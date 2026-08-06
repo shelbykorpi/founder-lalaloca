@@ -38,6 +38,9 @@ export function DoorCard({
       <DoorFrame
         product={product}
         open={open}
+        /* Riding the elevator: first serum glides down to this floor, the
+           second rises up, the third comes down again. */
+        arrive={index === 1 ? "up" : "down"}
         compact
         priority={priority}
         className={`${DOOR_ASPECT} w-full`}

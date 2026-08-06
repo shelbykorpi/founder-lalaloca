@@ -4,102 +4,114 @@ import Image from "next/image";
 import { usePrefersReducedMotion } from "./useMotionPrefs";
 import type { Product } from "@/lib/products";
 
-export const DOOR_MS = 860;
+/** How long the elevator doors take to slide. */
+export const DOOR_MS = 950;
+/** How long the cab (the bottle) takes to arrive at the floor. */
+const CAB_MS = 1400;
+/** The cab starts moving a beat after the doors begin to part. */
+const CAB_DELAY = 220;
 
 /**
- * Where the doors sit inside pdoor-scene.webp, as fractions of it.
+ * Where the elevator opening sits inside edoor-scene.webp, as fractions of it.
  * Re-cut the leaves at the same seam if you ever swap the photograph, or the
- * doors will hang off their hinges.
+ * doors will slide off their tracks.
  */
-const LEAF = {
-  top: "23.59%",
-  height: "74.85%",
-  width: "38.27%",
-  leftX: "11.99%",
-  rightX: "50.26%",
+const OPENING = {
+  top: "9.406%",
+  height: "87.433%",
+  left: "22.556%",
+  width: "54.778%",
 } as const;
 
+/** Each leaf's share of the opening (they differ by one pixel of the crop). */
+const LEAF_LEFT_W = "50.101%";
+const LEAF_RIGHT_W = "49.899%";
+
 /** The photograph's own aspect. The container must match it or the leaves drift. */
-export const DOOR_ASPECT = "aspect-[784/1030]";
+export const DOOR_ASPECT = "aspect-[900/1297]";
 
 type Props = {
   product: Product;
   open: boolean;
-  /** Frame edges get lighter detailing on small cards */
+  /**
+   * Which way the serum rides in. "down" glides in from above and settles on
+   * the floor, like an elevator arriving from an upper floor; "up" rises into
+   * view from below. The shop page alternates: down, up, down.
+   */
+  arrive?: "down" | "up";
   compact?: boolean;
   priority?: boolean;
   className?: string;
 };
 
 /**
- * The architectural door primitive: an emerald lacquered doorway under a lit
- * fanlight, with a pair of heavy doors that swing inward.
+ * The architectural door primitive: an Art Deco elevator in Founder Green and
+ * brass. The two leaves slide apart horizontally — a standard elevator opening,
+ * not a swing — and disappear behind the fixed brass surround, which never
+ * moves. Behind them, the serum rides in vertically and stops on the floor.
  *
- * Same construction as the entrance on the homepage — a photographed scene with
- * the two leaves cut out at the centre seam and hinged back over it — but
- * recoloured to emerald with the brass left alone. Swinging the leaves reveals
- * the room painted in behind them, lit in the product's own accent.
+ * Construction: the full photograph is the backdrop. The opening rectangle is
+ * clipped (overflow hidden) and painted with an opaque room, so the baked-in
+ * closed doors underneath are never visible; the two leaf crops sit exactly
+ * over their own pixels when shut, and slide out of the clip when open.
  *
  * Purely presentational and aria-hidden. The accessible control lives with the
- * product information, never inside the room.
+ * product information, never inside the elevator.
  */
 export function DoorFrame({
   product,
   open,
+  arrive = "down",
   compact = false,
   priority = false,
   className = "",
 }: Props) {
   const reduced = usePrefersReducedMotion();
-  const duration = reduced ? 1 : DOOR_MS;
-  /* the bottle arrives a beat after the leaves start moving, so you see the
-     doors part first and the product second — not both at once */
-  const revealDelay = reduced ? 0 : Math.round(DOOR_MS * 0.34);
-  const angle = open ? 78 : 0;
+  const doorMs = reduced ? 1 : DOOR_MS;
+  const cabMs = reduced ? 1 : CAB_MS;
+  const cabDelay = reduced ? 0 : CAB_DELAY;
 
-  const leafTransition = reduced
+  /* Elevator motion: brisk start, long settle. */
+  const slide = reduced
     ? "none"
-    : `transform ${duration}ms var(--ease-door), filter ${duration}ms ease`;
+    : `transform ${doorMs}ms cubic-bezier(0.45, 0.05, 0.25, 1)`;
+  const ride = reduced
+    ? "none"
+    : `transform ${cabMs}ms ${cabDelay}ms cubic-bezier(0.3, 0.9, 0.3, 1)`;
+
+  const cabOffset = arrive === "up" ? "64%" : "-64%";
 
   return (
     <div
       aria-hidden
       className={`relative select-none overflow-hidden bg-emerald-deep ${className}`}
-      style={{ perspective: compact ? "1000px" : "1600px" }}
     >
-      {/* ---------- the doorway, and the room waiting behind it ---------- */}
+      {/* ---------- the lobby: brass surround, sconces, marble floor ---------- */}
       <Image
-        src="/door/pdoor-scene.webp"
+        src="/door/edoor-scene.webp"
         alt=""
         fill
         priority={priority}
-        sizes="(max-width: 1024px) 90vw, 30rem"
+        sizes={compact ? "(max-width: 1024px) 90vw, 26rem" : "(max-width: 1024px) 90vw, 32rem"}
         className="object-cover"
       />
 
-      {/* ---------- the room, and the bottle standing in it ----------
-          Everything here sits inside the doorway opening and is painted before
-          the leaves, so the doors swing over the top of it. This is the whole
-          point of the interaction: opening the doors shows you the product. */}
+      {/* ---------- the opening — everything inside is clipped by the frame ---------- */}
       <div
         className="absolute overflow-hidden"
         style={{
-          top: LEAF.top,
-          height: LEAF.height,
-          left: LEAF.leftX,
-          width: `calc(${LEAF.width} * 2)`,
+          top: OPENING.top,
+          height: OPENING.height,
+          left: OPENING.left,
+          width: OPENING.width,
         }}
       >
-        {/* Deepen the back wall. The scene is graded so the *door face* lands on
-            Founder Green, which leaves the room behind it too bright — and
-            Thirst Trap's turquoise is close enough to Founder Green that the
-            bottle would half-disappear into the wall. The room is a shadow
-            value; the lit face is the brand colour. */}
+        {/* the shaft: opaque, so the photograph's own shut doors never show */}
         <div
           className="absolute inset-0"
           style={{
             background:
-              "radial-gradient(72% 58% at 50% 44%, rgba(4,20,18,0.30) 0%, rgba(4,20,18,0.62) 68%, rgba(3,14,12,0.80) 100%)",
+              "linear-gradient(180deg, #0a2523 0%, #0d2f2b 34%, #071915 100%)",
           }}
         />
 
@@ -107,39 +119,35 @@ export function DoorFrame({
         <div
           className="absolute inset-0 transition-opacity"
           style={{
-            transitionDuration: `${duration}ms`,
+            transitionDuration: `${doorMs}ms`,
             opacity: open ? 1 : 0,
-            background: `radial-gradient(58% 46% at 50% 38%, ${product.glow}44 0%, transparent 74%), radial-gradient(34% 24% at 50% 82%, ${product.accent}33 0%, transparent 72%)`,
+            background: `radial-gradient(60% 44% at 50% 36%, ${product.glow}40 0%, transparent 74%), radial-gradient(36% 22% at 50% 84%, ${product.accent}30 0%, transparent 72%)`,
           }}
         />
 
-        {/* floor — the room falls away into shadow at the bottom */}
+        {/* floor — the car falls away into shadow at the bottom */}
         <div
-          className="absolute inset-x-0 bottom-0 h-[34%] transition-opacity"
+          className="absolute inset-x-0 bottom-0 h-[30%] transition-opacity"
           style={{
-            transitionDuration: `${duration}ms`,
+            transitionDuration: `${doorMs}ms`,
             opacity: open ? 1 : 0,
             background:
-              "linear-gradient(180deg, transparent 0%, rgba(0,0,0,0.42) 38%, rgba(3,12,10,0.9) 100%)",
+              "linear-gradient(180deg, transparent 0%, rgba(0,0,0,0.42) 40%, rgba(3,12,10,0.9) 100%)",
           }}
         />
 
         {/* ---- the display block ----
-            A lacquered black riser, the way a jeweller sets one piece down:
-            a lit top face, a body that falls away into shadow, and the bottle
-            mirrored in the polish. */}
+            A lacquered black riser waiting on the elevator floor: a lit top
+            face, a body that falls away into shadow, and the bottle mirrored
+            in the polish once it lands. */}
         <div
-          className="absolute bottom-[6%] left-1/2 h-[15%] w-[35%] transition-all"
+          className="absolute bottom-[5%] left-1/2 h-[13%] w-[42%] transition-opacity"
           style={{
-            transitionDuration: `${duration}ms`,
-            transitionDelay: `${revealDelay}ms`,
+            transitionDuration: `${doorMs}ms`,
             opacity: open ? 1 : 0,
-            transform: open
-              ? "translate(-50%, 0) scale(1)"
-              : "translate(-50%, 6px) scale(0.96)",
+            transform: "translateX(-50%)",
           }}
         >
-          {/* body — tapered a touch so it reads as a solid seen from above */}
           <div
             className="absolute inset-x-[4%] bottom-0 top-[12%]"
             style={{
@@ -149,7 +157,6 @@ export function DoorFrame({
               boxShadow: "0 24px 36px rgba(0,0,0,0.8)",
             }}
           />
-          {/* polished cap, overhanging the body the way a plinth does */}
           <div
             className="absolute inset-x-0 top-0 h-[24%] rounded-[50%]"
             style={{
@@ -158,7 +165,6 @@ export function DoorFrame({
               boxShadow: `0 0 22px ${product.glow}2e, inset 0 1px 0 rgba(234,211,195,0.44)`,
             }}
           />
-          {/* bronze line along the front lip of the cap */}
           <div
             className="absolute inset-x-[10%] top-[19%] h-px"
             style={{
@@ -168,123 +174,124 @@ export function DoorFrame({
           />
         </div>
 
-        {/* the bottle, mirrored in the polished top — flipped about its own base
-            and foreshortened, so it falls onto the block rather than floating */}
+        {/* ---- the cab: the serum riding to this floor ----
+            The whole group — bottle, its reflection in the plinth, and the
+            contact shadow — glides vertically and stops. Direction comes from
+            `arrive`; the clip hides it until it enters the opening. */}
         <div
-          className="absolute inset-x-0 transition-opacity"
+          className="absolute inset-0 will-change-transform"
           style={{
-            bottom: "21%",
-            top: "15%",
-            transitionDuration: `${duration}ms`,
-            transitionDelay: `${revealDelay}ms`,
-            opacity: open ? 0.2 : 0,
-            transform: "scaleY(-0.34)",
-            transformOrigin: "bottom center",
-            maskImage: "linear-gradient(0deg, #000 0%, transparent 62%)",
-            WebkitMaskImage: "linear-gradient(0deg, #000 0%, transparent 62%)",
+            transform: open ? "translateY(0)" : `translateY(${cabOffset})`,
+            transition: ride,
           }}
         >
-          <Image
-            src={product.bottle}
-            alt=""
-            fill
-            sizes="320px"
-            style={{ objectFit: "contain", objectPosition: "center bottom" }}
-          />
-        </div>
-
-        {/* contact shadow where the bottle meets the block */}
-        <div
-          className="absolute bottom-[20.2%] left-1/2 h-[2%] w-[17%] -translate-x-1/2 rounded-[50%] blur-[5px] transition-opacity"
-          style={{
-            transitionDuration: `${duration}ms`,
-            transitionDelay: `${revealDelay}ms`,
-            opacity: open ? 0.85 : 0,
-            background: "radial-gradient(closest-side, rgba(0,0,0,0.95), transparent)",
-          }}
-        />
-
-        {/* the bottle */}
-        <div
-          className="absolute inset-x-0 flex items-end justify-center transition-all"
-          style={{
-            bottom: "21%",
-            top: "15%",
-            transitionDuration: `${duration}ms`,
-            transitionDelay: `${revealDelay}ms`,
-            opacity: open ? 1 : 0,
-            transform: open ? "translateY(0) scale(1)" : "translateY(10px) scale(0.97)",
-          }}
-        >
-          <div className="relative h-full w-full">
+          {/* the bottle, mirrored in the polished top — flipped about its own
+              base and foreshortened, so it lands rather than floats */}
+          <div
+            className="absolute inset-x-0 transition-opacity"
+            style={{
+              bottom: "18.5%",
+              top: "20%",
+              transitionDuration: `${cabMs}ms`,
+              transitionDelay: `${cabDelay}ms`,
+              opacity: open ? 0.2 : 0,
+              transform: "scaleY(-0.34)",
+              transformOrigin: "bottom center",
+              maskImage: "linear-gradient(0deg, #000 0%, transparent 62%)",
+              WebkitMaskImage: "linear-gradient(0deg, #000 0%, transparent 62%)",
+            }}
+          >
             <Image
               src={product.bottle}
               alt=""
               fill
-              priority={priority}
-              sizes={
-                compact
-                  ? "(max-width: 768px) 60vw, 320px"
-                  : "(max-width: 1024px) 70vw, 520px"
-              }
+              sizes="320px"
               style={{ objectFit: "contain", objectPosition: "center bottom" }}
-              className="drop-shadow-[0_28px_38px_rgba(0,0,0,0.55)]"
             />
+          </div>
+
+          {/* contact shadow where the bottle meets the block */}
+          <div
+            className="absolute bottom-[17.8%] left-1/2 h-[2%] w-[19%] -translate-x-1/2 rounded-[50%] blur-[5px] transition-opacity"
+            style={{
+              transitionDuration: `${cabMs}ms`,
+              transitionDelay: `${cabDelay}ms`,
+              opacity: open ? 0.85 : 0,
+              background:
+                "radial-gradient(closest-side, rgba(0,0,0,0.95), transparent)",
+            }}
+          />
+
+          {/* the bottle */}
+          <div
+            className="absolute inset-x-0 flex items-end justify-center"
+            style={{ bottom: "18.5%", top: "20%" }}
+          >
+            <div className="relative h-full w-full">
+              <Image
+                src={product.bottle}
+                alt=""
+                fill
+                priority={priority}
+                sizes={
+                  compact
+                    ? "(max-width: 768px) 60vw, 320px"
+                    : "(max-width: 1024px) 70vw, 520px"
+                }
+                style={{ objectFit: "contain", objectPosition: "center bottom" }}
+                className="drop-shadow-[0_28px_38px_rgba(0,0,0,0.55)]"
+              />
+            </div>
           </div>
         </div>
 
         {/* reflected light on the floor under the plinth */}
         <div
-          className="absolute bottom-[3%] left-1/2 h-[4%] w-[40%] -translate-x-1/2 rounded-[50%] blur-lg transition-opacity"
+          className="absolute bottom-[2.5%] left-1/2 h-[4%] w-[44%] -translate-x-1/2 rounded-[50%] blur-lg transition-opacity"
           style={{
-            transitionDuration: `${duration}ms`,
-            transitionDelay: `${revealDelay}ms`,
+            transitionDuration: `${cabMs}ms`,
+            transitionDelay: `${cabDelay}ms`,
             opacity: open ? 0.5 : 0,
             background: `radial-gradient(closest-side, ${product.glow}66, transparent)`,
           }}
         />
-      </div>
 
-      {/* ---------- the doors ---------- */}
-      {(["left", "right"] as const).map((side) => {
-        const isLeft = side === "left";
-        return (
-          <div
-            key={side}
-            className="absolute will-change-transform"
-            style={{
-              top: LEAF.top,
-              height: LEAF.height,
-              width: LEAF.width,
-              left: isLeft ? LEAF.leftX : LEAF.rightX,
-              transformOrigin: isLeft ? "left center" : "right center",
-              transform: `rotateY(${isLeft ? -angle : angle}deg)`,
-              transition: leafTransition,
-              backfaceVisibility: "hidden",
-              filter: `brightness(${open ? 0.66 : 1})`,
-            }}
-          >
-            <Image
-              src={`/door/pdoor-leaf-${side}.webp`}
-              alt=""
-              fill
-              priority={priority}
-              sizes="(max-width: 1024px) 35vw, 12rem"
-              className="object-fill"
-            />
-            <div
-              className="pointer-events-none absolute inset-0 transition-opacity"
-              style={{
-                transitionDuration: `${duration}ms`,
-                opacity: open ? 1 : 0,
-                background: isLeft
-                  ? "linear-gradient(270deg, rgba(0,0,0,0.5) 0%, transparent 44%)"
-                  : "linear-gradient(90deg, rgba(0,0,0,0.5) 0%, transparent 44%)",
-              }}
-            />
-          </div>
-        );
-      })}
+        {/* ---------- the doors — they slide, the frame never moves ---------- */}
+        <div
+          className="absolute inset-y-0 left-0 will-change-transform"
+          style={{
+            width: LEAF_LEFT_W,
+            transform: open ? "translateX(-101%)" : "translateX(0)",
+            transition: slide,
+          }}
+        >
+          <Image
+            src="/door/edoor-leaf-left.webp"
+            alt=""
+            fill
+            priority={priority}
+            sizes="(max-width: 1024px) 30vw, 10rem"
+            className="object-fill"
+          />
+        </div>
+        <div
+          className="absolute inset-y-0 right-0 will-change-transform"
+          style={{
+            width: LEAF_RIGHT_W,
+            transform: open ? "translateX(101%)" : "translateX(0)",
+            transition: slide,
+          }}
+        >
+          <Image
+            src="/door/edoor-leaf-right.webp"
+            alt=""
+            fill
+            priority={priority}
+            sizes="(max-width: 1024px) 30vw, 10rem"
+            className="object-fill"
+          />
+        </div>
+      </div>
     </div>
   );
 }

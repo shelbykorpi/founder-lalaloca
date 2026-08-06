@@ -6,22 +6,28 @@ import { usePrefersReducedMotion } from "./useMotionPrefs";
 /**
  * Opens every door inside it at the same moment, driven by scroll position.
  *
- * The doors swing wide as the collection rises into the middle of the screen,
- * stay open while you're reading it, and shut again as it climbs out of the
- * top. One shared measurement drives all of them, so they move together rather
- * than firing one by one as each card crosses its own line.
+ * The doors part as the collection scrolls into view, stay open the whole
+ * time any of it is on screen, and shut again once it has climbed out of the
+ * top. One shared measurement drives all of them, so they move together
+ * rather than firing one by one as each card crosses its own line.
  *
- * Thresholds are on the group's centre, as a fraction of viewport height, and
- * the open and close points are deliberately apart — without that gap a door
- * sitting exactly on the line would flicker on every pixel of scroll.
+ * Thresholds are on the group's EDGES, not its centre. On a phone the cards
+ * stack into one very tall column, and a centre-based trigger doesn't fire
+ * until you are halfway down the list — the first elevator sat shut while
+ * you looked straight at it, then everything closed again while the last
+ * card was still on screen. Edge-based thresholds behave identically on a
+ * one-row desktop grid and a stacked mobile column.
+ *
+ * The open and close points are deliberately apart — without that gap a
+ * door sitting exactly on the line would flicker on every pixel of scroll.
  *
  * With reduced motion the doors simply start open and stay there.
  */
 
-const OPEN_ABOVE = 0.90; // centre must be above this to swing open
-const OPEN_BELOW = 0.14; // ...and below this
-const SHUT_ABOVE = 0.96; // once open, only shut past these
-const SHUT_BELOW = 0.06;
+const OPEN_ENTER = 0.85; // open once the group's top rises above this line…
+const OPEN_EXIT = 0.30; // …while its bottom is still below this one
+const SHUT_ABOVE = 0.92; // once open, shut only if scrolled back above here…
+const SHUT_EXIT = 0.22; // …or once the group has almost left through the top
 
 const ScrollDoorsContext = createContext<boolean | null>(null);
 
@@ -53,12 +59,13 @@ export function ScrollDoors({
       frame = 0;
       const rect = el.getBoundingClientRect();
       const vh = window.innerHeight || 1;
-      const centre = (rect.top + rect.height / 2) / vh;
+      const top = rect.top / vh;
+      const bottom = rect.bottom / vh;
 
       setOpen((wasOpen) =>
         wasOpen
-          ? centre < SHUT_ABOVE && centre > SHUT_BELOW
-          : centre < OPEN_ABOVE && centre > OPEN_BELOW,
+          ? top < SHUT_ABOVE && bottom > SHUT_EXIT
+          : top < OPEN_ENTER && bottom > OPEN_EXIT,
       );
     };
 

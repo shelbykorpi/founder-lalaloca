@@ -1,0 +1,14 @@
+{
+  "permissions": {
+    "allow": [
+      "WebFetch(domain:lalaloca-prestige-beauty.shelbykorpi.chatgpt.site)",
+      "Bash(magick -size 1200x860 xc:'#0d2b26' \\\\\\( public/products/bounce-back-bottle.png \\\\\\) -gravity center -geometry +-380+0 -composite \\\\\\( public/products/thirst-trap-bottle.png \\\\\\) -gravity center -geometry +0+0 -composite \\\\\\( public/products/c-me-glow-bottle.png \\\\\\) -gravity center -geometry +380+0 -composite /tmp/trio-check.png)",
+      "Bash(magick identify *)",
+      "Bash(python3 -)",
+      "Bash(npm run *)",
+      "Bash(cd \"/Users/shelbykorpi/Founder:LALALOCA\" && rm -f src/app/page.tsx src/app/shop/page.tsx \"src/app/products/[slug]/page.tsx\" src/app/our-story/page.tsx src/app/share-your-story/page.tsx src/app/find-your-serum/page.tsx src/app/search/page.tsx src/app/account/page.tsx src/app/not-found.tsx && echo cleared)",
+      "Bash(magick \"ChatGPT Image Aug 5, 2026, 01_19_57 AM.png\" -auto-orient -strip -resize '1400x>' -quality 84 public/editorial/the-room-is-yours.webp)",
+      "Bash(mv *.png assets/source/references/)"
+    ]
+  }
+}

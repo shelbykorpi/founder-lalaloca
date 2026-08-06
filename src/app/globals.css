@@ -1,0 +1,346 @@
+@import "tailwindcss";
+
+/* ============================================================
+   LALALOCA — design tokens
+   Palette, type and spacing are locked brand foundations.
+   ============================================================ */
+
+@theme {
+  /* ---- FOUNDER primary palette · Brand Bible v2.3 §4 ----
+     Six colours, exact hexes. These are the master-brand field; the LALALOCA
+     supporting palette below is for softness and product storytelling. */
+  --color-founder-green: #164d49; /* primary brand field / doors / architecture */
+  --color-founder-black: #0b0b0b; /* editorial contrast / tailoring */
+  --color-bronze: #b08a64; /* Antique Gold — monogram / hardware */
+  --color-cream: #f7efe8; /* Warm Ivory — editorial space */
+  --color-blush: #ead3c3; /* Found Her Blush — the whisper */
+  --color-rose: #d8a7a0; /* Desert Rose — pink at full voice / FOUND HER */
+
+  /* LALALOCA supporting palette */
+  --color-charcoal: #2a2928;
+  --color-ink: #000000;
+  --color-shell: #fffaf5;
+  /* --color-gold #c79b5b removed 6 Aug 2026: that is the pre-remap provenance
+     gold from the original monogram render, which §7A bars from production.
+     Antique Gold is --color-bronze. Do not reintroduce it. */
+  /* Bronze darkened for small text on light surfaces (WCAG AA on cream) */
+  --color-bronze-ink: #8a6335;
+  /* Mid bronze for large display accents on light surfaces */
+  --color-bronze-mid: #a37c53;
+
+  /* Door environment — shadow values of Founder Green, not separate colours.
+     The lit face of every door photograph is graded to #164D49 itself; these
+     are what it falls to in shade and in the room behind. */
+  --color-emerald: #10403c;
+  --color-emerald-deep: #0a2523;
+  --color-teal: #164d49;
+
+  /* Product accents (locked) */
+  --color-bounce: #dc3d39;
+  --color-thirst: #48958d;
+  --color-glow: #f6740b;
+
+  /* Typography */
+  --font-serif: var(--font-cormorant), Georgia, "Times New Roman", serif;
+  --font-sans: var(--font-jost), "Helvetica Neue", Arial, sans-serif;
+
+  /* Spacing system — one scale, used everywhere */
+  --spacing-gutter: 1.5rem;
+  --spacing-section: 5rem;
+  --spacing-section-lg: 7.5rem;
+
+  /* Motion */
+  --ease-door: cubic-bezier(0.22, 0.61, 0.24, 1);
+}
+
+@layer base {
+  :root {
+    --shell-pad: 1.25rem;
+    color-scheme: light;
+  }
+
+  @media (min-width: 768px) {
+    :root {
+      --shell-pad: 2.5rem;
+    }
+  }
+
+  @media (min-width: 1280px) {
+    :root {
+      --shell-pad: 4rem;
+    }
+  }
+
+  html {
+    scroll-behavior: smooth;
+    -webkit-text-size-adjust: 100%;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    html {
+      scroll-behavior: auto;
+    }
+    *,
+    *::before,
+    *::after {
+      animation-duration: 0.01ms !important;
+      animation-iteration-count: 1 !important;
+      transition-duration: 0.01ms !important;
+    }
+  }
+
+  body {
+    background-color: var(--color-cream);
+    color: var(--color-charcoal);
+    font-family: var(--font-sans);
+    font-size: 1rem;
+    line-height: 1.65;
+    -webkit-font-smoothing: antialiased;
+    overflow-x: hidden;
+  }
+
+  h1,
+  h2,
+  h3,
+  h4 {
+    font-family: var(--font-serif);
+    font-weight: 300;
+    line-height: 1.04;
+    letter-spacing: -0.01em;
+  }
+
+  ::selection {
+    background: var(--color-blush);
+    color: var(--color-charcoal);
+  }
+
+  /* Visible, brand-consistent keyboard focus everywhere */
+  :focus-visible {
+    outline: 2px solid var(--color-bronze);
+    outline-offset: 3px;
+    border-radius: 2px;
+  }
+
+  button,
+  a {
+    -webkit-tap-highlight-color: transparent;
+  }
+}
+
+@layer components {
+  /* ---- Layout rhythm ---------------------------------------------------- */
+  .shell {
+    width: 100%;
+    max-width: 88rem;
+    margin-inline: auto;
+    padding-inline: var(--shell-pad);
+  }
+
+  .shell-narrow {
+    width: 100%;
+    max-width: 60rem;
+    margin-inline: auto;
+    padding-inline: var(--shell-pad);
+  }
+
+  .section {
+    padding-block: 3.5rem;
+  }
+
+  @media (min-width: 768px) {
+    .section {
+      padding-block: 5rem;
+    }
+  }
+
+  @media (min-width: 1280px) {
+    .section {
+      padding-block: 6.5rem;
+    }
+  }
+
+  .section-tight {
+    padding-block: 2.5rem;
+  }
+
+  @media (min-width: 768px) {
+    .section-tight {
+      padding-block: 3.5rem;
+    }
+  }
+
+  /* ---- Type primitives -------------------------------------------------- */
+  .eyebrow {
+    font-family: var(--font-sans);
+    font-size: 0.6875rem;
+    font-weight: 400;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    line-height: 1.4;
+  }
+
+  .display {
+    font-family: var(--font-serif);
+    font-size: clamp(2.75rem, 8.5vw, 5.25rem);
+    line-height: 0.98;
+  }
+
+  .headline {
+    font-family: var(--font-serif);
+    font-size: clamp(2rem, 5.2vw, 3.5rem);
+    line-height: 1.03;
+  }
+
+  .subhead {
+    font-family: var(--font-serif);
+    font-size: clamp(1.5rem, 3.2vw, 2.125rem);
+    line-height: 1.12;
+  }
+
+  .lede {
+    font-size: clamp(1rem, 1.6vw, 1.125rem);
+    line-height: 1.7;
+    max-width: 46ch;
+  }
+
+  .body-copy {
+    font-size: 0.9375rem;
+    line-height: 1.75;
+    max-width: 62ch;
+  }
+
+  .italic-accent {
+    font-style: italic;
+    color: var(--color-bronze-mid);
+  }
+
+  /* ---- Buttons — one consistent system ---------------------------------- */
+  .btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.625rem;
+    min-height: 3rem;
+    padding: 0.75rem 1.75rem;
+    font-family: var(--font-sans);
+    font-size: 0.75rem;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    border: 1px solid transparent;
+    border-radius: 1px;
+    cursor: pointer;
+    transition:
+      background-color 240ms ease,
+      color 240ms ease,
+      border-color 240ms ease;
+    text-align: center;
+  }
+
+  .btn:disabled {
+    opacity: 0.45;
+    cursor: not-allowed;
+  }
+
+  .btn-primary {
+    background: var(--color-bronze);
+    color: var(--color-shell);
+  }
+
+  .btn-primary:hover:not(:disabled) {
+    background: var(--color-charcoal);
+  }
+
+  .btn-dark {
+    background: var(--color-charcoal);
+    color: var(--color-shell);
+  }
+
+  .btn-dark:hover:not(:disabled) {
+    background: var(--color-bronze);
+  }
+
+  .btn-outline {
+    border-color: color-mix(in srgb, var(--color-charcoal) 35%, transparent);
+    color: var(--color-charcoal);
+    background: transparent;
+  }
+
+  .btn-outline:hover:not(:disabled) {
+    border-color: var(--color-charcoal);
+    background: color-mix(in srgb, var(--color-charcoal) 6%, transparent);
+  }
+
+  .btn-ghost-light {
+    border-color: color-mix(in srgb, #fffaf5 45%, transparent);
+    color: var(--color-shell);
+    background: transparent;
+  }
+
+  .btn-ghost-light:hover:not(:disabled) {
+    background: color-mix(in srgb, #fffaf5 12%, transparent);
+    border-color: var(--color-shell);
+  }
+
+  .link-underline {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-size: 0.75rem;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    min-height: 2.75rem;
+    padding-block: 0.5rem;
+    border-bottom: 1px solid currentColor;
+    transition: opacity 200ms ease, gap 200ms ease;
+  }
+
+  .link-underline:hover {
+    gap: 0.75rem;
+    opacity: 0.7;
+  }
+
+  /* ---- Surfaces --------------------------------------------------------- */
+  .rule {
+    height: 1px;
+    background: color-mix(in srgb, var(--color-charcoal) 14%, transparent);
+  }
+
+  .card-quiet {
+    background: var(--color-shell);
+    border: 1px solid color-mix(in srgb, var(--color-bronze) 22%, transparent);
+  }
+
+  /* Subtle stone / silk texture used behind editorial sections */
+  .texture-stone {
+    background-image:
+      radial-gradient(
+        120% 90% at 12% 0%,
+        color-mix(in srgb, var(--color-blush) 55%, transparent) 0%,
+        transparent 58%
+      ),
+      radial-gradient(
+        100% 80% at 100% 100%,
+        color-mix(in srgb, var(--color-rose) 30%, transparent) 0%,
+        transparent 60%
+      );
+  }
+}
+
+@keyframes entrance-arrive {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@layer utilities {
+  .text-balance {
+    text-wrap: balance;
+  }
+
+  .text-pretty {
+    text-wrap: pretty;
+  }
+}

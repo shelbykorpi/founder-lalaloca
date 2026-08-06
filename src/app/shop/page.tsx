@@ -104,40 +104,77 @@ export default function ShopPage() {
         </div>
       </section>
 
-      {/* ---------------- All three ---------------- */}
-      <section className="section bg-charcoal text-shell">
-        <div className="shell grid items-center gap-10 lg:grid-cols-[minmax(0,24rem)_1fr] lg:gap-16">
-          <div className="relative mx-auto aspect-[4/5] w-full max-w-sm overflow-hidden bg-ink lg:mx-0 lg:max-w-none">
+      {/* ---------------- All three: the FOUNDER parlour ----------------
+          One photographed room — the serum counters like a gelateria, the
+          three bottles on marble, and a gold-framed marble tariff board. The
+          board's text and button are LIVE, laid over the cleaned photograph,
+          so the price comes from products.ts and the button really adds the
+          trio to the bag. */}
+      <section aria-labelledby="set-heading" className="bg-cream">
+        {/* Desktop: the full parlour, live copy set into the tariff board */}
+        <div className="relative hidden lg:block">
+          <div className="relative aspect-[1915/821] w-full">
             <Image
-              src={SET.image}
-              alt="A glass sculpture of a three-colour swirl — orange, teal and red — melting in a silver coupe."
+              src="/editorial/trio-parlor.webp"
+              alt="The FOUNDER parlour: three serum counters under glass like a gelateria — turquoise, red and orange — with the three LALALOCA bottles standing on a marble table."
               fill
               loading="lazy"
-              sizes="(max-width: 1024px) 90vw, 24rem"
+              sizes="100vw"
+              className="object-cover"
+            />
+            <div
+              className="absolute flex flex-col items-center justify-center text-center"
+              style={{ left: "67.9%", width: "28.2%", top: "14%", height: "73.9%" }}
+            >
+              <p className="eyebrow text-bronze-ink">The House Trio</p>
+              <h2
+                id="set-heading"
+                className="mt-[0.6em] font-serif text-[clamp(1.5rem,2.7vw,3.25rem)] leading-[1.05] text-charcoal"
+              >
+                Treat Yourself
+                <br />
+                to All Three
+              </h2>
+              <div className="mt-[1.2em] h-px w-16 bg-bronze/70" aria-hidden />
+              <p className="mt-[1.2em] max-w-[24ch] text-[clamp(0.8rem,1.05vw,1.125rem)] leading-relaxed text-charcoal/85">
+                Three full-size serums. Hydrate, firm, brighten. One order. No
+                choosing.
+              </p>
+              <p className="mt-[1em] text-[clamp(0.8rem,1.05vw,1.125rem)] text-charcoal/85">
+                {formatPrice(SET.price)} for all three · valued at{" "}
+                {formatPrice(products.reduce((sum, p) => sum + p.price, 0))}
+              </p>
+              <AddSetButton className="mt-[1.4em] inline-flex min-h-11 w-full max-w-[22rem] items-center justify-center border border-bronze/40 bg-founder-green px-6 text-[clamp(0.6875rem,0.85vw,0.875rem)] uppercase tracking-[0.18em] text-cream transition-colors hover:bg-teal" />
+            </div>
+          </div>
+        </div>
+
+        {/* Small screens: the counters as a banner, the board as a card */}
+        <div className="lg:hidden">
+          <div className="relative aspect-[1215/821] w-full">
+            <Image
+              src="/editorial/trio-parlor-counter.webp"
+              alt="The FOUNDER parlour: three serum counters under glass like a gelateria — turquoise, red and orange — with the three LALALOCA bottles standing on a marble table."
+              fill
+              loading="lazy"
+              sizes="100vw"
               className="object-cover"
             />
           </div>
-          <div>
-            <p className="eyebrow text-bronze">All three</p>
-            <h2 className="headline mt-4 max-w-[14ch] text-balance">
+          <div className="shell py-12 text-center">
+            <p className="eyebrow text-bronze-ink">The House Trio</p>
+            <h2 className="headline mt-4 text-balance text-charcoal">
               Treat Yourself to All Three
             </h2>
-            <p className="mt-6 max-w-md text-shell/85">
-              C Me Glow in the morning. Bounce Back at night. Thirst Trap whenever your
-              skin asks for it. {SET.detail} — one of each, which is how you’d have
-              ordered it anyway.
+            <div className="mx-auto mt-6 h-px w-16 bg-bronze/70" aria-hidden />
+            <p className="mx-auto mt-6 max-w-md text-charcoal/85">
+              Three full-size serums. Hydrate, firm, brighten. One order. No choosing.
             </p>
-            <p className="mt-5 max-w-md text-shell/80">
-              You spend most of the week deciding what everyone else gets. This is the
-              one order where you don’t have to choose.
+            <p className="mt-4 text-charcoal/85">
+              {formatPrice(SET.price)} for all three · valued at{" "}
+              {formatPrice(products.reduce((sum, p) => sum + p.price, 0))}
             </p>
-            <p className="mt-6 text-sm text-shell/80">
-              {formatPrice(SET.price)} for all three, instead of{" "}
-              {formatPrice(products.reduce((sum, p) => sum + p.price, 0))}.
-            </p>
-            <div className="mt-8">
-              <AddSetButton className="btn btn-primary w-full sm:w-auto" />
-            </div>
+            <AddSetButton className="btn mt-8 w-full border border-bronze/40 bg-founder-green text-cream hover:bg-teal sm:w-auto" />
           </div>
         </div>
       </section>

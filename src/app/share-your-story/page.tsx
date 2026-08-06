@@ -14,31 +14,60 @@ export const metadata: Metadata = {
 export default function ShareYourStoryPage() {
   return (
     <>
-      <PageIntro
-        eyebrow="Share your story"
-        title="I found her when …"
-        lede={STORY_INTRO}
-        tone="rose"
-        media={
-          /* Found Her in the Mirror — the campaign image for this page. The
-             sentence on the glass is the same one the form asks her to finish. */
-          <figure className="relative mx-auto w-full max-w-[26rem] lg:mx-0">
-            <div className="relative aspect-[1122/1402] overflow-hidden">
+      {/* ---- The gallery wall ----
+          One photographed room: an ivory panelled wall over a Founder Green
+          wainscot, the mirror hung in its green-and-gold frame under a brass
+          picture light. On large screens the page text sits directly on the
+          wall; the photograph was cleaned of its mocked-in type so the live,
+          translated, screen-readable text is the only text. */}
+      <div className="relative hidden lg:block">
+        <div className="relative aspect-[1913/729] w-full">
+          <Image
+            src="/editorial/story-wall.webp"
+            alt="A sunlit ivory panelled wall above a deep green wainscot. A mirror in an ornate green-and-gold frame hangs under a brass picture light; four women are reflected in it, writing on the glass in rose."
+            fill
+            priority
+            sizes="100vw"
+            className="object-cover"
+          />
+          <div className="absolute inset-0 flex items-center">
+            <div className="shell w-full">
+              <div className="max-w-xl">
+                <p className="eyebrow text-charcoal/60">Share your story</p>
+                <h1 className="headline mt-5 text-balance text-charcoal">
+                  I found her when …
+                </h1>
+                <p className="lede mt-6 text-charcoal/80">{STORY_INTRO}</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      {/* Small screens: the text on cream, then the framed mirror on its wall */}
+      <div className="lg:hidden">
+        <PageIntro
+          eyebrow="Share your story"
+          title="I found her when …"
+          lede={STORY_INTRO}
+        />
+        <div className="bg-cream px-0 pb-2">
+          <figure>
+            <div className="relative aspect-[833/729] w-full">
               <Image
-                src="/editorial/found-her-mirror.webp"
-                alt="Four women gathered at a mirror in an ornate green-and-gold frame, writing on the glass in rose. Their sentences read: I found her when I decided my worth is non-negotiable. When I stopped shrinking for comfort. When I chose peace over proving. When I became my own safe place."
+                src="/editorial/story-frame.webp"
+                alt="A mirror in an ornate green-and-gold frame under a brass picture light, on an ivory wall above a green wainscot. Four women are reflected in it, writing on the glass in rose."
                 fill
-                priority
-                sizes="(max-width: 1024px) 90vw, 26rem"
+                sizes="100vw"
                 className="object-cover"
               />
             </div>
-            <figcaption className="mt-3 text-xs uppercase tracking-[0.16em] text-charcoal/60">
+            <figcaption className="shell mt-3 text-xs uppercase tracking-[0.16em] text-charcoal/60">
               Found her in the mirror
             </figcaption>
           </figure>
-        }
-      />
+        </div>
+      </div>
 
       <section className="section bg-cream pt-4">
         <div className="shell grid gap-12 lg:grid-cols-[1fr_minmax(0,22rem)] lg:gap-16">

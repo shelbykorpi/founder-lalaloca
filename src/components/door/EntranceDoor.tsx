@@ -13,22 +13,24 @@ const WALK_MS = 1000;
 const NAV_MS = 940;
 
 /**
- * The entrance to the shop: black lacquered doors under a lit fanlight,
- * between two brass sconces.
+ * The entrance to the shop: the full FOUNDER lobby — marble floor, velvet
+ * chairs, green fluted panels with mirrors — with the black lacquered ꟻF
+ * doors at its centre under the gold fanlight. It runs the full width of
+ * the page.
  *
  * HOW THIS IS BUILT
  * -----------------
  * The scene is a photograph, but the doors still open. Three images:
  *
- *   door-scene.webp        the room — wall, pilasters, fanlight, sconces, and
- *                          a dark warm interior painted in behind the doorway
- *   door-leaf-left.webp    the left door, cut out at the centre seam
- *   door-leaf-right.webp   the right door
+ *   hdoor-scene.webp        the whole lobby, doors shut (baked in)
+ *   hdoor-leaf-left.webp    the left door, cut out at the centre seam
+ *   hdoor-leaf-right.webp   the right door
  *
  * The leaves are positioned over the scene at the exact fractions of the
  * photograph they were cut from (see LEAF below) and rotated on their outer
- * hinges. Because they are separate layers, swinging them reveals the interior
- * that was painted behind them.
+ * hinges. Because the photograph's own doors are baked in shut, an opaque
+ * interior is painted into the opening underneath the leaves — swinging them
+ * reveals that interior, never the baked pixels.
  *
  * IF YOU REPLACE THE PHOTOGRAPH: re-cut the leaves at the same seam and update
  * LEAF with the new fractions, or the doors will sit off their hinges.
@@ -41,11 +43,13 @@ const NAV_MS = 940;
 
 /** Where the doors sit inside the photograph, as fractions of its width/height. */
 const LEAF = {
-  top: "22.92%",
-  height: "72.74%",
-  width: "20.22%",
-  leftX: "30.05%",
-  rightX: "50.27%",
+  top: "21.531%",
+  height: "57.775%",
+  leftX: "42.371%",
+  leftW: "8.985%",
+  rightX: "51.356%",
+  rightW: "9.038%",
+  openW: "18.022%",
 } as const;
 
 export function EntranceDoor() {
@@ -84,47 +88,72 @@ export function EntranceDoor() {
       onClick={handleClick}
       onPointerEnter={() => hasHover && !reduced && setAjar(true)}
       onPointerLeave={() => hasHover && setAjar(false)}
-      className="group mx-auto block w-full max-w-[62rem] focus-visible:outline-offset-8"
+      className="group block w-full focus-visible:outline-offset-8"
       aria-label="Open the doors and shop the LALALOCA Collection"
     >
       <div
         aria-hidden
-        className={`relative aspect-[1484/1060] w-full select-none overflow-hidden bg-black ${
+        className={`relative aspect-[1881/836] w-full select-none overflow-hidden bg-black ${
           opening ? "z-30" : ""
         }`}
         style={{
-          perspective: "1600px",
-          transformOrigin: "center 62%",
-          transform: opening ? "scale(2.4)" : "scale(1)",
+          perspective: "2400px",
+          transformOrigin: "center 55%",
+          transform: opening ? "scale(3.2)" : "scale(1)",
           transition: reduced
             ? "none"
             : `transform ${WALK_MS}ms cubic-bezier(0.55, 0, 0.85, 0.2)`,
         }}
       >
-        {/* ---------- the room, and what waits on the other side ---------- */}
+        {/* ---------- the lobby ---------- */}
         <Image
-          src="/door/door-scene.webp"
+          src="/door/hdoor-scene.webp"
           alt=""
           fill
           priority
-          sizes="(max-width: 1024px) 100vw, 62rem"
+          sizes="100vw"
           className="object-cover"
         />
 
-        {/* warm light from the room, rising as the doors swing */}
+        {/* ---------- the doorway — interior painted under the leaves ---------- */}
         <div
-          className="absolute transition-opacity"
+          className="absolute overflow-hidden"
           style={{
             top: LEAF.top,
             height: LEAF.height,
             left: LEAF.leftX,
-            width: `calc(${LEAF.width} * 2)`,
-            transitionDuration: `${OPEN_MS}ms`,
-            opacity: open ? 1 : 0,
-            background:
-              "radial-gradient(64% 52% at 50% 46%, rgba(240,214,178,0.40) 0%, rgba(176,138,100,0.16) 44%, transparent 78%)",
+            width: LEAF.openW,
           }}
-        />
+        >
+          {/* opaque interior, so the photograph's own shut doors never show */}
+          <div
+            className="absolute inset-0"
+            style={{
+              background:
+                "linear-gradient(180deg, #171008 0%, #241708 40%, #0c0703 100%)",
+            }}
+          />
+          {/* warm light from the room, rising as the doors swing */}
+          <div
+            className="absolute inset-0 transition-opacity"
+            style={{
+              transitionDuration: `${OPEN_MS}ms`,
+              opacity: open ? 1 : 0,
+              background:
+                "radial-gradient(70% 56% at 50% 42%, rgba(240,214,178,0.5) 0%, rgba(176,138,100,0.2) 46%, transparent 80%)",
+            }}
+          />
+          {/* a marble threshold catching that light at the floor */}
+          <div
+            className="absolute inset-x-0 bottom-0 h-[9%] transition-opacity"
+            style={{
+              transitionDuration: `${OPEN_MS}ms`,
+              opacity: open ? 0.8 : 0,
+              background:
+                "linear-gradient(180deg, transparent, rgba(240,214,178,0.28))",
+            }}
+          />
+        </div>
 
         {/* ---------- the doors ---------- */}
         {(["left", "right"] as const).map((side) => {
@@ -136,7 +165,7 @@ export function EntranceDoor() {
               style={{
                 top: LEAF.top,
                 height: LEAF.height,
-                width: LEAF.width,
+                width: isLeft ? LEAF.leftW : LEAF.rightW,
                 left: isLeft ? LEAF.leftX : LEAF.rightX,
                 transformOrigin: isLeft ? "left center" : "right center",
                 transform: `rotateY(${isLeft ? -angle : angle}deg)`,
@@ -147,11 +176,11 @@ export function EntranceDoor() {
               }}
             >
               <Image
-                src={`/door/door-leaf-${side}.webp`}
+                src={`/door/hdoor-leaf-${side}.webp`}
                 alt=""
                 fill
                 priority
-                sizes="21vw"
+                sizes="10vw"
                 className="object-fill"
               />
               {/* edge shadow deepening into the seam as the door parts */}

@@ -59,7 +59,9 @@ export default function HomePage() {
         </div>
       </section>
 
-      {/* ---------------- The entrance ---------------- */}
+      {/* ---------------- The entrance ----------------
+          The lobby photograph runs edge to edge — no shell — so the marble
+          floor and the mirrored walls read as the room you are standing in. */}
       <section className="section bg-cream" aria-labelledby="entrance-heading">
         <div className="shell">
           <div className="mx-auto max-w-[30rem] text-center">
@@ -71,10 +73,10 @@ export default function HomePage() {
               Three serums on the other side of this door. Nobody is checking names.
             </p>
           </div>
+        </div>
 
-          <div className="mt-12">
-            <EntranceDoor />
-          </div>
+        <div className="mt-12">
+          <EntranceDoor />
         </div>
       </section>
 

@@ -15,6 +15,7 @@ export const metadata: Metadata = {
 };
 
 export default function FoundHerPage() {
+  const [featured, ...otherProfiles] = profiles;
   return (
     <>
       <PageIntro
@@ -70,35 +71,93 @@ export default function FoundHerPage() {
                 </ul>
               </div>
             </div>
-          ) : (
-            <ul className="mt-8 grid gap-10 md:grid-cols-2 lg:grid-cols-3">
-              {profiles.map((profile) => (
-                <li key={profile.slug}>
-                  <Link href={`/found-her/${profile.slug}`} className="group block">
-                    {profile.portrait && (
-                      <div className="relative aspect-[4/5] overflow-hidden bg-shell">
-                        <Image
-                          src={profile.portrait.src}
-                          alt={profile.portrait.alt}
-                          fill
-                          loading="lazy"
-                          sizes="(max-width: 768px) 100vw, 33vw"
-                          className="object-cover transition-transform duration-700 group-hover:scale-[1.03]"
-                          style={{ objectPosition: profile.portrait.position ?? "center" }}
-                        />
-                      </div>
-                    )}
-                    <p className="eyebrow mt-5 text-bronze-ink">{profile.role}</p>
-                    <h3 className="mt-2 font-serif text-[1.75rem] leading-none text-charcoal group-hover:text-bronze-ink">
-                      {profile.name}
-                    </h3>
-                    <p className="mt-2 text-sm text-charcoal/80">{profile.building}</p>
-                  </Link>
-                </li>
-              ))}
-            </ul>
-          )}
+          ) : null}
         </div>
+
+        {profiles.length > 0 && (
+          <>
+            {/* ---- The founder's portrait, hung in the gallery ----
+                The whole scene is one link to her story: the photographed
+                room runs edge to edge, and the placard sits beneath it the
+                way a museum label sits under a painting. Nothing readable
+                is baked into the image — every word is live text. */}
+            <Link
+              href={`/found-her/${featured.slug}`}
+              className="group mt-8 block focus-visible:outline-offset-4"
+              aria-label={`Read ${featured.name}’s story`}
+            >
+              <div className="relative hidden aspect-[1779/884] w-full overflow-hidden md:block">
+                <Image
+                  src="/editorial/founder-portrait-wall.webp"
+                  alt="A gallery wall: Shelby Korpi’s portrait in a carved dark frame under a brass picture light, on ivory panelling above a green wainscot, with a leather bench beneath."
+                  fill
+                  loading="lazy"
+                  sizes="100vw"
+                  className="object-cover transition-transform duration-700 group-hover:scale-[1.01]"
+                />
+              </div>
+              <div className="relative aspect-[712/884] w-full overflow-hidden md:hidden">
+                <Image
+                  src="/editorial/founder-portrait-wall-m.webp"
+                  alt="Shelby Korpi’s portrait in a carved dark frame under a brass picture light, hung on a gallery wall above a leather bench."
+                  fill
+                  loading="lazy"
+                  sizes="100vw"
+                  className="object-cover"
+                />
+              </div>
+
+              {/* the placard */}
+              <div className="shell mt-9 text-center">
+                <p className="eyebrow text-bronze-ink">
+                  The first profile · {featured.role}
+                </p>
+                <h3 className="mt-3 font-serif text-[clamp(2rem,4vw,3rem)] leading-none text-charcoal transition-colors group-hover:text-bronze-ink">
+                  {featured.name}
+                </h3>
+                <p className="mx-auto mt-3 max-w-md text-sm leading-relaxed text-charcoal/80">
+                  {featured.building}
+                </p>
+                <span className="link-underline mt-5 inline-block text-charcoal">
+                  Read her story <span aria-hidden>↗</span>
+                </span>
+              </div>
+            </Link>
+
+            {otherProfiles.length > 0 && (
+              <div className="shell">
+                <ul className="mt-16 grid gap-10 md:grid-cols-2 lg:grid-cols-3">
+                  {otherProfiles.map((profile) => (
+                    <li key={profile.slug}>
+                      <Link href={`/found-her/${profile.slug}`} className="group block">
+                        {profile.portrait && (
+                          <div className="relative aspect-[4/5] overflow-hidden bg-shell">
+                            <Image
+                              src={profile.portrait.src}
+                              alt={profile.portrait.alt}
+                              fill
+                              loading="lazy"
+                              sizes="(max-width: 768px) 100vw, 33vw"
+                              className="object-cover transition-transform duration-700 group-hover:scale-[1.03]"
+                              style={{
+                                objectPosition: profile.portrait.position ?? "center",
+                              }}
+                            />
+                          </div>
+                        )}
+                        <p className="eyebrow mt-5 text-bronze-ink">{profile.role}</p>
+                        <h3 className="mt-2 font-serif text-[1.75rem] leading-none text-charcoal group-hover:text-bronze-ink">
+                          {profile.name}
+                        </h3>
+                        <p className="mt-2 text-sm text-charcoal/80">{profile.building}</p>
+                      </Link>
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            )}
+          </>
+        )}
       </section>
 
       {/* ---------------- Notes ---------------- */}

@@ -33,8 +33,21 @@ export const metadata: Metadata = {
     description: SITE.description,
     type: "website",
     url: SITE.url,
+    images: [
+      {
+        url: "/founder-share.jpg",
+        width: 1200,
+        height: 1200,
+        alt: "FOUNDER gold doorway monogram on the signature deep green field.",
+      },
+    ],
   },
-  twitter: { card: "summary_large_image", title: SITE.title, description: SITE.description },
+  twitter: {
+    card: "summary_large_image",
+    title: SITE.title,
+    description: SITE.description,
+    images: ["/founder-share.jpg"],
+  },
   robots: SITE.indexable
     ? { index: true, follow: true }
     : { index: false, follow: false, nocache: true },

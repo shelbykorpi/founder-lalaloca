@@ -6,6 +6,8 @@ import { Footer } from "@/components/site/Footer";
 import { BagProvider } from "@/components/bag/BagProvider";
 import { BagDrawer } from "@/components/bag/BagDrawer";
 import { BRAND, SITE } from "@/lib/brand";
+import { JsonLd, organizationSchema, websiteSchema } from "@/lib/seo";
+import { Analytics } from "@/components/site/Analytics";
 
 const cormorant = Cormorant_Garamond({
   subsets: ["latin"],
@@ -54,23 +56,13 @@ export const metadata: Metadata = {
 };
 
 export default function RootLayout({ children }: LayoutProps<"/">) {
-  /* Organization data names the legal seller, not the working brand name. */
-  const organization = {
-    "@context": "https://schema.org",
-    "@type": "Organization",
-    name: BRAND.legal.name,
-    alternateName: BRAND.display,
-    url: SITE.url,
-    description: SITE.description,
-  };
-
   return (
     <html lang="en" className={`${cormorant.variable} ${jost.variable}`}>
       <body className="flex min-h-full flex-col">
-        <script
-          type="application/ld+json"
-          dangerouslySetInnerHTML={{ __html: JSON.stringify(organization) }}
-        />
+        {/* The brand as a connected graph: who we are, and that this is a
+            searchable site. Product and FAQ blocks reference the @id set here. */}
+        <JsonLd schema={[organizationSchema(), websiteSchema()]} />
+        <Analytics />
         <BagProvider>
           <a
             href="#main"

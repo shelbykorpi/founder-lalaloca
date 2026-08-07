@@ -20,8 +20,20 @@ export function ProductDoor({ product }: { product: Product }) {
   useEffect(() => {
     if (viewed.current === product.slug) return;
     viewed.current = product.slug;
-    track("product_view", { product: product.slug, value: product.price });
-  }, [product.slug, product.price]);
+    track("product_view", {
+      value: product.price,
+      currency: "USD",
+      items: [
+        {
+          item_id: product.slug,
+          item_name: product.name,
+          item_category: product.category,
+          price: product.price,
+          quantity: 1,
+        },
+      ],
+    });
+  }, [product.slug, product.price, product.name, product.category]);
 
   useEffect(() => {
     const timer = window.setTimeout(() => setOpen(true), reduced ? 0 : 420);

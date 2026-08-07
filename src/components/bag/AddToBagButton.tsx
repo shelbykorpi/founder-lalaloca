@@ -46,9 +46,17 @@ export function AddToBagButton({
           href: `/products/${product.slug}`,
         });
         track("add_to_cart", {
-          product: product.slug,
           value: product.price,
           currency: "USD",
+          items: [
+            {
+              item_id: product.slug,
+              item_name: product.name,
+              item_category: product.category,
+              price: product.price,
+              quantity: 1,
+            },
+          ],
         });
       }}
     >
@@ -93,9 +101,17 @@ export function AddSetButton({
           href: "/shop",
         });
         track("add_to_cart", {
-          product: "all-three",
           value: price,
           currency: "USD",
+          items: [
+            {
+              item_id: "all-three",
+              item_name: "All three serums",
+              item_category: SET.detail,
+              price,
+              quantity: 1,
+            },
+          ],
         });
       }}
     >

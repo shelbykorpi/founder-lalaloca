@@ -4,7 +4,8 @@ import Link from "next/link";
 import { notFound } from "next/navigation";
 import { ProductDoor } from "@/components/door/ProductDoor";
 import { AddToBagButton } from "@/components/bag/AddToBagButton";
-import { BRAND, SITE } from "@/lib/brand";
+import { BRAND } from "@/lib/brand";
+import { JsonLd, breadcrumbSchema, faqSchema, productSchema } from "@/lib/seo";
 import { formatPrice, getProduct, otherProducts, products } from "@/lib/products";
 
 export function generateStaticParams() {
@@ -35,32 +36,20 @@ export default async function ProductPage({ params }: PageProps<"/products/[slug
   const product = getProduct(slug);
   if (!product) notFound();
 
-  /* Structured data: only facts from the label and the price we actually charge.
-     No ratings or reviews — we have none, and inventing them is not an option. */
-  const jsonLd = {
-    "@context": "https://schema.org",
-    "@type": "Product",
-    name: product.name,
-    description: product.what,
-    category: product.category,
-    image: `${SITE.url}${product.bottle}`,
-    brand: { "@type": "Brand", name: BRAND.collection },
-    size: product.size,
-    offers: {
-      "@type": "Offer",
-      price: product.price.toFixed(2),
-      priceCurrency: "USD",
-      url: `${SITE.url}/products/${product.slug}`,
-      availability: "https://schema.org/InStock",
-      seller: { "@type": "Organization", name: BRAND.legal.name },
-    },
-  };
-
   return (
     <>
-      <script
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+      {/* Product, the breadcrumb trail rendered below, and the FAQs further
+          down the page — all three are eligible for rich results, and give
+          answer engines quotable facts rather than prose to paraphrase. */}
+      <JsonLd
+        schema={[
+          productSchema(product),
+          breadcrumbSchema([
+            { name: "Shop", path: "/shop" },
+            { name: product.name, path: `/products/${product.slug}` },
+          ]),
+          faqSchema(product.faqs),
+        ]}
       />
 
       {/* ---------------- Buy ---------------- */}

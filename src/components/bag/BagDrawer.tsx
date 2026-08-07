@@ -28,7 +28,17 @@ export function BagDrawer() {
       return;
     }
 
-    track("begin_checkout", { value: subtotal, currency: "USD", items: count });
+    track("begin_checkout", {
+      value: subtotal,
+      currency: "USD",
+      items: lines.map((l) => ({
+        item_id: l.id,
+        item_name: l.name,
+        item_category: l.category,
+        price: l.price,
+        quantity: l.quantity,
+      })),
+    });
     window.location.href = url;
   }
 

@@ -12,23 +12,35 @@ const CAB_MS = 1400;
 const CAB_DELAY = 220;
 
 /**
- * Where the elevator opening sits inside edoor-scene.webp, as fractions of it.
- * Re-cut the leaves at the same seam if you ever swap the photograph, or the
- * doors will slide off their tracks.
+ * The three elevators come from ONE photograph of the FOUNDER elevator bank —
+ * marble floor, sconces, green wainscot — cut into three equal slices, each
+ * centred on its own car. Every serum gets its own elevator: Thirst Trap the
+ * left car beside the sconce, C Me Glow the centre, Bounce Back the right.
+ *
+ * The slices were cut so the door opening sits at identical fractions in all
+ * three, so one set of geometry drives them all. Re-cut at the same centres
+ * if you ever swap the photograph, or the doors will slide off their tracks.
  */
+const VARIANT: Record<string, number> = {
+  "thirst-trap": 0,
+  "c-me-glow": 1,
+  "bounce-back": 2,
+};
+
+/** Where the elevator opening sits inside each slice, as fractions of it. */
 const OPENING = {
-  top: "9.406%",
-  height: "87.433%",
-  left: "22.556%",
-  width: "54.778%",
+  top: "20.853%",
+  height: "70.616%",
+  left: "28.387%",
+  width: "43.226%",
 } as const;
 
-/** Each leaf's share of the opening (they differ by one pixel of the crop). */
-const LEAF_LEFT_W = "50.101%";
-const LEAF_RIGHT_W = "49.899%";
+/** The leaves split the opening at the centre seam. */
+const LEAF_LEFT_W = "50%";
+const LEAF_RIGHT_W = "50%";
 
-/** The photograph's own aspect. The container must match it or the leaves drift. */
-export const DOOR_ASPECT = "aspect-[900/1297]";
+/** Each slice's own aspect. The container must match it or the leaves drift. */
+export const DOOR_ASPECT = "aspect-[620/844]";
 
 type Props = {
   product: Product;
@@ -80,6 +92,7 @@ export function DoorFrame({
     : `transform ${cabMs}ms ${cabDelay}ms cubic-bezier(0.3, 0.9, 0.3, 1)`;
 
   const cabOffset = arrive === "up" ? "64%" : "-64%";
+  const variant = VARIANT[product.slug] ?? 0;
 
   return (
     <div
@@ -88,7 +101,7 @@ export function DoorFrame({
     >
       {/* ---------- the lobby: brass surround, sconces, marble floor ---------- */}
       <Image
-        src="/door/edoor-scene.webp"
+        src={`/door/edoor2-${variant}-scene.webp`}
         alt=""
         fill
         priority={priority}
@@ -266,7 +279,7 @@ export function DoorFrame({
           }}
         >
           <Image
-            src="/door/edoor-leaf-left.webp"
+            src={`/door/edoor2-${variant}-left.webp`}
             alt=""
             fill
             priority={priority}
@@ -283,7 +296,7 @@ export function DoorFrame({
           }}
         >
           <Image
-            src="/door/edoor-leaf-right.webp"
+            src={`/door/edoor2-${variant}-right.webp`}
             alt=""
             fill
             priority={priority}

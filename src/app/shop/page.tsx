@@ -122,35 +122,29 @@ export default function ShopPage() {
               sizes="100vw"
               className="object-cover"
             />
-            {/* The live board content. The box is measured INSIDE the gold rim
-                (rim: x 65.5%–96.5%, y 8%–87% of the photo) with its own padding,
-                so nothing can touch the frame at any viewport width — both the
-                box and the photograph scale from the same aspect-locked parent. */}
             <div
-              className="absolute flex flex-col items-center justify-center px-[2.2%] text-center"
-              style={{ left: "69.2%", width: "25.4%", top: "16%", height: "70%" }}
+              className="absolute flex flex-col items-center justify-center text-center"
+              style={{ left: "67.9%", width: "28.2%", top: "14%", height: "73.9%" }}
             >
               <p className="eyebrow text-bronze-ink">The House Trio</p>
               <h2
                 id="set-heading"
-                className="mt-[0.6em] font-serif text-[clamp(1.4rem,2.5vw,3rem)] leading-[1.05] text-charcoal"
+                className="mt-[0.6em] font-serif text-[clamp(1.5rem,2.7vw,3.25rem)] leading-[1.05] text-charcoal"
               >
                 Treat Yourself
                 <br />
                 to All Three
               </h2>
-              <div className="mt-[1.1em] h-px w-14 bg-bronze/70" aria-hidden />
-              <p className="mt-[1.1em] max-w-[26ch] text-[clamp(0.78rem,1vw,1.0625rem)] leading-relaxed text-charcoal/85">
+              <div className="mt-[1.2em] h-px w-16 bg-bronze/70" aria-hidden />
+              <p className="mt-[1.2em] max-w-[24ch] text-[clamp(0.8rem,1.05vw,1.125rem)] leading-relaxed text-charcoal/85">
                 Three full-size serums. Hydrate, firm, brighten. One order. No
                 choosing.
               </p>
-              <p className="mt-[0.9em] whitespace-nowrap text-[clamp(0.78rem,1vw,1.0625rem)] text-charcoal/85">
+              <p className="mt-[1em] text-[clamp(0.8rem,1.05vw,1.125rem)] text-charcoal/85">
                 {formatPrice(SET.price)} for all three · valued at{" "}
                 {formatPrice(products.reduce((sum, p) => sum + p.price, 0))}
               </p>
-              {/* The button spans the board's inner width, like the plaque in
-                  the source render, and scales its height with the type. */}
-              <AddSetButton className="mt-[1.5em] inline-flex w-full items-center justify-center whitespace-nowrap border border-bronze/40 bg-founder-green px-4 py-[1.1em] text-[clamp(0.6875rem,0.8vw,0.8125rem)] uppercase tracking-[0.18em] leading-none text-cream transition-colors hover:bg-teal" />
+              <AddSetButton className="mt-[1.4em] inline-flex min-h-11 w-full max-w-[22rem] items-center justify-center border border-bronze/40 bg-founder-green px-6 text-[clamp(0.6875rem,0.85vw,0.875rem)] uppercase tracking-[0.18em] text-cream transition-colors hover:bg-teal" />
             </div>
           </div>
         </div>

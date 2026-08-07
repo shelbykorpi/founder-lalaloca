@@ -166,6 +166,56 @@ export function collectionSchema(products: Product[]) {
   };
 }
 
+/**
+ * FOUND HER stories. Original first-person interviews are the one kind of
+ * content that cannot be produced by summarising someone else's page — which
+ * is exactly what both Google's helpful-content system and answer engines are
+ * trying to reward. Marking them as Article with a named author and a real
+ * publication date is what lets them be recognised as reporting rather than
+ * product copy.
+ */
+export function articleSchema(article: {
+  title: string;
+  standfirst: string;
+  path: string;
+  image?: string;
+  published?: string;
+  modified?: string;
+}) {
+  return {
+    "@context": "https://schema.org",
+    "@type": "Article",
+    "@id": `${SITE.url}${article.path}/#article`,
+    headline: article.title,
+    description: article.standfirst,
+    url: `${SITE.url}${article.path}`,
+    ...(article.image ? { image: `${SITE.url}${article.image}` } : {}),
+    ...(article.published ? { datePublished: article.published } : {}),
+    ...(article.modified ? { dateModified: article.modified } : {}),
+    publisher: { "@id": `${SITE.url}/#organization` },
+    isPartOf: { "@id": `${SITE.url}/#website` },
+  };
+}
+
+/** The woman a profile is about — a real named person, not a testimonial. */
+export function personSchema(person: {
+  name: string;
+  role?: string;
+  path: string;
+  image?: string;
+  description?: string;
+}) {
+  return {
+    "@context": "https://schema.org",
+    "@type": "Person",
+    name: person.name,
+    ...(person.role ? { jobTitle: person.role } : {}),
+    ...(person.description ? { description: person.description } : {}),
+    ...(person.image ? { image: `${SITE.url}${person.image}` } : {}),
+    url: `${SITE.url}${person.path}`,
+  };
+}
+
 /** One tag, many blocks — keeps the DOM tidy and the graph connected. */
 export function JsonLd({ schema }: { schema: object | object[] }) {
   const payload = Array.isArray(schema) ? schema : [schema];

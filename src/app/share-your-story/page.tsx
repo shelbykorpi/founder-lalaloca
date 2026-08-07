@@ -46,10 +46,15 @@ export default function ShareYourStoryPage() {
 
       {/* Small screens: the text on cream, then the framed mirror on its wall */}
       <div className="lg:hidden">
+        {/* Both breakpoints are in the DOM at once (CSS-hidden, not conditionally
+            rendered), so this must render an h2 — two h1 elements on one page is
+            an accessibility failure and an ambiguous signal to crawlers. The
+            desktop block above owns the h1. */}
         <PageIntro
           eyebrow="Share your story"
           title="I found her when …"
           lede={STORY_INTRO}
+          headingLevel="h2"
         />
         <div className="bg-cream px-0 pb-2">
           <figure>

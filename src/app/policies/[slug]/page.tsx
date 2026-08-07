@@ -13,7 +13,13 @@ export async function generateMetadata({
   const { slug } = await params;
   const policy = policies[slug as PolicySlug];
   if (!policy) return { title: "Policy not found" };
-  return { title: policy.title, description: policy.intro };
+  return {
+    title: policy.title,
+    description: policy.intro,
+    /* Self-referencing, or all five policy pages inherit the homepage
+       canonical and de-index themselves. */
+    alternates: { canonical: `/policies/${slug}` },
+  };
 }
 
 export default async function PolicyPage({ params }: PageProps<"/policies/[slug]">) {

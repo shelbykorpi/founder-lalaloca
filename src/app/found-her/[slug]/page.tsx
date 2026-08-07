@@ -6,6 +6,7 @@ import { getNote, notes } from "@/lib/content";
 import { getProfile, profiles } from "@/lib/profiles";
 import { ProfileStory } from "@/components/found-her/ProfileStory";
 import { BRAND } from "@/lib/brand";
+import { JsonLd, articleSchema, breadcrumbSchema, personSchema } from "@/lib/seo";
 
 export function generateStaticParams() {
   return [
@@ -45,7 +46,35 @@ export default async function NotePage({ params }: PageProps<"/found-her/[slug]"
   const { slug } = await params;
 
   const profile = getProfile(slug);
-  if (profile) return <ProfileStory profile={profile} />;
+  if (profile) {
+    return (
+      <>
+        <JsonLd
+          schema={[
+            articleSchema({
+              title: `${profile.name} — ${BRAND.editorial}`,
+              standfirst: profile.standfirst,
+              path: `/found-her/${profile.slug}`,
+              image: profile.portrait?.src,
+              published: profile.approvedOn,
+            }),
+            personSchema({
+              name: profile.name,
+              role: profile.role,
+              path: `/found-her/${profile.slug}`,
+              image: profile.portrait?.src,
+              description: profile.standfirst,
+            }),
+            breadcrumbSchema([
+              { name: BRAND.editorial, path: "/found-her" },
+              { name: profile.name, path: `/found-her/${profile.slug}` },
+            ]),
+          ]}
+        />
+        <ProfileStory profile={profile} />
+      </>
+    );
+  }
 
   const note = getNote(slug);
   if (!note) notFound();
@@ -54,6 +83,21 @@ export default async function NotePage({ params }: PageProps<"/found-her/[slug]"
 
   return (
     <>
+      {/* Notes are bylined to the team on the page itself, so the schema says
+          the same thing rather than inventing an author. */}
+      <JsonLd
+        schema={[
+          articleSchema({
+            title: note.title,
+            standfirst: note.standfirst,
+            path: `/found-her/${note.slug}`,
+          }),
+          breadcrumbSchema([
+            { name: BRAND.editorial, path: "/found-her" },
+            { name: note.title, path: `/found-her/${note.slug}` },
+          ]),
+        ]}
+      />
       <ArticleView slug={note.slug} />
 
       <article className="bg-cream">

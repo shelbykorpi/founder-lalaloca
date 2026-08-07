@@ -14,7 +14,8 @@ export default function sitemap(): MetadataRoute.Sitemap {
     "/share-your-story",
     "/find-your-serum",
     "/search",
-    "/account",
+    /* /account is intentionally absent: robots.ts disallows it, and a URL that
+       is both submitted and blocked is a Search Console error, not a signal. */
   ];
 
   return [
@@ -28,8 +29,11 @@ export default function sitemap(): MetadataRoute.Sitemap {
       changeFrequency: "monthly" as const,
       priority: 0.9,
     })),
+    /* Real approval dates, not build timestamps — a lastModified that changes
+       on every deploy teaches crawlers to ignore the field. */
     ...profiles.map((profile) => ({
       url: `${SITE.url}/found-her/${profile.slug}`,
+      lastModified: profile.approvedOn,
       changeFrequency: "yearly" as const,
       priority: 0.7,
     })),

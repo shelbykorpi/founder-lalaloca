@@ -7,12 +7,20 @@ export function PageIntro({
   lede,
   children,
   media,
+  headingLevel = "h1",
   tone = "cream",
 }: {
   eyebrow: string;
   title: ReactNode;
   lede?: string;
   children?: ReactNode;
+  /**
+   * Almost every page wants the h1. The exception is a responsive layout that
+   * renders two copies of the same heading and hides one with CSS — both are
+   * still in the DOM, so the hidden one must step down to h2 or the page ships
+   * two h1 elements.
+   */
+  headingLevel?: "h1" | "h2";
   /** Optional image column. Text keeps the left; the media sits beside it and
       drops below on small screens. */
   media?: ReactNode;
@@ -23,6 +31,7 @@ export function PageIntro({
    */
   tone?: "cream" | "dark" | "rose";
 }) {
+  const Heading = headingLevel;
   const dark = tone === "dark";
   const rose = tone === "rose";
   const field = dark
@@ -45,7 +54,7 @@ export function PageIntro({
           >
             {eyebrow}
           </p>
-          <h1 className="headline mt-5 max-w-[20ch] text-balance">{title}</h1>
+          <Heading className="headline mt-5 max-w-[20ch] text-balance">{title}</Heading>
           {lede && (
             <p
               className={`lede mt-6 ${dark ? "text-shell/75" : rose ? "text-charcoal/85" : "text-charcoal/80"}`}

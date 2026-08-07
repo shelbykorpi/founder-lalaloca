@@ -6,16 +6,29 @@ import { ScrollDoors } from "@/components/door/ScrollDoors";
 import { AddSetButton } from "@/components/bag/AddToBagButton";
 import { PageIntro } from "@/components/site/PageIntro";
 import { formatPrice, products, SET } from "@/lib/products";
+import { JsonLd, breadcrumbSchema, collectionSchema } from "@/lib/seo";
 
 export const metadata: Metadata = {
   title: "Shop the LALALOCA Collection",
   description:
     "Three serums — Thirst Trap, C Me Glow and Bounce Back. 50 ml, $39.99 each, free US shipping. What each one does, and how to pick.",
+  /* Without this the root layout's canonical is inherited and this page tells
+     Google the homepage is the real version of it — the fastest way to get a
+     commercial page dropped from the index. */
+  alternates: { canonical: "/shop" },
 };
 
 export default function ShopPage() {
   return (
     <>
+      {/* The collection as a ranked list, so the three serums can surface
+          together rather than competing as three unrelated pages. */}
+      <JsonLd
+        schema={[
+          collectionSchema(products),
+          breadcrumbSchema([{ name: "Shop", path: "/shop" }]),
+        ]}
+      />
       <PageIntro
         eyebrow="The LALALOCA Collection"
         title="Open the doors. You’re already in the room."

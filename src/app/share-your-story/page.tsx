@@ -92,8 +92,13 @@ export default function ShareYourStoryPage() {
                 </li>
               ))}
             </ul>
+            {/* This note used to say the form wasn't wired to anything. It is
+                now — so the note says what is still true instead, which is that
+                the form will admit a failure rather than fake a success. Left
+                in place deliberately: it is the sentence that makes the
+                thank-you screen worth believing. */}
             <p className="mt-8 border-l-2 border-bronze/50 py-1 pl-4 text-xs leading-relaxed text-charcoal/70">
-              Heads up: the form isn’t wired to an inbox yet. It will tell you so rather
+              If anything goes wrong when you send this, we’ll tell you plainly rather
               than showing a thank-you screen over a message that went nowhere.
             </p>
           </aside>

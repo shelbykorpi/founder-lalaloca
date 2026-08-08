@@ -1,5 +1,6 @@
 import { BRAND, SITE } from "./brand";
 import type { Product } from "./products";
+import type { ProductReviews } from "./reviews";
 
 /**
  * Structured data — the machine-readable version of the site.
@@ -182,7 +183,14 @@ export function faqSchema(faqs: { q: string; a: string }[]) {
   };
 }
 
-export function productSchema(product: Product) {
+/**
+ * `reviews` is optional and comes from lib/reviews.ts, which is empty. When it
+ * is null — which is today — no rating markup is emitted at all. That is not a
+ * limitation to work around: a rating in the schema that no customer produced
+ * is fraud, draws a manual penalty, and would cost more than every rich result
+ * it could win. The function cannot be called in a way that invents one.
+ */
+export function productSchema(product: Product, reviews?: ProductReviews | null) {
   return {
     "@context": "https://schema.org",
     "@type": "Product",
@@ -197,6 +205,27 @@ export function productSchema(product: Product) {
     brand: { "@id": `${SITE.url}/#brand-lalaloca` },
     size: product.size,
     audience: { "@type": "PeopleAudience", suggestedGender: "female" },
+    ...(reviews && reviews.count > 0
+      ? {
+          aggregateRating: {
+            "@type": "AggregateRating",
+            ratingValue: reviews.average,
+            reviewCount: reviews.count,
+            bestRating: 5,
+            worstRating: 1,
+          },
+          /* A handful of individual reviews alongside the aggregate. Google
+             wants at least one `Review` node to show star ratings reliably,
+             and a real excerpt is more persuasive in a result than a number. */
+          review: reviews.items.slice(0, 5).map((item) => ({
+            "@type": "Review",
+            reviewRating: { "@type": "Rating", ratingValue: item.rating, bestRating: 5 },
+            author: { "@type": "Person", name: item.author },
+            datePublished: item.published,
+            reviewBody: item.body,
+          })),
+        }
+      : {}),
     offers: {
       "@type": "Offer",
       price: product.price.toFixed(2),

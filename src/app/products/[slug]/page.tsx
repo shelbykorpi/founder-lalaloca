@@ -7,6 +7,7 @@ import { AddToBagButton } from "@/components/bag/AddToBagButton";
 import { BRAND } from "@/lib/brand";
 import { JsonLd, breadcrumbSchema, faqSchema, productSchema } from "@/lib/seo";
 import { formatPrice, getProduct, otherProducts, products } from "@/lib/products";
+import { getReviews } from "@/lib/reviews";
 
 export function generateStaticParams() {
   return products.map((product) => ({ slug: product.slug }));
@@ -36,6 +37,11 @@ export default async function ProductPage({ params }: PageProps<"/products/[slug
   const product = getProduct(slug);
   if (!product) notFound();
 
+  /* Null until a review platform is connected. Everything downstream — the
+     section below and the rating in the schema — is derived from this, so
+     there is no path by which the page can show a rating nobody left. */
+  const reviews = getReviews(slug);
+
   return (
     <>
       {/* Product, the breadcrumb trail rendered below, and the FAQs further
@@ -43,7 +49,7 @@ export default async function ProductPage({ params }: PageProps<"/products/[slug
           answer engines quotable facts rather than prose to paraphrase. */}
       <JsonLd
         schema={[
-          productSchema(product),
+          productSchema(product, reviews),
           breadcrumbSchema([
             { name: "Shop", path: "/shop" },
             { name: product.name, path: `/products/${product.slug}` },

@@ -22,8 +22,82 @@
  * thrown at the visitor.
  */
 
-const SHOP = process.env.SHOPIFY_SHOP_DOMAIN;
-const TOKEN = process.env.SHOPIFY_ADMIN_ACCESS_TOKEN;
+import { SHOPIFY_DOMAIN } from "./shopifyLinks";
+
+/**
+ * The store host is already a known constant used to build cart permalinks, so
+ * it is reused rather than duplicated into a second environment variable. One
+ * fewer thing to set, and no way for two copies of the same fact to disagree.
+ * The env var stays as an override for a staging store.
+ */
+const SHOP = process.env.SHOPIFY_SHOP_DOMAIN ?? SHOPIFY_DOMAIN;
+
+/**
+ * ── HOW THIS AUTHENTICATES, AND WHY IT CHANGED ──────────────────────────────
+ *
+ * Shopify retired the old "custom app → reveal a permanent Admin API token"
+ * flow. Apps are now created in the Dev Dashboard and authenticate with a
+ * CLIENT CREDENTIALS GRANT: post the client id and secret, receive an access
+ * token that expires in 24 hours.
+ *
+ * So there is no long-lived token to paste into an environment variable any
+ * more. The credentials are exchanged for one on demand and the result is
+ * cached in module scope until shortly before it expires.
+ *
+ * The static-token path is kept as an override. Stores still running a legacy
+ * custom app have a permanent token and should keep using it — setting
+ * SHOPIFY_ADMIN_ACCESS_TOKEN skips the exchange entirely.
+ *
+ * The grant only works when the app and the store are in the same Shopify
+ * organization, which is exactly the case for a store's own private app.
+ */
+const STATIC_TOKEN = process.env.SHOPIFY_ADMIN_ACCESS_TOKEN;
+const CLIENT_ID = process.env.SHOPIFY_CLIENT_ID;
+const CLIENT_SECRET = process.env.SHOPIFY_CLIENT_SECRET;
+
+/** Cached across invocations that share a warm serverless instance. */
+let cachedToken: { value: string; expiresAt: number } | null = null;
+
+/**
+ * Refresh a minute early. A token that expires mid-request fails the request,
+ * and one wasted exchange is cheaper than one lost subscriber.
+ */
+const EXPIRY_MARGIN_MS = 60_000;
+
+async function getAccessToken(): Promise<string | null> {
+  if (STATIC_TOKEN) return STATIC_TOKEN;
+  if (!CLIENT_ID || !CLIENT_SECRET) return null;
+
+  if (cachedToken && Date.now() < cachedToken.expiresAt - EXPIRY_MARGIN_MS) {
+    return cachedToken.value;
+  }
+
+  const response = await fetch(`https://${SHOP}/admin/oauth/access_token`, {
+    method: "POST",
+    headers: { "content-type": "application/x-www-form-urlencoded" },
+    body: new URLSearchParams({
+      grant_type: "client_credentials",
+      client_id: CLIENT_ID,
+      client_secret: CLIENT_SECRET,
+    }),
+  });
+
+  if (!response.ok) {
+    throw new Error(
+      `Shopify token exchange returned ${response.status}: ${await response.text()}`,
+    );
+  }
+
+  const json = await response.json();
+  if (!json?.access_token) throw new Error("Shopify token exchange returned no access_token");
+
+  cachedToken = {
+    value: json.access_token,
+    /* expires_in is seconds; Shopify currently returns 86399 (24 hours). */
+    expiresAt: Date.now() + Number(json.expires_in ?? 3600) * 1000,
+  };
+  return cachedToken.value;
+}
 
 /**
  * Pinned deliberately. Shopify ships quarterly versions and unversioned calls
@@ -37,11 +111,14 @@ export type SubscribeResult =
   | { ok: false; reason: string };
 
 async function shopifyGraphql(query: string, variables: Record<string, unknown>) {
+  const token = await getAccessToken();
+  if (!token) throw new Error("No Shopify credentials configured");
+
   const response = await fetch(`https://${SHOP}/admin/api/${API_VERSION}/graphql.json`, {
     method: "POST",
     headers: {
       "content-type": "application/json",
-      "X-Shopify-Access-Token": TOKEN as string,
+      "X-Shopify-Access-Token": token,
     },
     body: JSON.stringify({ query, variables }),
   });
@@ -84,8 +161,11 @@ export async function subscribeToList(
   email: string,
   source: string,
 ): Promise<SubscribeResult> {
-  if (!SHOP || !TOKEN) {
-    return { ok: false, reason: "SHOPIFY_SHOP_DOMAIN or SHOPIFY_ADMIN_ACCESS_TOKEN is not set" };
+  if (!SHOP || (!STATIC_TOKEN && !(CLIENT_ID && CLIENT_SECRET))) {
+    return {
+      ok: false,
+      reason: "Set SHOPIFY_CLIENT_ID and SHOPIFY_CLIENT_SECRET (or a legacy SHOPIFY_ADMIN_ACCESS_TOKEN)",
+    };
   }
 
   const address = email.trim().toLowerCase();

@@ -13,9 +13,11 @@ export default function sitemap(): MetadataRoute.Sitemap {
     "/found-her",
     "/share-your-story",
     "/find-your-serum",
-    "/search",
-    /* /account is intentionally absent: robots.ts disallows it, and a URL that
-       is both submitted and blocked is a Search Console error, not a signal. */
+    /* Two deliberate absences:
+       /account — robots.ts disallows it and the page carries noindex. A URL
+         that is both submitted and blocked is a Search Console error.
+       /search  — an internal search page carries noindex for the same reason
+         it should not be submitted: `?q=` generates unbounded thin URLs. */
   ];
 
   return [

@@ -5,8 +5,9 @@ import { DoorCard } from "@/components/door/DoorCard";
 import { ScrollDoors } from "@/components/door/ScrollDoors";
 import { AddSetButton } from "@/components/bag/AddToBagButton";
 import { PageIntro } from "@/components/site/PageIntro";
+import { TrackListView } from "@/components/site/TrackListView";
 import { formatPrice, products, SET } from "@/lib/products";
-import { JsonLd, breadcrumbSchema, collectionSchema } from "@/lib/seo";
+import { JsonLd, breadcrumbSchema, collectionSchema, setSchema } from "@/lib/seo";
 
 export const metadata: Metadata = {
   title: "Shop the LALALOCA Collection",
@@ -26,6 +27,10 @@ export default function ShopPage() {
       <JsonLd
         schema={[
           collectionSchema(products),
+          /* The trio is the highest-value order in the store and had no
+             machine-readable existence at all — it has no page of its own, so
+             nothing described it as a purchasable thing. */
+          setSchema(SET, products),
           breadcrumbSchema([{ name: "Shop", path: "/shop" }]),
         ]}
       />
@@ -38,6 +43,12 @@ export default function ShopPage() {
           Answer three questions instead <span aria-hidden>↗</span>
         </Link>
       </PageIntro>
+
+      <TrackListView
+        items={products}
+        listId="collection"
+        listName="The LALALOCA Collection"
+      />
 
       <section className="section bg-cream pt-4" aria-label="Serums">
         <ScrollDoors className="shell grid gap-x-8 gap-y-14 md:grid-cols-2 lg:grid-cols-3">

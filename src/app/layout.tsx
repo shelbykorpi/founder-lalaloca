@@ -6,8 +6,9 @@ import { Footer } from "@/components/site/Footer";
 import { BagProvider } from "@/components/bag/BagProvider";
 import { BagDrawer } from "@/components/bag/BagDrawer";
 import { BRAND, SITE } from "@/lib/brand";
-import { JsonLd, organizationSchema, websiteSchema } from "@/lib/seo";
+import { JsonLd, brandSchema, organizationSchema, websiteSchema } from "@/lib/seo";
 import { Analytics } from "@/components/site/Analytics";
+import { WebVitals } from "@/components/site/WebVitals";
 
 const cormorant = Cormorant_Garamond({
   subsets: ["latin"],
@@ -35,34 +36,65 @@ export const metadata: Metadata = {
     description: SITE.description,
     type: "website",
     url: SITE.url,
-    images: [
-      {
-        url: "/founder-share.jpg",
-        width: 1200,
-        height: 1200,
-        alt: "FOUNDER gold doorway monogram on the signature deep green field.",
-      },
-    ],
   },
-  twitter: {
-    card: "summary_large_image",
-    title: SITE.title,
-    description: SITE.description,
-    images: ["/founder-share.jpg"],
-  },
+  twitter: { card: "summary_large_image", title: SITE.title, description: SITE.description },
   robots: SITE.indexable
-    ? { index: true, follow: true }
+    ? {
+        index: true,
+        follow: true,
+        /* max-image-preview:large is what makes Google use a full-size image in
+           Discover and in image-rich results rather than a thumbnail. There is
+           no downside for a brand that wants its photography seen. */
+        googleBot: {
+          index: true,
+          follow: true,
+          "max-image-preview": "large",
+          "max-snippet": -1,
+          "max-video-preview": -1,
+        },
+      }
     : { index: false, follow: false, nocache: true },
+  /**
+   * Ownership proofs. Each is a token from the relevant console, set as an
+   * environment variable so the value can change without a code review.
+   *
+   * DNS TXT verification is better than a meta tag where it is offered, because
+   * it survives a rewrite of this file and covers every subdomain at once. These
+   * are the fallback, and the only option Bing gives without a DNS record.
+   */
+  verification: {
+    ...(process.env.NEXT_PUBLIC_GOOGLE_SITE_VERIFICATION
+      ? { google: process.env.NEXT_PUBLIC_GOOGLE_SITE_VERIFICATION }
+      : {}),
+    ...(process.env.NEXT_PUBLIC_BING_SITE_VERIFICATION ||
+    process.env.NEXT_PUBLIC_PINTEREST_SITE_VERIFICATION
+      ? {
+          other: {
+            ...(process.env.NEXT_PUBLIC_BING_SITE_VERIFICATION
+              ? { "msvalidate.01": process.env.NEXT_PUBLIC_BING_SITE_VERIFICATION }
+              : {}),
+            ...(process.env.NEXT_PUBLIC_PINTEREST_SITE_VERIFICATION
+              ? { "p:domain_verify": process.env.NEXT_PUBLIC_PINTEREST_SITE_VERIFICATION }
+              : {}),
+          },
+        }
+      : {}),
+  },
 };
 
 export default function RootLayout({ children }: LayoutProps<"/">) {
   return (
     <html lang="en" className={`${cormorant.variable} ${jost.variable}`}>
       <body className="flex min-h-full flex-col">
-        {/* The brand as a connected graph: who we are, and that this is a
-            searchable site. Product and FAQ blocks reference the @id set here. */}
-        <JsonLd schema={[organizationSchema(), websiteSchema()]} />
+        {/* The brand as a connected graph: who we are, what the collection is
+            called, and that this is a searchable site. Product, FAQ and Article
+            blocks on individual pages reference the @ids set here rather than
+            restating them, so the whole site resolves to one entity. */}
+        <JsonLd schema={[organizationSchema(), brandSchema(), websiteSchema()]} />
         <Analytics />
+        {/* Field data from the first visitor, rather than waiting months for
+            CrUX to reach a reporting quorum. Inert without a GA4 ID. */}
+        <WebVitals />
         <BagProvider>
           <a
             href="#main"

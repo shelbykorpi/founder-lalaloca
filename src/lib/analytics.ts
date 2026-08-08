@@ -17,22 +17,46 @@
  * from this site — it can't. Revenue only appears in GA4 if the same
  * measurement ID is also installed inside Shopify. Until then, treat
  * begin_checkout as the last measurable step in the funnel.
+ *
+ * THE FUNNEL THIS PRODUCES, in GA4's own vocabulary, so the standard ecommerce
+ * reports populate without any custom exploration being built first:
+ *
+ *   view_item_list  →  /shop, the three doors rendered
+ *   select_item     →  a door opened
+ *   view_item       →  a product page
+ *   add_to_cart     →  added, single or trio
+ *   view_cart       →  bag drawer opened
+ *   remove_from_cart→  removed from the bag
+ *   begin_checkout  →  handed off to Shopify   ← last step this site can see
+ *   purchase        →  fires only from inside Shopify, with the same GA4 ID
+ *
+ * `search` and `sign_up` are also reserved names and are mapped below; a search
+ * event under any other name will not populate the site-search report.
  */
 
 export type TrackEvent =
   | "product_view"
+  | "product_list_view"
   | "product_select"
   | "add_to_cart"
+  | "remove_from_cart"
+  | "cart_view"
   | "begin_checkout"
   | "purchase"
+  | "site_search"
+  | "quiz_complete"
   | "email_signup"
   | "found_her_article_view"
-  | "story_submission";
+  | "story_submission"
+  | "web_vitals";
 
 /** GA4 reserved names. Anything unmapped passes through as a custom event. */
 const GA4_NAME: Partial<Record<TrackEvent, string>> = {
   product_view: "view_item",
+  product_list_view: "view_item_list",
   product_select: "select_item",
+  cart_view: "view_cart",
+  site_search: "search",
   email_signup: "sign_up",
 };
 
@@ -42,6 +66,10 @@ export type TrackItem = {
   item_name: string;
   price?: number;
   item_category?: string;
+  item_brand?: string;
+  item_list_id?: string;
+  item_list_name?: string;
+  index?: number;
   quantity?: number;
 };
 
@@ -54,6 +82,29 @@ declare global {
     dataLayer?: unknown[];
     gtag?: (...args: unknown[]) => void;
   }
+}
+
+/**
+ * Build one GA4 line item from a product-shaped object.
+ *
+ * Exists because the single most common way to get an empty ecommerce report
+ * is a call site that sends `{ product: "thirst-trap" }` — a perfectly readable
+ * payload that GA4 discards silently. Routing every call site through this
+ * makes the required shape the path of least resistance.
+ */
+export function toTrackItem(
+  product: { slug: string; name: string; category: string; price: number },
+  extra: Partial<TrackItem> = {},
+): TrackItem {
+  return {
+    item_id: product.slug,
+    item_name: product.name,
+    item_category: product.category,
+    item_brand: "LALALOCA",
+    price: product.price,
+    quantity: 1,
+    ...extra,
+  };
 }
 
 export function track(event: TrackEvent, payload: Payload = {}) {

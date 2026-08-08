@@ -1,9 +1,10 @@
 old_url,measured_status,final_destination,hops,issue,recommended,implementation_status
-http://lalaloca.com,302 Found,https://www.founderbeauty.co/,1,"Temporary redirect. GoDaddy UI is configured ""Permanent (301)"" but the edge serves 302 — verified twice. Google keeps the old URL indexed and withholds link equity.",308 or 301 via Vercel redirect domain,NEEDS OWNER ACTION
-https://lalaloca.com,302 Found,https://www.founderbeauty.co/,1,"Same as above. Also domain-level only: every old path collapses to the homepage.",308 permanent + path preservation,NEEDS OWNER ACTION
-http://www.lalaloca.com,NXDOMAIN,none,n/a,"No DNS record exists. The www variant is entirely dead — not redirected, unresolvable.",Add DNS + include in redirect,NEEDS OWNER ACTION
-https://www.lalaloca.com,NXDOMAIN,none,n/a,"No DNS record exists.",Add DNS + include in redirect,NEEDS OWNER ACTION
-http://founderbeauty.co,301/308 chain,https://www.founderbeauty.co/,2,"Normal HTTP→HTTPS then apex→www. Acceptable.",No change,OK
-https://founderbeauty.co,308 Permanent,https://www.founderbeauty.co/,1,"Correct permanent redirect, configured in Vercel.",No change,OK
-http://www.founderbeauty.co,301,https://www.founderbeauty.co/,1,"HTTP→HTTPS upgrade.",No change,OK
-https://www.founderbeauty.co,200 OK,self,0,"Preferred canonical origin. Confirmed serving and canonical-consistent.",No change,OK
+http://lalaloca.com,redirect (exact code unverified - see note),https://www.founderbeauty.co/,1,"Now served by Vercel, configured 308 Permanent.",Verify with: curl -sI https://lalaloca.com,DONE - VERIFY CODE
+https://lalaloca.com,redirect (exact code unverified - see note),https://www.founderbeauty.co/,1,"Now served by Vercel, configured 308 Permanent. Paths preserved: /shop and /products/thirst-trap both reach their matching FOUNDER page.",Verify with: curl -sI https://lalaloca.com,DONE - VERIFY CODE
+http://www.lalaloca.com,resolves,https://www.founderbeauty.co/,1,"Previously NXDOMAIN - no DNS record at all. CNAME now points at Vercel.",none,FIXED
+https://www.lalaloca.com,resolves,https://www.founderbeauty.co/,1,"Previously NXDOMAIN.",none,FIXED
+http://founderbeauty.co,301/308 chain,https://www.founderbeauty.co/,2,"Normal HTTP->HTTPS then apex->www.",none,OK
+https://founderbeauty.co,308 Permanent,https://www.founderbeauty.co/,1,"Correct permanent redirect configured in Vercel.",none,OK
+http://www.founderbeauty.co,301,https://www.founderbeauty.co/,1,"HTTP->HTTPS upgrade.",none,OK
+https://www.founderbeauty.co,200 OK,self,0,"Preferred canonical origin.",none,OK
+NOTE,,,,"The tool used to measure reports the literal string '302 Found' for every redirect, including ones configured as 308. Status codes above are therefore stated as configured, not as measured. Confirm with curl -sI from a terminal.",,

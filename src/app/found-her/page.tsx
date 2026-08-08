@@ -6,18 +6,45 @@ import { EmailSignup } from "@/components/site/EmailSignup";
 import { BRAND } from "@/lib/brand";
 import { notes, PROFILE_QUESTIONS, STORY_STANDARD } from "@/lib/content";
 import { profiles } from "@/lib/profiles";
+import { JsonLd, breadcrumbSchema, editorialListSchema } from "@/lib/seo";
 
 export const metadata: Metadata = {
   title: "Found Her",
   description:
     "Stories from women about what they started, survived, changed, finished, and finally gave themselves credit for.",
-  alternates: { canonical: "/found-her" },
+  alternates: {
+    canonical: "/found-her",
+    /* Advertises the feed in the document head, which is how aggregators,
+       newsletter platforms and feed-reading crawlers find it without being
+       told the URL. */
+    types: { "application/rss+xml": "/feed/found-her.xml" },
+  },
 };
 
 export default function FoundHerPage() {
   const [featured, ...otherProfiles] = profiles;
   return (
     <>
+      {/* Declares the archive as a list of real articles, so the section itself
+          can accrue topical authority instead of each story fending for
+          itself. Profiles first — they are the original reporting. */}
+      <JsonLd
+        schema={[
+          editorialListSchema([
+            ...profiles.map((profile) => ({
+              title: `${profile.name} — ${profile.building}`,
+              path: `/found-her/${profile.slug}`,
+              description: profile.standfirst,
+            })),
+            ...notes.map((note) => ({
+              title: note.title,
+              path: `/found-her/${note.slug}`,
+              description: note.excerpt,
+            })),
+          ]),
+          breadcrumbSchema([{ name: BRAND.editorial, path: "/found-her" }]),
+        ]}
+      />
       <PageIntro
         eyebrow={BRAND.editorial}
         title={BRAND.campaign}

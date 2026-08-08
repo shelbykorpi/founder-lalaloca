@@ -34,19 +34,27 @@ A canonical is a page telling Google *"if you index one URL, index this one inst
 
 **Fixed.** Every route now self-references. Verified across nine routes in a production build.
 
-### SEVERE · The old-domain redirect is temporary, not permanent
+### CORRECTED · The old-domain redirect — what was claimed, and what is actually known
 
-`lalaloca.com` returns **`302 Found`** → `https://www.founderbeauty.co/`. Measured twice.
+**An earlier version of this document stated as fact that lalaloca.com served a `302` despite GoDaddy displaying "Permanent (301)". That claim is withdrawn.** The measurement tool used reports the literal string "Status: 302 Found" for *every* redirect it encounters — it returned the same "302" for the replacement Vercel redirect, which is explicitly configured as 308 and displays a `308` badge in the Vercel dashboard. Two different systems, both configured permanent, both labelled 302 by the same tool. The label is the tool's, not the server's.
 
-GoDaddy's control panel displays the forward as **"Permanent (301)"**. The wire disagrees with the UI, which means **this cannot be fixed by editing that setting** — it's GoDaddy's forwarding edge.
+**Verify the real status yourself in one line:**
+```
+curl -sI https://lalaloca.com | head -3
+```
 
-Why it matters for a brand migration specifically: a 301 tells Google *"lalaloca.com has moved permanently — transfer its history to the new address."* A 302 says *"keep lalaloca.com indexed, this is a temporary detour."* Every backlink, every year of branded recognition, every customer bookmark's accumulated value stays stranded on the old domain instead of consolidating into FOUNDER. This is the single most valuable unfixed item on the list.
+**What IS verified, independent of any HTTP status reading:**
 
-Two further defects in the same area:
-- **Domain-level only.** Every old path collapses to the homepage. `lalaloca.com/products/thirst-trap` does not reach the Thirst Trap page.
-- **`www.lalaloca.com` has no DNS record at all.** Not redirected — unresolvable. Anyone who types or bookmarked the www form gets a dead page.
+| Finding | How it was established |
+|---|---|
+| `www.lalaloca.com` had **no DNS record** — unresolvable, not merely misrouted | Direct DNS resolution, NXDOMAIN |
+| GoDaddy forwarding was **domain-level only** — every old path collapsed to the homepage | The forward's configured destination was the bare homepage URL |
+| Both now resolve to Vercel | DNS resolution after the change: `216.198.79.1` |
+| **Deep paths are now preserved** | `lalaloca.com/products/thirst-trap` loads the Thirst Trap page; `/shop` and `/our-story` likewise |
 
-**Not fixed** — requires a DNS change on a second domain with live customers. Exact procedure in Owner Actions.
+**What changed and why it was still worth doing:** the redirect moved from GoDaddy forwarding to a Vercel redirect domain set to 308 Permanent. Path preservation alone justifies it — under GoDaddy every legacy URL landed on the homepage, which the brief explicitly calls out as wrong ("Do not send every old URL to the homepage when a relevant replacement exists"). Vercel also issues real auto-renewing SSL and keeps both domains manageable in one place.
+
+**Live Google Workspace email on lalaloca.com was found and preserved.** Four `aspmx.l.google.com` MX records. Only the A and CNAME records were touched; mail routing is unaffected.
 
 ### MODERATE · `/share-your-story` shipped two `<h1>` elements
 
@@ -135,7 +143,7 @@ Not attempted in this pass. Each needs either an input above or is a body of wor
 
 ## Priority order from here
 
-1. **Fix the 302** — the highest-value unfixed item. Nothing else recovers LALALOCA's accumulated authority.
+1. **Confirm the redirect code** — `curl -sI https://lalaloca.com | head -3`. The migration to Vercel is done and configured 308; this is the one-line check that closes it out.
 2. **Bing Webmaster Tools** — ChatGPT's search leans on Bing's index. Ten minutes, and the single best lever for the AI-discovery goal in the brief.
 3. **Google Search Console** — then the keyword map becomes real work instead of guesswork.
 4. **GA4 Measurement ID** — one env var away from live.

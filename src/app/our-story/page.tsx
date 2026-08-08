@@ -4,11 +4,14 @@ import Link from "next/link";
 import { PageIntro } from "@/components/site/PageIntro";
 import { BRAND } from "@/lib/brand";
 import { profiles } from "@/lib/profiles";
+import { JsonLd, aboutPageSchema, breadcrumbSchema } from "@/lib/seo";
+
+const ABOUT_DESCRIPTION =
+  "FOUNDER is for women building something — and finding themselves along the way. The LALALOCA Collection is where it started.";
 
 export const metadata: Metadata = {
   title: "Our Story",
-  description:
-    "FOUNDER is for women building something — and finding themselves along the way. The LALALOCA Collection is where it started.",
+  description: ABOUT_DESCRIPTION,
   alternates: { canonical: "/our-story" },
 };
 
@@ -27,6 +30,14 @@ export default function OurStoryPage() {
 
   return (
     <>
+      {/* The page an engine reads to answer "who is behind this brand" — typed
+          as such, and pointed at the Organization node rather than repeating it. */}
+      <JsonLd
+        schema={[
+          aboutPageSchema(ABOUT_DESCRIPTION),
+          breadcrumbSchema([{ name: "Our Story", path: "/our-story" }]),
+        ]}
+      />
       <PageIntro
         eyebrow="Our story"
         title="FOUNDER is for women building something — and finding themselves along the way."

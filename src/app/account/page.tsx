@@ -6,6 +6,15 @@ export const metadata: Metadata = {
   title: "Account",
   description: "Track an order using the link in your confirmation email.",
   alternates: { canonical: "/account" },
+  /**
+   * robots.txt already disallows this path, but a disallow only asks a crawler
+   * not to *fetch* the page — a URL that is linked from the footer can still be
+   * indexed on the strength of those links, showing up as a bare title with no
+   * description. A noindex on the page itself is what actually keeps it out,
+   * and the two work together: crawlers that respect the disallow never see it,
+   * and any that fetch it anyway are told plainly.
+   */
+  robots: { index: false, follow: true },
 };
 
 export default function AccountPage() {

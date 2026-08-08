@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { SerumFinder } from "@/components/quiz/SerumFinder";
 import { PageIntro } from "@/components/site/PageIntro";
+import { JsonLd, breadcrumbSchema } from "@/lib/seo";
 
 export const metadata: Metadata = {
   title: "Which serum?",
@@ -12,6 +13,9 @@ export const metadata: Metadata = {
 export default function FindYourSerumPage() {
   return (
     <>
+      <JsonLd
+        schema={breadcrumbSchema([{ name: "Which serum?", path: "/find-your-serum" }])}
+      />
       <PageIntro
         eyebrow="Which serum?"
         title="Three questions. One answer."

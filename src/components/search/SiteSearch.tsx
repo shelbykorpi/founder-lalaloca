@@ -1,7 +1,8 @@
 "use client";
 
 import Link from "next/link";
-import { useMemo, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
+import { track } from "@/lib/analytics";
 import { notes } from "@/lib/content";
 import { PRIMARY_NAV } from "@/lib/brand";
 import { products } from "@/lib/products";
@@ -61,6 +62,27 @@ export function SiteSearch() {
     const terms = trimmed.split(/\s+/);
     return index.filter((entry) => terms.every((term) => entry.haystack.includes(term)));
   }, [trimmed]);
+
+  /**
+   * Report the search, debounced.
+   *
+   * WHY THIS IS WORTH MEASURING. This is the only place on the site where
+   * customers type what they actually want in their own words, unprompted. A
+   * search for "eye cream" or "retinol" is a product the range does not have;
+   * a search for "ingredients" is a page that is not answering the question.
+   * It is the cheapest keyword research available and it comes from buyers
+   * rather than from a tool's estimate.
+   *
+   * 700ms because firing per keystroke would log "h", "hy", "hya" … and bury
+   * the real query under its own prefixes.
+   */
+  useEffect(() => {
+    if (trimmed.length < 2) return;
+    const timer = setTimeout(() => {
+      track("site_search", { search_term: trimmed, results: results.length });
+    }, 700);
+    return () => clearTimeout(timer);
+  }, [trimmed, results.length]);
 
   return (
     <div className="shell">

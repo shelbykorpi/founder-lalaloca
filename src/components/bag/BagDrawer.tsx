@@ -42,6 +42,53 @@ export function BagDrawer() {
     window.location.href = url;
   }
 
+  /**
+   * view_cart, fired once each time the drawer opens.
+   *
+   * This is the step where GA4's funnel usually breaks on a headless build:
+   * there is no /cart page to collect a pageview, so without an explicit event
+   * the journey jumps from add_to_cart straight to begin_checkout and every
+   * abandonment in between is invisible.
+   */
+  useEffect(() => {
+    if (!isOpen || lines.length === 0) return;
+    track("cart_view", {
+      value: subtotal,
+      currency: "USD",
+      items: lines.map((l) => ({
+        item_id: l.id,
+        item_name: l.name,
+        item_category: l.category,
+        item_brand: "LALALOCA",
+        price: l.price,
+        quantity: l.quantity,
+      })),
+    });
+    /* Only on the open transition — re-firing as the bag is edited would
+       inflate the count and distort the drop-off rate. */
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [isOpen]);
+
+  /** Removals are the clearest signal of a pricing or expectation problem, and
+      they are the one bag action that leaves no other trace. */
+  function removeLine(line: (typeof lines)[number]) {
+    track("remove_from_cart", {
+      value: line.price * line.quantity,
+      currency: "USD",
+      items: [
+        {
+          item_id: line.id,
+          item_name: line.name,
+          item_category: line.category,
+          item_brand: "LALALOCA",
+          price: line.price,
+          quantity: line.quantity,
+        },
+      ],
+    });
+    remove(line.id);
+  }
+
   /* Escape closes, focus moves into the panel, and focus is trapped while open. */
   useEffect(() => {
     if (!isOpen) return;
@@ -178,7 +225,7 @@ export function BagDrawer() {
                     </div>
                     <button
                       type="button"
-                      onClick={() => remove(line.id)}
+                      onClick={() => removeLine(line)}
                       className="mt-1 inline-flex min-h-11 self-start items-center text-[0.6875rem] uppercase tracking-[0.16em] text-charcoal/70 underline underline-offset-4 hover:text-charcoal"
                     >
                       Remove

@@ -5,7 +5,7 @@ import { useState } from "react";
 import { DOOR_ASPECT, DoorFrame } from "./DoorFrame";
 import { useScrollDoors } from "./ScrollDoors";
 import { AddToBagButton } from "@/components/bag/AddToBagButton";
-import { track } from "@/lib/analytics";
+import { toTrackItem, track } from "@/lib/analytics";
 import { formatPrice, type Product } from "@/lib/products";
 
 /**
@@ -30,7 +30,20 @@ export function DoorCard({
 
   function reveal(next: boolean) {
     setManual(next);
-    if (next) track("product_select", { product: product.slug });
+    /* select_item needs the item array, not just a slug — without it the event
+       lands but the product-performance report stays blank. */
+    if (next)
+      track("product_select", {
+        item_list_id: "collection",
+        item_list_name: "The LALALOCA Collection",
+        items: [
+          toTrackItem(product, {
+            index,
+            item_list_id: "collection",
+            item_list_name: "The LALALOCA Collection",
+          }),
+        ],
+      });
   }
 
   return (

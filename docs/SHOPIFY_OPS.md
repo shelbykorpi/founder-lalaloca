@@ -86,18 +86,28 @@ The 1.5 is the margin for a good week arriving while you're waiting. Running out
 
 ---
 
-## 8. The two API tokens you now have
+## 8. The API credentials you now have
 
-Both live only in Vercel's encrypted environment store, marked Sensitive:
+All of them live only in Vercel's encrypted environment store, marked Sensitive.
 
-| Token | Scopes | Used by |
+| Credential | Scopes | Used by |
 |---|---|---|
-| Admin API (`shpat_…`) | `write_customers`, `read_customers` | The Founding List signup |
+| `SHOPIFY_CLIENT_ID` + `SHOPIFY_CLIENT_SECRET` | `write_customers`, `read_customers` | The Founding List signup and unsubscribe |
 | Storefront | cart permalinks | Checkout handoff |
 
-**Neither can see an order or move money.** That's deliberate — a leaked token should be an annoyance, not an incident. If either is ever exposed, Settings → Apps → Develop apps → the app → revoke and reissue. Then update Vercel and redeploy.
+**Corrected 8 August 2026.** This section previously described a permanent
+`shpat_…` Admin API token. Shopify has retired that flow. The app is now created
+in the **Dev Dashboard** (`dev.shopify.com`) and the site exchanges the client id
+and secret for a token that expires in 24 hours, refreshing it on demand. There
+is no long-lived token anywhere — which means a credential caught in a log or a
+screenshot is useless within a day.
 
-Never paste either into a chat, a doc, or a support ticket.
+**None of these can see an order or move money.** That's deliberate: a leaked
+credential should be an annoyance, not an incident. If one is ever exposed,
+dev.shopify.com → the app → **Client credentials → rotate**, then update Vercel
+and redeploy.
+
+Never paste any of them into a chat, a doc, or a support ticket.
 
 ---
 

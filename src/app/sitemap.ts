@@ -13,11 +13,16 @@ export default function sitemap(): MetadataRoute.Sitemap {
     "/found-her",
     "/share-your-story",
     "/find-your-serum",
-    /* Two deliberate absences:
+    /* Three deliberate absences:
        /account — robots.ts disallows it and the page carries noindex. A URL
          that is both submitted and blocked is a Search Console error.
        /search  — an internal search page carries noindex for the same reason
-         it should not be submitted: `?q=` generates unbounded thin URLs. */
+         it should not be submitted: `?q=` generates unbounded thin URLs.
+       /unsubscribe — reachable only from a signed link in an email, carries
+         noindex, and has nothing on it for anyone who arrived another way.
+         Deliberately NOT added to robots.ts either: a disallowed page is one
+         Google never fetches, so it never reads the noindex. Unlinked plus
+         noindex is the stronger combination here. */
   ];
 
   return [

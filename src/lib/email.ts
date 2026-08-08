@@ -36,6 +36,15 @@ export async function sendEmail(message: {
   text: string;
   /** So a reply from the owner goes to the woman who wrote in, not to a robot. */
   replyTo?: string;
+  /**
+   * Raw SMTP headers. Used for List-Unsubscribe / List-Unsubscribe-Post, which
+   * put a native "Unsubscribe" control in Gmail's own interface next to the
+   * sender name. That control is the single most effective thing you can do to
+   * stay out of spam folders: it gives an irritated reader something to press
+   * that is not the spam button, and Gmail and Yahoo both now require it on
+   * bulk mail. It costs two headers.
+   */
+  headers?: Record<string, string>;
 }): Promise<SendResult> {
   if (!API_KEY) return { sent: false, reason: "RESEND_API_KEY is not set" };
 
@@ -52,6 +61,7 @@ export async function sendEmail(message: {
         subject: message.subject,
         text: message.text,
         ...(message.replyTo ? { reply_to: message.replyTo } : {}),
+        ...(message.headers ? { headers: message.headers } : {}),
       }),
     });
 

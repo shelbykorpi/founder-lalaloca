@@ -107,7 +107,22 @@ async function getAccessToken(): Promise<string | null> {
 const API_VERSION = "2025-10";
 
 export type SubscribeResult =
-  | { ok: true; created: boolean }
+  | {
+      ok: true;
+      /** A Shopify customer record did not exist before this call. */
+      created: boolean;
+      /**
+       * Consent moved from "not subscribed" to "subscribed" on this call —
+       * true for a brand-new record, and also for an existing *buyer* who has
+       * now joined the list. This, not `created`, is the condition for sending
+       * a welcome: a customer who bought last month and subscribes today is new
+       * to the list even though her record is not new.
+       *
+       * False when she was already subscribed, so re-entering an address never
+       * sends a second welcome.
+       */
+      newlySubscribed: boolean;
+    }
   | { ok: false; reason: string };
 
 async function shopifyGraphql(query: string, variables: Record<string, unknown>) {
@@ -209,7 +224,7 @@ export async function subscribeToList(
       }
 
       await shopifyGraphql(ADD_TAGS, { id: existing.id, tags });
-      return { ok: true, created: false };
+      return { ok: true, created: false, newlySubscribed: !already };
     }
 
     const created = await shopifyGraphql(CREATE, {
@@ -227,7 +242,53 @@ export async function subscribeToList(
     const errors = created?.customerCreate?.userErrors ?? [];
     if (errors.length) return { ok: false, reason: JSON.stringify(errors) };
 
-    return { ok: true, created: true };
+    return { ok: true, created: true, newlySubscribed: true };
+  } catch (error) {
+    return { ok: false, reason: error instanceof Error ? error.message : "unknown error" };
+  }
+}
+
+/**
+ * Take someone off the list.
+ *
+ * UNSUBSCRIBED, NOT DELETED. The record stays, so the customer's orders, spend
+ * and history survive — and so does the fact that she asked not to be emailed.
+ * Deleting the row would lose the instruction along with everything else, and
+ * the next time she bought something she would silently rejoin the list.
+ *
+ * NOT FOUND IS A SUCCESS. An address that was never on the list is, from the
+ * only point of view that matters, already unsubscribed. Reporting a failure
+ * would mean showing an error to someone who correctly wants to be left alone,
+ * and it would turn the page into an oracle for which addresses are customers.
+ */
+export async function unsubscribeFromList(
+  email: string,
+): Promise<{ ok: true } | { ok: false; reason: string }> {
+  if (!SHOP || (!STATIC_TOKEN && !(CLIENT_ID && CLIENT_SECRET))) {
+    return { ok: false, reason: "No Shopify credentials configured" };
+  }
+
+  const address = email.trim().toLowerCase();
+
+  try {
+    const found = await shopifyGraphql(FIND, { query: `email:${address}` });
+    const existing = found?.customers?.edges?.[0]?.node;
+    if (!existing) return { ok: true };
+
+    const result = await shopifyGraphql(UPDATE_CONSENT, {
+      input: {
+        customerId: existing.id,
+        emailMarketingConsent: {
+          marketingState: "UNSUBSCRIBED",
+          consentUpdatedAt: new Date().toISOString(),
+        },
+      },
+    });
+
+    const errors = result?.customerEmailMarketingConsentUpdate?.userErrors ?? [];
+    if (errors.length) return { ok: false, reason: JSON.stringify(errors) };
+
+    return { ok: true };
   } catch (error) {
     return { ok: false, reason: error instanceof Error ? error.message : "unknown error" };
   }

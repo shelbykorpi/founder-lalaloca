@@ -6,7 +6,36 @@ Ordered by value. Detail for each lives in the linked document; this is the chec
 
 ## 0. The deadline that outranks everything
 
-**The Vercel trial expires in 3 days.** Every item below assumes the site is up.
+**The Vercel trial expires on 10 August 2026 — two days.** Every item below
+assumes the site is up. Billing → **End Trial and Start Pro Plan**. I can't press
+it; a purchase on a saved card has to be yours.
+
+---
+
+## 0b. Two variables the welcome email needs
+
+Both server-side, so no rebuild — but **redeploy** or the running instance won't
+see them.
+
+| Variable | Value | Sensitive |
+|---|---|---|
+| `UNSUBSCRIBE_SECRET` | any long random string — `node -e "console.log(crypto.randomUUID()+crypto.randomUUID())"` | **yes** |
+| `MAILING_ADDRESS` | a real postal address that receives post | no |
+
+**`MAILING_ADDRESS` is a legal requirement, not a nicety.** CAN-SPAM requires a
+valid physical postal address in commercial email, and the welcome links to
+products, so it is commercial. There is no default in the code on purpose — an
+invented address would be worse than a missing one, because a missing one is
+visible. **A PO box or your registered-agent address is fine and is what most
+one-person brands use. Do not use your home address.**
+
+Until it's set the welcome still sends — silently dropping a subscriber's first
+email would be the worse failure — but every send logs a warning in Vercel.
+
+Without `UNSUBSCRIBE_SECRET` the email falls back to *"reply with unsubscribe"*
+wording, which works but puts the job on you by hand.
+
+→ `FORMS_AND_EMAIL_SETUP.md` §5
 
 ---
 
@@ -115,7 +144,8 @@ Five-minute version: add the Etsy URL to `NEXT_PUBLIC_SAME_AS`, and add founderb
 ## The order I'd do it in
 
 ```
-Today       Renew Vercel · deploy · set the env vars · redeploy
+Today       Convert Vercel to paid (trial ends the 10th)
+Today       UNSUBSCRIBE_SECRET + MAILING_ADDRESS · set the env vars · redeploy
 This week   Bing (10 min) → Search Console (20 min) → GA4 + Shopify (30 min)
 This week   sameAs + Etsy About link — five minutes, highest leverage per minute
 Next week   Merchant Center (after checking the Shopify sync)

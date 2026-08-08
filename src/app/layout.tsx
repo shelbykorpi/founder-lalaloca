@@ -9,6 +9,7 @@ import { BRAND, SITE } from "@/lib/brand";
 import { JsonLd, brandSchema, organizationSchema, websiteSchema } from "@/lib/seo";
 import { Analytics } from "@/components/site/Analytics";
 import { WebVitals } from "@/components/site/WebVitals";
+import { Analytics as VercelAnalytics } from "@vercel/analytics/next";
 
 const cormorant = Cormorant_Garamond({
   subsets: ["latin"],
@@ -95,6 +96,7 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
         {/* Field data from the first visitor, rather than waiting months for
             CrUX to reach a reporting quorum. Inert without a GA4 ID. */}
         <WebVitals />
+        <VercelAnalytics />
         <BagProvider>
           <a
             href="#main"

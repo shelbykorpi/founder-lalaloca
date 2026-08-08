@@ -11,7 +11,7 @@ export function Footer() {
           <p className="mt-4 max-w-sm font-serif text-[1.75rem] leading-tight text-shell/90">
             {BRAND.tagline}
           </p>
-          <EmailSignup />
+          <EmailSignup source="footer" />
         </div>
 
         <div className="grid gap-10 sm:grid-cols-3">

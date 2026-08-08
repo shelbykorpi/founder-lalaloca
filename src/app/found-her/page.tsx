@@ -296,7 +296,7 @@ export default function FoundHerPage() {
           <h2 className="headline text-balance text-charcoal">
             New stories, as they’re published.
           </h2>
-          <EmailSignup tone="light" />
+          <EmailSignup tone="light" source="found-her" />
         </div>
       </section>
     </>

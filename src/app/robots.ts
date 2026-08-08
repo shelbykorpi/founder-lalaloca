@@ -27,8 +27,12 @@ import { SITE } from "@/lib/brand";
  *                   from AI Overviews while leaving normal Search untouched.
  *
  * /account stays out of every index: it is a personal order-lookup page with
- * nothing crawlable and no reason to appear in a result.
+ * nothing crawlable and no reason to appear in a result. /api is not pages at
+ * all — the form endpoints answer POST and nothing else, so a crawler spending
+ * requests on them learns nothing and wastes crawl budget.
  */
+
+const DISALLOW = ["/account", "/api/"];
 
 const AI_AGENTS = [
   "OAI-SearchBot",
@@ -50,11 +54,11 @@ export default function robots(): MetadataRoute.Robots {
 
   return {
     rules: [
-      { userAgent: "*", allow: "/", disallow: ["/account"] },
+      { userAgent: "*", allow: "/", disallow: DISALLOW },
       ...AI_AGENTS.map((userAgent) => ({
         userAgent,
         allow: "/",
-        disallow: ["/account"],
+        disallow: DISALLOW,
       })),
     ],
     sitemap: `${SITE.url}/sitemap.xml`,

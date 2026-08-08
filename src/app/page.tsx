@@ -148,7 +148,7 @@ export default function HomePage() {
         <div className="shell">
           <div className="max-w-xl">
             <h2 className="headline text-balance text-charcoal">Come build this with us.</h2>
-            <EmailSignup tone="light" />
+            <EmailSignup tone="light" source="home" />
           </div>
         </div>
       </section>

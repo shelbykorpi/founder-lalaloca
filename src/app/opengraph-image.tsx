@@ -1,15 +1,21 @@
-import { BRAND } from "@/lib/brand";
-import { OG_CONTENT_TYPE, OG_SIZE, ogCard } from "@/lib/og";
+import { readFile } from "node:fs/promises";
+import { join } from "node:path";
 
-/** The default card, used by any route that does not supply its own. */
-export const alt = `${BRAND.display} — ${BRAND.tagline}`;
-export const size = OG_SIZE;
-export const contentType = OG_CONTENT_TYPE;
+/**
+ * v3.0 identity: the site-wide OG / social share image is the primary lockup
+ * on Founder Green (public/brand/founder-primary-green.png), per the Website
+ * Alignment Spec §1. Routes with their own opengraph-image (products,
+ * Found Her profiles) still override this.
+ */
+export const alt = "FOUNDER";
+export const size = { width: 1200, height: 630 };
+export const contentType = "image/png";
 
-export default function Image() {
-  return ogCard({
-    eyebrow: BRAND.structure,
-    title: BRAND.campaign,
-    footnote: "Three serums. 50 ml each. Free US shipping.",
+export default async function Image() {
+  const png = await readFile(
+    join(process.cwd(), "public/brand/founder-primary-green.png"),
+  );
+  return new Response(new Uint8Array(png), {
+    headers: { "Content-Type": contentType },
   });
 }

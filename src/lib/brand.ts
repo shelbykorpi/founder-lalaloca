@@ -48,6 +48,11 @@ export const BRAND = {
   monogram: "L",
 
   /** Message hierarchy. Each line has one job. Do not stack them together. */
+  /**
+   * v3.0 campaign line. ALWAYS set stacked on these two lines — a single-line
+   * setting is prohibited by the Master Brand Board, not discouraged.
+   */
+  campaignLines: ["Open the Door.", "The Room Is Yours."],
   tagline: "Beauty for what you’re building.",
   belief: "Every woman is the founder of something.",
   campaign: "You didn’t become her. You found her.",

@@ -89,7 +89,7 @@ export function EntranceDoor() {
       onPointerEnter={() => hasHover && !reduced && setAjar(true)}
       onPointerLeave={() => hasHover && setAjar(false)}
       className="group block w-full focus-visible:outline-offset-8"
-      aria-label="Open the doors and shop the LALALOCA Collection"
+      aria-label="Open the door and shop the LALALOCA Collection"
     >
       <div
         aria-hidden
@@ -200,7 +200,7 @@ export function EntranceDoor() {
       </div>
 
       <p className="mt-6 text-center text-[0.6875rem] uppercase tracking-[0.22em] text-charcoal/70 transition-colors group-hover:text-charcoal">
-        Open the doors <span aria-hidden>↗</span>
+        Open the door <span aria-hidden>↗</span>
       </p>
     </Link>
   );

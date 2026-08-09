@@ -196,7 +196,7 @@ export default function FoundHerPage() {
                 Meanwhile, from us
               </h2>
               <p className="mt-3 max-w-xl text-sm text-charcoal/80">
-                Written by the {BRAND.display} team, and labelled that way. These aren’t
+                Written by the {BRAND.display} team, and labeled that way. These aren’t
                 customer stories — those only appear here with a name attached and
                 permission given.
               </p>
@@ -254,7 +254,7 @@ export default function FoundHerPage() {
           <div>
             <p className="eyebrow text-bronze-ink">Your turn</p>
             <h2 id="invitation-heading" className="headline mt-4 max-w-[14ch] text-balance text-charcoal">
-              The room is yours.
+              Write yours.
             </h2>
             <p className="mt-6 max-w-md text-[1.0625rem] leading-[1.8] text-charcoal/85">
               This archive isn’t ours to fill. Tell us what you started, what it took,

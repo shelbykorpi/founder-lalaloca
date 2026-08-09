@@ -34,16 +34,18 @@ export default function HomePage() {
         <div className="shell relative flex flex-col justify-end pb-14 pt-8 md:min-h-[36rem] md:py-16 lg:min-h-[40rem]">
           <div className="max-w-[34rem]">
             <p className="eyebrow text-blush/90">{BRAND.display}</p>
-            <h1 className="display mt-5 max-w-[13ch] text-balance">{BRAND.tagline}</h1>
+            {/* Campaign line — always stacked on two lines (v3.0; single-line is prohibited) */}
+            <h1 className="display mt-5 text-balance">
+              <span className="block">{BRAND.campaignLines[0]}</span>
+              <span className="block">{BRAND.campaignLines[1]}</span>
+            </h1>
             <p className="mt-6 font-serif text-[clamp(1.5rem,3vw,2.125rem)] leading-snug text-blush">
-              Three serums. No spreadsheet.
+              {BRAND.tagline}
             </p>
-            <p className="lede mt-4 text-shell/85">
-              Stories from women who built before anyone applauded.
-            </p>
+            <p className="lede mt-4 text-shell/85">Three serums. No spreadsheet.</p>
             <div className="mt-9 flex flex-col gap-3 sm:flex-row">
               <Link href="/shop" className="btn btn-primary">
-                Shop the LALALOCA Collection
+                Open the door
               </Link>
               <Link href="/found-her" className="btn btn-ghost-light">
                 Read Found Her
@@ -100,6 +102,9 @@ export default function HomePage() {
           <div className="grid gap-10 lg:grid-cols-[minmax(0,26rem)_1fr] lg:gap-16">
             <div>
               <p className="eyebrow text-bronze-ink">{BRAND.editorial}</p>
+              <p className="mt-4 font-serif text-xl text-charcoal/85">
+                Stories from women who built before anyone applauded.
+              </p>
               <h2 id="found-her-heading" className="headline mt-4 text-balance">
                 {BRAND.campaign}
               </h2>
@@ -144,11 +149,13 @@ export default function HomePage() {
       </section>
 
       {/* ---------------- Email ---------------- */}
-      <section className="section-tight texture-stone bg-cream py-14 md:py-16">
+      {/* Founder Green enters the page here — the invitation moment (§3 of the
+          alignment spec). One green band only; its authority comes from scarcity. */}
+      <section className="section-tight bg-founder-green py-14 md:py-16">
         <div className="shell">
           <div className="max-w-xl">
-            <h2 className="headline text-balance text-charcoal">Come build this with us.</h2>
-            <EmailSignup tone="light" source="home" />
+            <h2 className="headline text-balance text-cream">Come build this with us.</h2>
+            <EmailSignup tone="green" source="home" />
           </div>
         </div>
       </section>

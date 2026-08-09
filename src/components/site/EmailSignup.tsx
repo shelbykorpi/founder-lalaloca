@@ -8,7 +8,7 @@ import { HONEYPOT_FIELD } from "@/lib/formGuard";
  * Email signup, wired to /api/subscribe → the Shopify customer list.
  *
  * The heading and the button are the locked §12 call to action — "Enter the
- * Founding List. Be first through the doors." The invitation is "come closer",
+ * Founding List. Be first through the door." The invitation is "come closer",
  * never "sign up now" (§8), so the button says Enter, not Subscribe.
  *
  * THREE STATES, AND THE THIRD IS THE IMPORTANT ONE. Idle, subscribed, and
@@ -22,7 +22,8 @@ export function EmailSignup({
   heading = "Enter the Founding List.",
   source = "page",
 }: {
-  tone?: "dark" | "light";
+  /** "green" = the Founder Green invitation band: cream type, blush eyebrow, gold ENTER. */
+  tone?: "dark" | "light" | "green";
   heading?: string;
   /** Becomes a Shopify tag, so campaigns can be segmented by where someone joined. */
   source?: "footer" | "found-her" | "shop" | "page" | "home";
@@ -41,6 +42,7 @@ export function EmailSignup({
     renderedAt.current = Date.now();
   }, []);
   const dark = tone === "dark";
+  const green = tone === "green";
 
   async function submit(event: React.FormEvent<HTMLFormElement>) {
     event.preventDefault();
@@ -81,19 +83,23 @@ export function EmailSignup({
   }
 
   const note = `mt-4 border p-4 text-sm leading-relaxed ${
-    dark ? "border-shell/25 text-shell/85" : "border-bronze/40 text-charcoal/80"
+    green
+      ? "border-cream/30 text-cream/85"
+      : dark
+        ? "border-shell/25 text-shell/85"
+        : "border-bronze/40 text-charcoal/80"
   }`;
 
   return (
     <form className="mt-8 max-w-md" onSubmit={submit}>
       <label
         htmlFor={id}
-        className={`eyebrow block ${dark ? "text-shell/60" : "text-charcoal/70"}`}
+        className={`eyebrow block ${green ? "text-blush" : dark ? "text-shell/60" : "text-charcoal/70"}`}
       >
         {heading}
       </label>
-      <p className={`mt-2 text-sm ${dark ? "text-shell/70" : "text-charcoal/75"}`}>
-        Be first through the doors. Which serum to start with, new stories as
+      <p className={`mt-2 text-sm ${green ? "text-cream/80" : dark ? "text-shell/70" : "text-charcoal/75"}`}>
+        Be first through the door. Which serum to start with, new stories as
         they’re published, and when something is back in stock. A few emails a
         month, not a few a week.
       </p>
@@ -128,16 +134,18 @@ export function EmailSignup({
               placeholder="Your email"
               onChange={(event) => setEmail(event.target.value)}
               className={`h-12 min-w-0 shrink-0 border bg-transparent px-4 text-sm outline-none transition-colors placeholder:text-current/60 sm:flex-1 ${
-                dark
-                  ? "border-shell/30 text-shell focus:border-bronze"
-                  : "border-charcoal/25 text-charcoal focus:border-bronze"
+                green
+                  ? "border-cream/40 text-cream focus:border-bronze"
+                  : dark
+                    ? "border-shell/30 text-shell focus:border-bronze"
+                    : "border-charcoal/25 text-charcoal focus:border-bronze"
               }`}
             />
             <button
               type="submit"
               disabled={state === "sending"}
               className={`btn shrink-0 disabled:opacity-60 ${
-                dark ? "btn-ghost-light" : "btn-outline"
+                green ? "bg-bronze text-ink hover:opacity-90" : dark ? "btn-ghost-light" : "btn-outline"
               }`}
             >
               {state === "sending" ? "One moment" : "Enter"}
@@ -146,7 +154,7 @@ export function EmailSignup({
           {message && (
             <p
               role="alert"
-              className={`mt-3 text-sm ${dark ? "text-shell/80" : "text-charcoal/80"}`}
+              className={`mt-3 text-sm ${green ? "text-cream/85" : dark ? "text-shell/80" : "text-charcoal/80"}`}
             >
               {message}
             </p>

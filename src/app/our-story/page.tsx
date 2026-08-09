@@ -150,7 +150,7 @@ export default function OurStoryPage() {
             <p className="mt-8 leading-[1.8] text-charcoal/85">
               The other half of the name is the part people notice second. Founder.
               Found her. There’s usually a moment somewhere in the building where a
-              woman looks up and recognises who she’s become. We named the brand after
+              woman looks up and recognizes who she’s become. We named the brand after
               that moment rather than after ourselves.
             </p>
           </div>

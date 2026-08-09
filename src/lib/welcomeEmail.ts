@@ -20,7 +20,7 @@
  * Both of Shopify's welcome templates attach one. A first-purchase discount
  * teaches the most engaged part of an audience to wait for the next one, and it
  * takes margin from the buyers least likely to have needed it. The list was
- * sold on the footer as "be first through the doors" — access, not money off —
+ * sold on the footer as "be first through the door" — access, not money off —
  * and the email keeps that promise instead of quietly replacing it.
  *
  * ── WHY IT SETS EXPECTATIONS EXPLICITLY ─────────────────────────────────────

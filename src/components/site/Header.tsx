@@ -49,11 +49,14 @@ export function Header() {
           </svg>
         </button>
 
-        <Link
-          href="/"
-          className="inline-flex min-h-11 items-center font-serif text-[1.375rem] tracking-[0.34em] text-charcoal md:text-2xl"
-        >
-          {BRAND.display}
+        <Link href="/" aria-label="FOUNDER — home" className="inline-flex min-h-11 items-center">
+          {/* v3.0 identity: horizontal lockup, key height 32px mobile / 40px desktop.
+              Clear space = full key width on all sides — keep nav clear of it. */}
+          <img
+            src="/brand/founder-horizontal-cream.svg"
+            alt="FOUNDER"
+            className="h-8 w-auto md:h-10"
+          />
         </Link>
 
         <nav aria-label="Primary" className="hidden lg:block">

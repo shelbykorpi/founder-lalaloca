@@ -51,10 +51,10 @@ export const notes: Note[] = [
     title: "Nobody clapped",
     standfirst: "The wins that don’t come with an announcement.",
     excerpt:
-      "You sent the email. You said the number out loud. You stopped apologising for the thing you’re good at.",
+      "You sent the email. You said the number out loud. You stopped apologizing for the thing you’re good at.",
     readingTime: "3 min",
     body: [
-      "You sent the email. You said the number out loud without shaving anything off it. You stopped apologising at the start of sentences about work you’re good at.",
+      "You sent the email. You said the number out loud without shaving anything off it. You stopped apologizing at the start of sentences about work you’re good at.",
       "None of that gets a photo. There’s no announcement, no one takes you to dinner, and if you told most people they’d say “oh, nice” and change the subject. And yet the year that follows is measurably different because of it.",
       "We’re interested in those. Not the launch — the Tuesday three months earlier when you decided you were going to do it anyway. Not the finished thing — the night you let it be badly made rather than not made at all.",
       "If you’re keeping a list of what you’ve done this year and the quiet ones didn’t make it onto the list, put them on the list.",

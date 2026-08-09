@@ -7,7 +7,8 @@ export function Footer() {
     <footer className="bg-charcoal text-shell">
       <div className="shell grid gap-12 py-14 md:py-16 lg:grid-cols-[1.1fr_1.4fr] lg:gap-20">
         <div>
-          <p className="font-serif text-2xl tracking-[0.34em]">{BRAND.display}</p>
+          {/* v3.0 identity: gold lockup on Charcoal, key height 40px */}
+          <img src="/brand/founder-horizontal-ink.svg" alt="FOUNDER" className="h-10 w-auto" />
           <p className="mt-4 max-w-sm font-serif text-[1.75rem] leading-tight text-shell/90">
             {BRAND.tagline}
           </p>

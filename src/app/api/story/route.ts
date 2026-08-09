@@ -2,6 +2,7 @@ import { recordStorySubmission } from "@/lib/airtable";
 import { STORY_FIELDS } from "@/lib/content";
 import { OWNER_EMAIL, sendEmail } from "@/lib/email";
 import { guard, looksLikeEmail, silentOk } from "@/lib/formGuard";
+import { STORY_CONFIRMATION_SUBJECT, storyConfirmationText } from "@/lib/storyEmail";
 
 /**
  * FOUND HER story intake.
@@ -152,22 +153,15 @@ export async function POST(request: Request) {
      and failing her submission over a courtesy email would be the wrong trade. */
   const confirmed = await sendEmail({
     to: email,
-    subject: "We have your story",
-    text: [
-      `${name},`,
-      "",
-      "Your story arrived. A person reads every one of these — not a system, and",
-      "not immediately. It may be a little while.",
-      "",
-      canPublish
-        ? "You said we may consider it for publication. If we would like to, we will write to you first with the final text, and you can say no at that point with no explanation needed. Nothing goes up before you have read it."
-        : "You did not tick the publication permission, so this will be read and nothing more. That is a perfectly good reason to have sent it.",
-      "",
-      "Thank you for writing it down.",
-      "",
-      "FOUNDER",
-      "founderbeauty.co",
-    ].join("\n"),
+    subject: STORY_CONFIRMATION_SUBJECT,
+    /* The copy lives in `storyEmail.ts` because it is the owner's, verbatim,
+       and because it forks on the publication permission. Do not inline it back
+       here — it is long, it is not developer copy, and it needs to be editable
+       without reading an API route. */
+    text: storyConfirmationText(name, canPublish),
+    /* Photographs come back as a REPLY to this email, so reply-to has to reach
+       a human inbox rather than the sending domain. It already did; now it
+       matters more. */
     replyTo: OWNER_EMAIL,
   });
   if (!confirmed.sent) console.error("[story] confirmation failed:", confirmed.reason);

@@ -228,9 +228,23 @@ def render_tile(size, fg, bg, ss=4):
     draw_evenodd(d, polys, fg, bg)
     return img.resize((size, size), Image.LANCZOS)
 
-render_tile(180, GOLD, GREEN).save(os.path.join(OUT, 'founder-icon-180.png'))
-render_tile(48, IVORY, GREEN).save(os.path.join(OUT, 'favicon.ico'),
-                                   sizes=[(16, 16), (32, 32), (48, 48)])
+# RGBA, NOT RGB — and this is not cosmetic.
+#
+# Pillow writes each ICO entry as a PNG in whatever mode the source image is.
+# Turbopack decodes favicon.ico with the Rust `image` crate, whose ICO decoder
+# accepts PNG-in-ICO entries ONLY when they are RGBA8. Hand it an RGB entry and
+# the Next.js build dies with:
+#
+#     ./src/app/favicon.ico
+#     Error: Processing image failed
+#     unable to decode image data
+#
+# which names the file but not the cause, and which took a failed production
+# deploy to find. The tiles are fully opaque either way, so this changes no
+# pixel — it only changes the pixel format the encoder records.
+render_tile(180, GOLD, GREEN).convert('RGBA').save(os.path.join(OUT, 'founder-icon-180.png'))
+render_tile(48, IVORY, GREEN).convert('RGBA').save(os.path.join(OUT, 'favicon.ico'),
+                                                   sizes=[(16, 16), (32, 32), (48, 48)])
 
 def og():
     ss = 2; W, H = 1200*ss, 630*ss

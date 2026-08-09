@@ -7,8 +7,10 @@ export function Footer() {
     <footer className="bg-charcoal text-shell">
       <div className="shell grid gap-12 py-14 md:py-16 lg:grid-cols-[1.1fr_1.4fr] lg:gap-20">
         <div>
-          {/* v3.0 identity: gold lockup on Charcoal, key height 40px */}
-          <img src="/brand/founder-horizontal-ink.svg" alt="FOUNDER" className="h-10 w-auto" />
+          {/* Stacked lockup in gold on Charcoal. 80px, which puts FOUNDER at
+              the same reading size the 40px horizontal lockup gave it — the
+              extra height is the monogram sitting above, not a bigger word. */}
+          <img src="/brand/founder-stacked-ink.svg" alt="FOUNDER" className="h-20 w-auto" />
           <p className="mt-4 max-w-sm font-serif text-[1.75rem] leading-tight text-shell/90">
             {BRAND.tagline}
           </p>

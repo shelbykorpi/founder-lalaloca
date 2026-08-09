@@ -31,7 +31,12 @@ export function Header() {
         {BRAND.structure}
       </p>
 
-      <div className="shell flex h-16 items-center justify-between gap-4 md:h-[4.5rem]">
+      {/* The bar is tall because the lockup is stacked. A vertical logo is
+          roughly twice the height of a horizontal one at the same wordmark
+          size, so holding FOUNDER at its previous reading size costs about
+          40px of bar. 96/112 leaves a 16px margin above and below the mark at
+          both breakpoints — below that the logo starts touching the rules. */}
+      <div className="shell flex h-24 items-center justify-between gap-4 md:h-28">
         <button
           type="button"
           aria-expanded={menuOpen}
@@ -50,12 +55,14 @@ export function Header() {
         </button>
 
         <Link href="/" aria-label="FOUNDER — home" className="inline-flex min-h-11 items-center">
-          {/* v3.0 identity: horizontal lockup, key height 32px mobile / 40px desktop.
-              Clear space = full key width on all sides — keep nav clear of it. */}
+          {/* Stacked lockup: the F monogram centred over the wordmark, 64px
+              mobile / 80px desktop. The horizontal lockup is still in
+              /public/brand if a wide, short space ever needs it.
+              Clear space = full monogram width on all sides — keep nav off it. */}
           <img
-            src="/brand/founder-horizontal-cream.svg"
+            src="/brand/founder-stacked-cream.svg"
             alt="FOUNDER"
-            className="h-8 w-auto md:h-10"
+            className="h-16 w-auto md:h-20"
           />
         </Link>
 

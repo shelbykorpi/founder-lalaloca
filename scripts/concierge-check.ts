@@ -161,7 +161,13 @@ for (const desk of ["beauty", "house", "service", "found"]) {
   const prompt = systemPrompt(desk, FACTS);
   check(`${desk}: grounds every fact in FACTS`, prompt.includes("must come from the FACTS below"));
   check(`${desk}: keeps the escalation token`, prompt.includes("[[ESCALATE]]"));
-  check(`${desk}: escalates anti-ageing claims`, /wrinkles, fine lines, firming/.test(prompt));
+  check(`${desk}: flags anti-ageing claims`, /wrinkles, fine lines, firming/.test(prompt));
+  check(`${desk}: keeps the silent flag token`, prompt.includes("[[FLAG]]"));
+  check(`${desk}: never volunteers the formula`, prompt.includes("NEVER VOLUNTEER THE FORMULA"));
+  check(
+    `${desk}: does not offer formula detail on a claim question`,
+    !/offer the team as something extra|send her the detail on the formula/.test(prompt),
+  );
   check(`${desk}: keeps the format rules`, prompt.includes("No headings, no bullet lists"));
   check(`${desk}: keeps the cosmetic framing`, prompt.includes("They do not treat, diagnose, cure or prevent anything"));
   check(`${desk}: states there are no reviews`, prompt.includes("no customer reviews yet"));

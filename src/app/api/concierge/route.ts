@@ -133,10 +133,22 @@ export async function POST(request: Request) {
     return Response.json({ ok: false, configured: result.configured }, { status: 503 });
   }
 
-  /* The model signals a handover with a token on its own line. Strip it before
-     anything reaches the browser. */
+  /* Two tokens, both on their own line, both stripped before anything reaches
+     the browser.
+
+     [[ESCALATE]] is a handover the customer has been told about. [[FLAG]] is
+     silent: it exists because claim questions — wrinkles, firming, lifting —
+     are answered normally now, with no offer of formula detail and no promise
+     of a person, but the brand still wants the transcript. Shelby asked for the
+     offer to stop; she did not ask to stop seeing them, and an unanswerable
+     claim question is exactly the exchange worth having on file.
+
+     They must produce different rows. An email that looks like a customer
+     waiting for a reply, when nobody is waiting, trains you to ignore the
+     queue — which is the one thing this queue cannot survive. */
   const wants = result.text.includes("[[ESCALATE]]");
-  const text = result.text.replace(/\[\[ESCALATE\]\]/g, "").trim();
+  const flagged = result.text.includes("[[FLAG]]");
+  const text = result.text.replace(/\[\[(ESCALATE|FLAG)\]\]/g, "").trim();
 
   /* ── 6. Outbound screen ──────────────────────────────────────────────────
      Checked on what the model actually wrote, not on what it was told to
@@ -164,10 +176,12 @@ export async function POST(request: Request) {
      Awaited. The customer has just been told a person will follow up; the
      function must not be frozen before that becomes true. */
   let escalated = false;
-  if (wants) {
+  if (wants || flagged) {
     const sent = await escalate({
       desk,
-      reason: "Concierge handed over",
+      reason: wants
+        ? "Concierge handed over"
+        : "Claim question — logged, nothing promised to her",
       history: [...history, { role: "assistant", content: text }],
       reply: text,
       email: emailIn(history),

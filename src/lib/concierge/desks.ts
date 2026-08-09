@@ -30,7 +30,7 @@ export const DESK_ORDER: Desk[] = ["beauty", "house", "found", "service"];
 export const DESKS: Record<Desk, DeskContent> = {
   beauty: {
     label: "Beauty",
-    title: "Welcome in.",
+    title: "Welcome to FOUNDER. The room is yours.",
     courses: [
       {
         label: "To begin",
@@ -70,13 +70,16 @@ export const DESKS: Record<Desk, DeskContent> = {
       "Do I still need sunscreen?",
       "My serum turned yellow — is it off?",
     ],
-    note: "Ask the awkward ones too.",
-    chips: [
-      "Is 8-layer HA better than regular?",
-      "Will this get rid of my wrinkles?",
-      "I’m allergic to fish",
-      "What if my skin is sensitive?",
-    ],
+    note: "Tell me what you want your skin to say before you do.",
+    /* Her three, as she wrote them. Sent verbatim as the message, which is why
+       they are phrased as an answer rather than a question — "Luminous" is a
+       perfectly good thing to say to a concierge.
+
+       "Will this get rid of my wrinkles?" used to sit here. It now routes to a
+       human every time it is tapped, so leaving it as a one-press suggestion
+       would have turned the most tempting chip on the card into a mailing list
+       for Shelby. It is still answered properly when a customer types it. */
+    chips: ["Hydrated", "Luminous", "Ready for a comeback", "I can’t decide"],
   },
 
   house: {

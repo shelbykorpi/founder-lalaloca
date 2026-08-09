@@ -130,7 +130,7 @@ for (const [reply, why] of BLOCKED) {
 
 const ALLOWED = [
   "Thirst Trap is the one I would place in your room. It gives thirsty, tired-looking skin the hydration step that helps it appear fresher and more composed.",
-  "C Me Glow is your entrance. Apply it before moisturizer and sunscreen, then walk in like the room was expecting you.",
+  "C Me Glow is your entrance. Apply it before moisturiser and sunscreen, then walk in like the room was expecting you.",
   "The House Trio is $98.99 for three full-size 50 ml serums. Shall I send it up?",
   "Vitamin C is not a UV filter, so keep wearing sunscreen daily.",
 

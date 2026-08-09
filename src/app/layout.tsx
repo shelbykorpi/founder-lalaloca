@@ -9,6 +9,7 @@ import { BRAND, SITE } from "@/lib/brand";
 import { JsonLd, brandSchema, organizationSchema, websiteSchema } from "@/lib/seo";
 import { Analytics } from "@/components/site/Analytics";
 import { WebVitals } from "@/components/site/WebVitals";
+import { Concierge } from "@/components/concierge/Concierge";
 
 const cormorant = Cormorant_Garamond({
   subsets: ["latin"],
@@ -106,6 +107,11 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
           <main id="main">{children}</main>
           <Footer />
           <BagDrawer />
+          {/* Outside <main> on purpose: it is a fixed overlay available on every
+              page, not page content, and putting it in the main landmark would
+              have a screen reader announce it as part of whatever she is
+              reading. */}
+          <Concierge />
         </BagProvider>
       </body>
     </html>

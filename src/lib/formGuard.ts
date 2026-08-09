@@ -42,10 +42,25 @@ const hits = new Map<string, number[]>();
 const WINDOW_MS = 60 * 60 * 1000;
 const MAX_PER_WINDOW = 5;
 
-export function rateLimited(ip: string, now: number): boolean {
-  const recent = (hits.get(ip) ?? []).filter((t) => now - t < WINDOW_MS);
+/**
+ * `bucket` keeps the counters separate.
+ *
+ * A form submission and a chat message are not the same event and must not
+ * share a budget: five per hour is generous for someone submitting a story and
+ * absurd for someone having a conversation. Without the namespace, asking the
+ * concierge five questions would silently lock the same visitor out of the
+ * story form.
+ */
+export function rateLimited(
+  ip: string,
+  now: number,
+  max: number = MAX_PER_WINDOW,
+  bucket = "form",
+): boolean {
+  const id = `${bucket}:${ip}`;
+  const recent = (hits.get(id) ?? []).filter((t) => now - t < WINDOW_MS);
   recent.push(now);
-  hits.set(ip, recent);
+  hits.set(id, recent);
 
   /* Keep the map from growing without bound across a long-lived instance. */
   if (hits.size > 5_000) {
@@ -54,7 +69,7 @@ export function rateLimited(ip: string, now: number): boolean {
     }
   }
 
-  return recent.length > MAX_PER_WINDOW;
+  return recent.length > max;
 }
 
 export function clientIp(request: Request): string {
@@ -80,6 +95,9 @@ export function guard(
   request: Request,
   body: Record<string, unknown>,
   now = Date.now(),
+  /* Defaults reproduce the original behaviour exactly, so the two form
+     endpoints are unaffected by the concierge needing different numbers. */
+  limits: { max?: number; bucket?: string; minFillMs?: number } = {},
 ): GuardResult {
   if (typeof body[HONEYPOT_FIELD] === "string" && body[HONEYPOT_FIELD]) {
     return { ok: false, reason: "honeypot" };
@@ -91,11 +109,11 @@ export function guard(
      (treating a missing stamp as instant) would reject real people. Missing is
      skipped, present is checked. */
   const rendered = Number(body.rendered_at);
-  if (Number.isFinite(rendered) && rendered > 0 && now - rendered < MIN_FILL_MS) {
+  if (Number.isFinite(rendered) && rendered > 0 && now - rendered < (limits.minFillMs ?? MIN_FILL_MS)) {
     return { ok: false, reason: "too fast" };
   }
 
-  if (rateLimited(clientIp(request), now)) {
+  if (rateLimited(clientIp(request), now, limits.max, limits.bucket)) {
     return { ok: false, reason: "rate limited" };
   }
 

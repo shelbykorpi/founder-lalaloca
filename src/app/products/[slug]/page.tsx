@@ -82,11 +82,26 @@ export default async function ProductPage({ params }: PageProps<"/products/[slug
               <h1 className="font-serif text-[clamp(2.5rem,6vw,3.75rem)] leading-none text-charcoal">
                 {product.name}
               </h1>
+              {/* Identity first, then the label. The archetype sits beside the
+                  category rather than replacing it — the category is the
+                  approved label wording and is what a shopper scanning for
+                  "vitamin C serum" is actually looking for. */}
               <p className="mt-3 text-xs uppercase tracking-[0.18em] text-charcoal/70">
+                <span className="text-bronze-ink">{product.archetype}</span>
+                <span aria-hidden> · </span>
                 {product.category}
               </p>
 
-              <p className="mt-6 max-w-md text-[1.0625rem] leading-relaxed text-charcoal/85">
+              {/* The hero line runs first and the functional description
+                  immediately under it, so the page answers "who am I when I
+                  use this?" and "what does it do?" in the same glance. The
+                  order matters: lifestyle copy that displaces the product
+                  description reads as evasion. */}
+              <p className="mt-6 max-w-md font-serif text-[clamp(1.375rem,2.4vw,1.75rem)] leading-snug text-charcoal">
+                {product.hero}
+              </p>
+
+              <p className="mt-4 max-w-md text-[1.0625rem] leading-relaxed text-charcoal/85">
                 {product.what}
               </p>
 
@@ -285,7 +300,14 @@ export default async function ProductPage({ params }: PageProps<"/products/[slug
                   />
                 </span>
                 <span className="flex-1">
-                  <span className="block font-serif text-2xl leading-none text-charcoal">
+                  {/* The archetype earns its place here specifically: this is
+                      the one module on the page where she is choosing between
+                      two products, and "The Entrance" separates them faster
+                      than two cosmetic benefit lines can. */}
+                  <span className="block text-[0.6875rem] uppercase tracking-[0.16em] text-bronze-ink">
+                    {other.archetype}
+                  </span>
+                  <span className="mt-1 block font-serif text-2xl leading-none text-charcoal">
                     {other.name}
                   </span>
                   <span className="mt-2 block text-sm text-charcoal/80">

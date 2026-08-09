@@ -6,6 +6,7 @@ import { ScrollDoors } from "@/components/door/ScrollDoors";
 import { AddSetButton } from "@/components/bag/AddToBagButton";
 import { PageIntro } from "@/components/site/PageIntro";
 import { TrackListView } from "@/components/site/TrackListView";
+import { BRAND } from "@/lib/brand";
 import { formatPrice, products, SET } from "@/lib/products";
 import { JsonLd, breadcrumbSchema, collectionSchema, setSchema } from "@/lib/seo";
 
@@ -50,7 +51,32 @@ export default function ShopPage() {
         listName="The LALALOCA Collection"
       />
 
-      <section className="section bg-cream pt-4" aria-label="Serums">
+      {/* ---------------- The three identities ----------------
+          Deliberately placed above the grid and deliberately small. Its job is
+          to hand the shopper a way of choosing that is faster than reading
+          three ingredient lists — not to become the page. The mapping from
+          identity to product name is explicit, because an identity band that
+          leaves you guessing which bottle is which is decoration. */}
+      <section className="bg-cream pt-8" aria-labelledby="identities-heading">
+        <div className="shell">
+          <h2 id="identities-heading" className="font-serif text-[clamp(1.25rem,2.2vw,1.75rem)] leading-snug text-charcoal">
+            Three serums. Three energies. One woman building what’s next.
+          </h2>
+          <ul className="mt-7 grid gap-x-8 gap-y-6 border-t border-charcoal/12 pt-6 sm:grid-cols-3">
+            {products.map((product) => (
+              <li key={product.slug}>
+                <p className="eyebrow text-bronze-ink">{product.archetype}</p>
+                <p className="mt-2 font-serif text-xl leading-none text-charcoal">
+                  {product.name}
+                </p>
+                <p className="mt-2 text-sm text-charcoal/80">{product.archetypeFor}</p>
+              </li>
+            ))}
+          </ul>
+        </div>
+      </section>
+
+      <section className="section bg-cream pt-10" aria-label="Serums">
         <ScrollDoors className="shell grid gap-x-8 gap-y-14 md:grid-cols-2 lg:grid-cols-3">
           {products.map((product, index) => (
             <DoorCard
@@ -155,14 +181,20 @@ export default function ShopPage() {
                 id="set-heading"
                 className="mt-[0.6em] font-serif text-[clamp(1.5rem,2.7vw,3.25rem)] leading-[1.05] text-charcoal"
               >
-                Treat Yourself
+                No Woman Is Only
                 <br />
-                to All Three
+                One Version
+                <br />
+                of Herself
               </h2>
-              <div className="mt-[1.2em] h-px w-16 bg-bronze/70" aria-hidden />
-              <p className="mt-[1.2em] max-w-[24ch] text-[clamp(0.8rem,1.05vw,1.125rem)] leading-relaxed text-charcoal/85">
-                Three full-size serums. Hydrate, firm, brighten. One order. No
-                choosing.
+              <div className="mt-[1em] h-px w-16 bg-bronze/70" aria-hidden />
+              {/* The trio is a wardrobe, not a discount. The order of the three
+                  verbs matches the order of the three identities above it, so
+                  the set reads as the same argument the collection page just
+                  made rather than an unrelated upsell. */}
+              <p className="mt-[1em] max-w-[26ch] text-[clamp(0.8rem,1.05vw,1.125rem)] leading-relaxed text-charcoal/85">
+                The Closer, The Entrance, The Comeback. Three full-size serums —
+                hydrate, brighten, firm — for three different kinds of days.
               </p>
               <p className="mt-[1em] text-[clamp(0.8rem,1.05vw,1.125rem)] text-charcoal/85">
                 {formatPrice(SET.price)} for all three · valued at{" "}
@@ -188,11 +220,12 @@ export default function ShopPage() {
           <div className="shell py-12 text-center">
             <p className="eyebrow text-bronze-ink">The House Trio</p>
             <h2 className="headline mt-4 text-balance text-charcoal">
-              Treat Yourself to All Three
+              No Woman Is Only One Version of Herself
             </h2>
             <div className="mx-auto mt-6 h-px w-16 bg-bronze/70" aria-hidden />
             <p className="mx-auto mt-6 max-w-md text-charcoal/85">
-              Three full-size serums. Hydrate, firm, brighten. One order. No choosing.
+              The Closer, The Entrance, The Comeback. Three full-size serums —
+              hydrate, brighten, firm — for three different kinds of days.
             </p>
             <p className="mt-4 text-charcoal/85">
               {formatPrice(SET.price)} for all three · valued at{" "}
@@ -200,6 +233,23 @@ export default function ShopPage() {
             </p>
             <AddSetButton className="btn mt-8 w-full border border-bronze/40 bg-founder-green text-cream hover:bg-teal sm:w-auto" />
           </div>
+        </div>
+      </section>
+
+      {/* ---------------- The close ----------------
+          The last thing said about the collection, and the only place on this
+          page the campaign line appears. Set stacked on two lines because the
+          Master Brand Board prohibits a single-line setting, and taken from
+          BRAND so it can never drift out of sync with the homepage. */}
+      <section className="bg-shell py-16 text-center md:py-20" aria-label="The room is yours">
+        <div className="shell">
+          <p className="mx-auto max-w-[34rem] font-serif text-[clamp(1.375rem,2.6vw,2rem)] leading-snug text-charcoal">
+            Some days you close. Some days you glow. Some days you start again.
+          </p>
+          <p className="mt-10 text-[0.6875rem] uppercase tracking-[0.24em] text-bronze-ink">
+            <span className="block">{BRAND.campaignLines[0]}</span>
+            <span className="mt-2 block">{BRAND.campaignLines[1]}</span>
+          </p>
         </div>
       </section>
 

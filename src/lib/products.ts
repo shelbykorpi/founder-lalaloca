@@ -17,6 +17,28 @@ export type Product = {
   name: string;
   /** Exactly as printed on the label */
   category: string;
+  /**
+   * ── THE THREE IDENTITIES ──────────────────────────────────────────────────
+   *
+   * FOUNDER sells three serums that do three different things, and the reason
+   * a woman reaches for one over another is rarely only dermatological — it is
+   * what kind of day she is having. These three fields carry that, and only
+   * that.
+   *
+   * They are EDITORIAL. Nothing here may state or imply a result, an
+   * ingredient, a timeframe or a clinical effect; that work belongs to
+   * `what`, `need`, `benefit` and `keyActive`, which are written against the
+   * approved label and must not absorb any of this language.
+   *
+   * The test when editing: if a sentence would need substantiation under FTC
+   * claims rules, it does not belong in these three fields.
+   */
+  /** The identity: The Closer, The Entrance, The Comeback. */
+  archetype: string;
+  /** One line for the collection page's identity band. */
+  archetypeFor: string;
+  /** Opens the product page, above the functional description. */
+  hero: string;
   /** Plain-language answer to "what is it?" */
   what: string;
   /** The skin need it addresses, in the customer's words */
@@ -57,6 +79,9 @@ export const products: Product[] = [
     slug: "thirst-trap",
     name: "Thirst Trap",
     category: "8-Layer Hyaluronic Acid Serum",
+    archetype: "The Closer",
+    archetypeFor: "For when it needs to get done.",
+    hero: "Looks expensive. Never looks exhausted.",
     what: "A lightweight hydrating serum built on eight molecular weights of hyaluronic acid.",
     need: "Skin that goes tight, flaky or dull-looking when it’s short on water.",
     who: "Anyone whose skin feels tight by the afternoon, or whose makeup starts to sit badly by lunchtime.",
@@ -117,6 +142,9 @@ export const products: Product[] = [
     slug: "c-me-glow",
     name: "C Me Glow",
     category: "Vitamin C Brightening Serum",
+    archetype: "The Entrance",
+    archetypeFor: "For when it’s time to be seen.",
+    hero: "For mornings when being overlooked isn’t on the calendar.",
     what: "A vitamin C serum for skin that looks flat or uneven in tone.",
     need: "A complexion that looks dull in daylight, or uneven when you’d rather it weren’t.",
     who: "Anyone who looks fine up close and washed out in photographs.",
@@ -166,6 +194,9 @@ export const products: Product[] = [
     slug: "bounce-back",
     name: "Bounce Back",
     category: "Collagen Firming Serum",
+    archetype: "The Comeback",
+    archetypeFor: "For when you’re becoming again.",
+    hero: "Because starting over is still starting.",
     what: "A collagen serum for skin that feels slack rather than dry.",
     need: "Skin that’s lost some spring, and a face that reads tired before you feel it.",
     who: "Anyone who wants more cushion and bounce, particularly at the end of a long stretch.",

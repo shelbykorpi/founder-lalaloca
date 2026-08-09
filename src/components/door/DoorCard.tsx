@@ -9,9 +9,9 @@ import { toTrackItem, track } from "@/lib/analytics";
 import { formatPrice, type Product } from "@/lib/products";
 
 /**
- * The product card used on the homepage and the shop page: one compact
- * doorway, and everything you need to buy sitting underneath it in plain text.
- * Nothing important is hidden behind the interaction.
+ * The product card on the shop page: one compact doorway, and everything you
+ * need to buy sitting underneath it in plain text. Nothing important is hidden
+ * behind the interaction.
  */
 export function DoorCard({
   product,
@@ -74,9 +74,11 @@ export function DoorCard({
       </button>
 
       <div className="mt-5 flex flex-1 flex-col">
-        <p className="eyebrow text-bronze-ink">
-          {String(index + 1).padStart(2, "0")} · {product.timing}
-        </p>
+        {/* The archetype replaces the 01/02/03 counter, which was decoration —
+            the numbering told a shopper nothing and the identity tells her
+            which day this bottle is for. Timing is not lost: it moves to the
+            size and price line below, where the rest of the hard facts are. */}
+        <p className="eyebrow text-bronze-ink">{product.archetype}</p>
         <h3 className="mt-2 font-serif text-[1.75rem] leading-none text-charcoal">
           <Link href={`/products/${product.slug}`} className="hover:text-bronze-ink">
             {product.name}
@@ -87,7 +89,7 @@ export function DoorCard({
         </p>
         <p className="mt-3 text-sm leading-relaxed text-charcoal/80">{product.benefit}</p>
         <p className="mt-4 text-sm text-charcoal">
-          {product.size} · {formatPrice(product.price)}
+          {product.size} · {formatPrice(product.price)} · {product.timing}
         </p>
 
         <div className="mt-5 flex flex-col gap-3 pt-1 sm:flex-row">

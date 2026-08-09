@@ -111,6 +111,15 @@ const BLOCKED: [string, string][] = [
   ["It erases wrinkles.", "results guarantee"],
   ["Rated 4.8 out of 5 by our community.", "rating — there are none"],
   ["Our best-selling serum.", "unverified popularity claim"],
+
+  /* The softened-claim backstop. A hedge in front of a claim is still a claim,
+     so these must fail even though every one of them sounds gentle. */
+  ["It may reduce wrinkles over time.", "wrinkle claim — say how skin LOOKS instead"],
+  ["This can help reduce fine lines.", "wrinkle claim — say how skin LOOKS instead"],
+  ["It gets rid of those lines around the eyes.", "wrinkle claim — say how skin LOOKS instead"],
+  ["Bounce Back may help tighten your jawline.", "lifting or tightening claim — a cosmetic does not do this"],
+  ["It lifts the contour a little.", "lifting or tightening claim — a cosmetic does not do this"],
+  ["Marine collagen helps rebuild your collagen.", "topical collagen does not rebuild collagen"],
 ];
 
 for (const [reply, why] of BLOCKED) {
@@ -124,6 +133,16 @@ const ALLOWED = [
   "C Me Glow is your entrance. Apply it before moisturizer and sunscreen, then walk in like the room was expecting you.",
   "The House Trio is $98.99 for three full-size 50 ml serums. Shall I send it up?",
   "Vitamin C is not a UV filter, so keep wearing sunscreen daily.",
+
+  /* The permitted register. Every one of these is the softened, positive form
+     the prompt now asks for, and every one must survive the backstop — a
+     filter that also blocks the approved phrasing would leave the concierge
+     with nothing to say. */
+  "Hydrated skin can make fine lines look softer, and the surface often looks smoother by morning.",
+  "It may help skin look more rested, and many find their makeup sits better on top.",
+  "Bounce Back is the collagen firming serum — skin feels firmer and more cushioned.",
+  "It can reduce the appearance of dullness by morning.",
+  "This is designed to help skin look brighter and more even in tone.",
 ];
 
 for (const reply of ALLOWED) {

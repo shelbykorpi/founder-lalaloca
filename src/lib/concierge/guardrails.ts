@@ -184,6 +184,34 @@ const BANNED_OUT: { pattern: RegExp; why: string }[] = [
   { pattern: /\b(guarantee[ds]?|guaranteed results|will eliminate|erases?)\b/i, why: "results guarantee" },
   { pattern: /\b\d(\.\d)?\s*(out of 5|stars?)\b/i, why: "rating — there are none" },
   { pattern: /\bbest[- ]sell(er|ing)\b/i, why: "unverified popularity claim" },
+
+  /* ── The softened-claim backstop ───────────────────────────────────────────────────
+   *
+   * Added when the concierge was told to stop answering with a flat no and to
+   * soften instead. That instruction is right, and it also moves the model
+   * closer to the line rather than further from it: "may reduce wrinkles" is
+   * the most natural way to be kind, and it is a wrinkle claim with a hedge in
+   * front of it. A hedge is not a defence — the FTC reads a qualified claim as
+   * a claim, and a claim about changing the structure of skin is what makes a
+   * cosmetic a drug.
+   *
+   * These three catch the model ASSERTING an action on the body. They do not
+   * catch appearance language, which is the whole permitted register: "reduces
+   * the appearance of fine lines" has words between the verb and the noun and
+   * passes, as it should. So does "skin feels firmer", "looks smoother", and
+   * "the collagen firming serum", which is the product's own name. */
+  {
+    pattern: /\b(reduces?|reducing|removes?|removing|gets? rid of|eliminates?|smooths? (out|away))\s+(your\s+|the\s+|those\s+)?(wrinkles?|fine lines?|lines)\b/i,
+    why: "wrinkle claim — say how skin LOOKS instead",
+  },
+  {
+    pattern: /\b(lifts?|lifting|tightens?|tightening|firms?)\s+(your\s+|the\s+)?(jawline|jowls|neck|face|skin|contour)\b/i,
+    why: "lifting or tightening claim — a cosmetic does not do this",
+  },
+  {
+    pattern: /\brebuild(s|ing)?\s+(your\s+|the\s+)?(collagen|skin|structure)\b/i,
+    why: "topical collagen does not rebuild collagen",
+  },
 ];
 
 export type OutboundCheck = { clean: true } | { clean: false; why: string };

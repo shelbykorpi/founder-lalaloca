@@ -153,7 +153,7 @@ export default async function NotePage({ params }: PageProps<"/found-her/[slug]"
             <p className="mt-3 text-sm leading-relaxed text-charcoal/80">
               If you’ve got an answer to that, we’d like to read it.
             </p>
-            <Link href="/share-your-story" className="btn btn-outline mt-5">
+            <Link href="/found-her#share" className="btn btn-outline mt-5">
               Share your story
             </Link>
           </div>

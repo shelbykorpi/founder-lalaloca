@@ -75,9 +75,10 @@ export const PRIMARY_NAV = [
     stack: ["LALALOCA", "\u00d7", "StandUp for Kids"],
   },
   { href: "/our-story", label: "Our Story" },
+  /* Share Your Story lived here as its own tab; the page now lives on Found
+     Her at /found-her#share, so one tab carries both. */
   { href: "/found-her", label: "Found Her" },
   { href: "/young-founders-room", label: "Young Founders\u2019 Room" },
-  { href: "/share-your-story", label: "Share Your Story" },
 ];
 
 export const FOOTER_NAV = [
@@ -96,7 +97,7 @@ export const FOOTER_NAV = [
     links: [
       { href: "/found-her", label: "Found Her" },
       { href: "/our-story", label: "Our Story" },
-      { href: "/share-your-story", label: "Share Your Story" },
+      { href: "/found-her#share", label: "Share Your Story" },
     ],
   },
   {

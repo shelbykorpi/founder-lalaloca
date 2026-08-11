@@ -11,7 +11,6 @@ export default function sitemap(): MetadataRoute.Sitemap {
     "/shop",
     "/our-story",
     "/found-her",
-    "/share-your-story",
     "/find-your-serum",
     /* Three deliberate absences:
        /account — robots.ts disallows it and the page carries noindex. A URL

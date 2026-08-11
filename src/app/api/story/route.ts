@@ -8,7 +8,7 @@ import { STORY_CONFIRMATION_SUBJECT, storyConfirmationText } from "@/lib/storyEm
  * FOUND HER story intake.
  *
  * WHAT THIS DOES, END TO END:
- *   1. A woman fills in the form on /share-your-story.
+ *   1. A woman fills in the form on /found-her#share.
  *   2. This endpoint checks it isn't a bot, then emails the whole submission —
  *      every answer, both consent flags, her contact details — to the owner.
  *   3. It sends her a short confirmation so she knows a person has it.

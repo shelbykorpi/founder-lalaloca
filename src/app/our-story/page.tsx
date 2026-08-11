@@ -222,7 +222,7 @@ export default function OurStoryPage() {
               <Link href={`/found-her/${founder.slug}`} className="btn btn-dark">
                 Read her story
               </Link>
-              <Link href="/share-your-story" className="btn btn-outline">
+              <Link href="/found-her#share" className="btn btn-outline">
                 Tell us what you’re building
               </Link>
             </div>

@@ -107,6 +107,9 @@ const nextConfig: NextConfig = {
       /* Editorial moved under FOUND HER. Product URLs are unchanged. */
       { source: "/women", destination: "/found-her", permanent: true },
       { source: "/journal", destination: "/found-her", permanent: true },
+      /* Share Your Story folded into Found Her; the fragment lands arrivals
+         on the form itself, not the top of the archive. */
+      { source: "/share-your-story", destination: "/found-her#share", permanent: true },
       /* Previous journal slugs, mapped to the pieces that replaced them. */
       {
         source: "/journal/the-moment-before",

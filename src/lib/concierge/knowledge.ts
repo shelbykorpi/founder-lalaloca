@@ -131,7 +131,7 @@ const BRAND_FACTS: Fact[] = [
     cues: ["found her", "story", "stories", "journal", "share", "submit", "profile", "featured"],
     text: [
       `FOUND HER is the brand's stories platform: women writing about what they started, survived, changed, finished, and finally gave themselves credit for. "${BRAND.campaign}"`,
-      `Submissions go through /share-your-story. No purchase is ever required to be featured — that is a rule, not a promotion.`,
+      `Submissions go through the form on the Found Her page, at /found-her#share. No purchase is ever required to be featured — that is a rule, not a promotion.`,
       `Two separate permissions are asked for and neither is assumed: permission to reply, and permission to consider it for publication. Either can be withdrawn.`,
       `A person reads every submission. Profiles are edited by the FOUNDER team and the contributor approves the final text before anything is published. Nothing is invented.`,
     ].join("\n"),

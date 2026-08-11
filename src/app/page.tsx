@@ -118,7 +118,7 @@ export default function HomePage() {
                 and finally gave themselves credit for.
               </p>
               <div className="mt-8 flex flex-col gap-3 sm:flex-row">
-                <Link href="/share-your-story" className="btn btn-dark">
+                <Link href="/found-her#share" className="btn btn-dark">
                   I found her when…
                 </Link>
                 <Link href="/found-her" className="btn btn-outline">

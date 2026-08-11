@@ -43,7 +43,7 @@ export function Header() {
           aria-expanded={menuOpen}
           aria-controls="mobile-nav"
           onClick={() => setMenuOpen((v) => !v)}
-          className="-ml-3 flex h-11 w-11 items-center justify-center xl:hidden"
+          className="-ml-3 flex h-11 w-11 items-center justify-center lg:hidden"
         >
           <span className="sr-only">{menuOpen ? "Close menu" : "Open menu"}</span>
           <svg viewBox="0 0 20 14" aria-hidden className="h-3.5 w-5">
@@ -83,13 +83,13 @@ export function Header() {
           </span>
         </Link>
 
-        {/* The bar was full at 1024px with five single-line tabs and no slack
-            left over. The collaboration lockup is three times the width of the
-            word Shop it replaced, so the run of tabs now starts at xl instead:
-            between 1024 and 1279 the menu button carries them, which is what
-            it is for. Squeezing the gap to 8px did fit, and turned the other
-            four labels into one continuous strip of tracked capitals. */}
-        <nav aria-label="Primary" className="hidden xl:block">
+        {/* The tabs moved out to xl when the collaboration lockup arrived —
+            five tabs plus a three-line lockup overflowed a 1024px window.
+            Share Your Story folding into Found Her gave that width back:
+            measured in a browser, the four-tab run is 587px, which sits
+            beside the wordmark and the actions with slack at 1024. So the
+            bar starts at lg again. */}
+        <nav aria-label="Primary" className="hidden lg:block">
           <ul className="flex items-center gap-6 xl:gap-9">
             {PRIMARY_NAV.map((item) => {
               const active =
@@ -152,7 +152,7 @@ export function Header() {
       <div
         id="mobile-nav"
         hidden={!menuOpen}
-        className="border-t border-charcoal/10 bg-cream xl:hidden"
+        className="border-t border-charcoal/10 bg-cream lg:hidden"
       >
         <nav aria-label="Primary mobile" className="shell py-4">
           <ul className="flex flex-col">

@@ -95,7 +95,7 @@ export function ProfileStory({ profile }: { profile: FoundHerProfile }) {
             <p className="mt-3 text-sm leading-relaxed text-charcoal/80">
               Hers is the first. The next ones belong to women who wrote in.
             </p>
-            <Link href="/share-your-story" className="btn btn-dark mt-5">
+            <Link href="/found-her#share" className="btn btn-dark mt-5">
               Share your story
             </Link>
           </div>

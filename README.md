@@ -74,7 +74,6 @@ Each line has one job and appears in one place:
 | `/our-story` | Static |
 | `/found-her` | Static |
 | `/found-her/[slug]` | SSG — profiles first, then editorial notes |
-| `/share-your-story` | Static |
 | `/find-your-serum` | Static |
 | `/search` | Static |
 | `/account` | Static |

@@ -90,7 +90,7 @@ export function welcomeText(email: string): string {
     "https://www.founderbeauty.co/found-her",
 
     "",
-    "And if you’ve got one of your own: https://www.founderbeauty.co/share-your-story",
+    "And if you’ve got one of your own: https://www.founderbeauty.co/found-her#share",
     "A person reads every submission, and nothing is published without your",
     "permission.",
 

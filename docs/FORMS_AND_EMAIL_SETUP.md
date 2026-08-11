@@ -204,7 +204,7 @@ After any redeploy that touches these variables:
      bottom and Gmail's own Unsubscribe control beside the sender name.
    → Subscribe with the *same* address again. Still a thank-you on screen, and
      **no second welcome**.
-2. **Submit a story** to yourself on /share-your-story.
+2. **Submit a story** to yourself on /found-her#share (the form lives on the Found Her page; the old /share-your-story URL redirects there).
    → An email titled **"FOUND HER submission — <name>"** at shelbykorpi@gmail.com.
      Hit reply and check it addresses the submitter, not a no-reply.
    → A separate confirmation in the submitter's inbox.

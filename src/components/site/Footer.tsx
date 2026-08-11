@@ -1,4 +1,5 @@
 import Link from "next/link";
+import { FOUNDER_ASPECT, Wordmark } from "./Wordmark";
 import { BRAND, FOOTER_NAV } from "@/lib/brand";
 import { EmailSignup } from "./EmailSignup";
 
@@ -7,10 +8,15 @@ export function Footer() {
     <footer className="bg-charcoal text-shell">
       <div className="shell grid gap-12 py-14 md:py-16 lg:grid-cols-[1.1fr_1.4fr] lg:gap-20">
         <div>
-          {/* Stacked lockup in gold on Charcoal. 80px, which puts FOUNDER at
-              the same reading size the 40px horizontal lockup gave it — the
-              extra height is the monogram sitting above, not a bigger word. */}
-          <img src="/brand/founder-stacked-ink.svg" alt="FOUNDER" className="h-20 w-auto" />
+          {/* Colourway 05, Evening: Champagne Gold FOUNDER over Champagne
+              Cream BEAUTY on Charcoal. It read `text-charcoal` until 11 August
+              — charcoal on charcoal, an invisible logo nobody had reason to
+              look for. */}
+          <Wordmark
+            height={150 / FOUNDER_ASPECT}
+            className="text-champagne"
+            beautyClassName="text-cream"
+          />
           <p className="mt-4 max-w-sm font-serif text-[1.75rem] leading-tight text-shell/90">
             {BRAND.tagline}
           </p>

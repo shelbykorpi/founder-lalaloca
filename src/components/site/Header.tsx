@@ -4,6 +4,8 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useEffect, useState } from "react";
 import { BRAND, PRIMARY_NAV } from "@/lib/brand";
+import { track } from "@/lib/analytics";
+import { FOUNDER_ASPECT, Wordmark } from "./Wordmark";
 import { useBag } from "@/components/bag/BagProvider";
 
 export function Header() {
@@ -31,12 +33,11 @@ export function Header() {
         {BRAND.structure}
       </p>
 
-      {/* The bar is tall because the lockup is stacked. A vertical logo is
-          roughly twice the height of a horizontal one at the same wordmark
-          size, so holding FOUNDER at its previous reading size costs about
-          40px of bar. 96/112 leaves a 16px margin above and below the mark at
-          both breakpoints — below that the logo starts touching the rules. */}
-      <div className="shell flex h-24 items-center justify-between gap-4 md:h-28">
+      {/* The FOUNDER/BEAUTY lockup is far shorter than the stacked mark it
+          replaced, so the bar comes back down: 72/80 leaves clear space equal
+          to the cap height of the F on every side, which is what v2.13 asks
+          for. */}
+      <div className="shell flex h-18 items-center justify-between gap-4 md:h-20">
         <button
           type="button"
           aria-expanded={menuOpen}
@@ -55,19 +56,35 @@ export function Header() {
         </button>
 
         <Link href="/" aria-label="FOUNDER — home" className="inline-flex min-h-11 items-center">
-          {/* Stacked lockup: the F monogram centred over the wordmark, 64px
-              mobile / 80px desktop. The horizontal lockup is still in
-              /public/brand if a wide, short space ever needs it.
-              Clear space = full monogram width on all sides — keep nav off it. */}
-          <img
-            src="/brand/founder-stacked-cream.svg"
-            alt="FOUNDER"
-            className="h-16 w-auto md:h-20"
-          />
+          {/* The v2.13 master: FOUNDER over BEAUTY, at the board's display
+              widths — 150px desktop, 130px mobile. Those are widths, so the
+              FOUNDER height is derived from them through the wordmark's own
+              6.878:1 ratio rather than guessed. The link carries the accessible
+              name, so the mark itself is silent to a screen reader. */}
+          {/* Wrapped rather than given `hidden`/`md:inline-flex` directly: the
+              component already sets `inline-flex`, and two display utilities on
+              one element are decided by stylesheet order, not by the order they
+              are written in. That collision rendered a zero-size lockup. */}
+          {/* Colourway 03, the board's preferred light-background alternate:
+              Founder Green FOUNDER over Desert Rose BEAUTY on a Cream field. */}
+          <span className="text-founder-green md:hidden">
+            <Wordmark
+              height={130 / FOUNDER_ASPECT}
+              beautyClassName="text-rose"
+              label=""
+            />
+          </span>
+          <span className="hidden text-founder-green md:block">
+            <Wordmark
+              height={150 / FOUNDER_ASPECT}
+              beautyClassName="text-rose"
+              label=""
+            />
+          </span>
         </Link>
 
         <nav aria-label="Primary" className="hidden lg:block">
-          <ul className="flex items-center gap-9">
+          <ul className="flex items-center gap-6 xl:gap-9">
             {PRIMARY_NAV.map((item) => {
               const active =
                 pathname === item.href || pathname.startsWith(`${item.href}/`);
@@ -76,7 +93,10 @@ export function Header() {
                   <Link
                     href={item.href}
                     aria-current={active ? "page" : undefined}
-                    className={`eyebrow inline-flex min-h-11 items-center border-b transition-colors ${
+                    onClick={() => {
+                      if (item.href === "/young-founders-room") track("young_founders_nav_click", { from: "desktop" });
+                    }}
+                    className={`eyebrow inline-flex min-h-11 items-center whitespace-nowrap border-b transition-colors ${
                       active
                         ? "border-bronze text-bronze-ink"
                         : "border-transparent text-charcoal hover:border-charcoal/30"
@@ -122,7 +142,10 @@ export function Header() {
               <li key={item.href}>
                 <Link
                   href={item.href}
-                  onClick={close}
+                  onClick={() => {
+                    if (item.href === "/young-founders-room") track("young_founders_nav_click", { from: "mobile" });
+                    close();
+                  }}
                   className="flex min-h-[3rem] items-center border-b border-charcoal/10 font-serif text-2xl text-charcoal"
                 >
                   {item.label}

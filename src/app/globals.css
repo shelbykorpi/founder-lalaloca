@@ -12,6 +12,9 @@
   --color-founder-green: #164d49; /* primary brand field / doors / architecture */
   --color-founder-black: #0b0b0b; /* editorial contrast / tailoring */
   --color-bronze: #b08a64; /* Antique Gold — monogram / hardware */
+  /* Champagne Gold. In the v2.13 wordmark system, including colourway 01, the
+     default master. It was the one board token with no counterpart here. */
+  --color-champagne: #d6be9a;
   --color-cream: #f7efe8; /* Warm Ivory — editorial space */
   --color-blush: #ead3c3; /* Found Her Blush — the whisper */
   --color-rose: #d8a7a0; /* Desert Rose — pink at full voice / FOUND HER */

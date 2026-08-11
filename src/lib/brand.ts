@@ -41,11 +41,15 @@ export const BRAND = {
   structure: "FOUNDER presents the LALALOCA Collection.",
 
   /**
-   * The door mark. Mirrored on the left leaf and set normally on the right, the
-   * pair frames a doorway with a star at the seam — so it reads as one piece
-   * when the doors are shut and parts as they open.
+   * The door mark: the F-key. v2.13 makes it the secondary identifier — the
+   * compact one — while the master lockup is FOUNDER over BEAUTY. Set normally
+   * on the left leaf and mirrored on the right, the pair faces the seam, so it
+   * reads as one piece when the doors are shut and parts as they open.
+   *
+   * Was "L" until 11 August 2026, with a comment describing a mark that is no
+   * longer the mark.
    */
-  monogram: "L",
+  monogram: "F",
 
   /** Message hierarchy. Each line has one job. Do not stack them together. */
   /**
@@ -64,6 +68,10 @@ export const PRIMARY_NAV = [
   { href: "/shop", label: "Shop" },
   { href: "/our-story", label: "Our Story" },
   { href: "/found-her", label: "Found Her" },
+  /* Longest label in the bar. The header drops its gap from 2.25rem to 1.5rem
+     between lg and xl so five items still fit on a 1024px laptop without the
+     labels wrapping — see Header.tsx. */
+  { href: "/young-founders-room", label: "Young Founders\u2019 Room" },
   { href: "/share-your-story", label: "Share Your Story" },
 ];
 

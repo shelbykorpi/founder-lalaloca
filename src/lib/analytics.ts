@@ -48,7 +48,16 @@ export type TrackEvent =
   | "email_signup"
   | "found_her_article_view"
   | "story_submission"
-  | "web_vitals";
+  | "web_vitals"
+  /* The Young Founders' Room. None of these carry anything about a visitor or
+     about a young person — they count doors and clicks, nothing else. */
+  | "young_founders_nav_click"
+  | "young_founders_door_started"
+  | "young_founders_door_completed"
+  | "young_founders_door_skipped"
+  | "young_founders_shop_click"
+  | "young_founders_learn_click"
+  | "young_founders_donate_click";
 
 /** GA4 reserved names. Anything unmapped passes through as a custom event. */
 const GA4_NAME: Partial<Record<TrackEvent, string>> = {

@@ -1,0 +1,389 @@
+/**
+ * The Young Founders' Threshold.
+ *
+ * One animation run drives the whole sequence. Every element below is on the
+ * same `--dur` with keyframe percentages set to the storyboard, so the phases
+ * cannot drift out of step with each other the way five separate JS timers
+ * would. Changing the mode changes one custom property.
+ *
+ *   full     2600ms   first entrance of the session
+ *   mobile   1800ms   same narrative, less camera
+ *   short     700ms   repeat entrance — doors only, no settle
+ *
+ * Everything animated here is transform or opacity. Nothing triggers layout.
+ */
+
+/* Rendered on the server so this stylesheet is linked in the document head
+   before the overlay ever mounts. See the note in Threshold.tsx. */
+.boot {
+  display: none;
+}
+
+.overlay {
+  position: fixed;
+  inset: 0;
+  /* Above the sticky header (30) and above the concierge bell and its folio
+     (69/70). During the entrance nothing else is on screen. */
+  z-index: 80;
+  display: grid;
+  place-items: center;
+  overflow: hidden;
+  /* The page underneath is real and already painted. Only the doors and the
+     backdrop are drawn here, so the widening gap reveals the actual hero. */
+  background: transparent;
+  perspective: 1600px;
+  perspective-origin: 50% 46%;
+}
+
+@media (max-width: 767px) {
+  .overlay {
+    /* Shallower perspective on a small screen: the same rotation reads as far
+       more movement close to the face, and that is where motion discomfort
+       comes from. */
+    perspective: 1100px;
+  }
+}
+
+/* The dark room the doors stand in. Fades at the end so the page shows. */
+.backdrop {
+  position: absolute;
+  inset: 0;
+  background: #2a2928;
+  animation: backdrop var(--dur) var(--ease) forwards;
+}
+
+/* Warm light from the room beyond, growing at the seam. */
+.roomLight {
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(
+    ellipse 22% 48% at 50% 48%,
+    #f7efe8 0%,
+    rgba(247, 239, 232, 0.55) 42%,
+    rgba(247, 239, 232, 0) 72%
+  );
+  opacity: 0;
+  animation: roomLight var(--dur) var(--ease) forwards;
+}
+
+/* The camera. Scaling the scene rather than the doors keeps both leaves and
+   both monograms in the same moving frame. */
+.scene {
+  position: relative;
+  width: 92vw;
+  max-width: 1500px;
+  height: min(92vh, 1010px);
+  transform-style: preserve-3d;
+  animation: camera var(--dur) var(--ease) forwards;
+}
+
+@media (max-width: 767px) {
+  .scene {
+    /* Wide leaves on mobile too. The brief is explicit that these must not
+       become narrow vertical panels. */
+    width: 94vw;
+    height: min(88vh, 760px);
+  }
+
+  /* A leaf is roughly half as wide here, so the same percentage would leave the
+     mark looking incidental. Scaled to hold the same presence on the door. */
+  .monogram {
+    width: 34%;
+  }
+}
+
+.leaf {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  width: 50%;
+  opacity: 0;
+  backface-visibility: hidden;
+  background: #164d49;
+  /* Matte. A single soft inner gradient reads as a painted surface catching
+     one light source; a gloss highlight would read as plastic. */
+  background-image: linear-gradient(
+    100deg,
+    rgba(0, 0, 0, 0.16) 0%,
+    rgba(0, 0, 0, 0) 42%,
+    rgba(255, 255, 255, 0.045) 100%
+  );
+  animation: leafIn var(--dur) var(--ease) forwards;
+}
+
+.left {
+  left: 0;
+  transform-origin: left center;
+}
+
+.right {
+  right: 0;
+  transform-origin: right center;
+}
+
+/* Restrained inset molding: one tall panel per leaf. A two-panel door reads as
+   domestic joinery and, at this scale, its mid-rail cuts straight through the
+   monogram's crossbar. */
+.leaf::before {
+  content: "";
+  position: absolute;
+  left: 8%;
+  right: 8%;
+  top: 4.5%;
+  bottom: 4.5%;
+  border: 1px solid rgba(247, 239, 232, 0.13);
+  box-shadow:
+    inset 0 1px 0 rgba(0, 0, 0, 0.3),
+    0 1px 0 rgba(247, 239, 232, 0.05);
+  pointer-events: none;
+}
+
+/* The approved F-key, painted in Antique Gold through a mask so the geometry
+   comes from the file itself and is never redrawn here. */
+.monogram {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  width: 21%;
+  aspect-ratio: 212.5 / 423.9;
+  transform: translate(-50%, -50%);
+  background-color: #b08a64;
+  -webkit-mask-image: url("/brand/founder-f-monogram.svg");
+  mask-image: url("/brand/founder-f-monogram.svg");
+  -webkit-mask-repeat: no-repeat;
+  mask-repeat: no-repeat;
+  -webkit-mask-position: center;
+  mask-position: center;
+  -webkit-mask-size: contain;
+  mask-size: contain;
+}
+
+/* The right leaf's mark is the same artwork, mirrored, so the pair faces the
+   seam. Mirrored inside the leaf, so it swings with the door. */
+.right .monogram {
+  transform: translate(-50%, -50%) scaleX(-1);
+}
+
+/* The two marks sit slightly off-centre on their own leaves so the gap at the
+   seam stays slim without either mark touching it. */
+.left .monogram {
+  left: 64%;
+}
+
+.right .monogram {
+  left: 36%;
+}
+
+/* One slim antique-brass seam. */
+.seam {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 50%;
+  width: 2px;
+  margin-left: -1px;
+  background: linear-gradient(
+    180deg,
+    rgba(176, 138, 100, 0.35) 0%,
+    #b08a64 18%,
+    #b08a64 82%,
+    rgba(176, 138, 100, 0.35) 100%
+  );
+  opacity: 0;
+  animation: seam var(--dur) var(--ease) forwards;
+}
+
+/* Warm light tracing the outer edges and the seam, 0.90–1.20s. */
+.edgeLight {
+  position: absolute;
+  inset: -1px;
+  opacity: 0;
+  pointer-events: none;
+  box-shadow:
+    0 0 0 1px rgba(176, 138, 100, 0.5),
+    0 0 34px 2px rgba(247, 239, 232, 0.3);
+  animation: edgeLight var(--dur) var(--ease) forwards;
+}
+
+.skip {
+  position: absolute;
+  top: max(1.25rem, env(safe-area-inset-top));
+  right: max(1.25rem, env(safe-area-inset-right));
+  z-index: 2;
+  display: inline-flex;
+  min-height: 44px;
+  min-width: 44px;
+  align-items: center;
+  padding: 0 0.9rem;
+  border: 1px solid rgba(247, 239, 232, 0.45);
+  background: rgba(42, 41, 40, 0.35);
+  color: #f7efe8;
+  font-size: 0.6875rem;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  cursor: pointer;
+}
+
+.skip:hover {
+  border-color: #f7efe8;
+}
+
+.skip:focus-visible {
+  outline: 2px solid #b08a64;
+  outline-offset: 2px;
+}
+
+/* ── The sequence ─────────────────────────────────────────────────────────
+   Percentages are the storyboard, expressed against --dur:
+     0–13.5%   the screen becomes the threshold
+     13.5–34.6% the doors settle into view
+     34.6–46.2% light traces the edges and the seam
+     46.2–82.7% the doors open inward, camera moves through
+     82.7–100%  the overlay dissolves                                        */
+
+@keyframes backdrop {
+  0% { opacity: 0; }
+  13.5% { opacity: 1; }
+  46.2% { opacity: 1; }
+  /* Gone before the leaves are, so the widening gap shows the hero itself
+     rather than a lit panel standing in for it. */
+  80% { opacity: 0; }
+  100% { opacity: 0; }
+}
+
+/* Opacity only. `openLeft`/`openRight` own transform on these elements — two
+   animations on one property means the later name wins, so setting transform
+   here as well would look like a settle and do nothing. */
+@keyframes leafIn {
+  0%, 13.5% { opacity: 0; }
+  34.6%, 100% { opacity: 1; }
+}
+
+.left { animation-name: leafIn, openLeft; }
+.right { animation-name: leafIn, openRight; }
+.left, .right {
+  animation-duration: var(--dur), var(--dur);
+  /* The opening curve is deliberately NOT --ease. A front-loaded curve puts a
+     door edge-on within the first third of its travel and the swing reads as a
+     snap; this one keeps the leaf visibly turning across the whole phase. */
+  animation-timing-function: var(--ease), cubic-bezier(0.45, 0.05, 0.2, 1);
+  animation-fill-mode: forwards, forwards;
+}
+
+@keyframes openLeft {
+  0%, 46.2% { transform: rotateY(0deg); }
+  82.7%, 100% { transform: rotateY(-104deg); }
+}
+
+@keyframes openRight {
+  0%, 46.2% { transform: rotateY(0deg); }
+  82.7%, 100% { transform: rotateY(104deg); }
+}
+
+/* The seam belongs to the shut door. Once the leaves part it is a brass line
+   floating in the gap, so it goes as soon as they move. */
+@keyframes seam {
+  0%, 13.5% { opacity: 0; }
+  34.6%, 46.2% { opacity: 1; }
+  56% { opacity: 0; }
+  100% { opacity: 0; }
+}
+
+@keyframes edgeLight {
+  0%, 34.6% { opacity: 0; }
+  46.2% { opacity: 1; }
+  70% { opacity: 0.5; }
+  100% { opacity: 0; }
+}
+
+/* Warmth spilling through the gap, not a bloom over the whole screen. */
+@keyframes roomLight {
+  0%, 46.2% { opacity: 0; transform: scale(0.5); }
+  66% { opacity: 0.5; transform: scale(1.05); }
+  88% { opacity: 0; transform: scale(1.5); }
+  100% { opacity: 0; }
+}
+
+@keyframes camera {
+  0%, 46.2% { transform: scale(1); }
+  100% { transform: scale(1.28); }
+}
+
+@media (max-width: 767px) {
+  /* Same narrative, less travel. */
+  @keyframes camera {
+    0%, 46.2% { transform: scale(1); }
+    100% { transform: scale(1.1); }
+  }
+}
+
+/* ── Repeat entrance ──────────────────────────────────────────────────────
+   No settle, no light trace. The doors are already there and they open. */
+.short .backdrop { animation-name: backdropShort; }
+.short .left { animation-name: leafShortIn, openLeftShort; }
+.short .right { animation-name: leafShortIn, openRightShort; }
+.short .seam { animation-name: seamShort; }
+.short .edgeLight { animation: none; opacity: 0; }
+.short .roomLight { animation-name: roomLightShort; }
+.short .scene { animation-name: cameraShort; }
+
+@keyframes backdropShort {
+  0% { opacity: 0.92; }
+  30% { opacity: 0.92; }
+  85% { opacity: 0; }
+  100% { opacity: 0; }
+}
+
+@keyframes leafShortIn {
+  0%, 100% { opacity: 1; }
+}
+
+@keyframes openLeftShort {
+  0% { transform: rotateY(0deg); }
+  100% { transform: rotateY(-104deg); }
+}
+
+@keyframes openRightShort {
+  0% { transform: rotateY(0deg); }
+  100% { transform: rotateY(104deg); }
+}
+
+@keyframes seamShort {
+  0% { opacity: 1; }
+  60%, 100% { opacity: 0; }
+}
+
+@keyframes roomLightShort {
+  0% { opacity: 0; transform: scale(0.7); }
+  55% { opacity: 0.45; transform: scale(1.1); }
+  100% { opacity: 0; transform: scale(1.5); }
+}
+
+@keyframes cameraShort {
+  0% { transform: scale(1); }
+  100% { transform: scale(1.12); }
+}
+
+/**
+ * Reduced motion.
+ *
+ * The component does not mount at all when the visitor has asked for reduced
+ * motion, so this block is a second line rather than the mechanism. It exists
+ * because a preference can change after mount, and a door that starts rotating
+ * through 3D space at that moment is exactly what the preference is for.
+ */
+@media (prefers-reduced-motion: reduce) {
+  .overlay,
+  .overlay * {
+    animation: none !important;
+    transform: none !important;
+  }
+
+  .overlay {
+    animation: reducedOut 150ms linear forwards !important;
+  }
+
+  @keyframes reducedOut {
+    to { opacity: 0; }
+  }
+}

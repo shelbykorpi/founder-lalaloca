@@ -42,7 +42,12 @@ export default function HomePage() {
             <p className="mt-6 font-serif text-[clamp(1.5rem,3vw,2.125rem)] leading-snug text-blush">
               {BRAND.tagline}
             </p>
-            <p className="lede mt-4 text-shell/85">Three serums. No spreadsheet.</p>
+            {/* The three archetypes, dropped like a cast list. Replaced "Three
+                serums. No spreadsheet." on 11 August 2026 — the joke was doing
+                the work a seductive line should. */}
+            <p className="lede mt-4 text-shell/85">
+              The Closer. The Entrance. The Comeback.
+            </p>
             <div className="mt-9 flex flex-col gap-3 sm:flex-row">
               <Link href="/shop" className="btn btn-primary">
                 Open the door

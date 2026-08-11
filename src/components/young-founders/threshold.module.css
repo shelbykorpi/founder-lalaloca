@@ -6,9 +6,9 @@
  * cannot drift out of step with each other the way five separate JS timers
  * would. Changing the mode changes one custom property.
  *
- *   full     2600ms   first entrance of the session
- *   mobile   1800ms   same narrative, less camera
- *   short     700ms   repeat entrance — doors only, no settle
+ *   full     4200ms   first entrance of the session
+ *   mobile   2800ms   same narrative, less camera
+ *   short    1100ms   repeat entrance — doors only, no settle
  *
  * Everything animated here is transform or opacity. Nothing triggers layout.
  */
@@ -90,6 +90,23 @@
   .monogram {
     width: 34%;
   }
+
+  /* The hardware scales with the door it is mounted on. */
+  .handle {
+    width: 7px;
+    height: 15%;
+    min-height: 84px;
+  }
+
+  .handle::before,
+  .handle::after {
+    width: 12px;
+    height: 8px;
+  }
+
+  .edge {
+    width: 24px;
+  }
 }
 
 .leaf {
@@ -99,31 +116,47 @@
   width: 50%;
   opacity: 0;
   backface-visibility: hidden;
+  /* Children live in the leaf's 3D space so the edge slab below can stand
+     perpendicular to the face. */
+  transform-style: preserve-3d;
   background: #164d49;
-  /* Matte. A single soft inner gradient reads as a painted surface catching
-     one light source; a gloss highlight would read as plastic. */
-  background-image: linear-gradient(
-    100deg,
-    rgba(0, 0, 0, 0.16) 0%,
-    rgba(0, 0, 0, 0) 42%,
-    rgba(255, 255, 255, 0.045) 100%
-  );
   animation: leafIn var(--dur) var(--ease) forwards;
 }
 
+/* Matte paint, lit like a pair. Per leaf: shadow gathering at the hinge side,
+   a whisper of light near the seam, an occlusion line right at the crack, a
+   vignette top and bottom where a tall door falls out of the light, and two
+   overlaid vertical grains at different periods so the streaking never
+   resolves into a visible repeat. All of it low-contrast — a door is a
+   painted surface, not a texture demo. */
 .left {
   left: 0;
   transform-origin: left center;
+  background-image:
+    linear-gradient(90deg, rgba(0, 0, 0, 0.22) 0%, rgba(0, 0, 0, 0.05) 55%, rgba(255, 255, 255, 0.05) 100%),
+    linear-gradient(90deg, rgba(0, 0, 0, 0) 96.5%, rgba(0, 0, 0, 0.32) 100%),
+    linear-gradient(180deg, rgba(0, 0, 0, 0.2) 0%, rgba(0, 0, 0, 0) 7%, rgba(0, 0, 0, 0) 93%, rgba(0, 0, 0, 0.24) 100%),
+    repeating-linear-gradient(90deg, rgba(0, 0, 0, 0.045) 0 2px, rgba(0, 0, 0, 0) 2px 9px),
+    repeating-linear-gradient(90deg, rgba(255, 255, 255, 0.02) 0 1px, rgba(0, 0, 0, 0) 1px 23px);
 }
 
 .right {
   right: 0;
   transform-origin: right center;
+  background-image:
+    linear-gradient(270deg, rgba(0, 0, 0, 0.22) 0%, rgba(0, 0, 0, 0.05) 55%, rgba(255, 255, 255, 0.05) 100%),
+    linear-gradient(270deg, rgba(0, 0, 0, 0) 96.5%, rgba(0, 0, 0, 0.32) 100%),
+    linear-gradient(180deg, rgba(0, 0, 0, 0.2) 0%, rgba(0, 0, 0, 0) 7%, rgba(0, 0, 0, 0) 93%, rgba(0, 0, 0, 0.24) 100%),
+    repeating-linear-gradient(90deg, rgba(0, 0, 0, 0.045) 0 2px, rgba(0, 0, 0, 0) 2px 9px),
+    repeating-linear-gradient(90deg, rgba(255, 255, 255, 0.02) 0 1px, rgba(0, 0, 0, 0) 1px 23px);
 }
 
 /* Restrained inset molding: one tall panel per leaf. A two-panel door reads as
    domestic joinery and, at this scale, its mid-rail cuts straight through the
-   monogram's crossbar. */
+   monogram's crossbar. The panel field sits a step darker and its bevel is
+   drawn with light from above — shadow pooling under the top molding, a thin
+   lit lip on the bottom one — because a flat outline reads as a printed
+   border, and a door panel is carpentry, not a border. */
 .leaf::before {
   content: "";
   position: absolute;
@@ -131,10 +164,15 @@
   right: 8%;
   top: 4.5%;
   bottom: 4.5%;
-  border: 1px solid rgba(247, 239, 232, 0.13);
+  border: 1px solid rgba(247, 239, 232, 0.1);
+  background: rgba(0, 0, 0, 0.09);
   box-shadow:
-    inset 0 1px 0 rgba(0, 0, 0, 0.3),
-    0 1px 0 rgba(247, 239, 232, 0.05);
+    inset 0 6px 10px -4px rgba(0, 0, 0, 0.45),
+    inset 0 -3px 6px -3px rgba(247, 239, 232, 0.07),
+    inset 5px 0 9px -5px rgba(0, 0, 0, 0.35),
+    inset -5px 0 9px -5px rgba(0, 0, 0, 0.35),
+    0 1px 0 rgba(247, 239, 232, 0.06),
+    0 -2px 4px -1px rgba(0, 0, 0, 0.35);
   pointer-events: none;
 }
 
@@ -156,6 +194,114 @@
   mask-position: center;
   -webkit-mask-size: contain;
   mask-size: contain;
+  /* Past edge-on the face is gone; nothing painted on it may survive it. The
+     104° swing means the last degrees are technically backfacing, and a
+     mirrored mark floating without its door — invisible at the old speed —
+     has time to be seen at this one. */
+  backface-visibility: hidden;
+}
+
+/* A brass pull the height of a forearm, one per leaf at the seam side, where
+   a door this size is actually pulled. The horizontal gradient is what makes
+   a bar read as a cylinder; the two mounts are what make it read as attached
+   rather than printed. Antique Gold family only. */
+.handle {
+  position: absolute;
+  top: 50%;
+  width: 9px;
+  height: 17%;
+  min-height: 110px;
+  border-radius: 999px;
+  transform: translateY(-50%);
+  background: linear-gradient(
+    90deg,
+    #6f5138 0%,
+    #b08a64 38%,
+    #e2c193 52%,
+    #a67f5b 78%,
+    #5d4430 100%
+  );
+  box-shadow:
+    0 6px 14px rgba(0, 0, 0, 0.4),
+    inset 0 1px 0 rgba(255, 255, 255, 0.25);
+  backface-visibility: hidden;
+}
+
+.left .handle {
+  right: 6.5%;
+}
+
+.right .handle {
+  left: 6.5%;
+}
+
+.handle::before,
+.handle::after {
+  content: "";
+  position: absolute;
+  left: 50%;
+  width: 15px;
+  height: 10px;
+  transform: translateX(-50%);
+  border-radius: 3px;
+  background: linear-gradient(180deg, #9c7654, #6f5138);
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.45);
+}
+
+.handle::before {
+  top: -7px;
+}
+
+.handle::after {
+  bottom: -7px;
+}
+
+/* The face falls into shadow as it turns out of the light. A rotating plane
+   that keeps uniform brightness is the single biggest tell that it is a
+   texture and not an object; this layer rides the leaf and darkens on the
+   open phase's own curve, heavier toward the hinge where the face turns
+   away hardest. */
+.shade {
+  position: absolute;
+  inset: 0;
+  opacity: 0;
+  pointer-events: none;
+  backface-visibility: hidden;
+  animation: shade var(--dur) cubic-bezier(0.55, 0, 0.45, 1) forwards;
+}
+
+.left .shade {
+  background: linear-gradient(90deg, rgba(8, 14, 13, 0.9), rgba(8, 14, 13, 0.5));
+}
+
+.right .shade {
+  background: linear-gradient(270deg, rgba(8, 14, 13, 0.9), rgba(8, 14, 13, 0.5));
+}
+
+/* The slab's thickness: a darker plane hinged at the seam edge, standing
+   perpendicular to the face and extending behind it, where a door's body
+   actually is. Closed, it is exactly edge-on and projects to nothing; as the
+   leaf swings away its trailing edge turns into view, which is the one thing
+   a flat rectangle can never do and a real door always does. No animation of
+   its own — the geometry is the animation. */
+.edge {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  width: 38px;
+  background: linear-gradient(180deg, #0c3330 0%, #11403c 50%, #0b2f2c 100%);
+}
+
+.left .edge {
+  right: 0;
+  transform-origin: right center;
+  transform: rotateY(-90deg);
+}
+
+.right .edge {
+  left: 0;
+  transform-origin: left center;
+  transform: rotateY(90deg);
 }
 
 /* The right leaf's mark is the same artwork, mirrored, so the pair faces the
@@ -264,20 +410,31 @@
 .left, .right {
   animation-duration: var(--dur), var(--dur);
   /* The opening curve is deliberately NOT --ease. A front-loaded curve puts a
-     door edge-on within the first third of its travel and the swing reads as a
-     snap; this one keeps the leaf visibly turning across the whole phase. */
-  animation-timing-function: var(--ease), cubic-bezier(0.45, 0.05, 0.2, 1);
+     door edge-on within the first third of its travel and the swing reads as
+     a snap; this symmetric curve starts the leaf slowly — doors this size are
+     heavy — and keeps it visibly turning across the whole phase. */
+  animation-timing-function: var(--ease), cubic-bezier(0.55, 0, 0.45, 1);
   animation-fill-mode: forwards, forwards;
 }
 
+/* Positive on the left leaf, negative on the right: the seam edges travel
+   AWAY from the viewer, into the room. It was the other way, and measured
+   rather than asserted: leaves swinging toward the camera are thrown out of
+   the viewport by perspective before the swing is 60% done — at mid-open the
+   left leaf's bounding rect sat entirely off screen — so the doors read as a
+   fast snap followed by a second of nothing. Opening away, a leaf recedes and
+   stays in frame until it is edge-on, which is both the storyboard ("the
+   doors open inward") and what a door does. 95° rather than 104°: past 90° a
+   leaf is backfacing and paints nothing, so extra degrees are invisible time
+   subtracted from the visible swing. */
 @keyframes openLeft {
   0%, 46.2% { transform: rotateY(0deg); }
-  82.7%, 100% { transform: rotateY(-104deg); }
+  82.7%, 100% { transform: rotateY(95deg); }
 }
 
 @keyframes openRight {
   0%, 46.2% { transform: rotateY(0deg); }
-  82.7%, 100% { transform: rotateY(104deg); }
+  82.7%, 100% { transform: rotateY(-95deg); }
 }
 
 /* The seam belongs to the shut door. Once the leaves part it is a brass line
@@ -309,6 +466,12 @@
   100% { transform: scale(1.28); }
 }
 
+/* Keyed to the open phase, on the open phase's curve. */
+@keyframes shade {
+  0%, 46.2% { opacity: 0; }
+  82.7%, 100% { opacity: 0.55; }
+}
+
 @media (max-width: 767px) {
   /* Same narrative, less travel. */
   @keyframes camera {
@@ -326,6 +489,7 @@
 .short .edgeLight { animation: none; opacity: 0; }
 .short .roomLight { animation-name: roomLightShort; }
 .short .scene { animation-name: cameraShort; }
+.short .shade { animation-name: shadeShort; }
 
 @keyframes backdropShort {
   0% { opacity: 0.92; }
@@ -340,12 +504,12 @@
 
 @keyframes openLeftShort {
   0% { transform: rotateY(0deg); }
-  100% { transform: rotateY(-104deg); }
+  100% { transform: rotateY(95deg); }
 }
 
 @keyframes openRightShort {
   0% { transform: rotateY(0deg); }
-  100% { transform: rotateY(104deg); }
+  100% { transform: rotateY(-95deg); }
 }
 
 @keyframes seamShort {
@@ -362,6 +526,12 @@
 @keyframes cameraShort {
   0% { transform: scale(1); }
   100% { transform: scale(1.12); }
+}
+
+/* The short entrance is all open phase, so the shadow is too. */
+@keyframes shadeShort {
+  0% { opacity: 0; }
+  100% { opacity: 0.55; }
 }
 
 /**

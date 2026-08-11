@@ -15,8 +15,8 @@ import { track } from "@/lib/analytics";
  * ── WHAT DECIDES WHETHER IT PLAYS ───────────────────────────────────────────
  *
  *   prefers-reduced-motion   never plays. Not a shortened version — none.
- *   first visit this session  the full 2.6s sequence (1.8s on mobile)
- *   later visits this session a 0.7s open
+ *   first visit this session  the full 4.2s sequence (2.8s on mobile)
+ *   later visits this session a 1.1s open
  *
  * Session storage, not local storage, and deliberately: the entrance is part
  * of arriving, and someone coming back next week is arriving again. A flag
@@ -34,9 +34,9 @@ import { track } from "@/lib/analytics";
 
 const SEEN_KEY = "founder_young_founders_threshold_seen_v1";
 
-const FULL_DESKTOP_MS = 2600;
-const FULL_MOBILE_MS = 1800;
-const SHORT_MS = 700;
+const FULL_DESKTOP_MS = 4200;
+const FULL_MOBILE_MS = 2800;
+const SHORT_MS = 1100;
 
 /* Runs before paint on the client, and is a no-op during SSR rather than the
    "useLayoutEffect does nothing on the server" warning. */
@@ -150,12 +150,23 @@ export function Threshold({ focusTargetId }: { focusTargetId: string }) {
       <div className={s.backdrop} aria-hidden />
       <div className={s.roomLight} aria-hidden />
 
+      {/* Each leaf carries the mark, a brass pull, a shading layer that
+          darkens the face as it turns out of the light, and the slab's own
+          edge — a plane hinged at the seam that only has width on screen once
+          the leaf swings, which is exactly when a real door shows its
+          thickness. */}
       <div className={s.scene} aria-hidden>
         <div className={`${s.leaf} ${s.left}`}>
           <span className={s.monogram} />
+          <span className={s.handle} />
+          <span className={s.shade} />
+          <span className={s.edge} />
         </div>
         <div className={`${s.leaf} ${s.right}`}>
           <span className={s.monogram} />
+          <span className={s.handle} />
+          <span className={s.shade} />
+          <span className={s.edge} />
         </div>
         <div className={s.seam} />
         <div className={s.edgeLight} />

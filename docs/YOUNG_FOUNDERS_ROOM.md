@@ -45,9 +45,9 @@ and the doors follow it.
 
 | | |
 |---|---|
-| First visit, desktop | 2600 ms |
-| First visit, mobile | 1800 ms, shallower perspective, less camera travel |
-| Repeat visit in the same session | 700 ms — the doors open, nothing settles |
+| First visit, desktop | 4200 ms |
+| First visit, mobile | 2800 ms, shallower perspective, less camera travel |
+| Repeat visit in the same session | 1100 ms — the doors open, nothing settles |
 | `prefers-reduced-motion` | the overlay never mounts. Immediate reveal. |
 | Session key | `founder_young_founders_threshold_seen_v1` |
 

@@ -91,17 +91,61 @@
     width: 34%;
   }
 
-  /* The hardware scales with the door it is mounted on. */
-  .handle {
-    width: 7px;
-    height: 15%;
-    min-height: 84px;
+  /* The hardware scales with the door it is mounted on — and the joinery
+     re-proportions. A leaf here is ~180px wide: at desktop percentages the
+     lock stile is 13px and the pull would hang past the seam edge. Deeper
+     panel insets buy the stile the pull needs. */
+  .panel {
+    left: 10%;
+    right: 10%;
   }
 
-  .handle::before,
-  .handle::after {
-    width: 12px;
-    height: 8px;
+  .panel::before {
+    inset: 6px;
+  }
+
+  .handle {
+    width: 16px;
+    height: 22%;
+    min-height: 110px;
+  }
+
+  .left .handle {
+    right: 5%;
+  }
+
+  .right .handle {
+    left: 5%;
+  }
+
+  .grip {
+    width: 6px;
+  }
+
+  .mount {
+    width: 14px;
+    height: 30px;
+  }
+
+  .mountTop {
+    top: -26px;
+  }
+
+  .mountBottom {
+    bottom: -26px;
+  }
+
+  .knuckle {
+    width: 11px;
+    height: 11px;
+  }
+
+  .knuckleTop {
+    top: -4px;
+  }
+
+  .knuckleBottom {
+    bottom: -4px;
   }
 
   .edge {
@@ -151,29 +195,47 @@
     repeating-linear-gradient(90deg, rgba(255, 255, 255, 0.02) 0 1px, rgba(0, 0, 0, 0) 1px 23px);
 }
 
-/* Restrained inset molding: one tall panel per leaf. A two-panel door reads as
-   domestic joinery and, at this scale, its mid-rail cuts straight through the
-   monogram's crossbar. The panel field sits a step darker and its bevel is
-   drawn with light from above — shadow pooling under the top molding, a thin
-   lit lip on the bottom one — because a flat outline reads as a printed
-   border, and a door panel is carpentry, not a border. */
-.leaf::before {
+/* Two panels per leaf, tall over short with a mid-rail between, after the
+   reference door. The earlier objection to two panels — the mid-rail cutting
+   through the monogram's crossbar — is answered by centring the mark in the
+   upper panel instead of on the leaf, so the rail never touches it. Each
+   panel is framed in gilt beading: a gold line on the molding's outer step
+   and a finer one at the field's edge, each seated in its own dark shadow
+   line, because bare gold floating on green reads as print and gold sitting
+   in a shadow reads as a bead you could catch a fingernail on. */
+.panel {
+  position: absolute;
+  left: 7%;
+  right: 7%;
+  border: 2px solid #a5805c;
+  background: rgba(0, 0, 0, 0.06);
+  box-shadow:
+    0 0 0 1px rgba(0, 0, 0, 0.3),
+    inset 0 0 0 1px rgba(0, 0, 0, 0.35),
+    inset 0 8px 12px -6px rgba(0, 0, 0, 0.4),
+    inset 0 -4px 8px -5px rgba(247, 239, 232, 0.06);
+  pointer-events: none;
+  backface-visibility: hidden;
+}
+
+.panel::before {
   content: "";
   position: absolute;
-  left: 8%;
-  right: 8%;
-  top: 4.5%;
-  bottom: 4.5%;
-  border: 1px solid rgba(247, 239, 232, 0.1);
-  background: rgba(0, 0, 0, 0.09);
+  inset: 12px;
+  border: 1px solid rgba(176, 138, 100, 0.75);
   box-shadow:
-    inset 0 6px 10px -4px rgba(0, 0, 0, 0.45),
-    inset 0 -3px 6px -3px rgba(247, 239, 232, 0.07),
-    inset 5px 0 9px -5px rgba(0, 0, 0, 0.35),
-    inset -5px 0 9px -5px rgba(0, 0, 0, 0.35),
-    0 1px 0 rgba(247, 239, 232, 0.06),
-    0 -2px 4px -1px rgba(0, 0, 0, 0.35);
-  pointer-events: none;
+    inset 0 0 0 1px rgba(0, 0, 0, 0.28),
+    inset 0 6px 10px -5px rgba(0, 0, 0, 0.35);
+}
+
+.panelTop {
+  top: 4.5%;
+  bottom: 40%;
+}
+
+.panelBottom {
+  top: 66%;
+  bottom: 4.5%;
 }
 
 /* The approved F-key, painted in Antique Gold through a mask so the geometry
@@ -181,8 +243,9 @@
 .monogram {
   position: absolute;
   left: 50%;
-  top: 50%;
-  width: 21%;
+  /* Centred in the upper panel (4.5%–60%), not on the leaf. */
+  top: 32.25%;
+  width: 19%;
   aspect-ratio: 212.5 / 423.9;
   transform: translate(-50%, -50%);
   background-color: #b08a64;
@@ -201,18 +264,86 @@
   backface-visibility: hidden;
 }
 
-/* A brass pull the height of a forearm, one per leaf at the seam side, where
-   a door this size is actually pulled. The horizontal gradient is what makes
-   a bar read as a cylinder; the two mounts are what make it read as attached
-   rather than printed. Antique Gold family only. */
+/* The pull, after the reference: a long brass grip that straddles the
+   mid-rail, meeting the door through turned ball collars, each seated on a
+   shield escutcheon whose point faces away from the grip. One per leaf at
+   the seam side, where a door this size is actually pulled. The horizontal
+   gradient is what makes the grip read as a cylinder; the collars and
+   plates are what make it read as mounted rather than printed. Antique
+   Gold family only. */
 .handle {
   position: absolute;
-  top: 50%;
-  width: 9px;
-  height: 17%;
-  min-height: 110px;
+  top: 56%;
+  width: 30px;
+  height: 25%;
+  min-height: 150px;
+  transform: translate(50%, -50%);
+  backface-visibility: hidden;
+}
+
+/* Centred in the lock stile — the plain green between the panel beading (7%)
+   and the seam — not on top of the beading. */
+.left .handle {
+  right: 3.5%;
+}
+
+.right .handle {
+  left: 3.5%;
+  transform: translate(-50%, -50%);
+}
+
+/* The escutcheons. drop-shadow rather than box-shadow: box-shadow paints the
+   box, and these are clipped to a shield. */
+.mount {
+  position: absolute;
+  left: 50%;
+  width: 26px;
+  height: 56px;
+  transform: translateX(-50%);
+  background: linear-gradient(100deg, #7c5c3f 0%, #b08a64 45%, #8a6a4a 100%);
+  filter: drop-shadow(0 3px 4px rgba(0, 0, 0, 0.4));
+  backface-visibility: hidden;
+}
+
+.mountTop {
+  top: -50px;
+  clip-path: polygon(50% 0%, 88% 30%, 70% 100%, 30% 100%, 12% 30%);
+}
+
+.mountBottom {
+  bottom: -50px;
+  clip-path: polygon(30% 0%, 70% 0%, 88% 70%, 50% 100%, 12% 70%);
+}
+
+/* The turned collars where the grip meets its plates. */
+.knuckle {
+  position: absolute;
+  left: 50%;
+  width: 20px;
+  height: 20px;
+  transform: translateX(-50%);
+  border-radius: 50%;
+  background: radial-gradient(circle at 35% 30%, #e2c193 0%, #b08a64 48%, #6f5138 100%);
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.4);
+  backface-visibility: hidden;
+}
+
+.knuckleTop {
+  top: -6px;
+}
+
+.knuckleBottom {
+  bottom: -6px;
+}
+
+.grip {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 50%;
+  width: 13px;
+  transform: translateX(-50%);
   border-radius: 999px;
-  transform: translateY(-50%);
   background: linear-gradient(
     90deg,
     #6f5138 0%,
@@ -225,35 +356,6 @@
     0 6px 14px rgba(0, 0, 0, 0.4),
     inset 0 1px 0 rgba(255, 255, 255, 0.25);
   backface-visibility: hidden;
-}
-
-.left .handle {
-  right: 6.5%;
-}
-
-.right .handle {
-  left: 6.5%;
-}
-
-.handle::before,
-.handle::after {
-  content: "";
-  position: absolute;
-  left: 50%;
-  width: 15px;
-  height: 10px;
-  transform: translateX(-50%);
-  border-radius: 3px;
-  background: linear-gradient(180deg, #9c7654, #6f5138);
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.45);
-}
-
-.handle::before {
-  top: -7px;
-}
-
-.handle::after {
-  bottom: -7px;
 }
 
 /* The face falls into shadow as it turns out of the light. A rotating plane

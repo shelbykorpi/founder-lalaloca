@@ -150,24 +150,29 @@ export function Threshold({ focusTargetId }: { focusTargetId: string }) {
       <div className={s.backdrop} aria-hidden />
       <div className={s.roomLight} aria-hidden />
 
-      {/* Each leaf carries the mark, a brass pull, a shading layer that
-          darkens the face as it turns out of the light, and the slab's own
-          edge — a plane hinged at the seam that only has width on screen once
-          the leaf swings, which is exactly when a real door shows its
-          thickness. */}
+      {/* Each leaf is built like the reference door: two beaded panels — tall
+          over short — with the mark centred in the upper one, a brass pull on
+          shield escutcheons at the seam side, a shading layer that darkens the
+          face as it turns out of the light, and the slab's own edge — a plane
+          hinged at the seam that only has width on screen once the leaf
+          swings, which is exactly when a real door shows its thickness. */}
       <div className={s.scene} aria-hidden>
-        <div className={`${s.leaf} ${s.left}`}>
-          <span className={s.monogram} />
-          <span className={s.handle} />
-          <span className={s.shade} />
-          <span className={s.edge} />
-        </div>
-        <div className={`${s.leaf} ${s.right}`}>
-          <span className={s.monogram} />
-          <span className={s.handle} />
-          <span className={s.shade} />
-          <span className={s.edge} />
-        </div>
+        {["left", "right"].map((side) => (
+          <div key={side} className={`${s.leaf} ${side === "left" ? s.left : s.right}`}>
+            <span className={`${s.panel} ${s.panelTop}`} />
+            <span className={`${s.panel} ${s.panelBottom}`} />
+            <span className={s.monogram} />
+            <span className={s.handle}>
+              <span className={`${s.mount} ${s.mountTop}`} />
+              <span className={`${s.mount} ${s.mountBottom}`} />
+              <span className={`${s.knuckle} ${s.knuckleTop}`} />
+              <span className={`${s.knuckle} ${s.knuckleBottom}`} />
+              <span className={s.grip} />
+            </span>
+            <span className={s.shade} />
+            <span className={s.edge} />
+          </div>
+        ))}
         <div className={s.seam} />
         <div className={s.edgeLight} />
       </div>

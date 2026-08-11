@@ -18,66 +18,10 @@ export const PROFILE_QUESTIONS = [
   "What would you tell a woman starting where you started?",
 ];
 
-export type Note = {
-  slug: string;
-  title: string;
-  standfirst: string;
-  excerpt: string;
-  readingTime: string;
-  body: string[];
-};
-
-/**
- * Notes written by us, and labelled as such. They are never presented as a
- * customer's story — those only appear once a real contributor approves hers.
- */
-export const notes: Note[] = [
-  {
-    slug: "the-ten-minutes-before",
-    title: "The ten minutes before",
-    standfirst: "On getting ready when you don’t feel ready.",
-    excerpt:
-      "The presentation is at nine. You’ve read the deck four times. What’s left is ten minutes and a mirror.",
-    readingTime: "3 min",
-    body: [
-      "The presentation is at nine. You’ve read the deck four times, you know the numbers, and there is nothing useful left to prepare. What’s left is ten minutes and a mirror.",
-      "Nobody tells you that this is the hard part. Not the work — you did the work. The hard part is the small gap between finishing the preparation and walking in, where your brain helpfully offers you a list of everything that could go badly.",
-      "Skincare doesn’t fix that. Anyone who tells you a serum will make you brave is selling you something. What it does is give your hands a job for two minutes while the rest of you catches up, and it means that when you do look in the mirror, you look like yourself on a good day rather than yourself at the end of a long week.",
-      "That’s a small thing. Small things at nine in the morning are not nothing.",
-    ],
-  },
-  {
-    slug: "nobody-clapped",
-    title: "Nobody clapped",
-    standfirst: "The wins that don’t come with an announcement.",
-    excerpt:
-      "You sent the email. You said the number out loud. You stopped apologizing for the thing you’re good at.",
-    readingTime: "3 min",
-    body: [
-      "You sent the email. You said the number out loud without shaving anything off it. You stopped apologizing at the start of sentences about work you’re good at.",
-      "None of that gets a photo. There’s no announcement, no one takes you to dinner, and if you told most people they’d say “oh, nice” and change the subject. And yet the year that follows is measurably different because of it.",
-      "We’re interested in those. Not the launch — the Tuesday three months earlier when you decided you were going to do it anyway. Not the finished thing — the night you let it be badly made rather than not made at all.",
-      "If you’re keeping a list of what you’ve done this year and the quiet ones didn’t make it onto the list, put them on the list.",
-    ],
-  },
-  {
-    slug: "what-she-said-once",
-    title: "What she said once, in passing",
-    standfirst: "The most useful advice usually arrives sideways.",
-    excerpt:
-      "It’s rarely advice. It’s an observation, handed over lightly, at the moment you can actually hear it.",
-    readingTime: "2 min",
-    body: [
-      "The most useful sentence anyone ever said to you was probably short, unplanned, and delivered by a woman who had no idea she was doing anything memorable.",
-      "It’s rarely advice. Advice announces itself and expects to be followed. This is different — an observation handed over lightly, in a kitchen or a car park, at the exact moment you happen to be able to hear it.",
-      "One woman repeating something another woman told her ten years ago is a durable kind of company. It’s most of what we want this page to be.",
-    ],
-  },
-];
-
-export function getNote(slug: string) {
-  return notes.find((note) => note.slug === slug);
-}
+/* The team-written notes that used to live here ("The ten minutes before",
+   "Nobody clapped", "What she said once, in passing") were removed with their
+   section. The archive is contributors' stories only; their old URLs redirect
+   to /found-her in next.config.ts. */
 
 /* ---------------- Share Your Story ---------------- */
 

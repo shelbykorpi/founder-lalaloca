@@ -110,18 +110,12 @@ const nextConfig: NextConfig = {
       /* Share Your Story folded into Found Her; the fragment lands arrivals
          on the form itself, not the top of the archive. */
       { source: "/share-your-story", destination: "/found-her#share", permanent: true },
-      /* Previous journal slugs, mapped to the pieces that replaced them. */
-      {
-        source: "/journal/the-moment-before",
-        destination: "/found-her/the-ten-minutes-before",
-        permanent: true,
-      },
-      { source: "/journal/quiet-wins", destination: "/found-her/nobody-clapped", permanent: true },
-      {
-        source: "/journal/notes-between-women",
-        destination: "/found-her/what-she-said-once",
-        permanent: true,
-      },
+      /* The team-written notes were removed with their section. Their URLs —
+         and the legacy journal slugs that used to map onto them — go to the
+         archive, because a 404 discards whatever link equity they earned. */
+      { source: "/found-her/the-ten-minutes-before", destination: "/found-her", permanent: true },
+      { source: "/found-her/nobody-clapped", destination: "/found-her", permanent: true },
+      { source: "/found-her/what-she-said-once", destination: "/found-her", permanent: true },
       { source: "/journal/:slug", destination: "/found-her", permanent: true },
       { source: "/prelaunch", destination: "/", permanent: true },
       ...legacyRedirects,

@@ -1,5 +1,4 @@
 import { BRAND, SITE } from "@/lib/brand";
-import { notes } from "@/lib/content";
 import { profiles } from "@/lib/profiles";
 
 /**
@@ -32,8 +31,7 @@ function xml(value: string) {
     .replace(/"/g, "&quot;");
 }
 
-/** RSS wants RFC-822. Profiles carry a real approval date; notes do not, and
-    a made-up date in a feed is a lie a crawler will act on. */
+/** RSS wants RFC-822. Profiles carry a real approval date. */
 function rfc822(isoDate: string) {
   return new Date(`${isoDate}T12:00:00Z`).toUTCString();
 }
@@ -52,18 +50,6 @@ export function GET() {
     ].join("\n"),
   );
 
-  const noteItems = notes.map((note) =>
-    [
-      "    <item>",
-      `      <title>${xml(note.title)}</title>`,
-      `      <link>${xml(`${SITE.url}/found-her/${note.slug}`)}</link>`,
-      `      <guid isPermaLink="true">${xml(`${SITE.url}/found-her/${note.slug}`)}</guid>`,
-      `      <description>${xml(note.excerpt)}</description>`,
-      `      <category>Notes</category>`,
-      "    </item>",
-    ].join("\n"),
-  );
-
   const feed = [
     '<?xml version="1.0" encoding="UTF-8"?>',
     '<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">',
@@ -72,12 +58,11 @@ export function GET() {
     `    <link>${xml(`${SITE.url}/found-her`)}</link>`,
     `    <atom:link href="${xml(`${SITE.url}/feed/found-her.xml`)}" rel="self" type="application/rss+xml"/>`,
     `    <description>${xml(
-      "Women on what they built, in their own words. Profiles and notes from FOUNDER.",
+      "Women on what they built, in their own words. Profiles from FOUNDER.",
     )}</description>`,
     "    <language>en-US</language>",
     `    <copyright>${xml(BRAND.display)}</copyright>`,
     ...profileItems,
-    ...noteItems,
     "  </channel>",
     "</rss>",
   ].join("\n");

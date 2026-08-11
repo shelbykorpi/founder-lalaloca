@@ -5,7 +5,7 @@ import { PageIntro } from "@/components/site/PageIntro";
 import { EmailSignup } from "@/components/site/EmailSignup";
 import { StoryForm } from "@/components/story/StoryForm";
 import { BRAND } from "@/lib/brand";
-import { notes, PROFILE_QUESTIONS, STORY_INTRO, STORY_STANDARD } from "@/lib/content";
+import { PROFILE_QUESTIONS, STORY_INTRO, STORY_STANDARD } from "@/lib/content";
 import { profiles } from "@/lib/profiles";
 import { JsonLd, breadcrumbSchema, editorialListSchema } from "@/lib/seo";
 
@@ -28,21 +28,16 @@ export default function FoundHerPage() {
     <>
       {/* Declares the archive as a list of real articles, so the section itself
           can accrue topical authority instead of each story fending for
-          itself. Profiles first — they are the original reporting. */}
+          itself. Profiles only — they are the original reporting. */}
       <JsonLd
         schema={[
-          editorialListSchema([
-            ...profiles.map((profile) => ({
+          editorialListSchema(
+            profiles.map((profile) => ({
               title: `${profile.name} — ${profile.building}`,
               path: `/found-her/${profile.slug}`,
               description: profile.standfirst,
             })),
-            ...notes.map((note) => ({
-              title: note.title,
-              path: `/found-her/${note.slug}`,
-              description: note.excerpt,
-            })),
-          ]),
+          ),
           breadcrumbSchema([{ name: BRAND.editorial, path: "/found-her" }]),
         ]}
       />
@@ -78,9 +73,6 @@ export default function FoundHerPage() {
                 <div className="mt-8 flex flex-col gap-3 sm:flex-row">
                   <Link href="#share" className="btn btn-dark">
                     I found her when…
-                  </Link>
-                  <Link href="#notes" className="btn btn-outline">
-                    Read what we’ve written meanwhile
                   </Link>
                 </div>
               </div>
@@ -186,56 +178,6 @@ export default function FoundHerPage() {
             )}
           </>
         )}
-      </section>
-
-      {/* ---------------- Notes ---------------- */}
-      <section id="notes" className="section bg-shell" aria-labelledby="notes-heading">
-        <div className="shell">
-          <div className="flex flex-wrap items-end justify-between gap-4">
-            <div>
-              <h2 id="notes-heading" className="subhead text-charcoal">
-                Meanwhile, from us
-              </h2>
-              <p className="mt-3 max-w-xl text-sm text-charcoal/80">
-                Written by the {BRAND.display} team, and labeled that way. These aren’t
-                customer stories — those only appear here with a name attached and
-                permission given.
-              </p>
-            </div>
-          </div>
-
-          <ul className="mt-8 border-t border-charcoal/12">
-            {notes.map((note) => (
-              <li key={note.slug} className="border-b border-charcoal/12">
-                <Link
-                  href={`/found-her/${note.slug}`}
-                  className="group grid gap-3 py-7 transition-colors hover:bg-cream md:grid-cols-[1fr_auto] md:items-baseline md:gap-8 md:px-4"
-                >
-                  <span>
-                    <span className="block font-serif text-[clamp(1.75rem,3.4vw,2.25rem)] leading-tight text-charcoal">
-                      {note.title}
-                    </span>
-                    <span className="mt-1 block font-serif text-lg italic text-bronze-ink">
-                      {note.standfirst}
-                    </span>
-                    <span className="mt-3 block max-w-2xl text-sm leading-relaxed text-charcoal/80">
-                      {note.excerpt}
-                    </span>
-                  </span>
-                  <span className="flex items-center gap-3 text-[0.6875rem] uppercase tracking-[0.16em] text-charcoal/70">
-                    {note.readingTime}
-                    <span
-                      aria-hidden
-                      className="text-bronze-ink transition-transform duration-300 group-hover:translate-x-1"
-                    >
-                      ↗
-                    </span>
-                  </span>
-                </Link>
-              </li>
-            ))}
-          </ul>
-        </div>
       </section>
 
       {/* ---------------- The invitation ---------------- */}

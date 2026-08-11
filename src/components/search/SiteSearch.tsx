@@ -3,7 +3,6 @@
 import Link from "next/link";
 import { useEffect, useMemo, useState } from "react";
 import { track } from "@/lib/analytics";
-import { notes } from "@/lib/content";
 import { PRIMARY_NAV } from "@/lib/brand";
 import { products } from "@/lib/products";
 import { profiles } from "@/lib/profiles";
@@ -31,13 +30,6 @@ const index: Result[] = [
     kind: "Found Her",
     detail: profile.building,
     haystack: `${profile.name} ${profile.role} ${profile.building} ${profile.standfirst}`.toLowerCase(),
-  })),
-  ...notes.map((note) => ({
-    href: `/found-her/${note.slug}`,
-    title: note.title,
-    kind: "Found Her",
-    detail: note.standfirst,
-    haystack: `${note.title} ${note.standfirst} ${note.excerpt}`.toLowerCase(),
   })),
   ...[
     ...PRIMARY_NAV,

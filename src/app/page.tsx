@@ -3,7 +3,6 @@ import Link from "next/link";
 import { EntranceDoor } from "@/components/door/EntranceDoor";
 import { EmailSignup } from "@/components/site/EmailSignup";
 import { BRAND, HERO } from "@/lib/brand";
-import { notes } from "@/lib/content";
 
 export default function HomePage() {
   return (
@@ -104,7 +103,10 @@ export default function HomePage() {
       {/* ---------------- Found Her ---------------- */}
       <section className="section bg-shell" aria-labelledby="found-her-heading">
         <div className="shell">
-          <div className="grid gap-10 lg:grid-cols-[minmax(0,26rem)_1fr] lg:gap-16">
+          {/* The team-written notes that used to fill the right column left
+              with their section on /found-her, so the invitation stands
+              alone. */}
+          <div className="max-w-2xl">
             <div>
               <p className="eyebrow text-bronze-ink">{BRAND.editorial}</p>
               <p className="mt-4 font-serif text-xl text-charcoal/85">
@@ -127,28 +129,6 @@ export default function HomePage() {
               </div>
             </div>
 
-            <ul className="border-t border-charcoal/12">
-              {notes.map((note) => (
-                <li key={note.slug} className="border-b border-charcoal/12">
-                  <Link
-                    href={`/found-her/${note.slug}`}
-                    className="group flex items-baseline justify-between gap-6 py-5 transition-colors hover:bg-cream md:px-3"
-                  >
-                    <span>
-                      <span className="block font-serif text-2xl leading-tight text-charcoal">
-                        {note.title}
-                      </span>
-                      <span className="mt-1 block text-sm text-charcoal/75">
-                        {note.standfirst}
-                      </span>
-                    </span>
-                    <span className="shrink-0 text-[0.6875rem] uppercase tracking-[0.16em] text-charcoal/70">
-                      {note.readingTime}
-                    </span>
-                  </Link>
-                </li>
-              ))}
-            </ul>
           </div>
         </div>
       </section>

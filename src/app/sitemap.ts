@@ -1,6 +1,5 @@
 import type { MetadataRoute } from "next";
 import { SITE } from "@/lib/brand";
-import { notes } from "@/lib/content";
 import { products } from "@/lib/products";
 import { profiles } from "@/lib/profiles";
 import { policies } from "@/lib/content";
@@ -42,11 +41,6 @@ export default function sitemap(): MetadataRoute.Sitemap {
       lastModified: profile.approvedOn,
       changeFrequency: "yearly" as const,
       priority: 0.7,
-    })),
-    ...notes.map((note) => ({
-      url: `${SITE.url}/found-her/${note.slug}`,
-      changeFrequency: "yearly" as const,
-      priority: 0.5,
     })),
     ...Object.keys(policies).map((slug) => ({
       url: `${SITE.url}/policies/${slug}`,

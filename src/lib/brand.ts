@@ -65,12 +65,17 @@ export const BRAND = {
 } as const;
 
 export const PRIMARY_NAV = [
-  { href: "/shop", label: "Shop" },
+  /* The collaboration lockup. `stack` is the three centred lines the desktop
+     bar shows; `label` is the one-line version the mobile menu uses and the
+     accessible name a screen reader hears, because a multiplication sign read
+     aloud between two proper nouns is not a sentence. */
+  {
+    href: "/shop",
+    label: "LALALOCA Collection and StandUp for Kids",
+    stack: ["LALALOCA", "\u00d7", "StandUp for Kids"],
+  },
   { href: "/our-story", label: "Our Story" },
   { href: "/found-her", label: "Found Her" },
-  /* Longest label in the bar. The header drops its gap from 2.25rem to 1.5rem
-     between lg and xl so five items still fit on a 1024px laptop without the
-     labels wrapping — see Header.tsx. */
   { href: "/young-founders-room", label: "Young Founders\u2019 Room" },
   { href: "/share-your-story", label: "Share Your Story" },
 ];

@@ -43,7 +43,7 @@ export function Header() {
           aria-expanded={menuOpen}
           aria-controls="mobile-nav"
           onClick={() => setMenuOpen((v) => !v)}
-          className="-ml-3 flex h-11 w-11 items-center justify-center lg:hidden"
+          className="-ml-3 flex h-11 w-11 items-center justify-center xl:hidden"
         >
           <span className="sr-only">{menuOpen ? "Close menu" : "Open menu"}</span>
           <svg viewBox="0 0 20 14" aria-hidden className="h-3.5 w-5">
@@ -83,7 +83,13 @@ export function Header() {
           </span>
         </Link>
 
-        <nav aria-label="Primary" className="hidden lg:block">
+        {/* The bar was full at 1024px with five single-line tabs and no slack
+            left over. The collaboration lockup is three times the width of the
+            word Shop it replaced, so the run of tabs now starts at xl instead:
+            between 1024 and 1279 the menu button carries them, which is what
+            it is for. Squeezing the gap to 8px did fit, and turned the other
+            four labels into one continuous strip of tracked capitals. */}
+        <nav aria-label="Primary" className="hidden xl:block">
           <ul className="flex items-center gap-6 xl:gap-9">
             {PRIMARY_NAV.map((item) => {
               const active =
@@ -96,13 +102,25 @@ export function Header() {
                     onClick={() => {
                       if (item.href === "/young-founders-room") track("young_founders_nav_click", { from: "desktop" });
                     }}
-                    className={`eyebrow inline-flex min-h-11 items-center whitespace-nowrap border-b transition-colors ${
+                    aria-label={item.stack ? item.label : undefined}
+                    className={`eyebrow inline-flex min-h-11 items-center whitespace-nowrap border-b text-center transition-colors ${
                       active
                         ? "border-bronze text-bronze-ink"
                         : "border-transparent text-charcoal hover:border-charcoal/30"
                     }`}
                   >
-                    {item.label}
+                    {item.stack ? (
+                      /* Three centred lines. Hidden from the accessible name
+                         above, so this is decoration as far as a screen reader
+                         is concerned. */
+                      <span aria-hidden className="flex flex-col items-center">
+                        {item.stack.map((line) => (
+                          <span key={line}>{line}</span>
+                        ))}
+                      </span>
+                    ) : (
+                      item.label
+                    )}
                   </Link>
                 </li>
               );
@@ -134,7 +152,7 @@ export function Header() {
       <div
         id="mobile-nav"
         hidden={!menuOpen}
-        className="border-t border-charcoal/10 bg-cream lg:hidden"
+        className="border-t border-charcoal/10 bg-cream xl:hidden"
       >
         <nav aria-label="Primary mobile" className="shell py-4">
           <ul className="flex flex-col">
@@ -146,9 +164,16 @@ export function Header() {
                     if (item.href === "/young-founders-room") track("young_founders_nav_click", { from: "mobile" });
                     close();
                   }}
+                  aria-label={item.stack ? item.label : undefined}
                   className="flex min-h-[3rem] items-center border-b border-charcoal/10 font-serif text-2xl text-charcoal"
                 >
-                  {item.label}
+                  {/* One line here rather than three: at this size the stack
+                      would run half the panel. Same words, same order. */}
+                  {item.stack ? (
+                    <span aria-hidden>{item.stack.join(" ")}</span>
+                  ) : (
+                    item.label
+                  )}
                 </Link>
               </li>
             ))}

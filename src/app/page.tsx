@@ -17,13 +17,26 @@ export default function HomePage() {
             so the frame is never cropped down to an extreme close-up. From md up
             it becomes the background and the copy sits on the black side of it. */}
         <div className="relative aspect-[4/3] w-full sm:aspect-[16/9] md:absolute md:inset-0 md:aspect-auto md:h-full">
+          {/* Two renditions of one photograph. The desktop file extends the
+              wall leftward so the headline has a field to sit on; on a phone
+              that extension is a third of the frame — a smear of dark nothing
+              with a soft edge against the F. So phones get the photograph
+              itself, uncomposited, full width. */}
+          <Image
+            src="/editorial/hero-open-door-m.webp"
+            alt={HERO.alt}
+            fill
+            priority
+            sizes="100vw"
+            className="object-cover object-[50%_30%] md:hidden"
+          />
           <Image
             src={HERO.src}
             alt={HERO.alt}
             fill
             priority
             sizes="100vw"
-            className="object-cover object-[78%_25%] md:object-[70%_35%]"
+            className="hidden object-cover md:block md:object-[70%_35%]"
           />
           <div className="absolute inset-0 bg-[linear-gradient(180deg,rgba(0,0,0,0)_55%,rgba(0,0,0,0.85)_88%,#000_100%)] md:hidden" />
           {/* Wide screens: the wash clears before her face, so it is never veiled. */}

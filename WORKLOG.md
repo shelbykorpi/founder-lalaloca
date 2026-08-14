@@ -6,6 +6,16 @@ date · agent · what changed · what was left alone · anything unpushed.
 ---
 
 ## 2026-08-14 · Claude (Cowork)
+- /shop: moved the LALALOCA × StandUp for Kids band from the bottom of the
+  page (after the House Trio) to directly under the PageIntro, per Shelby.
+  Added id="standup-for-kids" to the section for direct linking. Charitable
+  wording untouched — block moved verbatim.
+- Left alone: everything else on /shop, nav, charitable copy, protected
+  campaign language.
+- Unpushed: this single edit to src/app/shop/page.tsx (awaiting Shelby's OK
+  to commit/push; Vercel auto-deploys from main).
+
+## 2026-08-14 · Claude (Cowork)
 - Seeded this worklog and AGENTS.md after a week of uncoordinated edits.
 - State at time of writing: HEAD = 739b433 (Open the Door hero, desktop).
   Pending on disk: reconciled page.tsx (mobile hero fix), new

@@ -38,7 +38,6 @@ export default function ShopPage() {
       <PageIntro
         eyebrow="The LALALOCA Collection"
         title="Open the door. You’re already in the room."
-        lede="Three serums behind three doors, and nothing standing in front of them. Start with the one that matches what your skin actually does — not the one with the best story."
       >
         <Link href="/find-your-serum" className="link-underline mt-4 text-charcoal">
           Answer three questions instead <span aria-hidden>↗</span>

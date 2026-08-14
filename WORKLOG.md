@@ -5,6 +5,12 @@ date · agent · what changed · what was left alone · anything unpushed.
 
 ---
 
+## 2026-08-14 · Claude (Cowork) — later
+- /shop: removed the PageIntro lede ("Three serums behind three doors…best
+  story.") per Shelby. lede is an optional prop, so the intro renders
+  heading + link only.
+- Unpushed: this edit (plus f0eb4fa if the earlier push hasn't run yet).
+
 ## 2026-08-14 · Claude (Cowork)
 - /shop: moved the LALALOCA × StandUp for Kids band from the bottom of the
   page (after the House Trio) to directly under the PageIntro, per Shelby.

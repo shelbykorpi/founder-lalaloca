@@ -5,6 +5,14 @@ date · agent · what changed · what was left alone · anything unpushed.
 
 ---
 
+## 2026-08-14 · Claude (Cowork) — night, part 2
+- Recomposited the /found-her gallery wall: the green-blazer portrait now
+  hangs inside the carved frame in founder-portrait-wall.webp and the -m
+  mobile crop (head-and-shoulders crop, warm picture-light falloff and
+  inner-frame shadow matched to the scene). Scene, frame, bench untouched;
+  alts unchanged (they don't name the outfit).
+- Unpushed: five commits total.
+
 ## 2026-08-14 · Claude (Cowork) — night
 - Replaced Shelby's headshot: /editorial/shelby-korpi.webp is now the green
   satin blazer door portrait (from upload, 1122x1402). profiles.ts alt

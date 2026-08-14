@@ -5,6 +5,15 @@ date · agent · what changed · what was left alone · anything unpushed.
 
 ---
 
+## 2026-08-14 · Claude (Cowork) — evening
+- Young Founders' Room: installed the volunteer photograph the page was
+  already wired for — public/editorial/young-founders/shelby-volunteer.webp
+  (from Shelby's upload). The DocumentaryImage slot next to "A note from
+  Shelby" now renders and the note column narrows to its two-up layout.
+  Set the slot ratio to the photo's native 1179/964 so the baked-in
+  VOLUNTEER SHELBY caption never crops.
+- Unpushed: this + "drop the intro lede" + f0eb4fa if not yet pushed.
+
 ## 2026-08-14 · Claude (Cowork) — later
 - /shop: removed the PageIntro lede ("Three serums behind three doors…best
   story.") per Shelby. lede is an optional prop, so the intro renders

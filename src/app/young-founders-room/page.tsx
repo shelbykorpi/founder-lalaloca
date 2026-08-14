@@ -204,7 +204,9 @@ export default function YoungFoundersRoomPage() {
             <DocumentaryImage
               src={PHOTO.shelbyVolunteer}
               alt="Shelby Korpi in a StandUp for Kids volunteer shirt outside the Tucson Outreach Center."
-              ratio="3 / 4"
+              /* matches the photograph's native frame so the baked-in
+                 VOLUNTEER SHELBY caption is never cropped */
+              ratio="1179 / 964"
               focal="50% 30%"
               sizes="(min-width: 1024px) 40vw, 100vw"
             />

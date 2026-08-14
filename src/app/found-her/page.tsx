@@ -4,6 +4,7 @@ import Link from "next/link";
 import { PageIntro } from "@/components/site/PageIntro";
 import { EmailSignup } from "@/components/site/EmailSignup";
 import { StoryForm } from "@/components/story/StoryForm";
+import { StoryPromptButton } from "@/components/story/StoryPromptButton";
 import { BRAND } from "@/lib/brand";
 import { PROFILE_QUESTIONS, STORY_INTRO, STORY_STANDARD } from "@/lib/content";
 import { profiles } from "@/lib/profiles";
@@ -287,7 +288,14 @@ export default function FoundHerPage() {
 
         <div className="section bg-cream pt-4">
           <div className="shell grid gap-12 lg:grid-cols-[1fr_minmax(0,22rem)] lg:gap-16">
-            <StoryForm />
+            {/* The writing help sits above the form rather than beside it: a
+                woman who wants it needs it before she starts typing, and a
+                woman who doesn't scrolls past one card. It shares the form's
+                max-width so the column reads as one thing. */}
+            <div className="min-w-0">
+              <StoryPromptButton />
+              <StoryForm />
+            </div>
 
             <aside className="lg:pt-2">
               <h3 className="eyebrow text-charcoal/70">Before you write</h3>

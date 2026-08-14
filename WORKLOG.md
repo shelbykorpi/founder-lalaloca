@@ -5,6 +5,27 @@ date · agent · what changed · what was left alone · anything unpushed.
 
 ---
 
+## 2026-08-14 · Claude (Cowork) — AI writing prompt on the story form
+- New: src/components/story/StoryPromptButton.tsx — a "Copy the prompt" card
+  above StoryForm on /found-her. Clipboard only: no model call, nothing sent,
+  no tab opened, no reading of what she has typed. Falls back to a selected
+  read-only textarea when navigator.clipboard is blocked (in-app browsers).
+- STORY_AI_PROMPT added to src/lib/content.ts. The numbered field list is
+  GENERATED from STORY_FIELDS (via a new optional `aiHint` on three of them),
+  so the prompt cannot drift from the questions the form actually asks. Only
+  the four contact fields are literals.
+- The prompt itself is the editorial charter as machine instructions: invent
+  nothing, no generic empowerment language, infer nothing sensitive, no web
+  search for a similar name, and the literal "I need your input for this
+  answer" wherever it does not know.
+- analytics.ts: new TrackEvent "story_prompt_copied" (counts a click, nothing
+  else). Not GA4-reserved, passes through as a custom event.
+- Verified: tsc --noEmit clean for src/ (the only errors are the pre-existing
+  ones inside _to_delete/_sync) and eslint clean on all four files. `next
+  build` cannot run in the Cowork VM — node_modules holds the darwin SWC
+  binary and the VM is linux/arm64 — so run it locally before shipping.
+- Unpushed: this change, on top of whatever was already unpushed.
+
 ## 2026-08-14 · Claude (Cowork) — night, part 2
 - Recomposited the /found-her gallery wall: the green-blazer portrait now
   hangs inside the carved frame in founder-portrait-wall.webp and the -m

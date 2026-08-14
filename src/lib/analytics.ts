@@ -48,6 +48,9 @@ export type TrackEvent =
   | "email_signup"
   | "found_her_article_view"
   | "story_submission"
+  /* She copied the writing prompt on /found-her. This counts a click and
+     nothing else — no prompt text, no draft, nothing about her. */
+  | "story_prompt_copied"
   | "web_vitals"
   /* The Young Founders' Room. None of these carry anything about a visitor or
      about a young person — they count doors and clicks, nothing else. */

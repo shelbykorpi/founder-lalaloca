@@ -38,6 +38,8 @@ export const STORY_FIELDS = [
     name: "found",
     label: "I found her when…",
     hint: "Finish the sentence in your own words. One line is enough; more is welcome.",
+    aiHint:
+      "Finish the sentence in my own words. One line is enough, but include more if my story supports it.",
     rows: 3,
     required: true,
   },
@@ -45,6 +47,8 @@ export const STORY_FIELDS = [
     name: "building",
     label: "What are you building?",
     hint: "A company, a family, a body of work, a comeback — whatever it is.",
+    aiHint:
+      "This could be a company, family, body of work, comeback, new life, community, or something else meaningful to me.",
     rows: 3,
     required: true,
   },
@@ -58,6 +62,8 @@ export const STORY_FIELDS = [
     name: "cost",
     label: "What did it take?",
     hint: "The part people don’t see, if you want to tell us.",
+    aiHint:
+      "Include the part people may not see, but only if I have previously shared it.",
     rows: 4,
     required: false,
   },
@@ -74,6 +80,68 @@ export const STORY_FIELDS = [
     required: false,
   },
 ];
+
+/**
+ * The prompt a woman can hand to her own AI before she writes.
+ *
+ * WHY THIS EXISTS AND WHY IT READS THE WAY IT DOES. Some women can say the
+ * thing out loud long before they can write it down, and plenty of them are
+ * already talking to an assistant every day. Pretending otherwise would not
+ * keep AI off this page; it would only mean the drafts arriving here were
+ * written by an assistant that had been told nothing about honesty. So the
+ * prompt is the safeguard: it forbids invention, forbids generic empowerment
+ * language, forbids inferring anything sensitive, forbids searching the
+ * internet for someone with a similar name, and requires the literal sentence
+ * "I need your input for this answer" wherever the assistant does not know.
+ * That is the editorial charter — nothing is invented, she approves the words —
+ * translated into instructions a machine can follow.
+ *
+ * IT IS BUILT FROM STORY_FIELDS, NOT PASTED BESIDE THEM. The field list below
+ * is generated from the same array the form renders, so a question can never
+ * be added, reworded or reordered on the form while the prompt keeps asking
+ * for the old one. The four contact fields are the only literals, and they
+ * match the inputs at the top of StoryForm.
+ */
+const STORY_AI_CONTACT_FIELDS = [
+  "Your name",
+  "Email",
+  "Location (optional)",
+  "Instagram or website (optional)",
+];
+
+const STORY_AI_RULES = [
+  "Do not invent, assume, exaggerate, or embellish any details.",
+  "Do not use generic inspirational language that could describe anyone.",
+  "Only include facts, experiences, accomplishments, challenges, and feelings that I have personally shared with you.",
+  "Do not infer sensitive details such as my email, location, family status, health, finances, or identity.",
+  "If you do not have enough information to answer something truthfully, write: “I need your input for this answer.”",
+  "Write in the first person and make the responses sound natural, honest, personal, and emotionally grounded.",
+  "Preserve my voice. Do not make me sound overly polished, corporate, or AI-generated.",
+  "Keep each response concise but meaningful.",
+  "After drafting, identify any statement that may need me to verify before submitting.",
+  "Do not search the internet or use information about another person with a similar name.",
+];
+
+export const STORY_AI_PROMPT = [
+  "Using only credible facts I have explicitly shared with you in our past conversations, help me complete the FOUND HER submission form below.",
+  "",
+  "Important rules:",
+  "",
+  ...STORY_AI_RULES.map((rule) => `- ${rule}`),
+  "",
+  "Complete these fields:",
+  "",
+  ...[
+    ...STORY_AI_CONTACT_FIELDS,
+    ...STORY_FIELDS.map((field) =>
+      [field.label, field.required ? "" : "(optional)", field.aiHint ?? ""]
+        .filter(Boolean)
+        .join(" "),
+    ),
+  ].map((line, index) => `${index + 1}. ${line}`),
+  "",
+  "First, review what you credibly know about me from our conversations. If important information is missing, ask me up to five short questions before writing the final submission. Then present the completed answers under their matching form headings, ready for me to review and paste into the FOUND HER form.",
+].join("\n");
 
 export const STORY_STANDARD = [
   {

@@ -236,6 +236,52 @@ export default function ShopPage() {
         </div>
       </section>
 
+      {/* ---------------- The collaboration ----------------
+          Why the nav calls this page LALALOCA × StandUp for Kids. The words
+          are the Young Founders' Room's own — the collection copy and the
+          commitment line are reused verbatim from that page, not rewritten,
+          because the 20%-of-net-profits wording is approved as written and
+          must be identical everywhere it appears. */}
+      <section
+        className="bg-founder-green py-16 text-shell md:py-20"
+        aria-labelledby="standup-heading"
+      >
+        <div className="shell grid items-center gap-10 lg:grid-cols-[1.3fr_1fr]">
+          <div>
+            <p className="eyebrow text-champagne">LALALOCA × StandUp for Kids</p>
+            <h2
+              id="standup-heading"
+              className="mt-4 max-w-[24ch] font-serif text-[clamp(1.5rem,3vw,2.25rem)] leading-snug"
+            >
+              Part of this collection was built inside the StandUp for Kids
+              Tucson Outreach Center.
+            </h2>
+            <div className="mt-5 max-w-prose space-y-4 text-shell/85">
+              <p>
+                Young people tried products, compared packaging, shared honest
+                opinions, and helped make real decisions about what LALALOCA
+                would become. From the very beginning, these young people
+                helped shape the LALALOCA Collection.
+              </p>
+            </div>
+            <Link
+              href="/young-founders-room"
+              className="mt-7 inline-flex min-h-11 items-center border-b border-champagne/60 text-[0.6875rem] uppercase tracking-[0.22em] text-champagne transition-colors hover:border-champagne"
+            >
+              Step into the Young Founders&rsquo; Room
+            </Link>
+          </div>
+
+          <p className="font-serif text-2xl leading-snug text-rose md:text-3xl">
+            20% of LALALOCA net profits.
+            <br />
+            Every month.
+            <br />
+            Directly to StandUp for Kids Tucson.
+          </p>
+        </div>
+      </section>
+
       {/* ---------------- The close ----------------
           The last thing said about the collection, and the only place on this
           page the campaign line appears. Set stacked on two lines because the

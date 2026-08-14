@@ -30,8 +30,8 @@ export const profiles: FoundHerProfile[] = [
     role: "Founder",
     portrait: {
       src: "/editorial/shelby-korpi.webp",
-      alt: "Shelby Korpi in a black blazer, photographed in a panelled room with a brass lamp behind her.",
-      position: "45% 26%",
+      alt: "Shelby Korpi in a deep green satin blazer, her hand on the brass plate of a dark green door, a lamp glowing in the room behind her.",
+      position: "50% 26%",
     },
     building: "FOUNDER, EcoYield.ai, and a few things before both.",
     standfirst:

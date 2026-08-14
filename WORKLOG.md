@@ -5,6 +5,16 @@ date · agent · what changed · what was left alone · anything unpushed.
 
 ---
 
+## 2026-08-14 · Claude (Cowork) — night
+- Replaced Shelby's headshot: /editorial/shelby-korpi.webp is now the green
+  satin blazer door portrait (from upload, 1122x1402). profiles.ts alt
+  rewritten to match; objectPosition tuned to 50% 26% for the 3/2 frames.
+- Deliberately NOT touched: founder-portrait-wall(.m).webp — that is the
+  composed gallery-wall scene (her framed portrait on the wall), not a raw
+  headshot; swapping the file would break the museum framing and its alt.
+  Recomposite needed if the new portrait should hang there too.
+- Unpushed: this + volunteer photo + intro lede + f0eb4fa (if not pushed).
+
 ## 2026-08-14 · Claude (Cowork) — evening
 - Young Founders' Room: installed the volunteer photograph the page was
   already wired for — public/editorial/young-founders/shelby-volunteer.webp

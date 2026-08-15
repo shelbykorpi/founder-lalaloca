@@ -14,10 +14,10 @@
  * can drift, and a customer who sees one price and is charged another is a
  * real problem. If you change a price in Shopify, change it here too:
  *
- *   products.ts  price: 39.99   ->  Shopify variant price
+ *   products.ts  price: 38.00   ->  Shopify variant price
  *   products.ts  SET.price      ->  Shopify SerumSet price
  *
- * Verified against Shopify on 6 Aug 2026: serums $39.99, trio $98.99.
+ * Verified against Shopify on 15 Aug 2026: serums $38.00, trio $98.00.
  */
 
 import type { ProductSlug } from "./products";

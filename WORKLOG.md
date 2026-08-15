@@ -132,6 +132,17 @@ date · agent · what changed · what was left alone · anything unpushed.
   binary and the VM is linux/arm64 — so run it locally before shipping.
 - Unpushed: this change, on top of whatever was already unpushed.
 
+## 2026-08-15 · Claude (Cowork)
+- Prices matched to live Shopify (storefront products.json, updated 15 Aug
+  13:01 ET): serums $39.99 -> $38.00, trio $98.99 -> $98.00. Changed in
+  products.ts (single source; compare table, JSON-LD offers, merchant feed
+  and "valued at" math all derive). Shop meta description updated; bag
+  storage key bumped v2 -> v3 so no stale $39.99 persists in drawers;
+  shopifyLinks verification note refreshed.
+- Heads-up for Shelby: the TRIO's Shopify body copy still says "$98.99 ...
+  instead of $119.97" — stale on Shopify's side, edit there.
+- Unpushed: this commit (+ gallery-frame commit if not yet pushed).
+
 ## 2026-08-14 · Claude (Cowork) — night, part 2
 - Recomposited the /found-her gallery wall: the green-blazer portrait now
   hangs inside the carved frame in founder-portrait-wall.webp and the -m

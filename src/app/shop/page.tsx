@@ -13,7 +13,7 @@ import { JsonLd, breadcrumbSchema, collectionSchema, setSchema } from "@/lib/seo
 export const metadata: Metadata = {
   title: "Shop the LALALOCA Collection",
   description:
-    "Three serums — Thirst Trap, C Me Glow and Bounce Back. 50 ml, $39.99 each, free US shipping. What each one does, and how to pick.",
+    "Three serums — Thirst Trap, C Me Glow and Bounce Back. 50 ml, $38 each, free US shipping. What each one does, and how to pick.",
   /* Without this the root layout's canonical is inherited and this page tells
      Google the homepage is the real version of it — the fastest way to get a
      commercial page dropped from the index. */

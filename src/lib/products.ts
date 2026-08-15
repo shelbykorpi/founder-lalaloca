@@ -90,7 +90,7 @@ export const products: Product[] = [
     moment:
       "The 6am one, when you’ve been up twice in the night and you’d like your face not to announce it.",
     benefit: "Skin feels softer and more comfortable, and makeup sits better on top.",
-    price: 39.99,
+    price: 38.0,
     size: "50 ml / 1.69 fl oz",
     accent: "#48958D",
     glow: "#7fd0c4",
@@ -153,7 +153,7 @@ export const products: Product[] = [
     moment:
       "The morning of something that matters, when you want to look like you slept even if you didn’t.",
     benefit: "Tone looks brighter and more even, with a warm finish rather than a shiny one.",
-    price: 39.99,
+    price: 38.0,
     size: "50 ml / 1.69 fl oz",
     accent: "#F6740B",
     glow: "#ffb066",
@@ -205,7 +205,7 @@ export const products: Product[] = [
     moment:
       "The night after the week that took everything, when going to bed with a clean face is the whole plan.",
     benefit: "Skin feels firmer and more cushioned, and looks smoother the next morning.",
-    price: 39.99,
+    price: 38.0,
     size: "50 ml / 1.69 fl oz",
     accent: "#DC3D39",
     glow: "#f0a08c",
@@ -250,7 +250,7 @@ export const products: Product[] = [
 export const SET = {
   name: "All three",
   detail: "Three full-size 50 ml serums",
-  price: 98.99,
+  price: 98.0,
   /** Editorial still life — the three product colours, not a photograph of the bottles. */
   image: "/editorial/collection-still.webp",
 };

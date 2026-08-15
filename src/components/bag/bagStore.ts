@@ -11,13 +11,15 @@ export type BagLine = {
 
 /**
  * Bumped v1 -> v2 when serum prices moved from $29.99 to $39.99.
+ * Bumped v2 -> v3 when serum prices moved to $38.00 and the trio to $98.00
+ * (matched to Shopify, 15 Aug 2026).
  *
  * A bag line stores the price it was added at. Anyone holding a v1 bag would
  * have seen $29.99 in the drawer and then been charged $39.99 at Shopify —
  * so the old key is abandoned rather than migrated. Bump this again on any
  * future price change.
  */
-const STORAGE_KEY = "lalaloca.bag.v2";
+const STORAGE_KEY = "lalaloca.bag.v3";
 const EMPTY: BagLine[] = [];
 
 /**

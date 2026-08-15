@@ -55,6 +55,9 @@ const PHOTO = {
   outreachTeam: "/editorial/young-founders/outreach-team.webp",
   shelbyVolunteer: "/editorial/young-founders/shelby-volunteer.webp",
   collaboration: "/editorial/young-founders/collaboration-table.webp",
+  /* StandUp for Kids' own published RESPECT graphic, used with the partner's
+     branding intact — a music afternoon at the Outreach Center. */
+  respect: "/editorial/young-founders/respect-outreach-center.webp",
   gala: "/editorial/young-founders/grit-and-gratitude-gala.webp",
 } as const;
 
@@ -76,6 +79,7 @@ export default function YoungFoundersRoomPage() {
     outreachTeam: assetExists(PHOTO.outreachTeam),
     shelbyVolunteer: assetExists(PHOTO.shelbyVolunteer),
     collaboration: assetExists(PHOTO.collaboration),
+    respect: assetExists(PHOTO.respect),
     gala: assetExists(PHOTO.gala),
   };
   const twoUp = (present: boolean, cols: string) => (present ? cols : "max-w-3xl");
@@ -230,6 +234,18 @@ export default function YoungFoundersRoomPage() {
               focal="50% 50%"
               sizes="(min-width: 1024px) 40vw, 100vw"
               className="mt-2"
+            />
+            {/* StandUp for Kids' own RESPECT graphic. Their branding and their
+                words stay on the image — it is the partner speaking, not us
+                describing them. Square, so it sits under the paragraph column
+                without fighting the 4:3 above it. */}
+            <DocumentaryImage
+              src={PHOTO.respect}
+              alt="An afternoon at the StandUp for Kids Tucson Outreach Center: a young person playing acoustic guitar at the table while a volunteer listens. The organization's RESPECT graphic reads: We StandUp for every individual, listening, honoring their voices and treating them with dignity."
+              ratio="1094 / 1062"
+              focal="50% 50%"
+              sizes="(min-width: 1024px) 40vw, 100vw"
+              className={has.collaboration ? "mt-6" : "mt-2"}
             />
           </div>
 

@@ -5,6 +5,17 @@ date · agent · what changed · what was left alone · anything unpushed.
 
 ---
 
+## 2026-08-15 · Claude (Cowork) — later
+- Young Founders' Room: added StandUp for Kids' own RESPECT graphic as
+  /editorial/young-founders/respect-outreach-center.webp, placed in the
+  "They helped build LALALOCA" column (below the collaboration slot, which
+  is still empty). New PHOTO.respect entry + assetExists check. Alt
+  describes the scene and transcribes the graphic's text; no young person
+  is named, per AGENTS.md.
+- Note: the image carries StandUp for Kids' logo and wording — partner
+  branding left intact deliberately.
+- Unpushed: this + prices + gallery frame (if not yet pushed).
+
 ## 2026-08-15 · Claude (Cowork) — end-to-end test of the email path
 - PASS: all DNS. ImprovMX MX x2, root SPF, Resend MX/SPF/DKIM, and 2 of the 6
   Shopify CNAMEs, from Google + Cloudflare.

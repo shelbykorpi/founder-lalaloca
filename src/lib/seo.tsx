@@ -1,4 +1,4 @@
-import { BRAND, SITE } from "./brand";
+import { BRAND, CONTACT_EMAIL, SITE } from "./brand";
 import type { Product } from "./products";
 import type { ProductReviews } from "./reviews";
 
@@ -68,7 +68,10 @@ const SAME_AS = (process.env.NEXT_PUBLIC_SAME_AS ?? "")
   .map((url) => url.trim())
   .filter(Boolean);
 
-const CONTACT_EMAIL = process.env.NEXT_PUBLIC_CONTACT_EMAIL?.trim();
+/* Was read straight from the environment here and was unset, so the structured
+   data shipped with no contactPoint at all. It now comes from brand.ts — the
+   same constant the visible copy uses, so the address an engine is told about
+   and the address a woman is shown cannot drift apart. */
 
 export function organizationSchema() {
   return {
@@ -94,17 +97,13 @@ export function organizationSchema() {
       "collagen firming serum",
     ],
     ...(SAME_AS.length ? { sameAs: SAME_AS } : {}),
-    ...(CONTACT_EMAIL
-      ? {
-          contactPoint: {
-            "@type": "ContactPoint",
-            contactType: "customer service",
-            email: CONTACT_EMAIL,
-            areaServed: "US",
-            availableLanguage: "English",
-          },
-        }
-      : {}),
+    contactPoint: {
+      "@type": "ContactPoint",
+      contactType: "customer service",
+      email: CONTACT_EMAIL,
+      areaServed: "US",
+      availableLanguage: "English",
+    },
   };
 }
 

@@ -22,11 +22,42 @@
 
 const API_KEY = process.env.RESEND_API_KEY;
 
-/** Must be on a domain verified in Resend. */
-const FROM = process.env.EMAIL_FROM ?? "FOUNDER <notifications@send.founderbeauty.co>";
+/**
+ * Must be on a domain verified in Resend.
+ *
+ * The fallback moved from `notifications@send.founderbeauty.co` to the root
+ * domain on 15 Aug 2026, when Resend's verified domain was swapped from the
+ * subdomain to `founderbeauty.co`. A stale fallback here is not a cosmetic
+ * problem: an unverified sender means Resend refuses the send, and the woman
+ * gets the "we haven't sent it" screen.
+ */
+const FROM = process.env.EMAIL_FROM ?? "FOUNDER <notifications@founderbeauty.co>";
 
-/** Where anything needing a human decision goes. */
+/**
+ * Where anything needing a human decision goes. This is an INBOX, not an
+ * identity — it is never shown to anyone outside the company.
+ */
 export const OWNER_EMAIL = process.env.OWNER_EMAIL ?? "shelbykorpi@gmail.com";
+
+/**
+ * The address a member of the public is invited to reply to.
+ *
+ * WHY THIS IS NOT OWNER_EMAIL. It used to be, and that meant every confirmation
+ * email and every Founding List welcome carried a personal Gmail address in
+ * its reply-to. Hit reply to say thank you, and you were writing to
+ * shelbykorpi@gmail.com — an address the brand never chose to publish, now
+ * sitting in the mailbox of every woman who has ever written in and anywhere
+ * her mail is later forwarded, screenshotted or subpoenaed.
+ *
+ * The two jobs are genuinely different: OWNER_EMAIL is where mail must LAND,
+ * this is the identity mail is SENT AS. They point at the same human today
+ * because shelby@founderbeauty.co forwards to that Gmail — but the public one
+ * can be redirected, delegated or retired without touching the other.
+ */
+export const PUBLIC_REPLY_TO =
+  process.env.PUBLIC_REPLY_TO?.trim() ||
+  process.env.NEXT_PUBLIC_CONTACT_EMAIL?.trim() ||
+  "shelby@founderbeauty.co";
 
 export type SendResult = { sent: true } | { sent: false; reason: string };
 

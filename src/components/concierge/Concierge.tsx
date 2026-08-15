@@ -2,6 +2,7 @@
 
 import { useCallback, useEffect, useRef, useState } from "react";
 import s from "./concierge.module.css";
+import { CONTACT_EMAIL } from "@/lib/brand";
 import { DESK_ORDER, DESKS, type Desk } from "@/lib/concierge/desks";
 import { HONEYPOT_FIELD } from "@/lib/formGuard";
 
@@ -138,7 +139,7 @@ export function Concierge() {
             ...prev,
             {
               who: "bot",
-              text: "The concierge isn’t connected yet, so I’d rather say that than invent an answer.\n\nWrite to us directly and a person will pick it up.",
+              text: `The concierge isn’t connected yet, so I’d rather say that than invent an answer.\n\nWrite to ${CONTACT_EMAIL} and a person will pick it up.`,
               kind: "care",
               tag: "Not connected",
             },

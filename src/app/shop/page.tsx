@@ -6,7 +6,7 @@ import { ScrollDoors } from "@/components/door/ScrollDoors";
 import { AddSetButton } from "@/components/bag/AddToBagButton";
 import { PageIntro } from "@/components/site/PageIntro";
 import { TrackListView } from "@/components/site/TrackListView";
-import { BRAND } from "@/lib/brand";
+import { BRAND, CONTACT_EMAIL, CONTACT_MAILTO } from "@/lib/brand";
 import { formatPrice, products, SET } from "@/lib/products";
 import { JsonLd, breadcrumbSchema, collectionSchema, setSchema } from "@/lib/seo";
 
@@ -316,8 +316,12 @@ export default function ShopPage() {
           <div>
             <h2 className="font-serif text-2xl text-charcoal">Returns</h2>
             <p className="mt-2 text-sm text-charcoal/80">
-              Damaged or not what you expected? Write to us and we’ll sort it out.
-              Opened cosmetics have rules; a genuine problem is still our problem.
+              Damaged or not what you expected? Write to{" "}
+              <a href={CONTACT_MAILTO} className="link-underline text-charcoal">
+                {CONTACT_EMAIL}
+              </a>{" "}
+              and we’ll sort it out. Opened cosmetics have rules; a genuine problem is
+              still our problem.
             </p>
             <Link href="/policies/returns" className="link-underline mt-2 text-charcoal">
               Details <span aria-hidden>↗</span>

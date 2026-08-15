@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { PageIntro } from "@/components/site/PageIntro";
+import { CONTACT_EMAIL, CONTACT_MAILTO } from "@/lib/brand";
 
 export const metadata: Metadata = {
   title: "Account",
@@ -36,7 +37,11 @@ export default function AccountPage() {
               <strong className="font-medium">Tracking an order?</strong> Your
               confirmation email has a link to the live order status page — that’s the
               same information a login would show you, without the login. Can’t find the
-              email, or need to change an order? Write to us and a person will answer.
+              email, or need to change an order? Write to{" "}
+              <a href={CONTACT_MAILTO} className="link-underline text-charcoal">
+                {CONTACT_EMAIL}
+              </a>{" "}
+              and a person will answer.
             </p>
             <p className="mt-4 text-sm leading-relaxed text-charcoal/85">
               Payment is handled on Shopify’s secure checkout. No card details are ever

@@ -5,7 +5,7 @@ import { PageIntro } from "@/components/site/PageIntro";
 import { EmailSignup } from "@/components/site/EmailSignup";
 import { StoryForm } from "@/components/story/StoryForm";
 import { StoryPromptButton } from "@/components/story/StoryPromptButton";
-import { BRAND } from "@/lib/brand";
+import { BRAND, CONTACT_EMAIL, CONTACT_MAILTO } from "@/lib/brand";
 import { PROFILE_QUESTIONS, STORY_INTRO, STORY_STANDARD } from "@/lib/content";
 import { profiles } from "@/lib/profiles";
 import { JsonLd, breadcrumbSchema, editorialListSchema } from "@/lib/seo";
@@ -320,6 +320,17 @@ export default function FoundHerPage() {
                 If anything goes wrong when you send this, we’ll tell you plainly
                 rather than showing a thank-you screen over a message that went
                 nowhere.
+              </p>
+              {/* The form is the main route in, but a woman who would rather
+                  write a normal email than fill in six boxes should not have to
+                  hunt for an address — and someone with a question about FOUNDER
+                  that is not a story needs somewhere to send it. */}
+              <p className="mt-6 text-xs leading-relaxed text-charcoal/70">
+                Rather just write to a person, or asking about something other than a
+                story?{" "}
+                <a href={CONTACT_MAILTO} className="link-underline text-charcoal">
+                  {CONTACT_EMAIL}
+                </a>
               </p>
             </aside>
           </div>

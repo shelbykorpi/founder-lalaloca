@@ -132,6 +132,30 @@ export const HERO = {
 };
 
 /**
+ * The address a woman writes to.
+ *
+ * WHY IT IS HERE AND NOT IN NINE STRINGS. Before this existed the site told
+ * people to "write to us" or "email us and we'll send the supplier sheet" in
+ * nine separate places and never once said where. That is worse than saying
+ * nothing: it promises a person at the other end and then hides them. One
+ * constant means the address is correct everywhere or wrong everywhere, and
+ * changing it is one line rather than a search-and-replace across copy.
+ *
+ * IT MUST FORWARD SOMEWHERE REAL. shelby@founderbeauty.co only exists as long
+ * as the domain's MX records point at a forwarder — see docs/EMAIL_SETUP.md.
+ * Publishing an address that bounces is the one failure mode worse than
+ * publishing none, so verify the forwarding before shipping a change here.
+ *
+ * The env var lets a preview deployment point somewhere harmless without a code
+ * change; the fallback is what production actually uses.
+ */
+export const CONTACT_EMAIL =
+  process.env.NEXT_PUBLIC_CONTACT_EMAIL?.trim() || "shelby@founderbeauty.co";
+
+/** For `href={CONTACT_MAILTO}`. */
+export const CONTACT_MAILTO = `mailto:${CONTACT_EMAIL}`;
+
+/**
  * Canonical origin, resolved at build time.
  *
  * Set NEXT_PUBLIC_SITE_URL once the real domain is attached. Until then Vercel

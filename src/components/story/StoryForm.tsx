@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useId, useRef, useState } from "react";
+import { CONTACT_EMAIL, CONTACT_MAILTO } from "@/lib/brand";
 import { STORY_FIELDS } from "@/lib/content";
 import { track } from "@/lib/analytics";
 import { HONEYPOT_FIELD } from "@/lib/formGuard";
@@ -59,8 +60,11 @@ export function StoryForm() {
         <p className="mt-4 text-sm leading-relaxed text-charcoal/80">
           The intake isn’t connected right now, so your words went nowhere and nothing
           was stored. We’d rather tell you that than show you a thank-you screen over a
-          deleted message. Try again shortly — and if it keeps happening, write to us
-          directly and we’ll take it that way.
+          deleted message. Try again shortly — and if it keeps happening, write to{" "}
+          <a href={CONTACT_MAILTO} className="link-underline text-charcoal">
+            {CONTACT_EMAIL}
+          </a>{" "}
+          and we’ll take it that way.
         </p>
         <button
           type="button"

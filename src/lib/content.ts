@@ -6,6 +6,8 @@
  * statistics or press; and the customer stays the main character.
  */
 
+import { CONTACT_EMAIL } from "./brand";
+
 /* ---------------- FOUND HER — editorial platform ---------------- */
 
 /** Questions each profile answers, shown on the page so women know what we ask. */
@@ -279,7 +281,7 @@ export const policies = {
       },
       {
         heading: "Outside the United States",
-        body: "We don’t ship internationally yet. If you’re outside the US, checkout won’t be able to quote you a rate — write to us and we’ll tell you when that changes rather than guess at a date.",
+        body: `We don’t ship internationally yet. If you’re outside the US, checkout won’t be able to quote you a rate — write to ${CONTACT_EMAIL} and we’ll tell you when that changes rather than guess at a date.`,
       },
       {
         heading: "If it arrives damaged",
@@ -294,7 +296,7 @@ export const policies = {
     sections: [
       {
         heading: "The principle",
-        body: "Write to us and tell us what happened. Cosmetics have rules about what can be resold, so opened products are handled differently from sealed ones — but a genuine problem is our problem, not yours.",
+        body: `Write to ${CONTACT_EMAIL} and tell us what happened. Cosmetics have rules about what can be resold, so opened products are handled differently from sealed ones — but a genuine problem is our problem, not yours.`,
       },
       {
         heading: "Still to confirm",

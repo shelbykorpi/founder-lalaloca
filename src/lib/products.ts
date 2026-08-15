@@ -10,6 +10,8 @@
  * list has not been supplied it is marked as outstanding rather than invented.
  */
 
+import { CONTACT_EMAIL } from "./brand";
+
 export type ProductSlug = "bounce-back" | "thirst-trap" | "c-me-glow";
 
 export type Product = {
@@ -117,7 +119,7 @@ export const products: Product[] = [
       },
       {
         q: "Where’s the full ingredient list?",
-        a: "The complete INCI list hasn’t been published here yet. The label lists eight-weight hyaluronic acid, marine collagen and panthenol. We’d rather leave the rest blank than guess at it — email us and we’ll send the supplier sheet.",
+        a: `The complete INCI list hasn’t been published here yet. The label lists eight-weight hyaluronic acid, marine collagen and panthenol. We’d rather leave the rest blank than guess at it — email ${CONTACT_EMAIL} and we’ll send the supplier sheet.`,
       },
       {
         q: "Will it work for me?",
@@ -180,7 +182,7 @@ export const products: Product[] = [
       },
       {
         q: "Where’s the full ingredient list?",
-        a: "The complete INCI list hasn’t been published here yet. The label states it is a vitamin C serum; we haven’t listed anything the packaging doesn’t. Email us and we’ll send the supplier sheet.",
+        a: `The complete INCI list hasn’t been published here yet. The label states it is a vitamin C serum; we haven’t listed anything the packaging doesn’t. Email ${CONTACT_EMAIL} and we’ll send the supplier sheet.`,
       },
       {
         q: "Will it work for me?",
@@ -229,7 +231,7 @@ export const products: Product[] = [
       },
       {
         q: "Where’s the full ingredient list?",
-        a: "The complete INCI list hasn’t been published here yet. The label states it is a collagen firming serum; we haven’t listed anything the packaging doesn’t. Email us and we’ll send the supplier sheet.",
+        a: `The complete INCI list hasn’t been published here yet. The label states it is a collagen firming serum; we haven’t listed anything the packaging doesn’t. Email ${CONTACT_EMAIL} and we’ll send the supplier sheet.`,
       },
       {
         q: "Will it work for me?",

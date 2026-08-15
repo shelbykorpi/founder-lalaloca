@@ -1,6 +1,6 @@
 import { recordStorySubmission } from "@/lib/airtable";
 import { STORY_FIELDS } from "@/lib/content";
-import { OWNER_EMAIL, sendEmail } from "@/lib/email";
+import { OWNER_EMAIL, PUBLIC_REPLY_TO, sendEmail } from "@/lib/email";
 import { guard, looksLikeEmail, silentOk } from "@/lib/formGuard";
 import { STORY_CONFIRMATION_SUBJECT, storyConfirmationText } from "@/lib/storyEmail";
 
@@ -160,9 +160,11 @@ export async function POST(request: Request) {
        without reading an API route. */
     text: storyConfirmationText(name, canPublish),
     /* Photographs come back as a REPLY to this email, so reply-to has to reach
-       a human inbox rather than the sending domain. It already did; now it
-       matters more. */
-    replyTo: OWNER_EMAIL,
+       a human inbox rather than the sending domain. It now uses the brand
+       address rather than the owner's personal Gmail: this header is visible to
+       every woman who writes in, and it still lands in the same inbox because
+       shelby@founderbeauty.co forwards there. */
+    replyTo: PUBLIC_REPLY_TO,
   });
   if (!confirmed.sent) console.error("[story] confirmation failed:", confirmed.reason);
 

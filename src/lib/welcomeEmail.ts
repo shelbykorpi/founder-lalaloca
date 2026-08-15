@@ -32,7 +32,7 @@
  * order confirmations.
  */
 
-import { OWNER_EMAIL, sendEmail, type SendResult } from "./email";
+import { PUBLIC_REPLY_TO, sendEmail, type SendResult } from "./email";
 import { unsubscribeOneClickUrl, unsubscribeUrl } from "./unsubscribe";
 
 export const WELCOME_SUBJECT = "You’re on the Founding List";
@@ -139,8 +139,9 @@ export async function sendWelcomeEmail(to: string): Promise<SendResult> {
     text: welcomeText(to),
     /* A reply goes to a person, not to a no-reply void. This is the one
        promise in the email that costs something to keep, which is why it is
-       worth making. */
-    replyTo: OWNER_EMAIL,
+       worth making. It is the brand address, not the owner's personal Gmail —
+       this list is the largest audience any header on this site reaches. */
+    replyTo: PUBLIC_REPLY_TO,
     /* Puts Gmail's own Unsubscribe control beside the sender name. Both headers
        are needed: List-Unsubscribe alone offers a mailto or a link, and
        List-Unsubscribe-Post is what makes it a single press with no round trip

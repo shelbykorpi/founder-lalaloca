@@ -74,6 +74,10 @@ export const PRIMARY_NAV = [
     label: "LALALOCA Collection and StandUp for Kids",
     stack: ["LALALOCA", "\u00d7", "StandUp for Kids"],
   },
+  /* The second line, sold under FOUNDER itself. Kept next to the LALALOCA
+     lockup so the two collections read as siblings, not as a shop and a
+     sub-page. */
+  { href: "/founder-collection", label: "The FOUNDER Collection" },
   { href: "/our-story", label: "Our Story" },
   { href: "/found-her", label: "Found Her" },
   { href: "/young-founders-room", label: "Young Founders\u2019 Room" },
@@ -87,6 +91,7 @@ export const FOOTER_NAV = [
     heading: "Shop",
     links: [
       { href: "/shop", label: "The LALALOCA Collection" },
+      { href: "/founder-collection", label: "The FOUNDER Collection" },
       { href: "/products/thirst-trap", label: "Thirst Trap" },
       { href: "/products/c-me-glow", label: "C Me Glow" },
       { href: "/products/bounce-back", label: "Bounce Back" },

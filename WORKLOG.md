@@ -5,6 +5,26 @@ date · agent · what changed · what was left alone · anything unpushed.
 
 ---
 
+## 2026-08-16 · Claude (Cowork)
+- NEW: the FOUNDER Collection, second line beside LALALOCA.
+  - src/lib/founderCollection.ts — own file, deliberately not products.ts.
+    First product HOLD THE ROOM (THE ANCHOR), sourced from Blanka "Extreme
+    Moisture Blend" SKU 100249-BLNK-MB-03-02-HM-SM3D. 30 ml, $34, chamomile
+    + witch hazel, full INCI transcribed verbatim (duplicates left as
+    printed), directions and origin from the supplier listing.
+  - src/app/founder-collection/page.tsx — editorial single-product layout,
+    no door treatment (one product is a corridor, not a choice).
+  - Nav + footer + sitemap entries added.
+  - docs/BRAND_BOARD.md — amendment section: name kept, spec changed from
+    peptide/50ml to chamomile/30ml, remaining release gates listed.
+- NOT SELLABLE ON PURPOSE: sellable:false, no Shopify variant wired, no
+  add-to-bag anywhere. Page states why and offers the founding list instead.
+  To ship: create the product in Shopify, add its variant to shopifyLinks.ts,
+  flip sellable, add the button — ONE commit.
+- Flagged to Shelby: INCI contains fragrance + petrolatum; the FAQ says so
+  outright. Blanka SRP was $27.70, we price at $34.
+- Unpushed: this + earlier commits if the push hasn't run.
+
 ## 2026-08-15 · Claude (Cowork) — later
 - Young Founders' Room: added StandUp for Kids' own RESPECT graphic as
   /editorial/young-founders/respect-outreach-center.webp, placed in the

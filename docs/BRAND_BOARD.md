@@ -217,3 +217,35 @@ alongside LALALOCA, and a naming system that already reads.
 
 THE FIRST MOVE, SOFT POWER and THE LAST WORD are archive naming and are
 explicitly not current. Do not let them back into copy.
+
+### Amendment · 16 Aug 2026 — THE ANCHOR is sourced, and its spec changed
+
+**HOLD THE ROOM** has been sourced from Blanka ("Extreme Moisture Blend",
+SKU 100249-BLNK-MB-03-02-HM-SM3D). The formula is not the peptide cream the
+board imagined:
+
+| | v2.14 spec | As sourced |
+|---|---|---|
+| Size | 50 ml airless pump | **30 ml / 1 fl oz** airless pump |
+| Actives | peptides | **chamomile extract, witch hazel** |
+| INCI | outstanding | **published** — transcribed in `src/lib/founderCollection.ts` |
+| Origin | — | Made in North America |
+| Retail | outstanding | **$34.00** |
+
+**The name was kept and the spec was amended.** The v2.14 naming system
+assigns a name to a slot — OPENER / ANCHOR / SIGNATURE — not to a formula, so
+a different cream in the anchor slot is still HOLD THE ROOM. Renaming would
+have broken a system that already reads, and invented a fourth name for no
+gain.
+
+**Still open before it can be sold**, from the governance list above:
+stability documentation, component and leakage testing, regulatory artwork
+(net contents, warnings, directions), trademark clearance, fulfilment timing.
+Until every one is closed the product record carries `sellable: false`, the
+page shows no buy path, and no Shopify variant is wired. Flip all three in a
+single commit or the site and the till will disagree.
+
+Note for copy: the INCI includes **fragrance** and **petrolatum**. The
+brand's serum copy leans on gentleness and patch testing, so the moisturizer
+says plainly that it is fragranced rather than leaving a customer to discover
+it. That FAQ is deliberate — do not soften it.

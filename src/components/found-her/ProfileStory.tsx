@@ -20,7 +20,12 @@ export function ProfileStory({ profile }: { profile: FoundHerProfile }) {
 
           <div className="grid gap-10 lg:grid-cols-[minmax(0,30rem)_1fr] lg:gap-16">
             {profile.portrait && (
-              <div className="relative aspect-[3/2] w-full overflow-hidden bg-shell">
+              <div
+                className="relative w-full overflow-hidden bg-shell"
+                /* Framed artwork declares its own ratio so the frame is never
+                   cropped; photographs fall back to the slot's 3:2. */
+                style={{ aspectRatio: profile.portrait.aspect ?? "3 / 2" }}
+              >
                 <Image
                   src={profile.portrait.src}
                   alt={profile.portrait.alt}

@@ -12,7 +12,14 @@ export type FoundHerProfile = {
   name: string;
   role: string;
   location?: string;
-  portrait?: { src: string; alt: string; position?: string };
+  portrait?: {
+    src: string;
+    alt: string;
+    position?: string;
+    /** CSS aspect-ratio, e.g. "3 / 4". Defaults to the slot's own shape.
+        Set it for framed artwork, which must never be cropped. */
+    aspect?: string;
+  };
   /** One line for the archive card */
   building: string;
   /** Sits under the name at the top of her page */
@@ -140,6 +147,65 @@ export const profiles: FoundHerProfile[] = [
       },
     ],
     closing: "FOUNDER. FOUND HER.",
+  },
+  {
+    slug: "julie-schoener",
+    name: "Julie Schoener",
+    role: "Building Stay Delusional",
+    location: "Newport Beach",
+    portrait: {
+      src: "/editorial/julie-schoener-frame.webp",
+      alt: "A framed collage for Julie Schoener: a watercolour vision board \u2014 mountains at sunrise, friends laughing over coffee, a climber, hot-air balloons, handwritten notes from her story \u2014 in a carved green-and-gold frame with a brass nameplate carrying her name.",
+      aspect: "3 / 4",
+    },
+    building: "Stay Delusional — a brand for believing in the life before it exists.",
+    standfirst:
+      "She spent years on the path she was supposed to follow. Losing her mom changed how she looked at time — so she moved across the country, started over, and began building a life she was excited to wake up to.",
+    /* PENDING HER APPROVAL — do not publish until she has read this text as it
+       stands and said yes, and the date below is filled in from her reply.
+       Answers are verbatim from her submission of 15 August 2026. */
+    approvedOn: "PENDING",
+    answers: [
+      {
+        question: "When did you find her?",
+        body: [
+          "I found her after losing my mom and realizing how quickly life can change. I had spent years building a career at the same investment firm, and losing her made me stop and really question what I wanted my own life to look like. I realized I wanted to build something that was mine, take more chances, and create a life that felt meaningful to me, not just keep following the path I thought I was supposed to be on.",
+        ],
+      },
+      {
+        question: "What are you building?",
+        body: [
+          "I\u2019m building Stay Delusional with one of my best friends. It came from this idea that sometimes you have to believe in a life that doesn\u2019t exist yet so strongly that everyone else might think you\u2019re a little delusional.",
+          "For me, it\u2019s not just about starting a company. It\u2019s about building a life I\u2019m actually excited to wake up to and creating something of my own that has meaning behind it. We\u2019re starting with a lifestyle brand, but the bigger dream is to build a community around people who are brave enough to believe in their crazy ideas before anyone else does.",
+          "And one of the pieces that means the most to me is eventually having a portion of the proceeds support young people with a \u201cdelusional\u201d dream of their own, giving them a little help believing that maybe their idea isn\u2019t so crazy after all.",
+        ],
+      },
+      {
+        question: "What did it take?",
+        body: [
+          "Losing my mom changed the way I look at time. It made me realize that the life you keep saying you\u2019ll build \u201csomeday\u201d isn\u2019t guaranteed. It took leaving behind a version of my life that looked stable on paper, moving across the country, starting over, and being willing to not have everything figured out yet.",
+          "I\u2019m still very much in the figuring-it-out part. Stay Delusional hasn\u2019t even launched yet. But maybe that\u2019s part of my story too, I\u2019m submitting this while I\u2019m still becoming her.",
+        ],
+      },
+      {
+        question: "What are you proud of?",
+        body: [
+          "I\u2019m proud that I\u2019ve been willing to start over. To leave behind what was comfortable, move across the country, meet new people, try new things, and build a life that feels more like mine. I definitely don\u2019t have it all figured out, but I\u2019m proud of how much I\u2019ve created from starting again.",
+        ],
+      },
+      {
+        question: "What makes you feel most like yourself?",
+        body: [
+          "Adventure. Being outside, doing something that scares me a little, laughing with my friends, dreaming up ideas that are probably way too big, and being around people who make me feel completely myself.",
+        ],
+      },
+      {
+        question: "What would you tell a woman beginning now?",
+        body: [
+          "You don\u2019t need proof that your dream is going to work before you start. Sometimes you have to be a little delusional first. Believe in the life you want before it exists and then start building it.",
+        ],
+      },
+    ],
   },
 ];
 

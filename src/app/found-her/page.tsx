@@ -4,8 +4,7 @@ import Link from "next/link";
 import { PageIntro } from "@/components/site/PageIntro";
 import { EmailSignup } from "@/components/site/EmailSignup";
 import { StoryForm } from "@/components/story/StoryForm";
-import { StoryPromptButton } from "@/components/story/StoryPromptButton";
-import { BRAND, CONTACT_EMAIL, CONTACT_MAILTO } from "@/lib/brand";
+import { BRAND } from "@/lib/brand";
 import { PROFILE_QUESTIONS, STORY_INTRO, STORY_STANDARD } from "@/lib/content";
 import { profiles } from "@/lib/profiles";
 import { JsonLd, breadcrumbSchema, editorialListSchema } from "@/lib/seo";
@@ -152,7 +151,10 @@ export default function FoundHerPage() {
                     <li key={profile.slug}>
                       <Link href={`/found-her/${profile.slug}`} className="group block">
                         {profile.portrait && (
-                          <div className="relative aspect-[4/5] overflow-hidden bg-shell">
+                          <div
+                            className="relative overflow-hidden bg-shell"
+                            style={{ aspectRatio: profile.portrait.aspect ?? "4 / 5" }}
+                          >
                             <Image
                               src={profile.portrait.src}
                               alt={profile.portrait.alt}
@@ -288,14 +290,7 @@ export default function FoundHerPage() {
 
         <div className="section bg-cream pt-4">
           <div className="shell grid gap-12 lg:grid-cols-[1fr_minmax(0,22rem)] lg:gap-16">
-            {/* The writing help sits above the form rather than beside it: a
-                woman who wants it needs it before she starts typing, and a
-                woman who doesn't scrolls past one card. It shares the form's
-                max-width so the column reads as one thing. */}
-            <div className="min-w-0">
-              <StoryPromptButton />
-              <StoryForm />
-            </div>
+            <StoryForm />
 
             <aside className="lg:pt-2">
               <h3 className="eyebrow text-charcoal/70">Before you write</h3>
@@ -320,17 +315,6 @@ export default function FoundHerPage() {
                 If anything goes wrong when you send this, we’ll tell you plainly
                 rather than showing a thank-you screen over a message that went
                 nowhere.
-              </p>
-              {/* The form is the main route in, but a woman who would rather
-                  write a normal email than fill in six boxes should not have to
-                  hunt for an address — and someone with a question about FOUNDER
-                  that is not a story needs somewhere to send it. */}
-              <p className="mt-6 text-xs leading-relaxed text-charcoal/70">
-                Rather just write to a person, or asking about something other than a
-                story?{" "}
-                <a href={CONTACT_MAILTO} className="link-underline text-charcoal">
-                  {CONTACT_EMAIL}
-                </a>
               </p>
             </aside>
           </div>

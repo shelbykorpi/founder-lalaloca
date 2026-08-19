@@ -5,6 +5,38 @@ date · agent · what changed · what was left alone · anything unpushed.
 
 ---
 
+## 2026-08-19 · Claude (Cowork)
+- Julie Schoener staged end-to-end, publication HELD on her approval:
+  - src/lib/profiles.ts — her profile (verbatim answers, role line
+    "Building Stay Delusional", approvedOn: "PENDING"). portrait type
+    gained optional `aspect` so framed artwork is never cropped.
+  - public/editorial/julie-schoener-frame.webp — her framed collage
+    (AI-generated, supplied by Shelby; noted in her Airtable draft as
+    part of what she approves).
+  - src/components/found-her/ProfileStory.tsx — portrait slot honours
+    portrait.aspect (falls back to 3/2).
+  - src/app/found-her/page.tsx — THE WALL IS NOW A TWO-FRAME COMPOSITE:
+    found-her-wall.webp hangs Julie's frame beside Shelby's at the SAME
+    SIZE (both 493px tall, same centre line) in the photographed room.
+    Desktop: two invisible click overlays split in the wall gap (64/36)
+    plus two placards in the museum-label format. Mobile: one card per
+    woman — her picture above her name — cropped identically from the
+    same composite (found-her-frame-shelby-m.webp / -julie-m.webp).
+    First two profiles hang on the wall; profiles[2:] go to the grid.
+    HANGING THE NEXT FRAME MEANS REGENERATING THE COMPOSITE IMAGES AND
+    THE OVERLAY WIDTHS, not just adding data. Single-profile fallback
+    (old founder-portrait-wall scene) kept in code.
+  - public/editorial/found-her-wall.webp + found-her-frame-shelby-m.webp
+    + found-her-frame-julie-m.webp — composites (Julie's frame graded to
+    room light, cast shadow; source founder-portrait-wall*.webp files
+    kept untouched). found-her-wall-m.webp was superseded same-day and
+    moved to _to_delete/ — never referenced by any commit.
+- Airtable recFuOFm3d557fzI0: Draft updated to include the portrait in
+  what Julie approves. Status still Drafting.
+- UNPUSHED — everything above. Push ONLY after Julie approves text +
+  artwork; then set approvedOn to her date and mark her record Approved.
+- Left alone: protected language, wordmark, charitable wording, all else.
+
 ## 2026-08-16 · Claude (Cowork)
 - NEW: the FOUNDER Collection, second line beside LALALOCA.
   - src/lib/founderCollection.ts — own file, deliberately not products.ts.

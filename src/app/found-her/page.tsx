@@ -23,7 +23,14 @@ export const metadata: Metadata = {
 };
 
 export default function FoundHerPage() {
-  const [featured, ...otherProfiles] = profiles;
+  /* The first two profiles hang on the gallery wall itself; everyone after
+     them joins the grid below. The wall is a composited photograph —
+     found-her-wall.webp — so hanging the next frame means regenerating that
+     image (and its mobile crop) and adjusting the click-overlay widths, not
+     just adding data. */
+  const [featured, second, ...otherProfiles] = profiles;
+  const onWall = second ? [featured, second] : [featured];
+  const ordinals = ["first", "second"];
   return (
     <>
       {/* Declares the archive as a list of real articles, so the section itself
@@ -96,53 +103,164 @@ export default function FoundHerPage() {
 
         {profiles.length > 0 && (
           <>
-            {/* ---- The founder's portrait, hung in the gallery ----
-                The whole scene is one link to her story: the photographed
-                room runs edge to edge, and the placard sits beneath it the
-                way a museum label sits under a painting. Nothing readable
-                is baked into the image — every word is live text. */}
-            <Link
-              href={`/found-her/${featured.slug}`}
-              className="group mt-8 block focus-visible:outline-offset-4"
-              aria-label={`Read ${featured.name}’s story`}
-            >
-              <div className="relative hidden aspect-[1779/884] w-full overflow-hidden md:block">
-                <Image
-                  src="/editorial/founder-portrait-wall.webp"
-                  alt="A gallery wall: Shelby Korpi’s portrait in a carved dark frame under a brass picture light, on ivory panelling above a green wainscot, with a leather bench beneath."
-                  fill
-                  loading="lazy"
-                  sizes="100vw"
-                  className="object-cover transition-transform duration-700 group-hover:scale-[1.01]"
-                />
-              </div>
-              <div className="relative aspect-[712/884] w-full overflow-hidden md:hidden">
-                <Image
-                  src="/editorial/founder-portrait-wall-m.webp"
-                  alt="Shelby Korpi’s portrait in a carved dark frame under a brass picture light, hung on a gallery wall above a leather bench."
-                  fill
-                  loading="lazy"
-                  sizes="100vw"
-                  className="object-cover"
-                />
-              </div>
+            {/* ---- The gallery wall ----
+                One photographed room, two frames: the founder's portrait
+                under its picture light, and Julie's framed collage hung
+                beside it. Each half of the scene is its own click target —
+                the invisible split falls in the wall space between the
+                frames (64% on desktop, 57% on the tighter mobile crop) —
+                and each woman gets her own placard beneath, the way museum
+                labels sit under a group hang. Nothing readable is baked
+                into the image — every word is live text. */}
+            {second ? (
+              <>
+                {/* Desktop: the one photographed room, both frames the same
+                    size on the same centre line. */}
+                <div className="relative mt-8 hidden md:block">
+                  <div className="relative aspect-[1779/884] w-full overflow-hidden">
+                    <Image
+                      src="/editorial/found-her-wall.webp"
+                      alt="A gallery wall: Shelby Korpi’s portrait in a carved dark frame under a brass picture light, and beside it, hung at the same size, Julie Schoener’s framed watercolour collage in green and gold, on ivory panelling above a green wainscot, with a leather bench beneath."
+                      fill
+                      loading="lazy"
+                      sizes="100vw"
+                      className="object-cover"
+                    />
+                  </div>
+                  <Link
+                    href={`/found-her/${featured.slug}`}
+                    aria-label={`Read ${featured.name}’s story`}
+                    className="absolute inset-y-0 left-0 w-[64%] focus-visible:outline-offset-[-4px]"
+                  />
+                  <Link
+                    href={`/found-her/${second.slug}`}
+                    aria-label={`Read ${second.name}’s story`}
+                    className="absolute inset-y-0 right-0 w-[36%] focus-visible:outline-offset-[-4px]"
+                  />
+                </div>
 
-              {/* the placard */}
-              <div className="shell mt-9 text-center">
-                <p className="eyebrow text-bronze-ink">
-                  The first profile · {featured.role}
-                </p>
-                <h3 className="mt-3 font-serif text-[clamp(2rem,4vw,3rem)] leading-none text-charcoal transition-colors group-hover:text-bronze-ink">
-                  {featured.name}
-                </h3>
-                <p className="mx-auto mt-3 max-w-md text-sm leading-relaxed text-charcoal/80">
-                  {featured.building}
-                </p>
-                <span className="link-underline mt-5 inline-block text-charcoal">
-                  Read her story <span aria-hidden>↗</span>
-                </span>
-              </div>
-            </Link>
+                {/* the placards — desktop only; on mobile each placard
+                    travels with its own picture below */}
+                <div className="shell mt-9 hidden md:block">
+                  <div className="mx-auto grid max-w-3xl gap-10 text-center md:grid-cols-2">
+                    {onWall.map((profile, i) => (
+                      <Link
+                        key={profile.slug}
+                        href={`/found-her/${profile.slug}`}
+                        className="group block"
+                      >
+                        {/* bottom-aligned so a two-line eyebrow (Julie's)
+                            doesn't push her name below her neighbour's */}
+                        <p className="eyebrow flex min-h-[2.6em] items-end justify-center text-bronze-ink">
+                          <span>
+                            The {ordinals[i]} profile · {profile.role}
+                          </span>
+                        </p>
+                        <h3 className="mt-3 font-serif text-[clamp(1.75rem,3vw,2.5rem)] leading-none text-charcoal transition-colors group-hover:text-bronze-ink">
+                          {profile.name}
+                        </h3>
+                        <p className="mx-auto mt-3 max-w-md text-sm leading-relaxed text-charcoal/80">
+                          {profile.building}
+                        </p>
+                        <span className="link-underline mt-5 inline-block text-charcoal">
+                          Read her story <span aria-hidden>↗</span>
+                        </span>
+                      </Link>
+                    ))}
+                  </div>
+                </div>
+
+                {/* Mobile: her picture above her name — one card per woman,
+                    cropped identically from the same composited wall so the
+                    frames stay the same size here too. */}
+                <div className="mt-8 space-y-16 md:hidden">
+                  {onWall.map((profile, i) => (
+                    <Link
+                      key={profile.slug}
+                      href={`/found-her/${profile.slug}`}
+                      className="group block"
+                      aria-label={`Read ${profile.name}’s story`}
+                    >
+                      <div className="relative aspect-[510/655] w-full overflow-hidden">
+                        <Image
+                          src={
+                            i === 0
+                              ? "/editorial/found-her-frame-shelby-m.webp"
+                              : "/editorial/found-her-frame-julie-m.webp"
+                          }
+                          alt={
+                            i === 0
+                              ? "Shelby Korpi’s portrait in a carved dark frame under a brass picture light, hung on an ivory gallery wall."
+                              : "Julie Schoener’s framed watercolour collage in green and gold, hung on the same ivory gallery wall."
+                          }
+                          fill
+                          loading="lazy"
+                          sizes="100vw"
+                          className="object-cover"
+                        />
+                      </div>
+                      <div className="shell mt-7 text-center">
+                        <p className="eyebrow text-bronze-ink">
+                          The {ordinals[i]} profile · {profile.role}
+                        </p>
+                        <h3 className="mt-3 font-serif text-[clamp(1.75rem,3vw,2.5rem)] leading-none text-charcoal">
+                          {profile.name}
+                        </h3>
+                        <p className="mx-auto mt-3 max-w-md text-sm leading-relaxed text-charcoal/80">
+                          {profile.building}
+                        </p>
+                        <span className="link-underline mt-5 inline-block text-charcoal">
+                          Read her story <span aria-hidden>↗</span>
+                        </span>
+                      </div>
+                    </Link>
+                  ))}
+                </div>
+              </>
+            ) : (
+              <Link
+                href={`/found-her/${featured.slug}`}
+                className="group mt-8 block focus-visible:outline-offset-4"
+                aria-label={`Read ${featured.name}’s story`}
+              >
+                <div className="relative hidden aspect-[1779/884] w-full overflow-hidden md:block">
+                  <Image
+                    src="/editorial/founder-portrait-wall.webp"
+                    alt="A gallery wall: Shelby Korpi’s portrait in a carved dark frame under a brass picture light, on ivory panelling above a green wainscot, with a leather bench beneath."
+                    fill
+                    loading="lazy"
+                    sizes="100vw"
+                    className="object-cover transition-transform duration-700 group-hover:scale-[1.01]"
+                  />
+                </div>
+                <div className="relative aspect-[712/884] w-full overflow-hidden md:hidden">
+                  <Image
+                    src="/editorial/founder-portrait-wall-m.webp"
+                    alt="Shelby Korpi’s portrait in a carved dark frame under a brass picture light, hung on a gallery wall above a leather bench."
+                    fill
+                    loading="lazy"
+                    sizes="100vw"
+                    className="object-cover"
+                  />
+                </div>
+
+                {/* the placard */}
+                <div className="shell mt-9 text-center">
+                  <p className="eyebrow text-bronze-ink">
+                    The first profile · {featured.role}
+                  </p>
+                  <h3 className="mt-3 font-serif text-[clamp(2rem,4vw,3rem)] leading-none text-charcoal transition-colors group-hover:text-bronze-ink">
+                    {featured.name}
+                  </h3>
+                  <p className="mx-auto mt-3 max-w-md text-sm leading-relaxed text-charcoal/80">
+                    {featured.building}
+                  </p>
+                  <span className="link-underline mt-5 inline-block text-charcoal">
+                    Read her story <span aria-hidden>↗</span>
+                  </span>
+                </div>
+              </Link>
+            )}
 
             {otherProfiles.length > 0 && (
               <div className="shell">

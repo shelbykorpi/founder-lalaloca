@@ -17,6 +17,11 @@ date · agent · what changed · what was left alone · anything unpushed.
   will the box customers actually receive say? If it says Extreme
   Moisture Blend, add an FAQ explaining it before anyone asks; if
   custom artwork is coming, say nothing and swap the photo when real.
+- Also: the campaign door portrait (blush doors, brass F, woman in the
+  cream suit — same generated woman as the homepage hero) added to the
+  right column above the ingredient list, full column width, honest alt,
+  no caption (the page headline already carries the line). File:
+  public/editorial/founder-collection-door.webp, supplied 19 Aug.
 - Left alone: buy module, preorder note, facts, everything else.
 
 

@@ -229,6 +229,24 @@ export default function FounderCollectionPage() {
               ))}
             </ol>
 
+            {/* The campaign door, between the routine and the fine print.
+                Same doors as the homepage hero — blush, brass F on each
+                leaf — seen from inside the atelier. Supplied 19 Aug 2026.
+                No caption: the page's own headline ("The room is easy to
+                enter. Harder to hold.") already says the sentence this
+                picture is showing. */}
+            <figure className="mt-12 border-t border-charcoal/12 pt-8">
+              <Image
+                src="/editorial/founder-collection-door.webp"
+                alt="A woman in a cream suit with a deep green belt pushes open tall blush-pink double doors, a brass F on each leaf, into a dark atelier of shelved bottles under warm lamps."
+                width={1003}
+                height={1568}
+                loading="lazy"
+                sizes="(max-width: 1024px) 100vw, 40rem"
+                className="w-full"
+              />
+            </figure>
+
             <h3 className="eyebrow mt-12 text-bronze-ink">Ingredients</h3>
             {product.ingredients ? (
               <p className="mt-5 border-t border-charcoal/12 pt-5 text-sm leading-relaxed text-charcoal/80">

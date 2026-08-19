@@ -210,8 +210,29 @@ export default function FounderCollectionPage() {
             )}
           </div>
 
-          {/* ---- How to use, ingredients, questions ---- */}
-          <div className="max-w-prose">
+          {/* The campaign door — same doors as the homepage hero, blush
+              with a brass F on each leaf, seen from inside the atelier.
+              Supplied 19 Aug 2026. It sits in the first grid row beside
+              the product column, bottom-aligned (lg:self-end) so its
+              lower edge lands level with the purchase module opposite.
+              No caption: the page's headline already carries the line. */}
+          <figure className="max-w-[26rem] lg:self-end">
+            <Image
+              src="/editorial/founder-collection-door.webp"
+              alt="A woman in a cream suit with a deep green belt pushes open tall blush-pink double doors, a brass F on each leaf, into a dark atelier of shelved bottles under warm lamps."
+              width={1003}
+              height={1568}
+              loading="lazy"
+              sizes="(max-width: 1024px) 90vw, 26rem"
+              className="w-full"
+            />
+          </figure>
+
+          {/* ---- How to use, ingredients, questions ----
+              Explicitly second row, second column: the door holds the
+              first row, and the left column's empty run-out below the
+              buy module is the same white space the old layout had. */}
+          <div className="max-w-prose lg:col-start-2">
             <h3 className="eyebrow text-bronze-ink">How to use it</h3>
             <ol className="mt-5 space-y-5 border-t border-charcoal/12 pt-5">
               {product.howToUse.map((step, i) => (
@@ -228,24 +249,6 @@ export default function FounderCollectionPage() {
                 </li>
               ))}
             </ol>
-
-            {/* The campaign door, between the routine and the fine print.
-                Same doors as the homepage hero — blush, brass F on each
-                leaf — seen from inside the atelier. Supplied 19 Aug 2026.
-                No caption: the page's own headline ("The room is easy to
-                enter. Harder to hold.") already says the sentence this
-                picture is showing. */}
-            <figure className="mt-12 border-t border-charcoal/12 pt-8">
-              <Image
-                src="/editorial/founder-collection-door.webp"
-                alt="A woman in a cream suit with a deep green belt pushes open tall blush-pink double doors, a brass F on each leaf, into a dark atelier of shelved bottles under warm lamps."
-                width={1003}
-                height={1568}
-                loading="lazy"
-                sizes="(max-width: 1024px) 100vw, 40rem"
-                className="w-full"
-              />
-            </figure>
 
             <h3 className="eyebrow mt-12 text-bronze-ink">Ingredients</h3>
             {product.ingredients ? (

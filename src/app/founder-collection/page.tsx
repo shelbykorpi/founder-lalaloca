@@ -73,16 +73,32 @@ export default function FounderCollectionPage() {
       <section className="bg-cream" aria-labelledby="anchor-heading">
         <div className="shell grid gap-12 py-14 md:py-20 lg:grid-cols-[0.95fr_1fr] lg:gap-16">
           <div>
-            {/* The product itself, before the copy about it. Small on purpose
-                — this page is a column of facts, not a shop window. */}
-            <Image
-              src={product.bottle}
-              alt={product.bottleAlt}
-              width={203}
-              height={720}
-              priority
-              className="mb-8 h-56 w-auto md:h-64"
-            />
+            {/* The product as it photographs: bottle and carton, side by
+                side, supplied 19 Aug 2026. These replace the lone cutout
+                (still in founderCollection.ts as `bottle` for the bag).
+                The carton prints the supplier's own product name — EXTREME
+                MOISTURE BLEND — because that is what the first run's box
+                says; the alt text reads it out rather than papering over
+                it. */}
+            <div className="mb-8 grid grid-cols-2 gap-3">
+              <Image
+                src="/products/hold-the-room-bottle-studio.webp"
+                alt="The Hold the Room airless pump bottle — black cap and base, frosted body printed FOUNDER BEAUTY — standing in warm side light."
+                width={1254}
+                height={1254}
+                priority
+                sizes="(max-width: 1024px) 50vw, 24rem"
+                className="w-full"
+              />
+              <Image
+                src="/products/hold-the-room-carton-studio.webp"
+                alt="The carton: FOUNDER BEAUTY above the supplier’s product name, Extreme Moisture Blend, net 30 ml / 1 US fl oz."
+                width={1254}
+                height={1254}
+                sizes="(max-width: 1024px) 50vw, 24rem"
+                className="w-full"
+              />
+            </div>
 
             <p className="eyebrow text-bronze-ink">02 · {product.archetype}</p>
             <h2

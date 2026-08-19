@@ -5,6 +5,21 @@ date · agent · what changed · what was left alone · anything unpushed.
 
 ---
 
+## 2026-08-19 · Claude (Cowork) — later, product photography
+- /founder-collection: the lone bottle cutout at the top of the product
+  column is replaced by a two-up gallery — bottle + carton studio shots
+  supplied by Shelby 19 Aug (AI-generated renders, blush set), saved as
+  public/products/hold-the-room-bottle-studio.webp and
+  hold-the-room-carton-studio.webp. The cutout PNG stays in
+  founderCollection.ts as `bottle` (the bag still uses it).
+- The carton image reads EXTREME MOISTURE BLEND — the supplier's name,
+  shown deliberately, alt text says so. OPEN QUESTION for Shelby: what
+  will the box customers actually receive say? If it says Extreme
+  Moisture Blend, add an FAQ explaining it before anyone asks; if
+  custom artwork is coming, say nothing and swap the photo when real.
+- Left alone: buy module, preorder note, facts, everything else.
+
+
 ## 2026-08-19 · Claude (Cowork) — Hold the Room goes on sale (preorder)
 
 Shelby's explicit call, 19 Aug: put Hold the Room on the FOUNDER

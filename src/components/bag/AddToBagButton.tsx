@@ -2,15 +2,35 @@
 
 import { useBag } from "./BagProvider";
 import { track } from "@/lib/analytics";
-import { formatPrice, SET, type Product } from "@/lib/products";
+import { formatPrice, SET } from "@/lib/products";
+
+/**
+ * Structural, not `Pick<Product, ...>`: the FOUNDER Collection lives in its
+ * own file with its own type, and both lines put things in the same bag. The
+ * button only ever needed these six fields.
+ */
+type BagProduct = {
+  slug: string;
+  name: string;
+  category: string;
+  price: number;
+  size: string;
+  bottle: string;
+};
 
 type Props = {
-  product: Pick<Product, "slug" | "name" | "category" | "price" | "size" | "bottle">;
+  product: BagProduct;
   className?: string;
   showPrice?: boolean;
   label?: string;
   /** Shopify says this variant cannot be sold. Pass availableForSale === false. */
   soldOut?: boolean;
+  /**
+   * Where the bag drawer links this line. Defaults to the LALALOCA product
+   * route; the FOUNDER Collection has no per-product page, so it passes its
+   * own path rather than pointing at a 404.
+   */
+  href?: string;
 };
 
 export function AddToBagButton({
@@ -19,6 +39,7 @@ export function AddToBagButton({
   showPrice = false,
   label = "Add to bag",
   soldOut = false,
+  href,
 }: Props) {
   const { add } = useBag();
 
@@ -43,7 +64,7 @@ export function AddToBagButton({
           price: product.price,
           size: product.size,
           image: product.bottle,
-          href: `/products/${product.slug}`,
+          href: href ?? `/products/${product.slug}`,
         });
         track("add_to_cart", {
           value: product.price,

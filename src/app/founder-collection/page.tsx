@@ -1,11 +1,18 @@
 import type { Metadata } from "next";
+import Image from "next/image";
 import Link from "next/link";
+import { AddToBagButton } from "@/components/bag/AddToBagButton";
 import { PageIntro } from "@/components/site/PageIntro";
 import { EmailSignup } from "@/components/site/EmailSignup";
-import { CONTACT_EMAIL, CONTACT_MAILTO } from "@/lib/brand";
+import { BRAND, CONTACT_EMAIL, CONTACT_MAILTO } from "@/lib/brand";
 import { FOUNDER_COLLECTION } from "@/lib/founderCollection";
 import { formatPrice } from "@/lib/products";
-import { JsonLd, breadcrumbSchema, faqSchema } from "@/lib/seo";
+import {
+  JsonLd,
+  breadcrumbSchema,
+  faqSchema,
+  founderProductSchema,
+} from "@/lib/seo";
 
 /**
  * THE FOUNDER COLLECTION.
@@ -16,13 +23,18 @@ import { JsonLd, breadcrumbSchema, faqSchema } from "@/lib/seo";
  * through one way is a corridor. So: editorial column, the facts in full, and
  * no theatre.
  *
- * NO BUY PATH YET. Every product here has `sellable: false` — there is no
- * Shopify variant, and the brand board's release gates (stability
- * documentation, component and leakage testing, regulatory artwork,
- * trademark clearance, fulfilment timing) are not all closed. The page says
- * so plainly rather than showing a button that cannot work. When the product
- * is live in Shopify: add the variant to shopifyLinks.ts, flip `sellable`,
- * and add the button — one commit, so the site and the till never disagree.
+ * ON SALE AS A PREORDER since 19 Aug 2026, per Shelby. Hold the Room has a
+ * Shopify variant wired in shopifyLinks.ts and `sellable: true`, so the buy
+ * module renders in place of the old "Not on sale yet" block.
+ *
+ * Both branches are kept. OPENING LINE and SIGN HERE will land here with
+ * `sellable: false` and must still get the honest waiting-room treatment
+ * rather than a dead button.
+ *
+ * THE PREORDER NOTE IS NOT DECORATION. Shopify holds 0 on hand and sells
+ * anyway, while /policies/shipping promises dispatch within one business day.
+ * `product.preorder` is the only thing on the page correcting that. If it
+ * ever renders empty, the button must not render either.
  */
 
 export const metadata: Metadata = {
@@ -43,6 +55,7 @@ export default function FounderCollectionPage() {
             { name: "The FOUNDER Collection", path: "/founder-collection" },
           ]),
           faqSchema(product.faqs),
+          ...(product.sellable ? [founderProductSchema(product)] : []),
         ]}
       />
 
@@ -60,6 +73,17 @@ export default function FounderCollectionPage() {
       <section className="bg-cream" aria-labelledby="anchor-heading">
         <div className="shell grid gap-12 py-14 md:py-20 lg:grid-cols-[0.95fr_1fr] lg:gap-16">
           <div>
+            {/* The product itself, before the copy about it. Small on purpose
+                — this page is a column of facts, not a shop window. */}
+            <Image
+              src={product.bottle}
+              alt={product.bottleAlt}
+              width={203}
+              height={720}
+              priority
+              className="mb-8 h-56 w-auto md:h-64"
+            />
+
             <p className="eyebrow text-bronze-ink">02 · {product.archetype}</p>
             <h2
               id="anchor-heading"
@@ -104,8 +128,49 @@ export default function FounderCollectionPage() {
               </div>
             </dl>
 
-            {/* The honest state of things, in place of a button that would
-                not reach a real checkout. */}
+            {/* Buy. The preorder line sits above the button, not under it —
+                a customer should read the exception before they commit, not
+                after. */}
+            {product.sellable && product.preorder && (
+              <div className="mt-9 max-w-md">
+                <div className="border-l-2 border-bronze bg-shell/60 py-5 pl-5">
+                  <p className="eyebrow text-bronze-ink">Preorder</p>
+                  <p className="mt-3 text-charcoal/85">{product.preorder}</p>
+                </div>
+                <AddToBagButton
+                  product={product}
+                  href="/founder-collection"
+                  className="btn btn-dark mt-6 w-full"
+                  label="Preorder"
+                  showPrice
+                />
+                <p className="mt-3 text-xs leading-relaxed text-charcoal/70">
+                  You’ll finish your order on Shopify’s secure checkout. Free US
+                  shipping. Cosmetic product. {BRAND.legal.name} is the seller
+                  of record. See{" "}
+                  {/* Plain inline underline, not .link-underline — that class
+                      is a 44px-tall uppercase CTA and breaks inside a
+                      sentence. */}
+                  <Link
+                    className="underline underline-offset-2 hover:opacity-70"
+                    href="/policies/shipping"
+                  >
+                    shipping
+                  </Link>{" "}
+                  and{" "}
+                  <Link
+                    className="underline underline-offset-2 hover:opacity-70"
+                    href="/policies/returns"
+                  >
+                    returns
+                  </Link>
+                  .
+                </p>
+              </div>
+            )}
+
+            {/* The honest state of things, for anything in the line that has
+                no checkout behind it yet. */}
             {!product.sellable && (
               <div className="mt-9 border-l-2 border-bronze bg-shell/60 py-5 pl-5">
                 <p className="eyebrow text-bronze-ink">Not on sale yet</p>

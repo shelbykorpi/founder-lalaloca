@@ -1,4 +1,5 @@
 import { BRAND, CONTACT_EMAIL, SITE } from "./brand";
+import type { FounderProduct } from "./founderCollection";
 import type { Product } from "./products";
 import type { ProductReviews } from "./reviews";
 
@@ -234,6 +235,57 @@ export function productSchema(product: Product, reviews?: ProductReviews | null)
       itemCondition: "https://schema.org/NewCondition",
       seller: { "@id": `${SITE.url}/#organization` },
       shippingDetails: US_SHIPPING,
+    },
+  };
+}
+
+/**
+ * The FOUNDER Collection product, which sells ahead of stock.
+ *
+ * Deliberately does NOT reuse US_SHIPPING. That object carries a 1–2 day
+ * handling time, true of the serums and false of a preorder; publishing it
+ * here would put a dispatch promise we cannot keep into Google's index.
+ * Shipping is still free and still 3–5 days in transit once it goes out, so
+ * those stay; handlingTime is omitted rather than guessed.
+ */
+export function founderProductSchema(product: FounderProduct) {
+  return {
+    "@context": "https://schema.org",
+    "@type": "Product",
+    "@id": `${SITE.url}/founder-collection/#${product.slug}`,
+    name: product.name,
+    description: product.what,
+    category: product.category,
+    image: `${SITE.url}${product.bottle}`,
+    sku: product.supplierSku,
+    brand: { "@id": `${SITE.url}/#organization` },
+    size: product.size,
+    audience: { "@type": "PeopleAudience", suggestedGender: "female" },
+    offers: {
+      "@type": "Offer",
+      price: product.price.toFixed(2),
+      priceCurrency: "USD",
+      url: `${SITE.url}/founder-collection`,
+      /* Preorder, not InStock: Shopify holds 0 on hand and oversells on
+         purpose. Claiming InStock here would be the same lie in a format
+         Google quotes back. Only rendered when `sellable` is true. */
+      availability: "https://schema.org/PreOrder",
+      itemCondition: "https://schema.org/NewCondition",
+      seller: { "@id": `${SITE.url}/#organization` },
+      shippingDetails: {
+        "@type": "OfferShippingDetails",
+        shippingRate: { "@type": "MonetaryAmount", value: "0", currency: "USD" },
+        shippingDestination: { "@type": "DefinedRegion", addressCountry: "US" },
+        deliveryTime: {
+          "@type": "ShippingDeliveryTime",
+          transitTime: {
+            "@type": "QuantitativeValue",
+            minValue: 3,
+            maxValue: 5,
+            unitCode: "DAY",
+          },
+        },
+      },
     },
   };
 }

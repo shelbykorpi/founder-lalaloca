@@ -22,13 +22,22 @@
  * directions are transcribed from it and must not be edited to read better.
  * Nothing here states a clinical result; appearance language only.
  *
- * NOT YET SELLABLE. There is no Shopify variant for this product, so there is
- * deliberately no add-to-bag path — see `sellable` below. Wire the variant in
- * shopifyLinks.ts and flip the flag in one commit, never separately.
+ * SELLABLE AS A PREORDER since 19 Aug 2026. The product exists in Shopify
+ * (variant 47361868169385, $34.00) and the variant is wired in
+ * shopifyLinks.ts, so `sellable` is true and the buy path renders.
+ *
+ * It is a PREORDER, not stock: Shopify holds 0 on hand and sells anyway
+ * ("continue selling when out of stock"). That contradicts the published
+ * shipping policy — /policies/shipping promises dispatch within one business
+ * day — so `preorder` below states the exception in plain words on the page
+ * itself. If the preorder note is ever removed, remove the buy path with it;
+ * a customer must never be able to buy this expecting next-day dispatch.
  */
 
+export type FounderProductSlug = "hold-the-room";
+
 export type FounderProduct = {
-  slug: string;
+  slug: FounderProductSlug;
   name: string;
   /** Exactly as it will print on the label. */
   category: string;
@@ -56,6 +65,9 @@ export type FounderProduct = {
   keyActive: string;
   /** Full INCI, transcribed verbatim from the supplier listing. */
   ingredients: string[] | null;
+  /** Cutout on transparent ground, matched to the LALALOCA bottle treatment. */
+  bottle: string;
+  bottleAlt: string;
   /** Manufacturing origin as stated by the supplier. */
   origin: string;
   howToUse: { step: string; detail: string }[];
@@ -67,6 +79,13 @@ export type FounderProduct = {
    * fulfilment timing). Controls whether a buy path renders at all.
    */
   sellable: boolean;
+  /**
+   * Set when the product sells ahead of stock. Rendered next to the buy
+   * button, never below the fold — it is the only thing correcting the
+   * one-business-day dispatch promise on /policies/shipping. Null means the
+   * product ships from stock like the serums do.
+   */
+  preorder: string | null;
 };
 
 export const FOUNDER_COLLECTION: FounderProduct[] = [
@@ -124,6 +143,9 @@ export const FOUNDER_COLLECTION: FounderProduct[] = [
       "Anthemis Nobilis Flower Oil",
     ],
     origin: "Made in North America.",
+    bottle: "/products/hold-the-room-bottle.png",
+    bottleAlt:
+      "The Hold the Room airless pump bottle, black cap and base with a frosted white body, FOUNDER BEAUTY on the front.",
     howToUse: [
       {
         step: "Clean skin first",
@@ -153,11 +175,17 @@ export const FOUNDER_COLLECTION: FounderProduct[] = [
         a: "The serums are 50 ml because most serums are sold at 30 ml. A moisturizer is a different amount of product per use — 30 ml is the standard size for a cream of this richness.",
       },
       {
+        q: "When does it ship?",
+        a: "Not immediately. This is a preorder against the first run, so it does not follow the one-business-day dispatch that applies to the serums. You will hear from us by email before it ships, and you can reply to that email to cancel if the timing no longer works.",
+      },
+      {
         q: "Is this LALALOCA?",
         a: "No. LALALOCA is the serum collection. This is the FOUNDER collection — the same house, a different line.",
       },
     ],
-    sellable: false,
+    sellable: true,
+    preorder:
+      "Hold the Room is not in stock yet. Ordering now reserves one from the first run — it does not go out in one business day the way the serums do, and we will email you before it ships.",
   },
 ];
 

@@ -14,13 +14,16 @@
  * can drift, and a customer who sees one price and is charged another is a
  * real problem. If you change a price in Shopify, change it here too:
  *
- *   products.ts  price: 38.00   ->  Shopify variant price
- *   products.ts  SET.price      ->  Shopify SerumSet price
+ *   products.ts           price: 38.00  ->  Shopify variant price
+ *   products.ts           SET.price     ->  Shopify SerumSet price
+ *   founderCollection.ts  price: 34.00  ->  Shopify variant price
  *
  * Verified against Shopify on 15 Aug 2026: serums $38.00, trio $98.00.
+ * Verified against Shopify on 19 Aug 2026: Hold the Room $34.00.
  */
 
 import type { ProductSlug } from "./products";
+import type { FounderProductSlug } from "./founderCollection";
 
 export const SHOPIFY_DOMAIN = "founderbeauty.myshopify.com";
 
@@ -29,11 +32,19 @@ export const SHOPIFY_DOMAIN = "founderbeauty.myshopify.com";
  * deleted and recreated. Read them any time from:
  *   https://founderbeauty.myshopify.com/products.json
  */
-export const VARIANT_ID: Record<ProductSlug | "all-three", string> = {
+export const VARIANT_ID: Record<
+  ProductSlug | FounderProductSlug | "all-three",
+  string
+> = {
   "thirst-trap": "47320268964009",
   "c-me-glow": "47320268898473",
   "bounce-back": "47320268996777",
   "all-three": "47320268931241",
+  /* The FOUNDER Collection. Sold with Shopify inventory at 0 and
+     "continue selling when out of stock" ON — a preorder, not a lie about
+     stock. If that setting is ever turned off, checkout starts refusing the
+     line and `sellable` in founderCollection.ts must go back to false. */
+  "hold-the-room": "47361868169385",
 };
 
 export type CheckoutLine = { id: string; quantity: number };

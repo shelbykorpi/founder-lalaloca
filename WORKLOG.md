@@ -5,6 +5,71 @@ date · agent · what changed · what was left alone · anything unpushed.
 
 ---
 
+## 2026-08-19 · Claude (Cowork) — Hold the Room goes on sale (preorder)
+
+Shelby's explicit call, 19 Aug: put Hold the Room on the FOUNDER
+Collection page and make it purchasable now. That overrides the standing
+AGENTS.md line "the three v2.14 pre-sale products do NOT appear on the
+site — production is not locked". It is a PREORDER, not stock.
+
+Shopify (done by hand in admin, not in this repo):
+- New product 9021783113897 / variant 47361868169385, $34.00, cost $8.90,
+  vendor FOUNDER, type Moisturizer, SKU 100249-BLNK-MB-03-02-HM-SM3D,
+  category Face Moisturizers. Two images from the Blanka listing.
+- Inventory 0 with "continue selling when out of stock" ON. Verified:
+  products.json reports available:true and
+  /cart/47361868169385:1 resolves to a live checkout.
+
+Repo, all in this one commit so the site and the till never disagree:
+- src/lib/shopifyLinks.ts — VARIANT_ID gains "hold-the-room", typed via a
+  new FounderProductSlug rather than widening to string.
+- src/lib/founderCollection.ts — sellable:true, plus `bottle`/`bottleAlt`
+  and a `preorder` string. New FAQ "When does it ship?".
+- src/app/founder-collection/page.tsx — buy module (bottle cutout,
+  preorder notice, Preorder · $34.00 button, policy links). The
+  !sellable branch is KEPT for OPENING LINE and SIGN HERE.
+- src/components/bag/AddToBagButton.tsx — product prop is now structural
+  (six fields) instead of Pick<Product,...>, so the FOUNDER line can use
+  it; optional `href` so the bag links to /founder-collection rather than
+  a /products/hold-the-room route that does not exist.
+- src/lib/seo.tsx — founderProductSchema(). Availability PreOrder, and
+  deliberately NOT US_SHIPPING: that object carries a 1–2 day handling
+  time which is false here.
+- public/products/hold-the-room-bottle.png — cutout cut from the Blanka
+  bottle shot, 203×720, matched to the LALALOCA bottle treatment.
+
+Verified: next build clean; /founder-collection screenshotted at 1440px
+and 390px; Preorder → bag → Checkout produces
+founderbeauty.myshopify.com/cart/47361868169385:1 and Shopify accepts it.
+
+NEEDS SHELBY, none of it done here:
+1. /policies/shipping still promises dispatch within one business day.
+   The preorder notice contradicts it on the product, which is the honest
+   minimum, but the policy page should carry a preorder clause. Not
+   written by an agent — that is a commercial term.
+2. The `preorder` wording is mine, not approved copy. It promises an
+   email before shipping. Change it or commit to sending it.
+3. No ship window anywhere, on purpose — no invented dates.
+4. The Shopify carton image still reads "Extreme Moisture Blend" (the
+   supplier's name). Not used on this site; it IS live on the Shopify
+   product. Pull it or replace it with real artwork.
+5. The Founder Concierge knowledge base has no idea the FOUNDER
+   Collection exists — it will not answer questions about this product.
+6. feed/products.xml is LALALOCA-only; Hold the Room is not in the
+   merchant feed.
+
+LEFT ALONE / WARNING for whoever lands the FOUND HER work above:
+- src/app/sitemap.ts is still uncommitted and still yours. Its diff
+  DELETED "/founder-collection" from staticPaths — almost certainly a
+  slip while rewriting that block. I restored the line in the working
+  tree and did NOT commit the file, because your publicationDate() change
+  is in it. Keep the restored line when you commit; the page it points at
+  now sells something.
+- This commit does carry the FOUND HER worklog entry above it, since the
+  log is one file. That code is still uncommitted in the tree.
+- Untouched: protected campaign language, the wordmark, charitable
+  wording, products.ts, _to_delete/, _candidates/.
+
 ## 2026-08-19 · Claude (Cowork)
 - Julie Schoener staged end-to-end, publication HELD on her approval:
   - src/lib/profiles.ts — her profile (verbatim answers, role line
@@ -33,8 +98,24 @@ date · agent · what changed · what was left alone · anything unpushed.
     moved to _to_delete/ — never referenced by any commit.
 - Airtable recFuOFm3d557fzI0: Draft updated to include the portrait in
   what Julie approves. Status still Drafting.
-- UNPUSHED — everything above. Push ONLY after Julie approves text +
-  artwork; then set approvedOn to her date and mark her record Approved.
+- PUBLISHED AHEAD OF APPROVAL — Shelby's explicit call, 19 Aug, after the
+  hold was restated. To keep the site honest while approval is pending:
+  - profiles.ts: isApproved() + publicationDate() helpers; Julie carries
+    approvedOn:"PENDING" + publishedOn:"2026-08-19".
+  - ProfileStory.tsx: the "published after she read and approved" line
+    renders ONLY when approvedOn is real; Julie's page says "Told in her
+    own words." until then.
+  - [slug]/page.tsx, feed route, sitemap.ts: use publicationDate() — no
+    more "Invalid Date" in RSS/sitemap from the PENDING sentinel.
+  - WHEN JULIE APPROVES: set approvedOn to her date, DELETE publishedOn,
+    mark Airtable recFuOFm3d557fzI0 Approved. One small commit.
+- Shelby pushed the wall commit BEFORE the safeguard files landed, so the
+  live site briefly carried the approval sentence + Invalid Date; the
+  safeguards ship in the next commit together with:
+- portrait.note (profiles.ts) — small print above Julie's "Read her
+  story" on the hub, both breakpoints: "The picture in the frame isn't
+  Julie — it's a painting we put together for her story." Shelby's
+  wording, lightly polished, her instruction 19 Aug.
 - Left alone: protected language, wordmark, charitable wording, all else.
 
 ## 2026-08-16 · Claude (Cowork)

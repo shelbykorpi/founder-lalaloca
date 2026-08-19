@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
-import { getProfile, profiles } from "@/lib/profiles";
+import { getProfile, profiles, publicationDate } from "@/lib/profiles";
 import { ProfileStory } from "@/components/found-her/ProfileStory";
 import { BRAND } from "@/lib/brand";
 import { JsonLd, articleSchema, breadcrumbSchema, personSchema } from "@/lib/seo";
@@ -46,7 +46,7 @@ export default async function ProfilePage({ params }: PageProps<"/found-her/[slu
             standfirst: profile.standfirst,
             path: `/found-her/${profile.slug}`,
             image: profile.portrait?.src,
-            published: profile.approvedOn,
+            published: publicationDate(profile),
           }),
           personSchema({
             name: profile.name,

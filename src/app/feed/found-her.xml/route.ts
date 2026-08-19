@@ -1,5 +1,5 @@
 import { BRAND, SITE } from "@/lib/brand";
-import { profiles } from "@/lib/profiles";
+import { profiles, publicationDate } from "@/lib/profiles";
 
 /**
  * FOUND HER as an RSS feed.
@@ -44,7 +44,7 @@ export function GET() {
       `      <link>${xml(`${SITE.url}/found-her/${profile.slug}`)}</link>`,
       `      <guid isPermaLink="true">${xml(`${SITE.url}/found-her/${profile.slug}`)}</guid>`,
       `      <description>${xml(profile.standfirst)}</description>`,
-      `      <pubDate>${rfc822(profile.approvedOn)}</pubDate>`,
+      `      <pubDate>${rfc822(publicationDate(profile))}</pubDate>`,
       `      <category>Profiles</category>`,
       "    </item>",
     ].join("\n"),

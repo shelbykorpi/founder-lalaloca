@@ -1,7 +1,7 @@
 import type { MetadataRoute } from "next";
 import { SITE } from "@/lib/brand";
 import { products } from "@/lib/products";
-import { profiles } from "@/lib/profiles";
+import { profiles, publicationDate } from "@/lib/profiles";
 import { policies } from "@/lib/content";
 
 export default function sitemap(): MetadataRoute.Sitemap {
@@ -39,7 +39,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
        on every deploy teaches crawlers to ignore the field. */
     ...profiles.map((profile) => ({
       url: `${SITE.url}/found-her/${profile.slug}`,
-      lastModified: profile.approvedOn,
+      lastModified: publicationDate(profile),
       changeFrequency: "yearly" as const,
       priority: 0.7,
     })),

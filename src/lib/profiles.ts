@@ -19,6 +19,10 @@ export type FoundHerProfile = {
     /** CSS aspect-ratio, e.g. "3 / 4". Defaults to the slot's own shape.
         Set it for framed artwork, which must never be cropped. */
     aspect?: string;
+    /** Small print rendered above her "Read her story" link wherever the
+        portrait stands in for her. Exists so a composed artwork is never
+        mistaken for a photograph of the woman herself. */
+    note?: string;
   };
   /** One line for the archive card */
   building: string;
@@ -26,9 +30,30 @@ export type FoundHerProfile = {
   standfirst: string;
   answers: { question: string; body: string[] }[];
   closing?: string;
-  /** The date she signed off on this text */
+  /** The date she signed off on this text, or "PENDING" until she has.
+      While it is "PENDING", her page drops the "published after she read
+      and approved the final text" line — the site never claims an
+      approval that hasn't happened. */
   approvedOn: string;
+  /** Only for a story published ahead of her sign-off (the founder's
+      call): the date it actually went live, so feeds, the sitemap and
+      article schema get a real date instead of the PENDING sentinel.
+      Remove it when approvedOn gets her real date. */
+  publishedOn?: string;
 };
+
+/** True once she has read and approved the final text. */
+export function isApproved(profile: FoundHerProfile): boolean {
+  return profile.approvedOn !== "PENDING";
+}
+
+/** The date machines cite: her approval date, or — for a story the
+    founder chose to publish ahead of sign-off — the day it went live. */
+export function publicationDate(profile: FoundHerProfile): string {
+  return isApproved(profile)
+    ? profile.approvedOn
+    : (profile.publishedOn ?? profile.approvedOn);
+}
 
 export const profiles: FoundHerProfile[] = [
   {
@@ -157,14 +182,19 @@ export const profiles: FoundHerProfile[] = [
       src: "/editorial/julie-schoener-frame.webp",
       alt: "A framed collage for Julie Schoener: a watercolour vision board \u2014 mountains at sunrise, friends laughing over coffee, a climber, hot-air balloons, handwritten notes from her story \u2014 in a carved green-and-gold frame with a brass nameplate carrying her name.",
       aspect: "3 / 4",
+      note: "The picture in the frame isn’t Julie — it’s a painting we put together for her story.",
     },
     building: "Stay Delusional — a brand for believing in the life before it exists.",
     standfirst:
       "She spent years on the path she was supposed to follow. Losing her mom changed how she looked at time — so she moved across the country, started over, and began building a life she was excited to wake up to.",
-    /* PENDING HER APPROVAL — do not publish until she has read this text as it
-       stands and said yes, and the date below is filled in from her reply.
+    /* PENDING HER APPROVAL. Shelby chose to publish ahead of Julie's
+       sign-off on 19 August 2026 — publishedOn records that date for
+       feeds and schema, and her page omits the "she read and approved"
+       line until approvedOn carries her real date. When Julie says yes:
+       put her date in approvedOn and delete publishedOn.
        Answers are verbatim from her submission of 15 August 2026. */
     approvedOn: "PENDING",
+    publishedOn: "2026-08-19",
     answers: [
       {
         question: "When did you find her?",

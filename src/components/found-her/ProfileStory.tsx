@@ -1,7 +1,7 @@
 import Image from "next/image";
 import Link from "next/link";
 import { BRAND } from "@/lib/brand";
-import type { FoundHerProfile } from "@/lib/profiles";
+import { isApproved, type FoundHerProfile } from "@/lib/profiles";
 
 /** The published-profile template: her portrait, then her answers, in her words. */
 export function ProfileStory({ profile }: { profile: FoundHerProfile }) {
@@ -47,9 +47,13 @@ export function ProfileStory({ profile }: { profile: FoundHerProfile }) {
               <p className="mt-6 max-w-md font-serif text-2xl leading-snug text-charcoal/90">
                 {profile.standfirst}
               </p>
+              {/* The approval sentence is a promise, so it only renders
+                  once it's true. A story published ahead of her sign-off
+                  says just the part that is already true. */}
               <p className="mt-8 max-w-md text-sm leading-relaxed text-charcoal/70">
-                Told in her own words, and published after she read and approved the
-                final text.
+                {isApproved(profile)
+                  ? "Told in her own words, and published after she read and approved the final text."
+                  : "Told in her own words."}
               </p>
             </div>
           </div>

@@ -162,6 +162,11 @@ export default function FoundHerPage() {
                         <p className="mx-auto mt-3 max-w-md text-sm leading-relaxed text-charcoal/80">
                           {profile.building}
                         </p>
+                        {profile.portrait?.note ? (
+                          <p className="mx-auto mt-4 max-w-md text-xs leading-relaxed text-charcoal/60">
+                            {profile.portrait.note}
+                          </p>
+                        ) : null}
                         <span className="link-underline mt-5 inline-block text-charcoal">
                           Read her story <span aria-hidden>↗</span>
                         </span>
@@ -209,6 +214,11 @@ export default function FoundHerPage() {
                         <p className="mx-auto mt-3 max-w-md text-sm leading-relaxed text-charcoal/80">
                           {profile.building}
                         </p>
+                        {profile.portrait?.note ? (
+                          <p className="mx-auto mt-4 max-w-md text-xs leading-relaxed text-charcoal/60">
+                            {profile.portrait.note}
+                          </p>
+                        ) : null}
                         <span className="link-underline mt-5 inline-block text-charcoal">
                           Read her story <span aria-hidden>↗</span>
                         </span>

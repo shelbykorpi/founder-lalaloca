@@ -71,8 +71,8 @@ export function Footer() {
           </div>
         </div>
         <p className="max-w-2xl text-[0.6875rem] leading-relaxed text-shell/55">
-          {BRAND.display} is the seller and the name on your order, receipt and
-          packaging. {BRAND.collection} is the name of the serum collection.
+          {BRAND.display} is the name on your order. {BRAND.collection} is the
+          name of the collection.
         </p>
       </div>
     </footer>

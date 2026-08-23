@@ -9,10 +9,10 @@ Three names, one company. Getting a search engine to understand that is the whol
 ```
 FOUNDER                        the master brand · the company · the name on the receipt
   └── The LALALOCA Collection  the skincare line · three serums
-        ├── Thirst Trap        8-Layer Hyaluronic Acid Serum · 50 ml · $39.99
-        ├── C Me Glow          Vitamin C Brightening Serum   · 50 ml · $39.99
-        ├── Bounce Back        Collagen Firming Serum        · 50 ml · $39.99
-        └── All three                                        · $98.99
+        ├── Thirst Trap        8-Layer Hyaluronic Acid Serum · 50 ml · $38.00
+        ├── C Me Glow          Vitamin C Brightening Serum   · 50 ml · $38.00
+        ├── Bounce Back        Collagen Firming Serum        · 50 ml · $38.00
+        └── All three                                        · $98.00
   └── FOUND HER                the stories platform · editorial
 ```
 

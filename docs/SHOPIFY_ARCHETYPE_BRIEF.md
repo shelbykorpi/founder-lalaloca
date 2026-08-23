@@ -69,10 +69,10 @@ Confirmed against the store on 9 August 2026.
 
 | Product | Handle | SKU | Variant ID | Price |
 |---|---|---|---|---|
-| Thirst Trap | `8-layer-hyaluronic-acid-serum-plumping-glow-drops-marine-collagen-dry-skin-hydration-50ml` | `ThirstTrap` | 47320268964009 | $39.99 |
-| C Me Glow | `c-me-glow-vitamin-c-brightening-serum-with-niacinamide-50ml-full-size` | `CmegLow` | 47320268898473 | $39.99 |
-| Bounce Back | `bounce-back-collagen-firming-serum-marine-face-neck-lifting-50ml` | `bounceback` | 47320268996777 | $39.99 |
-| Serum Trio | `lalaloca-serum-trio-hyaluronic-acid-vitamin-c-collagen-face-serums` | `SerumSet` | 47320268931241 | $98.99 |
+| Thirst Trap | `8-layer-hyaluronic-acid-serum-plumping-glow-drops-marine-collagen-dry-skin-hydration-50ml` | `ThirstTrap` | 47320268964009 | $38.00 |
+| C Me Glow | `c-me-glow-vitamin-c-brightening-serum-with-niacinamide-50ml-full-size` | `CmegLow` | 47320268898473 | $38.00 |
+| Bounce Back | `bounce-back-collagen-firming-serum-marine-face-neck-lifting-50ml` | `bounceback` | 47320268996777 | $38.00 |
+| Serum Trio | `lalaloca-serum-trio-hyaluronic-acid-vitamin-c-collagen-face-serums` | `SerumSet` | 47320268931241 | $98.00 |
 
 Current titles:
 

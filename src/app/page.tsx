@@ -3,6 +3,7 @@ import Link from "next/link";
 import { EntranceDoor } from "@/components/door/EntranceDoor";
 import { EmailSignup } from "@/components/site/EmailSignup";
 import { BRAND, HERO } from "@/lib/brand";
+import { formatPrice, products } from "@/lib/products";
 
 export default function HomePage() {
   return (
@@ -97,6 +98,45 @@ export default function HomePage() {
         <div className="mt-12">
           <EntranceDoor />
         </div>
+
+        {/* The three serums, visible on the homepage itself — before this
+            row a woman could read the whole page without seeing a product.
+            Name, approved label wording, price; the card is the link. */}
+        <div className="shell mt-14">
+          <ul className="grid gap-10 sm:grid-cols-3">
+            {products.map((product) => (
+              <li key={product.slug}>
+                <Link
+                  href={`/products/${product.slug}`}
+                  className="group block text-center"
+                >
+                  <span className="relative mx-auto block h-44 w-28 md:h-52 md:w-32">
+                    <Image
+                      src={product.bottle}
+                      alt={`The ${product.name} bottle.`}
+                      fill
+                      loading="lazy"
+                      sizes="128px"
+                      className="object-contain transition-transform duration-500 group-hover:scale-[1.04]"
+                    />
+                  </span>
+                  <span className="eyebrow mt-5 block text-bronze-ink">
+                    {product.archetype}
+                  </span>
+                  <span className="mt-2 block font-serif text-2xl leading-none text-charcoal transition-colors group-hover:text-bronze-ink">
+                    {product.name}
+                  </span>
+                  <span className="mt-2 block text-xs uppercase tracking-[0.14em] text-charcoal/70">
+                    {product.category}
+                  </span>
+                  <span className="mt-2 block text-sm text-charcoal">
+                    {formatPrice(product.price)}
+                  </span>
+                </Link>
+              </li>
+            ))}
+          </ul>
+        </div>
       </section>
 
       {/* ---------------- Brand belief ---------------- */}
@@ -106,9 +146,6 @@ export default function HomePage() {
           <p className="mt-6 max-w-xl text-shell/80">
             A company. A family. A body of work. A comeback. A louder voice. A life she
             chose for herself.
-          </p>
-          <p className="mt-6 font-serif text-2xl text-bronze">
-            Whatever you’re building, begin with you.
           </p>
         </div>
       </section>
@@ -129,8 +166,8 @@ export default function HomePage() {
                 {BRAND.campaign}
               </h2>
               <p className="mt-6 max-w-md text-charcoal/80">
-                Stories from women about what they started, survived, changed, finished,
-                and finally gave themselves credit for.
+                What they started, survived, changed, finished — and finally gave
+                themselves credit for.
               </p>
               <div className="mt-8 flex flex-col gap-3 sm:flex-row">
                 <Link href="/found-her#share" className="btn btn-dark">

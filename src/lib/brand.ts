@@ -34,7 +34,7 @@ export const BRAND = {
    */
   legal: {
     name: "FOUNDER",
-    note: "FOUNDER is the trading name on your order, receipt and packaging. LALALOCA is the name of the serum collection.",
+    note: "FOUNDER is the name on your order. LALALOCA is the name of the collection.",
   },
 
   /** Structural line — what the customer needs to understand in one read. */

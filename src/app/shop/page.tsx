@@ -5,6 +5,7 @@ import { DoorCard } from "@/components/door/DoorCard";
 import { ScrollDoors } from "@/components/door/ScrollDoors";
 import { AddSetButton } from "@/components/bag/AddToBagButton";
 import { PageIntro } from "@/components/site/PageIntro";
+import { EmailSignup } from "@/components/site/EmailSignup";
 import { TrackListView } from "@/components/site/TrackListView";
 import { BRAND, CONTACT_EMAIL, CONTACT_MAILTO } from "@/lib/brand";
 import { formatPrice, products, SET } from "@/lib/products";
@@ -35,62 +36,19 @@ export default function ShopPage() {
           breadcrumbSchema([{ name: "Shop", path: "/shop" }]),
         ]}
       />
+      {/* Four words above the grid (copy-cut spec, 23 Aug 2026 — category
+          median is five). Everything that used to sit here still exists:
+          StandUp for Kids moved below the trio, the identity band collapsed
+          into the title and the cards. A shopper sees a product on the first
+          screen. */}
       <PageIntro
         eyebrow="The LALALOCA Collection"
-        title="Open the door. You’re already in the room."
+        title="Three serums. Three energies."
       >
         <Link href="/find-your-serum" className="link-underline mt-4 text-charcoal">
           Answer three questions instead <span aria-hidden>↗</span>
         </Link>
       </PageIntro>
-
-      {/* ---------------- The collaboration ----------------
-          Why the nav calls this page LALALOCA × StandUp for Kids. The words
-          are the Young Founders' Room's own — the collection copy and the
-          commitment line are reused verbatim from that page, not rewritten,
-          because the 20%-of-net-profits wording is approved as written and
-          must be identical everywhere it appears. */}
-      <section
-        id="standup-for-kids"
-        className="bg-founder-green py-16 text-shell md:py-20"
-        aria-labelledby="standup-heading"
-      >
-        <div className="shell grid items-center gap-10 lg:grid-cols-[1.3fr_1fr]">
-          <div>
-            <p className="eyebrow text-champagne">LALALOCA × StandUp for Kids</p>
-            <h2
-              id="standup-heading"
-              className="mt-4 max-w-[24ch] font-serif text-[clamp(1.5rem,3vw,2.25rem)] leading-snug"
-            >
-              Part of this collection was built inside the StandUp for Kids
-              Tucson Outreach Center.
-            </h2>
-            <div className="mt-5 max-w-prose space-y-4 text-shell/85">
-              <p>
-                Young people tried products, compared packaging, shared honest
-                opinions, and helped make real decisions about what LALALOCA
-                would become. From the very beginning, these young people
-                helped shape the LALALOCA Collection.
-              </p>
-            </div>
-            <Link
-              href="/young-founders-room"
-              className="mt-7 inline-flex min-h-11 items-center border-b border-champagne/60 text-[0.6875rem] uppercase tracking-[0.22em] text-champagne transition-colors hover:border-champagne"
-            >
-              Step into the Young Founders&rsquo; Room
-            </Link>
-          </div>
-
-          <p className="font-serif text-2xl leading-snug text-rose md:text-3xl">
-            20% of LALALOCA net profits.
-            <br />
-            Every month.
-            <br />
-            Directly to StandUp for Kids Tucson.
-          </p>
-        </div>
-      </section>
-
 
       <TrackListView
         items={products}
@@ -98,32 +56,7 @@ export default function ShopPage() {
         listName="The LALALOCA Collection"
       />
 
-      {/* ---------------- The three identities ----------------
-          Deliberately placed above the grid and deliberately small. Its job is
-          to hand the shopper a way of choosing that is faster than reading
-          three ingredient lists — not to become the page. The mapping from
-          identity to product name is explicit, because an identity band that
-          leaves you guessing which bottle is which is decoration. */}
-      <section className="bg-cream pt-8" aria-labelledby="identities-heading">
-        <div className="shell">
-          <h2 id="identities-heading" className="font-serif text-[clamp(1.25rem,2.2vw,1.75rem)] leading-snug text-charcoal">
-            Three serums. Three energies. One woman building what’s next.
-          </h2>
-          <ul className="mt-7 grid gap-x-8 gap-y-6 border-t border-charcoal/12 pt-6 sm:grid-cols-3">
-            {products.map((product) => (
-              <li key={product.slug}>
-                <p className="eyebrow text-bronze-ink">{product.archetype}</p>
-                <p className="mt-2 font-serif text-xl leading-none text-charcoal">
-                  {product.name}
-                </p>
-                <p className="mt-2 text-sm text-charcoal/80">{product.archetypeFor}</p>
-              </li>
-            ))}
-          </ul>
-        </div>
-      </section>
-
-      <section className="section bg-cream pt-10" aria-label="Serums">
+      <section className="section bg-cream pt-2" aria-label="Serums">
         <ScrollDoors className="shell grid gap-x-8 gap-y-14 md:grid-cols-2 lg:grid-cols-3">
           {products.map((product, index) => (
             <DoorCard
@@ -134,71 +67,6 @@ export default function ShopPage() {
             />
           ))}
         </ScrollDoors>
-      </section>
-
-      {/* ---------------- Comparison ---------------- */}
-      <section className="section-tight bg-shell" aria-labelledby="compare-heading">
-        <div className="shell">
-          <h2 id="compare-heading" className="subhead text-charcoal">
-            Side by side
-          </h2>
-          <div className="mt-8 overflow-x-auto">
-            <table className="w-full min-w-[44rem] border-collapse text-left text-sm">
-              <caption className="sr-only">
-                The three LALALOCA serums compared by what they are for, when to use
-                them, where they sit in a routine, size and price.
-              </caption>
-              <thead>
-                <tr className="border-b border-charcoal/20">
-                  <th scope="col" className="py-4 pr-6 eyebrow font-normal text-charcoal/70">
-                    Serum
-                  </th>
-                  <th scope="col" className="py-4 pr-6 eyebrow font-normal text-charcoal/70">
-                    Use it if
-                  </th>
-                  <th scope="col" className="py-4 pr-6 eyebrow font-normal text-charcoal/70">
-                    When
-                  </th>
-                  <th scope="col" className="py-4 pr-6 eyebrow font-normal text-charcoal/70">
-                    Key active on the label
-                  </th>
-                  <th scope="col" className="py-4 eyebrow font-normal text-charcoal/70">
-                    Size · price
-                  </th>
-                </tr>
-              </thead>
-              <tbody>
-                {products.map((product) => (
-                  <tr key={product.slug} className="border-b border-charcoal/12 align-top">
-                    <th scope="row" className="py-5 pr-6 font-serif text-2xl font-normal">
-                      <Link
-                        href={`/products/${product.slug}`}
-                        className="text-charcoal hover:text-bronze-ink"
-                      >
-                        {product.name}
-                      </Link>
-                      <span className="mt-1 block text-xs uppercase tracking-[0.14em] text-charcoal/70">
-                        {product.category}
-                      </span>
-                    </th>
-                    <td className="py-5 pr-6 text-charcoal/80">{product.need}</td>
-                    <td className="py-5 pr-6 text-charcoal/80">{product.timing}</td>
-                    <td className="py-5 pr-6 text-charcoal/80">{product.keyActive}</td>
-                    <td className="py-5 text-charcoal/80">
-                      {product.size}
-                      <br />
-                      {formatPrice(product.price)}
-                    </td>
-                  </tr>
-                ))}
-              </tbody>
-            </table>
-          </div>
-          <p className="mt-5 text-xs leading-relaxed text-charcoal/70">
-            Key actives are listed exactly as they appear on the approved label. Full
-            INCI lists ship with every carton and are available on request.
-          </p>
-        </div>
       </section>
 
       {/* ---------------- All three: the FOUNDER parlour ----------------
@@ -283,6 +151,117 @@ export default function ShopPage() {
         </div>
       </section>
 
+      {/* ---------------- Comparison ---------------- */}
+      <section className="section-tight bg-shell" aria-labelledby="compare-heading">
+        <div className="shell">
+          <h2 id="compare-heading" className="subhead text-charcoal">
+            Side by side
+          </h2>
+          <div className="mt-8 overflow-x-auto">
+            <table className="w-full min-w-[44rem] border-collapse text-left text-sm">
+              <caption className="sr-only">
+                The three LALALOCA serums compared by what they are for, when to use
+                them, where they sit in a routine, size and price.
+              </caption>
+              <thead>
+                <tr className="border-b border-charcoal/20">
+                  <th scope="col" className="py-4 pr-6 eyebrow font-normal text-charcoal/70">
+                    Serum
+                  </th>
+                  <th scope="col" className="py-4 pr-6 eyebrow font-normal text-charcoal/70">
+                    Use it if
+                  </th>
+                  <th scope="col" className="py-4 pr-6 eyebrow font-normal text-charcoal/70">
+                    When
+                  </th>
+                  <th scope="col" className="py-4 pr-6 eyebrow font-normal text-charcoal/70">
+                    Key active on the label
+                  </th>
+                  <th scope="col" className="py-4 eyebrow font-normal text-charcoal/70">
+                    Size · price
+                  </th>
+                </tr>
+              </thead>
+              <tbody>
+                {products.map((product) => (
+                  <tr key={product.slug} className="border-b border-charcoal/12 align-top">
+                    <th scope="row" className="py-5 pr-6 font-serif text-2xl font-normal">
+                      <Link
+                        href={`/products/${product.slug}`}
+                        className="text-charcoal hover:text-bronze-ink"
+                      >
+                        {product.name}
+                      </Link>
+                      <span className="mt-1 block text-xs uppercase tracking-[0.14em] text-charcoal/70">
+                        {product.category}
+                      </span>
+                    </th>
+                    <td className="py-5 pr-6 text-charcoal/80">{product.need}</td>
+                    <td className="py-5 pr-6 text-charcoal/80">{product.timing}</td>
+                    <td className="py-5 pr-6 text-charcoal/80">{product.keyActive}</td>
+                    <td className="py-5 text-charcoal/80">
+                      {product.size}
+                      <br />
+                      {formatPrice(product.price)}
+                    </td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </div>
+          <p className="mt-5 text-xs leading-relaxed text-charcoal/70">
+            Key actives are listed exactly as they appear on the approved label. Full
+            INCI lists ship with every carton and are available on request.
+          </p>
+        </div>
+      </section>
+
+      {/* ---------------- The collaboration ----------------
+          Why the nav calls this page LALALOCA × StandUp for Kids. The words
+          are the Young Founders' Room's own — the collection copy and the
+          commitment line are reused verbatim from that page, not rewritten,
+          because the 20%-of-net-profits wording is approved as written and
+          must be identical everywhere it appears. */}
+      <section
+        id="standup-for-kids"
+        className="bg-founder-green py-16 text-shell md:py-20"
+        aria-labelledby="standup-heading"
+      >
+        <div className="shell grid items-center gap-10 lg:grid-cols-[1.3fr_1fr]">
+          <div>
+            <p className="eyebrow text-champagne">LALALOCA × StandUp for Kids</p>
+            <h2
+              id="standup-heading"
+              className="mt-4 max-w-[24ch] font-serif text-[clamp(1.5rem,3vw,2.25rem)] leading-snug"
+            >
+              Part of this collection was built inside the StandUp for Kids
+              Tucson Outreach Center.
+            </h2>
+            <div className="mt-5 max-w-prose space-y-4 text-shell/85">
+              <p>
+                At the Tucson Outreach Center, young people tried products,
+                compared packaging, gave honest opinions, and made real
+                decisions. They helped shape LALALOCA from the beginning.
+              </p>
+            </div>
+            <Link
+              href="/young-founders-room"
+              className="mt-7 inline-flex min-h-11 items-center border-b border-champagne/60 text-[0.6875rem] uppercase tracking-[0.22em] text-champagne transition-colors hover:border-champagne"
+            >
+              Step into the Young Founders&rsquo; Room
+            </Link>
+          </div>
+
+          <p className="font-serif text-2xl leading-snug text-rose md:text-3xl">
+            20% of LALALOCA net profits.
+            <br />
+            Every month.
+            <br />
+            Directly to StandUp for Kids Tucson.
+          </p>
+        </div>
+      </section>
+
       {/* ---------------- The close ----------------
           The last thing said about the collection, and the only place on this
           page the campaign line appears. Set stacked on two lines because the
@@ -306,8 +285,8 @@ export default function ShopPage() {
           <div>
             <h2 className="font-serif text-2xl text-charcoal">Shipping</h2>
             <p className="mt-2 text-sm text-charcoal/80">
-              Free US shipping on every order, 3–5 business days. Express is $15 and
-              takes 1–2. Packed and sent from Arizona.
+              Free US shipping, 3–5 business days. Express $15, 1–2 days. From
+              Arizona.
             </p>
             <Link href="/policies/shipping" className="link-underline mt-2 text-charcoal">
               Details <span aria-hidden>↗</span>
@@ -320,8 +299,7 @@ export default function ShopPage() {
               <a href={CONTACT_MAILTO} className="link-underline text-charcoal">
                 {CONTACT_EMAIL}
               </a>{" "}
-              and we’ll sort it out. Opened cosmetics have rules; a genuine problem is
-              still our problem.
+              and we’ll sort it out. A genuine problem is our problem.
             </p>
             <Link href="/policies/returns" className="link-underline mt-2 text-charcoal">
               Details <span aria-hidden>↗</span>
@@ -336,6 +314,16 @@ export default function ShopPage() {
           </div>
         </div>
       </section>
+      {/* ---------------- Founding List ---------------- */}
+      <section className="section-tight bg-founder-green py-14 md:py-16">
+        <div className="shell">
+          <div className="max-w-xl">
+            <h2 className="headline text-balance text-cream">Enter the Founding List.</h2>
+            <EmailSignup tone="green" source="shop" />
+          </div>
+        </div>
+      </section>
+
     </>
   );
 }

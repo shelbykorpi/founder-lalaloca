@@ -283,7 +283,7 @@ export default function FounderCollectionPage() {
         <div className="shell max-w-3xl">
           <p className="eyebrow text-blush">The FOUNDER Collection</p>
           <h2 className="mt-5 font-serif text-3xl leading-tight md:text-4xl">
-            Three named steps. One of them exists.
+            Three steps. One is open. Two are being made properly.
           </h2>
           <p className="mt-6 max-w-prose text-cream/85">
             The collection is written as three: an opener, an anchor, a

@@ -249,3 +249,23 @@ Note for copy: the INCI includes **fragrance** and **petrolatum**. The
 brand's serum copy leans on gentleness and patch testing, so the moisturizer
 says plainly that it is fragranced rather than leaving a customer to discover
 it. That FAQ is deliberate — do not soften it.
+
+
+## Amendment — one price, 23 August 2026
+
+The board's $39.99 serum / $98.99 trio pricing is superseded. Shelby set the
+price at **$38.00 per serum and $98.00 for the trio** on 23 August 2026 —
+matching what Shopify has charged since at least 15 August and what every
+customer has actually paid. Shopify is the single source of truth for price;
+site copy and repo docs no longer carry their own figures, and any document
+still showing $39.99/$98.99 is stale, not authoritative.
+
+## Amendment — Hold the Room preorder, decided 19 August, reaffirmed 23 August 2026
+
+The paragraph above ("Still open before it can be sold") is overridden by a
+founder decision: Shelby chose on 19 August 2026 to sell Hold the Room as a
+preorder with the verification gates still open, and reaffirmed that on
+23 August when asked directly. The page carries a preorder notice above the
+button correcting the shipping promise. The gates themselves remain open work,
+not cancelled work: stability documentation, component and leakage testing,
+regulatory artwork, trademark clearance, fulfilment timing.

@@ -5,24 +5,35 @@ date · agent · what changed · what was left alone · anything unpushed.
 
 ---
 
-## 2026-08-19 · Claude (Cowork) — later, product photography
-- /founder-collection: the lone bottle cutout at the top of the product
-  column is replaced by a two-up gallery — bottle + carton studio shots
-  supplied by Shelby 19 Aug (AI-generated renders, blush set), saved as
-  public/products/hold-the-room-bottle-studio.webp and
-  hold-the-room-carton-studio.webp. The cutout PNG stays in
-  founderCollection.ts as `bottle` (the bag still uses it).
-- The carton image reads EXTREME MOISTURE BLEND — the supplier's name,
-  shown deliberately, alt text says so. OPEN QUESTION for Shelby: what
-  will the box customers actually receive say? If it says Extreme
-  Moisture Blend, add an FAQ explaining it before anyone asks; if
-  custom artwork is coming, say nothing and swap the photo when real.
-- Also: the campaign door portrait (blush doors, brass F, woman in the
-  cream suit — same generated woman as the homepage hero) added to the
-  right column above the ingredient list, full column width, honest alt,
-  no caption (the page headline already carries the line). File:
-  public/editorial/founder-collection-door.webp, supplied 19 Aug.
-- Left alone: buy module, preorder note, facts, everything else.
+## 2026-08-23 · Claude (Cowork) — copy cut, phase 1
+Per the copy-cut doc (claude/site-copy-cut-and-product-template.md in the
+Claude project) and Shelby's three decisions today: price is $38/$98,
+copy cuts ship first, the Hold the Room preorder stands.
+- PRICE: no live bug existed — Shopify and the site both charge $38/$98
+  (verified against the public storefront JSON today). The $39.99/$98.99
+  survived only in docs: SHOPIFY_ARCHETYPE_BRIEF.md and
+  BRAND_ENTITY_AND_CHANNEL_MAP.md corrected, BRAND_BOARD.md amended twice
+  (price decision + HTR preorder override) so no agent "fixes" it back.
+- HOME: three-up product row (bottle · archetype · name · label wording ·
+  price, whole card links) after the entrance; brand statement drops
+  "Whatever you're building, begin with you."; Found Her para 17→13.
+- SHOP reordered: 4-word title "Three serums. Three energies." → grid →
+  House Trio → comparison → StandUp for Kids (body 40→28, PROFIT LINE
+  UNTOUCHED) → close → shipping (→12w) / returns (→20w) / claims
+  (unchanged, compliance) → new Founding List band (source="shop").
+  Identity band removed — its headline became the page title.
+- PDP: products.ts gains hook (≤25w) + panels {who,how,actives} (26–33w
+  each; the cosmetic-claims sentence kept verbatim in who). Page renders
+  hook instead of hero+what, three accordion panels instead of four full
+  sections, FAQs deleted (answers live in the panels), faqSchema removed
+  with them. hero/what/who/moment/faqs fields kept — other pages use them.
+- EmailSignup blurb 35→23; footer line 22→14 (brand.ts note matched).
+- FOUNDER Collection: "Three named steps. One of them exists." → "Three
+  steps. One is open. Two are being made properly."
+- NOT DONE (phase 2, needs Shelby in Shopify admin): Storefront API token,
+  founder.* metafields, /collections/[handle] + /products/[handle] from
+  Shopify, webhooks + revalidate, waitlist cards for Opening Line / Sign
+  Here. Copy for the panels should migrate INTO Shopify metafields then.
 
 
 ## 2026-08-19 · Claude (Cowork) — Hold the Room goes on sale (preorder)

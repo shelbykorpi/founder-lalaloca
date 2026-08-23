@@ -99,9 +99,8 @@ export function EmailSignup({
         {heading}
       </label>
       <p className={`mt-2 text-sm ${green ? "text-cream/80" : dark ? "text-shell/70" : "text-charcoal/75"}`}>
-        Be first through the door. Which serum to start with, new stories as
-        they’re published, and when something is back in stock. A few emails a
-        month, not a few a week.
+        Be first through the door. Where to start, what’s back, what we’ve
+        published. A few emails a month, not a few a week.
       </p>
 
       {/* Honeypot. Hidden from sight, hidden from screen readers, skipped by

@@ -59,7 +59,14 @@ export type CheckoutLine = { id: string; quantity: number };
 export function cartPermalink(lines: CheckoutLine[]): string | null {
   const parts = lines
     .map((line) => {
-      const variant = VARIANT_ID[line.id as keyof typeof VARIANT_ID];
+      /* Two shapes of id share the bag: a slug from the maps above, or —
+         for self-publishing catalog products — the numeric Shopify variant
+         id itself. A raw variant id needs no map entry, which is the whole
+         point: a product added in Shopify admin can be bought without
+         anyone editing this file. */
+      const variant =
+        VARIANT_ID[line.id as keyof typeof VARIANT_ID] ??
+        (/^\d{8,}$/.test(line.id) ? line.id : null);
       if (!variant) return null;
       const quantity = Math.max(1, Math.min(20, Math.floor(line.quantity)));
       return `${variant}:${quantity}`;

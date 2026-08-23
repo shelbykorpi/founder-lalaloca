@@ -5,6 +5,39 @@ date · agent · what changed · what was left alone · anything unpushed.
 
 ---
 
+## 2026-08-23 · Claude (Cowork) — self-publishing catalog, phase 2
+A product created in Shopify admin now publishes itself: card on
+/founder-collection and a page at /products/<handle>, within a minute,
+no deploy. Dark until Shelby does docs/SELF_PUBLISHING_SETUP.md (~10 min:
+read_products scope on the existing app, founder-collection collection,
+eight founder.* metafield definitions, optional webhooks).
+- src/lib/catalog.ts — Admin GraphQL readers (reuses shopifyAdmin token
+  machinery; new exports adminGraphql/hasAdminCredentials), 60s cache
+  under tag "shopify-catalog", inert without creds, null on any failure —
+  every caller has a local fallback. Missing descriptor/hook logs loudly
+  but renders (deliberately softer than the spec's build-fail).
+- src/components/shop/CatalogCard.tsx — the six-element card + the
+  WaitlistCard (name + categorical descriptor + Join the waitlist; no
+  price/formula/claim — stays inside the board's rule).
+- src/components/shop/CatalogProductPage.tsx — the fixed-stack PDP
+  template rendered from Shopify data + metafields; empty panel = no
+  panel, nothing invented.
+- /products/[slug] — unknown slugs fall through to the catalog by handle
+  (dynamicParams); og-image already brand-falls-back for unknown slugs.
+- /founder-collection — "The collection" shelf: Shopify cards when
+  reachable, else local Hold the Room card; waitlist cards for Opening
+  Line and Sign Here auto-retire when a real product with that name
+  appears. New #waitlist signup band (source="waitlist", added to
+  subscribe route's allowlist + EmailSignup type).
+- /api/revalidate — POST ?secret= (REVALIDATE_SECRET or
+  SHOPIFY_CLIENT_SECRET) bursts the catalog tag; for Shopify
+  products/create+update webhooks. 60s ISR works without it.
+- cartPermalink now accepts a raw numeric variant id alongside mapped
+  slugs — catalog products are buyable with no edit to shopifyLinks.ts.
+- next.config.ts allows cdn.shopify.com through the image optimizer.
+- scripts/check-prices.mjs + "prebuild": build fails loudly on Vercel if
+  a repo price drifts from live Shopify; offline/unreachable = warn+pass.
+
 ## 2026-08-23 · Claude (Cowork) — copy cut, phase 1
 Per the copy-cut doc (claude/site-copy-cut-and-product-template.md in the
 Claude project) and Shelby's three decisions today: price is $38/$98,

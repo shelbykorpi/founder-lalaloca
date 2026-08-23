@@ -26,7 +26,7 @@ export function EmailSignup({
   tone?: "dark" | "light" | "green";
   heading?: string;
   /** Becomes a Shopify tag, so campaigns can be segmented by where someone joined. */
-  source?: "footer" | "found-her" | "shop" | "page" | "home";
+  source?: "footer" | "found-her" | "shop" | "page" | "home" | "waitlist";
 }) {
   const id = useId();
   const [email, setEmail] = useState("");

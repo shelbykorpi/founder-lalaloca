@@ -31,7 +31,7 @@ export const runtime = "nodejs";
 export const dynamic = "force-dynamic";
 
 /** Where on the site the signup happened. Becomes a Shopify tag. */
-const ALLOWED_SOURCES = new Set(["footer", "found-her", "shop", "page", "home"]);
+const ALLOWED_SOURCES = new Set(["footer", "found-her", "shop", "page", "home", "waitlist"]);
 
 export async function POST(request: Request) {
   let body: Record<string, unknown>;

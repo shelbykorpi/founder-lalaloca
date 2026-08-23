@@ -96,6 +96,9 @@ const nextConfig: NextConfig = {
      * browsers without AVIF support silently get WebP.
      */
     formats: ["image/avif", "image/webp"],
+    /* Catalog products photograph in Shopify and serve from Shopify's CDN;
+       the optimizer needs the host allowlisted or every card 500s. */
+    remotePatterns: [{ protocol: "https" as const, hostname: "cdn.shopify.com" }],
     /* Optimised variants are cached for a year rather than the 60-second
        default, so a returning visitor and a repeat crawl do not pay to
        re-encode an image that has not changed. */

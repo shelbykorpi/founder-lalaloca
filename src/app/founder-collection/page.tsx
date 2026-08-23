@@ -6,6 +6,8 @@ import { PageIntro } from "@/components/site/PageIntro";
 import { EmailSignup } from "@/components/site/EmailSignup";
 import { BRAND, CONTACT_EMAIL, CONTACT_MAILTO } from "@/lib/brand";
 import { FOUNDER_COLLECTION } from "@/lib/founderCollection";
+import { fetchCollectionProducts, type CatalogProduct } from "@/lib/catalog";
+import { CatalogCard, WaitlistCard } from "@/components/shop/CatalogCard";
 import { formatPrice } from "@/lib/products";
 import {
   JsonLd,
@@ -44,8 +46,50 @@ export const metadata: Metadata = {
   alternates: { canonical: "/founder-collection" },
 };
 
-export default function FounderCollectionPage() {
+export default async function FounderCollectionPage() {
   const product = FOUNDER_COLLECTION[0];
+
+  /* The self-publishing shelf. When the founder-collection collection in
+     Shopify is reachable, its products are the cards; add one there and it
+     appears here within a minute. Until then the shelf falls back to Hold
+     the Room built from local data, so this page never renders empty. */
+  const catalog = await fetchCollectionProducts("founder-collection");
+  const cards: CatalogProduct[] =
+    catalog && catalog.length > 0
+      ? catalog
+      : [
+          {
+            handle: "founder-collection",
+            title: product.name,
+            variantId: "47361868169385",
+            price: product.price,
+            available: true,
+            image: {
+              url: "/products/hold-the-room-bottle-studio.webp",
+              alt: product.bottleAlt,
+            },
+            hoverImage: {
+              url: "/products/hold-the-room-carton-studio.webp",
+              alt: "The Hold the Room carton.",
+            },
+            character: `02 · ${product.archetype}`,
+            descriptor: product.category,
+            hook: null,
+            who: null,
+            how: null,
+            actives: null,
+            door: null,
+            badge: "Preorder",
+          },
+        ];
+  /* Named-but-unmade steps stay waitlist cards until a real product with
+     the same name shows up in the Shopify collection. Categorical
+     descriptors only — the board's rule: no price, no formula, no claim. */
+  const liveTitles = new Set(cards.map((c) => c.title.toLowerCase()));
+  const waitlist = [
+    { character: "01 · The Opener", name: "Opening Line", descriptor: "Daily cleanser" },
+    { character: "03 · The Signature", name: "Sign Here", descriptor: "Lip treatment" },
+  ].filter((w) => !liveTitles.has(w.name.toLowerCase()));
 
   return (
     <>
@@ -294,6 +338,46 @@ export default function FounderCollectionPage() {
           <p className="mt-6 font-serif text-xl text-blush">
             Named. Not yet promised.
           </p>
+        </div>
+      </section>
+
+      {/* ---- The collection shelf ----
+          Live cards from Shopify beside waitlist cards for the named,
+          unmade steps. The grid keeps its width however thin the
+          collection is — the thin-collection rule: the row just ends. */}
+      <section className="section bg-cream" aria-labelledby="shelf-heading">
+        <div className="shell">
+          <h2 id="shelf-heading" className="eyebrow text-charcoal/70">
+            The collection
+          </h2>
+          <div className="mt-8 grid gap-10 sm:grid-cols-2 lg:grid-cols-3">
+            {cards.map((card) => (
+              <CatalogCard
+                key={card.handle}
+                product={card}
+                /* The local fallback card's page is this page. */
+                href={card.handle === "founder-collection" ? "#anchor-heading" : undefined}
+              />
+            ))}
+            {waitlist.map((entry) => (
+              <WaitlistCard key={entry.name} {...entry} />
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* ---- The waitlist ---- */}
+      <section
+        id="waitlist"
+        className="section-tight bg-founder-green py-14 scroll-mt-24 md:py-16"
+      >
+        <div className="shell">
+          <div className="max-w-xl">
+            <h2 className="headline text-balance text-cream">
+              Hear when the next one is real.
+            </h2>
+            <EmailSignup tone="green" source="waitlist" />
+          </div>
         </div>
       </section>
 

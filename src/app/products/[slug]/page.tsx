@@ -8,17 +8,33 @@ import { BRAND } from "@/lib/brand";
 import { JsonLd, breadcrumbSchema, productSchema } from "@/lib/seo";
 import { formatPrice, getProduct, otherProducts, products } from "@/lib/products";
 import { getReviews } from "@/lib/reviews";
+import { fetchCatalogProduct } from "@/lib/catalog";
+import { CatalogProductPage } from "@/components/shop/CatalogProductPage";
 
 export function generateStaticParams() {
   return products.map((product) => ({ slug: product.slug }));
 }
+
+/* A slug the hand-written pages don't claim is tried against Shopify as a
+   product handle, so a product created in Shopify admin has a working page
+   at /products/<handle> the minute it's published — no deploy, no map entry.
+   Re-checked every 60 seconds via the catalog cache. */
+export const dynamicParams = true;
 
 export async function generateMetadata({
   params,
 }: PageProps<"/products/[slug]">): Promise<Metadata> {
   const { slug } = await params;
   const product = getProduct(slug);
-  if (!product) return { title: "Not found" };
+  if (!product) {
+    const catalog = await fetchCatalogProduct(slug);
+    if (!catalog) return { title: "Not found" };
+    return {
+      title: catalog.title,
+      description: catalog.hook ?? catalog.descriptor ?? undefined,
+      alternates: { canonical: `/products/${catalog.handle}` },
+    };
+  }
   return {
     title: `${product.name} — ${product.category}`,
     description: `${product.what} ${product.size}, ${formatPrice(product.price)}.`,
@@ -35,7 +51,11 @@ export async function generateMetadata({
 export default async function ProductPage({ params }: PageProps<"/products/[slug]">) {
   const { slug } = await params;
   const product = getProduct(slug);
-  if (!product) notFound();
+  if (!product) {
+    const catalog = await fetchCatalogProduct(slug);
+    if (!catalog) notFound();
+    return <CatalogProductPage product={catalog} />;
+  }
 
   /* Null until a review platform is connected. Everything downstream — the
      section below and the rating in the schema — is derived from this, so

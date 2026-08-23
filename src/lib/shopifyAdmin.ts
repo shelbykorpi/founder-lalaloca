@@ -125,6 +125,19 @@ export type SubscribeResult =
     }
   | { ok: false; reason: string };
 
+/** True when this deployment can talk to the Admin API at all. */
+export function hasAdminCredentials(): boolean {
+  return Boolean(SHOP && (STATIC_TOKEN || (CLIENT_ID && CLIENT_SECRET)));
+}
+
+/**
+ * The one door to Admin GraphQL, exported for read-side callers (catalog.ts).
+ * Same token machinery, same pinned version, same loud errors.
+ */
+export async function adminGraphql(query: string, variables: Record<string, unknown>) {
+  return shopifyGraphql(query, variables);
+}
+
 async function shopifyGraphql(query: string, variables: Record<string, unknown>) {
   const token = await getAccessToken();
   if (!token) throw new Error("No Shopify credentials configured");

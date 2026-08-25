@@ -80,6 +80,7 @@ async function getAccessToken(): Promise<string | null> {
       client_id: CLIENT_ID,
       client_secret: CLIENT_SECRET,
     }),
+    signal: AbortSignal.timeout(10_000),
   });
 
   if (!response.ok) {
@@ -149,6 +150,10 @@ async function shopifyGraphql(query: string, variables: Record<string, unknown>)
       "X-Shopify-Access-Token": token,
     },
     body: JSON.stringify({ query, variables }),
+    /* The catalog reads through here during static generation, so a slow
+       Shopify would hang a deploy instead of falling back to local content.
+       Ten seconds, then throw — callers all catch and degrade. */
+    signal: AbortSignal.timeout(10_000),
   });
 
   if (!response.ok) throw new Error(`Shopify returned ${response.status}`);

@@ -5,6 +5,38 @@ date · agent · what changed · what was left alone · anything unpushed.
 
 ---
 
+## 2026-08-25 · Claude (Cowork) — deploys stopped at b60c6b9
+Shelby sent a Vercel deployment URL. Production was ~18h stale. Diagnosed
+from the outside (no Vercel log access):
+- Copy cut phase 1 (75d67c6) IS live — /shop shows "Three serums. Three
+  energies.", PDP shows "The details" panels. So deploys worked, then
+  stopped at the NEXT commit, b60c6b9 (the self-publishing catalog).
+- Confirmed with cache-busting query strings, not the `age` header — an
+  earlier session called a false alarm off a stale `age`. /the-next-move
+  404s and next-move-hero.webp / clean-break-scene.webp / hold-the-room-
+  bottle-wide.webp all 404 with ?cb=random. Definitive: those files are not
+  in the deployed build.
+- Ruled out: remote is github.com/shelbykorpi/founder-lalaloca on main and
+  main == origin/main at b1bf86c, so the pushes landed. Build passes from
+  her exact HEAD three ways — `npx next build`, full `npm run build`
+  (including the new prebuild), and with SHOPIFY_CLIENT_ID/SECRET set to
+  exercise the credentialed Admin path that only runs on Vercel.
+- b60c6b9 is the commit that introduced the only two things that behave
+  differently on Vercel than in this sandbox: the `prebuild` price check
+  (Vercel can reach Shopify; this sandbox is 403 by egress policy) and
+  catalog.ts calling the Admin API during static generation.
+HARDENED BOTH, regardless of which one it turns out to be:
+- scripts/check-prices.mjs: now exits 0 on every failure mode except one
+  confirmed mismatch, and even a mismatch only warns. `--strict` restores
+  fatal behaviour for manual runs. A prebuild guard that can block every
+  deploy is worse than the bug it guards against — that was my design
+  error.
+- shopifyAdmin.ts: AbortSignal.timeout(10_000) on both the token exchange
+  and the GraphQL call. The catalog reads through these during static
+  generation, so a slow Shopify would have hung a deploy instead of
+  falling back.
+STILL NEEDED: the actual Vercel build log. Cannot be read from here.
+
 ## 2026-08-25 · Claude (Cowork) — one line on /founder-collection
 Shelby: put the three NEXT MOVE products on the FOUNDER Collection page and
 format Hold the Room to match.

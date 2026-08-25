@@ -92,6 +92,7 @@ export const FOOTER_NAV = [
     links: [
       { href: "/shop", label: "The LALALOCA Collection" },
       { href: "/founder-collection", label: "The FOUNDER Collection" },
+      { href: "/the-next-move", label: "The Next Move — presale" },
       { href: "/products/thirst-trap", label: "Thirst Trap" },
       { href: "/products/c-me-glow", label: "C Me Glow" },
       { href: "/products/bounce-back", label: "Bounce Back" },

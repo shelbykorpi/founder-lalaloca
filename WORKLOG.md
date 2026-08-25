@@ -35,7 +35,33 @@ HARDENED BOTH, regardless of which one it turns out to be:
   and the GraphQL call. The catalog reads through these during static
   generation, so a slow Shopify would have hung a deploy instead of
   falling back.
-STILL NEEDED: the actual Vercel build log. Cannot be read from here.
+ROOT CAUSE, from the build log Shelby pasted:
+
+    Error: Cannot find module '/vercel/path0/scripts/check-prices.mjs'
+    Error: Command "npm run build" exited with 1
+
+**`.vercelignore` has excluded `scripts` since the very first commit
+(018ebda).** The file is committed to git and present in HEAD — which is
+why `git cat-file` said yes and why this looked like a code problem — but
+Vercel never receives it, so `prebuild` died with MODULE_NOT_FOUND on
+every build after b60c6b9. Entirely my error: I added a build step
+pointing at a directory the deployment was configured to drop, and did
+not check .vercelignore first.
+
+FIXED:
+- .vercelignore: `scripts` -> `scripts/*` plus `!scripts/check-prices.mjs`.
+  The directory itself can no longer be excluded, because gitignore
+  semantics make a negation unreachable inside an excluded directory —
+  exclude the CONTENTS and re-admit the one file the build needs. Pattern
+  verified with `git check-ignore`: the price guard is kept, the python
+  and shell helpers and assets/source stay out.
+- package.json: `"prebuild": "node scripts/check-prices.mjs || true"`.
+  Belt and braces — if anyone edits .vercelignore again, a missing script
+  can never take the site down a second time. Verified by deleting the
+  file and running prebuild: exit 0.
+
+RULE FOR ANY FUTURE AGENT: before adding a build step, read .vercelignore.
+A file being in git does NOT mean it reaches the Vercel build container.
 
 ## 2026-08-25 · Claude (Cowork) — one line on /founder-collection
 Shelby: put the three NEXT MOVE products on the FOUNDER Collection page and

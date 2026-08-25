@@ -1,2 +1,15 @@
 assets/source
-scripts
+
+# The helper scripts are build-time only and do not belong in the deployment
+# — except the price guard, which runs as `prebuild` and therefore has to be
+# present in Vercel's build container. Excluding the directory itself would
+# make `!scripts/check-prices.mjs` unreachable (gitignore semantics: you
+# cannot re-include a file inside an excluded directory), so exclude the
+# contents and re-admit the one file the build needs.
+#
+# This cost a day of deploys on 25 Aug 2026: `prebuild` was added pointing at
+# a file the whole directory was configured to drop, so every build after
+# b60c6b9 died with MODULE_NOT_FOUND. If you add another build step, check
+# this file first.
+scripts/*
+!scripts/check-prices.mjs

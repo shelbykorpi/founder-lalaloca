@@ -5,6 +5,80 @@ date · agent · what changed · what was left alone · anything unpushed.
 
 ---
 
+## 2026-08-25 · Claude (Cowork) — corrected packaging photography
+Shelby supplied FOUNDER_corrected_packaging_images.zip. VERIFIED LABEL BY
+LABEL at full resolution before use — all four audit drifts are fixed:
+Smooth Talker reads CERAMIDE TONE STICK with no SPF/sunscreen wording;
+Clean Break reads MATE LEAF and 140 ml / 4.73 FL OZ; Double Take reads
+HEXAPEPTIDE-11 · VITAMIN C · VITAMIN E with the three approved benefit
+lines and no firming claim. Do not re-verify from the README — it was
+verified from the pixels.
+- 9 assets converted to WebP (largest 124 KB):
+  public/editorial/next-move-hero.webp (1672x941, presale hero, copy space
+  left, same frame as the homepage hero), next-move-flatlay.webp,
+  next-move-dressing-room.webp (unused, held for email/social);
+  public/products/{clean-break,smooth-talker,double-take}-scene.webp
+  (1536x1024) and -pack.webp (1050x1393).
+- FLAT LAY IS CROPPED ABOVE THE CAMPAIGN CARD. The supplied square version
+  still reads "THREE MOVES. ONE ROOM." and the room line was retired
+  25 Aug. To use it whole, re-render the card as "THREE MOVES."
+- Card treatment: scene leads (each shot into its own SKU colourway), pack
+  shot on hover, 4px rule in the SKU's deep stripe, 3:2 tile = scenes'
+  native ratio so nothing crops. Drawn stripe placeholders removed. Hover
+  verified in Playwright (opacity 0 -> 1). NOTE: no hover on touch, so
+  mobile never sees the readable label — fine for a reservation page.
+- nextMove.ts gains pack/scene per product + CAMPAIGN.hero/flatlay, with
+  the verification recorded in the file header.
+- Project doc: claude/next-move-image-set.md.
+STILL RENDERS, NOT SAMPLES. No sample ordered; every concept doc asks for
+one first, and a render cannot answer the Cormorant-hairline, cream-on-rose
+thumbnail, iron-oxide tint or white-hardware questions. Prices, ship window,
+trademark clearance and US labelling all still open.
+
+## 2026-08-25 · Claude (Cowork) — THE NEXT MOVE presale page
+Shelby brought a ChatGPT presale campaign plus 24 Aug packaging renders for
+the three Selfnamed SKUs. Audited against the three concept docs in the
+Claude project and the verbatim INCI captured from the studio. Audit saved
+as claude/next-room-presale-audit.md. Four drifts found, all corrected here,
+none of them cosmetic:
+- SMOOTH TALKER renders printed "Broad Spectrum SPF 30 sunscreen". The
+  21 Aug concept doc §4 is a HARD STOP saying the opposite, and records
+  that Selfnamed never states an SPF at all. In the US an SPF claim makes
+  it an OTC drug (Drug Facts panel, actives with %, 21 CFR 201.327 SPF
+  testing, broad-spectrum testing, CDER eDRLS registration, NDC). Shelby's
+  call 25 Aug: SELL AS A TONE STICK, NO SUN CLAIM. Every SPF word is out,
+  and the page carries an explicit "Not a sunscreen" note because zinc
+  oxide leads the INCI and a customer would reasonably assume otherwise.
+- CLEAN BREAK renders said MATCHA TEA. INCI is Ilex Paraguariensis —
+  yerba maté, a holly, not green tea. Corrected to MATE LEAF.
+- CLEAN BREAK renders said 146 ml / 4.9 fl oz. Supplier fill is 140 ml /
+  4.73 fl oz. Regulated declaration; corrected.
+- DOUBLE TAKE renders called out CERAMIDES, COQ10 and EGF. None is in its
+  40-item INCI. Corrected to HEXAPEPTIDE-11 · VITAMIN C · VITAMIN E. The
+  two renders also disagreed with each other on the third benefit line,
+  the actives line and the fill (0.5 vs 0.51 fl oz), and "visibly firms"
+  is on that doc's own May-not-say list.
+Built:
+- src/lib/nextMove.ts — campaign + three products, every fact traceable to
+  a concept doc, provenance in the header. RESERVING flag gates the buy
+  path.
+- src/app/the-next-move/page.tsx — presale page. TAKES NO MONEY: no price
+  exists for any SKU and no ship window is set, so charging would start
+  the FTC Mail Order Rule 30-day clock against a date nobody can name. It
+  captures reservations (EmailSignup source="waitlist"). Flip RESERVING
+  and add prices when both exist.
+- DOES NOT USE THE 24 AUG RENDERS — they show the withdrawn SPF claim and
+  the wrong ingredients. Each product is drawn as its documented stripe
+  colourway (portrait-on-striped-wall at web scale) instead. Replace with
+  photography of a physical sample when one exists.
+- Campaign line: "THE NEXT ROOM IS OPEN." retired on Shelby's call — the
+  protected lockup OPEN THE DOOR. / THE ROOM IS YOURS. stays the only room
+  line. Replaced with campaign THE NEXT MOVE / "Before the door opens."
+  The photography card's "THREE MOVES. ONE ROOM." needs the same edit.
+- Footer link + sitemap entry. Primary nav NOT touched — Shelby's call.
+STILL OPEN: prices (all three), ship window, sample order, trademark
+clearance on all three names, US labelling layer, corrected artwork.
+
 ## 2026-08-23 · Claude (Cowork) — self-publishing catalog, phase 2
 A product created in Shopify admin now publishes itself: card on
 /founder-collection and a page at /products/<handle>, within a minute,

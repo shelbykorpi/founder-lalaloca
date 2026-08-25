@@ -142,7 +142,7 @@ export const NEXT_MOVE: NextMoveProduct[] = [
     reservationStatus: "Reservation — no charge and no ship date yet.",
     detailHero: {
       src: "/products/clean-break-vanity.webp",
-      alt: "The Clean Break bottle standing on a cream marble vanity with a brass tap, beside a lit dressing-room mirror.",
+      alt: "The Clean Break bottle on a cream marble basin beside a running brass tap, a blush towel folded alongside, against a dark green wall.",
     },
     cta: "Start fresh",
     stripes: { a: "var(--color-cream)", b: "var(--color-founder-green)" },
@@ -174,10 +174,16 @@ export const NEXT_MOVE: NextMoveProduct[] = [
     ],
     keyIngredients: ["Ceramides", "Cocoa Butter", "Vitamin E"],
     size: "12 g / 0.42 oz",
-    /* Three shades, supplied 25 Aug. Alt text is the brief's wording
-       verbatim. No SPF, sunscreen, broad-spectrum or UV language anywhere
-       in these strings — that rule covers alt text and metadata, not just
-       visible copy. */
+    /* Three shades. The 25 Aug set was a straight pack shot per shade;
+       these replace it with the same three in use — stick and carton on a
+       surface, the shade being blended in the mirror behind. Same file
+       names and the same 1536x1024, so nothing downstream moves.
+
+       Every carton was read at full resolution before import: SMOOTH TALKER
+       / CERAMIDE TONE STICK, the right shade code, 12 g / 0.42 oz, and no
+       SPF, sunscreen, broad-spectrum or UV wording anywhere on the pack.
+       That rule covers these alt strings and metadata too, not just visible
+       copy. */
     shades: [
       {
         code: "20",
@@ -185,7 +191,7 @@ export const NEXT_MOVE: NextMoveProduct[] = [
         handle: "20-light",
         hero: {
           src: "/products/smooth-talker-20-light.webp",
-          alt: "FOUNDER Smooth Talker Ceramide Tone Stick in 20 LIGHT, with its pale ivory-beige and cream striped carton.",
+          alt: "FOUNDER Smooth Talker Ceramide Tone Stick in 20 LIGHT beside its pale ivory and cream striped carton on a marble dressing table, a woman blending a swatch along her cheekbone in the mirror behind.",
         },
       },
       {
@@ -194,7 +200,7 @@ export const NEXT_MOVE: NextMoveProduct[] = [
         handle: "25-medium",
         hero: {
           src: "/products/smooth-talker-25-medium.webp",
-          alt: "FOUNDER Smooth Talker Ceramide Tone Stick in 25 MEDIUM, with its warm beige and cream striped carton.",
+          alt: "FOUNDER Smooth Talker Ceramide Tone Stick in 25 MEDIUM beside its warm beige and cream striped carton on a brass side table, a swatch of the cream drawn beside it and a woman blending it along her cheek in the mirror behind.",
         },
       },
       {
@@ -203,7 +209,7 @@ export const NEXT_MOVE: NextMoveProduct[] = [
         handle: "35-deep",
         hero: {
           src: "/products/smooth-talker-35-deep.webp",
-          alt: "FOUNDER Smooth Talker Ceramide Tone Stick in 35 DEEP, with its espresso-brown and cream striped carton.",
+          alt: "FOUNDER Smooth Talker Ceramide Tone Stick in 35 DEEP beside its espresso-brown and cream striped carton on a dark tray, a woman blending a swatch along her jaw in the mirror behind.",
         },
       },
     ],
@@ -217,7 +223,7 @@ export const NEXT_MOVE: NextMoveProduct[] = [
        the default shade so nothing can render empty. */
     detailHero: {
       src: "/products/smooth-talker-25-medium.webp",
-      alt: "FOUNDER Smooth Talker Ceramide Tone Stick in 25 MEDIUM, with its warm beige and cream striped carton.",
+      alt: "FOUNDER Smooth Talker Ceramide Tone Stick in 25 MEDIUM beside its warm beige and cream striped carton on a brass side table.",
     },
     cta: "Make your move",
     stripes: { a: "var(--color-cream)", b: "var(--color-champagne)" },

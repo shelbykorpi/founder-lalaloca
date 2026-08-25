@@ -79,6 +79,34 @@ of) + "140 ml / 4.73 fl oz" style size line, with shade folded in beside
 it rather than on its own row. The data was already in nextMove.ts; the
 page simply never rendered it.
 
+## 2026-08-25 · Claude (Cowork) — /founder-collection opens at the vanity
+Shelby: remove the top of the page, replace with a vanity-mirror image, make
+the customer feel she is sitting down about to get ready.
+- Supplied render is 1672x941 — the SAME frame as the homepage hero, so the
+  two now read as one house rhythm. Saved as
+  public/editorial/collection-vanity.webp.
+- Mobile gets its own crop, collection-vanity-m.webp (722x901, ~4:5), cut
+  into the NEAREST mirror plus the counter running out of frame. The wide
+  shot letterboxed on a phone reads as "a photograph of a row of mirrors";
+  the crop reads as "you are sitting at this one". That distinction was the
+  whole brief.
+- Construction copied from the homepage hero: below md the photograph is its
+  own block with copy beneath, from md up it becomes the background with the
+  copy on the dark left wall. Two scrims, one per breakpoint.
+- The wordmark is etched into the glass IN-SHOT, so live copy stays left and
+  never fights it.
+- PageIntro removed (import dropped). New h1 is "Take your seat." — verified
+  exactly one h1 on the page. Sub: "The mirror's lit. LALALOCA is the serum
+  collection; this is what comes after it."
+- REORDERED while in there: was hero -> Hold the Room full spec -> green ->
+  grid. A collection page that buries its grid under one product's spec
+  sheet is the same mistake the copy cut fixed on /shop. Now hero -> THE
+  LINE grid -> Hold the Room detail -> green statement -> waitlist -> back
+  to serums. Products are on the first screen after the hero.
+- Retired the old title "The room is easy to enter. Harder to hold." — it
+  was a second room line, and the protected lockup OPEN THE DOOR. / THE ROOM
+  IS YOURS. is meant to be the only one in circulation (Shelby, 25 Aug).
+
 ## 2026-08-25 · Claude (Cowork) — one line on /founder-collection
 Shelby: put the three NEXT MOVE products on the FOUNDER Collection page and
 format Hold the Room to match.

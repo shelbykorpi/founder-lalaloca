@@ -2,7 +2,6 @@ import type { Metadata } from "next";
 import Image from "next/image";
 import Link from "next/link";
 import { AddToBagButton } from "@/components/bag/AddToBagButton";
-import { PageIntro } from "@/components/site/PageIntro";
 import { EmailSignup } from "@/components/site/EmailSignup";
 import { BRAND, CONTACT_EMAIL, CONTACT_MAILTO } from "@/lib/brand";
 import { FOUNDER_COLLECTION } from "@/lib/founderCollection";
@@ -120,15 +119,166 @@ export default async function FounderCollectionPage() {
         ]}
       />
 
-      <PageIntro
-        eyebrow="The FOUNDER Collection"
-        title="The room is easy to enter. Harder to hold."
-      >
-        <p className="lede mt-6 max-w-prose text-charcoal/80">
-          A second line, under FOUNDER itself. LALALOCA is the serum collection;
-          this is what comes after it.
-        </p>
-      </PageIntro>
+      {/* ---- The vanity ----
+          The page used to open with a paragraph. It opens at the mirror now:
+          the point of this line is the twenty minutes in front of one, and a
+          shopper should feel seated before she is sold to.
+
+          Two crops, because the feeling does not survive a letterbox. Desktop
+          runs the room wide — the same 1672×941 frame as the homepage hero, so
+          the two read as one house. Phones get a crop into the nearest mirror
+          and the counter running out of frame, which reads as *this* mirror
+          rather than a photograph of a row of them.
+
+          The wordmark is etched into the glass in-shot, so the live copy sits
+          on the dark wall to the left and never fights it. Same construction
+          as the homepage: below md the photograph is its own block with the
+          copy beneath, from md up it becomes the background. */}
+      <section className="relative isolate bg-ink text-shell">
+        <div className="relative aspect-[722/901] w-full sm:aspect-[16/9] md:absolute md:inset-0 md:aspect-auto md:h-full">
+          <Image
+            src="/editorial/collection-vanity-m.webp"
+            alt="A dressing-room mirror in a brass frame ringed with warm bulbs, FOUNDER · The Collection etched into the glass, above a lit counter."
+            fill
+            priority
+            sizes="100vw"
+            className="object-cover md:hidden"
+          />
+          <Image
+            src="/editorial/collection-vanity.webp"
+            alt="A row of brass dressing-room mirrors ringed with warm bulbs along a lit counter, the nearest one etched FOUNDER · The Collection, against a dusty rose wall and dark green panelling."
+            fill
+            priority
+            sizes="100vw"
+            className="hidden object-cover md:block"
+          />
+          {/* Phones: wash the foot of the frame so the copy beneath has ground. */}
+          <div className="absolute inset-0 bg-[linear-gradient(180deg,rgba(0,0,0,0)_55%,rgba(0,0,0,0.85)_88%,#000_100%)] md:hidden" />
+          {/* Wide: the left wall is already near-black, so this only deepens
+              it — it clears well before the first mirror. */}
+          <div className="absolute inset-0 hidden bg-[linear-gradient(90deg,#000_0%,rgba(0,0,0,0.82)_22%,rgba(0,0,0,0.4)_38%,rgba(0,0,0,0)_54%)] md:block" />
+        </div>
+
+        <div className="shell relative flex flex-col justify-end pb-14 pt-8 md:min-h-[34rem] md:py-16 lg:min-h-[38rem]">
+          <div className="max-w-[30rem]">
+            <p className="eyebrow text-blush/90">The FOUNDER Collection</p>
+            <h1 className="display mt-5 text-balance">Take your seat.</h1>
+            <p className="mt-6 text-[1.0625rem] leading-relaxed text-shell/85">
+              The mirror’s lit. LALALOCA is the serum collection; this is what
+              comes after it.
+            </p>
+          </div>
+        </div>
+      </section>
+
+      {/* ---- The line ----
+          One grid, one card treatment, three stages of readiness. When the
+          Shopify collection is reachable its products replace the local
+          Hold the Room card; the three NEXT MOVE entries and the two names
+          are local either way, because none of them exists in Shopify yet
+          and inventing a variant for them would be the same lie as
+          inventing a price. */}
+      <section className="section bg-cream" aria-labelledby="shelf-heading">
+        <div className="shell">
+          <h2 id="shelf-heading" className="eyebrow text-charcoal/70">
+            The line
+          </h2>
+
+          <div className="mt-8 grid gap-10 sm:grid-cols-2 lg:grid-cols-3">
+            {/* On sale. From Shopify when reachable, local otherwise. */}
+            {cards.map((card) =>
+              card.handle === "founder-collection" ? (
+                <LineCard
+                  key={card.handle}
+                  name={card.title}
+                  category={card.descriptor ?? ""}
+                  character={card.character ?? undefined}
+                  image={
+                    card.image
+                      ? { src: card.image.url, alt: card.image.alt }
+                      : undefined
+                  }
+                  hoverImage={
+                    card.hoverImage
+                      ? { src: card.hoverImage.url, alt: card.hoverImage.alt }
+                      : undefined
+                  }
+                  accent="var(--color-bronze)"
+                  href="#anchor-heading"
+                  state="Preorder — ships when the first run lands"
+                  action={
+                    <AddToBagButton
+                      product={product}
+                      href="/founder-collection"
+                      className="btn btn-dark w-full"
+                      label="Preorder"
+                      showPrice
+                    />
+                  }
+                />
+              ) : (
+                <CatalogCard key={card.handle} product={card} />
+              ),
+            )}
+
+            {/* Reservations. Real products, no price — their detail and the
+                reservation form live on the campaign page. */}
+            {NEXT_MOVE.map((entry) => (
+              <LineCard
+                key={entry.slug}
+                name={entry.name}
+                category={entry.category}
+                /* The campaign, not a slot number — founderCollection.ts
+                   numbers three archetypes while the Double Take concept doc
+                   numbers a four-step routine, and the two disagree. Naming
+                   the campaign is true under either. */
+                character={CAMPAIGN.name}
+                image={entry.scene}
+                hoverImage={{ src: entry.pack.src, alt: entry.pack.alt }}
+                accent={entry.stripes.b}
+                href="/the-next-move"
+                state="Reserve — no price yet"
+                action={
+                  <Link href="/the-next-move" className="btn btn-outline w-full">
+                    Reserve
+                  </Link>
+                }
+              />
+            ))}
+
+            {/* Names. Not product listings. */}
+            {waitlist.map((entry) => (
+              <LineCard
+                key={entry.name}
+                name={entry.name}
+                category={entry.category}
+                character={entry.character}
+                accent="var(--color-blush)"
+                href="#waitlist"
+                state="In the making"
+                action={
+                  <Link href="#waitlist" className="btn btn-outline w-full">
+                    Join the waitlist
+                  </Link>
+                }
+              />
+            ))}
+          </div>
+
+          <p className="mt-10 max-w-prose text-xs leading-relaxed text-charcoal/70">
+            {CAMPAIGN.name}: Clean Break, Smooth Talker and Double Take are
+            reservations, not sales. Nothing is charged, and no ship date has
+            been set.{" "}
+            <Link
+              href="/the-next-move"
+              className="underline underline-offset-2 hover:opacity-70"
+            >
+              See all three
+            </Link>
+            .
+          </p>
+        </div>
+      </section>
 
       {/* ---- The product ---- */}
       <section className="bg-cream" aria-labelledby="anchor-heading">
@@ -355,115 +505,6 @@ export default async function FounderCollectionPage() {
           </p>
           <p className="mt-6 font-serif text-xl text-blush">
             Named. Not yet promised.
-          </p>
-        </div>
-      </section>
-
-      {/* ---- The line ----
-          One grid, one card treatment, three stages of readiness. When the
-          Shopify collection is reachable its products replace the local
-          Hold the Room card; the three NEXT MOVE entries and the two names
-          are local either way, because none of them exists in Shopify yet
-          and inventing a variant for them would be the same lie as
-          inventing a price. */}
-      <section className="section bg-cream" aria-labelledby="shelf-heading">
-        <div className="shell">
-          <h2 id="shelf-heading" className="eyebrow text-charcoal/70">
-            The line
-          </h2>
-
-          <div className="mt-8 grid gap-10 sm:grid-cols-2 lg:grid-cols-3">
-            {/* On sale. From Shopify when reachable, local otherwise. */}
-            {cards.map((card) =>
-              card.handle === "founder-collection" ? (
-                <LineCard
-                  key={card.handle}
-                  name={card.title}
-                  category={card.descriptor ?? ""}
-                  character={card.character ?? undefined}
-                  image={
-                    card.image
-                      ? { src: card.image.url, alt: card.image.alt }
-                      : undefined
-                  }
-                  hoverImage={
-                    card.hoverImage
-                      ? { src: card.hoverImage.url, alt: card.hoverImage.alt }
-                      : undefined
-                  }
-                  accent="var(--color-bronze)"
-                  href="#anchor-heading"
-                  state="Preorder — ships when the first run lands"
-                  action={
-                    <AddToBagButton
-                      product={product}
-                      href="/founder-collection"
-                      className="btn btn-dark w-full"
-                      label="Preorder"
-                      showPrice
-                    />
-                  }
-                />
-              ) : (
-                <CatalogCard key={card.handle} product={card} />
-              ),
-            )}
-
-            {/* Reservations. Real products, no price — their detail and the
-                reservation form live on the campaign page. */}
-            {NEXT_MOVE.map((entry) => (
-              <LineCard
-                key={entry.slug}
-                name={entry.name}
-                category={entry.category}
-                /* The campaign, not a slot number — founderCollection.ts
-                   numbers three archetypes while the Double Take concept doc
-                   numbers a four-step routine, and the two disagree. Naming
-                   the campaign is true under either. */
-                character={CAMPAIGN.name}
-                image={entry.scene}
-                hoverImage={{ src: entry.pack.src, alt: entry.pack.alt }}
-                accent={entry.stripes.b}
-                href="/the-next-move"
-                state="Reserve — no price yet"
-                action={
-                  <Link href="/the-next-move" className="btn btn-outline w-full">
-                    Reserve
-                  </Link>
-                }
-              />
-            ))}
-
-            {/* Names. Not product listings. */}
-            {waitlist.map((entry) => (
-              <LineCard
-                key={entry.name}
-                name={entry.name}
-                category={entry.category}
-                character={entry.character}
-                accent="var(--color-blush)"
-                href="#waitlist"
-                state="In the making"
-                action={
-                  <Link href="#waitlist" className="btn btn-outline w-full">
-                    Join the waitlist
-                  </Link>
-                }
-              />
-            ))}
-          </div>
-
-          <p className="mt-10 max-w-prose text-xs leading-relaxed text-charcoal/70">
-            {CAMPAIGN.name}: Clean Break, Smooth Talker and Double Take are
-            reservations, not sales. Nothing is charged, and no ship date has
-            been set.{" "}
-            <Link
-              href="/the-next-move"
-              className="underline underline-offset-2 hover:opacity-70"
-            >
-              See all three
-            </Link>
-            .
           </p>
         </div>
       </section>

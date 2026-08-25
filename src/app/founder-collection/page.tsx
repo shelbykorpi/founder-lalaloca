@@ -63,16 +63,19 @@ export default async function FounderCollectionPage() {
             variantId: "47361868169385",
             price: product.price,
             available: true,
-            /* 3:2 versions so the square studio shots are not cropped by
-               the card tile — the product is scaled to the tile height and
-               the sides extended from the shot's own blurred ground. */
+            /* The vanity set, 25 Aug 2026. The card tile is 3:2, so these
+               are crops of the wide and overhead frames rather than the
+               square studio sweep padded out at the sides. Scene leads and
+               the flatlay is the hover, matching how the other five cards
+               work — and this card no longer sits in a peach mockup studio
+               beside five shot in the atelier. */
             image: {
-              url: "/products/hold-the-room-bottle-wide.webp",
-              alt: product.bottleAlt,
+              url: "/products/hold-the-room-vanity-wide.webp",
+              alt: "Hold the Room and its carton on a marble dressing table, green doors open onto a lit vanity beyond.",
             },
             hoverImage: {
-              url: "/products/hold-the-room-carton-wide.webp",
-              alt: "The Hold the Room carton, printed with the supplier's product name, Extreme Moisture Blend.",
+              url: "/products/hold-the-room-vanity-flatlay.webp",
+              alt: "Hold the Room seen from above on a marble vanity, among a gold watch, earrings and a cream handbag.",
             },
             character: `02 · ${product.archetype}`,
             descriptor: product.category,

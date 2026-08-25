@@ -83,35 +83,67 @@ export default function HoldTheRoomPage() {
         </div>
       </section>
 
+      {/* The room the product lives in, at the width the homepage and the
+          campaign use — same 1672×941 frame, composed with its copy space on
+          the left so the product sits where the eye lands last. This is the
+          LCP element, hence priority. */}
+      <section className="bg-cream pt-6 md:pt-8">
+        <div className="relative aspect-[1672/941] w-full overflow-hidden">
+          <Image
+            src="/products/hold-the-room-vanity-hero.webp"
+            alt="Hold the Room and its carton on a marble dressing table — deep green doors with brass F monograms stand open onto a lit vanity beyond, a cream jacket on the rail, a gold compact, watch and pen beside the bottle."
+            fill
+            priority
+            sizes="100vw"
+            className="object-cover"
+          />
+        </div>
+      </section>
+
       <section className="bg-cream">
         <div className="shell grid gap-12 py-14 md:py-20 lg:grid-cols-[0.95fr_1fr] lg:gap-16">
           <div>
-            {/* The product as it photographs: bottle and carton, side by
-                side, supplied 19 Aug 2026. These replace the lone cutout
-                (still in founderCollection.ts as `bottle` for the bag).
-                The carton prints the supplier's own product name — EXTREME
-                MOISTURE BLEND — because that is what the first run's box
-                says; the alt text reads it out rather than papering over
-                it. */}
-            <div className="mb-8 grid grid-cols-2 gap-3">
+            {/* The vanity set, supplied 25 Aug 2026, replacing the peach
+                studio sweep the supplier shipped with. That sweep had a
+                palm-frond gobo on it — the stock white-label mockup ground,
+                used nowhere else here — so beside Clean Break and Double
+                Take, both shot in the atelier, Hold the Room read as
+                somebody else's product. Now all four are in one world.
+
+                THE CARTON'S TYPO. As supplied, the wide frame's box read
+                EXTEEME MOISTURE BLEND. scripts/fix-carton-typo.py transfers
+                the R from MOISTURE on the line below onto the wrong E and
+                touches nothing else. The corrected spelling is the real
+                box's, so this makes the image more accurate, not less; the
+                as-supplied frame is kept beside the script's output in
+                assets/source/hold-the-room (gitignored, local only).
+
+                WHAT THESE ARE. Styled images, not studio photographs of the
+                packed product, so the small print below says what actually
+                ships. The carton still carries the supplier's own product
+                name, because that is what the first run's box says and no
+                photograph is the place to fix it.
+
+                The Antique Gold rule is Hold the Room's accent on the
+                collection grid. It has no stripe colourway, because the
+                pack genuinely does not have one. */}
+            <div className="mb-6">
               <Image
-                src="/products/hold-the-room-bottle-studio.webp"
-                alt="The Hold the Room airless pump bottle — black cap and base, frosted body printed FOUNDER BEAUTY — standing in warm side light."
+                src="/products/hold-the-room-vanity.webp"
+                alt="Hold the Room lying on a marble vanity seen from above, among a gold watch, twisted hoop earrings, a brass key, a cream handbag and a nude heel."
                 width={1254}
                 height={1254}
-                priority
-                sizes="(max-width: 1024px) 50vw, 24rem"
+                sizes="(max-width: 1024px) 90vw, 30rem"
                 className="w-full"
               />
-              <Image
-                src="/products/hold-the-room-carton-studio.webp"
-                alt="The carton: FOUNDER BEAUTY above the supplier’s product name, Extreme Moisture Blend, net 30 ml / 1 US fl oz."
-                width={1254}
-                height={1254}
-                sizes="(max-width: 1024px) 50vw, 24rem"
-                className="w-full"
-              />
+              <span aria-hidden className="block h-1 w-full bg-bronze" />
             </div>
+
+            <p className="mb-8 max-w-prose text-xs leading-relaxed text-charcoal/70">
+              Styled imagery. The carton that ships is plain, printed FOUNDER
+              BEAUTY above the supplier&rsquo;s product name, Extreme Moisture
+              Blend, 30 ml / 1 US fl oz.
+            </p>
 
             <p className="eyebrow text-bronze-ink">02 · {product.archetype}</p>
             <h1 className="mt-4 font-serif text-4xl leading-tight text-charcoal md:text-5xl">
@@ -220,16 +252,18 @@ export default function HoldTheRoomPage() {
             )}
           </div>
 
-          {/* The campaign door — same doors as the homepage hero, blush
-              with a brass F on each leaf, seen from inside the atelier.
-              Supplied 19 Aug 2026. It sits in the first grid row beside
-              the product column, bottom-aligned (lg:self-end) so its
-              lower edge lands level with the purchase module opposite.
+          {/* The mirror frame, supplied 25 Aug 2026. It took the slot the
+              campaign door held (still at /editorial/founder-collection-door
+              .webp, now unused) — same 1003×1568, same bottom alignment
+              (lg:self-end) so its lower edge lands level with the purchase
+              module opposite. The door was an editorial image of the brand;
+              this is the same moment with the product actually in it, which
+              is what a product page's second image is for.
               No caption: the page's headline already carries the line. */}
           <figure className="max-w-[26rem] lg:self-end">
             <Image
-              src="/editorial/founder-collection-door.webp"
-              alt="A woman in a cream suit with a deep green belt pushes open tall blush-pink double doors, a brass F on each leaf, into a dark atelier of shelved bottles under warm lamps."
+              src="/products/hold-the-room-vanity-mirror.webp"
+              alt="Hold the Room standing on a marble dressing table in front of a gilt mirror, a woman in a cream suit fastening her cuff in the reflection, a green leather folio and gold watch beside it."
               width={1003}
               height={1568}
               loading="lazy"

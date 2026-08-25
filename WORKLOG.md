@@ -5,6 +5,45 @@ date · agent · what changed · what was left alone · anything unpushed.
 
 ---
 
+## 2026-08-25 · Claude (Cowork) — one line on /founder-collection
+Shelby: put the three NEXT MOVE products on the FOUNDER Collection page and
+format Hold the Room to match.
+- NEW src/components/shop/LineCard.tsx — shared card so /founder-collection
+  and /the-next-move cannot drift into two treatments of the same products.
+  3:2 tile, hover reveal, 4px accent rule, eyebrow/name/category/STATE.
+  The state line is load-bearing: six entries at three stages, and a grid
+  that renders them identically implies six things you can buy.
+- /founder-collection shelf is now the whole line, one grid, six cards:
+    Hold the Room   preorder $34, Shopify card when reachable else local
+    Clean Break     ) reservations, no price, detail on /the-next-move
+    Smooth Talker   )
+    Double Take     )
+    Opening Line    ) names only, not product listings
+    Sign Here       )
+- Hold the Room accent is Antique Gold, NOT a stripe colourway, because it
+  does not have one — it is Blanka in plain supplier packaging while the
+  other three are Selfnamed in the striped house system. Deliberately not
+  disguised.
+- Its square studio shots were being cropped by the 3:2 tile, so
+  hold-the-room-{bottle,carton}-wide.webp were generated: product scaled to
+  tile height, sides extended from the shot's own blurred ground. Nothing
+  crops.
+- Its state line reads "Preorder — ships when the first run lands" rather
+  than repeating the price the button already carries.
+- The three campaign products carry the eyebrow "The Next Move" and NOT a
+  slot number, deliberately: founderCollection.ts numbers three archetype
+  slots (Opener/Anchor/Signature) while the DOUBLE TAKE concept doc numbers
+  a four-step routine (01 Opening Line / 02 Double Take / 03 Hold the Room /
+  04 Sign Here). THOSE TWO SYSTEMS DISAGREE and inventing a number here
+  would pick a winner by accident. Unresolved — flag for Shelby.
+- Green statement rewritten: "One is open. Three are close. Two are still
+  names." The old "Three steps..." line no longer described the shelf.
+- WaitlistCard in CatalogCard.tsx is now unused by this page (LineCard
+  handles the no-image state); left in place for the Shopify-driven path.
+FLAGGED AGAIN, NOW MORE VISIBLE: Hold the Room's hover reveals a carton
+printed EXTREME MOISTURE BLEND — the supplier's name — sitting beside three
+cartons that say the real product name. Still unanswered since 19 Aug.
+
 ## 2026-08-25 · Claude (Cowork) — corrected packaging photography
 Shelby supplied FOUNDER_corrected_packaging_images.zip. VERIFIED LABEL BY
 LABEL at full resolution before use — all four audit drifts are fixed:

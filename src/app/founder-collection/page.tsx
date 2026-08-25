@@ -7,7 +7,9 @@ import { EmailSignup } from "@/components/site/EmailSignup";
 import { BRAND, CONTACT_EMAIL, CONTACT_MAILTO } from "@/lib/brand";
 import { FOUNDER_COLLECTION } from "@/lib/founderCollection";
 import { fetchCollectionProducts, type CatalogProduct } from "@/lib/catalog";
-import { CatalogCard, WaitlistCard } from "@/components/shop/CatalogCard";
+import { CatalogCard } from "@/components/shop/CatalogCard";
+import { LineCard } from "@/components/shop/LineCard";
+import { NEXT_MOVE, CAMPAIGN } from "@/lib/nextMove";
 import { formatPrice } from "@/lib/products";
 import {
   JsonLd,
@@ -64,13 +66,16 @@ export default async function FounderCollectionPage() {
             variantId: "47361868169385",
             price: product.price,
             available: true,
+            /* 3:2 versions so the square studio shots are not cropped by
+               the card tile — the product is scaled to the tile height and
+               the sides extended from the shot's own blurred ground. */
             image: {
-              url: "/products/hold-the-room-bottle-studio.webp",
+              url: "/products/hold-the-room-bottle-wide.webp",
               alt: product.bottleAlt,
             },
             hoverImage: {
-              url: "/products/hold-the-room-carton-studio.webp",
-              alt: "The Hold the Room carton.",
+              url: "/products/hold-the-room-carton-wide.webp",
+              alt: "The Hold the Room carton, printed with the supplier's product name, Extreme Moisture Blend.",
             },
             character: `02 · ${product.archetype}`,
             descriptor: product.category,
@@ -82,13 +87,25 @@ export default async function FounderCollectionPage() {
             badge: "Preorder",
           },
         ];
-  /* Named-but-unmade steps stay waitlist cards until a real product with
-     the same name shows up in the Shopify collection. Categorical
-     descriptors only — the board's rule: no price, no formula, no claim. */
+  /* ── THE WHOLE LINE, IN ONE GRID ──────────────────────────────────────
+     Six entries at three different stages, and the grid has to say which
+     is which rather than implying six things you can buy:
+
+       Hold the Room     on sale as a preorder, $34
+       Clean Break       ) real products, artwork finished, NO PRICE YET —
+       Smooth Talker     ) reservations only, detail lives on /the-next-move
+       Double Take       )
+       Opening Line      ) named on the board, not made. Not product
+       Sign Here         ) listings: no price, no formula, no claim.
+
+     Hold the Room is the odd one visually and deliberately not disguised:
+     it is a Blanka product in plain supplier packaging while the other
+     three are Selfnamed in the striped house system. Its accent is Antique
+     Gold rather than a stripe colourway, because it does not have one. */
   const liveTitles = new Set(cards.map((c) => c.title.toLowerCase()));
   const waitlist = [
-    { character: "01 · The Opener", name: "Opening Line", descriptor: "Daily cleanser" },
-    { character: "03 · The Signature", name: "Sign Here", descriptor: "Lip treatment" },
+    { character: "01 · The Opener", name: "Opening Line", category: "Daily cleanser" },
+    { character: "03 · The Signature", name: "Sign Here", category: "Lip treatment" },
   ].filter((w) => !liveTitles.has(w.name.toLowerCase()));
 
   return (
@@ -327,13 +344,14 @@ export default async function FounderCollectionPage() {
         <div className="shell max-w-3xl">
           <p className="eyebrow text-blush">The FOUNDER Collection</p>
           <h2 className="mt-5 font-serif text-3xl leading-tight md:text-4xl">
-            Three steps. One is open. Two are being made properly.
+            One is open. Three are close. Two are still names.
           </h2>
           <p className="mt-6 max-w-prose text-cream/85">
-            The collection is written as three: an opener, an anchor, a
-            signature. {product.name} is the anchor, and the first to be
-            sourced. The other two are named and not yet made, which is a
-            different thing from coming soon.
+            {product.name} is the anchor and the first to be sourced — it is
+            the only one you can order. Clean Break, Smooth Talker and Double
+            Take are made and photographed but not yet priced, so they take
+            reservations instead of money. Opening Line and Sign Here are
+            names, which is a different thing from coming soon.
           </p>
           <p className="mt-6 font-serif text-xl text-blush">
             Named. Not yet promised.
@@ -341,28 +359,112 @@ export default async function FounderCollectionPage() {
         </div>
       </section>
 
-      {/* ---- The collection shelf ----
-          Live cards from Shopify beside waitlist cards for the named,
-          unmade steps. The grid keeps its width however thin the
-          collection is — the thin-collection rule: the row just ends. */}
+      {/* ---- The line ----
+          One grid, one card treatment, three stages of readiness. When the
+          Shopify collection is reachable its products replace the local
+          Hold the Room card; the three NEXT MOVE entries and the two names
+          are local either way, because none of them exists in Shopify yet
+          and inventing a variant for them would be the same lie as
+          inventing a price. */}
       <section className="section bg-cream" aria-labelledby="shelf-heading">
         <div className="shell">
           <h2 id="shelf-heading" className="eyebrow text-charcoal/70">
-            The collection
+            The line
           </h2>
+
           <div className="mt-8 grid gap-10 sm:grid-cols-2 lg:grid-cols-3">
-            {cards.map((card) => (
-              <CatalogCard
-                key={card.handle}
-                product={card}
-                /* The local fallback card's page is this page. */
-                href={card.handle === "founder-collection" ? "#anchor-heading" : undefined}
+            {/* On sale. From Shopify when reachable, local otherwise. */}
+            {cards.map((card) =>
+              card.handle === "founder-collection" ? (
+                <LineCard
+                  key={card.handle}
+                  name={card.title}
+                  category={card.descriptor ?? ""}
+                  character={card.character ?? undefined}
+                  image={
+                    card.image
+                      ? { src: card.image.url, alt: card.image.alt }
+                      : undefined
+                  }
+                  hoverImage={
+                    card.hoverImage
+                      ? { src: card.hoverImage.url, alt: card.hoverImage.alt }
+                      : undefined
+                  }
+                  accent="var(--color-bronze)"
+                  href="#anchor-heading"
+                  state="Preorder — ships when the first run lands"
+                  action={
+                    <AddToBagButton
+                      product={product}
+                      href="/founder-collection"
+                      className="btn btn-dark w-full"
+                      label="Preorder"
+                      showPrice
+                    />
+                  }
+                />
+              ) : (
+                <CatalogCard key={card.handle} product={card} />
+              ),
+            )}
+
+            {/* Reservations. Real products, no price — their detail and the
+                reservation form live on the campaign page. */}
+            {NEXT_MOVE.map((entry) => (
+              <LineCard
+                key={entry.slug}
+                name={entry.name}
+                category={entry.category}
+                /* The campaign, not a slot number — founderCollection.ts
+                   numbers three archetypes while the Double Take concept doc
+                   numbers a four-step routine, and the two disagree. Naming
+                   the campaign is true under either. */
+                character={CAMPAIGN.name}
+                image={entry.scene}
+                hoverImage={{ src: entry.pack.src, alt: entry.pack.alt }}
+                accent={entry.stripes.b}
+                href="/the-next-move"
+                state="Reserve — no price yet"
+                action={
+                  <Link href="/the-next-move" className="btn btn-outline w-full">
+                    Reserve
+                  </Link>
+                }
               />
             ))}
+
+            {/* Names. Not product listings. */}
             {waitlist.map((entry) => (
-              <WaitlistCard key={entry.name} {...entry} />
+              <LineCard
+                key={entry.name}
+                name={entry.name}
+                category={entry.category}
+                character={entry.character}
+                accent="var(--color-blush)"
+                href="#waitlist"
+                state="In the making"
+                action={
+                  <Link href="#waitlist" className="btn btn-outline w-full">
+                    Join the waitlist
+                  </Link>
+                }
+              />
             ))}
           </div>
+
+          <p className="mt-10 max-w-prose text-xs leading-relaxed text-charcoal/70">
+            {CAMPAIGN.name}: Clean Break, Smooth Talker and Double Take are
+            reservations, not sales. Nothing is charged, and no ship date has
+            been set.{" "}
+            <Link
+              href="/the-next-move"
+              className="underline underline-offset-2 hover:opacity-70"
+            >
+              See all three
+            </Link>
+            .
+          </p>
         </div>
       </section>
 

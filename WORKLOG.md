@@ -79,6 +79,35 @@ of) + "140 ml / 4.73 fl oz" style size line, with shade folded in beside
 it rather than on its own row. The data was already in nextMove.ts; the
 page simply never rendered it.
 
+## 2026-08-25 · Claude (Cowork) — shelf reorder + Hold the Room gets a page
+Shelby: swap Double Take and Hold the Room in the grid, and remove the Hold
+the Room section that sat after the products.
+- SWAP DONE. The grid used to be three maps rendered in sequence, so its
+  order was an accident of which array came first. Replaced with ONE
+  explicit `line` array — reorder that list and nothing else. New order:
+  Double Take / Clean Break / Smooth Talker | Hold the Room / Opening Line /
+  Sign Here. That puts the whole NEXT MOVE trio in row one.
+- THE SECTION WAS MOVED, NOT DELETED — to src/app/products/hold-the-room.
+  Deleting it would have removed the ONLY copy of `product.preorder`, the
+  only text anywhere correcting /policies/shipping's one-business-day
+  promise, while the grid card kept a live Preorder button. A customer could
+  have bought expecting next-day dispatch. It also carried the full INCI
+  (fragrance + petrolatum, disclosed on purpose) and the FAQs faqSchema
+  quotes. Card href now points at the new page instead of an anchor.
+  A STATIC route beats the /products/[slug] catalog template here: that
+  template needs a Shopify product with founder.* metafields and neither
+  exists yet. Next resolves the static file first, so it survives whatever
+  happens in Shopify later.
+- Fixed a regression I introduced mid-edit: the first pass rendered only the
+  card whose handle is "founder-collection", which would have silently
+  dropped every OTHER product once Shopify is connected. All catalog cards
+  now map to LineCards; the anchor is found by name and the rest append.
+- AddToBagButton was being handed the whole FounderProduct — 30-line INCI
+  and all — for a button that reads six fields. Now passed six fields. Aqua
+  / Petrolatum / Dimethicone all gone from the collection payload (0 hits).
+- Removed imports the move orphaned. eslint clean, tsc clean, build clean,
+  one h1 on the new page, 200.
+
 ## 2026-08-25 · Claude (Cowork) — SMOOTH TALKER shade range
 Shelby supplied a shade package + implementation brief. Three shades of ONE
 product (same 12 g stick, same formula, same claims): 20 LIGHT, 25 MEDIUM,

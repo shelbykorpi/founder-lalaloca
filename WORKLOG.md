@@ -79,6 +79,44 @@ of) + "140 ml / 4.73 fl oz" style size line, with shade folded in beside
 it rather than on its own row. The data was already in nextMove.ts; the
 page simply never rendered it.
 
+## 2026-08-25 · Claude (Cowork) — individual product detail pages
+Shelby's brief: the three campaign cards all linked to /the-next-move, so
+clicking Clean Break opened a page about three products.
+- NEW routes, all prerendered: /products/clean-break, /products/smooth-talker,
+  /products/double-take. /products/hold-the-room untouched.
+  /the-next-move KEPT as the campaign page and the "See all three" target.
+- NEW src/components/shop/ProductDetail.tsx — ONE shared template, three
+  thin routes. Three hand-built pages would drift the way the hand-built
+  LALALOCA pages did (24-word hook on one, none on the other), which is why
+  the copy cut happened in the first place.
+- NO Product/Offer schema on these pages, deliberately: an Offer wants a
+  price and these have none. Breadcrumbs only until a real price exists.
+- nextMove.ts gains description / detailCta / reservationStatus /
+  detailHero / facts. detailHero is the product ALONE — the card may show a
+  family or a range, a detail page may not, or someone who clicked one
+  product lands on a picture of three.
+- 2 new assets: clean-break-vanity.webp, double-take-vanity.webp (native
+  3:2, product alone at a vanity — matches the collection page's own
+  vanity hero).
+- ShadePicker upgraded: reads ?shade=20-light so a shade is linkable,
+  falls back to the default on an unknown value, priority prop for the LCP
+  hero on a detail page, and an aria-live line announcing the shown shade.
+  THE SUSPENSE BOUNDARY LIVES INSIDE THE COMPONENT — useSearchParams cannot
+  be prerendered without one, and putting it at the call site means the
+  next page that drops in a <ShadePicker /> breaks the build. Fallback
+  renders the default shade at the same height so nothing shifts.
+- Collection cards + CTAs repointed to /products/<slug>.
+- VERIFIED: each page mentions only its own product (grep across all three);
+  no card links to /the-next-move as a product destination; "See all three"
+  still does. ?shade=35-deep deep-links correctly; clicking 20 LIGHT swaps
+  the hero. Smooth Talker: SPF/sunscreen hits are ONLY our disclaimer + the
+  concierge FAQ button; broad spectrum/UVA/UVB/sun protection all zero.
+  Double Take: Ceramide/CoQ10/EGF/dark circle/brighten all zero — the two
+  "firm" hits are "collagen firming serum" in the site-wide Organization
+  schema (Bounce Back's approved category), not a Double Take claim.
+  Clean Break: Mate Leaf yes, matcha zero, 140 ml yes, 98% not published.
+  No Offer schema and no price on any of the three. eslint/tsc/build clean.
+
 ## 2026-08-25 · Claude (Cowork) — shelf reorder + Hold the Room gets a page
 Shelby: swap Double Take and Hold the Room in the grid, and remove the Hold
 the Room section that sat after the products.

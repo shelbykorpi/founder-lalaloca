@@ -182,12 +182,16 @@ export default async function FounderCollectionPage() {
     image: entry.scene,
     hoverImage: entry.shades ? undefined : { src: entry.pack.src, alt: entry.pack.alt },
     accent: entry.stripes.b,
-    href: "/the-next-move",
+    /* Each card opens ITS OWN product page. Until 25 Aug all three pointed
+       at /the-next-move, so clicking Clean Break opened a page about three
+       products and the shopper had to find hers again. /the-next-move stays
+       as the campaign page and the "See all three" destination. */
+    href: `/products/${entry.slug}`,
     state: entry.shades
       ? `Reserve — ${entry.shades.length} shades, no price yet`
       : "Reserve — no price yet",
     action: (
-      <Link href="/the-next-move" className="btn btn-outline w-full">
+      <Link href={`/products/${entry.slug}`} className="btn btn-outline w-full">
         Reserve
       </Link>
     ),

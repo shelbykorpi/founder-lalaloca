@@ -1,6 +1,7 @@
 "use client";
 
-import { useId, useState } from "react";
+import { Suspense, useId, useState } from "react";
+import { useSearchParams } from "next/navigation";
 import Image from "next/image";
 
 type Shade = {
@@ -30,18 +31,29 @@ type Shade = {
  * set, which is what a radio group is for, and it gets arrow-key navigation
  * and screen-reader semantics for free instead of re-implementing them.
  */
-export function ShadePicker({
+function ShadePickerInner({
   shades,
   accent,
   defaultHandle = "25-medium",
+  priority = false,
 }: {
   shades: Shade[];
   /** The SKU's stripe colour, for the rule under the image and the swatch ring. */
   accent: string;
   defaultHandle?: string;
+  /** True on a detail page, where this image is the LCP element. */
+  priority?: boolean;
 }) {
   const groupId = useId();
-  const initial = shades.find((s) => s.handle === defaultHandle) ?? shades[0];
+  /* ?shade=20-light makes a shade linkable and shareable. An unknown or
+     absent value falls back to the default rather than erroring — a bad
+     query string should never break the page. */
+  const params = useSearchParams();
+  const fromUrl = params.get("shade");
+  const initial =
+    shades.find((s) => s.handle === fromUrl) ??
+    shades.find((s) => s.handle === defaultHandle) ??
+    shades[0];
   const [selected, setSelected] = useState<Shade>(initial);
 
   return (
@@ -56,8 +68,10 @@ export function ShadePicker({
             alt={shade.handle === selected.handle ? shade.hero.alt : ""}
             aria-hidden={shade.handle !== selected.handle}
             fill
-            loading="lazy"
-            sizes="(max-width: 768px) 90vw, 30vw"
+            {...(priority && shade.handle === selected.handle
+              ? { priority: true }
+              : { loading: "lazy" as const })}
+            sizes="(max-width: 1024px) 100vw, 60vw"
             className={`object-cover transition-opacity duration-500 ${
               shade.handle === selected.handle ? "opacity-100" : "opacity-0"
             }`}
@@ -75,6 +89,10 @@ export function ShadePicker({
           Shade
           <span className="sr-only"> — choose one of three</span>
         </legend>
+
+        <p className="sr-only" aria-live="polite">
+          Showing {selected.code} {selected.name}
+        </p>
 
         <div className="mt-3 flex flex-wrap gap-2">
           {shades.map((shade) => {
@@ -110,5 +128,48 @@ export function ShadePicker({
         </div>
       </fieldset>
     </div>
+  );
+}
+
+/**
+ * `useSearchParams` opts a component into client-side rendering, and Next
+ * refuses to prerender a static page containing one without a Suspense
+ * boundary. Putting the boundary HERE rather than at each call site means a
+ * future page that drops in a <ShadePicker /> cannot break the build by
+ * forgetting it. The fallback is the default shade's frame, so the layout
+ * never shifts when the real picker hydrates.
+ */
+export function ShadePicker(props: {
+  shades: Shade[];
+  accent: string;
+  defaultHandle?: string;
+  priority?: boolean;
+}) {
+  return (
+    <Suspense
+      fallback={
+        <div>
+          <div className="relative aspect-[3/2] w-full overflow-hidden bg-shell">
+            <Image
+              src={props.shades[0].hero.src}
+              alt={props.shades[0].hero.alt}
+              fill
+              {...(props.priority ? { priority: true } : { loading: "lazy" as const })}
+              sizes="(max-width: 1024px) 100vw, 60vw"
+              className="object-cover"
+            />
+            <span
+              aria-hidden
+              className="absolute inset-x-0 bottom-0 h-1"
+              style={{ background: props.accent }}
+            />
+          </div>
+          {/* Same height as the real control row, so nothing jumps. */}
+          <div className="mt-5 min-h-[4.75rem]" />
+        </div>
+      }
+    >
+      <ShadePickerInner {...props} />
+    </Suspense>
   );
 }

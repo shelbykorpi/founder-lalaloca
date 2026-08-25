@@ -72,6 +72,27 @@ export type NextMoveProduct = {
     hero: { src: string; alt: string };
   }[];
   cta: string;
+  /**
+   * ── DETAIL-PAGE FIELDS (added 25 Aug) ──────────────────────────────────
+   * The collection cards used to send every shopper to the shared campaign
+   * page, so clicking Clean Break opened a page about three products. Each
+   * SKU now has its own route at /products/<slug>, and these carry what that
+   * page needs beyond the card.
+   */
+  /** Longer description, detail page only. Approved wording. */
+  description: string;
+  /** The detail page's own CTA label. */
+  detailCta: string;
+  /** What a reservation is, said plainly above the button. */
+  reservationStatus: string;
+  /**
+   * The detail hero — this product ALONE. The card's `scene` may show a
+   * family or a range; a detail page may not, or the shopper who clicked
+   * one product lands on a picture of three.
+   */
+  detailHero: { src: string; alt: string };
+  /** Extra supported facts, where the supplier documents them. */
+  facts?: string[];
   /** The two stripe colours of this SKU's packaging wall. */
   stripes: { a: string; b: string };
   /** Ink that reads on this SKU's mat. */
@@ -115,6 +136,14 @@ export const NEXT_MOVE: NextMoveProduct[] = [
     ],
     keyIngredients: ["Mate Leaf", "Iceland Moss", "Juniper Callus"],
     size: "140 ml / 4.73 fl oz",
+    description:
+      "A gentle daily face wash for blemish-prone skin. It washes away impurities and excess oil without harsh surfactants, leaving skin feeling fresh.",
+    detailCta: "Reserve Clean Break",
+    reservationStatus: "Reservation — no charge and no ship date yet.",
+    detailHero: {
+      src: "/products/clean-break-vanity.webp",
+      alt: "The Clean Break bottle standing on a cream marble vanity with a brass tap, beside a lit dressing-room mirror.",
+    },
     cta: "Start fresh",
     stripes: { a: "var(--color-cream)", b: "var(--color-founder-green)" },
     ink: "var(--color-founder-green)",
@@ -178,6 +207,18 @@ export const NEXT_MOVE: NextMoveProduct[] = [
         },
       },
     ],
+    description:
+      "A creamy tone-correcting stick that helps even the look of skin tone, supports the skin barrier and blends easily with fingertips for a natural-looking finish.",
+    detailCta: "Reserve your shade",
+    reservationStatus:
+      "Reservation — three shades, no charge and no ship date yet.",
+    /* Unused for this SKU: the detail page shows the SELECTED shade, so the
+       hero comes from `shades[]`. Kept non-optional for the type, pointed at
+       the default shade so nothing can render empty. */
+    detailHero: {
+      src: "/products/smooth-talker-25-medium.webp",
+      alt: "FOUNDER Smooth Talker Ceramide Tone Stick in 25 MEDIUM, with its warm beige and cream striped carton.",
+    },
     cta: "Make your move",
     stripes: { a: "var(--color-cream)", b: "var(--color-champagne)" },
     ink: "var(--color-founder-green)",
@@ -209,6 +250,19 @@ export const NEXT_MOVE: NextMoveProduct[] = [
     ],
     keyIngredients: ["Hexapeptide-11", "Vitamin C", "Vitamin E"],
     size: "15 ml / 0.51 fl oz",
+    description:
+      "A hydrating peptide eye cream that helps the appearance of fine lines look softened and the eye area look smoother. Comfortable under makeup.",
+    detailCta: "Reserve Double Take",
+    reservationStatus: "Reservation — no charge and no ship date yet.",
+    detailHero: {
+      src: "/products/double-take-vanity.webp",
+      alt: "The Double Take bottle and carton on a cream vanity beside a lit dressing-room mirror, with a blush dressing room beyond.",
+    },
+    facts: [
+      "COSMOS Natural certified by ECOCERT Greenlife",
+      "99% natural origin",
+      "Vegan",
+    ],
     cta: "Make them look twice",
     stripes: { a: "var(--color-blush)", b: "var(--color-rose)" },
     ink: "var(--color-founder-green)",

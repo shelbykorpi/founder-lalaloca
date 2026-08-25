@@ -50,8 +50,27 @@ export type NextMoveProduct = {
   keyIngredients: string[];
   /** Supplier-stated fill. Regulated declaration — never rounded. */
   size: string;
-  /** Shade, where the SKU has one. */
+  /** Shade, where the SKU has one. Kept for products with a single shade. */
   shade?: string;
+  /**
+   * Shade range, where the SKU has more than one. Three shades of ONE
+   * product — same 12 g stick, same formula, same claims — not three
+   * products. Each carries its own hero because the carton stripe shifts
+   * with the shade, so the picture has to change with the choice.
+   *
+   * `handle` is the stable identifier for a URL or a future Shopify
+   * variant. NO SHOPIFY VARIANT IDS EXIST FOR THESE YET, and none are
+   * invented here: the picker records an intent, not a purchase.
+   */
+  shades?: {
+    /** Numeric code as printed: "20". */
+    code: string;
+    /** Shade name as printed: "Light". */
+    name: string;
+    /** Stable handle for URLs and future variant mapping. */
+    handle: string;
+    hero: { src: string; alt: string };
+  }[];
   cta: string;
   /** The two stripe colours of this SKU's packaging wall. */
   stripes: { a: string; b: string };
@@ -126,17 +145,51 @@ export const NEXT_MOVE: NextMoveProduct[] = [
     ],
     keyIngredients: ["Ceramides", "Cocoa Butter", "Vitamin E"],
     size: "12 g / 0.42 oz",
-    shade: "25 Medium",
+    /* Three shades, supplied 25 Aug. Alt text is the brief's wording
+       verbatim. No SPF, sunscreen, broad-spectrum or UV language anywhere
+       in these strings — that rule covers alt text and metadata, not just
+       visible copy. */
+    shades: [
+      {
+        code: "20",
+        name: "Light",
+        handle: "20-light",
+        hero: {
+          src: "/products/smooth-talker-20-light.webp",
+          alt: "FOUNDER Smooth Talker Ceramide Tone Stick in 20 LIGHT, with its pale ivory-beige and cream striped carton.",
+        },
+      },
+      {
+        code: "25",
+        name: "Medium",
+        handle: "25-medium",
+        hero: {
+          src: "/products/smooth-talker-25-medium.webp",
+          alt: "FOUNDER Smooth Talker Ceramide Tone Stick in 25 MEDIUM, with its warm beige and cream striped carton.",
+        },
+      },
+      {
+        code: "35",
+        name: "Deep",
+        handle: "35-deep",
+        hero: {
+          src: "/products/smooth-talker-35-deep.webp",
+          alt: "FOUNDER Smooth Talker Ceramide Tone Stick in 35 DEEP, with its espresso-brown and cream striped carton.",
+        },
+      },
+    ],
     cta: "Make your move",
     stripes: { a: "var(--color-cream)", b: "var(--color-champagne)" },
     ink: "var(--color-founder-green)",
     pack: {
-      src: "/products/smooth-talker-pack.webp",
-      alt: "The Smooth Talker stick and its carton in cream and champagne stripes, the cream label reading Smooth Talker, ceramide tone stick, shade 25 Medium.",
+      src: "/products/smooth-talker-shades-closet.webp",
+      alt: "The three Smooth Talker shades lined up in the FOUNDER dressing closet.",
     },
+    /* The family shot leads now: a card showing one shade of a three-shade
+       product tells a customer the wrong thing before she ever clicks. */
     scene: {
-      src: "/products/smooth-talker-scene.webp",
-      alt: "The Smooth Talker stick and carton on a pale stone step beneath an arch, in warm daylight.",
+      src: "/products/smooth-talker-shades.webp",
+      alt: "The FOUNDER Smooth Talker Ceramide Tone Stick shade range: 20 LIGHT, 25 MEDIUM and 35 DEEP.",
     },
     plainly:
       "Fragranced, with four declared allergens. Contains cocoa butter. Certified COSMOS Natural by ECOCERT.",

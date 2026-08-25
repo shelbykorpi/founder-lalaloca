@@ -237,7 +237,11 @@ export default async function FounderCollectionPage() {
                 hoverImage={{ src: entry.pack.src, alt: entry.pack.alt }}
                 accent={entry.stripes.b}
                 href="/the-next-move"
-                state="Reserve — no price yet"
+                state={
+                  entry.shades
+                    ? `Reserve — ${entry.shades.length} shades, no price yet`
+                    : "Reserve — no price yet"
+                }
                 action={
                   <Link href="/the-next-move" className="btn btn-outline w-full">
                     Reserve

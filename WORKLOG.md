@@ -79,6 +79,42 @@ of) + "140 ml / 4.73 fl oz" style size line, with shade folded in beside
 it rather than on its own row. The data was already in nextMove.ts; the
 page simply never rendered it.
 
+## 2026-08-25 · Claude (Cowork) — SMOOTH TALKER shade range
+Shelby supplied a shade package + implementation brief. Three shades of ONE
+product (same 12 g stick, same formula, same claims): 20 LIGHT, 25 MEDIUM,
+35 DEEP. Handles 20-light / 25-medium / 35-deep.
+- Artwork VERIFIED at full resolution before use: every carton reads
+  CERAMIDE TONE STICK with the approved benefit trio and CERAMIDES · COCOA
+  BUTTER · VITAMIN E. No SPF/sunscreen wording on any of the three.
+- 5 assets -> WebP in public/products/ at native 3:2, nothing cropped:
+  smooth-talker-{20-light,25-medium,35-deep}.webp, -shades.webp (family
+  card), -shades-closet.webp. Source PNGs belong in assets/source/ which is
+  gitignored (/assets/ line 48) — the repo's established originals archive.
+- nextMove.ts: new optional `shades[]` on the product type. The single
+  `shade` field stays for one-shade SKUs.
+- NEW src/components/shop/ShadePicker.tsx — client component. Built as a
+  RADIO GROUP, not buttons: single choice from a small set, so arrow-key
+  navigation and screen-reader semantics come for free. All three heroes
+  render and cross-fade rather than swap, so switching never shows an empty
+  frame. Verified in Playwright: 3 radios, default 25-medium, click swaps
+  the hero, ArrowLeft moves selection AND the hero follows.
+- The family shot is now this SKU's card image everywhere — a card showing
+  one shade of a three-shade product tells the customer the wrong thing.
+  /founder-collection state line reads "Reserve — 3 shades, no price yet".
+- COMPLIANCE SWEEP of the built output: SPF/sunscreen/broad-spectrum/UVA/
+  UVB/EGF/CoQ10 all zero except (a) our own "Not a sunscreen" disclaimer
+  and (b) C Me Glow's pre-existing "wear sunscreen" routine advice. Both
+  legitimate.
+- KNOWN GAP, deliberate and documented in the component: the shade does NOT
+  reach any reservation payload. No Shopify variant exists for any shade,
+  and the reservation is one email capture for the whole campaign rather
+  than a per-SKU basket. A selector that implied it reserved a specific
+  shade would promise what the plumbing cannot keep. Map by handle when
+  variants exist.
+- OPEN FOR SHELBY: the concept doc records Selfnamed offering FOUR shades
+  (light/medium/tan/deep); only three are being used. Adding the fourth is
+  cheap now and widens a narrow range.
+
 ## 2026-08-25 · Claude (Cowork) — /founder-collection opens at the vanity
 Shelby: remove the top of the page, replace with a vanity-mirror image, make
 the customer feel she is sitting down about to get ready.

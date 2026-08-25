@@ -6,6 +6,7 @@ import { EmailSignup } from "@/components/site/EmailSignup";
 import { BRAND } from "@/lib/brand";
 import { CAMPAIGN, NEXT_MOVE, RESERVING } from "@/lib/nextMove";
 import { JsonLd, breadcrumbSchema } from "@/lib/seo";
+import { ShadePicker } from "@/components/shop/ShadePicker";
 
 /**
  * THE NEXT MOVE — presale.
@@ -96,29 +97,38 @@ export default function TheNextMovePage() {
                     for the label. The tile is 3:2, the scenes' native ratio,
                     so nothing is cropped, and a 4px rule in the SKU's deep
                     stripe keeps the colourway explicit. */}
-                <div className="group/card relative aspect-[3/2] w-full overflow-hidden bg-shell">
-                  <Image
-                    src={product.scene.src}
-                    alt={product.scene.alt}
-                    fill
-                    loading="lazy"
-                    sizes="(max-width: 768px) 90vw, 30vw"
-                    className="object-cover transition-opacity duration-500 group-hover/card:opacity-0"
+                {product.shades ? (
+                  /* A shade range replaces the hover reveal: hover is not a
+                     choice, and on a phone it does not exist at all. */
+                  <ShadePicker
+                    shades={product.shades}
+                    accent={product.stripes.b}
                   />
-                  <Image
-                    src={product.pack.src}
-                    alt=""
-                    fill
-                    loading="lazy"
-                    sizes="(max-width: 768px) 90vw, 30vw"
-                    className="object-contain p-4 opacity-0 transition-opacity duration-500 group-hover/card:opacity-100"
-                  />
-                  <span
-                    aria-hidden
-                    className="absolute inset-x-0 bottom-0 h-1"
-                    style={{ background: product.stripes.b }}
-                  />
-                </div>
+                ) : (
+                  <div className="group/card relative aspect-[3/2] w-full overflow-hidden bg-shell">
+                    <Image
+                      src={product.scene.src}
+                      alt={product.scene.alt}
+                      fill
+                      loading="lazy"
+                      sizes="(max-width: 768px) 90vw, 30vw"
+                      className="object-cover transition-opacity duration-500 group-hover/card:opacity-0"
+                    />
+                    <Image
+                      src={product.pack.src}
+                      alt=""
+                      fill
+                      loading="lazy"
+                      sizes="(max-width: 768px) 90vw, 30vw"
+                      className="object-contain p-4 opacity-0 transition-opacity duration-500 group-hover/card:opacity-100"
+                    />
+                    <span
+                      aria-hidden
+                      className="absolute inset-x-0 bottom-0 h-1"
+                      style={{ background: product.stripes.b }}
+                    />
+                  </div>
+                )}
 
                 {/* Name and category first. Without them a shopper scanning
                     three cards reads three taglines and no products — and a
@@ -150,6 +160,7 @@ export default function TheNextMovePage() {
                 <p className="mt-4 text-sm text-charcoal/80">
                   {product.size}
                   {product.shade ? ` · Shade ${product.shade}` : ""}
+                  {product.shades ? ` · ${product.shades.length} shades` : ""}
                 </p>
 
                 {/* The one thing a customer might otherwise assume. */}

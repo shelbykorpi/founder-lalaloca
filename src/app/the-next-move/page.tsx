@@ -120,7 +120,16 @@ export default function TheNextMovePage() {
                   />
                 </div>
 
-                <p className="mt-6 font-serif text-xl leading-snug text-charcoal">
+                {/* Name and category first. Without them a shopper scanning
+                    three cards reads three taglines and no products — and a
+                    heading per card is what gives screen readers something to
+                    navigate by. */}
+                <p className="eyebrow mt-6 text-bronze-ink">{product.category}</p>
+                <h3 className="mt-2 font-serif text-2xl font-light leading-none text-charcoal">
+                  {product.name}
+                </h3>
+
+                <p className="mt-4 font-serif text-xl leading-snug text-charcoal">
                   {product.hook}
                 </p>
                 <p className="mt-3 text-[0.9375rem] leading-relaxed text-charcoal/85">
@@ -138,11 +147,10 @@ export default function TheNextMovePage() {
                   {product.keyIngredients.join(" · ")}
                 </p>
 
-                {product.shade && (
-                  <p className="mt-4 text-sm text-charcoal/80">
-                    Shade: {product.shade}
-                  </p>
-                )}
+                <p className="mt-4 text-sm text-charcoal/80">
+                  {product.size}
+                  {product.shade ? ` · Shade ${product.shade}` : ""}
+                </p>
 
                 {/* The one thing a customer might otherwise assume. */}
                 {product.sunNote && (

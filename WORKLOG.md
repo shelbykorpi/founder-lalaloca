@@ -63,6 +63,22 @@ FIXED:
 RULE FOR ANY FUTURE AGENT: before adding a build step, read .vercelignore.
 A file being in git does NOT mean it reaches the Vercel build container.
 
+DEPLOY CONFIRMED GREEN after 11d884e. Verified live with cache-busting:
+/the-next-move 200, next-move-hero.webp 200, /founder-collection shows
+"One is open. Three are close". The MODULE_NOT_FOUND log Shelby pasted the
+second time was the OLD failed deployment — that Vercel URL permanently
+points at the build that failed, so re-reading it shows the same error
+forever. Check the live site, not the old deployment page.
+
+Live content audit found a real gap I had shipped: /the-next-move rendered
+NO product name, NO category and NO net contents — three cards of taglines
+with nothing naming the product. Size is a regulated declaration and a
+material fact before a reservation. Fixed: category eyebrow + name as an
+h3 (also gives screen readers a per-card heading, which the page had none
+of) + "140 ml / 4.73 fl oz" style size line, with shade folded in beside
+it rather than on its own row. The data was already in nextMove.ts; the
+page simply never rendered it.
+
 ## 2026-08-25 · Claude (Cowork) — one line on /founder-collection
 Shelby: put the three NEXT MOVE products on the FOUNDER Collection page and
 format Hold the Room to match.

@@ -358,6 +358,28 @@
     letter-spacing: -0.01em;
   }
 
+  /* The product name on an after-hours detail page: spaced serif capitals,
+     engraved rather than shouted. This is the opposite move to .display-house
+     — the lockup is huge and tight, a product name is modest and wide, so the
+     two never compete on the same screen. */
+  .display-product {
+    font-family: var(--font-serif);
+    font-weight: 300;
+    font-size: clamp(1.6rem, 3.4vw, 2.75rem);
+    line-height: 1.05;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+  }
+
+  /* The line under the name and the line under the category: a short gold
+     rule, the width of a thumb, doing the work a divider would do. */
+  .plate-rule {
+    display: block;
+    width: 2.25rem;
+    height: 1px;
+    background: var(--color-bronze);
+  }
+
   /* A link as a hairline, not a button. Antique Gold is the rule; the word
      itself stays cream so it never depends on the gold for contrast. */
   .hairline {

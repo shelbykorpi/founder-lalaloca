@@ -4,6 +4,8 @@ import Link from "next/link";
 import { EmailSignup } from "@/components/site/EmailSignup";
 import { Reveal } from "@/components/house/Reveal";
 import { RoomRail } from "@/components/house/RoomRail";
+import { ThresholdDoors } from "@/components/house/ThresholdDoors";
+import { DoorFrame } from "@/components/house/DoorFrame";
 import { BRAND } from "@/lib/brand";
 import { FOUNDER_COLLECTION } from "@/lib/founderCollection";
 import { NEXT_MOVE } from "@/lib/nextMove";
@@ -163,6 +165,7 @@ const NOTES = [
 export default function AfterHoursPage() {
   return (
     <div className="bg-emerald-deep text-cream">
+      <ThresholdDoors />
       <RoomRail rooms={ROOMS} />
 
       {/* ══ 01 · THE THRESHOLD ══════════════════════════════════════════════
@@ -205,6 +208,8 @@ export default function AfterHoursPage() {
           </div>
         </div>
       </section>
+
+      <DoorFrame label="Room 02 · Inside FOUNDER" />
 
       {/* ══ 02 · INSIDE FOUNDER ═════════════════════════════════════════════ */}
       <section id="room-house" className="section bg-emerald-deep">
@@ -402,6 +407,8 @@ export default function AfterHoursPage() {
         </div>
       </section>
 
+      <DoorFrame label="Room 04 · The Anchor" />
+
       {/* ══ 04 · THE ANCHOR ═════════════════════════════════════════════════ */}
       <section id="room-anchor" className="section bg-founder-green">
         <div className="shell grid gap-12 lg:grid-cols-[0.8fr_1fr] lg:items-center lg:gap-20">
@@ -471,6 +478,8 @@ export default function AfterHoursPage() {
           </Reveal>
         </div>
       </section>
+
+      <DoorFrame label="Room 06 · Notes from the house" />
 
       {/* ══ 06 · NOTES FROM THE HOUSE ═══════════════════════════════════════ */}
       <section id="room-notes" className="section bg-emerald-deep">

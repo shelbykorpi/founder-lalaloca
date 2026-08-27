@@ -313,6 +313,92 @@
     border: 1px solid color-mix(in srgb, var(--color-bronze) 22%, transparent);
   }
 
+  /* ---- After hours ------------------------------------------------------
+     The dark-first mode for /after-hours. NO NEW COLOURS: every value below
+     is an existing @theme token. The review build wanted a #08130f ground and
+     a #b8955e brass; both are refused. Founder Green is the master field and
+     Antique Gold is the metal — what changes here is which token carries the
+     text at which size, not the palette.
+
+     THE GOLD RULE, MEASURED. Antique Gold #b08a64 is 3.04:1 on Founder Green
+     and 2.77:1 on Warm Ivory: fine as a fill, a rule, or display type at 24px
+     and up, and unreadable as a 9px label. Champagne #d6be9a is 5.33:1 on
+     green and carries the small uppercase labels on every dark ground.
+     Bronze Ink #8a6335 does the same job on light. */
+  .room-label {
+    font-family: var(--font-sans);
+    font-size: 0.5625rem;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    line-height: 1;
+    color: var(--color-champagne);
+  }
+
+  .room-label-dk {
+    color: var(--color-bronze-ink);
+  }
+
+  /* Bigger and tighter than .display — the one thing worth taking wholesale
+     from the review build. Two lines of the lockup, one face, one colour. */
+  .display-house {
+    font-family: var(--font-serif);
+    font-weight: 300;
+    /* Sized so the longest lockup line — THE ROOM IS YOURS. — holds on one
+       line from 360px up. The board requires two lines; four is not two. */
+    font-size: clamp(2.4rem, 5.6vw, 4.5rem);
+    line-height: 1;
+    letter-spacing: -0.012em;
+  }
+
+  .headline-house {
+    font-family: var(--font-serif);
+    font-weight: 300;
+    font-size: clamp(2.25rem, 5.6vw, 4.25rem);
+    line-height: 1;
+    letter-spacing: -0.01em;
+  }
+
+  /* A link as a hairline, not a button. Antique Gold is the rule; the word
+     itself stays cream so it never depends on the gold for contrast. */
+  .hairline {
+    display: inline-block;
+    font-family: var(--font-sans);
+    font-size: 0.5625rem;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    padding-bottom: 0.35rem;
+    border-bottom: 1px solid var(--color-bronze);
+    transition: border-color 200ms ease;
+  }
+
+  .hairline:hover {
+    border-bottom-color: var(--color-champagne);
+  }
+
+  /* Scroll reveal. The class is applied by Reveal.tsx only after mount, so a
+     page with JS disabled — or a crawler — sees the content, never a blank. */
+  .reveal {
+    opacity: 0;
+    transform: translateY(1.25rem);
+    transition:
+      opacity 900ms cubic-bezier(0.22, 1, 0.36, 1),
+      transform 900ms cubic-bezier(0.22, 1, 0.36, 1);
+  }
+
+  .reveal[data-shown="true"] {
+    opacity: 1;
+    transform: none;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .reveal,
+    .reveal[data-shown="true"] {
+      opacity: 1;
+      transform: none;
+      transition: none;
+    }
+  }
+
   /* Subtle stone / silk texture used behind editorial sections */
   .texture-stone {
     background-image:

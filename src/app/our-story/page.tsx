@@ -65,13 +65,22 @@ export default function OurStoryPage() {
             sizes="100vw"
             className="object-cover"
           />
+          {/* The photograph's left side is a lit desk, and the copy was set on
+              it in charcoal — composed for the cream site. In the dark house
+              that made the first thing under the header a bright band. The
+              wash puts the left back into shadow and the type goes to cream;
+              the journal, the lamp and the pen keep all their light. */}
+          <div
+            aria-hidden
+            className="absolute inset-0 bg-[linear-gradient(90deg,rgba(7,19,15,0.95)_0%,rgba(7,19,15,0.88)_26%,rgba(7,19,15,0.55)_42%,rgba(7,19,15,0.12)_58%,rgba(7,19,15,0)_72%)]"
+          />
           <div className="absolute inset-0 flex items-center">
             <div className="shell w-full">
               {/* max-w-md holds the headline to the five lines the photograph's
                   cream field was composed around. Wider and it runs into the
                   desk; narrower and it stacks too tall for the band. */}
               <div className="max-w-md">
-                <p className="eyebrow text-bronze-ink">Our story</p>
+                <p className="room-label">Our story</p>
                 {/* Not the global .headline. That scales at 5.2vw, which is
                     tuned for a section that grows as tall as its text needs.
                     This band cannot: its height is fixed by the photograph's
@@ -79,10 +88,10 @@ export default function OurStoryPage() {
                     and the last line of the lede sat on the desk. 3.4vw keeps
                     five lines inside the band at every width from the lg
                     breakpoint up, and still reaches the same 3.5rem ceiling. */}
-                <h1 className="mt-5 text-balance font-serif text-[clamp(1.75rem,3.4vw,3.5rem)] leading-[1.05] text-charcoal">
+                <h1 className="mt-5 text-balance font-serif text-[clamp(1.75rem,3.4vw,3.5rem)] leading-[1.05] text-cream">
                   {OUR_STORY_TITLE}
                 </h1>
-                <p className="lede mt-6 text-charcoal/80">{OUR_STORY_LEDE}</p>
+                <p className="lede mt-6 text-cream/85">{OUR_STORY_LEDE}</p>
               </div>
             </div>
           </div>
@@ -105,7 +114,7 @@ export default function OurStoryPage() {
           headingLevel="h2"
           tone="dark"
         />
-        <div className="bg-cream pb-2">
+        <div className="bg-night pb-2">
           <figure>
             <div className="relative aspect-[1255/747] w-full">
               <Image
@@ -117,7 +126,7 @@ export default function OurStoryPage() {
                 className="object-cover"
               />
             </div>
-            <figcaption className="shell mt-3 text-xs uppercase tracking-[0.16em] text-charcoal/60">
+            <figcaption className="shell mt-3 text-xs uppercase tracking-[0.16em] text-cream/70">
               I found her in the woman who refused to quit
             </figcaption>
           </figure>
@@ -125,18 +134,26 @@ export default function OurStoryPage() {
       </div>
 
       {/* ---------------- Not only entrepreneurs ---------------- */}
-      <section className="section bg-cream">
+      {/* THIS WAS PAPER AND SHOULD NOT HAVE BEEN. The rule is that long
+          reading gets a lit panel; this is roughly two hundred words and a row
+          of chips — a statement, not an essay — and on the cream ground it
+          made two thirds of Our Story read as the old site with a dark header
+          bolted on. The founder's own story below stays lit, and it is the
+          only thing on the page that earns it. */}
+      <section className="section bg-emerald-deep text-cream">
         <div className="shell grid gap-10 lg:grid-cols-[minmax(0,24rem)_1fr] lg:gap-16">
           <div>
-            <h2 className="headline text-balance text-charcoal">
+            <h2 className="headline text-balance text-cream">
               Not every woman has a company.
             </h2>
-            <p className="mt-4 font-serif text-2xl text-bronze-ink">
+            {/* Bronze Ink is the gold that carries on cream; on this ground
+                it is 1.7:1. Champagne is its dark-room counterpart. */}
+            <p className="mt-4 font-serif text-2xl text-champagne">
               Every woman is building something.
             </p>
           </div>
           <div className="max-w-[38rem]">
-            <p className="text-[1.0625rem] leading-[1.8] text-charcoal/85">
+            <p className="text-[1.0625rem] leading-[1.8] text-cream/85">
               When we say founder, we don’t mean a business registration. We mean the
               woman who started the thing, kept it going, or began again after it fell
               over. Sometimes that’s a company. Usually it isn’t.
@@ -145,13 +162,13 @@ export default function OurStoryPage() {
               {BUILDING.map((item) => (
                 <li
                   key={item}
-                  className="border border-bronze/40 px-4 py-2 text-sm text-charcoal/85"
+                  className="border border-bronze/40 px-4 py-2 text-sm text-cream/85"
                 >
                   {item}
                 </li>
               ))}
             </ul>
-            <p className="mt-8 leading-[1.8] text-charcoal/85">
+            <p className="mt-8 leading-[1.8] text-cream/85">
               The other half of the name is the part people notice second. Founder.
               Found her. There’s usually a moment somewhere in the building where a
               woman looks up and recognizes who she’s become. We named the brand after

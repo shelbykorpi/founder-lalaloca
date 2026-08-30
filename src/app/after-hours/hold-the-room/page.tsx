@@ -59,7 +59,7 @@ export const metadata: Metadata = {
 
 export default function AfterHoursHoldTheRoomPage() {
   return (
-    <div className="bg-emerald-deep text-cream">
+    <div className="bg-night text-cream">
       <JsonLd
         schema={[
           breadcrumbSchema([
@@ -74,7 +74,7 @@ export default function AfterHoursHoldTheRoomPage() {
       {/* ══ THE PLATE ═══════════════════════════════════════════════════════
           One room, full width. The copy lives in the shadow on the left, so
           the wall behind it is the same wall the product is standing against. */}
-      <section className="relative isolate flex min-h-[calc(100svh-4rem)] flex-col justify-end overflow-hidden">
+      <section className="relative isolate flex min-h-[calc(100svh-7rem)] flex-col justify-end overflow-hidden">
         <Image
           src="/products/hold-the-room-vanity-hero.webp"
           alt="Hold the Room and its carton on a marble dressing table, green doors open onto a lit vanity beyond."
@@ -88,7 +88,7 @@ export default function AfterHoursHoldTheRoomPage() {
             over the lit part of the frame at any width. */}
         <div
           aria-hidden
-          className="absolute inset-0 bg-[linear-gradient(180deg,rgba(10,37,35,0.55)_0%,rgba(10,37,35,0.25)_30%,rgba(10,37,35,0.95)_86%,#0a2523_100%)] md:bg-[linear-gradient(90deg,#0a2523_0%,rgba(10,37,35,0.95)_28%,rgba(10,37,35,0.6)_44%,rgba(10,37,35,0.05)_66%)]"
+          className="absolute inset-0 bg-[linear-gradient(180deg,rgba(7,19,15,0.55)_0%,rgba(7,19,15,0.25)_30%,rgba(7,19,15,0.95)_86%,#07130f_100%)] md:bg-[linear-gradient(90deg,#07130f_0%,rgba(7,19,15,0.95)_28%,rgba(7,19,15,0.6)_44%,rgba(7,19,15,0.05)_66%)]"
         />
 
         <div className="shell relative flex w-full flex-1 items-end pb-16 pt-28 md:items-center md:py-24">
@@ -138,7 +138,7 @@ export default function AfterHoursHoldTheRoomPage() {
             {/* Kept to one line so the line rail still lands on the first
                 screen. Nothing is lost: shipping and returns are one tap away
                 and both are restated in the bag before checkout. */}
-            <p className="mt-5 max-w-[26rem] text-[0.6875rem] leading-relaxed text-cream/45">
+            <p className="mt-5 max-w-[26rem] text-[0.6875rem] leading-relaxed text-cream/55">
               Secure checkout · Free US shipping · {BRAND.legal.name} is the seller of record ·{" "}
               <Link className="underline underline-offset-2 hover:opacity-70" href="/policies/shipping">
                 Shipping
@@ -260,7 +260,7 @@ export default function AfterHoursHoldTheRoomPage() {
       <section className="relative isolate overflow-hidden">
         <Image
           src="/editorial/founder-collection-door.webp"
-          alt="Tall blush doors with a brass F on each leaf, half open onto a dark atelier."
+          alt="A woman in a cream suit holding open one of two tall rose-pink doors, a brass F on each leaf, stepping into a dark atelier lined with product benches."
           fill
           loading="lazy"
           sizes="100vw"
@@ -268,7 +268,7 @@ export default function AfterHoursHoldTheRoomPage() {
         />
         <div
           aria-hidden
-          className="absolute inset-0 bg-[linear-gradient(90deg,rgba(10,37,35,0.96)_0%,rgba(10,37,35,0.86)_34%,rgba(10,37,35,0.4)_62%,rgba(10,37,35,0.1)_100%)]"
+          className="absolute inset-0 bg-[linear-gradient(90deg,rgba(7,19,15,0.96)_0%,rgba(7,19,15,0.86)_34%,rgba(7,19,15,0.4)_62%,rgba(7,19,15,0.1)_100%)]"
         />
         <div className="shell relative py-24 md:py-32">
           <Reveal className="max-w-[30rem]">

@@ -79,7 +79,7 @@ const LINE = [
     descriptor: `${holdTheRoom.category} · ${holdTheRoom.size}`,
     image: "/products/hold-the-room-tall.webp",
     alt: "Hold the Room on a marble dressing table, green doors open onto a lit vanity beyond.",
-    href: "/products/hold-the-room",
+    href: "/after-hours/hold-the-room",
     state: "Preorder — ships when the first run lands",
     action: `Preorder · ${formatPrice(holdTheRoom.price)}`,
     ready: true,
@@ -91,7 +91,7 @@ const LINE = [
     descriptor: `${bySlug["clean-break"].category} · ${bySlug["clean-break"].size}`,
     image: "/products/clean-break-tall.webp",
     alt: "Clean Break beside a running brass tap on a cream marble basin.",
-    href: "/products/clean-break",
+    href: "/after-hours/clean-break",
     state: "Reserve — no price yet",
     action: "Reserve",
     ready: false,
@@ -103,7 +103,7 @@ const LINE = [
     descriptor: `${bySlug["smooth-talker"].category} · ${bySlug["smooth-talker"].size} · 3 shades`,
     image: "/products/smooth-talker-tall.webp",
     alt: "Smooth Talker in 25 Medium beside its striped carton on a brass table.",
-    href: "/products/smooth-talker",
+    href: "/after-hours/smooth-talker",
     state: "Reserve — no price yet",
     action: "Reserve",
     ready: false,
@@ -115,7 +115,7 @@ const LINE = [
     descriptor: `${bySlug["double-take"].category} · ${bySlug["double-take"].size}`,
     image: "/products/double-take-tall.webp",
     alt: "Double Take and its striped carton on a marble vanity by a lit mirror.",
-    href: "/products/double-take",
+    href: "/after-hours/double-take",
     state: "Reserve — no price yet",
     action: "Reserve",
     ready: false,
@@ -241,7 +241,7 @@ export default function AfterHoursPage() {
               },
               {
                 src: "/editorial/founder-collection-door.webp",
-                alt: "Tall blush doors with a brass F on each leaf, half open onto a dark atelier.",
+                alt: "A woman in a cream suit holding open one of two tall rose-pink doors, a brass F on each leaf, stepping into a dark atelier lined with product benches.",
                 cap: "The door",
               },
             ].map((tile, i) => (
@@ -435,7 +435,7 @@ export default function AfterHoursPage() {
               {holdTheRoom.preorder}
             </p>
             <div className="mt-9">
-              <Link href="/products/hold-the-room" className="btn btn-primary">
+              <Link href="/after-hours/hold-the-room" className="btn btn-primary">
                 Explore the ritual
               </Link>
             </div>

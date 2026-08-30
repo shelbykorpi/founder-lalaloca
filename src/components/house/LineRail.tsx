@@ -10,6 +10,12 @@ import Link from "next/link";
  * as a product in any form. A name in a navigation rail reads as a thing you
  * can go and look at, so it is left out here and stays a waitlist card on the
  * collection grid.
+ *
+ * THE RAIL STAYS INSIDE THE HOUSE. All four now have an after-hours plate, so
+ * every link points at `/after-hours/<slug>`. Until this session, three of the
+ * four left the dark world mid-line and dropped the shopper onto a cream page
+ * — the exact interruption the 27 Aug directive is about. When these plates
+ * are promoted over the live routes, this prefix collapses to `/products/`.
  */
 const LINE = [
   { slug: "double-take", name: "Double Take" },
@@ -22,7 +28,7 @@ export function LineRail({ current }: { current: string }) {
   return (
     <nav
       aria-label="The FOUNDER Collection"
-      className="border-t border-bronze/25 bg-emerald-deep/90 backdrop-blur-sm"
+      className="border-t border-bronze/25 bg-night/90 backdrop-blur-sm"
     >
       <ul className="mx-auto flex max-w-[80rem] flex-wrap items-stretch justify-center">
         {LINE.map((item) => {
@@ -30,11 +36,7 @@ export function LineRail({ current }: { current: string }) {
           return (
             <li key={item.slug} className="flex">
               <Link
-                href={
-                  item.slug === "hold-the-room"
-                    ? "/after-hours/hold-the-room"
-                    : `/products/${item.slug}`
-                }
+                href={`/after-hours/${item.slug}`}
                 aria-current={active ? "page" : undefined}
                 className={`inline-flex min-h-12 items-center border-b-2 px-5 text-[0.625rem] uppercase tracking-[0.2em] transition-colors sm:px-8 ${
                   active

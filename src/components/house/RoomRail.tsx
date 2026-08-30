@@ -54,7 +54,7 @@ export function RoomRail({ rooms }: { rooms: { id: string; label: string }[] }) 
       className="pointer-events-none fixed right-6 top-1/2 z-30 hidden -translate-y-1/2 flex-col items-end gap-3 lg:flex"
     >
       <span
-        className="mb-2 text-[0.5rem] uppercase tracking-[0.28em] text-cream/45"
+        className="mb-2 text-[0.5rem] uppercase tracking-[0.28em] text-cream/55"
         style={{ writingMode: "vertical-rl" }}
       >
         {rooms[active]?.label}

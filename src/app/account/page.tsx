@@ -21,10 +21,15 @@ export const metadata: Metadata = {
 export default function AccountPage() {
   return (
     <>
+      {/* Opens dark, under the dark header, and hands off to the card below —
+          a short account explainer, but still the kind of thing a person
+          reads carefully (how to track an order, where their card details
+          go), so it belongs on paper rather than in the room. */}
       <PageIntro
         eyebrow="Account"
         title="There’s nothing to sign into."
         lede="You don’t need an account to order, and we’d rather not ask you to make one."
+        tone="dark"
       />
 
       <section className="section bg-cream pt-4">

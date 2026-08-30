@@ -29,7 +29,11 @@ export default async function PolicyPage({ params }: PageProps<"/policies/[slug]
 
   return (
     <>
-      <PageIntro eyebrow="Care" title={policy.title} lede={policy.intro} />
+      {/* This is legal reading: the furniture (this intro) is the dark room,
+          and the policy text itself — shipping, returns, privacy, terms —
+          stays on paper below. Nobody should have to read a returns policy
+          in cream on near-black. */}
+      <PageIntro eyebrow="Care" title={policy.title} lede={policy.intro} tone="dark" />
       <section className="section bg-cream pt-0">
         <div className="shell-narrow">
           <div className="max-w-[38rem] border-t border-charcoal/12">

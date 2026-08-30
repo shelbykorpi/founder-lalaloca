@@ -131,7 +131,7 @@ export function BagDrawer() {
       <div
         aria-hidden={!isOpen}
         onClick={closeBag}
-        className={`fixed inset-0 z-40 bg-charcoal/45 transition-opacity duration-300 ${
+        className={`fixed inset-0 z-40 bg-night-deep/70 transition-opacity duration-300 ${
           isOpen ? "opacity-100" : "pointer-events-none opacity-0"
         }`}
       />
@@ -141,19 +141,19 @@ export function BagDrawer() {
         aria-modal="true"
         aria-label="Shopping bag"
         aria-hidden={!isOpen}
-        className={`fixed right-0 top-0 z-50 flex h-[100dvh] w-full max-w-[26rem] flex-col bg-shell shadow-2xl transition-transform duration-300 ease-[cubic-bezier(0.22,0.61,0.24,1)] ${
+        className={`fixed right-0 top-0 z-50 flex h-[100dvh] w-full max-w-[26rem] flex-col border-l border-bronze/25 bg-night text-cream shadow-2xl transition-transform duration-300 ease-[cubic-bezier(0.22,0.61,0.24,1)] ${
           isOpen ? "translate-x-0" : "pointer-events-none translate-x-full"
         }`}
       >
         <header className="flex items-center justify-between border-b border-bronze/20 px-6 py-5">
-          <h2 className="eyebrow text-charcoal">
-            Your bag {count > 0 && <span className="text-bronze-ink">({count})</span>}
+          <h2 className="eyebrow text-cream">
+            Your bag {count > 0 && <span className="text-bronze">({count})</span>}
           </h2>
           <button
             ref={closeRef}
             type="button"
             onClick={closeBag}
-            className="-mr-2 flex h-11 w-11 items-center justify-center text-charcoal transition-opacity hover:opacity-60"
+            className="-mr-2 flex h-11 w-11 items-center justify-center text-cream transition-opacity hover:opacity-60"
           >
             <span className="sr-only">Close bag</span>
             <svg viewBox="0 0 16 16" aria-hidden className="h-4 w-4">
@@ -164,17 +164,17 @@ export function BagDrawer() {
 
         {lines.length === 0 ? (
           <div className="flex flex-1 flex-col items-center justify-center gap-6 px-8 text-center">
-            <p className="subhead text-charcoal">Your bag is empty.</p>
-            <p className="text-sm text-charcoal/70">
+            <p className="subhead text-cream">Your bag is empty.</p>
+            <p className="text-sm text-cream/75">
               Three serums, three distinct personalities. Start wherever you like.
             </p>
-            <Link href="/shop" onClick={closeBag} className="btn btn-dark">
+            <Link href="/shop" onClick={closeBag} className="btn btn-primary">
               Shop the collection
             </Link>
           </div>
         ) : (
           <>
-            <ul className="flex-1 divide-y divide-bronze/15 overflow-y-auto px-6">
+            <ul className="flex-1 divide-y divide-bronze/20 overflow-y-auto px-6">
               {lines.map((line) => (
                 <li key={line.id} className="flex gap-4 py-5">
                   <div className="relative h-24 w-16 shrink-0 overflow-hidden bg-cream">
@@ -190,11 +190,11 @@ export function BagDrawer() {
                     <Link
                       href={line.href}
                       onClick={closeBag}
-                      className="inline-flex min-h-11 items-center font-serif text-xl leading-tight text-charcoal hover:text-bronze-ink"
+                      className="inline-flex min-h-11 items-center font-serif text-xl leading-tight text-cream hover:text-champagne"
                     >
                       {line.name}
                     </Link>
-                    <p className="text-xs uppercase tracking-[0.14em] text-charcoal/70">
+                    <p className="text-xs uppercase tracking-[0.14em] text-cream/70">
                       {line.size}
                     </p>
                     <div className="mt-auto flex items-center justify-between pt-3">
@@ -202,7 +202,7 @@ export function BagDrawer() {
                         <button
                           type="button"
                           onClick={() => setQuantity(line.id, line.quantity - 1)}
-                          className="flex h-11 w-11 items-center justify-center text-charcoal hover:bg-cream"
+                          className="flex h-11 w-11 items-center justify-center text-cream hover:bg-cream/10"
                         >
                           <span className="sr-only">Decrease quantity of {line.name}</span>
                           <span aria-hidden>–</span>
@@ -213,20 +213,20 @@ export function BagDrawer() {
                         <button
                           type="button"
                           onClick={() => setQuantity(line.id, line.quantity + 1)}
-                          className="flex h-11 w-11 items-center justify-center text-charcoal hover:bg-cream"
+                          className="flex h-11 w-11 items-center justify-center text-cream hover:bg-cream/10"
                         >
                           <span className="sr-only">Increase quantity of {line.name}</span>
                           <span aria-hidden>+</span>
                         </button>
                       </div>
-                      <span className="text-sm text-charcoal">
+                      <span className="text-sm text-cream">
                         {formatPrice(line.price * line.quantity)}
                       </span>
                     </div>
                     <button
                       type="button"
                       onClick={() => removeLine(line)}
-                      className="mt-1 inline-flex min-h-11 self-start items-center text-[0.6875rem] uppercase tracking-[0.16em] text-charcoal/70 underline underline-offset-4 hover:text-charcoal"
+                      className="mt-1 inline-flex min-h-11 self-start items-center text-[0.6875rem] uppercase tracking-[0.16em] text-cream/70 underline underline-offset-4 hover:text-cream"
                     >
                       Remove
                     </button>
@@ -237,27 +237,27 @@ export function BagDrawer() {
 
             <footer className="border-t border-bronze/20 px-6 py-5">
               <div className="flex items-baseline justify-between">
-                <span className="eyebrow text-charcoal/70">Subtotal</span>
-                <span className="font-serif text-2xl text-charcoal">
+                <span className="eyebrow text-cream/70">Subtotal</span>
+                <span className="font-serif text-2xl text-cream">
                   {formatPrice(subtotal)}
                 </span>
               </div>
-              <p className="mt-1 text-xs text-charcoal/70">
+              <p className="mt-1 text-xs text-cream/70">
                 Free US shipping. Taxes calculated at checkout.
               </p>
               <button
                 type="button"
                 onClick={startCheckout}
-                className="btn btn-dark mt-4 w-full"
+                className="btn btn-primary mt-4 w-full"
               >
                 Checkout
               </button>
               {checkoutError && (
-                <p role="alert" className="mt-3 text-center text-xs leading-relaxed text-red-700">
+                <p role="alert" className="mt-3 border-l-2 border-rose py-2 pl-3 text-left text-xs leading-relaxed text-rose">
                   {checkoutError}
                 </p>
               )}
-              <p className="mt-3 text-center text-[0.6875rem] leading-relaxed text-charcoal/70">
+              <p className="mt-3 text-center text-[0.6875rem] leading-relaxed text-cream/60">
                 You’ll finish your order on Shopify’s secure checkout. Cosmetic use only.
               </p>
             </footer>

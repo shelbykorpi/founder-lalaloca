@@ -9,25 +9,23 @@ import { FOUNDER_ASPECT, Wordmark } from "./Wordmark";
 import { useBag } from "@/components/bag/BagProvider";
 
 /**
- * Routes that belong to the after-hours house. The header goes dark on these
- * and stays cream everywhere else.
+ * THE HEADER IS DARK EVERYWHERE, as of 30 August.
  *
- * WHY A LIST AND NOT A FLIP. The 27 Aug directive asks for a dark header on
- * every page and no abrupt theme change while scrolling — but the site is
- * converting a page at a time, and a dark bar pinned above a cream shop is a
- * worse interruption than the one we are fixing. So the header follows the
- * room it is standing in. Add each route here as it converts; when the last
- * cream page goes, delete the check and the light branch with it.
+ * It ran route-aware for three days — cream over the shop, night over the
+ * after-hours rooms — because a dark bar pinned above a cream page is a worse
+ * interruption than the one the directive was fixing. That reasoning expired
+ * the moment the whole site went dark: there is no cream page left for it to
+ * sit above, so the check and its light branch went with it.
+ *
+ * Colourway 03 (Founder Green over Desert Rose) is the board's LIGHT-ground
+ * alternate and cannot survive here, so the bar carries Champagne over Desert
+ * Rose instead — the same two-tone structure, both halves legible on night.
  */
-const NIGHT_ROUTES = ["/after-hours"];
 
 export function Header() {
   const pathname = usePathname();
   const { count, openBag } = useBag();
   const [menuOpen, setMenuOpen] = useState(false);
-  const night = NIGHT_ROUTES.some(
-    (r) => pathname === r || pathname.startsWith(`${r}/`),
-  );
 
   useEffect(() => {
     if (!menuOpen) return;
@@ -45,14 +43,10 @@ export function Header() {
 
   return (
     <header
-      className={`sticky top-0 z-30 border-b backdrop-blur-md ${
-        night ? "border-bronze/25 bg-night/85" : "border-charcoal/10 bg-cream/95"
-      }`}
+      className="sticky top-0 z-30 border-b backdrop-blur-md border-bronze/25 bg-night/85"
     >
       <p
-        className={`py-2 text-center text-[0.625rem] uppercase tracking-[0.24em] ${
-          night ? "bg-night-deep text-cream/80" : "bg-ink text-shell"
-        }`}
+        className="py-2 text-center text-[0.625rem] uppercase tracking-[0.24em] bg-night-deep text-cream/80"
       >
         {BRAND.structure}
       </p>
@@ -67,9 +61,7 @@ export function Header() {
           aria-expanded={menuOpen}
           aria-controls="mobile-nav"
           onClick={() => setMenuOpen((v) => !v)}
-          className={`-ml-3 flex h-11 w-11 items-center justify-center lg:hidden ${
-            night ? "text-cream" : "text-charcoal"
-          }`}
+          className="-ml-3 flex h-11 w-11 items-center justify-center lg:hidden text-cream"
         >
           <span className="sr-only">{menuOpen ? "Close menu" : "Open menu"}</span>
           <svg viewBox="0 0 20 14" aria-hidden className="h-3.5 w-5">
@@ -97,14 +89,14 @@ export function Header() {
               light-background alternate. It cannot survive on a night ground,
               so the dark rooms take Champagne over Desert Rose instead: the
               same two-tone structure, both halves legible on #07130f. */}
-          <span className={`md:hidden ${night ? "text-champagne" : "text-founder-green"}`}>
+          <span className="md:hidden text-champagne">
             <Wordmark
               height={130 / FOUNDER_ASPECT}
               beautyClassName="text-rose"
               label=""
             />
           </span>
-          <span className={`hidden md:block ${night ? "text-champagne" : "text-founder-green"}`}>
+          <span className="hidden md:block text-champagne">
             <Wordmark
               height={150 / FOUNDER_ASPECT}
               beautyClassName="text-rose"
@@ -135,12 +127,8 @@ export function Header() {
                     aria-label={item.stack ? item.label : undefined}
                     className={`eyebrow inline-flex min-h-11 items-center whitespace-nowrap border-b text-center transition-colors ${
                       active
-                        ? night
-                          ? "border-bronze text-champagne"
-                          : "border-bronze text-bronze-ink"
-                        : night
-                          ? "border-transparent text-cream/70 hover:border-bronze/40 hover:text-cream"
-                          : "border-transparent text-charcoal hover:border-charcoal/30"
+                        ? "border-bronze text-champagne"
+                        : "border-transparent text-cream/70 hover:border-bronze/40 hover:text-cream"
                     }`}
                   >
                     {item.stack ? (
@@ -165,22 +153,14 @@ export function Header() {
         <div className="flex items-center gap-1 md:gap-3">
           <Link
             href="/search"
-            className={`eyebrow hidden h-11 items-center px-2 md:inline-flex ${
-              night
-                ? "text-cream/70 hover:text-champagne"
-                : "text-charcoal hover:text-bronze-ink"
-            }`}
+            className="eyebrow hidden h-11 items-center px-2 md:inline-flex text-cream/70 hover:text-champagne"
           >
             Search
           </Link>
           <button
             type="button"
             onClick={openBag}
-            className={`eyebrow flex h-11 items-center px-2 ${
-              night
-                ? "text-cream/70 hover:text-champagne"
-                : "text-charcoal hover:text-bronze-ink"
-            }`}
+            className="eyebrow flex h-11 items-center px-2 text-cream/70 hover:text-champagne"
           >
             Bag<span aria-hidden> ({count})</span>
             <span className="sr-only">
@@ -194,9 +174,7 @@ export function Header() {
       <div
         id="mobile-nav"
         hidden={!menuOpen}
-        className={`border-t lg:hidden ${
-          night ? "border-bronze/20 bg-night" : "border-charcoal/10 bg-cream"
-        }`}
+        className="border-t lg:hidden border-bronze/20 bg-night"
       >
         <nav aria-label="Primary mobile" className="shell py-4">
           <ul className="flex flex-col">
@@ -209,11 +187,7 @@ export function Header() {
                     close();
                   }}
                   aria-label={item.stack ? item.label : undefined}
-                  className={`flex min-h-[3rem] items-center border-b font-serif text-2xl ${
-                    night
-                      ? "border-bronze/15 text-cream"
-                      : "border-charcoal/10 text-charcoal"
-                  }`}
+                  className="flex min-h-[3rem] items-center border-b font-serif text-2xl border-bronze/15 text-cream"
                 >
                   {/* One line here rather than three: at this size the stack
                       would run half the panel. Same words, same order. */}
@@ -230,14 +204,14 @@ export function Header() {
             <Link
               href="/search"
               onClick={close}
-              className={`eyebrow flex min-h-11 items-center ${night ? "text-cream/70" : "text-charcoal"}`}
+              className="eyebrow flex min-h-11 items-center text-cream/70"
             >
               Search
             </Link>
             <Link
               href="/account"
               onClick={close}
-              className={`eyebrow flex min-h-11 items-center ${night ? "text-cream/70" : "text-charcoal"}`}
+              className="eyebrow flex min-h-11 items-center text-cream/70"
             >
               Account
             </Link>

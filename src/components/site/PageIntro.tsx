@@ -34,8 +34,13 @@ export function PageIntro({
   const Heading = headingLevel;
   const dark = tone === "dark";
   const rose = tone === "rose";
+  /* "dark" used to paint bg-charcoal/text-shell — a standalone dark card, not
+     one of the house's three night grounds. Now that the body itself is
+     night, this tone is what a page reaches for to open in a dark room
+     instead of defaulting into a pale band under the (also dark) header, so
+     it takes the same night ground everything else does. */
   const field = dark
-    ? "bg-charcoal text-shell"
+    ? "bg-night text-cream"
     : rose
       ? "bg-rose text-charcoal"
       : "texture-stone bg-cream";
@@ -50,14 +55,14 @@ export function PageIntro({
       >
         <div>
           <p
-            className={`eyebrow ${dark ? "text-bronze" : rose ? "text-charcoal/70" : "text-bronze-ink"}`}
+            className={`eyebrow ${dark ? "text-champagne" : rose ? "text-charcoal/70" : "text-bronze-ink"}`}
           >
             {eyebrow}
           </p>
           <Heading className="headline mt-5 max-w-[20ch] text-balance">{title}</Heading>
           {lede && (
             <p
-              className={`lede mt-6 ${dark ? "text-shell/75" : rose ? "text-charcoal/85" : "text-charcoal/80"}`}
+              className={`lede mt-6 ${dark ? "text-cream/75" : rose ? "text-charcoal/85" : "text-charcoal/80"}`}
             >
               {lede}
             </p>
@@ -70,7 +75,10 @@ export function PageIntro({
   );
 }
 
-/** Marks something we are waiting on rather than something we invented. */
+/** Marks something we are waiting on rather than something we invented.
+    Sets no ground of its own — it reads correctly wherever the caller
+    already sits on a paper/light surface, and callers only ever drop it
+    into one. */
 export function PendingNote({ children }: { children: ReactNode }) {
   return (
     <p className="mt-6 border-l-2 border-bronze/50 py-1 pl-4 text-xs leading-relaxed text-charcoal/70">

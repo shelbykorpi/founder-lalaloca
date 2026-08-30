@@ -39,7 +39,8 @@ export type Shade = {
  * one is a full-bleed plate with chips that must read on a night ground.
  * Threading a tone flag through every class of a component that is live on a
  * converting page, to serve a track that will replace it, is the wrong trade.
- * When the plate is promoted, delete `shop/ShadePicker`, not this.
+ * Both are live: this one on /products/smooth-talker, that one on
+ * /the-next-move, which is still a cream campaign page.
  *
  * NO `useSearchParams`, DELIBERATELY. It opts the tree into client rendering
  * and demands a Suspense boundary, which here would wrap the whole plate and

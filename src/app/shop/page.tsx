@@ -56,7 +56,10 @@ export default function ShopPage() {
         listName="The LALALOCA Collection"
       />
 
-      <section className="section bg-cream pt-2" aria-label="Serums">
+      {/* Browsing, not reading — the elevator doors are the room now, not a
+          card laid on paper. The long INCI/policy reading stays below on
+          paper; this is the dark room a shopper walks through first. */}
+      <section className="section bg-night pt-2" aria-label="Serums">
         <ScrollDoors className="shell grid gap-x-8 gap-y-14 md:grid-cols-2 lg:grid-cols-3">
           {products.map((product, index) => (
             <DoorCard
@@ -74,7 +77,12 @@ export default function ShopPage() {
           three bottles on marble, and a gold-framed marble tariff board. The
           board's text and button are LIVE, laid over the cleaned photograph,
           so the price comes from products.ts and the button really adds the
-          trio to the bag. */}
+          trio to the bag.
+
+          Left on the light marble the photograph is shot on, deliberately:
+          the tariff-board text and the counter card beneath it are reading a
+          lit surface that exists in the room, not a cream section standing
+          in for one. bg-cream here is only the fallback behind the image. */}
       <section aria-labelledby="set-heading" className="bg-cream">
         {/* Desktop: the full parlour, live copy set into the tariff board */}
         <div className="relative hidden lg:block">
@@ -267,12 +275,15 @@ export default function ShopPage() {
           page the campaign line appears. Set stacked on two lines because the
           Master Brand Board prohibits a single-line setting, and taken from
           BRAND so it can never drift out of sync with the homepage. */}
-      <section className="bg-shell py-16 text-center md:py-20" aria-label="The room is yours">
+      {/* A closing line, not a policy — it belongs in a room, not on paper.
+          night-deep so it reads as a distinct beat from the green rooms on
+          either side of it rather than a repeat of one of them. */}
+      <section className="bg-night-deep py-16 text-center md:py-20" aria-label="The room is yours">
         <div className="shell">
-          <p className="mx-auto max-w-[34rem] font-serif text-[clamp(1.375rem,2.6vw,2rem)] leading-snug text-charcoal">
+          <p className="mx-auto max-w-[34rem] font-serif text-[clamp(1.375rem,2.6vw,2rem)] leading-snug text-cream">
             Some days you close. Some days you glow. Some days you start again.
           </p>
-          <p className="mt-10 text-[0.6875rem] uppercase tracking-[0.24em] text-bronze-ink">
+          <p className="mt-10 text-[0.6875rem] uppercase tracking-[0.24em] text-champagne">
             <span className="block">{BRAND.campaignLines[0]}</span>
             <span className="mt-2 block">{BRAND.campaignLines[1]}</span>
           </p>

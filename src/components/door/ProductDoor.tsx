@@ -51,7 +51,7 @@ export function ProductDoor({ product }: { product: Product }) {
       <button
         type="button"
         onClick={() => setOpen((v) => !v)}
-        className="mt-3 flex min-h-11 w-full items-center justify-center gap-2 border border-charcoal/15 text-[0.6875rem] uppercase tracking-[0.18em] text-charcoal/75 transition-colors hover:border-charcoal/40 hover:text-charcoal"
+        className="mt-3 flex min-h-11 w-full items-center justify-center gap-2 border border-cream/20 text-[0.6875rem] uppercase tracking-[0.18em] text-cream/70 transition-colors hover:border-cream/45 hover:text-cream"
       >
         {open ? "Close the doors" : "Open the doors"}
         <span className="sr-only"> to {product.name}</span>

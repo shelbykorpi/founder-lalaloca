@@ -7,7 +7,8 @@ import { FOUNDER_COLLECTION } from "@/lib/founderCollection";
 import { fetchCollectionProducts, type CatalogProduct } from "@/lib/catalog";
 import { LineCard } from "@/components/shop/LineCard";
 import { NEXT_MOVE, CAMPAIGN } from "@/lib/nextMove";
-import { formatPrice } from "@/lib/products";
+import { formatPrice, products } from "@/lib/products";
+import { Reveal } from "@/components/house/Reveal";
 import {
   JsonLd,
   breadcrumbSchema,
@@ -36,6 +37,25 @@ import {
  * anyway, while /policies/shipping promises dispatch within one business day.
  * `product.preorder` is the only thing on the page correcting that. If it
  * ever renders empty, the button must not render either.
+ *
+ * ── RE-SKINNED FOR THE DARK HOUSE, 30 AUGUST ─────────────────────────────
+ *
+ * The page was rebuilt as a room, not rewritten as a page. Every mechanism
+ * above is untouched: the self-publishing Shopify shelf, the variant IDs, the
+ * add-to-bag, the waitlist capture, the three-stage state lines and the
+ * schema. Only the surfaces moved.
+ *
+ * THE HERO IS THE EMPTY SEAT. The redesign brief asks for it and it is the
+ * best frame in the library: a boardroom, an empty green wingback under a
+ * single light, a rose silk over the arm. The brief also asks for the covered
+ * objects on the table to come out. They stay, for now, and they earn it — a
+ * collection where one product takes money, three take reservations and two
+ * are still names IS a table of covered things. Swap the clean render in when
+ * it lands; the layout does not change.
+ *
+ * THE COMPOSITION IS SYMMETRICAL, so the copy sits centred and low rather
+ * than in a left shadow the way the product plates do. Putting a left-aligned
+ * column on a centred frame fights the picture.
  */
 
 export const metadata: Metadata = {
@@ -153,7 +173,7 @@ export default async function FounderCollectionPage() {
             bottle: product.bottle,
           }}
           href="/products/hold-the-room"
-          className="btn btn-dark w-full"
+          className="btn btn-primary w-full"
           label="Preorder"
           showPrice
         />
@@ -168,7 +188,7 @@ export default async function FounderCollectionPage() {
             bottle: c.image?.url ?? "",
           }}
           href={`/products/${c.handle}`}
-          className="btn btn-dark w-full"
+          className="btn btn-primary w-full"
           soldOut={!c.available}
           showPrice
         />
@@ -194,7 +214,7 @@ export default async function FounderCollectionPage() {
       ? `Reserve — ${entry.shades.length} shades, no price yet`
       : "Reserve — no price yet",
     action: (
-      <Link href={`/products/${entry.slug}`} className="btn btn-outline w-full">
+      <Link href={`/products/${entry.slug}`} className="btn btn-ghost-light w-full">
         Reserve
       </Link>
     ),
@@ -220,7 +240,7 @@ export default async function FounderCollectionPage() {
       href: "#waitlist",
       state: "In the making",
       action: (
-        <Link href="#waitlist" className="btn btn-outline w-full">
+        <Link href="#waitlist" className="btn btn-ghost-light w-full">
           Join the waitlist
         </Link>
       ),
@@ -239,55 +259,46 @@ export default async function FounderCollectionPage() {
         ]}
       />
 
-      {/* ---- The vanity ----
-          The page used to open with a paragraph. It opens at the mirror now:
-          the point of this line is the twenty minutes in front of one, and a
-          shopper should feel seated before she is sold to.
+      {/* ---- The empty seat ----
+          The chair is the argument. Nobody is in it, the light is already on
+          it, and the line reads "Take your seat." — so the photograph makes
+          the offer and the words only name it.
 
-          Two crops, because the feeling does not survive a letterbox. Desktop
-          runs the room wide — the same 1672×941 frame as the homepage hero, so
-          the two read as one house. Phones get a crop into the nearest mirror
-          and the counter running out of frame, which reads as *this* mirror
-          rather than a photograph of a row of them.
+          One frame at every width. It is near-square (1122x1200), which
+          crops honestly to a phone and to a wide desktop alike because the
+          subject sits dead centre; the two-crop treatment the old vanity
+          hero needed does not apply. */}
+      <section className="relative isolate flex min-h-[calc(100svh-7rem)] flex-col justify-end overflow-hidden bg-night text-cream">
+        <Image
+          src="/editorial/the-room-is-yours-chair.webp"
+          alt="An empty dark green wingback chair at the head of a marble boardroom table under a single overhead light, a rose silk robe over one arm and covered objects on the table."
+          fill
+          priority
+          sizes="100vw"
+          className="object-cover object-center"
+        />
+        {/* Bottom-up only. The frame is lit from directly above and falls off
+            to black at the foot on its own; this deepens that rather than
+            imposing a second light direction.
 
-          The wordmark is etched into the glass in-shot, so the live copy sits
-          on the dark wall to the left and never fights it. Same construction
-          as the homepage: below md the photograph is its own block with the
-          copy beneath, from md up it becomes the background. */}
-      <section className="relative isolate bg-ink text-shell">
-        <div className="relative aspect-[722/901] w-full sm:aspect-[16/9] md:absolute md:inset-0 md:aspect-auto md:h-full">
-          <Image
-            src="/editorial/collection-vanity-m.webp"
-            alt="A dressing-room mirror in a brass frame ringed with warm bulbs, FOUNDER · The Collection etched into the glass, above a lit counter."
-            fill
-            priority
-            sizes="100vw"
-            className="object-cover md:hidden"
-          />
-          <Image
-            src="/editorial/collection-vanity.webp"
-            alt="A row of brass dressing-room mirrors ringed with warm bulbs along a lit counter, the nearest one etched FOUNDER · The Collection, against a dusty rose wall and dark green panelling."
-            fill
-            priority
-            sizes="100vw"
-            className="hidden object-cover md:block"
-          />
-          {/* Phones: wash the foot of the frame so the copy beneath has ground. */}
-          <div className="absolute inset-0 bg-[linear-gradient(180deg,rgba(0,0,0,0)_55%,rgba(0,0,0,0.85)_88%,#000_100%)] md:hidden" />
-          {/* Wide: the left wall is already near-black, so this only deepens
-              it — it clears well before the first mirror. */}
-          <div className="absolute inset-0 hidden bg-[linear-gradient(90deg,#000_0%,rgba(0,0,0,0.82)_22%,rgba(0,0,0,0.4)_38%,rgba(0,0,0,0)_54%)] md:block" />
-        </div>
+            The first pass cleared at 28% and the copy landed on the chair's
+            lit headrest — the eyebrow was unreadable against it. The wash now
+            starts closing at the half and is solid by the time the words
+            begin, so the light stays on the chair and the type gets ground. */}
+        <div
+          aria-hidden
+          className="absolute inset-0 bg-[linear-gradient(180deg,rgba(7,19,15,0.5)_0%,rgba(7,19,15,0.12)_24%,rgba(7,19,15,0.45)_50%,rgba(7,19,15,0.9)_68%,rgba(7,19,15,0.99)_86%,#07130f_100%)]"
+        />
 
-        <div className="shell relative flex flex-col justify-end pb-14 pt-8 md:min-h-[34rem] md:py-16 lg:min-h-[38rem]">
-          <div className="max-w-[30rem]">
-            <p className="eyebrow text-blush/90">The FOUNDER Collection</p>
-            <h1 className="display mt-5 text-balance">Take your seat.</h1>
-            <p className="mt-6 text-[1.0625rem] leading-relaxed text-shell/85">
-              The mirror’s lit. LALALOCA is the serum collection; this is what
-              comes after it.
-            </p>
-          </div>
+        <div className="shell relative pb-20 pt-32 text-center md:pb-24">
+          <p className="room-label">The FOUNDER Collection</p>
+          <h1 className="display-house mx-auto mt-6 max-w-[16ch] text-balance text-cream">
+            Take your seat.
+          </h1>
+          <p className="mx-auto mt-7 max-w-[46ch] text-[1.0625rem] leading-relaxed text-cream/80">
+            The mirror&rsquo;s lit. LALALOCA is the serum collection; this is what
+            comes after it.
+          </p>
         </div>
       </section>
 
@@ -298,9 +309,9 @@ export default async function FounderCollectionPage() {
           are local either way, because none of them exists in Shopify yet
           and inventing a variant for them would be the same lie as
           inventing a price. */}
-      <section className="section bg-cream" aria-labelledby="shelf-heading">
+      <section className="section bg-night" aria-labelledby="shelf-heading">
         <div className="shell">
-          <h2 id="shelf-heading" className="eyebrow text-charcoal/70">
+          <h2 id="shelf-heading" className="room-label">
             The line
           </h2>
 
@@ -321,7 +332,7 @@ export default async function FounderCollectionPage() {
             ))}
           </div>
 
-          <p className="mt-10 max-w-prose text-xs leading-relaxed text-charcoal/70">
+          <p className="mt-10 max-w-prose text-xs leading-relaxed text-cream/65">
             {CAMPAIGN.name}: Clean Break, Smooth Talker and Double Take are
             reservations, not sales. Nothing is charged, and no ship date has
             been set.{" "}
@@ -334,6 +345,36 @@ export default async function FounderCollectionPage() {
             .
           </p>
         </div>
+      </section>
+
+      {/* ---- A room between the shelf and the reckoning ----
+          The brief asks for alternating editorial reveals through this page.
+          One is enough here: the grid above is already six pictures, and a
+          second gallery would turn a collection page into a mood board. This
+          is the pause before the page admits how much of the line is not
+          finished. */}
+      <section className="relative isolate overflow-hidden bg-night-deep">
+        <Reveal>
+          <div className="relative aspect-[16/9] w-full md:aspect-[1672/941]">
+            <Image
+              src="/editorial/collection-vanity.webp"
+              alt="A row of brass dressing-room mirrors ringed with warm bulbs along a lit counter, the nearest one etched FOUNDER, against a dusty rose wall and dark green panelling."
+              fill
+              loading="lazy"
+              sizes="100vw"
+              className="object-cover"
+            />
+            <div
+              aria-hidden
+              className="absolute inset-0 bg-[linear-gradient(180deg,rgba(3,8,6,0.2)_0%,rgba(3,8,6,0)_40%,rgba(3,8,6,0.85)_100%)]"
+            />
+          </div>
+          <div className="shell -mt-16 relative pb-14 md:-mt-24 md:pb-16">
+            <p className="font-serif text-[clamp(1.5rem,3vw,2.25rem)] leading-snug text-cream">
+              A mirror, a ritual, a reminder.
+            </p>
+          </div>
+        </Reveal>
       </section>
 
       {/* ---- The rest of the line ---- */}
@@ -371,16 +412,62 @@ export default async function FounderCollectionPage() {
         </div>
       </section>
 
-      {/* ---- Back to the serums ---- */}
-      <section className="bg-shell py-14 md:py-16">
-        <div className="shell max-w-3xl">
-          <p className="text-charcoal/85">
-            Looking for the serums? Those are LALALOCA — three of them, 50 ml
-            each, and part of every order goes to StandUp for Kids Tucson.
-          </p>
-          <Link href="/shop" className="link-underline mt-4 inline-flex text-charcoal">
-            The LALALOCA Collection <span aria-hidden>↗</span>
-          </Link>
+      {/* ---- The first room ----
+          The three serums, at the foot and deliberately quieter than the
+          grid above: they are LALALOCA, a different line under the same
+          roof, and they have been on sale for months. The brief calls this
+          THE FIRST ROOM — the one you were already in before this collection
+          existed. Bottles on a dark shelf, names, and a way through. No
+          prices and no buttons here; that is what /shop is for. */}
+      <section className="section bg-night-deep" aria-labelledby="first-room">
+        <div className="shell">
+          <Reveal>
+            <p id="first-room" className="room-label">
+              The first room · The LALALOCA Collection
+            </p>
+            <p className="mt-5 max-w-[46ch] font-serif text-[clamp(1.5rem,2.8vw,2rem)] leading-snug text-cream">
+              Looking for the serums? You were already in that room.
+            </p>
+            <p className="mt-6 max-w-prose text-[0.9375rem] leading-relaxed text-cream/75">
+              Three of them, 50 ml each, and part of every order goes to
+              StandUp for Kids Tucson.
+            </p>
+
+            <ul className="mt-12 grid gap-10 sm:grid-cols-3">
+              {products.map((serum) => (
+                <li key={serum.slug}>
+                  <Link
+                    href={`/products/${serum.slug}`}
+                    className="group/serum block text-center"
+                  >
+                    <span className="relative mx-auto block h-40 w-24 md:h-48 md:w-28">
+                      <Image
+                        src={serum.bottle}
+                        alt={`The ${serum.name} bottle.`}
+                        fill
+                        loading="lazy"
+                        sizes="112px"
+                        className="object-contain transition-transform duration-500 group-hover/serum:scale-[1.04]"
+                      />
+                    </span>
+                    <span className="eyebrow mt-6 block text-champagne">
+                      {serum.archetype}
+                    </span>
+                    <span className="mt-2 block font-serif text-2xl font-light text-cream transition-colors group-hover/serum:text-champagne">
+                      {serum.name}
+                    </span>
+                    <span className="mt-2 block text-sm text-cream/70">
+                      {serum.category}
+                    </span>
+                  </Link>
+                </li>
+              ))}
+            </ul>
+
+            <Link href="/shop" className="hairline mt-12 inline-flex text-cream">
+              The LALALOCA Collection <span aria-hidden>↗</span>
+            </Link>
+          </Reveal>
         </div>
       </section>
     </>

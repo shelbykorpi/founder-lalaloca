@@ -11,11 +11,11 @@ import Link from "next/link";
  * can go and look at, so it is left out here and stays a waitlist card on the
  * collection grid.
  *
- * THE RAIL STAYS INSIDE THE HOUSE. All four now have an after-hours plate, so
- * every link points at `/after-hours/<slug>`. Until this session, three of the
- * four left the dark world mid-line and dropped the shopper onto a cream page
- * — the exact interruption the 27 Aug directive is about. When these plates
- * are promoted over the live routes, this prefix collapses to `/products/`.
+ * THE WHOLE RAIL IS ONE WORLD. It briefly pointed at `/after-hours/<slug>`
+ * while the plates lived there; before that, three of the four links left the
+ * dark world mid-line and dropped the shopper onto a cream page. The plates
+ * are the live pages now, so it is `/products/` again and there is nowhere
+ * left to fall out of.
  */
 const LINE = [
   { slug: "double-take", name: "Double Take" },
@@ -36,7 +36,7 @@ export function LineRail({ current }: { current: string }) {
           return (
             <li key={item.slug} className="flex">
               <Link
-                href={`/after-hours/${item.slug}`}
+                href={`/products/${item.slug}`}
                 aria-current={active ? "page" : undefined}
                 className={`inline-flex min-h-12 items-center border-b-2 px-5 text-[0.625rem] uppercase tracking-[0.2em] transition-colors sm:px-8 ${
                   active

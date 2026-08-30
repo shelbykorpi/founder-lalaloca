@@ -199,7 +199,9 @@ export function EntranceDoor() {
         })}
       </div>
 
-      <p className="mt-6 text-center text-[0.6875rem] uppercase tracking-[0.22em] text-charcoal/70 transition-colors group-hover:text-charcoal">
+      {/* This caption used to read against a cream section; the house is dark
+          now, so it reads against the room instead. */}
+      <p className="mt-6 text-center text-[0.6875rem] uppercase tracking-[0.22em] text-cream/70 transition-colors group-hover:text-cream">
         Open the door <span aria-hidden>↗</span>
       </p>
     </Link>

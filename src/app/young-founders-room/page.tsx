@@ -65,8 +65,23 @@ function Rule() {
   return <hr className="my-8 h-px w-16 border-0 bg-bronze" />;
 }
 
-function Eyebrow({ children }: { children: string }) {
-  return <p className="eyebrow text-bronze-ink">{children}</p>;
+/* Two label colours for one badge: Bronze Ink is the WCAG-safe reading of
+   Antique Gold for a paper ground, Champagne is the reading for a dark room
+   (Antique Gold itself measures 3.04:1 on Founder Green and fails as small
+   type — the same reason the after-hours room-label class exists). Most of
+   this page is paper, so "paper" stays the default. */
+function Eyebrow({
+  children,
+  tone = "paper",
+}: {
+  children: string;
+  tone?: "paper" | "room";
+}) {
+  return (
+    <p className={`eyebrow ${tone === "room" ? "text-champagne" : "text-bronze-ink"}`}>
+      {children}
+    </p>
+  );
 }
 
 export default function YoungFoundersRoomPage() {
@@ -92,21 +107,26 @@ export default function YoungFoundersRoomPage() {
 
       <Threshold focusTargetId="young-founders-heading" />
 
-      {/* ---- Hero: what the doors open onto ---- */}
-      <section className="bg-cream">
+      {/* ---- Hero: what the doors open onto ----
+          The first thing after the header, so it opens in the same dark room
+          rather than defaulting to cream — a bright band right under a dark
+          header is the pale-island bug this pass exists to remove. The
+          essay proper (Shelby's note, the interview-style sections below)
+          still moves onto paper; this is scene-setting, not the reading. */}
+      <section className="room-dark">
         <div
           className={`shell grid gap-10 py-16 md:py-24 lg:items-center lg:gap-16 ${twoUp(has.outreachTeam, "lg:grid-cols-2")}`}
         >
           <div className="order-2 lg:order-1">
-            <Eyebrow>A room built with young voices.</Eyebrow>
+            <Eyebrow tone="room">A room built with young voices.</Eyebrow>
             <h1
               id="young-founders-heading"
-              className="mt-5 font-serif text-4xl leading-[1.08] text-charcoal outline-none md:text-6xl"
+              className="mt-5 font-serif text-4xl leading-[1.08] text-cream outline-none md:text-6xl"
             >
               THE YOUNG FOUNDERS’ ROOM
             </h1>
             <Rule />
-            <div className="max-w-prose space-y-4 text-charcoal/85">
+            <div className="max-w-prose space-y-4 text-cream/85">
               <p>LALALOCA began with three serums.</p>
               <p>
                 But part of the first collection was built somewhere far more important than a
@@ -121,7 +141,7 @@ export default function YoungFoundersRoomPage() {
               </p>
             </div>
 
-            <p className="mt-8 font-serif text-2xl leading-snug text-rose md:text-3xl">
+            <p className="mt-8 font-serif text-2xl leading-snug text-bronze-ink md:text-3xl">
               20% of LALALOCA net profits.
               <br />
               Every month.
@@ -129,6 +149,11 @@ export default function YoungFoundersRoomPage() {
               Directly to StandUp for Kids Tucson.
             </p>
 
+            {/* "secondary" is the outline treatment (founder-green text) built
+                for a paper ground; on this now-dark room it would be near-
+                invisible, so the CTA takes "ghost" — cream border and text —
+                same as every other secondary CTA that lives in a dark room
+                on this page. */}
             <div className="mt-8 flex flex-wrap gap-3">
               <TrackedLink href="/shop" event="young_founders_shop_click">
                 Shop LALALOCA
@@ -137,7 +162,7 @@ export default function YoungFoundersRoomPage() {
                 href={STANDUP_TUCSON}
                 event="young_founders_donate_click"
                 external
-                variant="secondary"
+                variant="ghost"
               >
                 Give directly
               </TrackedLink>
@@ -163,7 +188,10 @@ export default function YoungFoundersRoomPage() {
           className={`shell grid gap-10 py-16 md:py-24 lg:gap-16 ${twoUp(has.shelbyVolunteer, "lg:grid-cols-[1fr_0.85fr]")}`}
         >
           <div>
-            <p className="eyebrow text-bronze">The Young Founders’ Room</p>
+            {/* Champagne, not Antique Gold: the gold measures 3.04:1 on
+                Founder Green and fails as small type. Champagne is the
+                token the after-hours rooms already use for this job. */}
+            <p className="eyebrow text-champagne">The Young Founders’ Room</p>
             <h2 className="mt-5 font-serif text-3xl leading-tight md:text-5xl">
               This began before the brand partnership.
             </h2>
@@ -200,7 +228,7 @@ export default function YoungFoundersRoomPage() {
               <p>
                 Being allowed into even a small part of their stories has profoundly changed my own.
               </p>
-              <p className="eyebrow pt-2 text-bronze">— Shelby Korpi, Founder</p>
+              <p className="eyebrow pt-2 text-champagne">— Shelby Korpi, Founder</p>
             </div>
           </div>
 
@@ -274,7 +302,7 @@ export default function YoungFoundersRoomPage() {
 
             {/* The three lines the section is really about. Desert Rose at full
                 voice, which the board reserves for exactly this kind of moment. */}
-            <div className="border-l border-bronze pl-5 font-serif text-xl leading-relaxed text-rose md:text-2xl">
+            <div className="border-l border-bronze pl-5 font-serif text-xl leading-relaxed text-bronze-ink md:text-2xl">
               <p>Your ideas have value.</p>
               <p>Your voice can shape something real.</p>
               <p>There is a place for you on the team.</p>
@@ -375,7 +403,9 @@ export default function YoungFoundersRoomPage() {
                   wants to hear the answer.
                 </p>
               </div>
-              <p className="font-serif text-xl text-rose">
+              {/* Desert Rose is a dark-ground colour: on this cream panel it
+                  measures 2.03:1. Bronze Ink carries the same warmth at 4.71:1. */}
+              <p className="font-serif text-xl text-bronze-ink">
                 Your bottle is not the story.
                 <br />
                 What it helps continue is.
@@ -388,7 +418,9 @@ export default function YoungFoundersRoomPage() {
       {/* ---- The commitment ---- */}
       <section className="bg-founder-green text-cream">
         <div className="shell py-16 md:py-24">
-          <p className="eyebrow text-bronze">Our commitment</p>
+          {/* Champagne, not Antique Gold — see the note by the note-from-Shelby
+              eyebrow above; same room, same failing contrast otherwise. */}
+          <p className="eyebrow text-champagne">Our commitment</p>
           <h2 className="mt-5 max-w-4xl font-serif text-3xl leading-tight md:text-5xl">
             20% of net profits. Every month. Directly to Tucson.
           </h2>
@@ -429,14 +461,18 @@ export default function YoungFoundersRoomPage() {
         </div>
       </section>
 
-      {/* ---- Hold open their room ---- */}
-      <section className="bg-cream">
+      {/* ---- Hold open their room ----
+          A closing call to action, not reading, so — like the profile
+          template's own closing section — it leaves paper and goes back to a
+          dark room ahead of the (dark) footer, rather than ending the page on
+          a cream band that then has to explain itself to the footer above it. */}
+      <section className="room-dark">
         <div className="shell max-w-3xl py-16 text-center md:py-24">
-          <h2 className="font-serif text-3xl leading-tight text-charcoal md:text-5xl">
+          <h2 className="font-serif text-3xl leading-tight text-cream md:text-5xl">
             Hold open their room.
           </h2>
           <hr className="mx-auto my-8 h-px w-16 border-0 bg-bronze" />
-          <div className="space-y-4 text-charcoal/85">
+          <div className="space-y-4 text-cream/85">
             <p>Some rooms are claimed.</p>
             <p>Some rooms are created.</p>
             <p>
@@ -448,7 +484,7 @@ export default function YoungFoundersRoomPage() {
               Every purchase helps us continue showing them that they do.
             </p>
           </div>
-          <p className="mt-10 font-serif text-3xl leading-snug text-charcoal md:text-4xl">
+          <p className="mt-10 font-serif text-3xl leading-snug text-cream md:text-4xl">
             The room is yours.
             <br />
             <span className="text-rose">Hold the door.</span>
@@ -461,7 +497,7 @@ export default function YoungFoundersRoomPage() {
               href={STANDUP_TUCSON}
               event="young_founders_donate_click"
               external
-              variant="secondary"
+              variant="ghost"
             >
               Give directly
             </TrackedLink>

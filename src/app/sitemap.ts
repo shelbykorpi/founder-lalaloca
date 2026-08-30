@@ -1,6 +1,8 @@
 import type { MetadataRoute } from "next";
 import { SITE } from "@/lib/brand";
 import { products } from "@/lib/products";
+import { FOUNDER_COLLECTION } from "@/lib/founderCollection";
+import { NEXT_MOVE } from "@/lib/nextMove";
 import { profiles, publicationDate } from "@/lib/profiles";
 import { policies } from "@/lib/content";
 
@@ -35,6 +37,25 @@ export default function sitemap(): MetadataRoute.Sitemap {
       url: `${SITE.url}/products/${product.slug}`,
       changeFrequency: "monthly" as const,
       priority: 0.9,
+    })),
+    /* The FOUNDER line. It was missing from here entirely — four indexable
+       product pages, one of them taking money since 19 August, none of them
+       submitted. `products` above is the LALALOCA array only, and nothing
+       ever added the second line to it.
+
+       Hold the Room is priority 0.9 with the serums because it sells. The
+       three campaign SKUs sit at 0.6: they are real pages with real content,
+       but they take reservations rather than orders, so they should not
+       outrank a page a customer can buy from. */
+    ...FOUNDER_COLLECTION.map((product) => ({
+      url: `${SITE.url}/products/${product.slug}`,
+      changeFrequency: "monthly" as const,
+      priority: 0.9,
+    })),
+    ...NEXT_MOVE.map((product) => ({
+      url: `${SITE.url}/products/${product.slug}`,
+      changeFrequency: "monthly" as const,
+      priority: 0.6,
     })),
     /* Real approval dates, not build timestamps — a lastModified that changes
        on every deploy teaches crawlers to ignore the field. */

@@ -12,6 +12,9 @@ import type { CatalogProduct } from "@/lib/catalog";
  *
  * Everything on it is authored in Shopify. The card renders whatever exists
  * and never invents: no descriptor means no descriptor line, not filler.
+ *
+ * Text is set for a dark room (cream/champagne), matching DoorCard and
+ * LineCard now that the house is dark by default.
  */
 export function CatalogCard({
   product,
@@ -66,16 +69,18 @@ export function CatalogCard({
         </div>
 
         {product.character && (
-          <p className="eyebrow mt-5 text-bronze-ink">{product.character}</p>
+          <p className="eyebrow mt-5 text-champagne">{product.character}</p>
         )}
-        <h3 className="mt-2 font-serif text-2xl font-light leading-none text-charcoal transition-colors group-hover:text-bronze-ink">
+        <h3 className="mt-2 font-serif text-2xl font-light leading-none text-cream transition-colors group-hover:text-champagne">
           {product.title}
         </h3>
         {product.descriptor && (
-          <p className="mt-2 text-sm text-charcoal/80">{product.descriptor}</p>
+          <p className="mt-2 text-sm text-cream/70">{product.descriptor}</p>
         )}
       </Link>
 
+      {/* Card lives on a dark room's grid — gold fill leads, as everywhere
+          else the "add" action isn't sitting on paper. */}
       <div className="mt-4">
         <AddToBagButton
           product={{
@@ -89,7 +94,7 @@ export function CatalogCard({
             bottle: product.image?.url ?? "",
           }}
           href={target}
-          className="btn btn-dark w-full"
+          className="btn btn-primary w-full"
           label={product.available ? "Add" : "Add"}
           soldOut={!product.available}
           showPrice
@@ -115,6 +120,9 @@ export function WaitlistCard({
 }) {
   return (
     <div className="flex flex-col">
+      {/* Left pale on purpose — unmade is the one state that should look
+          washed out rather than lit, so the tile stays bg-shell/charcoal
+          even though the card around it now sits in a dark room. */}
       <div className="relative flex aspect-square w-full items-center justify-center overflow-hidden bg-shell">
         <span className="absolute left-3 top-3 bg-cream/95 px-3 py-1 text-[0.625rem] uppercase tracking-[0.18em] text-charcoal">
           In the making
@@ -123,15 +131,15 @@ export function WaitlistCard({
           {name}
         </span>
       </div>
-      <p className="eyebrow mt-5 text-bronze-ink">{character}</p>
-      <h3 className="mt-2 font-serif text-2xl font-light leading-none text-charcoal">
+      <p className="eyebrow mt-5 text-champagne">{character}</p>
+      <h3 className="mt-2 font-serif text-2xl font-light leading-none text-cream">
         {name}
       </h3>
-      <p className="mt-2 text-sm text-charcoal/80">{descriptor}</p>
+      <p className="mt-2 text-sm text-cream/70">{descriptor}</p>
       <div className="mt-4">
         <Link
           href="#waitlist"
-          className="btn btn-outline w-full"
+          className="btn btn-ghost-light w-full"
           aria-label={`Join the waitlist for ${name}`}
         >
           Join the waitlist

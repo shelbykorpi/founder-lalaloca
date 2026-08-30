@@ -48,10 +48,16 @@ export default function FoundHerPage() {
           breadcrumbSchema([{ name: BRAND.editorial, path: "/found-her" }]),
         ]}
       />
+      {/* This is the first thing on the page after the (dark) header, so it
+          opens in a dark room rather than defaulting to the intro's cream —
+          a bright band right under a dark header is exactly the pale-island
+          bug this pass exists to remove. The profiles section right below
+          is the deliberate lit panel it hands off to. */}
       <PageIntro
         eyebrow={BRAND.editorial}
         title={BRAND.campaign}
         lede="Stories from women about what they started, survived, changed, finished, and finally gave themselves credit for."
+        tone="dark"
       />
 
       {/* ---------------- Profiles ---------------- */}
@@ -163,7 +169,7 @@ export default function FoundHerPage() {
                           {profile.building}
                         </p>
                         {profile.portrait?.note ? (
-                          <p className="mx-auto mt-4 max-w-md text-xs leading-relaxed text-charcoal/60">
+                          <p className="mx-auto mt-4 max-w-md text-xs leading-relaxed text-charcoal/70">
                             {profile.portrait.note}
                           </p>
                         ) : null}
@@ -215,7 +221,7 @@ export default function FoundHerPage() {
                           {profile.building}
                         </p>
                         {profile.portrait?.note ? (
-                          <p className="mx-auto mt-4 max-w-md text-xs leading-relaxed text-charcoal/60">
+                          <p className="mx-auto mt-4 max-w-md text-xs leading-relaxed text-charcoal/70">
                             {profile.portrait.note}
                           </p>
                         ) : null}
@@ -311,8 +317,13 @@ export default function FoundHerPage() {
         )}
       </section>
 
-      {/* ---------------- The invitation ---------------- */}
-      <section className="section bg-cream" aria-labelledby="invitation-heading">
+      {/* ---------------- The invitation ----------------
+          A call to action, not reading, so it is a dark room between the two
+          lit panels either side of it — the profiles above, the share form
+          below. The photograph already sits on its own near-black ground, so
+          the room reads as one continuous surface with it rather than a
+          cream field the photo's bg-ink used to interrupt. */}
+      <section className="section room-dark" aria-labelledby="invitation-heading">
         <div className="shell grid items-center gap-10 lg:grid-cols-[minmax(0,26rem)_1fr] lg:gap-16">
           <div className="relative mx-auto aspect-[4/5] w-full max-w-sm overflow-hidden bg-ink lg:mx-0 lg:max-w-none">
             <Image
@@ -326,20 +337,20 @@ export default function FoundHerPage() {
           </div>
 
           <div>
-            <p className="eyebrow text-bronze-ink">Your turn</p>
-            <h2 id="invitation-heading" className="headline mt-4 max-w-[14ch] text-balance text-charcoal">
+            <p className="eyebrow text-champagne">Your turn</p>
+            <h2 id="invitation-heading" className="headline mt-4 max-w-[14ch] text-balance text-cream">
               Write yours.
             </h2>
-            <p className="mt-6 max-w-md text-[1.0625rem] leading-[1.8] text-charcoal/85">
+            <p className="mt-6 max-w-md text-[1.0625rem] leading-[1.8] text-cream/85">
               This archive isn’t ours to fill. Tell us what you started, what it took,
               and the part you’ve never said out loud at a dinner party.
             </p>
-            <p className="mt-5 max-w-md leading-[1.8] text-charcoal/80">
+            <p className="mt-5 max-w-md leading-[1.8] text-cream/80">
               As long or as short as you like — there’s no format and no word count. If
               you know the moment you found her, that’s the one we want.
             </p>
             <div className="mt-8">
-              <Link href="#share" className="btn btn-dark">
+              <Link href="#share" className="btn btn-primary">
                 Write yours
               </Link>
             </div>
@@ -375,7 +386,7 @@ export default function FoundHerPage() {
             <div className="absolute inset-0 flex items-center">
               <div className="shell w-full">
                 <div className="max-w-xl">
-                  <p className="eyebrow text-charcoal/60">Share your story</p>
+                  <p className="eyebrow text-charcoal/70">Share your story</p>
                   <h2 id="share-heading" className="headline mt-5 text-balance text-charcoal">
                     I found her when …
                   </h2>
@@ -409,7 +420,7 @@ export default function FoundHerPage() {
                   className="object-cover"
                 />
               </div>
-              <figcaption className="shell mt-3 text-xs uppercase tracking-[0.16em] text-charcoal/60">
+              <figcaption className="shell mt-3 text-xs uppercase tracking-[0.16em] text-charcoal/70">
                 Found her in the mirror
               </figcaption>
             </figure>
@@ -449,6 +460,11 @@ export default function FoundHerPage() {
         </div>
       </section>
 
+      {/* Kept on paper rather than pushed into a dark room: texture-stone's
+          blush/rose wash is built to sit on cream (it's the same pairing
+          PageIntro and Our Story's founder section use) and would barely
+          register against night — and this is a quiet closing note, not the
+          kind of call to action the dark rooms are for. */}
       <section className="section-tight texture-stone bg-cream py-14">
         <div className="shell max-w-xl">
           <h2 className="headline text-balance text-charcoal">

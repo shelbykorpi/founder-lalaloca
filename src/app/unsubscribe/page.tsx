@@ -32,24 +32,37 @@ export default async function UnsubscribePage({
   const email = t ? verifyUnsubscribeToken(t) : null;
 
   return (
-    <PageIntro
-      eyebrow="Founding List"
-      title={email ? "Leaving the list" : "That link didn’t work"}
-      lede={
-        email
-          ? "No hard feelings and no survey. One press and it’s done."
-          : "The link may have been broken by your email client, or it may have expired if we’ve since rotated our keys."
-      }
-    >
-      {email && t ? (
-        <UnsubscribeForm token={t} email={email} />
-      ) : (
-        <p className="mt-8 max-w-md text-sm leading-relaxed text-charcoal/80">
-          Reply to any email from us with the word “unsubscribe” and a person
-          will take you off by hand. That route always works and it does not
-          depend on this page.
-        </p>
-      )}
-    </PageIntro>
+    <>
+      {/* Someone lands here from an email already wanting out, so every
+          state has to be unmistakable, not just legible. The intro opens
+          dark like the header above it; the decision itself — the form, the
+          broken-link fallback — moves to a paper panel below rather than
+          living as cream-on-cream text inside a section that used to be the
+          whole page, so it reads as clearly as the account and search pages
+          this pass converted the same way. */}
+      <PageIntro
+        eyebrow="Founding List"
+        title={email ? "Leaving the list" : "That link didn’t work"}
+        lede={
+          email
+            ? "No hard feelings and no survey. One press and it’s done."
+            : "The link may have been broken by your email client, or it may have expired if we’ve since rotated our keys."
+        }
+        tone="dark"
+      />
+      <section className="section bg-cream pt-4">
+        <div className="shell">
+          {email && t ? (
+            <UnsubscribeForm token={t} email={email} />
+          ) : (
+            <p className="max-w-md text-sm leading-relaxed text-charcoal/80">
+              Reply to any email from us with the word “unsubscribe” and a person
+              will take you off by hand. That route always works and it does not
+              depend on this page.
+            </p>
+          )}
+        </div>
+      </section>
+    </>
   );
 }

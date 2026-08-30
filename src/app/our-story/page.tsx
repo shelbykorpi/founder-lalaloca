@@ -95,11 +95,15 @@ export default function OurStoryPage() {
           one page is an accessibility failure and an ambiguous outline for a
           crawler. The desktop block above owns the h1. */}
       <div className="lg:hidden">
+        {/* On this breakpoint the desktop hero above is display:none, so this
+            is the first thing under the dark header — same reasoning as the
+            Found Her archive's hero, dark rather than the default cream. */}
         <PageIntro
           eyebrow="Our story"
           title={OUR_STORY_TITLE}
           lede={OUR_STORY_LEDE}
           headingLevel="h2"
+          tone="dark"
         />
         <div className="bg-cream pb-2">
           <figure>
@@ -157,21 +161,27 @@ export default function OurStoryPage() {
         </div>
       </section>
 
-      {/* ---------------- The collection ---------------- */}
-      <section className="section bg-charcoal text-shell">
+      {/* ---------------- The collection ----------------
+          Was bg-charcoal/text-shell: a standalone dark card rather than the
+          house's own night ground. Moved onto bg-night/text-cream so it
+          reads as the same room as the header and the other dark sections,
+          not a different dark. The buttons below were already primary/
+          ghost-light, so this was the one piece of the section not yet on
+          the current vocabulary. */}
+      <section className="section bg-night text-cream">
         <div className="shell grid gap-10 lg:grid-cols-[minmax(0,24rem)_1fr] lg:gap-16">
           <div>
             <p className="eyebrow text-bronze">{BRAND.collectionFull}</p>
             <h2 className="subhead mt-4">Where it started, and what we sell.</h2>
           </div>
           <div className="max-w-[38rem]">
-            <p className="leading-[1.8] text-shell/85">
+            <p className="leading-[1.8] text-cream/85">
               LALALOCA came first: three serums — Thirst Trap, C Me Glow and Bounce
               Back — in the bottles they’re still sold in today. FOUNDER is the name on
               the door now. LALALOCA is the collection inside, and the name on your
               receipt.
             </p>
-            <p className="mt-5 leading-[1.8] text-shell/85">
+            <p className="mt-5 leading-[1.8] text-cream/85">
               We didn’t reformulate anything to launch a new brand, and we haven’t
               redesigned a single bottle. The products are what they were. What changed
               is what we’re building around them.
@@ -191,7 +201,11 @@ export default function OurStoryPage() {
         </div>
       </section>
 
-      {/* ---------------- The founder ---------------- */}
+      {/* ---------------- The founder ----------------
+          Kept on paper rather than a dark room: it's a portrait, a standfirst
+          and a blockquote — reading, not a call to action — and texture-
+          stone's blush/rose wash is built for a cream ground, the same
+          pairing used everywhere else it appears. */}
       <section className="section texture-stone bg-cream">
         <div className="shell grid gap-10 lg:grid-cols-[minmax(0,26rem)_1fr] lg:gap-16">
           <div className="relative mx-auto aspect-[3/2] w-full max-w-md overflow-hidden bg-shell lg:mx-0 lg:max-w-none">

@@ -16,10 +16,16 @@ export default function FindYourSerumPage() {
       <JsonLd
         schema={breadcrumbSchema([{ name: "Which serum?", path: "/find-your-serum" }])}
       />
+      {/* Opens in the dark room under the (dark) header rather than
+          defaulting to cream — the quiz itself is the reading surface below,
+          built to sit on paper (`SerumFinder` takes its charcoal-on-cream
+          styling from this section's bg-cream and expects nothing else), so
+          the intro is where this page gets its one dark beat. */}
       <PageIntro
         eyebrow="Which serum?"
         title="Three questions. One answer."
         lede="No diagnosis, no list of things to fix. Just what your skin does, when you’d use it, and how much you’re willing to do."
+        tone="dark"
       />
       <section className="section bg-cream pt-4">
         <SerumFinder />

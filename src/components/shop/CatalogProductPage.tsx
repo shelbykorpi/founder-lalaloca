@@ -52,20 +52,25 @@ export function CatalogProductPage({ product }: { product: CatalogProduct }) {
         ]}
       />
 
-      <section className="bg-cream pt-6 md:pt-10">
+      {/* Dark room: browse and buy against the wall, same as the hand-built
+          product page. The three panels (long reading — who it's for, how to
+          use it, what's in it) move to their own paper section below rather
+          than staying in this one, so the ingredient reading still happens on
+          a lit surface instead of night. */}
+      <section className="bg-night pt-6 md:pt-10">
         <div className="shell">
           <nav aria-label="Breadcrumb" className="mb-4">
-            <ol className="flex items-center gap-2 text-[0.6875rem] uppercase tracking-[0.16em] text-charcoal/70">
+            <ol className="flex items-center gap-2 text-[0.6875rem] uppercase tracking-[0.16em] text-cream/70">
               <li>
                 <Link
                   href="/founder-collection"
-                  className="inline-flex min-h-11 items-center hover:text-charcoal"
+                  className="inline-flex min-h-11 items-center hover:text-cream"
                 >
                   The FOUNDER Collection
                 </Link>
               </li>
               <li aria-hidden>/</li>
-              <li aria-current="page" className="text-charcoal">
+              <li aria-current="page" className="text-cream">
                 {product.title}
               </li>
             </ol>
@@ -95,20 +100,20 @@ export function CatalogProductPage({ product }: { product: CatalogProduct }) {
 
             <div className="lg:pt-4">
               {product.character && (
-                <p className="eyebrow text-bronze-ink">{product.character}</p>
+                <p className="eyebrow text-champagne">{product.character}</p>
               )}
-              <h1 className="mt-3 font-serif text-[clamp(2.5rem,6vw,3.75rem)] leading-none text-charcoal">
+              <h1 className="mt-3 font-serif text-[clamp(2.5rem,6vw,3.75rem)] leading-none text-cream">
                 {product.title}
               </h1>
               {product.descriptor && (
-                <p className="mt-3 text-sm uppercase tracking-[0.16em] text-charcoal/70">
+                <p className="mt-3 text-sm uppercase tracking-[0.16em] text-cream/70">
                   {product.descriptor}
                 </p>
               )}
-              <p className="mt-4 text-charcoal">{formatPrice(product.price)}</p>
+              <p className="mt-4 text-cream">{formatPrice(product.price)}</p>
 
               {product.hook && (
-                <p className="mt-6 max-w-md font-serif text-[clamp(1.375rem,2.4vw,1.75rem)] leading-snug text-charcoal">
+                <p className="mt-6 max-w-md font-serif text-[clamp(1.375rem,2.4vw,1.75rem)] leading-snug text-blush">
                   {product.hook}
                 </p>
               )}
@@ -124,11 +129,11 @@ export function CatalogProductPage({ product }: { product: CatalogProduct }) {
                     bottle: product.image?.url ?? "",
                   }}
                   href={`/products/${product.handle}`}
-                  className="btn btn-dark w-full"
+                  className="btn btn-primary w-full"
                   soldOut={!product.available}
                   showPrice
                 />
-                <p className="mt-3 text-xs leading-relaxed text-charcoal/70">
+                <p className="mt-3 text-xs leading-relaxed text-cream/70">
                   You’ll finish your order on Shopify’s secure checkout. Free US
                   shipping. Cosmetic product. See{" "}
                   <Link
@@ -147,35 +152,42 @@ export function CatalogProductPage({ product }: { product: CatalogProduct }) {
                   .
                 </p>
               </div>
-
-              {panels.length > 0 && (
-                <div className="mt-10 max-w-md border-t border-charcoal/12">
-                  {panels.map((panel, index) => (
-                    <details
-                      key={panel.title}
-                      open={index === 0}
-                      className="group border-b border-charcoal/12"
-                    >
-                      <summary className="flex min-h-[3.5rem] cursor-pointer list-none items-center justify-between gap-6 py-4 font-serif text-xl text-charcoal marker:content-none">
-                        {panel.title}
-                        <span
-                          aria-hidden
-                          className="shrink-0 text-bronze-ink transition-transform duration-300 group-open:rotate-45"
-                        >
-                          +
-                        </span>
-                      </summary>
-                      <p className="pb-5 pr-10 text-[0.9375rem] leading-relaxed text-charcoal/85">
-                        {panel.body}
-                      </p>
-                    </details>
-                  ))}
-                </div>
-              )}
             </div>
           </div>
         </div>
       </section>
+
+      {/* The panels are the long reading on this page — INCI-adjacent detail
+          a shopper reads for more than a sentence — so they get paper, same
+          as "The details" on the hand-built product page. */}
+      {panels.length > 0 && (
+        <section className="section-tight bg-shell">
+          <div className="shell">
+            <div className="max-w-md border-t border-charcoal/12">
+              {panels.map((panel, index) => (
+                <details
+                  key={panel.title}
+                  open={index === 0}
+                  className="group border-b border-charcoal/12"
+                >
+                  <summary className="flex min-h-[3.5rem] cursor-pointer list-none items-center justify-between gap-6 py-4 font-serif text-xl text-charcoal marker:content-none">
+                    {panel.title}
+                    <span
+                      aria-hidden
+                      className="shrink-0 text-bronze-ink transition-transform duration-300 group-open:rotate-45"
+                    >
+                      +
+                    </span>
+                  </summary>
+                  <p className="pb-5 pr-10 text-[0.9375rem] leading-relaxed text-charcoal/85">
+                    {panel.body}
+                  </p>
+                </details>
+              ))}
+            </div>
+          </div>
+        </section>
+      )}
     </>
   );
 }

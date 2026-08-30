@@ -46,8 +46,12 @@ export default function TheNextMovePage() {
 
       {/* The wide campaign frame — same 1672×941 as the homepage hero, and
           composed with its copy space on the left, so the headline below it
-          reads as the same gesture rather than competing with it. */}
-      <section className="bg-cream">
+          reads as the same gesture rather than competing with it. This is
+          the first thing under the (dark) header and carries no text of its
+          own, so it takes the night ground rather than cream — a beat of
+          dark room before the intro's lit panel, not a pale flash while the
+          image loads. */}
+      <section className="bg-night">
         <div className="relative aspect-[1672/941] w-full overflow-hidden">
           <Image
             src={CAMPAIGN.hero.src}
@@ -60,6 +64,11 @@ export default function TheNextMovePage() {
         </div>
       </section>
 
+      {/* PageIntro's default cream stays: this carries the reservation CTA and
+          the "nothing is charged" disclaimer, both of which the campaign
+          brief requires to stay prominent. Cream ground with charcoal ink is
+          the highest-contrast reading surface the house has, so the lead
+          decision copy gets that rather than cream type over night. */}
       <PageIntro eyebrow={`${BRAND.display} · ${CAMPAIGN.name}`} title={CAMPAIGN.headline}>
         <p className="lede mt-6 max-w-prose text-charcoal/80">{CAMPAIGN.standfirst}</p>
         <ul className="mt-6 space-y-1 font-serif text-xl text-charcoal">
@@ -185,8 +194,11 @@ export default function TheNextMovePage() {
         </div>
       </section>
 
-      {/* ---------------- The three together ---------------- */}
-      <section className="bg-cream pb-4">
+      {/* ---------------- The three together ----------------
+          A photograph, not reading — the card grid above it already carries
+          the ingredients and disclosures, so this is the dark room the house
+          hands off to between two lit panels, per the alternating rhythm. */}
+      <section className="bg-night pb-4">
         <div className="shell">
           <figure>
             <div className="relative aspect-[1254/900] w-full overflow-hidden">
@@ -199,7 +211,7 @@ export default function TheNextMovePage() {
                 className="object-cover"
               />
             </div>
-            <figcaption className="mt-3 text-xs uppercase tracking-[0.16em] text-charcoal/60">
+            <figcaption className="mt-3 text-xs uppercase tracking-[0.16em] text-cream/70">
               {CAMPAIGN.card}
             </figcaption>
           </figure>
@@ -252,18 +264,21 @@ export default function TheNextMovePage() {
         </div>
       </section>
 
-      {/* ---------------- Back to the collection ---------------- */}
-      <section className="section-tight bg-cream py-14">
+      {/* ---------------- Back to the collection ----------------
+          A closing nav, not a reading panel — no texture-stone dependency
+          holding it on cream the way found-her's does, so it takes the
+          default dark room like the rest of the house's chrome. */}
+      <section className="section-tight bg-night py-14">
         <div className="shell max-w-3xl">
-          <p className="text-charcoal/85">
+          <p className="text-cream/85">
             On sale now: the LALALOCA serums, and Hold the Room in the FOUNDER
             Collection.
           </p>
           <div className="mt-4 flex flex-col gap-4 sm:flex-row sm:gap-8">
-            <Link href="/shop" className="link-underline text-charcoal">
+            <Link href="/shop" className="link-underline text-cream">
               The LALALOCA Collection <span aria-hidden>↗</span>
             </Link>
-            <Link href="/founder-collection" className="link-underline text-charcoal">
+            <Link href="/founder-collection" className="link-underline text-cream">
               The FOUNDER Collection <span aria-hidden>↗</span>
             </Link>
           </div>

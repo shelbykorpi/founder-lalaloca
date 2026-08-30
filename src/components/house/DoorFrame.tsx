@@ -25,7 +25,10 @@ export function DoorFrame({ label }: { label?: string }) {
         }}
       />
       {label && (
-        <span className="room-label absolute left-1/2 top-3 -translate-x-1/2 whitespace-nowrap text-cream/35">
+        /* cream/35 measured 2.92:1 on the emerald ground and this is 9px type.
+           Champagne is the label colour the rest of the house already uses and
+           it clears the floor comfortably. */
+        <span className="room-label absolute left-1/2 top-3 -translate-x-1/2 whitespace-nowrap">
           {label}
         </span>
       )}

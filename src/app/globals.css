@@ -121,9 +121,22 @@
     }
   }
 
+  /**
+   * THE GROUND IS NIGHT.
+   *
+   * Flipped 30 Aug, per the site-wide directive. Everything used to sit on
+   * Warm Ivory and each dark section had to paint itself; now the house is
+   * dark by default and light is something a section deliberately switches
+   * on — `.paper` below. That is the right way round: the brief's phrase is
+   * "remove the light-site interruption", and an interruption is a page that
+   * forgot to be dark, not a reading panel that chose to be lit.
+   *
+   * A page that paints no ground of its own is now a dark room rather than a
+   * white one, so a route nobody has converted yet fails safe.
+   */
   body {
-    background-color: var(--color-cream);
-    color: var(--color-charcoal);
+    background-color: var(--color-night);
+    color: var(--color-cream);
     font-family: var(--font-sans);
     font-size: 1rem;
     line-height: 1.65;
@@ -144,6 +157,14 @@
   ::selection {
     background: var(--color-blush);
     color: var(--color-charcoal);
+  }
+
+  /* The house is dark, so the default form control — which browsers paint on
+     white with dark text — is now the odd one out. Inputs inherit the room. */
+  input,
+  textarea,
+  select {
+    color: inherit;
   }
 
   /* Visible, brand-consistent keyboard focus everywhere */
@@ -273,15 +294,27 @@
     cursor: not-allowed;
   }
 
+  /**
+   * THE PRIMARY BUTTON CARRIED A CONTRAST FAILURE, and it is the button that
+   * takes the money. Antique Gold with Shell type measures 3.04:1 — below the
+   * 4.5:1 AA floor for 12px, on every Preorder and Reserve on the site. The
+   * same gold with night ink measures 6.01:1 and reads better: dark type
+   * struck into brass, which is what the hardware in the photography does.
+   */
   .btn-primary {
     background: var(--color-bronze);
-    color: var(--color-shell);
+    color: var(--color-night);
   }
 
   .btn-primary:hover:not(:disabled) {
-    background: var(--color-charcoal);
+    background: var(--color-champagne);
+    color: var(--color-night);
   }
 
+  /* WHERE EACH BUTTON BELONGS, now that the ground is dark:
+       on a dark room  — `.btn-primary` (gold) leads, `.btn-ghost-light` follows
+       on `.paper`     — `.btn-dark` leads, `.btn-outline` follows
+     A `.btn-dark` on a night room is a charcoal block on a near-black wall. */
   .btn-dark {
     background: var(--color-charcoal);
     color: var(--color-shell);
@@ -511,6 +544,49 @@
   .room-hall {
     background-color: var(--color-night-deep);
     color: var(--color-cream);
+  }
+
+  /**
+   * PAPER — the lit reading surface inside a dark house.
+   *
+   * The dark world is not the absence of cream; it is cream used on purpose.
+   * Long reading — a policy, a story, an ingredient list, a form — belongs on
+   * a lit panel, and a panel that says so in one class cannot drift into a
+   * page that forgot to set its text colour and rendered Warm Ivory on Warm
+   * Ivory. Use `.paper` for anything a person reads for more than a sentence;
+   * use `.room-dark` / `.room-hall` for everything else.
+   */
+  .paper {
+    background-color: var(--color-cream);
+    color: var(--color-charcoal);
+  }
+
+  .paper-bright {
+    background-color: var(--color-shell);
+    color: var(--color-charcoal);
+  }
+
+  /**
+   * A LIGHT GROUND IMPLIES DARK INK. This rule is load-bearing — read before
+   * deleting.
+   *
+   * The body's colour used to be charcoal, so every heading and paragraph that
+   * set no colour of its own inherited it and looked right on a cream section.
+   * Flipping the body to cream on 30 August silently inverted all of them:
+   * `/shop` rendered "Three serums. Three energies." at 56px in Warm Ivory on
+   * a Warm Ivory ground — 1:1, an invisible headline — and it was not the only
+   * one. Chasing that with a `text-charcoal` on every heading would mean
+   * finding all of them and never missing one again.
+   *
+   * So the ground states its own ink. These live in `@layer components`, which
+   * Tailwind orders BEFORE `@layer utilities`, so any explicit `text-*` on the
+   * element still wins and a deliberate exception costs nothing.
+   */
+  .bg-cream,
+  .bg-shell,
+  .paper,
+  .paper-bright {
+    color: var(--color-charcoal);
   }
 
   /* Antique brass as a drawn edge rather than a border colour: a hairline that

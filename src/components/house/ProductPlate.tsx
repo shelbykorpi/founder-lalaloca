@@ -204,7 +204,7 @@ export function ProductPlate({ product }: { product: NextMoveProduct }) {
                 artwork and these frames are built from it; no filled sample
                 has been photographed yet. A customer reading an atmospheric
                 page would otherwise assume the opposite. */}
-            <p className="mt-8 border-t border-charcoal/12 pt-6 text-xs leading-relaxed text-charcoal/60">
+            <p className="mt-8 border-t border-charcoal/12 pt-6 text-xs leading-relaxed text-charcoal/70">
               Styled imagery, built from the approved packaging artwork rather
               than photographed from a filled sample. We&rsquo;ll reshoot with the
               real thing before it ships.
@@ -266,7 +266,7 @@ export function ProductPlate({ product }: { product: NextMoveProduct }) {
                 {product.sunNote}
               </p>
             )}
-            <p className="mt-8 border-t border-charcoal/12 pt-6 text-xs leading-relaxed text-charcoal/60">
+            <p className="mt-8 border-t border-charcoal/12 pt-6 text-xs leading-relaxed text-charcoal/70">
               The full ingredient list is printed on the carton and will be
               published here before the first order ships.
             </p>
@@ -337,8 +337,8 @@ export function ProductPlate({ product }: { product: NextMoveProduct }) {
               <Link href="/founder-collection" className="hairline text-cream">
                 The whole line
               </Link>
-              <Link href="/after-hours" className="hairline text-cream">
-                The house after hours
+              <Link href="/" className="hairline text-cream">
+                Back to the house
               </Link>
             </div>
           </Reveal>
@@ -350,17 +350,15 @@ export function ProductPlate({ product }: { product: NextMoveProduct }) {
 
 /**
  * Shared metadata builder, so three routes cannot describe themselves
- * differently. `noindex` for the whole after-hours track: these are the same
- * products as `/products/<slug>`, and two indexable pages for one product is a
- * duplicate, not a launch. The canonical points at the live page, which is the
- * one that should rank until these are promoted over it.
+ * differently. Indexable since 30 August: the plate IS `/products/<slug>` now,
+ * not a second copy of it, so the noindex that kept the after-hours track out
+ * of the results went with the promotion.
  */
 export function plateMetadata(product: NextMoveProduct) {
   return {
-    title: `${product.name} — after hours`,
+    title: `${product.name} — ${product.category}`,
     description: product.description,
     alternates: { canonical: `/products/${product.slug}` },
-    robots: { index: false, follow: false },
     openGraph: {
       title: `${product.name} — ${product.category}`,
       description: product.description,

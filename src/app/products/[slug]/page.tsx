@@ -77,18 +77,21 @@ export default async function ProductPage({ params }: PageProps<"/products/[slug
         ]}
       />
 
-      {/* ---------------- Buy ---------------- */}
-      <section className="bg-cream pt-6 md:pt-10">
+      {/* ---------------- Buy ----------------
+          The dark room, matching the after-hours plate: browsing and buying
+          happen against the wall, not on paper. The long reading (the three
+          panels below) is where the page switches to a lit surface. */}
+      <section className="bg-night pt-6 md:pt-10">
         <div className="shell">
           <nav aria-label="Breadcrumb" className="mb-4">
-            <ol className="flex items-center gap-2 text-[0.6875rem] uppercase tracking-[0.16em] text-charcoal/70">
+            <ol className="flex items-center gap-2 text-[0.6875rem] uppercase tracking-[0.16em] text-cream/70">
               <li>
-                <Link href="/shop" className="inline-flex min-h-11 items-center hover:text-charcoal">
+                <Link href="/shop" className="inline-flex min-h-11 items-center hover:text-cream">
                   Shop
                 </Link>
               </li>
               <li aria-hidden>/</li>
-              <li aria-current="page" className="text-charcoal">
+              <li aria-current="page" className="text-cream">
                 {product.name}
               </li>
             </ol>
@@ -98,15 +101,15 @@ export default async function ProductPage({ params }: PageProps<"/products/[slug
             <ProductDoor product={product} />
 
             <div className="lg:pt-4">
-              <h1 className="font-serif text-[clamp(2.5rem,6vw,3.75rem)] leading-none text-charcoal">
+              <h1 className="font-serif text-[clamp(2.5rem,6vw,3.75rem)] leading-none text-cream">
                 {product.name}
               </h1>
               {/* Identity first, then the label. The archetype sits beside the
                   category rather than replacing it — the category is the
                   approved label wording and is what a shopper scanning for
                   "vitamin C serum" is actually looking for. */}
-              <p className="mt-3 text-xs uppercase tracking-[0.18em] text-charcoal/70">
-                <span className="text-bronze-ink">{product.archetype}</span>
+              <p className="mt-3 text-xs uppercase tracking-[0.18em] text-cream/70">
+                <span className="text-champagne">{product.archetype}</span>
                 <span aria-hidden> · </span>
                 {product.category}
               </p>
@@ -120,32 +123,37 @@ export default async function ProductPage({ params }: PageProps<"/products/[slug
                   same breath (copy-cut spec, 23 Aug 2026). `hero` and `what`
                   still exist on the product for cards and metadata; the page
                   says it once. */}
-              <p className="mt-6 max-w-md font-serif text-[clamp(1.375rem,2.4vw,1.75rem)] leading-snug text-charcoal">
+              {/* text-blush, matching the hook line's treatment on the
+                  after-hours plate — the one serif line that gets its own
+                  voice against the room. */}
+              <p className="mt-6 max-w-md font-serif text-[clamp(1.375rem,2.4vw,1.75rem)] leading-snug text-blush">
                 {product.hook}
               </p>
 
-              <dl className="mt-8 grid grid-cols-2 gap-x-6 gap-y-4 border-y border-charcoal/12 py-6 text-sm">
+              <dl className="mt-8 grid grid-cols-2 gap-x-6 gap-y-4 border-y border-bronze/20 py-6 text-sm">
                 <div>
-                  <dt className="eyebrow text-charcoal/70">Size</dt>
-                  <dd className="mt-1 text-charcoal">{product.size}</dd>
+                  <dt className="eyebrow text-champagne">Size</dt>
+                  <dd className="mt-1 text-cream">{product.size}</dd>
                 </div>
                 <div>
-                  <dt className="eyebrow text-charcoal/70">Price</dt>
-                  <dd className="mt-1 text-charcoal">{formatPrice(product.price)}</dd>
+                  <dt className="eyebrow text-champagne">Price</dt>
+                  <dd className="mt-1 text-cream">{formatPrice(product.price)}</dd>
                 </div>
                 <div>
-                  <dt className="eyebrow text-charcoal/70">When</dt>
-                  <dd className="mt-1 text-charcoal">{product.timing}</dd>
+                  <dt className="eyebrow text-champagne">When</dt>
+                  <dd className="mt-1 text-cream">{product.timing}</dd>
                 </div>
                 <div>
-                  <dt className="eyebrow text-charcoal/70">In your routine</dt>
-                  <dd className="mt-1 text-charcoal">{product.routine}</dd>
+                  <dt className="eyebrow text-champagne">In your routine</dt>
+                  <dd className="mt-1 text-cream">{product.routine}</dd>
                 </div>
               </dl>
 
               <div className="mt-7 max-w-md">
-                <AddToBagButton product={product} className="btn btn-dark w-full" showPrice />
-                <p className="mt-3 text-xs leading-relaxed text-charcoal/70">
+                {/* Lead action on a dark room is the gold fill, not the
+                    charcoal block btn-dark was built for on paper. */}
+                <AddToBagButton product={product} className="btn btn-primary w-full" showPrice />
+                <p className="mt-3 text-xs leading-relaxed text-cream/70">
                   You’ll finish your order on Shopify’s secure checkout. Cosmetic
                   product. {BRAND.legal.name} is the seller of record.
                 </p>
@@ -211,13 +219,16 @@ export default async function ProductPage({ params }: PageProps<"/products/[slug
         </div>
       </section>
 
-      {/* ---------------- Photography ---------------- */}
+      {/* ---------------- Photography ----------------
+          Looking, not reading — stays in the room. The placeholder tile is
+          night-deep rather than shell now, so a slow-loading shot doesn't
+          flash a pale rectangle into the dark room while it comes in. */}
       {product.gallery.length > 0 && (
-        <section className="section-tight bg-cream">
+        <section className="section-tight bg-night">
           <div className="shell grid gap-6 sm:grid-cols-2">
             {product.gallery.map((shot) => (
               <figure key={shot.src}>
-                <div className="relative aspect-[4/3] w-full overflow-hidden bg-shell">
+                <div className="relative aspect-[4/3] w-full overflow-hidden bg-night-deep">
                   <Image
                     src={shot.src}
                     alt={shot.alt}
@@ -227,7 +238,7 @@ export default async function ProductPage({ params }: PageProps<"/products/[slug
                     className="object-cover"
                   />
                 </div>
-                <figcaption className="mt-3 text-xs uppercase tracking-[0.16em] text-charcoal/70">
+                <figcaption className="mt-3 text-xs uppercase tracking-[0.16em] text-cream/60">
                   {shot.caption}
                 </figcaption>
               </figure>
@@ -236,16 +247,20 @@ export default async function ProductPage({ params }: PageProps<"/products/[slug
         </section>
       )}
 
-      {/* ---------------- The other two ---------------- */}
-      <section className="section-tight bg-cream pb-16">
+      {/* ---------------- The other two ----------------
+          A cross-sell, not a reading panel — stays in the room. The grid line
+          trick (bg on the parent showing through a 1px gap) is rebuilt in
+          bronze rather than charcoal, since charcoal-on-charcoal would show
+          nothing on a night ground. */}
+      <section className="section-tight bg-night pb-16">
         <div className="shell">
-          <h2 className="eyebrow text-charcoal/70">The other two</h2>
-          <div className="mt-6 grid gap-px border border-charcoal/10 bg-charcoal/10 sm:grid-cols-2">
+          <h2 className="eyebrow text-cream/60">The other two</h2>
+          <div className="mt-6 grid gap-px border border-bronze/20 bg-bronze/15 sm:grid-cols-2">
             {otherProducts(product.slug).map((other) => (
               <Link
                 key={other.slug}
                 href={`/products/${other.slug}`}
-                className="group flex items-center gap-5 bg-cream p-6 transition-colors hover:bg-shell"
+                className="group flex items-center gap-5 bg-night p-6 transition-colors hover:bg-cream/5"
               >
                 <span className="relative h-24 w-16 shrink-0">
                   <Image
@@ -262,19 +277,19 @@ export default async function ProductPage({ params }: PageProps<"/products/[slug
                       the one module on the page where she is choosing between
                       two products, and "The Entrance" separates them faster
                       than two cosmetic benefit lines can. */}
-                  <span className="block text-[0.6875rem] uppercase tracking-[0.16em] text-bronze-ink">
+                  <span className="block text-[0.6875rem] uppercase tracking-[0.16em] text-champagne">
                     {other.archetype}
                   </span>
-                  <span className="mt-1 block font-serif text-2xl leading-none text-charcoal">
+                  <span className="mt-1 block font-serif text-2xl leading-none text-cream">
                     {other.name}
                   </span>
-                  <span className="mt-2 block text-sm text-charcoal/80">
+                  <span className="mt-2 block text-sm text-cream/70">
                     {other.benefit}
                   </span>
                 </span>
                 <span
                   aria-hidden
-                  className="text-bronze-ink transition-transform duration-300 group-hover:translate-x-1"
+                  className="text-champagne transition-transform duration-300 group-hover:translate-x-1"
                 >
                   ↗
                 </span>

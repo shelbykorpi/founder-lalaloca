@@ -23,7 +23,10 @@ export const metadata: Metadata = {
 export default function SearchPage() {
   return (
     <>
-      <PageIntro eyebrow="Search" title="What are you after?" />
+      {/* Opens dark under the dark header; the search form and its results
+          list are the reading/typing surface below, built to sit on the
+          cream this section supplies — a form belongs on paper. */}
+      <PageIntro eyebrow="Search" title="What are you after?" tone="dark" />
       <section className="section bg-cream pt-4">
         <SiteSearch />
       </section>

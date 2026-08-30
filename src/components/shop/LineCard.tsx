@@ -20,6 +20,12 @@ import Link from "next/link";
  * is not a product listing, so it gets the name, a purely categorical
  * descriptor and a way to hear when it is real. No price, no formula, no
  * claim, no ingredient.
+ *
+ * TEXT IS SET FOR A DARK ROOM — cream/champagne, not charcoal/bronze-ink —
+ * per the after-hours directive: the house is dark by default and a grid of
+ * these belongs in a room, not on paper. /founder-collection still wraps its
+ * shelf in bg-cream as of this pass; that section needs the same conversion
+ * or this card will go illegible there until it does.
  */
 export function LineCard({
   name,
@@ -48,7 +54,7 @@ export function LineCard({
   return (
     <article className="flex flex-col">
       <Link href={href} className="group/card block" aria-label={name}>
-        <div className="relative aspect-[3/2] w-full overflow-hidden bg-shell">
+        <div className="relative aspect-[3/2] w-full overflow-hidden bg-night-deep">
           {image ? (
             <>
               <Image
@@ -75,8 +81,15 @@ export function LineCard({
               )}
             </>
           ) : (
-            /* Named, not made. The name itself is the image. */
-            <span className="absolute inset-0 flex items-center justify-center px-8 text-center font-serif text-[clamp(1.5rem,2.4vw,2rem)] leading-tight text-charcoal/35">
+            /* Named, not made. The name itself is the image.
+
+               IT USED TO BE A CREAM TILE, on the reasoning that unmade should
+               look washed out rather than lit. On a dark page that inverts:
+               two white rectangles became the loudest objects on the whole
+               Collection grid, so the two products nobody can buy read as the
+               most important. An unmade product is an unfurnished room — dark,
+               with the name on the wall. */
+            <span className="absolute inset-0 flex items-center justify-center border border-bronze/20 px-8 text-center font-serif text-[clamp(1.5rem,2.4vw,2rem)] leading-tight text-cream/60">
               {name}
             </span>
           )}
@@ -88,13 +101,13 @@ export function LineCard({
         </div>
 
         {character && (
-          <p className="eyebrow mt-5 text-bronze-ink">{character}</p>
+          <p className="eyebrow mt-5 text-champagne">{character}</p>
         )}
-        <h3 className="mt-2 font-serif text-2xl font-light leading-none text-charcoal transition-colors group-hover/card:text-bronze-ink">
+        <h3 className="mt-2 font-serif text-2xl font-light leading-none text-cream transition-colors group-hover/card:text-champagne">
           {name}
         </h3>
-        <p className="mt-2 text-sm text-charcoal/80">{category}</p>
-        <p className="mt-2 text-sm text-charcoal">{state}</p>
+        <p className="mt-2 text-sm text-cream/70">{category}</p>
+        <p className="mt-2 text-sm text-cream">{state}</p>
       </Link>
 
       {action && <div className="mt-4">{action}</div>}

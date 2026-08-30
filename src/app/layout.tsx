@@ -99,7 +99,7 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
         <BagProvider>
           <a
             href="#main"
-            className="sr-only focus:not-sr-only focus:absolute focus:left-4 focus:top-4 focus:z-50 focus:bg-charcoal focus:px-4 focus:py-3 focus:text-sm focus:text-shell"
+            className="sr-only focus:not-sr-only focus:absolute focus:left-4 focus:top-4 focus:z-50 focus:bg-bronze focus:px-4 focus:py-3 focus:text-sm focus:text-night"
           >
             Skip to content
           </a>

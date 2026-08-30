@@ -1,17 +1,12 @@
-import type { Metadata } from "next";
-import { notFound } from "next/navigation";
-import { NEXT_MOVE } from "@/lib/nextMove";
-import { ProductPlate, plateMetadata } from "@/components/house/ProductPlate";
+import { permanentRedirect } from "next/navigation";
 
-/* One of three routes over the shared after-hours plate. The record in
-   nextMove.ts is the single source of truth; this file only names it. */
-const product = NEXT_MOVE.find((p) => p.slug === "clean-break");
+/**
+ * The Clean Break plate was built here and promoted to /products/clean-break on
+ * 30 August. Kept as a permanent redirect rather than deleted: the URL was
+ * shared while the work was in progress.
+ */
+export const metadata = { robots: { index: false, follow: false } };
 
-export const metadata: Metadata = product
-  ? plateMetadata(product)
-  : { title: "Not found" };
-
-export default function Page() {
-  if (!product) notFound();
-  return <ProductPlate product={product} />;
+export default function Moved() {
+  permanentRedirect("/products/clean-break");
 }

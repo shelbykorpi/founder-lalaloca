@@ -67,7 +67,7 @@ export function DoorCard({
              or the click that follows would close them again. */
           if (event.target.matches(":focus-visible")) reveal(true);
         }}
-        className="mt-3 flex min-h-11 items-center justify-center gap-2 border border-charcoal/15 text-[0.6875rem] uppercase tracking-[0.18em] text-charcoal/75 transition-colors hover:border-charcoal/40 hover:text-charcoal"
+        className="mt-3 flex min-h-11 items-center justify-center gap-2 border border-cream/20 text-[0.6875rem] uppercase tracking-[0.18em] text-cream/70 transition-colors hover:border-cream/45 hover:text-cream"
       >
         {open ? "Close the doors" : "Open the doors"}
         <span className="sr-only"> and see {product.name}</span>
@@ -78,23 +78,25 @@ export function DoorCard({
             the numbering told a shopper nothing and the identity tells her
             which day this bottle is for. Timing is not lost: it moves to the
             size and price line below, where the rest of the hard facts are. */}
-        <p className="eyebrow text-bronze-ink">{product.archetype}</p>
-        <h3 className="mt-2 font-serif text-[1.75rem] leading-none text-charcoal">
-          <Link href={`/products/${product.slug}`} className="hover:text-bronze-ink">
+        <p className="eyebrow text-champagne">{product.archetype}</p>
+        <h3 className="mt-2 font-serif text-[1.75rem] leading-none text-cream">
+          <Link href={`/products/${product.slug}`} className="hover:text-champagne">
             {product.name}
           </Link>
         </h3>
-        <p className="mt-2 text-xs uppercase tracking-[0.16em] text-charcoal/70">
+        <p className="mt-2 text-xs uppercase tracking-[0.16em] text-cream/70">
           {product.category}
         </p>
-        <p className="mt-3 text-sm leading-relaxed text-charcoal/80">{product.benefit}</p>
-        <p className="mt-4 text-sm text-charcoal">
+        <p className="mt-3 text-sm leading-relaxed text-cream/70">{product.benefit}</p>
+        <p className="mt-4 text-sm text-cream">
           {product.size} · {formatPrice(product.price)} · {product.timing}
         </p>
 
+        {/* Dark room now: primary leads in gold, secondary is the ghost-light
+            outline — btn-dark/btn-outline are paper-only per the house rule. */}
         <div className="mt-5 flex flex-col gap-3 pt-1 sm:flex-row">
-          <AddToBagButton product={product} className="btn btn-dark flex-1" />
-          <Link href={`/products/${product.slug}`} className="btn btn-outline flex-1">
+          <AddToBagButton product={product} className="btn btn-primary flex-1" />
+          <Link href={`/products/${product.slug}`} className="btn btn-ghost-light flex-1">
             Details
           </Link>
         </div>

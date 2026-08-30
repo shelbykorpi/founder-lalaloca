@@ -31,6 +31,11 @@ export function TrackedLink({
 }) {
   const base =
     "eyebrow inline-flex min-h-[44px] items-center justify-center px-7 py-3 text-center transition-colors";
+  /* "primary" is a solid fill, so it reads on any ground. "secondary" sets
+     founder-green text on a transparent field — built for a paper/cream
+     ground, and it disappears on night (dark green on near-black). "ghost"
+     is its dark-room counterpart: cream border and text. Pick the variant
+     for the ground the link actually sits on, not just for hierarchy. */
   const skin =
     variant === "primary"
       ? "bg-founder-green text-cream hover:bg-emerald"

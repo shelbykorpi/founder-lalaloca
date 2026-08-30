@@ -1,199 +1,557 @@
+import type { Metadata } from "next";
 import Image from "next/image";
 import Link from "next/link";
-import { EntranceDoor } from "@/components/door/EntranceDoor";
 import { EmailSignup } from "@/components/site/EmailSignup";
-import { BRAND, HERO } from "@/lib/brand";
-import { formatPrice, products } from "@/lib/products";
+import { Reveal } from "@/components/house/Reveal";
+import { RoomRail } from "@/components/house/RoomRail";
+import { ThresholdDoors } from "@/components/house/ThresholdDoors";
+import { DoorFrame } from "@/components/house/DoorFrame";
+import { BRAND } from "@/lib/brand";
+import { FOUNDER_COLLECTION } from "@/lib/founderCollection";
+import { NEXT_MOVE } from "@/lib/nextMove";
+import { products, formatPrice } from "@/lib/products";
+
+/**
+ * THE HOUSE — the homepage. Seven rooms, one threshold.
+ *
+ * IT BUILT ON /after-hours FIRST, and that was worth the three days. The
+ * direction went through three iterations in a week and every one arrived
+ * with factual errors in the product data — a product dropped, a fill
+ * invented, a sunscreen claim on something with no SPF test — so it went up
+ * beside the real homepage, on the real domain, against the real catalogue,
+ * and was walked before it took the front door. It took the front door on
+ * 30 August. The old campaign homepage is in the history at 19951ab if any
+ * of it is wanted back.
+ *
+ * WHAT IS TAKEN FROM THE REVIEW BUILD — the structure, and it is good:
+ * seven numbered rooms, a full-bleed threshold, captions living inside the
+ * photographs, hairline links in place of buttons, alternating full-bleed
+ * fields, scroll reveals, and a rail that names the room you are standing in.
+ *
+ * WHAT IS REFUSED, AND WHY:
+ *
+ *   · #08130f as the ground. Founder Green #164d49 is the master brand field
+ *     with an exact hex and every door photograph is graded to it. The
+ *     after-hours depth comes from --color-emerald-deep #0a2523, which is
+ *     already the token for the room behind the door.
+ *   · #b8955e as the brass. Antique Gold is #b08a64. The third variant in
+ *     three weeks; see the gold rule in globals.css for what carries small
+ *     text on which ground.
+ *   · The lockup in two colours across four lines, the second in italic.
+ *     Brand board: always two lines. One face, one colour.
+ *   · The review build's catalogue. It drops Clean Break — a real product with
+ *     finished artwork and a verified label — and replaces it with product
+ *     pages for Opening Line and Sign Here, which have no formula. It also
+ *     still captions Hold the Room "Peptide moisturizer · 50 mL" (it is a
+ *     moisturizing cream, 30 ml) and invents "150 mL" for Opening Line, which
+ *     is a regulated declaration for a product that does not exist. Every
+ *     figure on this page is read from the repo.
+ *   · Calling the three LALALOCA serums "the archive". They are the products
+ *     on sale.
+ */
+
+const ROOMS = [
+  { id: "room-threshold", label: "01 · The Threshold" },
+  { id: "room-house", label: "02 · Inside FOUNDER" },
+  { id: "room-collection", label: "03 · The Collection" },
+  { id: "room-anchor", label: "04 · The Anchor" },
+  { id: "room-found-her", label: "05 · Found Her" },
+  { id: "room-notes", label: "06 · Notes from the House" },
+  { id: "room-invitation", label: "07 · The Invitation" },
+];
+
+/* No `title` — the root layout's template would render "FOUNDER | FOUNDER".
+   The homepage takes SITE.title from the layout default, which is the one
+   place the site's name is written. */
+export const metadata: Metadata = {
+  description:
+    "FOUNDER after dark. A private world for women who already know what they bring. Beauty for what you're building.",
+  alternates: { canonical: "/" },
+};
+
+/* The line and the fill, read from the repo rather than retyped. */
+const holdTheRoom = FOUNDER_COLLECTION[0];
+const bySlug = Object.fromEntries(NEXT_MOVE.map((p) => [p.slug, p]));
+
+const LINE = [
+  {
+    n: "01",
+    archetype: "The Anchor",
+    name: holdTheRoom.name,
+    descriptor: `${holdTheRoom.category} · ${holdTheRoom.size}`,
+    image: "/products/hold-the-room-tall.webp",
+    alt: "Hold the Room on a marble dressing table, green doors open onto a lit vanity beyond.",
+    href: "/products/hold-the-room",
+    state: "Preorder — ships when the first run lands",
+    action: `Preorder · ${formatPrice(holdTheRoom.price)}`,
+    ready: true,
+  },
+  {
+    n: "02",
+    archetype: "The Reset",
+    name: bySlug["clean-break"].name,
+    descriptor: `${bySlug["clean-break"].category} · ${bySlug["clean-break"].size}`,
+    image: "/products/clean-break-tall.webp",
+    alt: "Clean Break beside a running brass tap on a cream marble basin.",
+    href: "/products/clean-break",
+    state: "Reserve — no price yet",
+    action: "Reserve",
+    ready: false,
+  },
+  {
+    n: "03",
+    archetype: "The Closer",
+    name: bySlug["smooth-talker"].name,
+    descriptor: `${bySlug["smooth-talker"].category} · ${bySlug["smooth-talker"].size} · 3 shades`,
+    image: "/products/smooth-talker-tall.webp",
+    alt: "Smooth Talker in 25 Medium beside its striped carton on a brass table.",
+    href: "/products/smooth-talker",
+    state: "Reserve — no price yet",
+    action: "Reserve",
+    ready: false,
+  },
+  {
+    n: "04",
+    archetype: "The Second Look",
+    name: bySlug["double-take"].name,
+    descriptor: `${bySlug["double-take"].category} · ${bySlug["double-take"].size}`,
+    image: "/products/double-take-tall.webp",
+    alt: "Double Take and its striped carton on a marble vanity by a lit mirror.",
+    href: "/products/double-take",
+    state: "Reserve — no price yet",
+    action: "Reserve",
+    ready: false,
+  },
+];
+
+/* Named on the board, not made. No photograph, no price, no product page and
+   no Reserve — a reservation implies something to reserve. The review build
+   gives both of these their own product page with a Reserve button; board
+   v2.14 bars them from the site as products in any form. */
+const IN_THE_MAKING = [
+  { n: "05", archetype: "The Opener", name: "Opening Line", descriptor: "Daily cleanser" },
+  { n: "06", archetype: "The Signature", name: "Sign Here", descriptor: "Lip treatment" },
+];
+
+const NOTES = [
+  {
+    src: "/editorial/our-story-desk.webp",
+    w: 2105,
+    h: 747,
+    alt: "An open journal on a green leather desk, a fountain pen beside it.",
+    line: "The note was left for you.",
+  },
+  {
+    src: "/editorial/trio-parlor.webp",
+    w: 1915,
+    h: 821,
+    alt: "The three LALALOCA serums on a counter in a dark panelled parlour.",
+    line: "Nothing loud. Everything intentional.",
+  },
+  {
+    src: "/editorial/next-move-dressing-room.webp",
+    w: 1672,
+    h: 941,
+    alt: "A dressing room of green panelling and brass, warm lamps lit.",
+    line: "A mirror, a ritual, a reminder.",
+  },
+  {
+    src: "/editorial/collection-vanity.webp",
+    w: 1672,
+    h: 941,
+    alt: "A row of bulb-lit gilt mirrors along a marble dressing counter.",
+    line: "The house remembers.",
+  },
+];
 
 export default function HomePage() {
   return (
-    <>
-      {/* ---------------- Hero ----------------
-          Tuned to the campaign composition: subject on the right, black on the
-          left. The scrim is deliberately light on wide screens so nothing sits
-          over her face; small screens crop in on her, so they get a flat wash
-          behind the type instead. */}
-      <section className="relative isolate bg-ink text-shell">
-        {/* Below md the photograph is its own block and the copy sits beneath it,
-            so the frame is never cropped down to an extreme close-up. From md up
-            it becomes the background and the copy sits on the black side of it. */}
-        <div className="relative aspect-[4/3] w-full sm:aspect-[16/9] md:absolute md:inset-0 md:aspect-auto md:h-full">
-          {/* Two renditions of one photograph. The desktop file extends the
-              wall leftward so the headline has a field to sit on; on a phone
-              that extension is a third of the frame — a smear of dark nothing
-              with a soft edge against the F. So phones get the photograph
-              itself, uncomposited, full width. */}
-          <Image
-            src="/editorial/hero-open-door-m.webp"
-            alt={HERO.alt}
-            fill
-            priority
-            sizes="100vw"
-            className="object-cover object-[50%_30%] md:hidden"
-          />
-          <Image
-            src={HERO.src}
-            alt={HERO.alt}
-            fill
-            priority
-            sizes="100vw"
-            className="hidden object-cover md:block md:object-[70%_35%]"
-          />
-          <div className="absolute inset-0 bg-[linear-gradient(180deg,rgba(0,0,0,0)_55%,rgba(0,0,0,0.85)_88%,#000_100%)] md:hidden" />
-          {/* Wide screens: the wash clears before her face, so it is never veiled. */}
-          <div className="absolute inset-0 hidden bg-[linear-gradient(90deg,#000_0%,#000_26%,rgba(0,0,0,0.55)_40%,rgba(0,0,0,0)_56%)] md:block" />
-        </div>
+    <div className="bg-emerald-deep text-cream">
+      <ThresholdDoors />
+      <RoomRail rooms={ROOMS} />
 
-        <div className="shell relative flex flex-col justify-end pb-14 pt-8 md:min-h-[36rem] md:py-16 lg:min-h-[40rem]">
-          <div className="max-w-[34rem]">
-            <p className="eyebrow text-blush/90">{BRAND.display}</p>
-            {/* Campaign line — always stacked on two lines (v3.0; single-line is prohibited) */}
-            <h1 className="display mt-5 text-balance">
+      {/* ══ 01 · THE THRESHOLD ══════════════════════════════════════════════
+          Full bleed, and the copy sits in the photograph's own dark half so
+          it never needs a scrim over her face. */}
+      <section id="room-threshold" className="relative isolate min-h-[calc(100svh-4rem)] overflow-hidden">
+        <Image
+          src="/editorial/hero-open-door.webp"
+          alt="A woman in a cream suit at a tall green door with a brass F monogram, the room beyond lit warm."
+          fill
+          priority
+          sizes="100vw"
+          className="object-cover object-[70%_35%]"
+        />
+        <div
+          aria-hidden
+          className="absolute inset-0 bg-[linear-gradient(180deg,rgba(10,37,35,0)_38%,rgba(10,37,35,0.9)_82%,#0a2523_100%)] md:bg-[linear-gradient(90deg,#0a2523_0%,rgba(10,37,35,0.94)_26%,rgba(10,37,35,0.55)_44%,rgba(10,37,35,0)_62%)]"
+        />
+        <div className="shell relative flex min-h-[calc(100svh-4rem)] flex-col justify-end pb-16 pt-24 md:justify-center md:py-24">
+          <div className="max-w-[44rem]">
+            <p className="room-label">{BRAND.display} · The house after hours</p>
+            {/* Two lines. One face. One colour. */}
+            <h1 className="display-house mt-6 text-cream">
               <span className="block">{BRAND.campaignLines[0]}</span>
               <span className="block">{BRAND.campaignLines[1]}</span>
             </h1>
-            <p className="mt-6 font-serif text-[clamp(1.5rem,3vw,2.125rem)] leading-snug text-blush">
-              {BRAND.tagline}
+            <p className="mt-7 max-w-[34rem] text-[1.0625rem] leading-relaxed text-cream/80">
+              Not a place to become someone else. A private world for women who already
+              know what they bring.
             </p>
-            {/* The three archetypes, dropped like a cast list. Replaced "Three
-                serums. No spreadsheet." on 11 August 2026 — the joke was doing
-                the work a seductive line should. */}
-            <p className="lede mt-4 text-shell/85">
-              The Closer. The Entrance. The Comeback.
-            </p>
-            <div className="mt-9 flex flex-col gap-3 sm:flex-row">
-              <Link href="/shop" className="btn btn-primary">
-                Open the door
+            <p className="mt-3 font-serif text-2xl text-blush">{BRAND.tagline}</p>
+            <div className="mt-9 flex flex-wrap items-center gap-x-8 gap-y-4">
+              <Link href="#room-house" className="btn btn-primary">
+                Enter the house
               </Link>
-              <Link href="/found-her" className="btn btn-ghost-light">
+              <Link href="/found-her" className="hairline text-cream">
                 Read Found Her
               </Link>
             </div>
           </div>
-
-          {!HERO.approved && (
-            <p className="mt-10 text-[0.625rem] uppercase tracking-[0.2em] text-shell/50">
-              {HERO.placeholderNote}
-            </p>
-          )}
         </div>
       </section>
 
-      {/* ---------------- The entrance ----------------
-          The lobby photograph runs edge to edge — no shell — so the marble
-          floor and the mirrored walls read as the room you are standing in. */}
-      <section className="section bg-cream" aria-labelledby="entrance-heading">
+      <DoorFrame label="Room 02 · Inside FOUNDER" />
+
+      {/* ══ 02 · INSIDE FOUNDER ═════════════════════════════════════════════ */}
+      <section id="room-house" className="section bg-emerald-deep">
         <div className="shell">
-          <div className="mx-auto max-w-[30rem] text-center">
-            <p className="eyebrow text-bronze-ink">{BRAND.collectionFull}</p>
-            <h2 id="entrance-heading" className="headline mt-4 text-balance">
-              Come in.
-            </h2>
-            <p className="mt-5 text-charcoal/80">
-              Three serums on the other side of this door. Nobody is checking names.
-            </p>
-          </div>
-        </div>
-
-        <div className="mt-12">
-          <EntranceDoor />
-        </div>
-
-        {/* The three serums, visible on the homepage itself — before this
-            row a woman could read the whole page without seeing a product.
-            Name, approved label wording, price; the card is the link. */}
-        <div className="shell mt-14">
-          <ul className="grid gap-10 sm:grid-cols-3">
-            {products.map((product) => (
-              <li key={product.slug}>
-                <Link
-                  href={`/products/${product.slug}`}
-                  className="group block text-center"
-                >
-                  <span className="relative mx-auto block h-44 w-28 md:h-52 md:w-32">
-                    <Image
-                      src={product.bottle}
-                      alt={`The ${product.name} bottle.`}
-                      fill
-                      loading="lazy"
-                      sizes="128px"
-                      className="object-contain transition-transform duration-500 group-hover:scale-[1.04]"
-                    />
-                  </span>
-                  <span className="eyebrow mt-5 block text-bronze-ink">
-                    {product.archetype}
-                  </span>
-                  <span className="mt-2 block font-serif text-2xl leading-none text-charcoal transition-colors group-hover:text-bronze-ink">
-                    {product.name}
-                  </span>
-                  <span className="mt-2 block text-xs uppercase tracking-[0.14em] text-charcoal/70">
-                    {product.category}
-                  </span>
-                  <span className="mt-2 block text-sm text-charcoal">
-                    {formatPrice(product.price)}
-                  </span>
-                </Link>
-              </li>
-            ))}
-          </ul>
-        </div>
-      </section>
-
-      {/* ---------------- Brand belief ---------------- */}
-      <section className="section-tight bg-charcoal py-16 text-shell md:py-20">
-        <div className="shell-narrow">
-          <h2 className="headline max-w-[16ch] text-balance">{BRAND.belief}</h2>
-          <p className="mt-6 max-w-xl text-shell/80">
-            A company. A family. A body of work. A comeback. A louder voice. A life she
-            chose for herself.
-          </p>
-        </div>
-      </section>
-
-      {/* ---------------- Found Her ---------------- */}
-      <section className="section bg-shell" aria-labelledby="found-her-heading">
-        <div className="shell">
-          {/* The team-written notes that used to fill the right column left
-              with their section on /found-her, so the invitation stands
-              alone. */}
-          <div className="max-w-2xl">
+          <Reveal className="grid gap-6 md:grid-cols-[1.4fr_1fr] md:items-end md:gap-16">
             <div>
-              <p className="eyebrow text-bronze-ink">{BRAND.editorial}</p>
-              <p className="mt-4 font-serif text-xl text-charcoal/85">
-                Stories from women who built before anyone applauded.
-              </p>
-              <h2 id="found-her-heading" className="headline mt-4 text-balance">
-                {BRAND.campaign}
+              <p className="room-label">Room 02 · Inside FOUNDER</p>
+              <h2 className="headline-house mt-5 text-balance text-cream">
+                Come in. Stay awhile.
               </h2>
-              <p className="mt-6 max-w-md text-charcoal/80">
-                What they started, survived, changed, finished — and finally gave
-                themselves credit for.
-              </p>
-              <div className="mt-8 flex flex-col gap-3 sm:flex-row">
-                <Link href="/found-her#share" className="btn btn-dark">
-                  I found her when…
-                </Link>
-                <Link href="/found-her" className="btn btn-outline">
-                  Read Found Her
-                </Link>
-              </div>
             </div>
+            <p className="max-w-[32ch] text-[0.9375rem] leading-relaxed text-cream/70">
+              The lights are low. The vanity is still warm. A blazer waits by the door.
+              A house that was alive before you arrived — nothing loud, everything intentional.
+            </p>
+          </Reveal>
 
+          <div className="mt-12 grid gap-5 md:grid-cols-3">
+            {[
+              {
+                src: "/editorial/found-her-mirror.webp",
+                alt: "A gilt mirror in the FOUNDER house catching low brass light.",
+                cap: "The mirror",
+              },
+              {
+                src: "/editorial/the-room-is-yours.webp",
+                alt: "A green typewriter on velvet, a page reading THE ROOM IS YOURS, a candle lit beside it.",
+                cap: "The note",
+              },
+              {
+                src: "/editorial/founder-collection-door.webp",
+                alt: "A woman in a cream suit holding open one of two tall rose-pink doors, a brass F on each leaf, stepping into a dark atelier lined with product benches.",
+                cap: "The door",
+              },
+            ].map((tile, i) => (
+              <Reveal key={tile.cap} as="figure" delay={i * 90} className="m-0">
+                <div className="relative aspect-[4/5] w-full overflow-hidden bg-emerald">
+                  <Image
+                    src={tile.src}
+                    alt={tile.alt}
+                    fill
+                    loading="lazy"
+                    sizes="(max-width: 768px) 90vw, 30vw"
+                    className="object-cover"
+                  />
+                </div>
+                <figcaption className="room-label mt-4">{tile.cap}</figcaption>
+              </Reveal>
+            ))}
           </div>
+
+          <Reveal className="mt-10">
+            <Link href="/our-story" className="hairline text-cream">
+              Inside FOUNDER
+            </Link>
+          </Reveal>
         </div>
       </section>
 
-      {/* ---------------- Email ---------------- */}
-      {/* Founder Green enters the page here — the invitation moment (§3 of the
-          alignment spec). One green band only; its authority comes from scarcity. */}
-      <section className="section-tight bg-founder-green py-14 md:py-16">
+      {/* ══ 03 · THE COLLECTION ═════════════════════════════════════════════
+          Six on the shelf at three stages, and the state line under each name
+          is what stops a reservation reading as a sale. */}
+      {/* THE COLLECTION ROOM IS DARK, and it was cream until 30 August.
+          Two reasons it had to move. Every tile in it is already a dark
+          object — a photograph under a near-black gradient with cream type —
+          so a cream ground was a white mat around six dark pictures rather
+          than a lit room. And a grid of products is browsing, not reading;
+          `.paper` is for the things people read, which is why the ritual and
+          the ingredient lists further in are still lit. */}
+      <section id="room-collection" className="section bg-night">
         <div className="shell">
-          <div className="max-w-xl">
-            <h2 className="headline text-balance text-cream">Come build this with us.</h2>
-            <EmailSignup tone="green" source="home" />
+          <Reveal className="grid gap-6 md:grid-cols-[1.4fr_1fr] md:items-end md:gap-16">
+            <div>
+              <p className="room-label">Room 03 · The Collection</p>
+              <h2 className="headline-house mt-5 text-balance text-cream">
+                Private tools. Public power.
+              </h2>
+            </div>
+            <p className="max-w-[34ch] text-[0.9375rem] leading-relaxed text-cream/75">
+              Six opening moves for a woman who knows exactly how she moves through a room.
+              One you can buy today, three you can hold a place in, two still being made.
+            </p>
+          </Reveal>
+
+          <div className="mt-12 grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
+            {LINE.map((item, i) => (
+              <Reveal key={item.name} as="article" delay={(i % 3) * 90} className="m-0">
+                <Link
+                  href={item.href}
+                  className="group relative block aspect-[2/3] overflow-hidden bg-emerald-deep"
+                >
+                  <Image
+                    src={item.image}
+                    alt={item.alt}
+                    fill
+                    loading="lazy"
+                    sizes="(max-width: 640px) 90vw, (max-width: 1024px) 45vw, 30vw"
+                    className="object-cover transition-transform duration-[900ms] ease-out group-hover:scale-[1.04]"
+                  />
+                  <span
+                    aria-hidden
+                    className="absolute inset-x-0 bottom-0 h-2/3 bg-[linear-gradient(to_top,rgba(10,37,35,0.97)_10%,rgba(10,37,35,0.86)_36%,rgba(10,37,35,0.35)_64%,transparent)]"
+                  />
+                  <span className="absolute inset-x-0 bottom-0 z-10 block p-6">
+                    <span className="room-label block">
+                      {item.n} · {item.archetype}
+                    </span>
+                    <span className="mt-2 block font-serif text-[1.75rem] font-light leading-none text-cream">
+                      {item.name}
+                    </span>
+                    <span className="mt-2 block text-[0.8125rem] text-cream/75">
+                      {item.descriptor}
+                    </span>
+                    <span className="mt-3 flex items-center gap-2 text-[0.5rem] uppercase tracking-[0.16em] text-cream/80">
+                      <span
+                        aria-hidden
+                        className={`block h-[0.3rem] w-[0.3rem] rounded-full ${
+                          item.ready ? "bg-champagne" : "bg-cream/35"
+                        }`}
+                      />
+                      {item.state}
+                    </span>
+                    <span className="mt-4 flex items-center justify-between border-t border-cream/15 pt-3">
+                      <span className="text-[0.5rem] uppercase tracking-[0.16em] text-cream">
+                        Discover
+                      </span>
+                      <span className="text-[0.5rem] uppercase tracking-[0.16em] text-champagne">
+                        {item.action}
+                      </span>
+                    </span>
+                  </span>
+                </Link>
+              </Reveal>
+            ))}
+
+            {IN_THE_MAKING.map((item, i) => (
+              <Reveal key={item.name} as="article" delay={(i % 3) * 90} className="m-0">
+                {/* An unfurnished room, not a blank card. This tile was cream —
+                    which on a dark page made the two products nobody can buy
+                    the brightest objects in the collection. */}
+                <div className="relative flex aspect-[2/3] flex-col justify-end overflow-hidden border border-bronze/20 bg-night-deep p-6">
+                  <span
+                    aria-hidden
+                    className="absolute inset-0 flex items-center justify-center font-serif text-4xl font-light text-cream/10"
+                  >
+                    {item.name}
+                  </span>
+                  <span className="relative">
+                    <span className="room-label block">
+                      {item.n} · {item.archetype}
+                    </span>
+                    <span className="mt-2 block font-serif text-[1.75rem] font-light leading-none text-cream">
+                      {item.name}
+                    </span>
+                    <span className="mt-2 block text-[0.8125rem] text-cream/70">
+                      {item.descriptor}
+                    </span>
+                    <span className="mt-3 flex items-center gap-2 text-[0.5rem] uppercase tracking-[0.16em] text-cream/70">
+                      <span aria-hidden className="block h-[0.3rem] w-[0.3rem] rounded-full bg-bronze" />
+                      In the making
+                    </span>
+                    <span className="mt-4 block border-t border-bronze/20 pt-3">
+                      <Link href="#room-invitation" className="hairline text-cream">
+                        Join the waitlist
+                      </Link>
+                    </span>
+                  </span>
+                </div>
+              </Reveal>
+            ))}
+          </div>
+
+          {/* On sale now — not "the archive". These are the products taking money. */}
+          <Reveal className="mt-16 border-t border-bronze/20 pt-10">
+            <p className="room-label">On sale now · The LALALOCA Collection</p>
+            <ul className="mt-8 grid gap-10 sm:grid-cols-3">
+              {products.map((product) => (
+                <li key={product.slug}>
+                  <Link href={`/products/${product.slug}`} className="group block text-center">
+                    <span className="relative mx-auto block h-40 w-24 md:h-48 md:w-28">
+                      <Image
+                        src={product.bottle}
+                        alt={`The ${product.name} bottle.`}
+                        fill
+                        loading="lazy"
+                        sizes="112px"
+                        className="object-contain transition-transform duration-500 group-hover:scale-[1.04]"
+                      />
+                    </span>
+                    <span className="room-label mt-5 block">{product.archetype}</span>
+                    <span className="mt-2 block font-serif text-2xl leading-none text-cream">
+                      {product.name}
+                    </span>
+                    <span className="mt-2 block font-serif text-lg leading-snug text-cream/80">
+                      {product.hero}
+                    </span>
+                    <span className="mt-3 block text-sm text-cream">
+                      {formatPrice(product.price)}
+                    </span>
+                  </Link>
+                </li>
+              ))}
+            </ul>
+          </Reveal>
+        </div>
+      </section>
+
+      <DoorFrame label="Room 04 · The Anchor" />
+
+      {/* ══ 04 · THE ANCHOR ═════════════════════════════════════════════════ */}
+      <section id="room-anchor" className="section bg-founder-green">
+        <div className="shell grid gap-12 lg:grid-cols-[0.8fr_1fr] lg:items-center lg:gap-20">
+          <Reveal>
+            <div className="relative aspect-[1003/1568] w-full overflow-hidden bg-emerald">
+              <Image
+                src="/products/hold-the-room-vanity-mirror.webp"
+                alt="Hold the Room on a marble dressing table in front of a gilt mirror, a woman fastening her cuff in the reflection."
+                fill
+                loading="lazy"
+                sizes="(max-width: 1024px) 90vw, 34vw"
+                className="object-cover"
+              />
+            </div>
+          </Reveal>
+          <Reveal delay={120}>
+            <p className="room-label">Room 04 · The Anchor</p>
+            <h2 className="headline-house mt-5 text-balance text-cream">Hold the room.</h2>
+            <p className="mt-7 max-w-[42ch] text-[0.9375rem] leading-relaxed text-cream/80">
+              {holdTheRoom.hero} This is beauty with gravity — composed, intentional, and
+              built for the woman who understands that presence is part of power.
+            </p>
+            <p className="mt-7 max-w-[40ch] border-l-2 border-bronze py-3 pl-5 text-[0.8125rem] leading-relaxed text-cream/70">
+              {holdTheRoom.preorder}
+            </p>
+            <div className="mt-9">
+              <Link href="/products/hold-the-room" className="btn btn-primary">
+                Explore the ritual
+              </Link>
+            </div>
+          </Reveal>
+        </div>
+      </section>
+
+      {/* ══ 05 · FOUND HER ══════════════════════════════════════════════════ */}
+      <section id="room-found-her" className="relative isolate overflow-hidden">
+        <Image
+          src="/editorial/found-her-wall.webp"
+          alt="The FOUND HER wall of framed portraits in the FOUNDER house."
+          fill
+          loading="lazy"
+          sizes="100vw"
+          className="object-cover"
+        />
+        <div
+          aria-hidden
+          className="absolute inset-0 bg-[linear-gradient(180deg,rgba(10,37,35,0.86)_0%,rgba(10,37,35,0.7)_60%,rgba(10,37,35,0.94)_100%)] md:bg-[linear-gradient(90deg,rgba(10,37,35,0.97)_0%,rgba(10,37,35,0.9)_32%,rgba(10,37,35,0.5)_58%,rgba(10,37,35,0.1)_100%)]"
+        />
+        <div className="shell relative py-20 md:py-28">
+          <Reveal className="max-w-[34rem]">
+            <p className="room-label">Room 05 · Found Her</p>
+            <p className="mt-5 font-serif text-2xl leading-snug text-blush">
+              Stories from women who built before anyone applauded.
+            </p>
+            <h2 className="headline-house mt-4 text-balance text-cream">{BRAND.campaign}</h2>
+            <p className="mt-6 max-w-[38ch] text-[0.9375rem] leading-relaxed text-cream/80">
+              The woman. The cost. The turning point. The private truth beneath public success.
+            </p>
+            <div className="mt-9 flex flex-wrap items-center gap-x-8 gap-y-4">
+              <Link href="/found-her#share" className="btn btn-primary">
+                I found her when…
+              </Link>
+              <Link href="/found-her" className="hairline text-cream">
+                Read Found Her
+              </Link>
+            </div>
+          </Reveal>
+        </div>
+      </section>
+
+      <DoorFrame label="Room 06 · Notes from the house" />
+
+      {/* ══ 06 · NOTES FROM THE HOUSE ═══════════════════════════════════════ */}
+      <section id="room-notes" className="section bg-emerald-deep">
+        <div className="shell">
+          <Reveal>
+            <p className="room-label">Room 06 · Notes from the house</p>
+          </Reveal>
+          <div className="mt-10 grid gap-6 sm:grid-cols-2 xl:grid-cols-4">
+            {NOTES.map((note, i) => (
+              <Reveal key={note.line} as="figure" delay={(i % 4) * 80} className="m-0">
+                <div className="relative aspect-[3/2] w-full overflow-hidden bg-emerald">
+                  <Image
+                    src={note.src}
+                    alt={note.alt}
+                    fill
+                    loading="lazy"
+                    sizes="(max-width: 640px) 90vw, (max-width: 1280px) 45vw, 22vw"
+                    className="object-cover"
+                  />
+                </div>
+                <figcaption className="mt-4 font-serif text-lg leading-snug text-blush">
+                  {note.line}
+                </figcaption>
+              </Reveal>
+            ))}
           </div>
         </div>
       </section>
-    </>
+
+      {/* ══ THE PLEDGE ══════════════════════════════════════════════════════
+          Absent from the review build and from the creative deck. It is the
+          house's largest truth claim and the wording never changes. */}
+      <section className="section-tight bg-rose py-14 text-charcoal md:py-16">
+        <div className="shell flex flex-col items-center gap-4 text-center">
+          <p className="room-label" style={{ color: "#5a2f2c" }}>
+            LALALOCA × StandUp for Kids
+          </p>
+          <p className="max-w-[26ch] font-serif text-[clamp(1.35rem,2.6vw,2rem)] leading-snug">
+            20% of LALALOCA net profits. Every month. Directly to StandUp for Kids Tucson.
+          </p>
+          <Link href="/our-story" className="hairline mt-2 text-charcoal">
+            How the giving works
+          </Link>
+        </div>
+      </section>
+
+      {/* ══ 07 · THE INVITATION ═════════════════════════════════════════════ */}
+      <section id="room-invitation" className="section-tight bg-founder-green py-16 md:py-20">
+        <div className="shell">
+          <Reveal className="max-w-xl">
+            <p className="room-label">Room 07 · The invitation</p>
+            <h2 className="headline-house mt-5 text-balance text-cream">
+              Be first through the door.
+            </h2>
+            {/* No standfirst here: EmailSignup already carries its own heading
+                and explanation, and two of them read as a stutter. */}
+            <EmailSignup tone="green" source="home" />
+          </Reveal>
+        </div>
+      </section>
+    </div>
   );
 }

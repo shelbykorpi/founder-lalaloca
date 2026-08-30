@@ -112,11 +112,12 @@ export default async function FounderCollectionPage() {
      is which rather than implying six things you can buy:
 
        Hold the Room     on sale as a preorder, $34
-       Clean Break       ) real products, artwork finished, NO PRICE YET —
-       Smooth Talker     ) reservations only, detail lives on /the-next-move
+       Opening Line      ) real products, artwork finished, NO PRICE YET —
+       Clean Break       ) reservations only. Opening Line joined this group
+       Smooth Talker     ) on 30 Aug when it finally found a supplier.
        Double Take       )
-       Opening Line      ) named on the board, not made. Not product
-       Sign Here         ) listings: no price, no formula, no claim.
+       Sign Here         ) named on the board, not made. Not a product
+                           listing: no price, no formula, no claim.
 
      Hold the Room is the odd one visually and deliberately not disguised:
      it is a Blanka product in plain supplier packaging while the other
@@ -124,7 +125,8 @@ export default async function FounderCollectionPage() {
      Gold rather than a stripe colourway, because it does not have one. */
   const liveTitles = new Set(cards.map((c) => c.title.toLowerCase()));
   const waitlist = [
-    { character: "01 · The Opener", name: "Opening Line", category: "Daily cleanser" },
+    /* Opening Line left this list on 30 Aug — it is a reservation card now.
+       Sign Here is the last name without a supplier; two have failed it. */
     { character: "03 · The Signature", name: "Sign Here", category: "Lip treatment" },
   ].filter((w) => !liveTitles.has(w.name.toLowerCase()));
 
@@ -224,10 +226,11 @@ export default async function FounderCollectionPage() {
   const holdTheRoom = shopCard;
 
   const line = [
-    byName("Double Take"),
+    byName("Opening Line"),
     byName("Clean Break"),
-    byName("Smooth Talker"),
     ...(holdTheRoom ? [holdTheRoom] : []),
+    byName("Double Take"),
+    byName("Smooth Talker"),
     ...otherShopCards,
     ...waitlist.map((entry) => ({
       handle: entry.name.toLowerCase().replace(/\s+/g, "-"),
@@ -382,14 +385,14 @@ export default async function FounderCollectionPage() {
         <div className="shell max-w-3xl">
           <p className="eyebrow text-blush">The FOUNDER Collection</p>
           <h2 className="mt-5 font-serif text-3xl leading-tight md:text-4xl">
-            One is open. Three are close. Two are still names.
+            One is open. Four are close. One is still a name.
           </h2>
           <p className="mt-6 max-w-prose text-cream/85">
             {product.name} is the anchor and the first to be sourced — it is
-            the only one you can order. Clean Break, Smooth Talker and Double
-            Take are made and photographed but not yet priced, so they take
-            reservations instead of money. Opening Line and Sign Here are
-            names, which is a different thing from coming soon.
+            the only one you can order. Opening Line, Clean Break, Smooth
+            Talker and Double Take are made and photographed but not yet
+            priced, so they take reservations instead of money. Sign Here is a
+            name, which is a different thing from coming soon.
           </p>
           <p className="mt-6 font-serif text-xl text-blush">
             Named. Not yet promised.

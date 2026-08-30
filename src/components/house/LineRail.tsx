@@ -5,6 +5,12 @@ import Link from "next/link";
  * that lets you step sideways through the collection without going back up to
  * a grid. The product you are on is marked with a gold underline.
  *
+ * OPENING LINE JOINED THE RAIL ON 30 AUGUST, and the order changed with it:
+ * the rail now runs in routine order — cleanse, cleanse, moisturise, eyes,
+ * finish — rather than the arbitrary order it had when it was four campaign
+ * SKUs. A rail that reads as a routine teaches the line; one that reads as a
+ * grid does not.
+ *
  * ONLY PRODUCTS THAT EXIST GO IN IT. Shelby's mock-up includes SIGN HERE,
  * which has no formula, no INCI and no page; board v2.14 keeps it off the site
  * as a product in any form. A name in a navigation rail reads as a thing you
@@ -18,10 +24,11 @@ import Link from "next/link";
  * left to fall out of.
  */
 const LINE = [
-  { slug: "double-take", name: "Double Take" },
+  { slug: "opening-line", name: "Opening Line" },
   { slug: "clean-break", name: "Clean Break" },
-  { slug: "smooth-talker", name: "Smooth Talker" },
   { slug: "hold-the-room", name: "Hold the Room" },
+  { slug: "double-take", name: "Double Take" },
+  { slug: "smooth-talker", name: "Smooth Talker" },
 ];
 
 export function LineRail({ current }: { current: string }) {

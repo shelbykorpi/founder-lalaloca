@@ -24,6 +24,17 @@
  * claim. These are renders of packaging, not photographs of a physical
  * sample — reshoot when a sample exists, per every concept doc.
  *
+ * OPENING LINE JOINED ON 30 AUGUST. Board slot 01 finally has a supplier —
+ * Selfnamed's Sensitive Skin Oil-To-Milk Cleanser, 150 ml, COSMOS Organic,
+ * $9.96 bulk / $16.60 at one, no MOQ. Every fact in its record is transcribed
+ * from the supplier's own listing, read logged in on 30 Aug. It is a
+ * reservation, not a sale, for the same reason as the other three.
+ *
+ * SIGN HERE, board slot 03, still has no supplier and is not in this array.
+ * Neither Blanka nor Selfnamed stocks a conditioning lip treatment; Selfnamed
+ * has a matte lipstick and a hydrogel patch, and matte is the opposite
+ * property. It stays a waitlist tile until a component maker is found.
+ *
  * NO PRICES, DELIBERATELY. All three concept docs record that Selfnamed's
  * unit cost was not visible in the studio, and their own rule is "no price,
  * no slot". The page therefore reserves rather than sells: nothing is
@@ -123,6 +134,64 @@ export type NextMoveProduct = {
 };
 
 export const NEXT_MOVE: NextMoveProduct[] = [
+  {
+    /* ── OPENING LINE ─────────────────────────────────────────────────────
+       Board slot 01, THE OPENER. It was a name and nothing else from 10 Aug
+       until 30 Aug, when a supplier was finally found for it: Selfnamed's
+       Sensitive Skin Oil-To-Milk Cleanser, 150 ml — which is the board's own
+       target format for this slot, "150 mL pump", exactly.
+
+       IT IS HERE AND NOT ON THE WAITLIST because its state changed. It has a
+       supplier, a verified fill, a certification, a unit cost and finished
+       artwork — the same state Clean Break, Smooth Talker and Double Take were
+       in when they became reservations. What it still does not have is a
+       retail price, a ship window or a physical sample, which is exactly what
+       RESERVING is for.
+
+       THE DESCRIPTOR IS THE PRODUCT'S, NOT THE BOARD'S. The board wrote
+       "Hydrating Daily Cleanser" when the slot was a concept. The thing that
+       exists is an oil-to-milk cleanser, so that is what the label and this
+       record say. Naming it for a formula it does not have would be the same
+       error as the invented "Cleanser · 150 mL" from the review build. */
+    slug: "opening-line",
+    name: "Opening Line",
+    category: "Oil-To-Milk Cleanser",
+    hook: "You can't control how the day opens.",
+    what: "A gentle daily cleanser that turns from oil to milk on contact with water.",
+    benefits: [
+      "Turns from oil-gel to silky milk",
+      "Dissolves make-up and impurities",
+      "Leaves skin soft, never stripped",
+    ],
+    keyIngredients: ["Camomile", "Sea Buckthorn", "Cloudberry"],
+    size: "150 ml / 5.07 fl oz",
+    description:
+      "A gentle daily cleanser for dry and delicate skin. The rich, oily texture turns to a silky milk on contact with water, dissolving make-up and impurities without stripping moisture from the skin.",
+    detailCta: "Reserve Opening Line",
+    reservationStatus: "Reservation — no charge and no ship date yet.",
+    detailHero: {
+      src: "/products/opening-line-plate.webp",
+      alt: "The Opening Line bottle in rose and green stripes, alone under a single overhead light on dark stone.",
+    },
+    facts: [
+      "COSMOS Organic certified by ECOCERT",
+      "Dermatologically tested",
+      "Vegan",
+    ],
+    cta: "Open the day",
+    stripes: { a: "var(--color-rose)", b: "var(--color-founder-green)" },
+    ink: "var(--color-founder-green)",
+    pack: {
+      src: "/products/opening-line-pack.webp",
+      alt: "The Opening Line bottle: a white airless pump in desert rose and green stripes, its cream label reading Opening Line, oil-to-milk cleanser.",
+    },
+    scene: {
+      src: "/products/opening-line-scene.webp",
+      alt: "The Opening Line bottle standing alone on dark stone, lit from above.",
+    },
+    plainly:
+      "Fragranced — a white-flower aroma with jasmine and sandalwood. Certified COSMOS Organic by ECOCERT, dermatologically tested, vegan. Suitable for sensitive skin.",
+  },
   {
     slug: "clean-break",
     name: "Clean Break",
@@ -296,6 +365,18 @@ export const NEXT_MOVE: NextMoveProduct[] = [
  */
 export const CAMPAIGN = {
   name: "The Next Move",
+  /**
+   * WHO IS ACTUALLY IN THE CAMPAIGN. `NEXT_MOVE` is every product that takes a
+   * reservation; THE NEXT MOVE is the three-product campaign shot in August,
+   * and its page is built on the number three — "Three moves.", a triad of
+   * three verbs, a hero of three packs and a flatlay of three cartons.
+   *
+   * Opening Line joined the array on 30 Aug but not the campaign. Letting it
+   * fall through would have rendered a fourth card under a headline that says
+   * three and beside a photograph of three bottles — the same drift this file
+   * exists to catch.
+   */
+  slugs: ["clean-break", "smooth-talker", "double-take"] as const,
   headline: "Before the door opens.",
   standfirst:
     "Three new essentials for the part nobody sees — the twenty minutes before you walk in.",

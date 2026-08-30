@@ -53,6 +53,7 @@ import { JsonLd, breadcrumbSchema } from "@/lib/seo";
  */
 export function ProductPlate({ product }: { product: NextMoveProduct }) {
   const shades = product.shades?.length ? product.shades : null;
+  const inCampaign = CAMPAIGN.slugs.includes(product.slug as never);
 
   /* The plate, written once. When the product has shades the whole section is
      wrapped in the picker's provider so the photograph and the chips halfway
@@ -327,13 +328,20 @@ export function ProductPlate({ product }: { product: NextMoveProduct }) {
             <p className="headline-house mt-5 text-balance text-cream">
               Leave the door open behind you.
             </p>
+            {/* Only a campaign member is one of three. Opening Line is a
+                reservation product but was not in the August shoot, and
+                saying otherwise would point at a page that does not list it. */}
             <p className="mt-6 max-w-[26rem] text-[0.9375rem] leading-relaxed text-cream/70">
-              {product.name} is one of three in {CAMPAIGN.name}.
+              {inCampaign
+                ? `${product.name} is one of three in ${CAMPAIGN.name}.`
+                : `${product.name} takes reservations. Nothing is charged until it has a price and a ship date.`}
             </p>
             <div className="mt-9 flex flex-wrap items-center gap-x-8 gap-y-4">
-              <Link href="/the-next-move" className="hairline text-cream">
-                See all three
-              </Link>
+              {inCampaign && (
+                <Link href="/the-next-move" className="hairline text-cream">
+                  See all three
+                </Link>
+              )}
               <Link href="/founder-collection" className="hairline text-cream">
                 The whole line
               </Link>

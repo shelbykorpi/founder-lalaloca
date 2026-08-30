@@ -97,7 +97,9 @@ export default function TheNextMovePage() {
           </h2>
 
           <div className="mt-8 grid gap-12 md:grid-cols-3 md:gap-8">
-            {NEXT_MOVE.map((product) => (
+            {/* The campaign's own three, not every reservation product —
+                see CAMPAIGN.slugs. */}
+            {NEXT_MOVE.filter((p) => CAMPAIGN.slugs.includes(p.slug as never)).map((product) => (
               <article key={product.slug} className="flex flex-col">
                 {/* The architectural scene leads — each was shot into its own
                     SKU's colourway, so the grid carries the packaging system's

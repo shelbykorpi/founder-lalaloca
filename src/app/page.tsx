@@ -76,15 +76,15 @@ const bySlug = Object.fromEntries(NEXT_MOVE.map((p) => [p.slug, p]));
 const LINE = [
   {
     n: "01",
-    archetype: "The Anchor",
-    name: holdTheRoom.name,
-    descriptor: `${holdTheRoom.category} · ${holdTheRoom.size}`,
-    image: "/products/hold-the-room-tall.webp",
-    alt: "Hold the Room on a marble dressing table, green doors open onto a lit vanity beyond.",
-    href: "/products/hold-the-room",
-    state: "Preorder — ships when the first run lands",
-    action: `Preorder · ${formatPrice(holdTheRoom.price)}`,
-    ready: true,
+    archetype: "The Opener",
+    name: bySlug["opening-line"].name,
+    descriptor: `${bySlug["opening-line"].category} · ${bySlug["opening-line"].size}`,
+    image: "/products/opening-line-tall.webp",
+    alt: "Opening Line in rose and green stripes, alone under a single light on dark stone.",
+    href: "/products/opening-line",
+    state: "Reserve — no price yet",
+    action: "Reserve",
+    ready: false,
   },
   {
     n: "02",
@@ -100,15 +100,15 @@ const LINE = [
   },
   {
     n: "03",
-    archetype: "The Closer",
-    name: bySlug["smooth-talker"].name,
-    descriptor: `${bySlug["smooth-talker"].category} · ${bySlug["smooth-talker"].size} · 3 shades`,
-    image: "/products/smooth-talker-tall.webp",
-    alt: "Smooth Talker in 25 Medium beside its striped carton on a brass table.",
-    href: "/products/smooth-talker",
-    state: "Reserve — no price yet",
-    action: "Reserve",
-    ready: false,
+    archetype: "The Anchor",
+    name: holdTheRoom.name,
+    descriptor: `${holdTheRoom.category} · ${holdTheRoom.size}`,
+    image: "/products/hold-the-room-tall.webp",
+    alt: "Hold the Room on a marble dressing table, green doors open onto a lit vanity beyond.",
+    href: "/products/hold-the-room",
+    state: "Preorder — ships when the first run lands",
+    action: `Preorder · ${formatPrice(holdTheRoom.price)}`,
+    ready: true,
   },
   {
     n: "04",
@@ -122,6 +122,18 @@ const LINE = [
     action: "Reserve",
     ready: false,
   },
+  {
+    n: "05",
+    archetype: "The Closer",
+    name: bySlug["smooth-talker"].name,
+    descriptor: `${bySlug["smooth-talker"].category} · ${bySlug["smooth-talker"].size} · 3 shades`,
+    image: "/products/smooth-talker-tall.webp",
+    alt: "Smooth Talker in 25 Medium beside its striped carton on a brass table.",
+    href: "/products/smooth-talker",
+    state: "Reserve — no price yet",
+    action: "Reserve",
+    ready: false,
+  },
 ];
 
 /* Named on the board, not made. No photograph, no price, no product page and
@@ -129,7 +141,14 @@ const LINE = [
    gives both of these their own product page with a Reserve button; board
    v2.14 bars them from the site as products in any form. */
 const IN_THE_MAKING = [
-  { n: "05", archetype: "The Opener", name: "Opening Line", descriptor: "Daily cleanser" },
+  /* OPENING LINE LEFT THIS LIST ON 30 AUGUST. It has a supplier, a verified
+     fill, a certification and finished artwork, so it is a reservation in
+     LINE above rather than a name here.
+
+     SIGN HERE STAYS, and is likely to stay a while. Two suppliers have now
+     failed it: neither Blanka nor Selfnamed stocks a conditioning lip
+     treatment, and the board wants a fountain-pen silhouette with a visible
+     chamber, which is custom tooling rather than a catalogue component. */
   { n: "06", archetype: "The Signature", name: "Sign Here", descriptor: "Lip treatment" },
 ];
 

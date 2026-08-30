@@ -31,6 +31,35 @@
   /* Mid bronze for large display accents on light surfaces */
   --color-bronze-mid: #a37c53;
 
+  /* ---- After Hours · the night rooms (27 Aug directive) ----------------
+     Shelby's dark-theme palette, reconciled against the board rather than
+     replacing it. Her brief says "adjust exact values against the official
+     brand-board colors, but preserve this dark hierarchy" — so:
+
+       her --founder-green   #07130f  →  NOT the master field. #164d49 is, with
+                                         an exact hex, and every door photograph
+                                         is graded to it. Hers is a near-black
+                                         room, so it lands here as --color-night.
+       her --antique-brass   #b08b55  →  Antique Gold #b08a64. One point of
+                                         green and fifteen of blue apart; the
+                                         same colour, and one of them is locked.
+       her --champagne       #d7c3a2  →  Champagne #d6be9a. Same, within 8.
+       her --warm-ivory      #eee4d7  →  Warm Ivory #f7efe8.
+       her --desert-rose     #b87978  →  kept as --color-rose-deep: it is a
+                                         genuinely different, shadowed rose and
+                                         earns its own name. Desert Rose #d8a7a0
+                                         stays the accent.
+       --dark-marble / --marble-vein →  new materials, no board equivalent.
+
+     WHAT THE DARK BUYS US. Antique Gold is 3.04:1 on Founder Green and fails
+     as small text; on #07130f it is 6.01:1 and passes. Going darker retires
+     the gold-contrast problem rather than deepening it. */
+  --color-night: #07130f; /* the room with the lights off */
+  --color-night-deep: #030806; /* the hall between rooms */
+  --color-marble: #100f0d;
+  --color-marble-vein: #725a42;
+  --color-rose-deep: #b87978; /* Desert Rose in shadow / as a light source */
+
   /* Door environment — shadow values of Founder Green, not separate colours.
      The lit face of every door photograph is graded to #164D49 itself; these
      are what it falls to in shade and in the room behind. */
@@ -419,6 +448,91 @@
       transform: none;
       transition: none;
     }
+  }
+
+  /* ---- After Hours · surfaces ------------------------------------------
+     DARK MARBLE, DRAWN NOT TILED. The brief asks for "nearly black with
+     restrained warm-bronze veining … dimensional and expensive, not like a
+     repeating stock texture". So it is built from six layers at deliberately
+     non-commensurate sizes and angles: two broad radial pools that give the
+     slab its unevenness, three vein systems at 17°, 74° and 128°, and a sheen.
+     Because no two layers share a period, the pattern does not visibly repeat
+     inside any panel you would actually use it on. */
+  .surface-marble {
+    background-color: var(--color-marble);
+    background-image:
+      radial-gradient(
+        120% 80% at 18% 12%,
+        color-mix(in srgb, var(--color-marble-vein) 16%, transparent) 0%,
+        transparent 58%
+      ),
+      radial-gradient(
+        90% 70% at 82% 78%,
+        color-mix(in srgb, var(--color-marble-vein) 11%, transparent) 0%,
+        transparent 62%
+      ),
+      repeating-linear-gradient(
+        17deg,
+        transparent 0 37px,
+        color-mix(in srgb, var(--color-marble-vein) 13%, transparent) 37px 38px,
+        transparent 38px 91px
+      ),
+      repeating-linear-gradient(
+        74deg,
+        transparent 0 113px,
+        color-mix(in srgb, var(--color-marble-vein) 8%, transparent) 113px 115px,
+        transparent 115px 197px
+      ),
+      repeating-linear-gradient(
+        128deg,
+        transparent 0 53px,
+        color-mix(in srgb, var(--color-marble-vein) 6%, transparent) 53px 54px,
+        transparent 54px 149px
+      ),
+      linear-gradient(
+        160deg,
+        color-mix(in srgb, #ffffff 4%, transparent) 0%,
+        transparent 44%
+      );
+  }
+
+  /* The three grounds. Named for what they are in the house, so a page reads
+     as a set of rooms rather than a stack of background colours. */
+  .room-lit {
+    background-color: var(--color-founder-green);
+    color: var(--color-cream);
+  }
+
+  .room-dark {
+    background-color: var(--color-night);
+    color: var(--color-cream);
+  }
+
+  .room-hall {
+    background-color: var(--color-night-deep);
+    color: var(--color-cream);
+  }
+
+  /* Antique brass as a drawn edge rather than a border colour: a hairline that
+     catches a little more light at its centre, the way a real trim does. */
+  .brass-line {
+    height: 1px;
+    background: linear-gradient(
+      90deg,
+      transparent,
+      color-mix(in srgb, var(--color-bronze) 45%, transparent) 22%,
+      var(--color-bronze) 50%,
+      color-mix(in srgb, var(--color-bronze) 45%, transparent) 78%,
+      transparent
+    );
+  }
+
+  /* A pane of dark glass for purchase panels and form blocks — the brief's
+     "dark glass or lacquered purchase panels", explicitly not white. */
+  .pane-glass {
+    background: color-mix(in srgb, var(--color-night) 72%, transparent);
+    border: 1px solid color-mix(in srgb, var(--color-bronze) 22%, transparent);
+    backdrop-filter: blur(10px);
   }
 
   /* Subtle stone / silk texture used behind editorial sections */

@@ -5,6 +5,9 @@ import { DoorCard } from "@/components/door/DoorCard";
 import { ScrollDoors } from "@/components/door/ScrollDoors";
 import { AddSetButton } from "@/components/bag/AddToBagButton";
 import { RoomHero } from "@/components/house/RoomHero";
+import { HouseShell } from "@/components/house/HouseShell";
+import { EditorialRoomSection } from "@/components/house/EditorialRoomSection";
+import { getRoom } from "@/lib/rooms";
 import { EmailSignup } from "@/components/site/EmailSignup";
 import { TrackListView } from "@/components/site/TrackListView";
 import { BRAND, CONTACT_EMAIL, CONTACT_MAILTO } from "@/lib/brand";
@@ -41,15 +44,13 @@ export default function ShopPage() {
           StandUp for Kids moved below the trio, the identity band collapsed
           into the title and the cards. A shopper sees a product on the first
           screen. */}
+      <HouseShell room={3}>
       <RoomHero
-        src="/editorial/rooms/serum-salon-doors.webp"
-        alt="The serum salon: three lit marble niches in teal, gold and red, one bottle in each, over a black marble counter, the dressing-room mirrors glowing through the doors either side."
-        position="center center"
-        height="min-h-[66svh]"
+        room={getRoom(3)}
+        height="min-h-[78svh]"
         priority
-        label="The LALALOCA Collection"
         title="Three serums. Three energies."
-        lede="Some days you close. Some days you glow. Some days you start again."
+        lede="One woman building what’s next."
       >
         <Link href="#serums" className="btn btn-primary">
           Shop the serums
@@ -92,7 +93,7 @@ export default function ShopPage() {
           the tariff-board text and the counter card beneath it are reading a
           lit surface that exists in the room, not a cream section standing
           in for one. bg-cream here is only the fallback behind the image. */}
-      <section aria-labelledby="set-heading" className="bg-cream">
+      <section aria-labelledby="set-heading" className="house-marble">
         {/* Desktop: the full parlour, live copy set into the tariff board */}
         <div className="relative hidden lg:block">
           <div className="relative aspect-[1915/821] w-full">
@@ -150,7 +151,8 @@ export default function ShopPage() {
               className="object-cover"
             />
           </div>
-          <div className="shell py-12 text-center">
+          <div className="shell py-10">
+          <div className="paper-page mx-auto max-w-xl px-6 py-10 text-center">
             <p className="eyebrow text-bronze-ink">The House Trio</p>
             <h2 className="headline mt-4 text-balance text-charcoal">
               No Woman Is Only One Version of Herself
@@ -167,13 +169,15 @@ export default function ShopPage() {
             </p>
             <AddSetButton className="btn mt-8 w-full border border-bronze/40 bg-founder-green text-cream hover:bg-rose hover:text-night sm:w-auto" />
           </div>
+          </div>
         </div>
       </section>
 
       {/* ---------------- Comparison ---------------- */}
-      <section className="section-tight bg-shell" aria-labelledby="compare-heading">
-        <div className="shell">
-          <h2 id="compare-heading" className="subhead text-charcoal">
+      <EditorialRoomSection surface="paper" tight aria-labelledby="compare-heading">
+        <div>
+          <p className="eyebrow text-rose-deep">Read the label. Then decide.</p>
+          <h2 id="compare-heading" className="subhead mt-3 text-charcoal">
             Side by side
           </h2>
           <div className="mt-8 overflow-x-auto">
@@ -233,7 +237,7 @@ export default function ShopPage() {
             ingredient list ships in every carton — email us for the supplier sheet.
           </p>
         </div>
-      </section>
+      </EditorialRoomSection>
 
       {/* ---------------- The collaboration ----------------
           Why the nav calls this page LALALOCA × StandUp for Kids. The words
@@ -302,40 +306,40 @@ export default function ShopPage() {
       </section>
 
       {/* ---------------- Shipping and returns ---------------- */}
-      <section className="section-tight bg-cream">
-        <div className="shell grid gap-8 border-t border-charcoal/12 pt-10 sm:grid-cols-2 lg:grid-cols-3">
+      <EditorialRoomSection surface="panel" tight>
+        <div className="shell grid gap-8 border-t border-bronze/25 pt-10 sm:grid-cols-2 lg:grid-cols-3">
           <div>
-            <h2 className="font-serif text-2xl text-charcoal">Shipping</h2>
-            <p className="mt-2 text-sm text-charcoal/80">
+            <h2 className="font-serif text-2xl text-cream">Shipping</h2>
+            <p className="mt-2 text-sm text-cream/80">
               Free US shipping, 3–5 business days. Express $15, 1–2 days. Ships
               from Arizona within one business day.
             </p>
-            <Link href="/policies/shipping" className="link-underline mt-2 text-charcoal">
+            <Link href="/policies/shipping" className="link-underline mt-2 text-cream">
               Details <span aria-hidden>↗</span>
             </Link>
           </div>
           <div>
-            <h2 className="font-serif text-2xl text-charcoal">Returns</h2>
-            <p className="mt-2 text-sm text-charcoal/80">
+            <h2 className="font-serif text-2xl text-cream">Returns</h2>
+            <p className="mt-2 text-sm text-cream/80">
               Damaged or not what you expected? Write to{" "}
-              <a href={CONTACT_MAILTO} className="link-underline text-charcoal">
+              <a href={CONTACT_MAILTO} className="link-underline text-cream">
                 {CONTACT_EMAIL}
               </a>{" "}
               and we’ll make it right. A real problem is our problem.
             </p>
-            <Link href="/policies/returns" className="link-underline mt-2 text-charcoal">
+            <Link href="/policies/returns" className="link-underline mt-2 text-cream">
               Details <span aria-hidden>↗</span>
             </Link>
           </div>
           <div>
-            <h2 className="font-serif text-2xl text-charcoal">Plainly</h2>
-            <p className="mt-2 text-sm text-charcoal/80">
+            <h2 className="font-serif text-2xl text-cream">Plainly</h2>
+            <p className="mt-2 text-sm text-cream/80">
               Cosmetics, not medicine. No clinical claims, no before-and-afters, and
               no review we didn’t earn.
             </p>
           </div>
         </div>
-      </section>
+      </EditorialRoomSection>
       {/* ---------------- Founding List ---------------- */}
       <section className="section-tight bg-founder-green py-14 md:py-16">
         <div className="shell">
@@ -345,7 +349,7 @@ export default function ShopPage() {
           </div>
         </div>
       </section>
-
+      </HouseShell>
     </>
   );
 }

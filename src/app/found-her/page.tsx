@@ -1,8 +1,10 @@
 import type { Metadata } from "next";
 import Image from "next/image";
 import Link from "next/link";
-import { PageIntro } from "@/components/site/PageIntro";
 import { RoomHero } from "@/components/house/RoomHero";
+import { HouseShell } from "@/components/house/HouseShell";
+import { EditorialRoomSection } from "@/components/house/EditorialRoomSection";
+import { getRoom } from "@/lib/rooms";
 import { EmailSignup } from "@/components/site/EmailSignup";
 import { StoryForm } from "@/components/story/StoryForm";
 import { BRAND } from "@/lib/brand";
@@ -29,8 +31,6 @@ export default function FoundHerPage() {
      found-her-wall.webp — so hanging the next frame means regenerating that
      image (and its mobile crop) and adjusting the click-overlay widths, not
      just adding data. */
-  const [featured, second, ...otherProfiles] = profiles;
-  const onWall = second ? [featured, second] : [featured];
   const ordinals = ["first", "second"];
   return (
     <>
@@ -54,12 +54,11 @@ export default function FoundHerPage() {
           a bright band right under a dark header is exactly the pale-island
           bug this pass exists to remove. The profiles section right below
           is the deliberate lit panel it hands off to. */}
+      <HouseShell room={6}>
       <RoomHero
-        src="/editorial/rooms/found-her-hall-doors.webp"
-        alt="The FOUND HER gallery: gilt-framed portraits of women along a dark marble hall, green doors with brass F monograms open at the end onto a lamplit workroom."
-        position="64% center"
+        room={getRoom(6)}
+        height="min-h-[78svh]"
         priority
-        label={BRAND.editorial}
         title={BRAND.campaign}
         lede="Stories from women who built before anyone applauded."
       >
@@ -72,269 +71,120 @@ export default function FoundHerPage() {
       </RoomHero>
 
       {/* ---------------- Profiles ---------------- */}
-      <section className="section bg-cream pt-4" aria-labelledby="profiles-heading">
+      {/* ---------------- The gallery ----------------
+          Room 06 continues behind the profiles: the portrait hall, darkened
+          to hold type, and each woman as an illuminated gallery panel —
+          her real picture in a brass-edged frame, her name and her line as
+          live text, and one link per panel. One markup for every width
+          (3 Sept 2026 replaces the composited ivory wall and its separate
+          phone frames). Portraits are the profiles' own — Julie's is the
+          painting made for her story, and her note says so. */}
+      <EditorialRoomSection
+        surface="scene"
+        scene={getRoom(6).hero.src}
+        sceneAlt=""
+        scenePosition="center 30%"
+        aria-labelledby="profiles-heading"
+      >
         <div className="shell">
-          <h2 id="profiles-heading" className="eyebrow scroll-mt-24 text-charcoal/70">
-            The profiles
+          <h2 id="profiles-heading" className="room-label scroll-mt-24">
+            On the wall
           </h2>
-
+          <p className="mt-4 max-w-[40ch] font-serif text-2xl leading-snug text-cream">
+            Not a hall of fame. A hall of women who kept going.
+          </p>
           {profiles.length === 0 ? (
-            <div className="mt-6 grid gap-10 lg:grid-cols-[1fr_minmax(0,26rem)] lg:gap-16">
-              <div>
-                <p className="headline max-w-[16ch] text-balance text-charcoal">
-                  The first one hasn’t been published yet.
-                </p>
-                <p className="mt-6 max-w-xl text-[1.0625rem] leading-[1.8] text-charcoal/85">
-                  There’s nothing here because nobody has approved her story yet. We
-                  could have filled this page with names and quotes nobody said, and
-                  you’d probably never know. We’d know.
-                </p>
-                <p className="mt-5 max-w-xl leading-[1.8] text-charcoal/85">
-                  The first profile will be the founder’s, in her own words. After that
-                  it’s women who wrote in — one at a time, slowly, each of them reading
-                  the final text before it goes anywhere.
-                </p>
-                <div className="mt-8 flex flex-col gap-3 sm:flex-row">
-                  <Link href="#share" className="btn btn-dark">
-                    I found her when…
-                  </Link>
-                </div>
+            <div className="paper-page mt-8 max-w-3xl p-8 md:p-12">
+              <p className="headline max-w-[16ch] text-balance text-charcoal">
+                The first one hasn’t been published yet.
+              </p>
+              <p className="mt-6 max-w-xl text-[1.0625rem] leading-[1.8] text-charcoal/85">
+                There’s nothing here because nobody has approved her story yet. We
+                could have filled this page with names and quotes nobody said, and
+                you’d probably never know. We’d know.
+              </p>
+              <p className="mt-5 max-w-xl leading-[1.8] text-charcoal/85">
+                The first profile will be the founder’s, in her own words. After that
+                it’s women who wrote in — one at a time, slowly, each of them reading
+                the final text before it goes anywhere.
+              </p>
+              <div className="mt-8">
+                <Link href="#share" className="btn btn-dark">
+                  I found her when…
+                </Link>
               </div>
-
-              <div className="card-quiet p-7">
-                <h3 className="eyebrow text-bronze-ink">What we ask</h3>
-                <ul className="mt-5 space-y-3">
-                  {PROFILE_QUESTIONS.map((question) => (
-                    <li
-                      key={question}
-                      className="border-b border-charcoal/10 pb-3 font-serif text-xl leading-snug text-charcoal last:border-0"
-                    >
-                      {question}
-                    </li>
-                  ))}
-                </ul>
-              </div>
+              <h3 className="eyebrow mt-10 text-bronze-ink">What we ask</h3>
+              <ul className="mt-5 space-y-3">
+                {PROFILE_QUESTIONS.map((question) => (
+                  <li
+                    key={question}
+                    className="border-b border-charcoal/10 pb-3 font-serif text-xl leading-snug text-charcoal last:border-0"
+                  >
+                    {question}
+                  </li>
+                ))}
+              </ul>
             </div>
-          ) : null}
-        </div>
-
-        {profiles.length > 0 && (
-          <>
-            {/* ---- The gallery wall ----
-                One photographed room, two frames: the founder's portrait
-                under its picture light, and Julie's framed collage hung
-                beside it. Each half of the scene is its own click target —
-                the invisible split falls in the wall space between the
-                frames (64% on desktop, 57% on the tighter mobile crop) —
-                and each woman gets her own placard beneath, the way museum
-                labels sit under a group hang. Nothing readable is baked
-                into the image — every word is live text. */}
-            {second ? (
-              <>
-                {/* Desktop: the one photographed room, both frames the same
-                    size on the same centre line. */}
-                <div className="relative mt-8 hidden md:block">
-                  <div className="relative aspect-[1779/884] w-full overflow-hidden">
-                    <Image
-                      src="/editorial/found-her-wall.webp"
-                      alt="A gallery wall: Shelby Korpi’s portrait in a carved dark frame under a brass picture light, and beside it, hung at the same size, Julie Schoener’s framed watercolour collage in green and gold, on ivory panelling above a green wainscot, with a leather bench beneath."
-                      fill
-                      loading="lazy"
-                      sizes="100vw"
-                      className="object-cover"
-                    />
-                  </div>
+          ) : (
+            <ul className="mt-10 grid gap-8 md:grid-cols-2" role="list">
+              {profiles.map((profile, i) => (
+                <li key={profile.slug} className="border border-rose/30 bg-night/70 backdrop-blur-[2px]">
                   <Link
-                    href={`/found-her/${featured.slug}`}
-                    aria-label={`Read ${featured.name}’s story`}
-                    className="absolute inset-y-0 left-0 w-[64%] focus-visible:outline-offset-[-4px]"
-                  />
-                  <Link
-                    href={`/found-her/${second.slug}`}
-                    aria-label={`Read ${second.name}’s story`}
-                    className="absolute inset-y-0 right-0 w-[36%] focus-visible:outline-offset-[-4px]"
-                  />
-                </div>
-
-                {/* the placards — desktop only; on mobile each placard
-                    travels with its own picture below */}
-                <div className="shell mt-9 hidden md:block">
-                  <div className="mx-auto grid max-w-3xl gap-10 text-center md:grid-cols-2">
-                    {onWall.map((profile, i) => (
-                      <Link
-                        key={profile.slug}
-                        href={`/found-her/${profile.slug}`}
-                        className="group block"
-                      >
-                        {/* bottom-aligned so a two-line eyebrow (Julie's)
-                            doesn't push her name below her neighbour's */}
-                        <p className="eyebrow flex min-h-[2.6em] items-end justify-center text-bronze-ink">
-                          <span>
-                            The {ordinals[i]} profile · {profile.role}
-                          </span>
-                        </p>
-                        <h3 className="mt-3 font-serif text-[clamp(1.75rem,3vw,2.5rem)] leading-none text-charcoal transition-colors group-hover:text-bronze-ink">
-                          {profile.name}
-                        </h3>
-                        <p className="mx-auto mt-3 max-w-md text-sm leading-relaxed text-charcoal/80">
-                          {profile.building}
-                        </p>
-                        {profile.portrait?.note ? (
-                          <p className="mx-auto mt-4 max-w-md text-xs leading-relaxed text-charcoal/70">
-                            {profile.portrait.note}
-                          </p>
-                        ) : null}
-                        <span className="link-underline mt-5 inline-block text-charcoal">
-                          Read her story <span aria-hidden>↗</span>
-                        </span>
-                      </Link>
-                    ))}
-                  </div>
-                </div>
-
-                {/* Mobile: her picture above her name — one card per woman,
-                    cropped identically from the same composited wall so the
-                    frames stay the same size here too. */}
-                <div className="mt-8 space-y-16 md:hidden">
-                  {onWall.map((profile, i) => (
-                    <Link
-                      key={profile.slug}
-                      href={`/found-her/${profile.slug}`}
-                      className="group block"
-                      aria-label={`Read ${profile.name}’s story`}
-                    >
-                      <div className="relative aspect-[510/655] w-full overflow-hidden">
+                    href={`/found-her/${profile.slug}`}
+                    className="group grid h-full gap-0 sm:grid-cols-[minmax(0,15rem)_1fr]"
+                  >
+                    {profile.portrait && (
+                      <div className="relative m-4 aspect-[4/5] overflow-hidden bg-night-deep shadow-[0_0_0_1px_var(--color-bronze),0_0_0_5px_var(--color-night-deep),0_0_0_6px_color-mix(in_srgb,var(--color-bronze)_60%,transparent),0_20px_50px_rgba(0,0,0,0.6)] sm:mb-4 sm:ml-4 sm:mt-4">
                         <Image
-                          src={
-                            i === 0
-                              ? "/editorial/found-her-frame-shelby-m.webp"
-                              : "/editorial/found-her-frame-julie-m.webp"
-                          }
-                          alt={
-                            i === 0
-                              ? "Shelby Korpi’s portrait in a carved dark frame under a brass picture light, hung on an ivory gallery wall."
-                              : "Julie Schoener’s framed watercolour collage in green and gold, hung on the same ivory gallery wall."
-                          }
+                          src={profile.portrait.src}
+                          alt={profile.portrait.alt}
                           fill
                           loading="lazy"
-                          sizes="100vw"
-                          className="object-cover"
+                          sizes="(max-width: 640px) 90vw, 15rem"
+                          className="object-cover transition-transform duration-700 group-hover:scale-[1.03]"
+                          style={{ objectPosition: profile.portrait.position ?? "center" }}
+                        />
+                        {/* The picture light. */}
+                        <span
+                          aria-hidden
+                          className="absolute inset-x-0 top-0 h-1/2 bg-[linear-gradient(180deg,rgba(234,211,195,0.18),transparent)]"
                         />
                       </div>
-                      <div className="shell mt-7 text-center">
-                        <p className="eyebrow text-bronze-ink">
-                          The {ordinals[i]} profile · {profile.role}
+                    )}
+                    <div className="flex flex-col justify-center p-6 pt-2 sm:p-8">
+                      <p className="eyebrow text-champagne">
+                        {i < ordinals.length ? `The ${ordinals[i]} profile · ` : ""}
+                        {profile.role}
+                      </p>
+                      <h3 className="mt-3 font-serif text-[clamp(1.75rem,3vw,2.5rem)] leading-none text-cream transition-colors group-hover:text-rose">
+                        {profile.name}
+                      </h3>
+                      <p className="mt-3 max-w-md text-sm leading-relaxed text-cream/80">
+                        {profile.building}
+                      </p>
+                      {profile.portrait?.note ? (
+                        <p className="mt-3 max-w-md text-xs leading-relaxed text-cream/60">
+                          {profile.portrait.note}
                         </p>
-                        <h3 className="mt-3 font-serif text-[clamp(1.75rem,3vw,2.5rem)] leading-none text-charcoal">
-                          {profile.name}
-                        </h3>
-                        <p className="mx-auto mt-3 max-w-md text-sm leading-relaxed text-charcoal/80">
-                          {profile.building}
-                        </p>
-                        {profile.portrait?.note ? (
-                          <p className="mx-auto mt-4 max-w-md text-xs leading-relaxed text-charcoal/70">
-                            {profile.portrait.note}
-                          </p>
-                        ) : null}
-                        <span className="link-underline mt-5 inline-block text-charcoal">
-                          Read her story <span aria-hidden>↗</span>
-                        </span>
-                      </div>
-                    </Link>
-                  ))}
-                </div>
-              </>
-            ) : (
-              <Link
-                href={`/found-her/${featured.slug}`}
-                className="group mt-8 block focus-visible:outline-offset-4"
-                aria-label={`Read ${featured.name}’s story`}
-              >
-                <div className="relative hidden aspect-[1779/884] w-full overflow-hidden md:block">
-                  <Image
-                    src="/editorial/founder-portrait-wall.webp"
-                    alt="A gallery wall: Shelby Korpi’s portrait in a carved dark frame under a brass picture light, on ivory panelling above a green wainscot, with a leather bench beneath."
-                    fill
-                    loading="lazy"
-                    sizes="100vw"
-                    className="object-cover transition-transform duration-700 group-hover:scale-[1.01]"
-                  />
-                </div>
-                <div className="relative aspect-[712/884] w-full overflow-hidden md:hidden">
-                  <Image
-                    src="/editorial/founder-portrait-wall-m.webp"
-                    alt="Shelby Korpi’s portrait in a carved dark frame under a brass picture light, hung on a gallery wall above a leather bench."
-                    fill
-                    loading="lazy"
-                    sizes="100vw"
-                    className="object-cover"
-                  />
-                </div>
-
-                {/* the placard */}
-                <div className="shell mt-9 text-center">
-                  <p className="eyebrow text-bronze-ink">
-                    The first profile · {featured.role}
-                  </p>
-                  <h3 className="mt-3 font-serif text-[clamp(2rem,4vw,3rem)] leading-none text-charcoal transition-colors group-hover:text-bronze-ink">
-                    {featured.name}
-                  </h3>
-                  <p className="mx-auto mt-3 max-w-md text-sm leading-relaxed text-charcoal/80">
-                    {featured.building}
-                  </p>
-                  <span className="link-underline mt-5 inline-block text-charcoal">
-                    Read her story <span aria-hidden>↗</span>
-                  </span>
-                </div>
-              </Link>
-            )}
-
-            {otherProfiles.length > 0 && (
-              <div className="shell">
-                <ul className="mt-16 grid gap-10 md:grid-cols-2 lg:grid-cols-3">
-                  {otherProfiles.map((profile) => (
-                    <li key={profile.slug}>
-                      <Link href={`/found-her/${profile.slug}`} className="group block">
-                        {profile.portrait && (
-                          <div
-                            className="relative overflow-hidden bg-shell"
-                            style={{ aspectRatio: profile.portrait.aspect ?? "4 / 5" }}
-                          >
-                            <Image
-                              src={profile.portrait.src}
-                              alt={profile.portrait.alt}
-                              fill
-                              loading="lazy"
-                              sizes="(max-width: 768px) 100vw, 33vw"
-                              className="object-cover transition-transform duration-700 group-hover:scale-[1.03]"
-                              style={{
-                                objectPosition: profile.portrait.position ?? "center",
-                              }}
-                            />
-                          </div>
-                        )}
-                        <p className="eyebrow mt-5 text-bronze-ink">{profile.role}</p>
-                        <h3 className="mt-2 font-serif text-[1.75rem] leading-none text-charcoal group-hover:text-bronze-ink">
-                          {profile.name}
-                        </h3>
-                        <p className="mt-2 text-sm text-charcoal/80">{profile.building}</p>
-                      </Link>
-                    </li>
-                  ))}
-                </ul>
-              </div>
-            )}
-          </>
-        )}
-      </section>
-
+                      ) : null}
+                      <span className="hairline mt-6 inline-block self-start text-cream group-hover:text-rose">
+                        Read her story <span aria-hidden>→</span>
+                      </span>
+                    </div>
+                  </Link>
+                </li>
+              ))}
+            </ul>
+          )}
+        </div>
+      </EditorialRoomSection>
       {/* ---------------- The invitation ----------------
           A call to action, not reading, so it is a dark room between the two
           lit panels either side of it — the profiles above, the share form
           below. The photograph already sits on its own near-black ground, so
           the room reads as one continuous surface with it rather than a
           cream field the photo's bg-ink used to interrupt. */}
-      <section className="section room-dark" aria-labelledby="invitation-heading">
+      <EditorialRoomSection surface="marble" aria-labelledby="invitation-heading">
         <div className="shell grid items-center gap-10 lg:grid-cols-[minmax(0,26rem)_1fr] lg:gap-16">
           <div className="relative mx-auto aspect-[4/5] w-full max-w-sm overflow-hidden bg-ink lg:mx-0 lg:max-w-none">
             <Image
@@ -367,7 +217,7 @@ export default function FoundHerPage() {
             </div>
           </div>
         </div>
-      </section>
+      </EditorialRoomSection>
 
       {/* ---------------- Share your story ----------------
           This was its own page at /share-your-story, with its own tab in the
@@ -378,68 +228,33 @@ export default function FoundHerPage() {
           the same four points arrive as the aside beside the form, and one
           page should not recite them twice. */}
       <section id="share" aria-labelledby="share-heading" className="scroll-mt-24">
-        {/* ---- The gallery wall ----
-            One photographed room: an ivory panelled wall over a Founder Green
-            wainscot, the mirror hung in its green-and-gold frame under a brass
-            picture light. On large screens the section text sits directly on
-            the wall; the photograph was cleaned of its mocked-in type so the
-            live, translated, screen-readable text is the only text. */}
-        <div className="relative hidden lg:block">
-          <div className="relative aspect-[1913/729] w-full">
-            <Image
-              src="/editorial/story-wall.webp"
-              alt="A sunlit ivory panelled wall above a deep green wainscot. A mirror in an ornate green-and-gold frame hangs under a brass picture light; four women are reflected in it, writing on the glass in rose."
-              fill
-              loading="lazy"
-              sizes="100vw"
-              className="object-cover"
-            />
-            <div className="absolute inset-0 flex items-center">
-              <div className="shell w-full">
-                <div className="max-w-xl">
-                  <p className="eyebrow text-charcoal/70">Share your story</p>
-                  <h2 id="share-heading" className="headline mt-5 text-balance text-charcoal">
-                    I found her when …
-                  </h2>
-                  <p className="lede mt-6 text-charcoal/80">{STORY_INTRO}</p>
-                </div>
-              </div>
+        {/* ---- The writing desk ----
+            The gallery hands off to a private desk: the typewriter frame the
+            house already owns, the invitation as live text beside it, and
+            the form itself on a page of paper lying on the marble below. One
+            form, one heading, every width — the two-breakpoint intro and the
+            separate phone figure are gone (3 Sept 2026). */}
+        <EditorialRoomSection
+          surface="scene"
+          scene="/editorial/the-room-is-yours.webp"
+          sceneAlt=""
+          scenePosition="center 35%"
+          tight
+        >
+          <div className="shell grid items-center gap-10 lg:grid-cols-[minmax(0,30rem)_1fr] lg:gap-16">
+            <div>
+              <p className="room-label">Your turn at the desk</p>
+              <h2 id="share-heading" className="headline-house mt-5 text-balance text-cream">
+                I found her when …
+              </h2>
+              <p className="mt-6 max-w-[40ch] text-[1.0625rem] leading-relaxed text-cream/80">
+                {STORY_INTRO}
+              </p>
             </div>
           </div>
-        </div>
-
-        {/* Small screens: the text on cream, then the framed mirror on its wall.
-            Both breakpoints are in the DOM at once (CSS-hidden, not
-            conditionally rendered), and the page's h1 is the archive's, so
-            both render h2 here — the desktop block above carries the id. */}
-        <div className="lg:hidden">
-          <PageIntro
-            eyebrow="Share your story"
-            title="I found her when …"
-            lede={STORY_INTRO}
-            headingLevel="h2"
-          />
-          <div className="bg-cream px-0 pb-2">
-            <figure>
-              <div className="relative aspect-[833/729] w-full">
-                <Image
-                  src="/editorial/story-frame.webp"
-                  alt="A mirror in an ornate green-and-gold frame under a brass picture light, on an ivory wall above a green wainscot. Four women are reflected in it, writing on the glass in rose."
-                  fill
-                  loading="lazy"
-                  sizes="100vw"
-                  className="object-cover"
-                />
-              </div>
-              <figcaption className="shell mt-3 text-xs uppercase tracking-[0.16em] text-charcoal/70">
-                Found her in the mirror
-              </figcaption>
-            </figure>
-          </div>
-        </div>
-
-        <div className="section bg-cream pt-4">
-          <div className="shell grid gap-12 lg:grid-cols-[1fr_minmax(0,22rem)] lg:gap-16">
+        </EditorialRoomSection>
+        <EditorialRoomSection surface="paper" ambient={false}>
+          <div className="grid gap-12 lg:grid-cols-[1fr_minmax(0,22rem)] lg:gap-16">
             <StoryForm />
 
             <aside className="lg:pt-2">
@@ -468,7 +283,7 @@ export default function FoundHerPage() {
               </p>
             </aside>
           </div>
-        </div>
+        </EditorialRoomSection>
       </section>
 
       {/* Kept on paper rather than pushed into a dark room: texture-stone's
@@ -476,14 +291,15 @@ export default function FoundHerPage() {
           PageIntro and Our Story's founder section use) and would barely
           register against night — and this is a quiet closing note, not the
           kind of call to action the dark rooms are for. */}
-      <section className="section-tight texture-stone bg-cream py-14">
+      <EditorialRoomSection surface="panel" tight>
         <div className="shell max-w-xl">
-          <h2 className="headline text-balance text-charcoal">
+          <h2 className="headline text-balance text-cream">
             New stories, as they’re published.
           </h2>
-          <EmailSignup tone="light" source="found-her" />
+          <EmailSignup tone="green" source="found-her" />
         </div>
-      </section>
+      </EditorialRoomSection>
+      </HouseShell>
     </>
   );
 }

@@ -400,7 +400,9 @@
     letter-spacing: 0.22em;
     text-transform: uppercase;
     line-height: 1;
-    color: var(--color-champagne);
+    /* Desert Rose since 3 Sept: the small label is where the pink lives
+       on every dark ground (7:1 on night, 5.5:1 on Founder Green). */
+    color: var(--color-rose);
   }
 
   .room-label-dk {
@@ -650,5 +652,250 @@
 
   .text-pretty {
     text-wrap: pretty;
+  }
+}
+
+/* ═══════════════════════════════════════════════════════════════════════════
+   THE HOUSE — 3 September 2026
+   The emerald doors, the ambient light, the paper pages and the paneling
+   that carry the room from the hero to the footer. Motion is slow and
+   restrained; everything here collapses to a static state under
+   prefers-reduced-motion.
+   ═══════════════════════════════════════════════════════════════════════ */
+@layer components {
+  /* ---- The emerald doors ------------------------------------------------ */
+  .door-portal {
+    aspect-ratio: 16 / 10;
+    isolation: isolate;
+  }
+  .door-portal-through {
+    transition: transform 1600ms cubic-bezier(0.22, 0.61, 0.24, 1);
+  }
+  /* Casing: a brass architrave around the opening and a deep reveal that
+     shadows the edges of the leaves, so they hang in a wall. */
+  .door-portal-casing {
+    box-shadow:
+      inset 0 0 0 1px color-mix(in srgb, var(--color-bronze) 70%, transparent),
+      inset 0 0 0 5px var(--color-emerald-deep),
+      inset 0 0 0 6px color-mix(in srgb, var(--color-bronze) 45%, transparent),
+      inset 0 0 120px rgba(0, 0, 0, 0.7);
+    z-index: 3;
+    pointer-events: none;
+  }
+  .door-leaf {
+    position: absolute;
+    top: 6px;
+    bottom: 6px;
+    width: calc(50% - 6px);
+    background:
+      linear-gradient(90deg, rgba(255, 255, 255, 0.05) 0%, rgba(0, 0, 0, 0) 30%),
+      linear-gradient(180deg, var(--color-founder-green) 0%, var(--color-emerald-deep) 100%);
+    box-shadow:
+      inset 0 0 0 1px color-mix(in srgb, var(--color-bronze) 55%, transparent),
+      0 0 40px rgba(0, 0, 0, 0.6);
+    transform-origin: left center;
+    transition: transform 1400ms cubic-bezier(0.32, 0, 0.12, 1);
+    will-change: transform;
+    z-index: 2;
+  }
+  .door-leaf-left {
+    left: 6px;
+    transform-origin: left center;
+  }
+  .door-leaf-right {
+    right: 6px;
+    transform-origin: right center;
+  }
+  /* At rest the leaves stand a little open, so the next room is always
+     visible through the gap; hover or focus eases them wider. */
+  .door-leaf-left {
+    transform: rotateY(-22deg);
+  }
+  .door-leaf-right {
+    transform: rotateY(22deg);
+  }
+  .door-leaf-left.is-ajar {
+    transform: rotateY(-40deg);
+  }
+  .door-leaf-right.is-ajar {
+    transform: rotateY(40deg);
+  }
+  .door-leaf-left.is-open {
+    transform: rotateY(-108deg);
+  }
+  .door-leaf-right.is-open {
+    transform: rotateY(108deg);
+  }
+  /* Two beaded panels, tall over short, drawn in antique brass. */
+  .door-panel {
+    position: absolute;
+    left: 12%;
+    right: 12%;
+    border: 1px solid color-mix(in srgb, var(--color-bronze) 75%, transparent);
+    box-shadow:
+      inset 0 0 0 3px var(--color-emerald-deep),
+      inset 0 0 0 4px color-mix(in srgb, var(--color-bronze) 35%, transparent),
+      inset 0 0 30px rgba(0, 0, 0, 0.35);
+  }
+  .door-panel-top {
+    top: 7%;
+    height: 54%;
+  }
+  .door-panel-bottom {
+    top: 66%;
+    height: 27%;
+  }
+  /* The gold F, from the monogram asset itself. */
+  .door-monogram {
+    position: absolute;
+    left: 50%;
+    top: 30%;
+    width: 11%;
+    aspect-ratio: 212.5 / 423.9;
+    transform: translate(-50%, -50%);
+    background: linear-gradient(180deg, var(--color-champagne) 0%, var(--color-bronze) 100%);
+    -webkit-mask: url("/brand/founder-f-monogram.svg") center / contain no-repeat;
+    mask: url("/brand/founder-f-monogram.svg") center / contain no-repeat;
+    filter: drop-shadow(0 1px 1px rgba(0, 0, 0, 0.6));
+  }
+  .door-handle {
+    position: absolute;
+    top: 50%;
+    width: 4px;
+    height: 13%;
+    border-radius: 2px;
+    background: linear-gradient(180deg, var(--color-champagne), var(--color-bronze) 55%, #6b4c2c);
+    box-shadow: 0 1px 6px rgba(0, 0, 0, 0.7);
+    transform: translateY(-50%);
+  }
+  .door-handle-left {
+    right: 7%;
+  }
+  .door-handle-right {
+    left: 7%;
+  }
+
+  /* ---- Ambient light: fire and candle ----------------------------------- */
+  .ambient-fire,
+  .ambient-glow {
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    mix-blend-mode: screen;
+  }
+  .ambient-fire {
+    background: radial-gradient(
+      55% 45% at 78% 88%,
+      rgba(255, 176, 102, 0.16) 0%,
+      rgba(255, 140, 70, 0.06) 40%,
+      transparent 70%
+    );
+    animation: house-flicker 5.2s ease-in-out infinite;
+  }
+  .ambient-glow {
+    background: radial-gradient(
+      50% 40% at 50% 8%,
+      rgba(216, 167, 160, 0.24) 0%,
+      rgba(216, 167, 160, 0.07) 45%,
+      transparent 75%
+    );
+    animation: house-breathe 9s ease-in-out infinite;
+  }
+
+  /* ---- Paper pages inside the dark house -------------------------------- */
+  .paper-page {
+    background-color: var(--color-cream);
+    color: var(--color-charcoal);
+    border-top: 3px solid var(--color-rose);
+    box-shadow:
+      0 0 0 1px color-mix(in srgb, var(--color-bronze) 55%, transparent),
+      0 0 0 6px var(--color-night-deep),
+      0 0 0 7px color-mix(in srgb, var(--color-bronze) 35%, transparent),
+      0 30px 80px rgba(0, 0, 0, 0.55);
+  }
+  /* Emerald paneling: the wall between rooms. */
+  .house-panel {
+    background-color: var(--color-emerald-deep);
+    border-top: 1px solid color-mix(in srgb, var(--color-rose) 55%, transparent);
+    background-image:
+      linear-gradient(180deg, rgba(255, 255, 255, 0.03), rgba(0, 0, 0, 0.25)),
+      repeating-linear-gradient(
+        90deg,
+        transparent 0 calc(25% - 1px),
+        color-mix(in srgb, var(--color-bronze) 28%, transparent) calc(25% - 1px) 25%
+      );
+    color: var(--color-cream);
+  }
+  /* The dark marble floor, for sections that read as the room continuing. */
+  .house-marble {
+    background-color: var(--color-night);
+    border-top: 1px solid color-mix(in srgb, var(--color-rose) 35%, transparent);
+    background-image:
+      radial-gradient(120% 80% at 18% 12%, rgba(216, 167, 160, 0.06) 0%, transparent 58%),
+      radial-gradient(90% 70% at 82% 78%, rgba(176, 138, 100, 0.08) 0%, transparent 62%),
+      repeating-linear-gradient(17deg, transparent 0 37px, rgba(176, 138, 100, 0.07) 37px 38px, transparent 38px 91px),
+      repeating-linear-gradient(128deg, transparent 0 53px, rgba(234, 211, 195, 0.04) 53px 54px, transparent 54px 149px);
+    color: var(--color-cream);
+  }
+  /* Photograph continuing behind a section — darkened to hold type. */
+  .house-scene-dim {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(180deg, rgba(7, 19, 15, 0.86) 0%, rgba(7, 19, 15, 0.78) 50%, rgba(7, 19, 15, 0.92) 100%);
+  }
+
+  /* Hero actions go full width on phones. */
+  .room-hero-actions > .btn {
+    width: 100%;
+  }
+  @media (min-width: 640px) {
+    .room-hero-actions > .btn {
+      width: auto;
+    }
+  }
+
+  /* ---- The room rail ---------------------------------------------------- */
+  .room-progress-link {
+    font-family: var(--font-sans);
+    font-size: 0.5rem;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+  }
+}
+
+@keyframes house-flicker {
+  0%, 100% { opacity: 0.85; transform: scale(1); }
+  18% { opacity: 1; transform: scale(1.02); }
+  37% { opacity: 0.78; transform: scale(0.995); }
+  55% { opacity: 0.95; transform: scale(1.015); }
+  74% { opacity: 0.82; }
+}
+@keyframes house-breathe {
+  0%, 100% { opacity: 0.7; }
+  50% { opacity: 1; }
+}
+@keyframes house-copy-in {
+  from { opacity: 0; transform: translateY(10px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+@keyframes house-push {
+  from { transform: scale(1.1); }
+  to { transform: scale(1); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .door-leaf,
+  .door-portal-through {
+    transition: none !important;
+  }
+  .door-leaf-left.is-ajar {
+    transform: rotateY(-22deg) !important;
+  }
+  .door-leaf-right.is-ajar {
+    transform: rotateY(22deg) !important;
+  }
+  .ambient-fire,
+  .ambient-glow {
+    animation: none !important;
   }
 }

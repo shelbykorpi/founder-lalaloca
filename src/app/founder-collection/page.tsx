@@ -9,6 +9,10 @@ import { LineCard } from "@/components/shop/LineCard";
 import { NEXT_MOVE, CAMPAIGN } from "@/lib/nextMove";
 import { formatPrice, products, SET } from "@/lib/products";
 import { Reveal } from "@/components/house/Reveal";
+import { RoomHero } from "@/components/house/RoomHero";
+import { HouseShell } from "@/components/house/HouseShell";
+import { LineRail } from "@/components/house/LineRail";
+import { getRoom } from "@/lib/rooms";
 import {
   JsonLd,
   breadcrumbSchema,
@@ -271,39 +275,20 @@ export default async function FounderCollectionPage() {
           crops honestly to a phone and to a wide desktop alike because the
           subject sits dead centre; the two-crop treatment the old vanity
           hero needed does not apply. */}
-      <section className="relative isolate flex min-h-[calc(100svh-7rem)] flex-col justify-end overflow-hidden bg-night text-cream">
-        <Image
-          src="/editorial/rooms/collection-mirror.webp"
-          alt="The FOUNDER Collection boardroom: a long black marble table set with striped packs at every seat, an empty green chair with a rose silk over its arm before a bulb-lit mirror."
-          fill
-          priority
-          sizes="100vw"
-          className="object-cover object-center"
-        />
-        {/* Bottom-up only. The frame is lit from directly above and falls off
-            to black at the foot on its own; this deepens that rather than
-            imposing a second light direction.
+      <HouseShell room={4}>
+      <RoomHero
+        room={getRoom(4)}
+        height="min-h-[78svh]"
+        priority
+        title="Take your seat."
+        lede="Private tools. Public power."
+      >
+        <Link href="#shelf-heading" className="btn btn-ghost-light">
+          Explore the collection
+        </Link>
+      </RoomHero>
+      <LineRail current="" />
 
-            The first pass cleared at 28% and the copy landed on the chair's
-            lit headrest — the eyebrow was unreadable against it. The wash now
-            starts closing at the half and is solid by the time the words
-            begin, so the light stays on the chair and the type gets ground. */}
-        <div
-          aria-hidden
-          className="absolute inset-0 bg-[linear-gradient(180deg,rgba(7,19,15,0.5)_0%,rgba(7,19,15,0.12)_24%,rgba(7,19,15,0.45)_50%,rgba(7,19,15,0.9)_68%,rgba(7,19,15,0.99)_86%,#07130f_100%)]"
-        />
-
-        <div className="shell relative pb-20 pt-32 text-center md:pb-24">
-          <p className="room-label">The FOUNDER Collection</p>
-          <h1 className="display-house mx-auto mt-6 max-w-[16ch] text-balance text-cream">
-            Take your seat.
-          </h1>
-          <p className="mx-auto mt-7 max-w-[46ch] text-[1.0625rem] leading-relaxed text-cream/80">
-            The mirror&rsquo;s lit. The cream, the cleanser, the wash, the stick and
-            the eye cream — what comes after the serums.
-          </p>
-        </div>
-      </section>
 
       {/* ---- The line ----
           One grid, one card treatment, three stages of readiness. When the
@@ -314,9 +299,13 @@ export default async function FounderCollectionPage() {
           inventing a price. */}
       <section className="section bg-night" aria-labelledby="shelf-heading">
         <div className="shell">
-          <h2 id="shelf-heading" className="room-label">
+          <h2 id="shelf-heading" className="room-label scroll-mt-24">
             The line
           </h2>
+          <p className="mt-4 max-w-[46ch] text-[0.9375rem] leading-relaxed text-cream/75">
+            Six pieces, laid out the way you&rsquo;d lay out a strategy. Take what
+            ships today. Hold the rest — they&rsquo;re yours when they&rsquo;re ready.
+          </p>
 
           <div className="mt-8 grid gap-10 sm:grid-cols-2 lg:grid-cols-3">
             {line.map((card) => (
@@ -359,8 +348,8 @@ export default async function FounderCollectionPage() {
         <Reveal>
           <div className="relative aspect-[16/9] w-full md:aspect-[1672/720]">
             <Image
-              src="/editorial/rooms/collection-study.webp"
-              alt="The boardroom from the head of the table, the double doors open onto a lamplit study lined with books."
+              src="/editorial/rooms/collection-mirror.webp"
+              alt="The boardroom vanity: an empty green chair with a rose silk over its arm before a bulb-lit mirror, the collection laid at every seat."
               fill
               loading="lazy"
               sizes="100vw"
@@ -472,6 +461,7 @@ export default async function FounderCollectionPage() {
           </Reveal>
         </div>
       </section>
+      </HouseShell>
     </>
   );
 }

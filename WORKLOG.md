@@ -737,3 +737,29 @@ LEFT ALONE / WARNING for whoever lands the FOUND HER work above:
 - 11–12 Aug · Claude (Cowork): brand board v2.14 conformance (Cormorant
   wordmark, colourways, nav lockup), Young Founders' Room, concierge prompt,
   FOUNDER Desk app v0.1.
+
+## 2026-09-03 · Claude (Cowork) — the house, local only
+- Redesigned the six room routes as one continuous house (see docs/HOUSE.md):
+  new src/lib/rooms.ts floor plan; new house components HouseShell,
+  EmeraldDoorPortal, NextRoomInvitation, RoomProgress, RoomTransition
+  (EnterTheHouse), AmbientLighting, EditorialRoomSection; RoomHero extended
+  (room prop, phone crop, headingId); LineRail numbered with six slots.
+- Pages: /, /shop, /founder-collection, /our-story, /found-her,
+  /young-founders-room. Found Her profiles rebuilt as gallery panels from the
+  profiles' own portraits; one story form; consent/publication copy intact.
+- Assets: public/editorial/rooms/*-m.webp phone crops, rooms/entrance-vanity
+  (+ -m); sources under assets/source/rooms/.
+- NOT changed: commerce, bag, catalog, APIs, forms' logic, analytics, SEO,
+  policies, product pages, protected lines. Nothing committed or pushed.
+- Verification: tsc, eslint (touched files), next build, Playwright walk —
+  all clean. Pre-existing lint errors in PlateShades.tsx / ThresholdDoors.tsx
+  untouched.
+- Later, 3 Sept: house copy sharpened (door labels, next-room notes, section
+  eyebrows, Found Her gallery line) and more Desert Rose: .room-label is rose
+  site-wide, rose rule under hero labels, rose top edge on paper pages and
+  panels, rose light through the door gaps, stronger pink ambient glow.
+- Voice pass against the consumer-psychology brief (claude/house-voice-psychology.md
+  in the Claude project): "The house isn't finished with you" → "Walk on. Every
+  door here opens for you."; scarcity phrasing removed from the collection
+  lines; ownership/belonging language kept. Doors still read "Push. It isn't
+  locked." / "After you."

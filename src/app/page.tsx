@@ -3,8 +3,10 @@ import Image from "next/image";
 import Link from "next/link";
 import { EmailSignup } from "@/components/site/EmailSignup";
 import { Reveal } from "@/components/house/Reveal";
-import { RoomRail } from "@/components/house/RoomRail";
-import { ThresholdDoors } from "@/components/house/ThresholdDoors";
+import { HouseShell } from "@/components/house/HouseShell";
+import { EnterTheHouse } from "@/components/house/RoomTransition";
+import { AmbientLighting } from "@/components/house/AmbientLighting";
+import { getRoom } from "@/lib/rooms";
 import { DoorFrame } from "@/components/house/DoorFrame";
 import { RoomHero } from "@/components/house/RoomHero";
 import { BRAND } from "@/lib/brand";
@@ -51,15 +53,7 @@ import { products, formatPrice, SET } from "@/lib/products";
  *     on sale.
  */
 
-const ROOMS = [
-  { id: "room-threshold", label: "01 · The Threshold" },
-  { id: "room-house", label: "02 · Inside FOUNDER" },
-  { id: "room-collection", label: "03 · The Collection" },
-  { id: "room-anchor", label: "04 · The Anchor" },
-  { id: "room-found-her", label: "05 · Found Her" },
-  { id: "room-notes", label: "06 · Notes from the House" },
-  { id: "room-invitation", label: "07 · The Invitation" },
-];
+/* The seven rooms are in src/lib/rooms.ts now; the rail reads them there. */
 
 /* No `title` — the root layout's template would render "FOUNDER | FOUNDER".
    The homepage takes SITE.title from the layout default, which is the one
@@ -72,6 +66,7 @@ export const metadata: Metadata = {
 
 /* The line and the fill, read from the repo rather than retyped. */
 const holdTheRoom = FOUNDER_COLLECTION[0];
+const threshold = getRoom(1);
 const bySlug = Object.fromEntries(NEXT_MOVE.map((p) => [p.slug, p]));
 
 const LINE = [
@@ -187,21 +182,29 @@ const NOTES = [
 export default function HomePage() {
   return (
     <div className="bg-emerald-deep text-cream">
-      <ThresholdDoors />
-      <RoomRail rooms={ROOMS} />
+      <HouseShell room={2}>
 
       {/* ══ 01 · THE THRESHOLD ══════════════════════════════════════════════
           Full bleed, and the copy sits in the photograph's own dark half so
           it never needs a scrim over her face. */}
       <section id="room-threshold" className="relative isolate min-h-[calc(100svh-4rem)] overflow-hidden">
         <Image
-          src="/editorial/rooms/threshold-doors.webp"
-          alt="Two tall green doors, a brass F on each leaf, standing open onto a firelit sitting room in the FOUNDER house."
+          src={threshold.hero.src}
+          alt={threshold.hero.alt}
           fill
           priority
           sizes="100vw"
-          className="object-cover object-[58%_center]"
+          className="hidden object-cover object-[58%_center] md:block"
         />
+        <Image
+          src={threshold.heroMobile.src}
+          alt={threshold.hero.alt}
+          fill
+          loading="eager"
+          sizes="100vw"
+          className="object-cover object-[center_40%] md:hidden"
+        />
+        <AmbientLighting />
         <div
           aria-hidden
           className="absolute inset-0 bg-[linear-gradient(180deg,rgba(10,37,35,0)_38%,rgba(10,37,35,0.9)_82%,#0a2523_100%)] md:bg-[linear-gradient(90deg,#0a2523_0%,rgba(10,37,35,0.94)_26%,rgba(10,37,35,0.55)_44%,rgba(10,37,35,0)_62%)]"
@@ -223,12 +226,10 @@ export default function HomePage() {
                 whole threshold without a way to a product; now the gold button
                 is the shop and the house is the hairline beside it. */}
             <div className="mt-9 flex flex-wrap items-center gap-x-8 gap-y-4">
-              <Link href="/shop" className="btn btn-primary">
+              <Link href="/shop" className="btn btn-primary w-full sm:w-auto">
                 Shop the serums
               </Link>
-              <Link href="#room-house" className="hairline text-cream">
-                Enter the house
-              </Link>
+              <EnterTheHouse className="btn btn-ghost-light w-full sm:w-auto" />
             </div>
           </div>
         </div>
@@ -240,14 +241,23 @@ export default function HomePage() {
       <RoomHero
         id="room-house"
         as="h2"
-        src="/editorial/rooms/inside-founder-lounge.webp"
-        alt="The FOUNDER sitting room: a green velvet sofa by a marble fireplace, a cream blazer over its arm, and through the open doors the lit serum shelves in teal, gold and red."
-        position="64% center"
-        height="min-h-[68svh]"
-        label="Room 02 · Inside FOUNDER"
+        room={getRoom(2)}
+        height="min-h-[78svh]"
         title="Come in. Stay awhile."
-        lede="The lights are low. The vanity is still warm. A blazer waits by the door. A house that was alive before you arrived — nothing loud, everything intentional."
-      />
+        lede={
+          <>
+            The door closes softly behind you.
+            <br />
+            The lights are low.
+            <br />
+            On the vanity, a note waits with your name on it.
+          </>
+        }
+      >
+        <a href="#room-collection" className="hairline text-cream">
+          Follow the light ↓
+        </a>
+      </RoomHero>
       <section className="section bg-emerald-deep pt-10">
         <div className="shell">
           <div className="grid gap-5 md:grid-cols-3">
@@ -306,12 +316,13 @@ export default function HomePage() {
         id="room-collection"
         as="h2"
         src="/editorial/rooms/collection-mirror.webp"
+        mobileSrc="/editorial/rooms/collection-mirror-m.webp"
         alt="The FOUNDER Collection boardroom: a long black marble table set with striped packs at every seat, an empty green chair with a rose silk over its arm before a bulb-lit mirror."
         position="56% center"
         height="min-h-[68svh]"
         label="Room 03 · The Collection"
         title="Private tools. Public power."
-        lede="Six pieces for the twenty minutes before you walk in. Hold the Room ships first. Hold your place for the rest — nothing is charged until they’re priced."
+        lede="Six pieces for the twenty minutes before you walk in. The first ships now. The rest are yours to hold — nothing charged until they’re priced, and you hear first."
       >
         <Link href="/founder-collection" className="btn btn-primary">
           Explore the collection
@@ -417,6 +428,7 @@ export default function HomePage() {
       <RoomHero
         as="h2"
         src="/editorial/rooms/serum-salon-arches.webp"
+        mobileSrc="/editorial/rooms/serum-salon-arches-m.webp"
         alt="The serum salon: three lit marble niches in teal, gold and red, one bottle in each, over a black marble counter, pink desert sky through the arches either side."
         position="center center"
         height="min-h-[64svh]"
@@ -609,6 +621,7 @@ export default function HomePage() {
           </Reveal>
         </div>
       </section>
+      </HouseShell>
     </div>
   );
 }

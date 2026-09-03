@@ -2,6 +2,9 @@ import type { Metadata } from "next";
 import { JsonLd, breadcrumbSchema } from "@/lib/seo";
 import { Threshold } from "@/components/young-founders/Threshold";
 import { RoomHero } from "@/components/house/RoomHero";
+import { HouseShell } from "@/components/house/HouseShell";
+import { EditorialRoomSection } from "@/components/house/EditorialRoomSection";
+import { getRoom } from "@/lib/rooms";
 import { TrackedLink } from "@/components/young-founders/TrackedLink";
 import { DocumentaryImage, assetExists } from "@/components/young-founders/DocumentaryImage";
 
@@ -107,17 +110,31 @@ export default function YoungFoundersRoomPage() {
       />
 
       <Threshold focusTargetId="young-founders-heading" />
+      <HouseShell room={7}>
       <RoomHero
-        as="p"
-        src="/editorial/rooms/young-founders-window.webp"
-        alt="A long table in the FOUNDER house covered in LALALOCA bottles, swatches, notebooks and a guitar, young hands at work along it, tall windows open onto a pink desert evening."
-        position="66% center"
-        height="min-h-[64svh]"
+        room={getRoom(7)}
+        height="min-h-[80svh]"
         priority
-        label="Room 07 · The Young Founders’ Room"
+        headingId="young-founders-heading"
         title="A room built with young voices."
-        lede="They were never treated like a charity project. They were collaborators."
-      />
+        lede={
+          <>
+            They were never treated like a charity project.
+            <br />
+            They were <em className="font-serif not-italic italic">collaborators</em>.
+            <span className="mt-6 block border-t border-rose/40 pt-5 text-[0.75rem] uppercase tracking-[0.2em] text-rose">
+              20% of LALALOCA net profits. Every month. Directly to StandUp for Kids Tucson.
+            </span>
+          </>
+        }
+      >
+        <a href="#how-it-began" className="btn btn-primary">
+          See how it began <span aria-hidden>→</span>
+        </a>
+        <TrackedLink href="/shop" event="young_founders_shop_click" variant="ghost">
+          Shop LALALOCA
+        </TrackedLink>
+      </RoomHero>
 
       {/* ---- Hero: what the doors open onto ----
           The first thing after the header, so it opens in the same dark room
@@ -125,18 +142,15 @@ export default function YoungFoundersRoomPage() {
           header is the pale-island bug this pass exists to remove. The
           essay proper (Shelby's note, the interview-style sections below)
           still moves onto paper; this is scene-setting, not the reading. */}
-      <section className="room-dark">
+      <EditorialRoomSection surface="marble" id="how-it-began" className="scroll-mt-24">
         <div
-          className={`shell grid gap-10 py-16 md:py-24 lg:items-center lg:gap-16 ${twoUp(has.outreachTeam, "lg:grid-cols-2")}`}
+          className={`shell grid gap-10 lg:items-center lg:gap-16 ${twoUp(has.outreachTeam, "lg:grid-cols-2")}`}
         >
           <div className="order-2 lg:order-1">
-            <Eyebrow tone="room">A room built with young voices.</Eyebrow>
-            <h1
-              id="young-founders-heading"
-              className="mt-5 font-serif text-4xl leading-[1.08] text-cream outline-none md:text-6xl"
-            >
+            <Eyebrow tone="room">How it began</Eyebrow>
+            <h2 className="mt-5 font-serif text-4xl leading-[1.08] text-cream md:text-6xl">
               THE YOUNG FOUNDERS’ ROOM
-            </h1>
+            </h2>
             <Rule />
             <div className="max-w-prose space-y-4 text-cream/85">
               <p>LALALOCA began with three serums.</p>
@@ -192,12 +206,12 @@ export default function YoungFoundersRoomPage() {
             />
           </div>
         </div>
-      </section>
+      </EditorialRoomSection>
 
       {/* ---- Shelby's note ---- */}
-      <section className="bg-founder-green text-cream">
+      <EditorialRoomSection surface="panel" ambient={false}>
         <div
-          className={`shell grid gap-10 py-16 md:py-24 lg:gap-16 ${twoUp(has.shelbyVolunteer, "lg:grid-cols-[1fr_0.85fr]")}`}
+          className={`shell grid gap-10 lg:gap-16 ${twoUp(has.shelbyVolunteer, "lg:grid-cols-[1fr_0.85fr]")}`}
         >
           <div>
             {/* Champagne, not Antique Gold: the gold measures 3.04:1 on
@@ -256,11 +270,11 @@ export default function YoungFoundersRoomPage() {
             />
           </div>
         </div>
-      </section>
+      </EditorialRoomSection>
 
       {/* ---- They helped build LALALOCA ---- */}
-      <section className="bg-shell">
-        <div className="shell grid gap-10 py-16 md:py-24 lg:grid-cols-[0.9fr_1fr] lg:gap-16">
+      <EditorialRoomSection surface="paper">
+        <div className="grid gap-10 lg:grid-cols-[0.9fr_1fr] lg:gap-16">
           <div>
             <Eyebrow>The Young Founders’ Room</Eyebrow>
             <h2 className="mt-5 font-serif text-3xl leading-tight text-charcoal md:text-5xl">
@@ -329,12 +343,12 @@ export default function YoungFoundersRoomPage() {
             </p>
           </div>
         </div>
-      </section>
+      </EditorialRoomSection>
 
       {/* ---- The gala ---- */}
-      <section className="bg-cream">
+      <EditorialRoomSection surface="paper">
         <div
-          className={`shell grid gap-10 py-16 md:py-24 lg:items-center lg:gap-16 ${twoUp(has.gala, "lg:grid-cols-2")}`}
+          className={`grid gap-10 lg:items-center lg:gap-16 ${twoUp(has.gala, "lg:grid-cols-2")}`}
         >
           <div>
             <Eyebrow>The Young Founders’ Room</Eyebrow>
@@ -372,11 +386,11 @@ export default function YoungFoundersRoomPage() {
             sizes="(min-width: 1024px) 50vw, 100vw"
           />
         </div>
-      </section>
+      </EditorialRoomSection>
 
       {/* ---- What your purchase opens ---- */}
-      <section className="bg-shell">
-        <div className="shell py-16 md:py-24">
+      <EditorialRoomSection surface="paper">
+        <div >
           <Eyebrow>The Young Founders’ Room</Eyebrow>
           <h2 className="mt-5 max-w-3xl font-serif text-3xl leading-tight text-charcoal md:text-5xl">
             What your purchase opens.
@@ -425,11 +439,11 @@ export default function YoungFoundersRoomPage() {
             </div>
           </div>
         </div>
-      </section>
+      </EditorialRoomSection>
 
       {/* ---- The commitment ---- */}
-      <section className="bg-founder-green text-cream">
-        <div className="shell py-16 md:py-24">
+      <EditorialRoomSection surface="panel" ambient={false}>
+        <div className="shell">
           {/* Champagne, not Antique Gold — see the note by the note-from-Shelby
               eyebrow above; same room, same failing contrast otherwise. */}
           <p className="eyebrow text-champagne">Our commitment</p>
@@ -471,15 +485,15 @@ export default function YoungFoundersRoomPage() {
             </TrackedLink>
           </div>
         </div>
-      </section>
+      </EditorialRoomSection>
 
       {/* ---- Hold open their room ----
           A closing call to action, not reading, so — like the profile
           template's own closing section — it leaves paper and goes back to a
           dark room ahead of the (dark) footer, rather than ending the page on
           a cream band that then has to explain itself to the footer above it. */}
-      <section className="room-dark">
-        <div className="shell max-w-3xl py-16 text-center md:py-24">
+      <EditorialRoomSection surface="marble">
+        <div className="shell max-w-3xl text-center">
           <h2 className="font-serif text-3xl leading-tight text-cream md:text-5xl">
             Hold open their room.
           </h2>
@@ -515,7 +529,8 @@ export default function YoungFoundersRoomPage() {
             </TrackedLink>
           </div>
         </div>
-      </section>
+      </EditorialRoomSection>
+      </HouseShell>
     </>
   );
 }

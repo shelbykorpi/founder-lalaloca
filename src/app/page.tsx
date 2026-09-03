@@ -195,11 +195,11 @@ export default function HomePage() {
       <section id="room-threshold" className="relative isolate min-h-[calc(100svh-4rem)] overflow-hidden">
         <Image
           src="/editorial/hero-open-door.webp"
-          alt="A woman in a cream suit at a tall green door with a brass F monogram, the room beyond lit warm."
+          alt="Two women in a dark green panelled hall, a warm-lit doorway open behind them — one in a cream suit and rust silk blouse, one in a deep green wrap dress — both looking straight into the camera."
           fill
           priority
           sizes="100vw"
-          className="object-cover object-[70%_35%]"
+          className="object-cover object-[68%_30%]"
         />
         <div
           aria-hidden

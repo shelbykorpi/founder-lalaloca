@@ -145,7 +145,7 @@ export const FOOTER_NAV = [
  */
 export const HERO = {
   src: "/editorial/hero-open-door.webp",
-  alt: "A woman at the edge of an open door, her hand on its brass frame, warm light across her face. A brass F hangs on the deep green wall behind her.",
+  alt: "Two women in a dark green panelled hall, a warm-lit doorway open behind them — one in a cream suit and rust silk blouse, one in a deep green wrap dress — both looking straight into the camera.",
   approved: true,
   placeholderNote:
     "Placeholder image · run ./scripts/set-hero.sh to install the approved campaign photograph",

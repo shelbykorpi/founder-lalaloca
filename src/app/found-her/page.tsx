@@ -31,7 +31,6 @@ export default function FoundHerPage() {
      found-her-wall.webp — so hanging the next frame means regenerating that
      image (and its mobile crop) and adjusting the click-overlay widths, not
      just adding data. */
-  const ordinals = ["first", "second"];
   return (
     <>
       {/* Declares the archive as a list of real articles, so the section itself
@@ -71,30 +70,20 @@ export default function FoundHerPage() {
       </RoomHero>
 
       {/* ---------------- Profiles ---------------- */}
-      {/* ---------------- The gallery ----------------
-          Room 06 continues behind the profiles: the portrait hall, darkened
-          to hold type, and each woman as an illuminated gallery panel —
-          her real picture in a brass-edged frame, her name and her line as
-          live text, and one link per panel. One markup for every width
-          (3 Sept 2026 replaces the composited ivory wall and its separate
-          phone frames). Portraits are the profiles' own — Julie's is the
-          painting made for her story, and her note says so. */}
-      <EditorialRoomSection
-        surface="scene"
-        scene={getRoom(6).hero.src}
-        sceneAlt=""
-        scenePosition="center 30%"
-        aria-labelledby="profiles-heading"
-      >
-        <div className="shell">
-          <h2 id="profiles-heading" className="room-label scroll-mt-24">
-            On the wall
-          </h2>
-          <p className="mt-4 max-w-[40ch] font-serif text-2xl leading-snug text-cream">
-            Not a hall of fame. A hall of women who kept going.
-          </p>
-          {profiles.length === 0 ? (
-            <div className="paper-page mt-8 max-w-3xl p-8 md:p-12">
+      {/* ---------------- The gallery: the profiles ----------------
+          3 Sept 2026, to Shelby's mock-up: the desert-pink portrait hall is
+          the hero above; the profiles are a dark band directly beneath it,
+          split two-up with a rose diamond between. Each band is one link to
+          her story — portrait, name, her line, "Read her story". Portraits
+          are the profiles' own (Julie's is the painting made for her story,
+          and her note still says so). One markup for every width. */}
+      <section aria-labelledby="profiles-heading" className="house-marble">
+        <h2 id="profiles-heading" className="sr-only">
+          The profiles
+        </h2>
+        {profiles.length === 0 ? (
+          <div className="shell py-16">
+            <div className="paper-page max-w-3xl p-8 md:p-12">
               <p className="headline max-w-[16ch] text-balance text-charcoal">
                 The first one hasn’t been published yet.
               </p>
@@ -125,59 +114,74 @@ export default function FoundHerPage() {
                 ))}
               </ul>
             </div>
-          ) : (
-            <ul className="mt-10 grid gap-8 md:grid-cols-2" role="list">
-              {profiles.map((profile, i) => (
-                <li key={profile.slug} className="border border-rose/30 bg-night/70 backdrop-blur-[2px]">
-                  <Link
-                    href={`/found-her/${profile.slug}`}
-                    className="group grid h-full gap-0 sm:grid-cols-[minmax(0,15rem)_1fr]"
+          </div>
+        ) : (
+          <ul role="list" className="grid md:grid-cols-2">
+            {profiles.map((profile, i) => (
+              <li
+                key={profile.slug}
+                className="relative border-t border-rose/20 md:border-t-0 md:border-l md:border-rose/20 md:first:border-l-0"
+              >
+                {/* The rose diamond that sits on the seam between the two, as
+                    in the mock-up. Desktop only, on the left border of the
+                    second card. */}
+                {i > 0 && (
+                  <span
+                    aria-hidden
+                    className="absolute left-0 top-1/2 z-10 hidden -translate-x-1/2 -translate-y-1/2 text-rose md:block"
                   >
-                    {profile.portrait && (
-                      <div className="relative m-4 aspect-[4/5] overflow-hidden bg-night-deep shadow-[0_0_0_1px_var(--color-bronze),0_0_0_5px_var(--color-night-deep),0_0_0_6px_color-mix(in_srgb,var(--color-bronze)_60%,transparent),0_20px_50px_rgba(0,0,0,0.6)] sm:mb-4 sm:ml-4 sm:mt-4">
-                        <Image
-                          src={profile.portrait.src}
-                          alt={profile.portrait.alt}
-                          fill
-                          loading="lazy"
-                          sizes="(max-width: 640px) 90vw, 15rem"
-                          className="object-cover transition-transform duration-700 group-hover:scale-[1.03]"
-                          style={{ objectPosition: profile.portrait.position ?? "center" }}
-                        />
-                        {/* The picture light. */}
-                        <span
-                          aria-hidden
-                          className="absolute inset-x-0 top-0 h-1/2 bg-[linear-gradient(180deg,rgba(234,211,195,0.18),transparent)]"
-                        />
-                      </div>
-                    )}
-                    <div className="flex flex-col justify-center p-6 pt-2 sm:p-8">
-                      <p className="eyebrow text-champagne">
-                        {i < ordinals.length ? `The ${ordinals[i]} profile · ` : ""}
-                        {profile.role}
-                      </p>
-                      <h3 className="mt-3 font-serif text-[clamp(1.75rem,3vw,2.5rem)] leading-none text-cream transition-colors group-hover:text-rose">
-                        {profile.name}
-                      </h3>
-                      <p className="mt-3 max-w-md text-sm leading-relaxed text-cream/80">
-                        {profile.building}
-                      </p>
-                      {profile.portrait?.note ? (
-                        <p className="mt-3 max-w-md text-xs leading-relaxed text-cream/60">
-                          {profile.portrait.note}
-                        </p>
-                      ) : null}
-                      <span className="hairline mt-6 inline-block self-start text-cream group-hover:text-rose">
-                        Read her story <span aria-hidden>→</span>
+                    ◇
+                  </span>
+                )}
+                <Link
+                  href={`/found-her/${profile.slug}`}
+                  aria-label={`Read ${profile.name}’s story`}
+                  className="group flex min-h-[13rem] items-stretch focus-visible:outline focus-visible:-outline-offset-2 focus-visible:outline-2 focus-visible:outline-rose"
+                >
+                  {profile.portrait && (
+                    <span className="relative block w-[38%] max-w-[13rem] shrink-0 overflow-hidden bg-night-deep">
+                      <Image
+                        src={profile.portrait.src}
+                        alt={profile.portrait.alt}
+                        fill
+                        loading="lazy"
+                        sizes="(max-width: 768px) 40vw, 13rem"
+                        className="object-cover transition-transform duration-700 group-hover:scale-[1.04]"
+                        style={{ objectPosition: profile.portrait.position ?? "center" }}
+                      />
+                      <span
+                        aria-hidden
+                        className="absolute inset-0 bg-[linear-gradient(90deg,transparent_60%,rgba(7,19,15,0.85))]"
+                      />
+                    </span>
+                  )}
+                  <span className="flex flex-1 items-center justify-between gap-4 px-6 py-6 md:px-8">
+                    <span className="min-w-0">
+                      <span className="block font-serif text-[clamp(1.75rem,3vw,2.5rem)] uppercase leading-none tracking-[0.02em] text-champagne transition-colors group-hover:text-rose">
+                        {profile.name.split(" ")[0]}
                       </span>
-                    </div>
-                  </Link>
-                </li>
-              ))}
-            </ul>
-          )}
-        </div>
-      </EditorialRoomSection>
+                      <span className="mt-3 block text-sm leading-relaxed text-cream/75">
+                        {profile.tagline ?? profile.building}
+                      </span>
+                      {profile.portrait?.note ? (
+                        <span className="mt-2 block text-xs leading-relaxed text-cream/45">
+                          {profile.portrait.note}
+                        </span>
+                      ) : null}
+                    </span>
+                    <span className="hidden shrink-0 items-center gap-2 text-[0.6875rem] uppercase tracking-[0.22em] text-cream/80 transition-colors group-hover:text-rose sm:flex">
+                      Read her story
+                      <span aria-hidden className="transition-transform duration-300 group-hover:translate-x-1">
+                        →
+                      </span>
+                    </span>
+                  </span>
+                </Link>
+              </li>
+            ))}
+          </ul>
+        )}
+      </section>
       {/* ---------------- The invitation ----------------
           A call to action, not reading, so it is a dark room between the two
           lit panels either side of it — the profiles above, the share form

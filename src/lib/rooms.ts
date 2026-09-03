@@ -117,11 +117,11 @@ export const ROOMS: Room[] = [
     href: "/found-her",
     pathname: "/found-her",
     hero: {
-      src: "/editorial/rooms/found-her-hall-doors.webp",
-      alt: "The FOUND HER gallery: gilt-framed portraits of women along a dark marble hall, emerald doors with brass F monograms open at the end onto a lamplit workroom.",
-      position: "64% center",
+      src: "/editorial/rooms/found-her-hall-pink.webp",
+      alt: "The FOUND HER gallery: gilt-framed portraits of women down a dark marble hall, sconces lit between them, a doorway at the far end open onto a soft desert-pink sky — the light from the next room.",
+      position: "58% center",
     },
-    heroMobile: { src: "/editorial/rooms/found-her-hall-doors-m.webp" },
+    heroMobile: { src: "/editorial/rooms/found-her-hall-pink-m.webp" },
     through: "At the end of the hall, the work is still on the table. Pull up a chair.",
   },
   {

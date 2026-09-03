@@ -763,3 +763,12 @@ LEFT ALONE / WARNING for whoever lands the FOUND HER work above:
   door here opens for you."; scarcity phrasing removed from the collection
   lines; ownership/belonging language kept. Doors still read "Push. It isn't
   locked." / "After you."
+- Found Her to Shelby's mock-up: new hero (found-her-hall-pink.webp, the
+  desert-pink portrait hall — replaces found-her-hall-doors as the room 06
+  frame; the old file is now unused). Profiles rebuilt as the two dark bands
+  from the mock — portrait · NAME · tagline · READ HER STORY →, rose diamond
+  on the seam, whole band links to her story. New optional profile.tagline:
+  Shelby "Built with conviction. Led with grace.", Julie "Redefined success.
+  On her own terms." (Julie's painting note kept). Hero copy unchanged (it
+  already matched). Old found-her-hall-doors*.webp / found-her-hall-sky*.webp
+  are unreferenced now — safe to delete when delete-permission is available.

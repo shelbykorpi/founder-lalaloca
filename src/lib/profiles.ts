@@ -26,6 +26,10 @@ export type FoundHerProfile = {
   };
   /** One line for the archive card */
   building: string;
+  /** Two short lines for the FOUND HER gallery card (the desert-pink hall).
+      Kept separate from `building` so the gallery band reads as a wall
+      placard while `building` stays the plain descriptor used elsewhere. */
+  tagline?: string;
   /** Sits under the name at the top of her page */
   standfirst: string;
   answers: { question: string; body: string[] }[];
@@ -66,6 +70,7 @@ export const profiles: FoundHerProfile[] = [
       position: "50% 26%",
     },
     building: "FOUNDER, EcoYield.ai, and a few things before both.",
+    tagline: "Built with conviction. Led with grace.",
     standfirst:
       "The first story here is her own — the kitchen-table business, the chicken barns, the year she delivered other people’s dinners to keep her company alive.",
     approvedOn: "2026-08-05",
@@ -185,6 +190,7 @@ export const profiles: FoundHerProfile[] = [
       note: "The picture in the frame isn’t Julie — it’s a painting we put together for her story.",
     },
     building: "Stay Delusional — a brand for believing in the life before it exists.",
+    tagline: "Redefined success. On her own terms.",
     standfirst:
       "She spent years on the path she was supposed to follow. Losing her mom changed how she looked at time — so she moved across the country, started over, and began building a life she was excited to wake up to.",
     /* PENDING HER APPROVAL. Shelby chose to publish ahead of Julie's

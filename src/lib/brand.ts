@@ -144,8 +144,8 @@ export const FOOTER_NAV = [
  * `approved: true` to remove the placeholder note under the hero.
  */
 export const HERO = {
-  src: "/editorial/hero-open-door.webp",
-  alt: "Two women in a dark green panelled hall, a warm-lit doorway open behind them — one in a cream suit and rust silk blouse, one in a deep green wrap dress — both looking straight into the camera.",
+  src: "/editorial/rooms/threshold-doors.webp",
+  alt: "Two tall green doors, a brass F on each leaf, standing open onto a firelit sitting room in the FOUNDER house.",
   approved: true,
   placeholderNote:
     "Placeholder image · run ./scripts/set-hero.sh to install the approved campaign photograph",

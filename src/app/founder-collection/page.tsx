@@ -273,8 +273,8 @@ export default async function FounderCollectionPage() {
           hero needed does not apply. */}
       <section className="relative isolate flex min-h-[calc(100svh-7rem)] flex-col justify-end overflow-hidden bg-night text-cream">
         <Image
-          src="/editorial/the-room-is-yours-chair.webp"
-          alt="An empty dark green wingback chair at the head of a marble boardroom table under a single overhead light, a rose silk robe over one arm and covered objects on the table."
+          src="/editorial/rooms/collection-mirror.webp"
+          alt="The FOUNDER Collection boardroom: a long black marble table set with striped packs at every seat, an empty green chair with a rose silk over its arm before a bulb-lit mirror."
           fill
           priority
           sizes="100vw"
@@ -357,10 +357,10 @@ export default async function FounderCollectionPage() {
           finished. */}
       <section className="relative isolate overflow-hidden bg-night-deep">
         <Reveal>
-          <div className="relative aspect-[16/9] w-full md:aspect-[1672/941]">
+          <div className="relative aspect-[16/9] w-full md:aspect-[1672/720]">
             <Image
-              src="/editorial/collection-vanity.webp"
-              alt="A row of brass dressing-room mirrors ringed with warm bulbs along a lit counter, the nearest one etched FOUNDER, against a dusty rose wall and dark green panelling."
+              src="/editorial/rooms/collection-study.webp"
+              alt="The boardroom from the head of the table, the double doors open onto a lamplit study lined with books."
               fill
               loading="lazy"
               sizes="100vw"

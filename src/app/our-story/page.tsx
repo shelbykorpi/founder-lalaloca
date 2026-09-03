@@ -56,9 +56,9 @@ export default function OurStoryPage() {
           read aloud by a screen reader. The handwriting in the journal is part
           of the photograph and is described in the alt text instead. */}
       <div className="relative hidden lg:block">
-        <div className="relative aspect-[2105/747] w-full">
+        <div className="relative aspect-[1672/866] w-full">
           <Image
-            src="/editorial/our-story-desk.webp"
+            src="/editorial/rooms/our-story-desk-portraits.webp"
             alt="An open journal on a green leather desk beside a brass lamp and a dark green fountain pen. Written across the left page in script: I found her in the woman who refused to quit."
             fill
             priority

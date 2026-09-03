@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { JsonLd, breadcrumbSchema } from "@/lib/seo";
 import { Threshold } from "@/components/young-founders/Threshold";
+import { RoomHero } from "@/components/house/RoomHero";
 import { TrackedLink } from "@/components/young-founders/TrackedLink";
 import { DocumentaryImage, assetExists } from "@/components/young-founders/DocumentaryImage";
 
@@ -106,6 +107,17 @@ export default function YoungFoundersRoomPage() {
       />
 
       <Threshold focusTargetId="young-founders-heading" />
+      <RoomHero
+        as="p"
+        src="/editorial/rooms/young-founders-window.webp"
+        alt="A long table in the FOUNDER house covered in LALALOCA bottles, swatches, notebooks and a guitar, young hands at work along it, tall windows open onto a pink desert evening."
+        position="66% center"
+        height="min-h-[64svh]"
+        priority
+        label="Room 07 · The Young Founders’ Room"
+        title="A room built with young voices."
+        lede="They were never treated like a charity project. They were collaborators."
+      />
 
       {/* ---- Hero: what the doors open onto ----
           The first thing after the header, so it opens in the same dark room

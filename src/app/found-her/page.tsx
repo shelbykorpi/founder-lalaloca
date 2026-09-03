@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import Image from "next/image";
 import Link from "next/link";
 import { PageIntro } from "@/components/site/PageIntro";
+import { RoomHero } from "@/components/house/RoomHero";
 import { EmailSignup } from "@/components/site/EmailSignup";
 import { StoryForm } from "@/components/story/StoryForm";
 import { BRAND } from "@/lib/brand";
@@ -53,17 +54,27 @@ export default function FoundHerPage() {
           a bright band right under a dark header is exactly the pale-island
           bug this pass exists to remove. The profiles section right below
           is the deliberate lit panel it hands off to. */}
-      <PageIntro
-        eyebrow={BRAND.editorial}
+      <RoomHero
+        src="/editorial/rooms/found-her-hall-doors.webp"
+        alt="The FOUND HER gallery: gilt-framed portraits of women along a dark marble hall, green doors with brass F monograms open at the end onto a lamplit workroom."
+        position="64% center"
+        priority
+        label={BRAND.editorial}
         title={BRAND.campaign}
-        lede="Stories from women about what they started, survived, changed, finished, and finally gave themselves credit for."
-        tone="dark"
-      />
+        lede="Stories from women who built before anyone applauded."
+      >
+        <Link href="#profiles-heading" className="btn btn-primary">
+          Read the stories
+        </Link>
+        <Link href="#share" className="hairline text-cream">
+          Write yours
+        </Link>
+      </RoomHero>
 
       {/* ---------------- Profiles ---------------- */}
       <section className="section bg-cream pt-4" aria-labelledby="profiles-heading">
         <div className="shell">
-          <h2 id="profiles-heading" className="eyebrow text-charcoal/70">
+          <h2 id="profiles-heading" className="eyebrow scroll-mt-24 text-charcoal/70">
             The profiles
           </h2>
 

@@ -4,7 +4,7 @@ import Link from "next/link";
 import { DoorCard } from "@/components/door/DoorCard";
 import { ScrollDoors } from "@/components/door/ScrollDoors";
 import { AddSetButton } from "@/components/bag/AddToBagButton";
-import { PageIntro } from "@/components/site/PageIntro";
+import { RoomHero } from "@/components/house/RoomHero";
 import { EmailSignup } from "@/components/site/EmailSignup";
 import { TrackListView } from "@/components/site/TrackListView";
 import { BRAND, CONTACT_EMAIL, CONTACT_MAILTO } from "@/lib/brand";
@@ -41,14 +41,23 @@ export default function ShopPage() {
           StandUp for Kids moved below the trio, the identity band collapsed
           into the title and the cards. A shopper sees a product on the first
           screen. */}
-      <PageIntro
-        eyebrow="The LALALOCA Collection"
+      <RoomHero
+        src="/editorial/rooms/serum-salon-doors.webp"
+        alt="The serum salon: three lit marble niches in teal, gold and red, one bottle in each, over a black marble counter, the dressing-room mirrors glowing through the doors either side."
+        position="center center"
+        height="min-h-[66svh]"
+        priority
+        label="The LALALOCA Collection"
         title="Three serums. Three energies."
+        lede="Some days you close. Some days you glow. Some days you start again."
       >
-        <Link href="/find-your-serum" className="link-underline mt-4 text-charcoal">
-          Not sure which? Three questions, one answer <span aria-hidden>↗</span>
+        <Link href="#serums" className="btn btn-primary">
+          Shop the serums
         </Link>
-      </PageIntro>
+        <Link href="/find-your-serum" className="hairline text-cream">
+          Not sure which? Three questions, one answer
+        </Link>
+      </RoomHero>
 
       <TrackListView
         items={products}
@@ -59,7 +68,7 @@ export default function ShopPage() {
       {/* Browsing, not reading — the elevator doors are the room now, not a
           card laid on paper. The long INCI/policy reading stays below on
           paper; this is the dark room a shopper walks through first. */}
-      <section className="section bg-night pt-2" aria-label="Serums">
+      <section id="serums" className="section bg-night scroll-mt-24" aria-label="Serums">
         <ScrollDoors className="shell grid gap-x-8 gap-y-14 md:grid-cols-2 lg:grid-cols-3">
           {products.map((product, index) => (
             <DoorCard

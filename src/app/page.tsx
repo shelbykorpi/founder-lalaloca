@@ -6,6 +6,7 @@ import { Reveal } from "@/components/house/Reveal";
 import { RoomRail } from "@/components/house/RoomRail";
 import { ThresholdDoors } from "@/components/house/ThresholdDoors";
 import { DoorFrame } from "@/components/house/DoorFrame";
+import { RoomHero } from "@/components/house/RoomHero";
 import { BRAND } from "@/lib/brand";
 import { FOUNDER_COLLECTION } from "@/lib/founderCollection";
 import { NEXT_MOVE } from "@/lib/nextMove";
@@ -194,12 +195,12 @@ export default function HomePage() {
           it never needs a scrim over her face. */}
       <section id="room-threshold" className="relative isolate min-h-[calc(100svh-4rem)] overflow-hidden">
         <Image
-          src="/editorial/hero-open-door.webp"
-          alt="Two women in a dark green panelled hall, a warm-lit doorway open behind them — one in a cream suit and rust silk blouse, one in a deep green wrap dress — both looking straight into the camera."
+          src="/editorial/rooms/threshold-doors.webp"
+          alt="Two tall green doors, a brass F on each leaf, standing open onto a firelit sitting room in the FOUNDER house."
           fill
           priority
           sizes="100vw"
-          className="object-cover object-[68%_30%]"
+          className="object-cover object-[58%_center]"
         />
         <div
           aria-hidden
@@ -236,22 +237,20 @@ export default function HomePage() {
       <DoorFrame label="Room 02 · Inside FOUNDER" />
 
       {/* ══ 02 · INSIDE FOUNDER ═════════════════════════════════════════════ */}
-      <section id="room-house" className="section bg-emerald-deep">
+      <RoomHero
+        id="room-house"
+        as="h2"
+        src="/editorial/rooms/inside-founder-lounge.webp"
+        alt="The FOUNDER sitting room: a green velvet sofa by a marble fireplace, a cream blazer over its arm, and through the open doors the lit serum shelves in teal, gold and red."
+        position="64% center"
+        height="min-h-[68svh]"
+        label="Room 02 · Inside FOUNDER"
+        title="Come in. Stay awhile."
+        lede="The lights are low. The vanity is still warm. A blazer waits by the door. A house that was alive before you arrived — nothing loud, everything intentional."
+      />
+      <section className="section bg-emerald-deep pt-10">
         <div className="shell">
-          <Reveal className="grid gap-6 md:grid-cols-[1.4fr_1fr] md:items-end md:gap-16">
-            <div>
-              <p className="room-label">Room 02 · Inside FOUNDER</p>
-              <h2 className="headline-house mt-5 text-balance text-cream">
-                Come in. Stay awhile.
-              </h2>
-            </div>
-            <p className="max-w-[32ch] text-[0.9375rem] leading-relaxed text-cream/70">
-              The lights are low. The vanity is still warm. A blazer waits by the door.
-              A house that was alive before you arrived — nothing loud, everything intentional.
-            </p>
-          </Reveal>
-
-          <div className="mt-12 grid gap-5 md:grid-cols-3">
+          <div className="grid gap-5 md:grid-cols-3">
             {[
               {
                 src: "/editorial/found-her-mirror.webp",
@@ -264,9 +263,9 @@ export default function HomePage() {
                 cap: "The note",
               },
               {
-                src: "/editorial/founder-collection-door.webp",
-                alt: "A woman in a cream suit holding open one of two tall rose-pink doors, a brass F on each leaf, stepping into a dark atelier lined with product benches.",
-                cap: "The door",
+                src: "/editorial/hero-two-women.webp",
+                alt: "Two women in the dark green hall, a warm-lit doorway behind them — one in a cream suit and rust silk blouse, one in a deep green wrap dress — both looking straight into the camera.",
+                cap: "The company",
               },
             ].map((tile, i) => (
               <Reveal key={tile.cap} as="figure" delay={i * 90} className="m-0">
@@ -303,22 +302,25 @@ export default function HomePage() {
           than a lit room. And a grid of products is browsing, not reading;
           `.paper` is for the things people read, which is why the ritual and
           the ingredient lists further in are still lit. */}
-      <section id="room-collection" className="section bg-night">
+      <RoomHero
+        id="room-collection"
+        as="h2"
+        src="/editorial/rooms/collection-mirror.webp"
+        alt="The FOUNDER Collection boardroom: a long black marble table set with striped packs at every seat, an empty green chair with a rose silk over its arm before a bulb-lit mirror."
+        position="56% center"
+        height="min-h-[68svh]"
+        label="Room 03 · The Collection"
+        title="Private tools. Public power."
+        lede="Six pieces for the twenty minutes before you walk in. Hold the Room ships first. Hold your place for the rest — nothing is charged until they’re priced."
+      >
+        <Link href="/founder-collection" className="btn btn-primary">
+          Explore the collection
+        </Link>
+      </RoomHero>
+      <section className="section bg-night pt-10">
         <div className="shell">
-          <Reveal className="grid gap-6 md:grid-cols-[1.4fr_1fr] md:items-end md:gap-16">
-            <div>
-              <p className="room-label">Room 03 · The Collection</p>
-              <h2 className="headline-house mt-5 text-balance text-cream">
-                Private tools. Public power.
-              </h2>
-            </div>
-            <p className="max-w-[34ch] text-[0.9375rem] leading-relaxed text-cream/75">
-              Six pieces for the twenty minutes before you walk in. Hold the Room ships
-              first. Hold your place for the rest — nothing is charged until they’re priced.
-            </p>
-          </Reveal>
 
-          <div className="mt-12 grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
+          <div className="grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
             {LINE.map((item, i) => (
               <Reveal key={item.name} as="article" delay={(i % 3) * 90} className="m-0">
                 <Link
@@ -406,8 +408,32 @@ export default function HomePage() {
             ))}
           </div>
 
-          {/* On sale now — not "the archive". These are the products taking money. */}
-          <Reveal className="mt-16 border-t border-bronze/20 pt-10">
+        </div>
+      </section>
+
+      {/* ══ THE SERUM SALON ═════════════════════════════════════════════════
+          The products taking money get a room of their own, not a footnote
+          under the collection. */}
+      <RoomHero
+        as="h2"
+        src="/editorial/rooms/serum-salon-arches.webp"
+        alt="The serum salon: three lit marble niches in teal, gold and red, one bottle in each, over a black marble counter, pink desert sky through the arches either side."
+        position="center center"
+        height="min-h-[64svh]"
+        label="The serum salon · The LALALOCA Collection"
+        title="Three serums. Three energies."
+        lede="Some days you close. Some days you glow. Some days you start again."
+      >
+        <Link href="/shop" className="btn btn-primary">
+          Shop the serums
+        </Link>
+        <Link href="/find-your-serum" className="hairline text-cream">
+          Which one is yours?
+        </Link>
+      </RoomHero>
+      <section className="section bg-night pt-10">
+        <div className="shell">
+          <Reveal>
             <div className="flex flex-wrap items-baseline justify-between gap-4">
               <p className="room-label">Ships now · The LALALOCA serums</p>
               <Link href="/shop#set-heading" className="hairline text-cream">
@@ -489,8 +515,8 @@ export default function HomePage() {
       {/* ══ 05 · FOUND HER ══════════════════════════════════════════════════ */}
       <section id="room-found-her" className="relative isolate overflow-hidden">
         <Image
-          src="/editorial/found-her-wall.webp"
-          alt="The FOUND HER wall of framed portraits in the FOUNDER house."
+          src="/editorial/rooms/found-her-hall-sky.webp"
+          alt="The FOUND HER gallery: gilt-framed portraits of women along a dark marble hall, a door at the end open onto a pink desert sky."
           fill
           loading="lazy"
           sizes="100vw"

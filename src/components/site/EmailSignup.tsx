@@ -144,7 +144,7 @@ export function EmailSignup({
               type="submit"
               disabled={state === "sending"}
               className={`btn shrink-0 disabled:opacity-60 ${
-                green ? "bg-bronze text-ink hover:opacity-90" : dark ? "btn-ghost-light" : "btn-outline"
+                green ? "bg-bronze text-ink hover:bg-rose" : dark ? "btn-ghost-light" : "btn-outline"
               }`}
             >
               {state === "sending" ? "One moment" : "Enter"}

@@ -71,7 +71,7 @@ export function CatalogCard({
         {product.character && (
           <p className="eyebrow mt-5 text-champagne">{product.character}</p>
         )}
-        <h3 className="mt-2 font-serif text-2xl font-light leading-none text-cream transition-colors group-hover:text-champagne">
+        <h3 className="mt-2 font-serif text-2xl font-light leading-none text-cream transition-colors group-hover:text-rose">
           {product.title}
         </h3>
         {product.descriptor && (

@@ -190,7 +190,7 @@ export function BagDrawer() {
                     <Link
                       href={line.href}
                       onClick={closeBag}
-                      className="inline-flex min-h-11 items-center font-serif text-xl leading-tight text-cream hover:text-champagne"
+                      className="inline-flex min-h-11 items-center font-serif text-xl leading-tight text-cream hover:text-rose"
                     >
                       {line.name}
                     </Link>

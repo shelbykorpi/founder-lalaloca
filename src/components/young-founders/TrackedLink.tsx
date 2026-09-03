@@ -38,10 +38,10 @@ export function TrackedLink({
      for the ground the link actually sits on, not just for hierarchy. */
   const skin =
     variant === "primary"
-      ? "bg-founder-green text-cream hover:bg-emerald"
+      ? "bg-founder-green text-cream hover:bg-rose hover:text-charcoal"
       : variant === "secondary"
-        ? "border border-founder-green text-founder-green hover:bg-founder-green hover:text-cream"
-        : "border border-cream/60 text-cream hover:bg-cream hover:text-founder-green";
+        ? "border border-founder-green text-founder-green hover:border-rose hover:bg-rose hover:text-charcoal"
+        : "border border-cream/60 text-cream hover:border-rose hover:bg-rose hover:text-charcoal";
 
   const className = `${base} ${skin}`;
   const onClick = () => track(event);

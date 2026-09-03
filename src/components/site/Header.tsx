@@ -128,7 +128,7 @@ export function Header() {
                     className={`eyebrow inline-flex min-h-11 items-center whitespace-nowrap border-b text-center transition-colors ${
                       active
                         ? "border-bronze text-champagne"
-                        : "border-transparent text-cream/70 hover:border-bronze/40 hover:text-cream"
+                        : "border-transparent text-cream/70 hover:border-rose/60 hover:text-cream"
                     }`}
                   >
                     {item.stack ? (
@@ -153,14 +153,14 @@ export function Header() {
         <div className="flex items-center gap-1 md:gap-3">
           <Link
             href="/search"
-            className="eyebrow hidden h-11 items-center px-2 md:inline-flex text-cream/70 hover:text-champagne"
+            className="eyebrow hidden h-11 items-center px-2 md:inline-flex text-cream/70 hover:text-rose"
           >
             Search
           </Link>
           <button
             type="button"
             onClick={openBag}
-            className="eyebrow flex h-11 items-center px-2 text-cream/70 hover:text-champagne"
+            className="eyebrow flex h-11 items-center px-2 text-cream/70 hover:text-rose"
           >
             Bag<span aria-hidden> ({count})</span>
             <span className="sr-only">

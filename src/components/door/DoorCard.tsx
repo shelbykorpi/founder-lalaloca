@@ -67,7 +67,7 @@ export function DoorCard({
              or the click that follows would close them again. */
           if (event.target.matches(":focus-visible")) reveal(true);
         }}
-        className="mt-3 flex min-h-11 items-center justify-center gap-2 border border-cream/20 text-[0.6875rem] uppercase tracking-[0.18em] text-cream/70 transition-colors hover:border-cream/45 hover:text-cream"
+        className="mt-3 flex min-h-11 items-center justify-center gap-2 border border-cream/20 text-[0.6875rem] uppercase tracking-[0.18em] text-cream/70 transition-colors hover:border-rose hover:text-rose"
       >
         {open ? "Close the doors" : "Open the doors"}
         <span className="sr-only"> and see {product.name}</span>
@@ -80,7 +80,7 @@ export function DoorCard({
             size and price line below, where the rest of the hard facts are. */}
         <p className="eyebrow text-champagne">{product.archetype}</p>
         <h3 className="mt-2 font-serif text-[1.75rem] leading-none text-cream">
-          <Link href={`/products/${product.slug}`} className="hover:text-champagne">
+          <Link href={`/products/${product.slug}`} className="hover:text-rose">
             {product.name}
           </Link>
         </h3>

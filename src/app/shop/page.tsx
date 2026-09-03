@@ -124,7 +124,7 @@ export default function ShopPage() {
                 {formatPrice(products.reduce((sum, p) => sum + p.price, 0))} · save{" "}
                 {formatPrice(products.reduce((sum, p) => sum + p.price, 0) - SET.price)}
               </p>
-              <AddSetButton className="mt-[1.4em] inline-flex min-h-11 w-full max-w-[22rem] items-center justify-center border border-bronze/40 bg-founder-green px-6 text-[clamp(0.6875rem,0.85vw,0.875rem)] uppercase tracking-[0.18em] text-cream transition-colors hover:bg-teal" />
+              <AddSetButton className="mt-[1.4em] inline-flex min-h-11 w-full max-w-[22rem] items-center justify-center border border-bronze/40 bg-founder-green px-6 text-[clamp(0.6875rem,0.85vw,0.875rem)] uppercase tracking-[0.18em] text-cream transition-colors hover:bg-rose hover:text-night" />
             </div>
           </div>
         </div>
@@ -156,7 +156,7 @@ export default function ShopPage() {
               {formatPrice(products.reduce((sum, p) => sum + p.price, 0))} · save{" "}
               {formatPrice(products.reduce((sum, p) => sum + p.price, 0) - SET.price)}
             </p>
-            <AddSetButton className="btn mt-8 w-full border border-bronze/40 bg-founder-green text-cream hover:bg-teal sm:w-auto" />
+            <AddSetButton className="btn mt-8 w-full border border-bronze/40 bg-founder-green text-cream hover:bg-rose hover:text-night sm:w-auto" />
           </div>
         </div>
       </section>
@@ -256,7 +256,7 @@ export default function ShopPage() {
             </div>
             <Link
               href="/young-founders-room"
-              className="mt-7 inline-flex min-h-11 items-center border-b border-champagne/60 text-[0.6875rem] uppercase tracking-[0.22em] text-champagne transition-colors hover:border-champagne"
+              className="mt-7 inline-flex min-h-11 items-center border-b border-champagne/60 text-[0.6875rem] uppercase tracking-[0.22em] text-champagne transition-colors hover:border-rose hover:text-rose"
             >
               Step into the Young Founders&rsquo; Room
             </Link>

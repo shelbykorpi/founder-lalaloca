@@ -99,8 +99,8 @@ export function EmailSignup({
         {heading}
       </label>
       <p className={`mt-2 text-sm ${green ? "text-cream/80" : dark ? "text-shell/70" : "text-charcoal/75"}`}>
-        Be first through the door. Where to start, what’s back, what we’ve
-        published. A few emails a month, not a few a week.
+        First through the door on every new product, every restock and every
+        story we publish. A few emails a month, not a few a week.
       </p>
 
       {/* Honeypot. Hidden from sight, hidden from screen readers, skipped by
@@ -113,7 +113,7 @@ export function EmailSignup({
       {state === "done" ? (
         <p role="status" className={note}>
           You’re on the list. Nothing else to do — we’ll write when there’s
-          something worth reading.
+          something worth opening.
         </p>
       ) : state === "unconfigured" ? (
         <p role="status" className={note}>

@@ -196,7 +196,7 @@ export default function HoldTheRoomPage() {
             </ol>
 
             <p className="mt-8 border-t border-charcoal/12 pt-6 text-xs leading-relaxed text-charcoal/70">
-              Styled imagery. The carton that ships is plain, printed FOUNDER BEAUTY above the
+              Shown: styled imagery. The carton that ships is plain — FOUNDER BEAUTY over the
               supplier&rsquo;s product name, Extreme Moisture Blend, 30 ml / 1 US fl oz.
             </p>
           </Reveal>
@@ -214,7 +214,7 @@ export default function HoldTheRoomPage() {
               The whole list, including the parts people avoid.
             </h3>
             <p className="mt-5 max-w-[44ch] text-[0.9375rem] leading-relaxed text-charcoal/70">
-              Fragrance and petrolatum are both on it. We would rather you read that here
+              Fragrance and petrolatum are both on it. We&rsquo;d rather you read that here
               than find it at home.
             </p>
             {product.ingredients && (

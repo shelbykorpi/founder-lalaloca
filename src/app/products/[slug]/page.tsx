@@ -6,7 +6,7 @@ import { ProductDoor } from "@/components/door/ProductDoor";
 import { AddToBagButton } from "@/components/bag/AddToBagButton";
 import { BRAND } from "@/lib/brand";
 import { JsonLd, breadcrumbSchema, productSchema } from "@/lib/seo";
-import { formatPrice, getProduct, otherProducts, products } from "@/lib/products";
+import { formatPrice, getProduct, otherProducts, products, SET } from "@/lib/products";
 import { getReviews } from "@/lib/reviews";
 import { fetchCatalogProduct } from "@/lib/catalog";
 import { CatalogProductPage } from "@/components/shop/CatalogProductPage";
@@ -154,8 +154,8 @@ export default async function ProductPage({ params }: PageProps<"/products/[slug
                     charcoal block btn-dark was built for on paper. */}
                 <AddToBagButton product={product} className="btn btn-primary w-full" showPrice />
                 <p className="mt-3 text-xs leading-relaxed text-cream/70">
-                  You’ll finish your order on Shopify’s secure checkout. Cosmetic
-                  product. {BRAND.legal.name} is the seller of record.
+                  Free US shipping · Ships from Arizona within one business day ·
+                  Secure checkout by Shopify · {BRAND.legal.name} is the seller of record.
                 </p>
               </div>
 
@@ -200,6 +200,11 @@ export default async function ProductPage({ params }: PageProps<"/products/[slug
                 </p>
               </details>
             ))}
+            {/* Said once, here, instead of inside every panel. */}
+            <p className="pt-5 text-xs leading-relaxed text-charcoal/60">
+              Cosmetic product. Results vary from person to person; no clinical
+              claims are made.
+            </p>
             <div className="flex flex-wrap gap-x-8 py-3 text-sm">
               {[
                 { href: "/policies/shipping", label: "Shipping" },
@@ -254,7 +259,17 @@ export default async function ProductPage({ params }: PageProps<"/products/[slug
           nothing on a night ground. */}
       <section className="section-tight bg-night pb-16">
         <div className="shell">
-          <h2 className="eyebrow text-cream/60">The other two</h2>
+          <div className="flex flex-wrap items-baseline justify-between gap-4">
+            <h2 className="eyebrow text-cream/60">Complete the trio</h2>
+            <Link
+              href="/shop#set-heading"
+              className="inline-flex min-h-11 items-center text-sm text-champagne underline underline-offset-4 hover:text-cream"
+            >
+              All three for {formatPrice(SET.price)} — save{" "}
+              {formatPrice(products.reduce((sum, p) => sum + p.price, 0) - SET.price)}
+              <span aria-hidden> ↗</span>
+            </Link>
+          </div>
           <div className="mt-6 grid gap-px border border-bronze/20 bg-bronze/15 sm:grid-cols-2">
             {otherProducts(product.slug).map((other) => (
               <Link

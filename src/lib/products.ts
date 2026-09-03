@@ -50,8 +50,11 @@ export type Product = {
   hook: string;
   /**
    * The three collapsible panels on the product page, 30–40 words each.
-   * The cosmetic-claims sentence inside `who` is compliance wording and is
-   * kept verbatim wherever it appears.
+   * 3 Sept 2026: the cosmetic-claims sentence left `who` — it was repeated
+   * inside every panel of every product, which read as a disclaimer on the
+   * sales floor. It is said once per page now, in the product route under
+   * the panels, and once site-wide in the footer. Nothing here may state or
+   * imply a clinical result; appearance and feel only.
    */
   panels: { who: string; how: string; actives: string };
   /** The skin need it addresses, in the customer's words */
@@ -101,11 +104,11 @@ export const products: Product[] = [
     moment:
       "The 6am one, when you’ve been up twice in the night and you’d like your face not to announce it.",
     benefit: "Skin feels softer and more comfortable, and makeup sits better on top.",
-    hook: "Looks expensive. Never looks exhausted. A lightweight serum built on eight weights of hyaluronic acid.",
+    hook: "Looks expensive. Never looks exhausted. Eight weights of hyaluronic acid, so skin feels soft at four in the afternoon and makeup stays where you put it.",
     panels: {
-      who: "Skin that goes tight, flaky or dull-looking when it’s short on water — or makeup that starts to sit badly by lunchtime. Cosmetic benefits only, and skin varies. No clinical results are claimed.",
+      who: "Skin that goes tight, flaky or dull when it’s short on water — or makeup that starts sliding by lunch. If you’re new to the house, start here: it layers under everything.",
       how: "Press 3–5 drops into damp skin after cleansing — damp is the important part — then seal with moisturiser. Morning or night. Layering all three? This one goes first; it’s the lightest.",
-      actives: "On the label: eight-weight hyaluronic acid, marine collagen and panthenol (B5). Every carton ships with its full INCI list — ask us and we’ll send the supplier sheet for your batch.",
+      actives: "On the label: eight-weight hyaluronic acid, marine collagen and panthenol (B5). The full ingredient list is in every carton — email us and we’ll send the supplier sheet for your batch.",
     },
     price: 38.0,
     size: "50 ml / 1.69 fl oz",
@@ -170,11 +173,11 @@ export const products: Product[] = [
     moment:
       "The morning of something that matters, when you want to look like you slept even if you didn’t.",
     benefit: "Tone looks brighter and more even, with a warm finish rather than a shiny one.",
-    hook: "For mornings when being overlooked isn’t on the calendar. A vitamin C serum for tone that reads flat or uneven.",
+    hook: "For mornings when being overlooked isn’t on the calendar. Vitamin C for tone that looks brighter and more even — a warm finish, not a shiny one.",
     panels: {
-      who: "A complexion that looks dull in daylight — fine up close, washed out in photographs. Cosmetic benefits only, and skin varies. No clinical results are claimed.",
+      who: "A complexion that looks dull in daylight — fine up close, washed out in photographs. For the morning of something that matters.",
       how: "Mornings. Press 3–5 drops into damp skin after cleansing, then moisturiser and sunscreen — vitamin C and daily SPF belong together. Using all three? Keep this one for mornings.",
-      actives: "On the label: vitamin C. We haven’t listed anything the packaging doesn’t. Every carton ships with its full INCI list — ask us and we’ll send the supplier sheet.",
+      actives: "On the label: vitamin C, and nothing the packaging doesn’t say. The full ingredient list is in every carton — email us and we’ll send the supplier sheet.",
     },
     price: 38.0,
     size: "50 ml / 1.69 fl oz",
@@ -228,11 +231,11 @@ export const products: Product[] = [
     moment:
       "The night after the week that took everything, when going to bed with a clean face is the whole plan.",
     benefit: "Skin feels firmer and more cushioned, and looks smoother the next morning.",
-    hook: "Because starting over is still starting. A collagen serum for skin that feels slack rather than dry.",
+    hook: "Because starting over is still starting. A collagen night serum for skin that’s lost its spring — firmer-feeling tonight, smoother-looking by morning.",
     panels: {
-      who: "Skin that’s lost some spring — a face that reads tired before you feel it. Cosmetic benefits only, and skin varies. No clinical results are claimed.",
+      who: "Skin that’s lost some spring — a face that reads tired before you feel it. For the night after the week that took everything.",
       how: "Nights. Press 3–5 drops into damp skin after cleansing — palms flat, no rubbing — then moisturiser. A common pattern: C Me Glow in the morning, this at night.",
-      actives: "On the label: collagen. We haven’t listed anything the packaging doesn’t. Every carton ships with its full INCI list — ask us and we’ll send the supplier sheet.",
+      actives: "On the label: collagen, and nothing the packaging doesn’t say. The full ingredient list is in every carton — email us and we’ll send the supplier sheet.",
     },
     price: 38.0,
     size: "50 ml / 1.69 fl oz",

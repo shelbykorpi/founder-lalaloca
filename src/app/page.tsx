@@ -9,7 +9,7 @@ import { DoorFrame } from "@/components/house/DoorFrame";
 import { BRAND } from "@/lib/brand";
 import { FOUNDER_COLLECTION } from "@/lib/founderCollection";
 import { NEXT_MOVE } from "@/lib/nextMove";
-import { products, formatPrice } from "@/lib/products";
+import { products, formatPrice, SET } from "@/lib/products";
 
 /**
  * THE HOUSE — the homepage. Seven rooms, one threshold.
@@ -82,7 +82,7 @@ const LINE = [
     image: "/products/opening-line-tall.webp",
     alt: "Opening Line in rose and green stripes, alone under a single light on dark stone.",
     href: "/products/opening-line",
-    state: "Reserve — no price yet",
+    state: "Reserve · Nothing charged today",
     action: "Reserve",
     ready: false,
   },
@@ -94,7 +94,7 @@ const LINE = [
     image: "/products/clean-break-tall.webp",
     alt: "Clean Break beside a running brass tap on a cream marble basin.",
     href: "/products/clean-break",
-    state: "Reserve — no price yet",
+    state: "Reserve · Nothing charged today",
     action: "Reserve",
     ready: false,
   },
@@ -106,7 +106,7 @@ const LINE = [
     image: "/products/hold-the-room-tall.webp",
     alt: "Hold the Room on a marble dressing table, green doors open onto a lit vanity beyond.",
     href: "/products/hold-the-room",
-    state: "Preorder — ships when the first run lands",
+    state: "Preorder · Ships from the first run",
     action: `Preorder · ${formatPrice(holdTheRoom.price)}`,
     ready: true,
   },
@@ -118,7 +118,7 @@ const LINE = [
     image: "/products/double-take-tall.webp",
     alt: "Double Take and its striped carton on a marble vanity by a lit mirror.",
     href: "/products/double-take",
-    state: "Reserve — no price yet",
+    state: "Reserve · Nothing charged today",
     action: "Reserve",
     ready: false,
   },
@@ -130,7 +130,7 @@ const LINE = [
     image: "/products/smooth-talker-tall.webp",
     alt: "Smooth Talker in 25 Medium beside its striped carton on a brass table.",
     href: "/products/smooth-talker",
-    state: "Reserve — no price yet",
+    state: "Reserve · Nothing charged today",
     action: "Reserve",
     ready: false,
   },
@@ -218,12 +218,15 @@ export default function HomePage() {
               know what they bring.
             </p>
             <p className="mt-3 font-serif text-2xl text-blush">{BRAND.tagline}</p>
+            {/* 3 Sept 2026: the primary action sells. A woman could read the
+                whole threshold without a way to a product; now the gold button
+                is the shop and the house is the hairline beside it. */}
             <div className="mt-9 flex flex-wrap items-center gap-x-8 gap-y-4">
-              <Link href="#room-house" className="btn btn-primary">
-                Enter the house
+              <Link href="/shop" className="btn btn-primary">
+                Shop the serums
               </Link>
-              <Link href="/found-her" className="hairline text-cream">
-                Read Found Her
+              <Link href="#room-house" className="hairline text-cream">
+                Enter the house
               </Link>
             </div>
           </div>
@@ -310,8 +313,8 @@ export default function HomePage() {
               </h2>
             </div>
             <p className="max-w-[34ch] text-[0.9375rem] leading-relaxed text-cream/75">
-              Six opening moves for a woman who knows exactly how she moves through a room.
-              One you can buy today, three you can hold a place in, two still being made.
+              Six pieces for the twenty minutes before you walk in. Hold the Room ships
+              first. Hold your place for the rest — nothing is charged until they’re priced.
             </p>
           </Reveal>
 
@@ -355,7 +358,7 @@ export default function HomePage() {
                     </span>
                     <span className="mt-4 flex items-center justify-between border-t border-cream/15 pt-3">
                       <span className="text-[0.5rem] uppercase tracking-[0.16em] text-cream">
-                        Discover
+                        See it
                       </span>
                       <span className="text-[0.5rem] uppercase tracking-[0.16em] text-champagne">
                         {item.action}
@@ -405,7 +408,13 @@ export default function HomePage() {
 
           {/* On sale now — not "the archive". These are the products taking money. */}
           <Reveal className="mt-16 border-t border-bronze/20 pt-10">
-            <p className="room-label">On sale now · The LALALOCA Collection</p>
+            <div className="flex flex-wrap items-baseline justify-between gap-4">
+              <p className="room-label">Ships now · The LALALOCA serums</p>
+              <Link href="/shop#set-heading" className="hairline text-cream">
+                All three for {formatPrice(SET.price)} — save{" "}
+                {formatPrice(products.reduce((sum, p) => sum + p.price, 0) - SET.price)}
+              </Link>
+            </div>
             <ul className="mt-8 grid gap-10 sm:grid-cols-3">
               {products.map((product) => (
                 <li key={product.slug}>
@@ -428,7 +437,10 @@ export default function HomePage() {
                       {product.hero}
                     </span>
                     <span className="mt-3 block text-sm text-cream">
-                      {formatPrice(product.price)}
+                      {formatPrice(product.price)} · {product.size.split(" /")[0]}
+                    </span>
+                    <span className="mt-4 inline-flex min-h-11 items-center text-[0.6875rem] uppercase tracking-[0.18em] text-champagne transition-colors group-hover:text-cream">
+                      Shop {product.name}
                     </span>
                   </Link>
                 </li>
@@ -459,15 +471,15 @@ export default function HomePage() {
             <p className="room-label">Room 04 · The Anchor</p>
             <h2 className="headline-house mt-5 text-balance text-cream">Hold the room.</h2>
             <p className="mt-7 max-w-[42ch] text-[0.9375rem] leading-relaxed text-cream/80">
-              {holdTheRoom.hero} This is beauty with gravity — composed, intentional, and
-              built for the woman who understands that presence is part of power.
+              {holdTheRoom.hero} A rich moisturizing cream with chamomile and witch hazel —
+              the last step of the routine, and the one that stays comfortable all day.
             </p>
             <p className="mt-7 max-w-[40ch] border-l-2 border-bronze py-3 pl-5 text-[0.8125rem] leading-relaxed text-cream/70">
               {holdTheRoom.preorder}
             </p>
             <div className="mt-9">
               <Link href="/products/hold-the-room" className="btn btn-primary">
-                Explore the ritual
+                Preorder · {formatPrice(holdTheRoom.price)}
               </Link>
             </div>
           </Reveal>
@@ -551,7 +563,7 @@ export default function HomePage() {
           <p className="max-w-[26ch] font-serif text-[clamp(1.35rem,2.6vw,2rem)] leading-snug">
             20% of LALALOCA net profits. Every month. Directly to StandUp for Kids Tucson.
           </p>
-          <Link href="/our-story" className="hairline mt-2 text-charcoal">
+          <Link href="/young-founders-room" className="hairline mt-2 text-charcoal">
             How the giving works
           </Link>
         </div>

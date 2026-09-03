@@ -41,6 +41,15 @@ export const BRAND = {
   structure: "FOUNDER presents the LALALOCA Collection.",
 
   /**
+   * The announcement bar. 3 Sept 2026: the bar used to carry `structure`,
+   * which explains the brand to itself. Every billion-dollar beauty site puts
+   * the offer there instead — shipping, price, the set — because it is the
+   * one line every visitor reads on every page. Facts only: free US shipping
+   * is the published policy, $38 and $98 are the Shopify prices.
+   */
+  bar: "Free US shipping on every order · Three serums, $38 each · All three for $98",
+
+  /**
    * The door mark: the F-key. v2.13 makes it the secondary identifier — the
    * compact one — while the master lockup is FOUNDER over BEAUTY. Set normally
    * on the left leaf and mirrored on the right, the pair faces the seam, so it
@@ -64,16 +73,20 @@ export const BRAND = {
   supporting: "Be seen. Be heard. Look good doing it.",
 } as const;
 
-export const PRIMARY_NAV = [
+/* `stack` is optional: a tab may render as a centred multi-line lockup on
+   desktop (with `label` as its accessible name). No tab uses it since 3 Sept
+   2026, but the Header still knows how to draw one. */
+export const PRIMARY_NAV: { href: string; label: string; stack?: string[] }[] = [
   /* The collaboration lockup. `stack` is the three centred lines the desktop
      bar shows; `label` is the one-line version the mobile menu uses and the
      accessible name a screen reader hears, because a multiplication sign read
      aloud between two proper nouns is not a sentence. */
-  {
-    href: "/shop",
-    label: "LALALOCA Collection and StandUp for Kids",
-    stack: ["LALALOCA", "\u00d7", "StandUp for Kids"],
-  },
+  /* 3 Sept 2026: the tab used to be the LALALOCA × StandUp for Kids lockup,
+     which is a beautiful thing to know and a confusing thing to click — a
+     first-time visitor could not find the shop. Every benchmark brand leads
+     the bar with the shop. The collaboration keeps its band on /shop and its
+     whole room at /young-founders-room; it has not gone anywhere. */
+  { href: "/shop", label: "Shop the Serums" },
   /* The second line, sold under FOUNDER itself. Kept next to the LALALOCA
      lockup so the two collections read as siblings, not as a shop and a
      sub-page. */
@@ -92,7 +105,8 @@ export const FOOTER_NAV = [
     links: [
       { href: "/shop", label: "The LALALOCA Collection" },
       { href: "/founder-collection", label: "The FOUNDER Collection" },
-      { href: "/the-next-move", label: "The Next Move — presale" },
+      { href: "/shop#set-heading", label: "The House Trio · $98" },
+      { href: "/the-next-move", label: "The Next Move — reserve" },
       { href: "/products/thirst-trap", label: "Thirst Trap" },
       { href: "/products/c-me-glow", label: "C Me Glow" },
       { href: "/products/bounce-back", label: "Bounce Back" },
@@ -188,5 +202,5 @@ export const SITE = {
     process.env.VERCEL_ENV === "production" && process.env.ALLOW_INDEXING === "true",
   title: "FOUNDER | Beauty for what you’re building.",
   description:
-    "Skincare for women creating a life that looks and feels like their own. Three serums in the LALALOCA Collection, and stories from women about what they built.",
+    "A private world for women who already know what they bring. Three serums, $38 each, free US shipping — and stories from women about what they built.",
 };

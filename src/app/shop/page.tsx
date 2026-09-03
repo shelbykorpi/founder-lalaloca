@@ -46,7 +46,7 @@ export default function ShopPage() {
         title="Three serums. Three energies."
       >
         <Link href="/find-your-serum" className="link-underline mt-4 text-charcoal">
-          Answer three questions instead <span aria-hidden>↗</span>
+          Not sure which? Three questions, one answer <span aria-hidden>↗</span>
         </Link>
       </PageIntro>
 
@@ -121,7 +121,8 @@ export default function ShopPage() {
               </p>
               <p className="mt-[1em] text-[clamp(0.8rem,1.05vw,1.125rem)] text-charcoal/85">
                 {formatPrice(SET.price)} for all three · valued at{" "}
-                {formatPrice(products.reduce((sum, p) => sum + p.price, 0))}
+                {formatPrice(products.reduce((sum, p) => sum + p.price, 0))} · save{" "}
+                {formatPrice(products.reduce((sum, p) => sum + p.price, 0) - SET.price)}
               </p>
               <AddSetButton className="mt-[1.4em] inline-flex min-h-11 w-full max-w-[22rem] items-center justify-center border border-bronze/40 bg-founder-green px-6 text-[clamp(0.6875rem,0.85vw,0.875rem)] uppercase tracking-[0.18em] text-cream transition-colors hover:bg-teal" />
             </div>
@@ -152,7 +153,8 @@ export default function ShopPage() {
             </p>
             <p className="mt-4 text-charcoal/85">
               {formatPrice(SET.price)} for all three · valued at{" "}
-              {formatPrice(products.reduce((sum, p) => sum + p.price, 0))}
+              {formatPrice(products.reduce((sum, p) => sum + p.price, 0))} · save{" "}
+              {formatPrice(products.reduce((sum, p) => sum + p.price, 0) - SET.price)}
             </p>
             <AddSetButton className="btn mt-8 w-full border border-bronze/40 bg-founder-green text-cream hover:bg-teal sm:w-auto" />
           </div>
@@ -218,8 +220,8 @@ export default function ShopPage() {
             </table>
           </div>
           <p className="mt-5 text-xs leading-relaxed text-charcoal/70">
-            Key actives are listed exactly as they appear on the approved label. Full
-            INCI lists ship with every carton and are available on request.
+            Key actives are listed exactly as they appear on the label. The full
+            ingredient list ships in every carton — email us for the supplier sheet.
           </p>
         </div>
       </section>
@@ -296,8 +298,8 @@ export default function ShopPage() {
           <div>
             <h2 className="font-serif text-2xl text-charcoal">Shipping</h2>
             <p className="mt-2 text-sm text-charcoal/80">
-              Free US shipping, 3–5 business days. Express $15, 1–2 days. From
-              Arizona.
+              Free US shipping, 3–5 business days. Express $15, 1–2 days. Ships
+              from Arizona within one business day.
             </p>
             <Link href="/policies/shipping" className="link-underline mt-2 text-charcoal">
               Details <span aria-hidden>↗</span>
@@ -310,17 +312,17 @@ export default function ShopPage() {
               <a href={CONTACT_MAILTO} className="link-underline text-charcoal">
                 {CONTACT_EMAIL}
               </a>{" "}
-              and we’ll sort it out. A genuine problem is our problem.
+              and we’ll make it right. A real problem is our problem.
             </p>
             <Link href="/policies/returns" className="link-underline mt-2 text-charcoal">
               Details <span aria-hidden>↗</span>
             </Link>
           </div>
           <div>
-            <h2 className="font-serif text-2xl text-charcoal">What these are</h2>
+            <h2 className="font-serif text-2xl text-charcoal">Plainly</h2>
             <p className="mt-2 text-sm text-charcoal/80">
-              Cosmetic products, not medicine. No clinical claims, no before-and-afters,
-              no reviews we wrote ourselves.
+              Cosmetics, not medicine. No clinical claims, no before-and-afters, and
+              no review we didn’t earn.
             </p>
           </div>
         </div>

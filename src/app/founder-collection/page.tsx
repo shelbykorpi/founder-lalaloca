@@ -7,7 +7,7 @@ import { FOUNDER_COLLECTION } from "@/lib/founderCollection";
 import { fetchCollectionProducts, type CatalogProduct } from "@/lib/catalog";
 import { LineCard } from "@/components/shop/LineCard";
 import { NEXT_MOVE, CAMPAIGN } from "@/lib/nextMove";
-import { formatPrice, products } from "@/lib/products";
+import { formatPrice, products, SET } from "@/lib/products";
 import { Reveal } from "@/components/house/Reveal";
 import {
   JsonLd,
@@ -158,7 +158,7 @@ export default async function FounderCollectionPage() {
         : `/products/${c.handle}`,
     state:
       c.handle === "founder-collection"
-        ? "Preorder — ships when the first run lands"
+        ? "Preorder · Ships from the first run"
         : `${formatPrice(c.price)}`,
     action:
       c.handle === "founder-collection" ? (
@@ -213,8 +213,8 @@ export default async function FounderCollectionPage() {
        as the campaign page and the "See all three" destination. */
     href: `/products/${entry.slug}`,
     state: entry.shades
-      ? `Reserve — ${entry.shades.length} shades, no price yet`
-      : "Reserve — no price yet",
+      ? `Reserve · ${entry.shades.length} shades · Nothing charged today`
+      : "Reserve · Nothing charged today",
     action: (
       <Link href={`/products/${entry.slug}`} className="btn btn-ghost-light w-full">
         Reserve
@@ -299,8 +299,8 @@ export default async function FounderCollectionPage() {
             Take your seat.
           </h1>
           <p className="mx-auto mt-7 max-w-[46ch] text-[1.0625rem] leading-relaxed text-cream/80">
-            The mirror&rsquo;s lit. LALALOCA is the serum collection; this is what
-            comes after it.
+            The mirror&rsquo;s lit. The cream, the cleanser, the wash, the stick and
+            the eye cream — what comes after the serums.
           </p>
         </div>
       </section>
@@ -336,14 +336,13 @@ export default async function FounderCollectionPage() {
           </div>
 
           <p className="mt-10 max-w-prose text-xs leading-relaxed text-cream/65">
-            {CAMPAIGN.name}: Clean Break, Smooth Talker and Double Take are
-            reservations, not sales. Nothing is charged, and no ship date has
-            been set.{" "}
+            Reserving costs nothing today. You&rsquo;ll get the price and ship
+            date by email before anything is sold, and you can walk away then.{" "}
             <Link
               href="/the-next-move"
               className="underline underline-offset-2 hover:opacity-70"
             >
-              See all three
+              See {CAMPAIGN.name}
             </Link>
             .
           </p>
@@ -385,17 +384,16 @@ export default async function FounderCollectionPage() {
         <div className="shell max-w-3xl">
           <p className="eyebrow text-blush">The FOUNDER Collection</p>
           <h2 className="mt-5 font-serif text-3xl leading-tight md:text-4xl">
-            One is open. Four are close. One is still a name.
+            One ships. Four take reservations. One is on its way.
           </h2>
           <p className="mt-6 max-w-prose text-cream/85">
-            {product.name} is the anchor and the first to be sourced — it is
-            the only one you can order. Opening Line, Clean Break, Smooth
-            Talker and Double Take are made and photographed but not yet
-            priced, so they take reservations instead of money. Sign Here is a
-            name, which is a different thing from coming soon.
+            {product.name} is the anchor and the first you can order. Opening
+            Line, Clean Break, Smooth Talker and Double Take are made and
+            photographed — reserve yours now and pay only once they&rsquo;re
+            priced. Sign Here is next.
           </p>
           <p className="mt-6 font-serif text-xl text-blush">
-            Named. Not yet promised.
+            Hold your place.
           </p>
         </div>
       </section>
@@ -408,7 +406,7 @@ export default async function FounderCollectionPage() {
         <div className="shell">
           <div className="max-w-xl">
             <h2 className="headline text-balance text-cream">
-              Hear when the next one is real.
+              Hear when the next one is ready.
             </h2>
             <EmailSignup tone="green" source="waitlist" />
           </div>
@@ -429,11 +427,12 @@ export default async function FounderCollectionPage() {
               The first room · The LALALOCA Collection
             </p>
             <p className="mt-5 max-w-[46ch] font-serif text-[clamp(1.5rem,2.8vw,2rem)] leading-snug text-cream">
-              Looking for the serums? You were already in that room.
+              Looking for the serums? Start here.
             </p>
             <p className="mt-6 max-w-prose text-[0.9375rem] leading-relaxed text-cream/75">
-              Three of them, 50 ml each, and part of every order goes to
-              StandUp for Kids Tucson.
+              Three of them, 50 ml each — {formatPrice(products[0].price)} each or
+              all three for {formatPrice(SET.price)}, shipping now. 20% of LALALOCA
+              net profits. Every month. Directly to StandUp for Kids Tucson.
             </p>
 
             <ul className="mt-12 grid gap-10 sm:grid-cols-3">
@@ -468,7 +467,7 @@ export default async function FounderCollectionPage() {
             </ul>
 
             <Link href="/shop" className="hairline mt-12 inline-flex text-cream">
-              The LALALOCA Collection <span aria-hidden>↗</span>
+              Shop the serums <span aria-hidden>↗</span>
             </Link>
           </Reveal>
         </div>

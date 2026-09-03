@@ -172,20 +172,20 @@ export const FOUNDER_COLLECTION: FounderProduct[] = [
       },
       {
         q: "Is 30 ml enough?",
-        a: "The serums are 50 ml because most serums are sold at 30 ml. A moisturizer is a different amount of product per use — 30 ml is the standard size for a cream of this richness.",
+        a: "Yes. A cream this rich uses far less per application than a serum does — 30 ml is the standard size for the category, and the airless pump means none of it is left in the bottle.",
       },
       {
         q: "When does it ship?",
-        a: "Not immediately. This is a preorder against the first run, so it does not follow the one-business-day dispatch that applies to the serums. You will hear from us by email before it ships, and you can reply to that email to cancel if the timing no longer works.",
+        a: "It’s a preorder against the first run, so it doesn’t follow the one-business-day dispatch the serums do. You’ll hear from us by email before it ships, and you can reply to that email to cancel if the timing no longer works.",
       },
       {
-        q: "Is this LALALOCA?",
-        a: "No. LALALOCA is the serum collection. This is the FOUNDER collection — the same house, a different line.",
+        q: "Is this one of the serums?",
+        a: "No. LALALOCA is the serum collection; Hold the Room opens the FOUNDER Collection — the same house, the next line. They’re made to be worn together.",
       },
     ],
     sellable: true,
     preorder:
-      "Hold the Room is not in stock yet. Ordering now reserves one from the first run — it does not go out in one business day the way the serums do, and we will email you before it ships.",
+      "Preorder. Hold the Room ships from the first run — not the next-business-day dispatch the serums get. We’ll email you before it ships, and you can reply to cancel if the timing no longer works.",
   },
 ];
 

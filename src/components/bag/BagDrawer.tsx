@@ -166,10 +166,10 @@ export function BagDrawer() {
           <div className="flex flex-1 flex-col items-center justify-center gap-6 px-8 text-center">
             <p className="subhead text-cream">Your bag is empty.</p>
             <p className="text-sm text-cream/75">
-              Three serums, three distinct personalities. Start wherever you like.
+              The house is open. Three serums, $38 each — or all three for $98.
             </p>
             <Link href="/shop" onClick={closeBag} className="btn btn-primary">
-              Shop the collection
+              Shop the serums
             </Link>
           </div>
         ) : (
@@ -258,7 +258,7 @@ export function BagDrawer() {
                 </p>
               )}
               <p className="mt-3 text-center text-[0.6875rem] leading-relaxed text-cream/60">
-                You’ll finish your order on Shopify’s secure checkout. Cosmetic use only.
+                Secure checkout by Shopify. FOUNDER is the name on your order. Cosmetic products.
               </p>
             </footer>
           </>

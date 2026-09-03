@@ -95,7 +95,7 @@ export function DoorCard({
         {/* Dark room now: primary leads in gold, secondary is the ghost-light
             outline — btn-dark/btn-outline are paper-only per the house rule. */}
         <div className="mt-5 flex flex-col gap-3 pt-1 sm:flex-row">
-          <AddToBagButton product={product} className="btn btn-primary flex-1" />
+          <AddToBagButton product={product} className="btn btn-primary flex-1" showPrice />
           <Link href={`/products/${product.slug}`} className="btn btn-ghost-light flex-1">
             Details
           </Link>

@@ -134,8 +134,8 @@ export function CatalogProductPage({ product }: { product: CatalogProduct }) {
                   showPrice
                 />
                 <p className="mt-3 text-xs leading-relaxed text-cream/70">
-                  You’ll finish your order on Shopify’s secure checkout. Free US
-                  shipping. Cosmetic product. See{" "}
+                  Free US shipping · Secure checkout by Shopify · Cosmetic product.
+                  See{" "}
                   <Link
                     className="underline underline-offset-2 hover:opacity-70"
                     href="/policies/shipping"

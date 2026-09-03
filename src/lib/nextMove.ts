@@ -168,7 +168,7 @@ export const NEXT_MOVE: NextMoveProduct[] = [
     description:
       "A gentle daily cleanser for dry and delicate skin. The rich, oily texture turns to a silky milk on contact with water, dissolving make-up and impurities without stripping moisture from the skin.",
     detailCta: "Reserve Opening Line",
-    reservationStatus: "Reservation — no charge and no ship date yet.",
+    reservationStatus: "Hold your place in the first run. No charge today — price and ship date come to you by email first.",
     detailHero: {
       src: "/products/opening-line-plate.webp",
       alt: "The Opening Line bottle in rose and green stripes, alone under a single overhead light on dark stone.",
@@ -208,7 +208,7 @@ export const NEXT_MOVE: NextMoveProduct[] = [
     description:
       "A gentle daily face wash for blemish-prone skin. It washes away impurities and excess oil without harsh surfactants, leaving skin feeling fresh.",
     detailCta: "Reserve Clean Break",
-    reservationStatus: "Reservation — no charge and no ship date yet.",
+    reservationStatus: "Hold your place in the first run. No charge today — price and ship date come to you by email first.",
     detailHero: {
       src: "/products/clean-break-vanity.webp",
       alt: "The Clean Break bottle on a cream marble basin beside a running brass tap, a blush towel folded alongside, against a dark green wall.",
@@ -286,7 +286,7 @@ export const NEXT_MOVE: NextMoveProduct[] = [
       "A creamy tone-correcting stick that helps even the look of skin tone, supports the skin barrier and blends easily with fingertips for a natural-looking finish.",
     detailCta: "Reserve your shade",
     reservationStatus:
-      "Reservation — three shades, no charge and no ship date yet.",
+      "Pick your shade and hold your place in the first run. No charge today — price and ship date come to you by email first.",
     /* Unused for this SKU: the detail page shows the SELECTED shade, so the
        hero comes from `shades[]`. Kept non-optional for the type, pointed at
        the default shade so nothing can render empty. */
@@ -328,7 +328,7 @@ export const NEXT_MOVE: NextMoveProduct[] = [
     description:
       "A hydrating peptide eye cream that helps the appearance of fine lines look softened and the eye area look smoother. Comfortable under makeup.",
     detailCta: "Reserve Double Take",
-    reservationStatus: "Reservation — no charge and no ship date yet.",
+    reservationStatus: "Hold your place in the first run. No charge today — price and ship date come to you by email first.",
     detailHero: {
       src: "/products/double-take-vanity.webp",
       alt: "The Double Take bottle and carton on a cream vanity beside a lit dressing-room mirror, with a blush dressing room beyond.",

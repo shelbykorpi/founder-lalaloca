@@ -48,7 +48,7 @@ export function Header() {
       <p
         className="py-2 text-center text-[0.625rem] uppercase tracking-[0.24em] bg-night-deep text-cream/80"
       >
-        {BRAND.structure}
+        {BRAND.bar}
       </p>
 
       {/* The FOUNDER/BEAUTY lockup is far shorter than the stacked mark it

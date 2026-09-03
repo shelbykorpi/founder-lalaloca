@@ -206,9 +206,8 @@ export function ProductPlate({ product }: { product: NextMoveProduct }) {
                 has been photographed yet. A customer reading an atmospheric
                 page would otherwise assume the opposite. */}
             <p className="mt-8 border-t border-charcoal/12 pt-6 text-xs leading-relaxed text-charcoal/70">
-              Styled imagery, built from the approved packaging artwork rather
-              than photographed from a filled sample. We&rsquo;ll reshoot with the
-              real thing before it ships.
+              Shown: renders of the approved packaging, not photographs of a
+              filled sample. We&rsquo;ll photograph the real thing before it ships.
             </p>
           </Reveal>
         </div>

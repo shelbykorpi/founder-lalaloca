@@ -33,6 +33,7 @@ export function RoomHero({
   id,
   headingId,
   align = "left",
+  scrim = "default",
   bar,
 }: {
   /** A room from the floor plan supplies src, alt, phone crop and label. */
@@ -57,6 +58,10 @@ export function RoomHero({
       from within rather than shadowed on one side. Default is the left
       shadow every other room uses. */
   align?: "left" | "center";
+  /** "soft" replaces the heavy left panel with a light vignette, so a frame
+      already dark where the copy sits (the boardroom) reads edge-to-edge
+      rather than behind a black gradient. Only meaningful with align="left". */
+  scrim?: "default" | "soft";
   /** A full-width strip pinned to the foot of the hero — e.g. the salon's
       product rail. Sits above the copy's bottom padding. */
   bar?: ReactNode;
@@ -98,14 +103,38 @@ export function RoomHero({
         />
       )}
       <AmbientLighting />
-      <div
-        aria-hidden
-        className={`pointer-events-none absolute inset-0 ${
-          align === "center"
-            ? "bg-[linear-gradient(180deg,rgba(7,19,15,0.25)_0%,rgba(7,19,15,0)_30%,rgba(7,19,15,0.55)_62%,rgba(7,19,15,0.94)_100%)]"
-            : "bg-[linear-gradient(180deg,rgba(7,19,15,0.35)_0%,rgba(7,19,15,0.12)_32%,rgba(7,19,15,0.9)_76%,#07130f_100%)] md:bg-[linear-gradient(90deg,#07130f_0%,#07130f_20%,rgba(7,19,15,0.93)_34%,rgba(7,19,15,0.6)_48%,rgba(7,19,15,0.08)_66%,rgba(7,19,15,0)_80%)]"
-        }`}
-      />
+      {align === "left" && scrim === "soft" ? (
+        <>
+          {/* A light vignette, not a panel — the boardroom is already dark
+              where the copy sits, so the room shows edge to edge. On phones a
+              gentle bottom fade keeps the stacked copy legible. */}
+          <div
+            aria-hidden
+            className="pointer-events-none absolute inset-0 md:hidden"
+            style={{
+              background:
+                "linear-gradient(180deg, rgba(7,19,15,0.30) 0%, rgba(7,19,15,0) 42%, rgba(7,19,15,0.55) 74%, rgba(7,19,15,0.9) 100%)",
+            }}
+          />
+          <div
+            aria-hidden
+            className="pointer-events-none absolute inset-0 hidden md:block"
+            style={{
+              background:
+                "linear-gradient(90deg, rgba(7,19,15,0.62) 0%, rgba(7,19,15,0.34) 24%, rgba(7,19,15,0.08) 46%, rgba(7,19,15,0) 62%), linear-gradient(0deg, rgba(7,19,15,0.5) 0%, rgba(7,19,15,0) 20%)",
+            }}
+          />
+        </>
+      ) : (
+        <div
+          aria-hidden
+          className={`pointer-events-none absolute inset-0 ${
+            align === "center"
+              ? "bg-[linear-gradient(180deg,rgba(7,19,15,0.25)_0%,rgba(7,19,15,0)_30%,rgba(7,19,15,0.55)_62%,rgba(7,19,15,0.94)_100%)]"
+              : "bg-[linear-gradient(180deg,rgba(7,19,15,0.35)_0%,rgba(7,19,15,0.12)_32%,rgba(7,19,15,0.9)_76%,#07130f_100%)] md:bg-[linear-gradient(90deg,#07130f_0%,#07130f_20%,rgba(7,19,15,0.93)_34%,rgba(7,19,15,0.6)_48%,rgba(7,19,15,0.08)_66%,rgba(7,19,15,0)_80%)]"
+          }`}
+        />
+      )}
       <div
         className={`shell relative flex w-full flex-1 ${
           align === "center"

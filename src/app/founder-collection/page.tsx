@@ -285,8 +285,9 @@ export default async function FounderCollectionPage() {
         height="min-h-[82svh]"
         priority
         position="center center"
-        title="Take your seat."
-        lede="Private tools. Public power."
+        scrim="soft"
+        title={<span className="uppercase tracking-[0.01em] md:whitespace-nowrap">Take your seat.</span>}
+        lede={<span className="text-rose">Private tools. Public power.</span>}
         bar={<LineRail current="" />}
       >
         <Link href="#shelf-heading" className="btn btn-ghost-light">

@@ -1,10 +1,9 @@
 import type { Metadata } from "next";
 import Image from "next/image";
 import Link from "next/link";
-import { DoorCard } from "@/components/door/DoorCard";
-import { ScrollDoors } from "@/components/door/ScrollDoors";
 import { AddSetButton } from "@/components/bag/AddToBagButton";
 import { RoomHero } from "@/components/house/RoomHero";
+import { SerumAlcove } from "@/components/shop/SerumAlcove";
 import { HouseShell } from "@/components/house/HouseShell";
 import { EditorialRoomSection } from "@/components/house/EditorialRoomSection";
 import { getRoom } from "@/lib/rooms";
@@ -85,11 +84,7 @@ export default function ShopPage() {
             </div>
           </nav>
         }
-      >
-        <Link href="/find-your-serum" className="hairline text-cream">
-          Not sure which? Three questions, one answer
-        </Link>
-      </RoomHero>
+      />
 
       <TrackListView
         items={products}
@@ -97,20 +92,16 @@ export default function ShopPage() {
         listName="The LALALOCA Collection"
       />
 
-      {/* Browsing, not reading — the elevator doors are the room now, not a
-          card laid on paper. The long INCI/policy reading stays below on
-          paper; this is the dark room a shopper walks through first. */}
-      <section id="serums" className="section bg-night scroll-mt-24" aria-label="Serums">
-        <ScrollDoors className="shell grid gap-x-8 gap-y-14 md:grid-cols-2 lg:grid-cols-3">
+      {/* The salon, continued. The hero is three lit alcoves; this is the
+          same three, closer — each bottle in its own colour-lit marble niche
+          on the same dark ground, so the page flows down out of the counter
+          rather than becoming a grid on a new surface. */}
+      <section id="serums" className="house-marble scroll-mt-24 pb-14 pt-12 md:pb-20 md:pt-16" aria-label="Serums">
+        <div className="shell grid gap-x-8 gap-y-14 sm:grid-cols-2 lg:grid-cols-3">
           {products.map((product, index) => (
-            <DoorCard
-              key={product.slug}
-              product={product}
-              index={index}
-              priority={index === 0}
-            />
+            <SerumAlcove key={product.slug} product={product} index={index} />
           ))}
-        </ScrollDoors>
+        </div>
       </section>
 
       {/* ---------------- All three: the FOUNDER parlour ----------------

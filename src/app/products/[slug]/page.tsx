@@ -101,6 +101,14 @@ export default async function ProductPage({ params }: PageProps<"/products/[slug
             <ProductDoor product={product} />
 
             <div className="lg:pt-4">
+              {/* The product's energy colour — its alcove in the Serum
+                  Salon (teal / amber / red) — as a hairline over the name,
+                  so the page and the salon read as one room. */}
+              <span
+                aria-hidden
+                className="mb-4 block h-[2px] w-12"
+                style={{ background: product.accent }}
+              />
               <h1 className="font-serif text-[clamp(2.5rem,6vw,3.75rem)] leading-none text-cream">
                 {product.name}
               </h1>

@@ -780,3 +780,13 @@ LEFT ALONE / WARNING for whoever lands the FOUND HER work above:
   colours with rose diamonds, then a cream "Shop the collection →" button —
   each name links to its product page, the button to the grid (#serums).
   Alcove labels kept as the salon's own signage; every link is live HTML.
+- Shop, second pass (Shelby): hero trimmed to the mock-up's exact text (label,
+  headline, sub, product rail — the "Not sure which?" line removed). The serum
+  grid is gone; the three serums are now lit ALCOVES continuing the salon
+  (new SerumAlcove component) — each real bottle in an arched marble niche
+  glowing in its own energy colour (teal/amber/red from product.accent), name
+  etched on the niche wall, then archetype/name/benefit/price and add-to-bag +
+  Details. Section is house-marble so it flows straight down out of the hero
+  counter — no grid on a new surface. Accent hairline also added to the serum
+  cards and the product-page hero so the colours thread through. DoorCard /
+  ScrollDoors are now unused (kept on disk). Commerce, tracking, links intact.

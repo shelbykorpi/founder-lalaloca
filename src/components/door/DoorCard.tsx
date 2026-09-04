@@ -78,6 +78,14 @@ export function DoorCard({
             the numbering told a shopper nothing and the identity tells her
             which day this bottle is for. Timing is not lost: it moves to the
             size and price line below, where the rest of the hard facts are. */}
+        {/* The card's energy colour — the teal/amber/red of its alcove in
+            the Serum Salon, threaded through the grid so the shop reads as
+            the room. */}
+        <span
+          aria-hidden
+          className="mb-3 block h-[2px] w-10"
+          style={{ background: product.accent }}
+        />
         <p className="eyebrow text-champagne">{product.archetype}</p>
         <h3 className="mt-2 font-serif text-[1.75rem] leading-none text-cream">
           <Link href={`/products/${product.slug}`} className="hover:text-rose">

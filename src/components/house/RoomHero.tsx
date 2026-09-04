@@ -32,6 +32,8 @@ export function RoomHero({
   priority = false,
   id,
   headingId,
+  align = "left",
+  bar,
 }: {
   /** A room from the floor plan supplies src, alt, phone crop and label. */
   room?: Room;
@@ -51,6 +53,13 @@ export function RoomHero({
   id?: string;
   /** Lets a page point a skip link or a focus target at the heading. */
   headingId?: string;
+  /** "center" lays the copy low and centred (the salon), the whole frame lit
+      from within rather than shadowed on one side. Default is the left
+      shadow every other room uses. */
+  align?: "left" | "center";
+  /** A full-width strip pinned to the foot of the hero — e.g. the salon's
+      product rail. Sits above the copy's bottom padding. */
+  bar?: ReactNode;
 }) {
   const Heading = as;
   const src = srcProp ?? room?.hero.src ?? "";
@@ -91,23 +100,37 @@ export function RoomHero({
       <AmbientLighting />
       <div
         aria-hidden
-        className="pointer-events-none absolute inset-0 bg-[linear-gradient(180deg,rgba(7,19,15,0.35)_0%,rgba(7,19,15,0.12)_32%,rgba(7,19,15,0.9)_76%,#07130f_100%)] md:bg-[linear-gradient(90deg,#07130f_0%,#07130f_20%,rgba(7,19,15,0.93)_34%,rgba(7,19,15,0.6)_48%,rgba(7,19,15,0.08)_66%,rgba(7,19,15,0)_80%)]"
+        className={`pointer-events-none absolute inset-0 ${
+          align === "center"
+            ? "bg-[linear-gradient(180deg,rgba(7,19,15,0.25)_0%,rgba(7,19,15,0)_30%,rgba(7,19,15,0.55)_62%,rgba(7,19,15,0.94)_100%)]"
+            : "bg-[linear-gradient(180deg,rgba(7,19,15,0.35)_0%,rgba(7,19,15,0.12)_32%,rgba(7,19,15,0.9)_76%,#07130f_100%)] md:bg-[linear-gradient(90deg,#07130f_0%,#07130f_20%,rgba(7,19,15,0.93)_34%,rgba(7,19,15,0.6)_48%,rgba(7,19,15,0.08)_66%,rgba(7,19,15,0)_80%)]"
+        }`}
       />
-      <div className="shell relative flex w-full flex-1 items-end pb-14 pt-28 md:items-center md:py-24">
-        <div className="max-w-[32rem]">
+      <div
+        className={`shell relative flex w-full flex-1 ${
+          align === "center"
+            ? "items-end justify-center pb-16 pt-28 text-center md:pb-20"
+            : "items-end pb-14 pt-28 md:items-center md:py-24"
+        }`}
+      >
+        <div className={align === "center" ? "max-w-[46rem]" : "max-w-[32rem]"}>
           <p className="room-label">{label}</p>
-          <span aria-hidden className="mt-4 block h-px w-10 bg-rose" />
+          <span
+            aria-hidden
+            className={`mt-4 block h-px w-10 bg-rose ${align === "center" ? "mx-auto" : ""}`}
+          />
           <Heading id={headingId} tabIndex={headingId ? -1 : undefined} className="headline-house mt-5 text-balance text-cream outline-none">{title}</Heading>
           {lede && (
-            <p className="mt-6 max-w-[40ch] text-[1.0625rem] leading-relaxed text-cream/80">
+            <p className={`mt-6 text-[1.0625rem] leading-relaxed text-cream/80 ${align === "center" ? "mx-auto max-w-[44ch]" : "max-w-[40ch]"}`}>
               {lede}
             </p>
           )}
           {children && (
-            <div className="room-hero-actions mt-8 flex flex-wrap items-center gap-x-8 gap-y-4">{children}</div>
+            <div className={`room-hero-actions mt-8 flex flex-wrap items-center gap-x-8 gap-y-4 ${align === "center" ? "justify-center" : ""}`}>{children}</div>
           )}
         </div>
       </div>
+      {bar && <div className="relative z-10 w-full">{bar}</div>}
     </section>
   );
 }

@@ -75,11 +75,11 @@ export const ROOMS: Room[] = [
     href: "/shop",
     pathname: "/shop",
     hero: {
-      src: "/editorial/rooms/serum-salon-doors.webp",
-      alt: "The serum salon: three lit marble niches in teal, gold and red, one bottle in each, over a black marble counter, the dressing-room mirrors glowing through the emerald doors either side.",
+      src: "/editorial/rooms/serum-salon-alcoves.webp",
+      alt: "The serum salon: three lit alcoves — Thirst Trap in teal, C Me Glow in amber, Bounce Back in red — each with its bottle, over a long black marble counter, brass pendants above and a desert-pink sky through the archways either side.",
       position: "center center",
     },
-    heroMobile: { src: "/editorial/rooms/serum-salon-doors-m.webp" },
+    heroMobile: { src: "/editorial/rooms/serum-salon-alcoves-m.webp" },
     through: "The boardroom is through the doors. Take the head of the table.",
   },
   {

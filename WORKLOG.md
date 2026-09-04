@@ -772,3 +772,11 @@ LEFT ALONE / WARNING for whoever lands the FOUND HER work above:
   On her own terms." (Julie's painting note kept). Hero copy unchanged (it
   already matched). Old found-her-hall-doors*.webp / found-her-hall-sky*.webp
   are unreferenced now — safe to delete when delete-permission is available.
+- Shop (Serum Salon) to Shelby's mock-up: new hero (serum-salon-alcoves.webp
+  — three lit alcoves with the real bottles, pink-sky archways; replaces
+  serum-salon-doors as the room 03 frame, old file now unused). RoomHero
+  gained align="center" (copy centred and low) and a `bar` slot. The bar is
+  the product rail: THIRST TRAP / C ME GLOW / BOUNCE BACK in their own accent
+  colours with rose diamonds, then a cream "Shop the collection →" button —
+  each name links to its product page, the button to the grid (#serums).
+  Alcove labels kept as the salon's own signage; every link is live HTML.

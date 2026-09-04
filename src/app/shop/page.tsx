@@ -47,14 +47,45 @@ export default function ShopPage() {
       <HouseShell room={3}>
       <RoomHero
         room={getRoom(3)}
-        height="min-h-[78svh]"
+        align="center"
+        height="min-h-[86svh]"
         priority
         title="Three serums. Three energies."
         lede="One woman building what’s next."
+        bar={
+          <nav
+            aria-label="The three serums"
+            className="border-t border-bronze/30 bg-night/70 backdrop-blur-sm"
+          >
+            <div className="shell flex flex-col items-stretch gap-3 py-3 sm:flex-row sm:items-center sm:justify-center sm:gap-0">
+              <ul className="flex flex-1 items-center justify-center gap-0" role="list">
+                {products.map((serum, i) => (
+                  <li key={serum.slug} className="flex items-center">
+                    {i > 0 && (
+                      <span aria-hidden className="px-3 text-rose sm:px-6">
+                        ◇
+                      </span>
+                    )}
+                    <Link
+                      href={`/products/${serum.slug}`}
+                      className="inline-flex min-h-11 items-center text-[0.6875rem] uppercase tracking-[0.22em] transition-opacity hover:opacity-80 sm:text-xs"
+                      style={{ color: serum.accent }}
+                    >
+                      {serum.name}
+                    </Link>
+                  </li>
+                ))}
+              </ul>
+              <Link
+                href="#serums"
+                className="inline-flex min-h-11 items-center justify-center gap-2 bg-cream px-6 text-[0.6875rem] uppercase tracking-[0.2em] text-night transition-colors hover:bg-rose sm:ml-6"
+              >
+                Shop the collection <span aria-hidden>→</span>
+              </Link>
+            </div>
+          </nav>
+        }
       >
-        <Link href="#serums" className="btn btn-primary">
-          Shop the serums
-        </Link>
         <Link href="/find-your-serum" className="hairline text-cream">
           Not sure which? Three questions, one answer
         </Link>

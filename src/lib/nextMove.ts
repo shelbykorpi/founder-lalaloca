@@ -183,8 +183,8 @@ export const NEXT_MOVE: NextMoveProduct[] = [
     detailCta: "Reserve Opening Line",
     reservationStatus: "Hold your place in the first run. No charge today — price and ship date come to you by email first.",
     detailHero: {
-      src: "/products/opening-line-plate.webp",
-      alt: "The Opening Line bottle in rose and green stripes, alone under a single overhead light on dark stone.",
+      src: "/products/opening-line-vanity.webp",
+      alt: "The Opening Line bottle and its carton in rose and green stripes on a cream marble vanity, an emerald door with a gold F open onto a blush dressing room and a lit mirror beyond.",
     },
     facts: [
       "COSMOS Organic certified by ECOCERT",
@@ -199,8 +199,8 @@ export const NEXT_MOVE: NextMoveProduct[] = [
       alt: "The Opening Line bottle: a white airless pump in desert rose and green stripes, its cream label reading Opening Line, oil-to-milk cleanser.",
     },
     scene: {
-      src: "/products/opening-line-scene.webp",
-      alt: "The Opening Line bottle standing alone on dark stone, lit from above.",
+      src: "/products/opening-line-vanity.webp",
+      alt: "The Opening Line bottle and carton on a cream marble vanity in the FOUNDER dressing room, warm light from a bulb-lit mirror.",
     },
     plainly:
       "Fragranced — a white-flower aroma with jasmine and sandalwood. Certified COSMOS Organic by ECOCERT, dermatologically tested, vegan. Suitable for sensitive skin.",

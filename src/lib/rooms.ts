@@ -89,11 +89,11 @@ export const ROOMS: Room[] = [
     href: "/founder-collection",
     pathname: "/founder-collection",
     hero: {
-      src: "/editorial/rooms/collection-study.webp",
-      alt: "The FOUNDER Collection boardroom: a long black marble table set with striped packs at every seat, the emerald doors at the head open onto a lamplit study lined with books.",
-      position: "52% center",
+      src: "/editorial/rooms/collection-boardroom.webp",
+      alt: "The FOUNDER Collection boardroom: a long black marble table with a place set for every founder, an empty green velvet chair with a rose silk over its arm at the head under a bulb-lit vanity mirror, a wardrobe of tailoring through the doorway beyond.",
+      position: "center center",
     },
-    heroMobile: { src: "/editorial/rooms/collection-study-m.webp" },
+    heroMobile: { src: "/editorial/rooms/collection-boardroom-m.webp" },
     through: "Past the table, a desk that was never for show.",
   },
   {

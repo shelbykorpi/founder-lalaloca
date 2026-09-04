@@ -271,23 +271,28 @@ export default async function FounderCollectionPage() {
           it, and the line reads "Take your seat." — so the photograph makes
           the offer and the words only name it.
 
-          One frame at every width. It is near-square (1122x1200), which
-          crops honestly to a phone and to a wide desktop alike because the
-          subject sits dead centre; the two-crop treatment the old vanity
-          hero needed does not apply. */}
+          THE FRAME IS THE BOARDROOM, per Shelby's mock-up: the long marble
+          table with a place set for every founder, the empty green wingback
+          under the bulb-lit mirror at the head, a rose silk over its arm, the
+          wardrobe through the doorway. The mirror sits dead centre and the
+          left third is dark wall, so the copy lands left in the room's own
+          shadow (the mock-up's layout exactly) and the whole line runs across
+          the foot as the rail. Baked-in type — the nav, the copy and the
+          rail — was inpainted out before import; the site draws its own. */}
       <HouseShell room={4}>
       <RoomHero
         room={getRoom(4)}
-        height="min-h-[78svh]"
+        height="min-h-[82svh]"
         priority
+        position="center center"
         title="Take your seat."
         lede="Private tools. Public power."
+        bar={<LineRail current="" />}
       >
         <Link href="#shelf-heading" className="btn btn-ghost-light">
           Explore the collection
         </Link>
       </RoomHero>
-      <LineRail current="" />
 
 
       {/* ---- The line ----

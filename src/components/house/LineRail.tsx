@@ -39,26 +39,39 @@ export function LineRail({ current }: { current: string }) {
   return (
     <nav
       aria-label="The FOUNDER Collection"
-      className="border-t border-bronze/25 bg-night/90 backdrop-blur-sm"
+      className="border-t border-bronze/30 bg-night/80 backdrop-blur-sm"
     >
-      <ul className="mx-auto flex max-w-[80rem] flex-wrap items-stretch justify-center">
+      <ul className="mx-auto flex max-w-[82rem] items-stretch justify-center overflow-x-auto px-2 md:overflow-visible">
         {LINE.map((item, i) => {
           const active = item.slug === current;
           return (
-            <li key={item.slug} className="flex">
+            <li key={item.slug} className="relative flex flex-1 shrink-0 justify-center">
+              {/* Diamond seam between places, drawn on the item's left edge. */}
+              {i > 0 && (
+                <span
+                  aria-hidden
+                  className="pointer-events-none absolute left-0 top-1/2 z-10 hidden -translate-x-1/2 -translate-y-1/2 rotate-45 border border-bronze/60 sm:block"
+                  style={{ width: "6px", height: "6px" }}
+                />
+              )}
               <Link
                 href={item.href}
                 aria-current={active ? "page" : undefined}
-                className={`inline-flex min-h-14 flex-col items-center justify-center gap-1 border-b-2 px-4 py-3 text-[0.625rem] uppercase tracking-[0.2em] transition-colors sm:px-7 ${
-                  active
-                    ? "border-rose text-cream"
-                    : "border-transparent text-cream/60 hover:text-rose"
+                className={`group/rail inline-flex min-h-[4.5rem] w-full flex-col items-center justify-center gap-2 px-3 py-4 text-center text-[0.5625rem] uppercase leading-tight tracking-[0.22em] transition-colors sm:px-6 sm:text-[0.625rem] ${
+                  active ? "text-cream" : "text-cream/60 hover:text-rose"
                 }`}
               >
-                <span className="font-serif text-base normal-case tracking-normal text-rose">
+                <span className="font-serif text-[1.0625rem] normal-case tracking-normal text-rose">
                   {String(i + 1).padStart(2, "0")}
                 </span>
-                {item.name}
+                <span>{item.name}</span>
+                {/* Hairline under each place; rose and full under the current one. */}
+                <span
+                  aria-hidden
+                  className={`mt-1 block h-px w-8 transition-colors ${
+                    active ? "bg-rose" : "bg-bronze/40 group-hover/rail:bg-rose/60"
+                  }`}
+                />
               </Link>
             </li>
           );

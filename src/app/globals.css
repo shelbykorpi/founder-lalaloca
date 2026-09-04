@@ -493,43 +493,22 @@
   }
 
   /* ---- After Hours · surfaces ------------------------------------------
-     DARK MARBLE, DRAWN NOT TILED. The brief asks for "nearly black with
-     restrained warm-bronze veining … dimensional and expensive, not like a
-     repeating stock texture". So it is built from six layers at deliberately
-     non-commensurate sizes and angles: two broad radial pools that give the
-     slab its unevenness, three vein systems at 17°, 74° and 128°, and a sheen.
-     Because no two layers share a period, the pattern does not visibly repeat
-     inside any panel you would actually use it on. */
+     DARK MARBLE, NO GRID. The tiled vein systems that ruled a faint mesh over
+     the slab are gone. What remains reads as a single expensive stone: two
+     broad pools of light for unevenness and one raking sheen — no repeating
+     layer, so nothing tiles a pattern across the page. */
   .surface-marble {
     background-color: var(--color-marble);
     background-image:
       radial-gradient(
-        120% 80% at 18% 12%,
-        color-mix(in srgb, var(--color-marble-vein) 16%, transparent) 0%,
-        transparent 58%
+        130% 90% at 18% 8%,
+        color-mix(in srgb, var(--color-marble-vein) 18%, transparent) 0%,
+        transparent 60%
       ),
       radial-gradient(
-        90% 70% at 82% 78%,
-        color-mix(in srgb, var(--color-marble-vein) 11%, transparent) 0%,
-        transparent 62%
-      ),
-      repeating-linear-gradient(
-        17deg,
-        transparent 0 37px,
-        color-mix(in srgb, var(--color-marble-vein) 13%, transparent) 37px 38px,
-        transparent 38px 91px
-      ),
-      repeating-linear-gradient(
-        74deg,
-        transparent 0 113px,
-        color-mix(in srgb, var(--color-marble-vein) 8%, transparent) 113px 115px,
-        transparent 115px 197px
-      ),
-      repeating-linear-gradient(
-        128deg,
-        transparent 0 53px,
-        color-mix(in srgb, var(--color-marble-vein) 6%, transparent) 53px 54px,
-        transparent 54px 149px
+        100% 80% at 84% 96%,
+        color-mix(in srgb, var(--color-marble-vein) 12%, transparent) 0%,
+        transparent 64%
       ),
       linear-gradient(
         160deg,
@@ -813,28 +792,27 @@
       0 0 0 7px color-mix(in srgb, var(--color-bronze) 35%, transparent),
       0 30px 80px rgba(0, 0, 0, 0.55);
   }
-  /* Emerald paneling: the wall between rooms. */
+  /* Emerald paneling: the wall between rooms. The regular bronze seams that
+     ruled it into a grid are gone; a single soft top-light gives the wall its
+     depth without tiling a pattern down the page. */
   .house-panel {
     background-color: var(--color-emerald-deep);
     border-top: 1px solid color-mix(in srgb, var(--color-rose) 55%, transparent);
     background-image:
-      linear-gradient(180deg, rgba(255, 255, 255, 0.03), rgba(0, 0, 0, 0.25)),
-      repeating-linear-gradient(
-        90deg,
-        transparent 0 calc(25% - 1px),
-        color-mix(in srgb, var(--color-bronze) 28%, transparent) calc(25% - 1px) 25%
-      );
+      radial-gradient(120% 100% at 50% 0%, rgba(255, 255, 255, 0.05) 0%, transparent 55%),
+      linear-gradient(180deg, rgba(255, 255, 255, 0.02), rgba(0, 0, 0, 0.28));
     color: var(--color-cream);
   }
-  /* The dark marble floor, for sections that read as the room continuing. */
+  /* The dark marble floor, for sections that read as the room continuing.
+     No tiled veining — the grid it made across every page is gone. What is
+     left is two soft pools of warm light in the dark, so the ground reads as
+     depth and atmosphere and the room's own photography carries the feeling. */
   .house-marble {
     background-color: var(--color-night);
     border-top: 1px solid color-mix(in srgb, var(--color-rose) 35%, transparent);
     background-image:
-      radial-gradient(120% 80% at 18% 12%, rgba(216, 167, 160, 0.06) 0%, transparent 58%),
-      radial-gradient(90% 70% at 82% 78%, rgba(176, 138, 100, 0.08) 0%, transparent 62%),
-      repeating-linear-gradient(17deg, transparent 0 37px, rgba(176, 138, 100, 0.07) 37px 38px, transparent 38px 91px),
-      repeating-linear-gradient(128deg, transparent 0 53px, rgba(234, 211, 195, 0.04) 53px 54px, transparent 54px 149px);
+      radial-gradient(120% 90% at 20% 0%, rgba(216, 167, 160, 0.08) 0%, transparent 60%),
+      radial-gradient(100% 80% at 82% 100%, rgba(176, 138, 100, 0.10) 0%, transparent 64%);
     color: var(--color-cream);
   }
   /* Photograph continuing behind a section — darkened to hold type. */

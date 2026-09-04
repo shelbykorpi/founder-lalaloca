@@ -127,12 +127,9 @@ export default async function FounderCollectionPage() {
      it is a Blanka product in plain supplier packaging while the other
      three are Selfnamed in the striped house system. Its accent is Antique
      Gold rather than a stripe colourway, because it does not have one. */
-  const liveTitles = new Set(cards.map((c) => c.title.toLowerCase()));
-  const waitlist = [
-    /* Opening Line left this list on 30 Aug — it is a reservation card now.
-       Sign Here is the last name without a supplier; two have failed it. */
-    { character: "03 · The Signature", name: "Sign Here", category: "Lip treatment" },
-  ].filter((w) => !liveTitles.has(w.name.toLowerCase()));
+  /* Sign Here was removed from the site entirely on 4 Sep 2026 (a name with no
+     formula), so the waitlist is empty and the grid is the five live SKUs. */
+  const waitlist: { character: string; name: string; category: string }[] = [];
 
   /* ── THE ORDER OF THE GRID, STATED ONCE ──────────────────────────────
      This used to be three maps rendered one after another, so the sequence
@@ -217,12 +214,28 @@ export default async function FounderCollectionPage() {
        as the campaign page and the "See all three" destination. */
     href: `/products/${entry.slug}`,
     state: entry.shades
-      ? `Reserve · ${entry.shades.length} shades · Nothing charged today`
-      : "Reserve · Nothing charged today",
-    action: (
-      <Link href={`/products/${entry.slug}`} className="btn btn-ghost-light w-full">
-        Reserve
+      ? `${formatPrice(entry.price)} · ${entry.shades.length} shades`
+      : formatPrice(entry.price),
+    action: entry.shades ? (
+      /* A grid card can't pick a shade, so the shaded SKU sends her to its
+         own page where the picker and buy button live. */
+      <Link href={`/products/${entry.slug}`} className="btn btn-primary w-full">
+        Choose your shade
       </Link>
+    ) : (
+      <AddToBagButton
+        product={{
+          slug: entry.variantId!,
+          name: entry.name,
+          category: entry.category,
+          price: entry.price,
+          size: entry.size,
+          bottle: entry.pack.src,
+        }}
+        href={`/products/${entry.slug}`}
+        className="btn btn-primary w-full"
+        showPrice
+      />
     ),
   }));
   const byName = (n: string) => nextMoveCards.find((c) => c.name === n)!;
@@ -309,8 +322,8 @@ export default async function FounderCollectionPage() {
             The line
           </h2>
           <p className="mt-4 max-w-[46ch] text-[0.9375rem] leading-relaxed text-cream/75">
-            Six pieces, laid out the way you&rsquo;d lay out a strategy. Take what
-            ships today. Hold the rest — they&rsquo;re yours when they&rsquo;re ready.
+            Five pieces, laid out the way you&rsquo;d lay out a strategy — the whole
+            routine, every one in stock and ready to ship.
           </p>
 
           <div className="mt-8 grid gap-10 sm:grid-cols-2 lg:grid-cols-3">
@@ -331,8 +344,7 @@ export default async function FounderCollectionPage() {
           </div>
 
           <p className="mt-10 max-w-prose text-xs leading-relaxed text-cream/65">
-            Reserving costs nothing today. You&rsquo;ll get the price and ship
-            date by email before anything is sold, and you can walk away then.{" "}
+            Every piece ships within one business day, with free US shipping.{" "}
             <Link
               href="/the-next-move"
               className="underline underline-offset-2 hover:opacity-70"
@@ -379,16 +391,15 @@ export default async function FounderCollectionPage() {
         <div className="shell max-w-3xl">
           <p className="eyebrow text-blush">The FOUNDER Collection</p>
           <h2 className="mt-5 font-serif text-3xl leading-tight md:text-4xl">
-            One ships. Four take reservations. One is on its way.
+            The whole routine. In stock, and yours today.
           </h2>
           <p className="mt-6 max-w-prose text-cream/85">
-            {product.name} is the anchor and the first you can order. Opening
-            Line, Clean Break, Smooth Talker and Double Take are made and
-            photographed — reserve yours now and pay only once they&rsquo;re
-            priced. Sign Here is next.
+            Opening Line to Hold the Room — cleanse, wash, treat, finish. Five
+            pieces, each one priced and in stock, shipping within one business
+            day. {product.name} is the anchor and the last step.
           </p>
           <p className="mt-6 font-serif text-xl text-blush">
-            Hold your place.
+            Take your seat.
           </p>
         </div>
       </section>
@@ -401,7 +412,7 @@ export default async function FounderCollectionPage() {
         <div className="shell">
           <div className="max-w-xl">
             <h2 className="headline text-balance text-cream">
-              Hear when the next one is ready.
+              First to know what&rsquo;s next.
             </h2>
             <EmailSignup tone="green" source="waitlist" />
           </div>

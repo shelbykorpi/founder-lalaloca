@@ -11,11 +11,10 @@ import Link from "next/link";
  * SKUs. A rail that reads as a routine teaches the line; one that reads as a
  * grid does not.
  *
- * ONLY PRODUCTS THAT EXIST GO IN IT. Shelby's mock-up includes SIGN HERE,
- * which has no formula, no INCI and no page; board v2.14 keeps it off the site
- * as a product in any form. A name in a navigation rail reads as a thing you
- * can go and look at, so it is left out here and stays a waitlist card on the
- * collection grid.
+ * ONLY PRODUCTS THAT EXIST GO IN IT. Sign Here — a name with no formula, no
+ * INCI and no page — was removed from the site entirely on 4 Sep 2026 at
+ * Shelby's direction, so it is no longer a rail slot or a waitlist card. The
+ * five that remain are all priced, stocked and Active in Shopify.
  *
  * THE WHOLE RAIL IS ONE WORLD. It briefly pointed at `/after-hours/<slug>`
  * while the plates lived there; before that, three of the four links left the
@@ -32,7 +31,6 @@ const LINE = [
   { slug: "hold-the-room", name: "Hold the Room", href: "/products/hold-the-room" },
   { slug: "double-take", name: "Double Take", href: "/products/double-take" },
   { slug: "smooth-talker", name: "Smooth Talker", href: "/products/smooth-talker" },
-  { slug: "sign-here", name: "Sign Here", href: "/founder-collection#waitlist" },
 ];
 
 export function LineRail({ current }: { current: string }) {

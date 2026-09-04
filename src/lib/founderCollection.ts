@@ -100,7 +100,7 @@ export const FOUNDER_COLLECTION: FounderProduct[] = [
     need: "Skin that goes dry, tight or dull-looking and doesn’t hold onto moisture for long.",
     benefit:
       "Skin feels smoother and stays comfortably hydrated, morning or night.",
-    price: 34.0,
+    price: 36.0,
     size: "30 ml / 1 fl oz",
     supplierSku: "100249-BLNK-MB-03-02-HM-SM3D",
     timing: "Morning or night",

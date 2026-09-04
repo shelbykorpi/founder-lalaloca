@@ -7,7 +7,9 @@ import {
   PlateShadeImage,
   PlateShadeChips,
 } from "@/components/house/PlateShades";
+import { PlateBuyButton } from "@/components/house/PlateBuyButton";
 import { CAMPAIGN, type NextMoveProduct } from "@/lib/nextMove";
+import { formatPrice } from "@/lib/products";
 import { SITE } from "@/lib/brand";
 import { JsonLd, breadcrumbSchema } from "@/lib/seo";
 
@@ -26,18 +28,19 @@ import { JsonLd, breadcrumbSchema } from "@/lib/seo";
  * pages drift — a 24-word hook on one and none on the next — and that drift is
  * what the copy cut of 23 Aug existed to undo.
  *
- * ── WHAT THIS PAGE MAY NOT DO ────────────────────────────────────────────
+ * ── WHAT THIS PAGE NOW DOES ──────────────────────────────────────────────
  *
- * NO PRICE AND NO BUY PATH. `RESERVING` is still true in nextMove.ts:
- * Selfnamed's unit cost was never visible in the studio, and the house rule is
- * "no price, no slot". Nothing is charged here, so the FTC Mail Order Rule's
- * 30-day clock never starts against a ship date nobody can name. The CTA goes
- * to the campaign's own reservation form — the same one, not a second capture.
+ * IT SELLS. As of 4 Sep 2026 every SKU is priced, stocked and Active in
+ * Shopify (`RESERVING` is false), so the plate shows a price and a real
+ * add-to-bag rather than a reservation capture. The shaded SKU adds the shade
+ * the shopper is looking at, via the same context the picture reads. The line
+ * id handed to the bag is the Shopify variant id, which the cart permalink
+ * resolves straight to checkout.
  *
- * NO PRODUCT SCHEMA. A schema.org Offer wants a price and an availability.
- * These have neither, and publishing an Offer with an invented price is
- * precisely the class of error the price guard exists to catch. Breadcrumbs
- * only until a real price exists.
+ * PRODUCT SCHEMA STILL WAITS. An Offer now has a price and availability to
+ * declare, but the INCI is not yet published on the page, so a full schema is
+ * left for the pass that publishes ingredients. Breadcrumbs only for now — an
+ * honest omission, not an invented value.
  *
  * THE PACK SHOTS ARE RENDERS. Every one of the three concept docs records it,
  * and every one says reshoot when a physical sample exists. A page this
@@ -101,24 +104,17 @@ export function ProductPlate({ product }: { product: NextMoveProduct }) {
             {product.size}
           </p>
 
-          {/* Choose, then reserve — the order a person actually decides in. */}
+          {/* Choose your shade, then add it — the order a person decides in. */}
           {shades && <PlateShadeChips className="mt-7" />}
 
-          {/* What a reservation is, said before the button rather than
-              after it. There is no price line above this on purpose. */}
-          <div className="mt-7 max-w-[24rem] border-l-2 border-bronze py-3 pl-4">
-            <p className="room-label">Reserve</p>
-            <p className="mt-2 text-[0.8125rem] leading-relaxed text-cream/75">
-              {product.reservationStatus}
-            </p>
-          </div>
+          <p className="mt-7 font-serif text-[1.5rem] leading-none text-cream">
+            {formatPrice(product.price)}
+          </p>
 
-          <Link
-            href="/the-next-move#reserve"
-            className="btn btn-ghost-light mt-6 w-full max-w-[20rem]"
-          >
-            {product.detailCta}
-          </Link>
+          <PlateBuyButton
+            product={product}
+            className="btn btn-primary mt-6 w-full max-w-[20rem]"
+          />
 
           {/* The thing she would otherwise have to assume — above the fold,
               because this is where the assumption gets made. */}
@@ -129,9 +125,7 @@ export function ProductPlate({ product }: { product: NextMoveProduct }) {
           )}
 
           <p className="mt-5 max-w-[26rem] text-[0.6875rem] leading-relaxed text-cream/55">
-            Nothing is charged today. We&rsquo;ll write to you with the price and a
-            ship date before anything is sold, and you can walk away at that
-            point.
+            In stock. Ships within one business day, with free US shipping.
           </p>
         </div>
       </div>
@@ -327,13 +321,12 @@ export function ProductPlate({ product }: { product: NextMoveProduct }) {
             <p className="headline-house mt-5 text-balance text-cream">
               Leave the door open behind you.
             </p>
-            {/* Only a campaign member is one of three. Opening Line is a
-                reservation product but was not in the August shoot, and
-                saying otherwise would point at a page that does not list it. */}
+            {/* Only a campaign member is one of three. Opening Line was not in
+                the August shoot, so it points at the collection, not the trio. */}
             <p className="mt-6 max-w-[26rem] text-[0.9375rem] leading-relaxed text-cream/70">
               {inCampaign
                 ? `${product.name} is one of three in ${CAMPAIGN.name}.`
-                : `${product.name} takes reservations. Nothing is charged until it has a price and a ship date.`}
+                : `${product.name} is part of the FOUNDER Collection.`}
             </p>
             <div className="mt-9 flex flex-wrap items-center gap-x-8 gap-y-4">
               {inCampaign && (

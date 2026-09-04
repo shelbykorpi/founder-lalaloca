@@ -16,10 +16,22 @@
  *
  *   products.ts           price: 38.00  ->  Shopify variant price
  *   products.ts           SET.price     ->  Shopify SerumSet price
- *   founderCollection.ts  price: 34.00  ->  Shopify variant price
+ *   founderCollection.ts  price: 36.00  ->  Shopify variant price
+ *   nextMove.ts           price + variantId per SKU (and per shade)
  *
  * Verified against Shopify on 15 Aug 2026: serums $38.00, trio $98.00.
- * Verified against Shopify on 19 Aug 2026: Hold the Room $34.00.
+ * Verified against Shopify on  4 Sep 2026: Hold the Room $36.00 (the site had
+ *   drifted to $34 while Shopify charged $36 — corrected to $36 here).
+ * Priced and made Active in Shopify on 4 Sep 2026, one unit each in stock:
+ *   Opening Line  $36  variant 47400898920617
+ *   Clean Break   $34  variant 47417854689449
+ *   Double Take   $46  variant 47417855115433
+ *   Smooth Talker $42  variants 47417855574185 (20 Light),
+ *                                47417855606953 (25 Medium),
+ *                                47417855639721 (35 Deep)
+ * These four carry their own `variantId` in nextMove.ts and are handed to the
+ * bag as raw numeric ids, which cartPermalink resolves directly — no entry in
+ * the map below is required (the map is typed to the serum/founder slugs).
  */
 
 import type { ProductSlug } from "./products";

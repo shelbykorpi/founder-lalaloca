@@ -78,9 +78,9 @@ const LINE = [
     image: "/products/opening-line-tall.webp",
     alt: "Opening Line in rose and green stripes, alone under a single light on dark stone.",
     href: "/products/opening-line",
-    state: "Reserve · Nothing charged today",
-    action: "Reserve",
-    ready: false,
+    state: "In stock · Ships in one business day",
+    action: `Shop · ${formatPrice(bySlug["opening-line"].price)}`,
+    ready: true,
   },
   {
     n: "02",
@@ -90,9 +90,9 @@ const LINE = [
     image: "/products/clean-break-tall.webp",
     alt: "Clean Break beside a running brass tap on a cream marble basin.",
     href: "/products/clean-break",
-    state: "Reserve · Nothing charged today",
-    action: "Reserve",
-    ready: false,
+    state: "In stock · Ships in one business day",
+    action: `Shop · ${formatPrice(bySlug["clean-break"].price)}`,
+    ready: true,
   },
   {
     n: "03",
@@ -114,9 +114,9 @@ const LINE = [
     image: "/products/double-take-tall.webp",
     alt: "Double Take and its striped carton on a marble vanity by a lit mirror.",
     href: "/products/double-take",
-    state: "Reserve · Nothing charged today",
-    action: "Reserve",
-    ready: false,
+    state: "In stock · Ships in one business day",
+    action: `Shop · ${formatPrice(bySlug["double-take"].price)}`,
+    ready: true,
   },
   {
     n: "05",
@@ -126,9 +126,9 @@ const LINE = [
     image: "/products/smooth-talker-tall.webp",
     alt: "Smooth Talker in 25 Medium beside its striped carton on a brass table.",
     href: "/products/smooth-talker",
-    state: "Reserve · Nothing charged today",
-    action: "Reserve",
-    ready: false,
+    state: "In stock · 3 shades",
+    action: `Shop · ${formatPrice(bySlug["smooth-talker"].price)}`,
+    ready: true,
   },
 ];
 
@@ -136,17 +136,17 @@ const LINE = [
    no Reserve — a reservation implies something to reserve. The review build
    gives both of these their own product page with a Reserve button; board
    v2.14 bars them from the site as products in any form. */
-const IN_THE_MAKING = [
-  /* OPENING LINE LEFT THIS LIST ON 30 AUGUST. It has a supplier, a verified
-     fill, a certification and finished artwork, so it is a reservation in
-     LINE above rather than a name here.
-
-     SIGN HERE STAYS, and is likely to stay a while. Two suppliers have now
-     failed it: neither Blanka nor Selfnamed stocks a conditioning lip
-     treatment, and the board wants a fountain-pen silhouette with a visible
-     chamber, which is custom tooling rather than a catalogue component. */
-  { n: "06", archetype: "The Signature", name: "Sign Here", descriptor: "Lip treatment" },
-];
+/* Empty since 4 Sep 2026. Opening Line left on 30 Aug (it became a reservation,
+   now a live SKU); Sign Here was removed from the site entirely at Shelby's
+   direction. Every piece in the collection is now priced, stocked and Active,
+   so there is nothing "in the making" to tile. Kept typed so the grid below
+   simply renders nothing rather than needing its markup pulled. */
+const IN_THE_MAKING: {
+  n: string;
+  archetype: string;
+  name: string;
+  descriptor: string;
+}[] = [];
 
 const NOTES = [
   {

@@ -14,8 +14,18 @@ export type Shade = {
   code: string;
   name: string;
   handle: string;
+  /** Shopify variant id for this shade — the bag line id for the plate. */
+  variantId: string;
   hero: { src: string; alt: string };
 };
+
+/** Exposes the selected shade to a sibling client component (the buy button),
+ *  so adding to the bag uses the variant the shopper is actually looking at.
+ *  Returns null outside the provider, so a single-shade caller can fall back. */
+export function useSelectedShade(): Shade | null {
+  const ctx = useContext(ShadeCtx);
+  return ctx ? ctx.selected : null;
+}
 
 /**
  * THE SHADE PICKER, FOR THE PLATE.

@@ -43,8 +43,11 @@
  * and switch `RESERVING` to false.
  */
 
-/** While true the page captures reservations and shows no price or buy path. */
-export const RESERVING = true;
+/** While true the page captures reservations and shows no price or buy path.
+ *  Switched off 4 Sep 2026: every SKU is priced, in Shopify, and Active, so
+ *  the plate sells rather than reserves. Each product carries its `price` and
+ *  `variantId` below; the shaded SKU carries a `variantId` per shade. */
+export const RESERVING = false;
 
 export type NextMoveProduct = {
   slug: string;
@@ -61,6 +64,12 @@ export type NextMoveProduct = {
   keyIngredients: string[];
   /** Supplier-stated fill. Regulated declaration — never rounded. */
   size: string;
+  /** Live retail price in USD. Matches the Shopify variant price. */
+  price: number;
+  /** Shopify variant id for a single-variant SKU. Shaded SKUs carry it per
+   *  shade instead (see `shades[].variantId`), so this is optional. Passed to
+   *  the bag as the line id; cartPermalink resolves a raw numeric id directly. */
+  variantId?: string;
   /** Shade, where the SKU has one. Kept for products with a single shade. */
   shade?: string;
   /**
@@ -78,8 +87,10 @@ export type NextMoveProduct = {
     code: string;
     /** Shade name as printed: "Light". */
     name: string;
-    /** Stable handle for URLs and future variant mapping. */
+    /** Stable handle for URLs and variant mapping. */
     handle: string;
+    /** Shopify variant id for this shade. Passed to the bag as the line id. */
+    variantId: string;
     hero: { src: string; alt: string };
   }[];
   cta: string;
@@ -165,6 +176,8 @@ export const NEXT_MOVE: NextMoveProduct[] = [
     ],
     keyIngredients: ["Camomile", "Sea Buckthorn", "Cloudberry"],
     size: "150 ml / 5.07 fl oz",
+    price: 36.0,
+    variantId: "47400898920617",
     description:
       "A gentle daily cleanser for dry and delicate skin. The rich, oily texture turns to a silky milk on contact with water, dissolving make-up and impurities without stripping moisture from the skin.",
     detailCta: "Reserve Opening Line",
@@ -205,6 +218,8 @@ export const NEXT_MOVE: NextMoveProduct[] = [
     ],
     keyIngredients: ["Mate Leaf", "Iceland Moss", "Juniper Callus"],
     size: "140 ml / 4.73 fl oz",
+    price: 34.0,
+    variantId: "47417854689449",
     description:
       "A gentle daily face wash for blemish-prone skin. It washes away impurities and excess oil without harsh surfactants, leaving skin feeling fresh.",
     detailCta: "Reserve Clean Break",
@@ -243,6 +258,7 @@ export const NEXT_MOVE: NextMoveProduct[] = [
     ],
     keyIngredients: ["Ceramides", "Cocoa Butter", "Vitamin E"],
     size: "12 g / 0.42 oz",
+    price: 42.0,
     /* Three shades. The 25 Aug set was a straight pack shot per shade;
        these replace it with the same three in use — stick and carton on a
        surface, the shade being blended in the mirror behind. Same file
@@ -258,6 +274,7 @@ export const NEXT_MOVE: NextMoveProduct[] = [
         code: "20",
         name: "Light",
         handle: "20-light",
+        variantId: "47417855574185",
         hero: {
           src: "/products/smooth-talker-20-light.webp",
           alt: "FOUNDER Smooth Talker Ceramide Tone Stick in 20 LIGHT beside its pale ivory and cream striped carton on a marble dressing table, a woman blending a swatch along her cheekbone in the mirror behind.",
@@ -267,6 +284,7 @@ export const NEXT_MOVE: NextMoveProduct[] = [
         code: "25",
         name: "Medium",
         handle: "25-medium",
+        variantId: "47417855606953",
         hero: {
           src: "/products/smooth-talker-25-medium.webp",
           alt: "FOUNDER Smooth Talker Ceramide Tone Stick in 25 MEDIUM beside its warm beige and cream striped carton on a brass side table, a swatch of the cream drawn beside it and a woman blending it along her cheek in the mirror behind.",
@@ -276,6 +294,7 @@ export const NEXT_MOVE: NextMoveProduct[] = [
         code: "35",
         name: "Deep",
         handle: "35-deep",
+        variantId: "47417855639721",
         hero: {
           src: "/products/smooth-talker-35-deep.webp",
           alt: "FOUNDER Smooth Talker Ceramide Tone Stick in 35 DEEP beside its espresso-brown and cream striped carton on a dark tray, a woman blending a swatch along her jaw in the mirror behind.",
@@ -325,6 +344,8 @@ export const NEXT_MOVE: NextMoveProduct[] = [
     ],
     keyIngredients: ["Hexapeptide-11", "Vitamin C", "Vitamin E"],
     size: "15 ml / 0.51 fl oz",
+    price: 46.0,
+    variantId: "47417855115433",
     description:
       "A hydrating peptide eye cream that helps the appearance of fine lines look softened and the eye area look smoother. Comfortable under makeup.",
     detailCta: "Reserve Double Take",

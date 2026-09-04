@@ -4,7 +4,7 @@ import Link from "next/link";
 import { PageIntro } from "@/components/site/PageIntro";
 import { EmailSignup } from "@/components/site/EmailSignup";
 import { BRAND } from "@/lib/brand";
-import { CAMPAIGN, NEXT_MOVE, RESERVING } from "@/lib/nextMove";
+import { CAMPAIGN, NEXT_MOVE } from "@/lib/nextMove";
 import { JsonLd, breadcrumbSchema } from "@/lib/seo";
 import { ShadePicker } from "@/components/shop/ShadePicker";
 
@@ -77,16 +77,10 @@ export default function TheNextMovePage() {
           ))}
         </ul>
         <div className="mt-8">
-          <Link href="#reserve" className="btn btn-dark">
-            Reserve your place
+          <Link href="#three-heading" className="btn btn-dark">
+            Shop the three
           </Link>
         </div>
-        {RESERVING && (
-          <p className="mt-5 max-w-md text-xs leading-relaxed text-charcoal/70">
-            Nothing is charged today. We&rsquo;ll write to you with the price and a
-            ship date before anything is sold, and you can walk away at that point.
-          </p>
-        )}
       </PageIntro>
 
       {/* ---------------- The three ---------------- */}
@@ -186,7 +180,10 @@ export default function TheNextMovePage() {
                 </p>
 
                 <div className="mt-auto pt-7">
-                  <Link href="#reserve" className="link-underline text-charcoal">
+                  <Link
+                    href={`/products/${product.slug}`}
+                    className="link-underline text-charcoal"
+                  >
                     {product.cta} <span aria-hidden>↗</span>
                   </Link>
                 </div>
@@ -220,25 +217,25 @@ export default function TheNextMovePage() {
         </div>
       </section>
 
-      {/* ---------------- What a reservation is ----------------
-          The board's Truth Standard applied to a presale: say what is and
-          isn't being promised, before the address is asked for. */}
+      {/* ---------------- What you're buying ----------------
+          The board's Truth Standard, now applied to a sale: say plainly what
+          is and isn't being promised. */}
       <section className="section-tight bg-shell" aria-labelledby="terms-heading">
         <div className="shell grid gap-8 border-t border-charcoal/12 pt-10 sm:grid-cols-3">
           <div>
             <h2 id="terms-heading" className="font-serif text-2xl text-charcoal">
-              Nothing is charged
+              In stock
             </h2>
             <p className="mt-2 text-sm leading-relaxed text-charcoal/80">
-              A reservation holds your place in the first run. No card, no deposit,
-              no obligation.
+              Each of the three is priced and in stock. Add it to your bag and
+              check out — no waitlist, no deposit.
             </p>
           </div>
           <div>
-            <h2 className="font-serif text-2xl text-charcoal">No date yet</h2>
+            <h2 className="font-serif text-2xl text-charcoal">Ships fast</h2>
             <p className="mt-2 text-sm leading-relaxed text-charcoal/80">
-              These are made to order with our supplier and the first run has not
-              been scheduled. We would rather tell you that than invent a month.
+              Dispatched within one business day, with free US shipping on every
+              order. First run, in limited numbers.
             </p>
           </div>
           <div>
@@ -273,8 +270,7 @@ export default function TheNextMovePage() {
       <section className="section-tight bg-night py-14">
         <div className="shell max-w-3xl">
           <p className="text-cream/85">
-            On sale now: the LALALOCA serums, and Hold the Room in the FOUNDER
-            Collection.
+            On sale now: the LALALOCA serums, and the full FOUNDER Collection.
           </p>
           <div className="mt-4 flex flex-col gap-4 sm:flex-row sm:gap-8">
             <Link href="/shop" className="link-underline text-cream">

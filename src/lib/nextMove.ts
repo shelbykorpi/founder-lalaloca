@@ -183,8 +183,8 @@ export const NEXT_MOVE: NextMoveProduct[] = [
     detailCta: "Reserve Opening Line",
     reservationStatus: "Hold your place in the first run. No charge today — price and ship date come to you by email first.",
     detailHero: {
-      src: "/products/opening-line-vanity.webp",
-      alt: "The Opening Line bottle and its carton in rose and green stripes on a cream marble vanity, an emerald door with a gold F open onto a blush dressing room and a lit mirror beyond.",
+      src: "/products/opening-line-hero.webp",
+      alt: "The Opening Line bottle, a white airless pump wrapped in cream and Founder Green stripes, its deep green plaque reading Opening Line, the opener, oil-to-milk cleanser.",
     },
     facts: [
       "COSMOS Organic certified by ECOCERT",
@@ -225,8 +225,8 @@ export const NEXT_MOVE: NextMoveProduct[] = [
     detailCta: "Reserve Clean Break",
     reservationStatus: "Hold your place in the first run. No charge today — price and ship date come to you by email first.",
     detailHero: {
-      src: "/products/clean-break-vanity.webp",
-      alt: "The Clean Break bottle on a cream marble basin beside a running brass tap, a blush towel folded alongside, against a dark green wall.",
+      src: "/products/clean-break-hero.webp",
+      alt: "The Clean Break bottle, a white pump wrapped in cream and Founder Green stripes, its deep green plaque reading Clean Break, the reset, purifying face wash.",
     },
     cta: "Start fresh",
     stripes: { a: "var(--color-cream)", b: "var(--color-founder-green)" },
@@ -276,8 +276,8 @@ export const NEXT_MOVE: NextMoveProduct[] = [
         handle: "20-light",
         variantId: "47417855574185",
         hero: {
-          src: "/products/smooth-talker-20-light.webp",
-          alt: "FOUNDER Smooth Talker Ceramide Tone Stick in 20 LIGHT beside its pale ivory and cream striped carton on a marble dressing table, a woman blending a swatch along her cheekbone in the mirror behind.",
+          src: "/products/smooth-talker-20-hero.webp",
+          alt: "FOUNDER Smooth Talker Ceramide Tone Stick in 20 LIGHT beside its Founder Green carton, the stick wrapped in sand-toned stripes matching the shade inside it.",
         },
       },
       {
@@ -286,8 +286,8 @@ export const NEXT_MOVE: NextMoveProduct[] = [
         handle: "25-medium",
         variantId: "47417855606953",
         hero: {
-          src: "/products/smooth-talker-25-medium.webp",
-          alt: "FOUNDER Smooth Talker Ceramide Tone Stick in 25 MEDIUM beside its warm beige and cream striped carton on a brass side table, a swatch of the cream drawn beside it and a woman blending it along her cheek in the mirror behind.",
+          src: "/products/smooth-talker-25-hero.webp",
+          alt: "FOUNDER Smooth Talker Ceramide Tone Stick in 25 MEDIUM beside its Founder Green carton, the stick wrapped in tan stripes matching the shade inside it.",
         },
       },
       {
@@ -296,8 +296,8 @@ export const NEXT_MOVE: NextMoveProduct[] = [
         handle: "35-deep",
         variantId: "47417855639721",
         hero: {
-          src: "/products/smooth-talker-35-deep.webp",
-          alt: "FOUNDER Smooth Talker Ceramide Tone Stick in 35 DEEP beside its espresso-brown and cream striped carton on a dark tray, a woman blending a swatch along her jaw in the mirror behind.",
+          src: "/products/smooth-talker-35-hero.webp",
+          alt: "FOUNDER Smooth Talker Ceramide Tone Stick in 35 DEEP beside its Founder Green carton, the stick wrapped in deep brown stripes matching the shade inside it.",
         },
       },
     ],
@@ -310,8 +310,8 @@ export const NEXT_MOVE: NextMoveProduct[] = [
        hero comes from `shades[]`. Kept non-optional for the type, pointed at
        the default shade so nothing can render empty. */
     detailHero: {
-      src: "/products/smooth-talker-25-medium.webp",
-      alt: "FOUNDER Smooth Talker Ceramide Tone Stick in 25 MEDIUM beside its warm beige and cream striped carton on a brass side table.",
+      src: "/products/smooth-talker-25-hero.webp",
+      alt: "FOUNDER Smooth Talker Ceramide Tone Stick in 25 MEDIUM beside its Founder Green carton, the stick wrapped in stripes the colour of the shade inside it.",
     },
     cta: "Make your move",
     stripes: { a: "var(--color-champagne)", b: "var(--color-founder-green)" },
@@ -351,8 +351,8 @@ export const NEXT_MOVE: NextMoveProduct[] = [
     detailCta: "Reserve Double Take",
     reservationStatus: "Hold your place in the first run. No charge today — price and ship date come to you by email first.",
     detailHero: {
-      src: "/products/double-take-vanity.webp",
-      alt: "The Double Take bottle and carton on a cream vanity beside a lit dressing-room mirror, with a blush dressing room beyond.",
+      src: "/products/double-take-hero.webp",
+      alt: "The Double Take bottle beside its Founder Green carton, the bottle wrapped in desert rose and green stripes, its plaque reading Double Take, the second look, peptide eye cream.",
     },
     facts: [
       "COSMOS Natural certified by ECOCERT Greenlife",

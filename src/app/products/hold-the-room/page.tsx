@@ -75,7 +75,7 @@ export default function HoldTheRoomPage() {
           the wall behind it is the same wall the product is standing against. */}
       <section className="relative isolate flex min-h-[calc(100svh-7rem)] flex-col justify-end overflow-hidden">
         <Image
-          src="/products/hold-the-room-vanity-hero.webp"
+          src="/products/hold-the-room-hero.webp"
           alt="Hold the Room and its carton on a marble dressing table, green doors open onto a lit vanity beyond."
           fill
           priority

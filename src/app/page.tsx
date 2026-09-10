@@ -258,49 +258,11 @@ export default function HomePage() {
           Follow the light ↓
         </a>
       </RoomHero>
-      <section className="section bg-emerald-deep pt-10">
-        <div className="shell">
-          <div className="grid gap-5 md:grid-cols-3">
-            {[
-              {
-                src: "/editorial/found-her-mirror.webp",
-                alt: "A gilt mirror in the FOUNDER house catching low brass light.",
-                cap: "The mirror",
-              },
-              {
-                src: "/editorial/the-room-is-yours.webp",
-                alt: "A green typewriter on velvet, a page reading THE ROOM IS YOURS, a candle lit beside it.",
-                cap: "The note",
-              },
-              {
-                src: "/editorial/hero-two-women.webp",
-                alt: "Two women in the dark green hall, a warm-lit doorway behind them — one in a cream suit and rust silk blouse, one in a deep green wrap dress — both looking straight into the camera.",
-                cap: "The company",
-              },
-            ].map((tile, i) => (
-              <Reveal key={tile.cap} as="figure" delay={i * 90} className="m-0">
-                <div className="relative aspect-[4/5] w-full overflow-hidden bg-emerald">
-                  <Image
-                    src={tile.src}
-                    alt={tile.alt}
-                    fill
-                    loading="lazy"
-                    sizes="(max-width: 768px) 90vw, 30vw"
-                    className="object-cover"
-                  />
-                </div>
-                <figcaption className="room-label mt-4">{tile.cap}</figcaption>
-              </Reveal>
-            ))}
-          </div>
-
-          <Reveal className="mt-10">
-            <Link href="/our-story" className="hairline text-cream">
-              Inside FOUNDER
-            </Link>
-          </Reveal>
-        </div>
-      </section>
+      {/* The three-tile gallery that followed this hero (The mirror · The note ·
+          The company, with an "Inside FOUNDER" link) was removed on
+          10 Sept 2026 at Shelby's direction. The room's hero stays: it is the
+          #room-house anchor that "Enter the house" and Room 07's doors resolve
+          to, and the copy on it is untouched. */}
 
       {/* ══ 03 · THE COLLECTION ═════════════════════════════════════════════
           Six on the shelf at three stages, and the state line under each name

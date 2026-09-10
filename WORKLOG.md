@@ -816,3 +816,11 @@ LEFT ALONE / WARNING for whoever lands the FOUND HER work above:
   on Smooth Talker, no firming/dark-circle language on Double Take).
 - Build: next build --webpack from $HOME/fb-build (bridge workaround).
   Committed on main, NOT pushed — `cd ~/Founder:LALALOCA && git push origin main`.
+- Later, 10 Sept · Claude (Cowork): homepage — removed the Room 02 three-tile
+  gallery (The mirror · The note · The company + "Inside FOUNDER" link) at
+  Shelby's direction. The "Come in. Stay awhile." hero and its #room-house
+  anchor stay, so Enter-the-house and Room 07's return doors still resolve.
+  public/editorial/found-her-mirror.webp and hero-two-women.webp are now
+  unreferenced (the-room-is-yours.webp is still used on /found-her) — safe
+  to delete when delete permission is available. Build clean. Committed,
+  not pushed.

@@ -48,7 +48,7 @@ export const ROOMS: Room[] = [
     pathname: "/",
     hero: {
       src: "/editorial/rooms/threshold-doors.webp",
-      alt: "Two tall emerald doors, a brass F on each leaf, standing open onto a firelit sitting room in the FOUNDER house.",
+      alt: "Two women standing at the threshold of the FOUNDER house — one in a deep green wrap dress, one in a cream suit and rust silk — beside two tall emerald doors with a brass F on each leaf, open onto a firelit sitting room behind them.",
       position: "58% center",
     },
     heroMobile: { src: "/editorial/rooms/threshold-doors-m.webp" },

@@ -192,11 +192,11 @@ export const NEXT_MOVE: NextMoveProduct[] = [
       "Vegan",
     ],
     cta: "Open the day",
-    stripes: { a: "var(--color-rose)", b: "var(--color-founder-green)" },
+    stripes: { a: "var(--color-cream)", b: "var(--color-founder-green)" },
     ink: "var(--color-founder-green)",
     pack: {
       src: "/products/opening-line-pack.webp",
-      alt: "The Opening Line bottle: a white airless pump in desert rose and green stripes, its cream label reading Opening Line, oil-to-milk cleanser.",
+      alt: "The Opening Line bottle: a white airless pump wrapped in cream and Founder Green stripes, a deep green plaque at the front reading Opening Line, the opener, oil-to-milk cleanser.",
     },
     scene: {
       src: "/products/opening-line-vanity.webp",
@@ -233,7 +233,7 @@ export const NEXT_MOVE: NextMoveProduct[] = [
     ink: "var(--color-founder-green)",
     pack: {
       src: "/products/clean-break-pack.webp",
-      alt: "The Clean Break bottle: a white pump bottle in deep green and cream stripes, its cream label framed in green, reading Clean Break, purifying face wash.",
+      alt: "The Clean Break bottle: a white pump bottle wrapped in cream and Founder Green stripes, a deep green plaque at the front reading Clean Break, the reset, purifying face wash.",
     },
     scene: {
       src: "/products/clean-break-scene.webp",
@@ -314,11 +314,11 @@ export const NEXT_MOVE: NextMoveProduct[] = [
       alt: "FOUNDER Smooth Talker Ceramide Tone Stick in 25 MEDIUM beside its warm beige and cream striped carton on a brass side table.",
     },
     cta: "Make your move",
-    stripes: { a: "var(--color-cream)", b: "var(--color-champagne)" },
+    stripes: { a: "var(--color-champagne)", b: "var(--color-founder-green)" },
     ink: "var(--color-founder-green)",
     pack: {
-      src: "/products/smooth-talker-shades-closet.webp",
-      alt: "The three Smooth Talker shades lined up in the FOUNDER dressing closet.",
+      src: "/products/smooth-talker-shades-pack.webp",
+      alt: "The three Smooth Talker shades side by side — 20 Light, 25 Medium and 35 Deep — each stick wrapped in stripes the colour of the shade inside it.",
     },
     /* The family shot leads now: a card showing one shade of a three-shade
        product tells a customer the wrong thing before she ever clicks. */
@@ -360,11 +360,11 @@ export const NEXT_MOVE: NextMoveProduct[] = [
       "Vegan",
     ],
     cta: "Make them look twice",
-    stripes: { a: "var(--color-blush)", b: "var(--color-rose)" },
+    stripes: { a: "var(--color-rose)", b: "var(--color-founder-green)" },
     ink: "var(--color-founder-green)",
     pack: {
       src: "/products/double-take-pack.webp",
-      alt: "The Double Take airless pump bottle and its carton in blush and rose stripes, the cream label reading Double Take, peptide eye cream.",
+      alt: "The Double Take airless pump bottle beside its Founder Green carton, the bottle wrapped in desert rose and green stripes, its plaque reading Double Take, the second look, peptide eye cream.",
     },
     scene: {
       src: "/products/double-take-scene.webp",

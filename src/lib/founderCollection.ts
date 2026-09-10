@@ -143,9 +143,9 @@ export const FOUNDER_COLLECTION: FounderProduct[] = [
       "Anthemis Nobilis Flower Oil",
     ],
     origin: "Made in North America.",
-    bottle: "/products/hold-the-room-bottle.png",
+    bottle: "/products/hold-the-room-pack.webp",
     bottleAlt:
-      "The Hold the Room airless pump bottle, black cap and base with a frosted white body, FOUNDER BEAUTY on the front.",
+      "The Hold the Room airless pump bottle beside its Founder Green carton, the bottle wrapped in desert rose and green stripes, its plaque reading Hold the Room, the anchor, peptide moisturizing cream.",
     howToUse: [
       {
         step: "Clean skin first",

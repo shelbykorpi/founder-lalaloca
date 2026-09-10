@@ -61,7 +61,7 @@ export function Header() {
           aria-expanded={menuOpen}
           aria-controls="mobile-nav"
           onClick={() => setMenuOpen((v) => !v)}
-          className="-ml-3 flex h-11 w-11 items-center justify-center lg:hidden text-cream"
+          className="-ml-3 flex h-11 w-11 items-center justify-center xl:hidden text-cream"
         >
           <span className="sr-only">{menuOpen ? "Close menu" : "Open menu"}</span>
           <svg viewBox="0 0 20 14" aria-hidden className="h-3.5 w-5">
@@ -110,8 +110,13 @@ export function Header() {
             Share Your Story folding into Found Her gave that width back:
             measured in a browser, the four-tab run is 587px, which sits
             beside the wordmark and the actions with slack at 1024. So the
-            bar starts at lg again. */}
-        <nav aria-label="Primary" className="hidden lg:block">
+            bar started at lg again.
+
+            10 Sept 2026: The Library is the sixth tab, and six tabs measure
+            ~700px — with the 150px wordmark and the Search/Bag actions that
+            is the whole of a 1024 window. The bar starts at xl now; lg gets
+            the menu button. */}
+        <nav aria-label="Primary" className="hidden xl:block">
           <ul className="flex items-center gap-6 xl:gap-9">
             {PRIMARY_NAV.map((item) => {
               const active =
@@ -174,7 +179,7 @@ export function Header() {
       <div
         id="mobile-nav"
         hidden={!menuOpen}
-        className="border-t lg:hidden border-bronze/20 bg-night"
+        className="border-t xl:hidden border-bronze/20 bg-night"
       >
         <nav aria-label="Primary mobile" className="shell py-4">
           <ul className="flex flex-col">

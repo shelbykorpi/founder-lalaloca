@@ -790,3 +790,29 @@ LEFT ALONE / WARNING for whoever lands the FOUND HER work above:
   counter — no grid on a new surface. Accent hairline also added to the serum
   cards and the product-page hero so the colours thread through. DoorCard /
   ScrollDoors are now unused (kept on disk). Commerce, tracking, links intact.
+
+## 2026-09-10 · Claude (Cowork) — The Library
+- New: /library (the reading room) and /library/[slug], one page per
+  ingredient named on a product label — 15 entries covering the three
+  LALALOCA serums and the five FOUNDER Collection SKUs. Data in
+  src/lib/library.ts; components src/components/library/EvidenceMark.tsx.
+  Every entry: what it is, what it does, which products carry it (linked,
+  with the label wording where it differs), and ONE peer-reviewed study on
+  the ingredient with a PubMed link. All 15 PMIDs verified against the PubMed
+  record before writing. Evidence is labelled honestly (randomised human
+  trial / human study / laboratory study) and each page carries the line
+  that the study is research on the ingredient, not a test of the product;
+  cosmetic benefits only; nothing is a sunscreen.
+- Nav: "The Library" added as the sixth PRIMARY_NAV tab and under Read in
+  the footer. Six tabs overflow a 1024 window, so Header.tsx now shows the
+  desktop bar from xl and the menu button below it (was lg). Sitemap lists
+  /library and each entry (yearly, 0.5).
+- Ingredients are only those already on the site (products.ts,
+  founderCollection.ts, nextMove.ts). Hold the Room is the LIVE Blanka
+  chamomile + witch hazel cream, not the Selfnamed peptide cream in the
+  cart. Double Take entries: Hexapeptide-11, Vitamin C, Vitamin E only.
+- NOT changed: products, prices, commerce, rooms/rail (the library is a
+  door off the hall, not room 08), protected lines, house codes (no SPF/UV
+  on Smooth Talker, no firming/dark-circle language on Double Take).
+- Build: next build --webpack from $HOME/fb-build (bridge workaround).
+  Committed on main, NOT pushed — `cd ~/Founder:LALALOCA && git push origin main`.

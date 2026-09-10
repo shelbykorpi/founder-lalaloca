@@ -94,6 +94,11 @@ export const PRIMARY_NAV: { href: string; label: string; stack?: string[] }[] = 
   { href: "/our-story", label: "Our Story" },
   { href: "/found-her", label: "Found Her" },
   { href: "/young-founders-room", label: "Young Founders\u2019 Room" },
+  /* 10 Sept 2026: the reading room. One page per ingredient named on a
+     label, with the study behind it. Last in the bar because it is reference,
+     not a room in the loop — the six-tab run measures ~700px, which is why
+     the desktop bar now starts at xl (see Header.tsx). */
+  { href: "/library", label: "The Library" },
   /* Share Your Story is not a tab: the page folded into Found Her (see the
      redirect in next.config.ts), so the nav says FOUND HER once and means
      both. The footer keeps a deep link to the invitation itself. */
@@ -119,6 +124,7 @@ export const FOOTER_NAV = [
       { href: "/found-her", label: "Found Her" },
       { href: "/our-story", label: "Our Story" },
       { href: "/found-her#share", label: "Share Your Story" },
+      { href: "/library", label: "The Library" },
     ],
   },
   {

@@ -5,6 +5,7 @@ import { FOUNDER_COLLECTION } from "@/lib/founderCollection";
 import { NEXT_MOVE } from "@/lib/nextMove";
 import { profiles, publicationDate } from "@/lib/profiles";
 import { policies } from "@/lib/content";
+import { LIBRARY, LIBRARY_PUBLISHED } from "@/lib/library";
 
 export default function sitemap(): MetadataRoute.Sitemap {
   const staticPaths = [
@@ -15,6 +16,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     "/our-story",
     "/found-her",
     "/find-your-serum",
+    "/library",
     /* Three deliberate absences:
        /account — robots.ts disallows it and the page carries noindex. A URL
          that is both submitted and blocked is a Search Console error.
@@ -56,6 +58,14 @@ export default function sitemap(): MetadataRoute.Sitemap {
       url: `${SITE.url}/products/${product.slug}`,
       changeFrequency: "monthly" as const,
       priority: 0.6,
+    })),
+    /* The Library: one reading per ingredient. Reference pages that change
+       only when an entry is rewritten, so yearly, and below the products. */
+    ...LIBRARY.map((entry) => ({
+      url: `${SITE.url}/library/${entry.slug}`,
+      lastModified: LIBRARY_PUBLISHED,
+      changeFrequency: "yearly" as const,
+      priority: 0.5,
     })),
     /* Real approval dates, not build timestamps — a lastModified that changes
        on every deploy teaches crawlers to ignore the field. */

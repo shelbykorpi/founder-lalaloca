@@ -199,8 +199,8 @@ export const NEXT_MOVE: NextMoveProduct[] = [
       alt: "The Opening Line bottle: a white airless pump wrapped in cream and Founder Green stripes, a deep green plaque at the front reading Opening Line, the opener, oil-to-milk cleanser.",
     },
     scene: {
-      src: "/products/opening-line-vanity.webp",
-      alt: "The Opening Line bottle and carton on a cream marble vanity in the FOUNDER dressing room, warm light from a bulb-lit mirror.",
+      src: "/products/opening-line-hero.webp",
+      alt: "The Opening Line bottle and striped carton on a marble vanity ledge, a dish of cleanser beside them, dark green doors open onto a lit dressing room beyond.",
     },
     plainly:
       "Fragranced — a white-flower aroma with jasmine and sandalwood. Certified COSMOS Organic by ECOCERT, dermatologically tested, vegan. Suitable for sensitive skin.",
@@ -236,8 +236,8 @@ export const NEXT_MOVE: NextMoveProduct[] = [
       alt: "The Clean Break bottle: a white pump bottle wrapped in cream and Founder Green stripes, a deep green plaque at the front reading Clean Break, the reset, purifying face wash.",
     },
     scene: {
-      src: "/products/clean-break-scene.webp",
-      alt: "The Clean Break bottle on a stone ledge against a dark green panelled wall, in low afternoon light.",
+      src: "/products/clean-break-hero.webp",
+      alt: "The Clean Break pump bottle and striped carton on a marble basin surround, water running from a brass tap, dark green panelling behind.",
     },
     plainly:
       "Fragranced — a fresh green-tea aroma. Certified COSMOS Natural by ECOCERT. For blemish-prone skin; not an acne treatment.",
@@ -323,8 +323,8 @@ export const NEXT_MOVE: NextMoveProduct[] = [
     /* The family shot leads now: a card showing one shade of a three-shade
        product tells a customer the wrong thing before she ever clicks. */
     scene: {
-      src: "/products/smooth-talker-shades.webp",
-      alt: "The FOUNDER Smooth Talker Ceramide Tone Stick shade range: 20 LIGHT, 25 MEDIUM and 35 DEEP.",
+      src: "/products/smooth-talker-hero.webp",
+      alt: "The Smooth Talker tone stick and its carton on a brass side table in the FOUNDER dressing room, a swatch of 25 MEDIUM on a stone dish, a woman blending it at her cheek in the mirror.",
     },
     plainly:
       "Fragranced, with four declared allergens. Contains cocoa butter. Certified COSMOS Natural by ECOCERT.",
@@ -367,8 +367,8 @@ export const NEXT_MOVE: NextMoveProduct[] = [
       alt: "The Double Take airless pump bottle beside its Founder Green carton, the bottle wrapped in desert rose and green stripes, its plaque reading Double Take, the second look, peptide eye cream.",
     },
     scene: {
-      src: "/products/double-take-scene.webp",
-      alt: "The Double Take bottle and carton on a round plaster plinth against a blush wall, in soft light.",
+      src: "/products/double-take-hero.webp",
+      alt: "The Double Take bottle and carton on a marble dressing table with a pearl applicator, a gilt mirror and bulb light behind.",
     },
     plainly:
       "Fragranced — a rose-geranium scent, with five declared allergens. Worth knowing for an eye-area product. Certified COSMOS Natural by ECOCERT, 99% natural origin, vegan.",

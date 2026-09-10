@@ -87,19 +87,17 @@ export default async function FounderCollectionPage() {
             variantId: "47361868169385",
             price: product.price,
             available: true,
-            /* The vanity set, 25 Aug 2026. The card tile is 3:2, so these
-               are crops of the wide and overhead frames rather than the
-               square studio sweep padded out at the sides. Scene leads and
-               the flatlay is the hover, matching how the other five cards
-               work — and this card no longer sits in a peach mockup studio
-               beside five shot in the atelier. */
+            /* The boardroom frame, 10 Sep 2026 — same delivery as the four
+               NEXT_MOVE heroes, so all five cards now sit in one world and
+               all five carry the current striped artwork. Scene leads and
+               the packshot is the hover, matching the other cards. */
             image: {
-              url: "/products/hold-the-room-vanity-wide.webp",
-              alt: "Hold the Room and its carton on a marble dressing table, green doors open onto a lit vanity beyond.",
+              url: "/products/hold-the-room-hero.webp",
+              alt: "Hold the Room and its carton on a dark marble console, a woman in cream buttoning her jacket in the mirror, the boardroom lit beyond the open doors.",
             },
             hoverImage: {
-              url: "/products/hold-the-room-vanity-flatlay.webp",
-              alt: "Hold the Room seen from above on a marble vanity, among a gold watch, earrings and a cream handbag.",
+              url: "/products/hold-the-room-pack.webp",
+              alt: "Hold the Room, bottle and carton together against a clean ground.",
             },
             character: `02 · ${product.archetype}`,
             descriptor: product.category,

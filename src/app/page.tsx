@@ -9,6 +9,7 @@ import { AmbientLighting } from "@/components/house/AmbientLighting";
 import { getRoom } from "@/lib/rooms";
 import { DoorFrame } from "@/components/house/DoorFrame";
 import { RoomHero } from "@/components/house/RoomHero";
+import { FounderGalleryWalk } from "@/components/house/FounderGalleryWalk";
 import { BRAND } from "@/lib/brand";
 import { FOUNDER_COLLECTION } from "@/lib/founderCollection";
 import { NEXT_MOVE } from "@/lib/nextMove";
@@ -75,8 +76,8 @@ const LINE = [
     archetype: "The Opener",
     name: bySlug["opening-line"].name,
     descriptor: `${bySlug["opening-line"].category} · ${bySlug["opening-line"].size}`,
-    image: "/products/opening-line-card.webp",
-    alt: "Opening Line in a lit arched alcove in a Founder Green panelled wall, the bottle wrapped in cream and green stripes.",
+    image: "/products/opening-line-cut.webp",
+    alt: "Opening Line: the oil-to-milk cleanser bottle, Founder Green label with cream and green stripes and a white pump.",
     href: "/products/opening-line",
     state: "In stock · Ships in one business day",
     action: `Shop · ${formatPrice(bySlug["opening-line"].price)}`,
@@ -87,8 +88,8 @@ const LINE = [
     archetype: "The Reset",
     name: bySlug["clean-break"].name,
     descriptor: `${bySlug["clean-break"].category} · ${bySlug["clean-break"].size}`,
-    image: "/products/clean-break-card.webp",
-    alt: "Clean Break in a lit arched alcove in a Founder Green panelled wall, the bottle wrapped in cream and green stripes.",
+    image: "/products/clean-break-cut.webp",
+    alt: "Clean Break: the purifying face wash bottle, Founder Green label with cream and green stripes and a white pump.",
     href: "/products/clean-break",
     state: "In stock · Ships in one business day",
     action: `Shop · ${formatPrice(bySlug["clean-break"].price)}`,
@@ -99,8 +100,8 @@ const LINE = [
     archetype: "The Anchor",
     name: holdTheRoom.name,
     descriptor: `${holdTheRoom.category} · ${holdTheRoom.size}`,
-    image: "/products/hold-the-room-card.webp",
-    alt: "Hold the Room and its carton in a lit arched alcove in a Founder Green panelled wall, the bottle wrapped in desert rose and green stripes.",
+    image: "/products/hold-the-room-cut.webp",
+    alt: "Hold the Room: the airless bottle and its carton, Founder Green with desert rose and green stripes.",
     href: "/products/hold-the-room",
     state: "Preorder · Ships from the first run",
     action: `Preorder · ${formatPrice(holdTheRoom.price)}`,
@@ -111,8 +112,8 @@ const LINE = [
     archetype: "The Second Look",
     name: bySlug["double-take"].name,
     descriptor: `${bySlug["double-take"].category} · ${bySlug["double-take"].size}`,
-    image: "/products/double-take-card.webp",
-    alt: "Double Take and its carton in a lit arched alcove in a Founder Green panelled wall, the bottle wrapped in desert rose and green stripes.",
+    image: "/products/double-take-cut.webp",
+    alt: "Double Take: the small eye-cream bottle and its carton, Founder Green with desert rose and green stripes.",
     href: "/products/double-take",
     state: "In stock · Ships in one business day",
     action: `Shop · ${formatPrice(bySlug["double-take"].price)}`,
@@ -123,8 +124,8 @@ const LINE = [
     archetype: "The Closer",
     name: bySlug["smooth-talker"].name,
     descriptor: `${bySlug["smooth-talker"].category} · ${bySlug["smooth-talker"].size} · 3 shades`,
-    image: "/products/smooth-talker-card.webp",
-    alt: "Smooth Talker in 25 Medium and its carton in a lit arched alcove in a Founder Green panelled wall, the stick wrapped in tan stripes matching the shade.",
+    image: "/products/smooth-talker-cut.webp",
+    alt: "Smooth Talker: the tinted stick in 25 Medium and its carton, Founder Green with tan stripes.",
     href: "/products/smooth-talker",
     state: "In stock · 3 shades",
     action: `Shop · ${formatPrice(bySlug["smooth-talker"].price)}`,
@@ -141,12 +142,6 @@ const LINE = [
    direction. Every piece in the collection is now priced, stocked and Active,
    so there is nothing "in the making" to tile. Kept typed so the grid below
    simply renders nothing rather than needing its markup pulled. */
-const IN_THE_MAKING: {
-  n: string;
-  archetype: string;
-  name: string;
-  descriptor: string;
-}[] = [];
 
 const NOTES = [
   {
@@ -317,99 +312,11 @@ export default function HomePage() {
           Explore the collection
         </Link>
       </RoomHero>
-      <section className="section bg-night pt-10">
-        <div className="shell">
-
-          <div className="grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
-            {LINE.map((item, i) => (
-              <Reveal key={item.name} as="article" delay={(i % 3) * 90} className="m-0">
-                <Link
-                  href={item.href}
-                  className="group relative block aspect-[2/3] overflow-hidden bg-emerald-deep"
-                >
-                  <Image
-                    src={item.image}
-                    alt={item.alt}
-                    fill
-                    loading="lazy"
-                    sizes="(max-width: 640px) 90vw, (max-width: 1024px) 45vw, 30vw"
-                    className="object-cover transition-transform duration-[900ms] ease-out group-hover:scale-[1.04]"
-                  />
-                  <span
-                    aria-hidden
-                    className="absolute inset-x-0 bottom-0 h-2/3 bg-[linear-gradient(to_top,rgba(10,37,35,0.97)_10%,rgba(10,37,35,0.86)_36%,rgba(10,37,35,0.35)_64%,transparent)]"
-                  />
-                  <span className="absolute inset-x-0 bottom-0 z-10 block p-6">
-                    <span className="room-label block">
-                      {item.n} · {item.archetype}
-                    </span>
-                    <span className="mt-2 block font-serif text-[1.75rem] font-light leading-none text-cream">
-                      {item.name}
-                    </span>
-                    <span className="mt-2 block text-[0.8125rem] text-cream/75">
-                      {item.descriptor}
-                    </span>
-                    <span className="mt-3 flex items-center gap-2 text-[0.5rem] uppercase tracking-[0.16em] text-cream/80">
-                      <span
-                        aria-hidden
-                        className={`block h-[0.3rem] w-[0.3rem] rounded-full ${
-                          item.ready ? "bg-champagne" : "bg-cream/35"
-                        }`}
-                      />
-                      {item.state}
-                    </span>
-                    <span className="mt-4 flex items-center justify-between border-t border-cream/15 pt-3">
-                      <span className="text-[0.5rem] uppercase tracking-[0.16em] text-cream">
-                        See it
-                      </span>
-                      <span className="text-[0.5rem] uppercase tracking-[0.16em] text-champagne">
-                        {item.action}
-                      </span>
-                    </span>
-                  </span>
-                </Link>
-              </Reveal>
-            ))}
-
-            {IN_THE_MAKING.map((item, i) => (
-              <Reveal key={item.name} as="article" delay={(i % 3) * 90} className="m-0">
-                {/* An unfurnished room, not a blank card. This tile was cream —
-                    which on a dark page made the two products nobody can buy
-                    the brightest objects in the collection. */}
-                <div className="relative flex aspect-[2/3] flex-col justify-end overflow-hidden border border-bronze/20 bg-night-deep p-6">
-                  <span
-                    aria-hidden
-                    className="absolute inset-0 flex items-center justify-center font-serif text-4xl font-light text-cream/10"
-                  >
-                    {item.name}
-                  </span>
-                  <span className="relative">
-                    <span className="room-label block">
-                      {item.n} · {item.archetype}
-                    </span>
-                    <span className="mt-2 block font-serif text-[1.75rem] font-light leading-none text-cream">
-                      {item.name}
-                    </span>
-                    <span className="mt-2 block text-[0.8125rem] text-cream/70">
-                      {item.descriptor}
-                    </span>
-                    <span className="mt-3 flex items-center gap-2 text-[0.5rem] uppercase tracking-[0.16em] text-cream/70">
-                      <span aria-hidden className="block h-[0.3rem] w-[0.3rem] rounded-full bg-bronze" />
-                      In the making
-                    </span>
-                    <span className="mt-4 block border-t border-bronze/20 pt-3">
-                      <Link href="#room-invitation" className="hairline text-cream">
-                        Join the waitlist
-                      </Link>
-                    </span>
-                  </span>
-                </div>
-              </Reveal>
-            ))}
-          </div>
-
-        </div>
-      </section>
+      {/* THE GALLERY WALK — 11 Sept 2026. The five cards became a corridor:
+          one brass-trimmed bay per product, the active one centred and lit,
+          the rest receding. Data is still LINE above, read from the repo; the
+          component owns only the walking. See FounderGalleryWalk.tsx. */}
+      <FounderGalleryWalk items={LINE} />
 
       {/* ══ THE SERUM SALON ═════════════════════════════════════════════════
           The products taking money get a room of their own, not a footnote

@@ -830,3 +830,35 @@ LEFT ALONE / WARNING for whoever lands the FOUND HER work above:
   · "The story begins where the performance ends." · hairline to /found-her.
   Same construction as the pledge band. Build clean, checked at 1440 and
   390. Committed, not pushed.
+
+## 2026-09-11 · Claude (Cowork) — the Gallery Walk (Room 03)
+- Homepage: the five FOUNDER Collection cards are now a corridor —
+  src/components/house/FounderGalleryWalk.tsx + gallery-walk.module.css.
+  One brass-trimmed arched bay per product, active bay centred and lit,
+  neighbours receding (scale/rotateY/opacity), partial bays at the edges.
+  Plaque beside the active bay on desktop (below the strip on phones):
+  number · archetype · name · category+fill · availability · price line ·
+  ENTER THIS ROOM → to the product route. Copy per the brief: ROOM 03 · THE
+  COLLECTION / Choose your next move. / Walk the room. Every product opens a
+  different door. / DRAG (SWIPE) TO WALK THE ROOM.
+- Data is still LINE in page.tsx, read from nextMove.ts/founderCollection.ts
+  — no price, stock or route is retyped; the component owns only the
+  walking. IN_THE_MAKING (already empty) removed.
+- Input: drag, trackpad horizontal / shift+wheel (vertical wheel is NOT
+  captured — the page scrolls through), arrows, ticks, ArrowLeft/Right/
+  Home/End, click a neighbour to walk to it. Mobile is native scroll-snap.
+  Live region announces the active product. prefers-reduced-motion drops
+  the travel. All five links are in the HTML without JS.
+- Images: new public/products/*-cut.webp — the five supplier pack shots cut
+  out (rembg) onto transparency on a 900×1200 canvas, so the packaging
+  reads large and sharp inside a CSS-drawn bay. The *-card.webp alcove
+  renders are now unreferenced on the homepage.
+- Header/nav, rooms rail, concierge, commerce, analytics untouched.
+- Verified: eslint clean, next build clean, screenshots at 1440/1024/768/
+  390/320, keyboard + drag + swipe exercised, no console errors.
+- Open: the RoomHero "Private tools. Public power." directly above now
+  sits under the same Room 03 label as the gallery — two Room 03 headers in
+  a row. Shelby to decide whether the hero stays. Hold the Room's render
+  reads PEPTIDE MOISTURIZING CREAM · 50 ml on the carton while the live
+  SKU is the 30 ml Blanka cream — same render the cards used, now larger.
+- Committed on main, NOT pushed.

@@ -364,7 +364,7 @@ export const NEXT_MOVE: NextMoveProduct[] = [
     ink: "var(--color-founder-green)",
     pack: {
       src: "/products/double-take-pack.webp",
-      alt: "The Double Take airless pump bottle beside its Founder Green carton, the bottle wrapped in desert rose and green stripes, its plaque reading Double Take, the second look, peptide eye cream.",
+      alt: "The Double Take airless pump bottle beside its Desert Pink carton, both carrying a Champagne Cream cartouche with a gold F-key crest, the label reading Double Take, the second look, peptide eye cream.",
     },
     scene: {
       src: "/products/double-take-hero.webp",

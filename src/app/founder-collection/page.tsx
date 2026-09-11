@@ -97,7 +97,7 @@ export default async function FounderCollectionPage() {
             },
             hoverImage: {
               url: "/products/hold-the-room-pack.webp",
-              alt: "Hold the Room, bottle and carton together against a clean ground.",
+              alt: "Hold the Room, the Desert Pink carton and its matching bottle together against a clean ground.",
             },
             character: `02 · ${product.archetype}`,
             descriptor: product.category,

@@ -96,6 +96,9 @@ const nextConfig: NextConfig = {
      * browsers without AVIF support silently get WebP.
      */
     formats: ["image/avif", "image/webp"],
+    /* Next 16 rejects any quality not listed here. 75 is the default; 90 is
+       for the one plate the whole homepage is judged on (the Gallery Walk). */
+    qualities: [75, 90],
     /* Catalog products photograph in Shopify and serve from Shopify's CDN;
        the optimizer needs the host allowlisted or every card 500s. */
     remotePatterns: [{ protocol: "https" as const, hostname: "cdn.shopify.com" }],

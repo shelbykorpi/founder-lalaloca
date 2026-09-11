@@ -877,3 +877,12 @@ LEFT ALONE / WARNING for whoever lands the FOUND HER work above:
 - Caveat for Shelby: the products are baked into the plate at 1672 px wide,
   so on a retina 1440 screen they are ~1.2x upscaled. A 3344-px render of
   the same frame, dropped in at the same path, fixes that with no code.
+- Plate quality pass: the render was 1672 px wide, soft on retina. Upscaled
+  4x with Real-ESRGAN (x4plus, CPU, in strips) and brought down to 2x —
+  public/editorial/rooms/collection-gallery-walk.webp is now 3344 × 1778,
+  q88 (439 KB). The 4x master is in assets/source/rooms/ at 6688 px for any
+  future crop. FounderGalleryWalk passes quality={90}; next.config.ts gains
+  images.qualities [75, 90] (Next 16 rejects unlisted qualities). Verified
+  at DPR 2: the optimizer serves the 3840-wide variant. The label text in
+  the render was never legible (AI type) — no resolution fixes that; only a
+  new render with the real artwork would.

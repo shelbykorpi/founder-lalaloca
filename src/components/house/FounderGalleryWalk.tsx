@@ -70,7 +70,10 @@ const BAYS = [
   { fx: 0.775, scale: 1.28 },
   { fx: 0.965, scale: 1.55 },
 ];
-const PLATE = { src: "/editorial/rooms/collection-gallery-walk.webp", w: 1672, h: 889 };
+/* 3344 × 1778 — the render, upscaled 4x with Real-ESRGAN and brought down
+   to 2x, so a retina 1440 screen gets a true 1:1 plate. Aspect stays
+   1672 / 889 in the stylesheet. */
+const PLATE = { src: "/editorial/rooms/collection-gallery-walk.webp", w: 3344, h: 1778 };
 const PLATE_ALT =
   "The FOUNDER Collection corridor: five lit arched niches in Founder Green walls with brass trim, each product on a black marble plinth, a desert-pink doorway glowing at the far end.";
 
@@ -292,6 +295,7 @@ export function FounderGalleryWalk({ items }: { items: GalleryWalkItem[] }) {
               alt={PLATE_ALT}
               fill
               priority
+              quality={90}
               sizes="(max-width: 1023px) 260vw, 100vw"
               draggable={false}
             />

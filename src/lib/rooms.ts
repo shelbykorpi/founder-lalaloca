@@ -62,8 +62,8 @@ export const ROOMS: Room[] = [
     pathname: "/",
     hero: {
       src: "/editorial/rooms/inside-founder-lounge.webp",
-      alt: "The FOUNDER sitting room: a woman in a rose silk gown sits in a green velvet chair by the marble fireplace, a cream blazer over the sofa arm, and through the open emerald doors the lit serum shelves in teal, gold and red.",
-      position: "64% center",
+      alt: "The FOUNDER sitting room: a woman in a rose silk gown with a champagne sash sits in a green velvet armchair beside a black marble fireplace, the fire lit, a brass lamp glowing, a cream blazer over the arm of the green sofa.",
+      position: "66% center",
     },
     heroMobile: { src: "/editorial/rooms/inside-founder-lounge-m.webp" },
     through: "Three lights through the next doors. Pick the one that’s yours.",

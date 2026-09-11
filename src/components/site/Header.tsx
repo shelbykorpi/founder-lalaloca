@@ -115,7 +115,12 @@ export function Header() {
             10 Sept 2026: The Library is the sixth tab, and six tabs measure
             ~700px — with the 150px wordmark and the Search/Bag actions that
             is the whole of a 1024 window. The bar starts at xl now; lg gets
-            the menu button. */}
+            the menu button.
+
+            11 Sept 2026: every tab is now a two-line stack (see PRIMARY_NAV).
+            That takes the run down to ~650px, but with the wordmark, the
+            actions and the shell padding a 1024 window is still ~30px short,
+            so the breakpoint stays at xl. */}
         <nav aria-label="Primary" className="hidden xl:block">
           <ul className="flex items-center gap-6 xl:gap-9">
             {PRIMARY_NAV.map((item) => {
@@ -130,17 +135,18 @@ export function Header() {
                       if (item.href === "/young-founders-room") track("young_founders_nav_click", { from: "desktop" });
                     }}
                     aria-label={item.stack ? item.label : undefined}
-                    className={`eyebrow inline-flex min-h-11 items-center whitespace-nowrap border-b text-center transition-colors ${
+                    className={`eyebrow inline-flex min-h-11 items-center whitespace-nowrap border-b pb-1 text-center transition-colors ${
                       active
                         ? "border-bronze text-champagne"
                         : "border-transparent text-cream/70 hover:border-rose/60 hover:text-cream"
                     }`}
                   >
                     {item.stack ? (
-                      /* Three centred lines. Hidden from the accessible name
-                         above, so this is decoration as far as a screen reader
-                         is concerned. */
-                      <span aria-hidden className="flex flex-col items-center">
+                      /* Two centred lines, set tight so the pair reads as one
+                         word-shape. Hidden from the accessible name above, so
+                         this is decoration as far as a screen reader is
+                         concerned. */
+                      <span aria-hidden className="flex flex-col items-center gap-[3px] leading-none">
                         {item.stack.map((line) => (
                           <span key={line}>{line}</span>
                         ))}

@@ -263,7 +263,11 @@ export default function HoldTheRoomPage() {
           fill
           loading="lazy"
           sizes="100vw"
-          className="object-cover object-[60%_center]"
+          /* The frame is a tall portrait and this band shows a quarter of
+             it. A centred crop took her face off the top edge; 35% from the
+             top puts her head just under the band's top and lets the floor
+             go instead. */
+          className="object-cover object-[60%_35%]"
         />
         <div
           aria-hidden

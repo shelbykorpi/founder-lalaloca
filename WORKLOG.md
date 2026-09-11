@@ -900,3 +900,9 @@ LEFT ALONE / WARNING for whoever lands the FOUND HER work above:
   library scene (EditorialRoomSection surface="scene"); foot link is "Back
   to the shelf". LIBRARY_HERO exported from src/lib/library.ts. Build, lint,
   1440/390 screenshots, no console errors. Committed, not pushed.
+- "The house continues" door band (ProductPlate.tsx, used by Clean Break /
+  Double Take / Smooth Talker / Opening Line, and the hand-written Hold the
+  Room page): founder-collection-door.webp is a tall portrait and the band
+  shows a quarter of it; the centred crop cut Shelby's face off the top.
+  object-position is now 60% 35% — her head sits under the band's top edge
+  and the floor is what's lost. Both files, same change.

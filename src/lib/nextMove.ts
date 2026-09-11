@@ -277,7 +277,7 @@ export const NEXT_MOVE: NextMoveProduct[] = [
         variantId: "47417855574185",
         hero: {
           src: "/products/smooth-talker-20-hero.webp",
-          alt: "FOUNDER Smooth Talker Ceramide Tone Stick in 20 LIGHT and its carton in a lit arched alcove in a Founder Green panelled wall, the stick wrapped in sand-toned stripes matching the shade inside it.",
+          alt: "FOUNDER Smooth Talker Ceramide Tone Stick in 20 LIGHT beside its brass carton, both carrying a Champagne Cream cartouche with a gold F-key crest, the stick wrapped in sand-toned stripes matching the shade inside it.",
         },
       },
       {
@@ -287,7 +287,7 @@ export const NEXT_MOVE: NextMoveProduct[] = [
         variantId: "47417855606953",
         hero: {
           src: "/products/smooth-talker-25-hero.webp",
-          alt: "FOUNDER Smooth Talker Ceramide Tone Stick in 25 MEDIUM and its carton in a lit arched alcove in a Founder Green panelled wall, the stick wrapped in tan stripes matching the shade inside it.",
+          alt: "FOUNDER Smooth Talker Ceramide Tone Stick in 25 MEDIUM beside its brass carton, both carrying a Champagne Cream cartouche with a gold F-key crest, the stick wrapped in tan stripes matching the shade inside it.",
         },
       },
       {
@@ -297,7 +297,7 @@ export const NEXT_MOVE: NextMoveProduct[] = [
         variantId: "47417855639721",
         hero: {
           src: "/products/smooth-talker-35-hero.webp",
-          alt: "FOUNDER Smooth Talker Ceramide Tone Stick in 35 DEEP and its carton in a lit arched alcove in a Founder Green panelled wall, the stick wrapped in deep brown stripes matching the shade inside it.",
+          alt: "FOUNDER Smooth Talker Ceramide Tone Stick in 35 DEEP beside its brass carton, both carrying a Champagne Cream cartouche with a gold F-key crest, the stick wrapped in deep brown stripes matching the shade inside it.",
         },
       },
     ],
@@ -311,14 +311,14 @@ export const NEXT_MOVE: NextMoveProduct[] = [
        the default shade so nothing can render empty. */
     detailHero: {
       src: "/products/smooth-talker-25-hero.webp",
-      alt: "FOUNDER Smooth Talker Ceramide Tone Stick in 25 MEDIUM beside its Founder Green carton, the stick wrapped in stripes the colour of the shade inside it.",
+      alt: "FOUNDER Smooth Talker Ceramide Tone Stick in 25 MEDIUM beside its brass carton, the stick wrapped in stripes the colour of the shade inside it.",
     },
     cta: "Make your move",
     stripes: { a: "var(--color-champagne)", b: "var(--color-founder-green)" },
     ink: "var(--color-founder-green)",
     pack: {
       src: "/products/smooth-talker-shades-pack.webp",
-      alt: "The three Smooth Talker shades side by side — 20 Light, 25 Medium and 35 Deep — each stick wrapped in stripes the colour of the shade inside it.",
+      alt: "The three Smooth Talker shades side by side — 20 Light, 25 Medium and 35 Deep — each brass carton naming its shade, each stick wrapped in stripes the colour of the shade inside it.",
     },
     /* The family shot leads now: a card showing one shade of a three-shade
        product tells a customer the wrong thing before she ever clicks. */

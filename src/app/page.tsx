@@ -125,7 +125,7 @@ const LINE = [
     name: bySlug["smooth-talker"].name,
     descriptor: `${bySlug["smooth-talker"].category} · ${bySlug["smooth-talker"].size} · 3 shades`,
     image: "/products/smooth-talker-cut.webp",
-    alt: "Smooth Talker: the tinted stick in 25 Medium and its carton, Founder Green with tan stripes.",
+    alt: "Smooth Talker: the tinted stick in 25 Medium and its brass carton, with a cream cartouche and gold crest.",
     href: "/products/smooth-talker",
     state: "In stock · 3 shades",
     action: `Shop · ${formatPrice(bySlug["smooth-talker"].price)}`,

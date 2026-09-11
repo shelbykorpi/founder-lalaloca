@@ -1,0 +1,247 @@
+/*
+ * THE VANITY — Room 03, the products standing in the room.
+ *
+ * 11 September 2026, third pass. The corridor before this was a rendered
+ * photograph with the products inside it: small, far apart, one legible at a
+ * time, and — after the packaging changed — wrong. Shelby's verdict on the
+ * pass after that was "no more graphs": a rail of dots over a bar is a
+ * diagram of a vanity. And the pass after *that*: "would you be happy with
+ * the images?" No. Dimmed, masked, soft.
+ *
+ * So, the rule this component is built on: THE PRODUCT IS NEVER DIMMED.
+ * All five stand sharp and at full brightness on the console of a real room
+ * (public/editorial/rooms/vanity-console.webp — the boardroom frame with its
+ * own product cropped out). The lit one gets MORE — a cone of light on the
+ * wall behind it, a warm glow, a lift — rather than the others getting less.
+ * The bulb that lights it is the real bulb cut from the mirror in that frame.
+ *
+ * Cutouts are public/products/<slug>-vanity.webp: the Selfnamed renders,
+ * recaptured at ~2x and matted with a segmentation model, which is what
+ * finally kept the white pumps that every brightness key had eaten. They sit
+ * at TRUE relative scale — the eye cream is small because it is small —
+ * which is how a real shelf reads and is quietly the luxury cue.
+ *
+ * Swapping the room later is one file: replace vanity-console.webp with an
+ * empty console shot in the same house and nothing else moves.
+ */
+
+.room {
+  --ease: cubic-bezier(0.22, 0.61, 0.36, 1);
+  --unit: clamp(2.2px, 0.44vh, 4.1px); /* 1% of the tallest product */
+  position: relative;
+  isolation: isolate;
+  height: clamp(640px, 92vh, 880px);
+  overflow: hidden;
+  background: var(--color-night) url("/editorial/rooms/vanity-console.webp") 50% 60% / cover no-repeat;
+}
+.room::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background:
+    linear-gradient(90deg, rgba(7, 19, 15, 0.42), transparent 20% 80%, rgba(7, 19, 15, 0.36)),
+    linear-gradient(180deg, rgba(7, 19, 15, 0.28), transparent 28% 72%, rgba(7, 19, 15, 0.5));
+}
+
+.words {
+  position: absolute;
+  left: clamp(16px, 5vw, 72px);
+  top: clamp(28px, 6vh, 56px);
+  max-width: 34rem;
+  z-index: 3;
+}
+.title {
+  font-size: clamp(2rem, 4.2vw, 3.4rem);
+  line-height: 1.02;
+  text-wrap: balance;
+  text-shadow: 0 2px 24px rgba(0, 0, 0, 0.5);
+}
+.play {
+  display: inline-flex;
+  align-items: center;
+  gap: 12px;
+  margin-top: 20px;
+  padding: 11px 16px 11px 13px;
+  border: 1px solid rgba(214, 190, 154, 0.5);
+  font-size: 0.5625rem;
+  letter-spacing: 0.26em;
+  text-transform: uppercase;
+  color: var(--color-champagne);
+  background: rgba(7, 19, 15, 0.25);
+  backdrop-filter: blur(6px);
+  transition: border-color 0.3s, background 0.3s;
+}
+.play:hover { border-color: var(--color-champagne); background: rgba(214, 190, 154, 0.08); }
+.dot { width: 6px; height: 6px; border-radius: 50%; background: var(--color-champagne); box-shadow: 0 0 10px var(--color-champagne); }
+.play[aria-pressed="true"] .dot { animation: pulse 1.6s ease-in-out infinite; }
+@keyframes pulse { 50% { opacity: 0.3; } }
+
+/* the mirror lights */
+.lights {
+  position: absolute;
+  left: 50%;
+  top: 27%;
+  transform: translateX(-50%);
+  width: min(1120px, 92vw);
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  z-index: 2;
+  pointer-events: none;
+}
+.light { position: relative; height: 70px; display: grid; place-items: start center; }
+.light img {
+  width: 32px;
+  height: 32px;
+  opacity: 0.85;
+  filter: brightness(0.42) saturate(0.7);
+  transition: filter 0.7s var(--ease), transform 0.7s var(--ease), opacity 0.7s;
+}
+.light::after {
+  content: "";
+  position: absolute;
+  top: -30px;
+  width: 150px;
+  height: 150px;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(255, 244, 214, 0.7), rgba(214, 190, 154, 0.28) 35%, transparent 68%);
+  opacity: 0;
+  transition: opacity 0.7s var(--ease);
+}
+.lightOn img { opacity: 1; filter: brightness(1.25) saturate(1); transform: scale(1.18); }
+.lightOn::after { opacity: 1; }
+
+/* the products on the console */
+.shelf {
+  position: absolute;
+  left: 50%;
+  bottom: clamp(58px, 10vh, 96px);
+  transform: translateX(-50%);
+  width: min(1120px, 92vw);
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  align-items: end;
+  z-index: 2;
+}
+.slot {
+  position: relative;
+  display: grid;
+  justify-items: center;
+  align-items: end;
+  padding: 0 4px;
+  cursor: pointer;
+  -webkit-tap-highlight-color: transparent;
+}
+.cone {
+  position: absolute;
+  left: 50%;
+  bottom: 0;
+  width: 200%;
+  height: 175%;
+  transform: translateX(-50%);
+  background: radial-gradient(70% 80% at 50% 0%, rgba(255, 240, 205, 0.52), rgba(214, 190, 154, 0.12) 48%, transparent 72%);
+  opacity: 0;
+  transition: opacity 0.8s var(--ease);
+  pointer-events: none;
+}
+.slot img {
+  display: block;
+  width: auto;
+  max-width: 100%;
+  height: calc(var(--h) * var(--unit));
+  filter: brightness(0.86) saturate(0.92) drop-shadow(0 18px 22px rgba(0, 0, 0, 0.55));
+  transform-origin: 50% 100%;
+  transition: filter 0.8s var(--ease), transform 0.8s var(--ease);
+}
+.slotOn .cone { opacity: 1; }
+.slotOn img {
+  filter: brightness(1.07) saturate(1.02) drop-shadow(0 26px 32px rgba(0, 0, 0, 0.62)) drop-shadow(0 0 46px rgba(214, 190, 154, 0.34));
+  transform: translateY(-12px) scale(1.06);
+}
+.refl {
+  position: absolute;
+  left: 50%;
+  bottom: -30px;
+  width: 60%;
+  height: 34px;
+  transform: translateX(-50%);
+  background: radial-gradient(50% 50% at 50% 0%, rgba(214, 190, 154, 0.42), transparent 75%);
+  opacity: 0;
+  transition: opacity 0.8s var(--ease);
+  pointer-events: none;
+}
+.slotOn .refl { opacity: 1; }
+
+/* one placard, for whichever piece is lit */
+.placard {
+  position: absolute;
+  right: clamp(16px, 5vw, 72px);
+  top: clamp(28px, 6vh, 56px);
+  width: min(19rem, 42vw);
+  text-align: right;
+  z-index: 3;
+}
+.p {
+  position: absolute;
+  inset: 0;
+  opacity: 0;
+  transform: translateY(6px);
+  transition: opacity 0.6s var(--ease), transform 0.6s var(--ease);
+  pointer-events: none;
+}
+.pOn { opacity: 1; transform: none; pointer-events: auto; }
+.tick { display: inline-block; width: 18px; height: 2px; background: var(--stepc, var(--color-cream)); vertical-align: middle; margin-left: 8px; }
+.name { font-size: clamp(1.7rem, 2.8vw, 2.3rem); line-height: 1; text-shadow: 0 2px 20px rgba(0, 0, 0, 0.5); }
+
+/* the names along the console's edge — the only navigation */
+.names {
+  position: absolute;
+  left: 50%;
+  bottom: clamp(18px, 3.4vh, 30px);
+  transform: translateX(-50%);
+  width: min(1120px, 92vw);
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  z-index: 3;
+}
+.names button {
+  font-size: 1rem;
+  letter-spacing: 0.02em;
+  color: rgba(247, 239, 232, 0.45);
+  padding: 8px 4px;
+  transition: color 0.4s;
+}
+.names button:hover { color: var(--color-champagne); }
+.nameOn { color: var(--color-cream) !important; }
+
+/* phone: the vanity becomes a track you slide along */
+@media (max-width: 820px) {
+  .room { height: auto; padding-block: 28px 24px; }
+  .words { position: relative; left: auto; top: auto; padding-inline: 16px; max-width: none; }
+  .lights { display: none; }
+  .shelf {
+    --unit: 2.6px;
+    position: relative;
+    left: auto;
+    bottom: auto;
+    transform: none;
+    width: auto;
+    display: flex;
+    overflow-x: auto;
+    scroll-snap-type: x mandatory;
+    margin-top: 26px;
+    padding: 20px 0 0;
+    scrollbar-width: none;
+  }
+  .shelf::-webkit-scrollbar { display: none; }
+  .slot { flex: 0 0 72vw; scroll-snap-align: center; min-height: 300px; }
+  .slot:first-child { margin-left: 14vw; }
+  .slot:last-child { margin-right: 14vw; }
+  .placard { position: relative; right: auto; top: auto; width: auto; text-align: left; padding-inline: 16px; margin-top: 22px; min-height: 190px; }
+  .p { left: 16px; right: 16px; }
+  .names { position: relative; left: auto; bottom: auto; transform: none; width: auto; padding-inline: 8px; margin-top: 8px; }
+  .names button { font-size: 0.7rem; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .room *, .room *::before, .room *::after { transition-duration: 0.01ms !important; animation: none !important; }
+}

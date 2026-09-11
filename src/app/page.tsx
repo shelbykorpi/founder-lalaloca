@@ -9,7 +9,7 @@ import { AmbientLighting } from "@/components/house/AmbientLighting";
 import { getRoom } from "@/lib/rooms";
 import { DoorFrame } from "@/components/house/DoorFrame";
 import { RoomHero } from "@/components/house/RoomHero";
-import { FounderGalleryWalk } from "@/components/house/FounderGalleryWalk";
+import { Vanity } from "@/components/house/Vanity";
 import { BRAND } from "@/lib/brand";
 import { FOUNDER_COLLECTION } from "@/lib/founderCollection";
 import { NEXT_MOVE } from "@/lib/nextMove";
@@ -79,6 +79,7 @@ const LINE = [
     image: "/products/opening-line-cut.webp",
     alt: "Opening Line: the oil-to-milk cleanser bottle, Founder Green label with cream and green stripes and a white pump.",
     href: "/products/opening-line",
+    hook: bySlug["opening-line"].hook,
     state: "In stock · Ships in one business day",
     action: `Shop · ${formatPrice(bySlug["opening-line"].price)}`,
     ready: true,
@@ -91,6 +92,7 @@ const LINE = [
     image: "/products/clean-break-cut.webp",
     alt: "Clean Break: the purifying face wash bottle, Founder Green label with cream and green stripes and a white pump.",
     href: "/products/clean-break",
+    hook: bySlug["clean-break"].hook,
     state: "In stock · Ships in one business day",
     action: `Shop · ${formatPrice(bySlug["clean-break"].price)}`,
     ready: true,
@@ -103,6 +105,7 @@ const LINE = [
     image: "/products/hold-the-room-cut.webp",
     alt: "Hold the Room: the airless bottle and its carton, Desert Pink with a cream cartouche and gold crest.",
     href: "/products/hold-the-room",
+    hook: holdTheRoom.hero,
     state: "Preorder · Ships from the first run",
     action: `Preorder · ${formatPrice(holdTheRoom.price)}`,
     ready: true,
@@ -115,6 +118,7 @@ const LINE = [
     image: "/products/double-take-cut.webp",
     alt: "Double Take: the small eye-cream bottle and its carton, Desert Pink with a cream cartouche and gold crest.",
     href: "/products/double-take",
+    hook: bySlug["double-take"].hook,
     state: "In stock · Ships in one business day",
     action: `Shop · ${formatPrice(bySlug["double-take"].price)}`,
     ready: true,
@@ -127,6 +131,7 @@ const LINE = [
     image: "/products/smooth-talker-cut.webp",
     alt: "Smooth Talker: the tinted stick in 25 Medium and its brass carton, with a cream cartouche and gold crest.",
     href: "/products/smooth-talker",
+    hook: bySlug["smooth-talker"].hook,
     state: "In stock · 3 shades",
     action: `Shop · ${formatPrice(bySlug["smooth-talker"].price)}`,
     ready: true,
@@ -312,11 +317,18 @@ export default function HomePage() {
           Explore the collection
         </Link>
       </RoomHero>
-      {/* THE GALLERY WALK — 11 Sept 2026. The five cards became a corridor:
-          one brass-trimmed bay per product, the active one centred and lit,
-          the rest receding. Data is still LINE above, read from the repo; the
-          component owns only the walking. See FounderGalleryWalk.tsx. */}
-      <FounderGalleryWalk items={LINE} />
+      {/* THE VANITY — 11 Sept 2026, replacing the gallery walk. The corridor
+          was a rendered photograph with the products inside it: small, far
+          apart, one legible at a time, and wrong the moment the packaging
+          changed. Now the five stand on the console of a real room, sharp,
+          at true relative scale, never dimmed; the mirror light follows
+          whichever one you look at. Data is still LINE above. See Vanity.tsx
+          and the note at the head of vanity.module.css. */}
+      <Vanity
+        items={LINE}
+        title="The twenty minutes before you walk in."
+        lede="Five pieces on the vanity, in the order you use them. Light one."
+      />
 
       {/* ══ THE SERUM SALON ═════════════════════════════════════════════════
           The products taking money get a room of their own, not a footnote

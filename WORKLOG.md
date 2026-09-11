@@ -886,3 +886,17 @@ LEFT ALONE / WARNING for whoever lands the FOUND HER work above:
   at DPR 2: the optimizer serves the 3840-wide variant. The label text in
   the render was never legible (AI type) — no resolution fixes that; only a
   new render with the real artwork would.
+- The Library became a room (same day). /library now opens on Shelby's
+  library render as a RoomHero (public/editorial/rooms/library-shelves.webp,
+  3344 px 2x plate via Real-ESRGAN, + library-shelves-m.webp 3:4 phone
+  crop; 6688 px master in assets/source/rooms/). The A–Z index is THE SHELF
+  (src/components/library/Shelf.tsx + shelf.module.css): every ingredient a
+  cloth-bound book on a brass-edged ledge, colour-coded by kind (green =
+  humectants/lipids, Desert Rose = antioxidants, cream = botanicals, night =
+  peptide), hover/focus pulls the book, click opens the reading. Pure CSS,
+  server-rendered links, every row of books on phones gets its own ledge.
+  Then By product (evidence mark under each name), then EmeraldDoorPortal
+  into Room 04 · The FOUNDER Collection. Each reading now opens on the
+  library scene (EditorialRoomSection surface="scene"); foot link is "Back
+  to the shelf". LIBRARY_HERO exported from src/lib/library.ts. Build, lint,
+  1440/390 screenshots, no console errors. Committed, not pushed.

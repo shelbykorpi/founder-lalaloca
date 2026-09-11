@@ -465,6 +465,15 @@ export const LIBRARY: LibraryEntry[] = [
   },
 ];
 
+/** The library's own frame — Shelby's render of the reading room. The wide
+ *  plate is 2x (3344 px) for retina; the phone crop is a 3:4 portrait of the
+ *  centre shelves and the desk. */
+export const LIBRARY_HERO = {
+  src: "/editorial/rooms/library-shelves.webp",
+  mobileSrc: "/editorial/rooms/library-shelves-m.webp",
+  alt: "The FOUNDER library: floor-to-ceiling Founder Green shelves of cloth-bound books — FOUND HER, THE FOUNDER COLLECTION, BEAUTY FOR WHAT YOU'RE BUILDING, THE ROOM IS YOURS on their spines — a brass reading lamp, and on the black marble desk a cream journal with a gold F, a FOUNDER pen, a brass key and the three serums on a marble tray; a desert-pink room through the open door.",
+};
+
 /** The day the library opened. Real date, not a build timestamp. */
 export const LIBRARY_PUBLISHED = "2026-09-10";
 

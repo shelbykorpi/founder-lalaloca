@@ -1,22 +1,31 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { EditorialRoomSection } from "@/components/house/EditorialRoomSection";
-import { PageIntro } from "@/components/site/PageIntro";
-import { JsonLd, breadcrumbSchema } from "@/lib/seo";
-import { LIBRARY, libraryByProduct } from "@/lib/library";
+import { EmeraldDoorPortal } from "@/components/house/EmeraldDoorPortal";
+import { RoomHero } from "@/components/house/RoomHero";
+import { Shelf } from "@/components/library/Shelf";
 import { EvidenceMark } from "@/components/library/EvidenceMark";
+import { JsonLd, breadcrumbSchema } from "@/lib/seo";
+import { LIBRARY, LIBRARY_HERO, libraryByProduct } from "@/lib/library";
+import { getRoom } from "@/lib/rooms";
 
 /**
  * THE LIBRARY — the reading room.
  *
- * One page, two ways in. The shelf at the top is by product: pick the bottle
- * you own and see what is in it. The index below is A–Z: every ingredient in
- * the house, one line each, into its own reading at /library/<slug>.
+ * 11 September 2026, second pass: it became a room. You arrive through the
+ * library's own frame — Shelby's render of the green shelves, the brass
+ * lamp, the marble desk with the journal and the key — the copy laid over it
+ * like every other room in the house. The A–Z index is the shelf itself:
+ * every ingredient a book you pull, colour-coded by kind. Below it, the
+ * bottles you own, each with its ingredients. At the foot, the emerald doors
+ * into the FOUNDER Collection, because a reading room should let you out
+ * somewhere.
  *
- * Not a room in the loop. The house has seven rooms and a rail that counts
- * them; the library is a door off the hall, so it takes the night ground and
- * the house surfaces without HouseShell, the rail, or the next-room doors.
+ * Not a room in the loop: the rail counts seven and this is a door off the
+ * hall, so it takes the house surfaces without HouseShell. Everything here
+ * renders on the server; the shelf's pull is CSS and the doors are a link.
  */
+
 
 const TITLE = "The Library";
 const DESCRIPTION =
@@ -38,37 +47,56 @@ export const metadata: Metadata = {
 export default function LibraryPage() {
   const shelves = libraryByProduct();
   const index = [...LIBRARY].sort((a, b) => a.name.localeCompare(b.name));
+  const collection = getRoom(4);
 
   return (
     <div className="room-dark">
       <JsonLd schema={[breadcrumbSchema([{ name: TITLE, path: "/library" }])]} />
 
-      <PageIntro
-        tone="dark"
-        eyebrow="The Library"
-        title={
-          <>
-            Read what you’re wearing.
-          </>
-        }
-        lede="Every ingredient named on a FOUNDER label has a page here: what it is, what it does in the bottle, and one peer-reviewed study on the ingredient — cited as research, never as a promise. Cosmetic benefits only, and skin varies."
+      <RoomHero
+        src={LIBRARY_HERO.src}
+        mobileSrc={LIBRARY_HERO.mobileSrc}
+        alt={LIBRARY_HERO.alt}
+        position="50% center"
+        height="min-h-[82svh]"
+        priority
+        label="The Library · Off the hall"
+        title="Read what you’re wearing."
+        lede="Every ingredient on a FOUNDER label has a page here — what it is, what it does in the bottle, and one peer-reviewed study on the ingredient, cited as research, never as a promise."
       >
-        <div className="mt-6 flex flex-wrap gap-3">
-          <a href="#by-product" className="btn btn-primary">
-            Start with a product <span aria-hidden>→</span>
-          </a>
-          <a href="#a-to-z" className="btn btn-ghost-light">
-            Browse A–Z
-          </a>
-        </div>
-      </PageIntro>
+        <a href="#the-shelf" className="btn btn-primary">
+          Pull a book from the shelf <span aria-hidden>↓</span>
+        </a>
+        <a href="#by-product" className="btn btn-ghost-light">
+          Start with a product
+        </a>
+      </RoomHero>
 
-      {/* ---- The shelf: by product ----
-          Each product is one shelf. The bottle's name is the heading and links
-          to its page; the ingredients under it link to their readings. The
-          label wording (`as`) is shown where it differs, because "marine
-          collagen" on a carton and "Collagen" in the index should be
-          recognisably the same thing. */}
+      {/* ---- The shelf ----
+          The index, as the room shelves it. Panel surface: emerald and brass
+          like the joinery in the frame above, so the shelf reads as the same
+          wall continuing below the fold. */}
+      <EditorialRoomSection surface="panel" id="the-shelf" className="scroll-mt-24">
+        <div className="shell">
+          <p className="eyebrow text-champagne">The shelf</p>
+          <h2 className="mt-4 font-serif text-3xl leading-tight text-cream md:text-5xl">
+            Every ingredient in the house.
+          </h2>
+          <p className="mt-4 max-w-prose text-cream/75">
+            Fifteen books, one per ingredient, in alphabetical order. Green cloth for the
+            water-holders and barrier lipids, Desert Rose for the antioxidants, cream for the
+            botanicals. Pull one.
+          </p>
+          <div className="mt-10">
+            <Shelf entries={index} />
+          </div>
+          <p className="mt-6 text-[0.6875rem] uppercase tracking-[0.2em] text-cream/45">
+            Hover to pull · click to open the reading
+          </p>
+        </div>
+      </EditorialRoomSection>
+
+      {/* ---- By product ---- */}
       <EditorialRoomSection surface="marble" id="by-product" className="scroll-mt-24">
         <div className="shell">
           <p className="eyebrow text-champagne">By product</p>
@@ -103,6 +131,9 @@ export default function LibraryPage() {
                               on the label: {ref?.as}
                             </span>
                           )}
+                          <span className="mt-1">
+                            <EvidenceMark evidence={entry.study.evidence} tone="room" />
+                          </span>
                         </Link>
                       </li>
                     );
@@ -111,66 +142,39 @@ export default function LibraryPage() {
               </li>
             ))}
           </ul>
+
+          <p className="mt-12 max-w-prose text-[0.8125rem] leading-relaxed text-cream/55">
+            The mark beside each entry says what kind of study is cited — a randomised human
+            trial is the strongest; a laboratory study is a mechanism, not a result on people.
+            Studies are cited as research on an ingredient. None of them tested a FOUNDER
+            product, and the concentration in any product is the supplier’s. These are
+            cosmetics, not medicine: nothing here treats, prevents or protects against anything,
+            and none of our products is a sunscreen.
+          </p>
         </div>
       </EditorialRoomSection>
 
-      {/* ---- The index: A–Z ----
-          Paper, because this is the reading surface of the house. One row per
-          ingredient: name, what kind of thing it is, the standfirst, and the
-          evidence mark that says honestly what the cited study is. */}
-      <EditorialRoomSection surface="paper" id="a-to-z" className="scroll-mt-24">
-        <p className="eyebrow text-bronze-ink">A to Z</p>
-        <h2 className="mt-4 font-serif text-3xl leading-tight text-charcoal md:text-5xl">
-          Every ingredient in the house.
-        </h2>
-        <p className="mt-4 max-w-prose text-charcoal/75">
-          The mark beside each entry says what kind of study is cited. A randomised human trial
-          is the strongest; a laboratory study is a mechanism, not a result on people. We show the
-          weaker ones too, because leaving them out would be its own kind of claim.
-        </p>
-        <hr className="my-8 h-px w-16 border-0 bg-bronze" />
-
-        <ol className="divide-y divide-bronze/30 border-t border-bronze/30">
-          {index.map((entry) => (
-            <li key={entry.slug}>
-              <Link
-                href={`/library/${entry.slug}`}
-                className="group grid gap-2 py-5 md:grid-cols-[minmax(0,14rem)_minmax(0,1fr)_auto] md:items-baseline md:gap-8"
-              >
-                <span>
-                  <span className="font-serif text-2xl leading-none text-charcoal group-hover:text-founder-green">
-                    {entry.name}
-                  </span>
-                  <span className="mt-1 block text-[0.6875rem] uppercase tracking-[0.18em] text-bronze-ink">
-                    {entry.kind}
-                  </span>
-                </span>
-                <span className="text-charcoal/80">
-                  {entry.standfirst}
-                  <span className="mt-1 block text-[0.8125rem] text-charcoal/55">
-                    In{" "}
-                    {entry.products.map((p, i) => (
-                      <span key={p.href}>
-                        {i > 0 && (i === entry.products.length - 1 ? " and " : ", ")}
-                        {p.name}
-                      </span>
-                    ))}
-                  </span>
-                </span>
-                <span className="md:justify-self-end">
-                  <EvidenceMark evidence={entry.study.evidence} tone="paper" />
-                </span>
-              </Link>
-            </li>
-          ))}
-        </ol>
-
-        <p className="mt-10 max-w-prose text-[0.8125rem] leading-relaxed text-charcoal/60">
-          Studies are cited as research on an ingredient. None of them tested a FOUNDER product,
-          and the concentration in any product is the supplier’s. These are cosmetics, not
-          medicine: nothing here treats, prevents or protects against anything, and none of our
-          products is a sunscreen.
-        </p>
+      {/* ---- The doors out ---- */}
+      <EditorialRoomSection surface="marble" tight>
+        <div className="shell grid items-center gap-10 lg:grid-cols-[minmax(0,22rem)_1fr] lg:gap-16">
+          <div>
+            <p className="room-label">Next door</p>
+            <h2 className="headline-house mt-5 text-balance text-cream">
+              Now go and hold the room.
+            </h2>
+            <p className="mt-4 max-w-prose text-cream/75">
+              You’ve read the ingredients. The boardroom is through the doors, and the
+              collection is on the table.
+            </p>
+          </div>
+          <EmeraldDoorPortal
+            href={collection.href}
+            through={collection.hero.src}
+            throughAlt={collection.hero.alt}
+            label="Enter the FOUNDER Collection"
+            eyebrow={`Room 04 · ${collection.name}`}
+          />
+        </div>
       </EditorialRoomSection>
     </div>
   );

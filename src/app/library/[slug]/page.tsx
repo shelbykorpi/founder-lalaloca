@@ -4,7 +4,7 @@ import { notFound } from "next/navigation";
 import { EditorialRoomSection } from "@/components/house/EditorialRoomSection";
 import { EvidenceMark } from "@/components/library/EvidenceMark";
 import { JsonLd, articleSchema, breadcrumbSchema } from "@/lib/seo";
-import { LIBRARY, LIBRARY_PUBLISHED, getLibraryEntry, pubmedUrl } from "@/lib/library";
+import { LIBRARY, LIBRARY_HERO, LIBRARY_PUBLISHED, getLibraryEntry, pubmedUrl } from "@/lib/library";
 
 /**
  * A READING — one ingredient.
@@ -74,8 +74,14 @@ export default async function LibraryEntryPage({
         ]}
       />
 
-      {/* ---- Opening: night ground ---- */}
-      <section className="section-tight bg-night text-cream">
+      {/* ---- Opening: the reading room, darkened to hold the type ---- */}
+      <EditorialRoomSection
+        surface="scene"
+        scene={LIBRARY_HERO.src}
+        sceneAlt=""
+        scenePosition="50% 35%"
+        tight
+      >
         <div className="shell pb-2 pt-6 md:pb-4 md:pt-10">
           <nav aria-label="Breadcrumb" className="eyebrow text-cream/60">
             <Link href="/library" className="hover:text-rose">
@@ -99,7 +105,7 @@ export default async function LibraryEntryPage({
             <EvidenceMark evidence={entry.study.evidence} tone="room" />
           </div>
         </div>
-      </section>
+      </EditorialRoomSection>
 
       {/* ---- The reading: paper ---- */}
       <EditorialRoomSection surface="paper">
@@ -178,8 +184,8 @@ export default async function LibraryEntryPage({
               {prev.name}
             </span>
           </Link>
-          <Link href="/library" className="eyebrow text-champagne hover:text-rose">
-            All readings
+          <Link href="/library#the-shelf" className="eyebrow text-champagne hover:text-rose">
+            Back to the shelf
           </Link>
           <Link href={`/library/${next.slug}`} className="group text-right text-cream/70 hover:text-cream">
             <span className="eyebrow block text-cream/50">Next</span>

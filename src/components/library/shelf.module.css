@@ -1,0 +1,168 @@
+/*
+ * THE SHELF — the A–Z index as books you pull.
+ *
+ * Every ingredient is a spine on a brass-edged shelf in the library's own
+ * Founder Green. Hover or focus pulls the book a little way out; the click
+ * opens the reading. Spines are colour-coded by what kind of thing the
+ * ingredient is, the way the render shelves its own books: green cloth for
+ * humectants and lipids, Desert Rose for antioxidants, cream for botanicals,
+ * night for the peptide. Titles are real HTML set vertically, never images.
+ */
+
+.shelfWrap {
+  position: relative;
+}
+
+.row {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: flex-end;
+  gap: 0 0.35rem;
+  row-gap: 3.25rem;
+  margin: 0;
+  padding: 0 1rem;
+  list-style: none;
+}
+
+/* Every book stands on its own length of ledge; the lengths abut into one
+   continuous shelf per row, so a wrapped row on a phone gets a shelf too. */
+.row > li {
+  position: relative;
+  padding-bottom: 0.9rem;
+}
+.row > li::after {
+  content: "";
+  position: absolute;
+  left: -0.35rem;
+  right: -0.35rem;
+  bottom: 0;
+  height: 0.9rem;
+  background: linear-gradient(180deg, #1a1816, #0b0a09);
+  border-top: 1px solid rgba(214, 190, 154, 0.85);
+  box-shadow: 0 14px 30px -10px rgba(0, 0, 0, 0.8);
+}
+.row > li:first-child::after {
+  left: -1rem;
+}
+.row > li:last-child::after {
+  right: -1rem;
+}
+
+.book {
+  position: relative;
+  display: block;
+  width: clamp(2.5rem, 3.6vw, 3.6rem);
+  height: var(--h, 15rem);
+  border-radius: 2px 6px 6px 2px;
+  transform-origin: 50% 100%;
+  transition:
+    transform 420ms cubic-bezier(0.22, 1, 0.36, 1),
+    box-shadow 420ms ease;
+  box-shadow:
+    inset 2px 0 0 rgba(255, 255, 255, 0.08),
+    inset -3px 0 0 rgba(0, 0, 0, 0.35),
+    0 10px 24px -12px rgba(0, 0, 0, 0.9);
+  color: var(--ink, var(--color-champagne));
+  background: var(--cloth, var(--color-founder-green));
+  outline: none;
+}
+.book::before {
+  /* Two gilt rules across the spine, top and bottom. */
+  content: "";
+  position: absolute;
+  inset: 0.9rem 0.45rem;
+  border-top: 1px solid rgba(214, 190, 154, 0.55);
+  border-bottom: 1px solid rgba(214, 190, 154, 0.55);
+  pointer-events: none;
+}
+.book:hover,
+.book:focus-visible {
+  transform: translateY(-0.55rem) rotate(-1.5deg);
+  box-shadow:
+    inset 2px 0 0 rgba(255, 255, 255, 0.1),
+    inset -3px 0 0 rgba(0, 0, 0, 0.35),
+    0 26px 34px -14px rgba(0, 0, 0, 0.95),
+    0 0 0 1px rgba(214, 190, 154, 0.35);
+}
+.book:focus-visible {
+  box-shadow:
+    0 0 0 2px var(--color-night),
+    0 0 0 4px var(--color-champagne);
+}
+
+.title {
+  position: absolute;
+  inset: 1.4rem 0 1.4rem 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  writing-mode: vertical-rl;
+  transform: rotate(180deg);
+  font-family: var(--font-serif);
+  font-size: 1.15rem;
+  letter-spacing: 0.04em;
+  line-height: 1;
+  white-space: nowrap;
+  text-align: center;
+}
+.kind {
+  position: absolute;
+  left: 50%;
+  top: 100%;
+  transform: translateX(-50%);
+  margin-top: 1.4rem;
+  white-space: nowrap;
+  font-size: 0.5rem;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: rgba(247, 239, 232, 0.5);
+  opacity: 0;
+  transition: opacity 250ms ease;
+}
+.book:hover .kind,
+.book:focus-visible .kind {
+  opacity: 1;
+}
+
+/* Cloth colours by kind. */
+.humectant {
+  --cloth: linear-gradient(90deg, #17524d, #164d49 55%, #123f3b);
+  --ink: var(--color-champagne);
+}
+.antioxidant {
+  --cloth: linear-gradient(90deg, #dcaea6, #d8a7a0 55%, #c69790);
+  --ink: #3a1f1c;
+}
+.botanical {
+  --cloth: linear-gradient(90deg, #fbf4ec, #f7efe8 55%, #e8dccf);
+  --ink: #8a6335;
+}
+.lipid {
+  --cloth: linear-gradient(90deg, #2f2c29, #2a2928 55%, #1f1e1d);
+  --ink: var(--color-champagne);
+}
+.peptide {
+  --cloth: linear-gradient(90deg, #0d2e2b, #0a2523 55%, #071a19);
+  --ink: var(--color-bronze);
+}
+
+@media (max-width: 640px) {
+  .book {
+    width: 2.4rem;
+    height: calc(var(--h, 15rem) * 0.8);
+  }
+  .title {
+    font-size: 0.9rem;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .book,
+  .kind {
+    transition: none;
+  }
+  .book:hover,
+  .book:focus-visible {
+    transform: none;
+  }
+}

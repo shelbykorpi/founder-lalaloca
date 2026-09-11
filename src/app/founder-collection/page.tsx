@@ -106,7 +106,7 @@ export default async function FounderCollectionPage() {
             how: null,
             actives: null,
             door: null,
-            badge: "Preorder",
+            badge: "First run",
           },
         ];
   /* ── THE WHOLE LINE, IN ONE GRID ──────────────────────────────────────
@@ -157,7 +157,7 @@ export default async function FounderCollectionPage() {
         : `/products/${c.handle}`,
     state:
       c.handle === "founder-collection"
-        ? "Preorder · Ships from the first run"
+        ? "First run · Prepaid, ships when it lands"
         : `${formatPrice(c.price)}`,
     action:
       c.handle === "founder-collection" ? (
@@ -175,7 +175,7 @@ export default async function FounderCollectionPage() {
           }}
           href="/products/hold-the-room"
           className="btn btn-primary w-full"
-          label="Preorder"
+          label="First run"
           showPrice
         />
       ) : (
@@ -321,7 +321,7 @@ export default async function FounderCollectionPage() {
           </h2>
           <p className="mt-4 max-w-[46ch] text-[0.9375rem] leading-relaxed text-cream/75">
             Five pieces, laid out the way you&rsquo;d lay out a strategy — the whole
-            routine, every one in stock and ready to ship.
+            routine, as a first run.
           </p>
 
           <div className="mt-8 grid gap-10 sm:grid-cols-2 lg:grid-cols-3">
@@ -342,7 +342,8 @@ export default async function FounderCollectionPage() {
           </div>
 
           <p className="mt-10 max-w-prose text-xs leading-relaxed text-cream/65">
-            Every piece ships within one business day, with free US shipping.{" "}
+            The serums ship within one business day. The collection is a first
+            run. Free US shipping on everything.{" "}
             <Link
               href="/the-next-move"
               className="underline underline-offset-2 hover:opacity-70"
@@ -389,12 +390,13 @@ export default async function FounderCollectionPage() {
         <div className="shell max-w-3xl">
           <p className="eyebrow text-blush">The FOUNDER Collection</p>
           <h2 className="mt-5 font-serif text-3xl leading-tight md:text-4xl">
-            The whole routine. In stock, and yours today.
+            The whole routine. The first run.
           </h2>
           <p className="mt-6 max-w-prose text-cream/85">
             Opening Line to Hold the Room — cleanse, wash, treat, finish. Five
-            pieces, each one priced and in stock, shipping within one business
-            day. {product.name} is the anchor and the last step.
+            pieces, each one priced, each one a first run: prepaid now, and we
+            email you the ship date before it leaves. {product.name} is the
+            anchor and the last step.
           </p>
           <p className="mt-6 font-serif text-xl text-blush">
             Take your seat.
@@ -419,7 +421,7 @@ export default async function FounderCollectionPage() {
 
       {/* ---- The first room ----
           The three serums, at the foot and deliberately quieter than the
-          grid above: they are LALALOCA, a different line under the same
+          grid above: they are the First Room, a different line under the same
           roof, and they have been on sale for months. The brief calls this
           THE FIRST ROOM — the one you were already in before this collection
           existed. Bottles on a dark shelf, names, and a way through. No
@@ -428,14 +430,14 @@ export default async function FounderCollectionPage() {
         <div className="shell">
           <Reveal>
             <p id="first-room" className="room-label">
-              The first room · The LALALOCA Collection
+              The First Room
             </p>
             <p className="mt-5 max-w-[46ch] font-serif text-[clamp(1.5rem,2.8vw,2rem)] leading-snug text-cream">
               Looking for the serums? Start here.
             </p>
             <p className="mt-6 max-w-prose text-[0.9375rem] leading-relaxed text-cream/75">
               Three of them, 50 ml each — {formatPrice(products[0].price)} each or
-              all three for {formatPrice(SET.price)}, shipping now. 20% of LALALOCA
+              all three for {formatPrice(SET.price)}, shipping now. Twenty percent of First Room
               net profits. Every month. Directly to StandUp for Kids Tucson.
             </p>
 

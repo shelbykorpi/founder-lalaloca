@@ -14,7 +14,7 @@ import { formatPrice, products, SET } from "@/lib/products";
 import { JsonLd, breadcrumbSchema, collectionSchema, setSchema } from "@/lib/seo";
 
 export const metadata: Metadata = {
-  title: "Shop the LALALOCA Collection",
+  title: "Shop the First Room",
   description:
     "Three serums — Thirst Trap, C Me Glow and Bounce Back. 50 ml, $38 each, free US shipping. What each one does, and how to pick.",
   /* Without this the root layout's canonical is inherited and this page tells
@@ -121,7 +121,7 @@ export default function ShopPage() {
           <div className="relative aspect-[1915/821] w-full">
             <Image
               src="/editorial/trio-parlor.webp"
-              alt="The FOUNDER parlour: three serum counters under glass like a gelateria — turquoise, red and orange — with the three LALALOCA bottles standing on a marble table."
+              alt="The FOUNDER parlour: three serum counters under glass like a gelateria — turquoise, red and orange — with the three First Room bottles standing on a marble table."
               fill
               loading="lazy"
               sizes="100vw"
@@ -166,7 +166,7 @@ export default function ShopPage() {
           <div className="relative aspect-[1215/821] w-full">
             <Image
               src="/editorial/trio-parlor-counter.webp"
-              alt="The FOUNDER parlour: three serum counters under glass like a gelateria — turquoise, red and orange — with the three LALALOCA bottles standing on a marble table."
+              alt="The FOUNDER parlour: three serum counters under glass like a gelateria — turquoise, red and orange — with the three First Room bottles standing on a marble table."
               fill
               loading="lazy"
               sizes="100vw"
@@ -205,7 +205,7 @@ export default function ShopPage() {
           <div className="mt-8 overflow-x-auto">
             <table className="w-full min-w-[44rem] border-collapse text-left text-sm">
               <caption className="sr-only">
-                The three LALALOCA serums compared by what they are for, when to use
+                The three First Room serums compared by what they are for, when to use
                 them, where they sit in a routine, size and price.
               </caption>
               <thead>
@@ -235,10 +235,10 @@ export default function ShopPage() {
                         href={`/products/${product.slug}`}
                         className="text-charcoal hover:text-bronze-ink"
                       >
-                        {product.name}
+                        {product.category}
                       </Link>
                       <span className="mt-1 block text-xs uppercase tracking-[0.14em] text-charcoal/70">
-                        {product.category}
+                        {product.name}
                       </span>
                     </th>
                     <td className="py-5 pr-6 text-charcoal/80">{product.need}</td>
@@ -262,11 +262,11 @@ export default function ShopPage() {
       </EditorialRoomSection>
 
       {/* ---------------- The collaboration ----------------
-          Why the nav calls this page LALALOCA × StandUp for Kids. The words
-          are the Young Founders' Room's own — the collection copy and the
-          commitment line are reused verbatim from that page, not rewritten,
-          because the 20%-of-net-profits wording is approved as written and
-          must be identical everywhere it appears. */}
+          The collaboration band. The words are the Young Founders' Room's own —
+          the collection copy and the commitment line are reused verbatim from
+          that page, not rewritten, because the profit-share wording must be
+          identical everywhere it appears. 11 Sep: the share is now stated as
+          "Twenty percent of First Room profits" in all five places at once. */}
       <section
         id="standup-for-kids"
         className="bg-founder-green py-16 text-shell md:py-20"
@@ -274,7 +274,7 @@ export default function ShopPage() {
       >
         <div className="shell grid items-center gap-10 lg:grid-cols-[1.3fr_1fr]">
           <div>
-            <p className="eyebrow text-champagne">LALALOCA × StandUp for Kids</p>
+            <p className="eyebrow text-champagne">The First Room × StandUp for Kids</p>
             <h2
               id="standup-heading"
               className="mt-4 max-w-[24ch] font-serif text-[clamp(1.5rem,3vw,2.25rem)] leading-snug"
@@ -286,7 +286,7 @@ export default function ShopPage() {
               <p>
                 At the Tucson Outreach Center, young people tried products,
                 compared packaging, gave honest opinions, and made real
-                decisions. They helped shape LALALOCA from the beginning.
+                decisions. They helped shape the First Room from the beginning.
               </p>
             </div>
             <Link
@@ -298,7 +298,7 @@ export default function ShopPage() {
           </div>
 
           <p className="font-serif text-2xl leading-snug text-rose md:text-3xl">
-            20% of LALALOCA net profits.
+            Twenty percent of First Room profits.
             <br />
             Every month.
             <br />

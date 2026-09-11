@@ -118,13 +118,15 @@ export function SerumAlcove({ product, index }: { product: Product; index: numbe
 
       <div className="mt-6 flex flex-1 flex-col">
         <span aria-hidden className="block h-[2px] w-10" style={{ background: a }} />
-        <p className="eyebrow mt-3 text-champagne">{product.archetype}</p>
-        <h3 className="mt-2 font-serif text-[1.75rem] leading-none text-cream">
+        {/* Function is the title, the name is the line beneath — see the note
+            in products/[slug]/page.tsx. */}
+        <p className="eyebrow mt-3 text-champagne">{product.name}</p>
+        <h3 className="mt-2 font-serif text-[1.5rem] leading-[1.1] text-cream">
           <Link href={`/products/${product.slug}`} onClick={selectTrack} className="hover:text-rose">
-            {product.name}
+            {product.category}
           </Link>
         </h3>
-        <p className="mt-2 text-xs uppercase tracking-[0.16em] text-cream/70">{product.category}</p>
+        <p className="mt-2 text-xs uppercase tracking-[0.16em] text-cream/70">{product.archetype}</p>
         <p className="mt-3 text-sm leading-relaxed text-cream/70">{product.benefit}</p>
         <p className="mt-4 text-sm text-cream">
           {product.size} · {formatPrice(product.price)} · {product.timing}

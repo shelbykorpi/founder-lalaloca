@@ -86,14 +86,14 @@ export function DoorCard({
           className="mb-3 block h-[2px] w-10"
           style={{ background: product.accent }}
         />
-        <p className="eyebrow text-champagne">{product.archetype}</p>
-        <h3 className="mt-2 font-serif text-[1.75rem] leading-none text-cream">
+        <p className="eyebrow text-champagne">{product.name}</p>
+        <h3 className="mt-2 font-serif text-[1.5rem] leading-[1.1] text-cream">
           <Link href={`/products/${product.slug}`} className="hover:text-rose">
-            {product.name}
+            {product.category}
           </Link>
         </h3>
         <p className="mt-2 text-xs uppercase tracking-[0.16em] text-cream/70">
-          {product.category}
+          {product.archetype}
         </p>
         <p className="mt-3 text-sm leading-relaxed text-cream/70">{product.benefit}</p>
         <p className="mt-4 text-sm text-cream">

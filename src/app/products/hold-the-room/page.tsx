@@ -119,7 +119,7 @@ export default function HoldTheRoomPage() {
             {product.sellable && product.preorder && (
               <>
                 <div className="mt-7 max-w-[24rem] border-l-2 border-bronze py-3 pl-4">
-                  <p className="room-label">Preorder</p>
+                  <p className="room-label">First run</p>
                   <p className="mt-2 text-[0.8125rem] leading-relaxed text-cream/75">
                     {product.preorder}
                   </p>
@@ -128,7 +128,7 @@ export default function HoldTheRoomPage() {
                   product={product}
                   href="/founder-collection"
                   className="btn btn-ghost-light mt-6 w-full max-w-[20rem]"
-                  label="Preorder"
+                  label="First run"
                   showPrice
                 />
               </>

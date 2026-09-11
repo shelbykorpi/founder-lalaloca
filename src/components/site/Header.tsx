@@ -61,7 +61,7 @@ export function Header() {
           aria-expanded={menuOpen}
           aria-controls="mobile-nav"
           onClick={() => setMenuOpen((v) => !v)}
-          className="-ml-3 flex h-11 w-11 items-center justify-center xl:hidden text-cream"
+          className="-ml-3 flex h-11 w-11 items-center justify-center lg:hidden text-cream"
         >
           <span className="sr-only">{menuOpen ? "Close menu" : "Open menu"}</span>
           <svg viewBox="0 0 20 14" aria-hidden className="h-3.5 w-5">
@@ -116,7 +116,11 @@ export function Header() {
             ~700px — with the 150px wordmark and the Search/Bag actions that
             is the whole of a 1024 window. The bar starts at xl now; lg gets
             the menu button. */}
-        <nav aria-label="Primary" className="hidden xl:block">
+        {/* 11 Sep: four tabs, not six, so the bar fits from lg instead of xl. At
+            six it measured ~700px and had to wait for xl; at four it is a little
+            over half that, and a 1100px laptop should not be served a hamburger
+            for a four-item nav. */}
+        <nav aria-label="Primary" className="hidden lg:block">
           <ul className="flex items-center gap-6 xl:gap-9">
             {PRIMARY_NAV.map((item) => {
               const active =
@@ -179,7 +183,7 @@ export function Header() {
       <div
         id="mobile-nav"
         hidden={!menuOpen}
-        className="border-t xl:hidden border-bronze/20 bg-night"
+        className="border-t lg:hidden border-bronze/20 bg-night"
       >
         <nav aria-label="Primary mobile" className="shell py-4">
           <ul className="flex flex-col">

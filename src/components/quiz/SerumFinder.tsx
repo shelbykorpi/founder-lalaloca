@@ -65,13 +65,13 @@ export function SerumFinder() {
             <p className="eyebrow text-bronze-ink">
               {result.even ? "Any of the three, honestly" : "Start here"}
             </p>
-            <h2 className="headline mt-4 text-charcoal">{result.pick.name}</h2>
-            {/* Same pairing as the product page: identity beside the approved
-                label wording, never instead of it. */}
+            <h2 className="headline mt-4 text-charcoal">{result.pick.category}</h2>
+            {/* Same order as the product page: function is the answer, the name
+                is what she remembers it by. */}
             <p className="mt-3 text-xs uppercase tracking-[0.16em] text-charcoal/70">
-              <span className="text-bronze-ink">{result.pick.archetype}</span>
+              <span className="text-bronze-ink">{result.pick.name}</span>
               <span aria-hidden> · </span>
-              {result.pick.category}
+              {result.pick.archetype}
             </p>
             <p className="mt-5 max-w-md text-charcoal/80">
               {result.even

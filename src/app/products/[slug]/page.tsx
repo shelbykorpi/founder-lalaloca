@@ -36,11 +36,11 @@ export async function generateMetadata({
     };
   }
   return {
-    title: `${product.name} — ${product.category}`,
+    title: `${product.category} — ${product.name}`,
     description: `${product.what} ${product.size}, ${formatPrice(product.price)}.`,
     alternates: { canonical: `/products/${product.slug}` },
     openGraph: {
-      title: `${product.name} — ${product.category}`,
+      title: `${product.category} — ${product.name}`,
       description: product.what,
       images: [{ url: product.bottle }],
       type: "website",
@@ -109,17 +109,22 @@ export default async function ProductPage({ params }: PageProps<"/products/[slug
                 className="mb-4 block h-[2px] w-12"
                 style={{ background: product.accent }}
               />
-              <h1 className="font-serif text-[clamp(2.5rem,6vw,3.75rem)] leading-none text-cream">
-                {product.name}
-              </h1>
-              {/* Identity first, then the label. The archetype sits beside the
-                  category rather than replacing it — the category is the
-                  approved label wording and is what a shopper scanning for
-                  "vitamin C serum" is actually looking for. */}
-              <p className="mt-3 text-xs uppercase tracking-[0.18em] text-cream/70">
-                <span className="text-champagne">{product.archetype}</span>
-                <span aria-hidden> · </span>
+              {/* 11 Sep 2026 — the lockup is flipped. The name used to be the
+                  h1 and the function a caption under it, which reads
+                  beautifully and shops badly: nobody searches "Thirst Trap" at
+                  11pm, they search for a hyaluronic serum. Function is now the
+                  title and the name is the line beneath it, so the poetry is
+                  kept and the shelf is legible. This is a LAYOUT change, not a
+                  rename — the names, URLs and SEO equity are untouched, which
+                  is the point: it tests the hypothesis before anything is
+                  repriced, reprinted or redirected. */}
+              <h1 className="font-serif text-[clamp(2.25rem,5.2vw,3.25rem)] leading-[1.05] text-cream">
                 {product.category}
+              </h1>
+              <p className="mt-3 text-xs uppercase tracking-[0.18em] text-cream/70">
+                <span className="text-champagne">{product.name}</span>
+                <span aria-hidden> · </span>
+                {product.archetype}
               </p>
 
               {/* The hero line runs first and the functional description

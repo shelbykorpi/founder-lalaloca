@@ -17,7 +17,7 @@ const OUR_STORY_LEDE =
 
 /* The meta description is the headline plus one clause, rather than a second
    piece of copy that can drift away from it. */
-const ABOUT_DESCRIPTION = `${OUR_STORY_TITLE} The LALALOCA Collection is where it started.`;
+const ABOUT_DESCRIPTION = `${OUR_STORY_TITLE} The First Room is where it started.`;
 
 export const metadata: Metadata = {
   title: "Our Story",
@@ -129,9 +129,9 @@ export default function OurStoryPage() {
             <p className="font-serif text-2xl leading-snug text-cream">{OUR_STORY_LEDE}</p>
             <p className="mt-6 leading-[1.8] text-cream/85">
               LALALOCA came first: three serums — Thirst Trap, C Me Glow and Bounce
-              Back — in the bottles they’re still sold in today. FOUNDER is the name on
-              the door now. LALALOCA is the collection inside, and the name on your
-              receipt.
+              Back — in the bottles they’re still sold in today. That collection
+              opened the house. We call it the First Room now, and FOUNDER is the
+              only name on the door, the bottle and your receipt.
             </p>
             <p className="mt-5 leading-[1.8] text-cream/85">
               We didn’t reformulate anything to launch a new brand, and we haven’t

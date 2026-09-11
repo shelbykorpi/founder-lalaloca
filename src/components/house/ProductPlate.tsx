@@ -125,7 +125,8 @@ export function ProductPlate({ product }: { product: NextMoveProduct }) {
           )}
 
           <p className="mt-5 max-w-[26rem] text-[0.6875rem] leading-relaxed text-cream/55">
-            In stock. Ships within one business day, with free US shipping.
+            First run. Prepaid now, and we email you the ship date before it
+            leaves — reply to that email to cancel. Free US shipping.
           </p>
         </div>
       </div>

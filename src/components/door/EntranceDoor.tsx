@@ -89,7 +89,7 @@ export function EntranceDoor() {
       onPointerEnter={() => hasHover && !reduced && setAjar(true)}
       onPointerLeave={() => hasHover && setAjar(false)}
       className="group block w-full focus-visible:outline-offset-8"
-      aria-label="Open the door and shop the LALALOCA Collection"
+      aria-label="Open the door and shop the First Room"
     >
       <div
         aria-hidden

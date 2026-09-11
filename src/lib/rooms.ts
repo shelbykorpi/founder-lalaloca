@@ -132,7 +132,7 @@ export const ROOMS: Room[] = [
     pathname: "/young-founders-room",
     hero: {
       src: "/editorial/rooms/young-founders-fireplace.webp",
-      alt: "A long table in the FOUNDER house covered in LALALOCA bottles, swatches, notebooks and a guitar, young hands at work along it, the emerald doors open onto the firelit lounge.",
+      alt: "A long table in the FOUNDER house covered in First Room bottles, swatches, notebooks and a guitar, young hands at work along it, the emerald doors open onto the firelit lounge.",
       position: "66% center",
     },
     heroMobile: { src: "/editorial/rooms/young-founders-fireplace-m.webp" },

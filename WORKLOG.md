@@ -862,3 +862,18 @@ LEFT ALONE / WARNING for whoever lands the FOUND HER work above:
   reads PEPTIDE MOISTURIZING CREAM · 50 ml on the carton while the live
   SKU is the 30 ml Blanka cream — same render the cards used, now larger.
 - Committed on main, NOT pushed.
+- Second pass, same day: Shelby rejected the CSS-drawn corridor — it has to
+  look like her render. So the render is now the room: new plate
+  public/editorial/rooms/collection-gallery-walk.webp (the mock-up with its
+  baked-in header, headline, plaque, arrows and cue removed by mirror-
+  patching the scene's own symmetry). FounderGalleryWalk.tsx rewritten as a
+  camera over that plate: five bays at fixed fractions of the frame; the
+  walk pans/eases the plate toward the chosen bay, a soft spotlight and the
+  plaque follow, hotspot links sit inside the moving layer. Opens on the
+  Anchor (the frame as rendered). Phones: the plate is a 260vw panorama in
+  a scroll-snap strip, plaque below. The *-cut.webp cutouts from the first
+  pass are now unreferenced (kept on disk). Verified again at 1440/1024/
+  768/390/320, keyboard/drag/swipe, no console errors. Committed, not pushed.
+- Caveat for Shelby: the products are baked into the plate at 1672 px wide,
+  so on a retina 1440 screen they are ~1.2x upscaled. A 3344-px render of
+  the same frame, dropped in at the same path, fixes that with no code.

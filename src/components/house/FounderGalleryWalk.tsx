@@ -19,28 +19,30 @@ import styles from "./gallery-walk.module.css";
 /**
  * FOUNDER GALLERY WALK — Room 03 as a corridor.
  *
- * 11 September 2026. Replaces the five static collection cards on the
- * homepage. One product per brass-trimmed arched bay; the active bay is
- * centred, lit and full size, the neighbours recede either side, and the
- * corridor keeps going past the viewport edge. Walking is drag, trackpad,
- * arrows, keyboard or the bays themselves.
+ * 11 September 2026, second pass. The room is Shelby's render, used as one
+ * plate; the walk is a camera move across it. Five bays live at fixed
+ * positions in the frame (BAYS below, as fractions of the plate), and the
+ * active one is brought to the centre and nearest the viewer by panning and
+ * easing the plate toward it, with a soft spotlight and the plaque following.
+ * Bay hotspots are real links inside the moving layer, so every product is
+ * reachable by pointer, keyboard and screen reader whatever the camera is
+ * doing.
  *
- * WHAT THIS COMPONENT DOES NOT OWN. The product data — name, category, fill,
- * availability line, price line, route — arrives as props from page.tsx,
- * which reads it from nextMove.ts and founderCollection.ts exactly as the
- * cards did. Nothing here formats a price, decides stock, or touches the bag.
+ * WHAT THIS COMPONENT DOES NOT OWN. Name, category, fill, availability,
+ * price line and route arrive as props from page.tsx, read from nextMove.ts
+ * and founderCollection.ts exactly as the cards were. Nothing here formats a
+ * price, decides stock, or touches the bag.
  *
- * DESKTOP is a transform carousel: the track translates so the active bay is
- * centred; bays take their scale/rotation from `data-pos` in the stylesheet.
- * MOBILE (< lg) is a native scroll-snap strip: no perspective, the browser
- * owns the swipe, and the active index is read back from scroll position.
- * Vertical scrolling is never trapped — only horizontal wheel intent
- * (trackpad, or shift+wheel) walks the room, so a reader scrolling down the
- * page passes straight through.
+ * DESKTOP: transform camera, drag / trackpad / arrows / ticks / keyboard.
+ * MOBILE (< lg): the plate is a panorama in a native scroll-snap strip; the
+ * browser owns the swipe and the active bay is read back from scroll
+ * position. Vertical scrolling is never captured. Reduced motion keeps the
+ * camera but shortens it and drops the fades.
  *
- * NO JS: the track is a plain list of product links, all five in the HTML,
- * bay 01 active. Reduced motion: the stylesheet drops the travel and keeps a
- * short opacity change.
+ * THE PLATE. public/editorial/rooms/collection-gallery-walk.webp is the
+ * mock-up with its baked-in header, headline, plaque, arrows and cue taken
+ * out (mirror-patched from the scene's own symmetry). Its products are part
+ * of the picture: to change a product's packaging, re-render the plate.
  */
 
 export type GalleryWalkItem = {
@@ -51,35 +53,53 @@ export type GalleryWalkItem = {
   state: string;
   action: string;
   href: string;
+  /** Unused by the walk (the plate carries the product); kept so page.tsx's
+   *  LINE stays one shape for every consumer. */
   image: string;
   alt: string;
   ready: boolean;
 };
 
+/* Where each bay stands in the plate, left to right, as a fraction of its
+   width, and how close the camera comes. The centre bay is the frame as
+   rendered; the others are eased toward until they fill the same space. */
+const BAYS = [
+  { fx: 0.035, scale: 1.55 },
+  { fx: 0.225, scale: 1.28 },
+  { fx: 0.5, scale: 1 },
+  { fx: 0.775, scale: 1.28 },
+  { fx: 0.965, scale: 1.55 },
+];
+const PLATE = { src: "/editorial/rooms/collection-gallery-walk.webp", w: 1672, h: 889 };
+const PLATE_ALT =
+  "The FOUNDER Collection corridor: five lit arched niches in Founder Green walls with brass trim, each product on a black marble plinth, a desert-pink doorway glowing at the far end.";
+
 const DRAG_THRESHOLD = 40;
 const WHEEL_THRESHOLD = 60;
-const WHEEL_COOLDOWN = 700;
+const WHEEL_COOLDOWN = 800;
+
+type Camera = { tx: number; ty: number; s: number; bayX: number; sx: number; plaqueLeft: number; plaqueTop: number };
 
 export function FounderGalleryWalk({ items }: { items: GalleryWalkItem[] }) {
-  const [active, setActive] = useState(0);
+  const count = Math.min(items.length, BAYS.length);
+  /* Opens on the Anchor — the frame as rendered — so the first paint is the
+     mock-up. Deterministic, never auto-rotated. */
+  const [active, setActive] = useState(2);
   const [isDesktop, setIsDesktop] = useState(true);
-  const [offset, setOffset] = useState(0);
-  const stageRef = useRef<HTMLDivElement>(null);
-  const trackRef = useRef<HTMLUListElement>(null);
-  const bayRefs = useRef<(HTMLLIElement | null)[]>([]);
-  const drag = useRef<{ x: number; moved: boolean; id: number } | null>(null);
+  const [cam, setCam] = useState<Camera | null>(null);
+  const sceneRef = useRef<HTMLDivElement>(null);
+  const cameraRef = useRef<HTMLDivElement>(null);
+  const plaqueRef = useRef<HTMLDivElement>(null);
+  const drag = useRef<{ x: number; id: number; moved: boolean } | null>(null);
   const dragMoved = useRef(false);
   const wheelAcc = useRef(0);
   const wheelLock = useRef(0);
-  const regionId = useId();
+  const headingId = useId();
   const liveId = useId();
 
-  const count = items.length;
   const clamp = useCallback((i: number) => Math.max(0, Math.min(count - 1, i)), [count]);
-  const go = useCallback((i: number) => setActive(clamp(i)), [clamp]);
   const step = useCallback((d: number) => setActive((a) => clamp(a + d)), [clamp]);
 
-  /* Which mode we are in. Matches the stylesheet's 1023px breakpoint. */
   useLayoutEffect(() => {
     const mq = window.matchMedia("(min-width: 1024px)");
     const apply = () => setIsDesktop(mq.matches);
@@ -88,40 +108,49 @@ export function FounderGalleryWalk({ items }: { items: GalleryWalkItem[] }) {
     return () => mq.removeEventListener("change", apply);
   }, []);
 
-  /* Desktop: centre the active bay. Measured, so the bay width can be a
-     clamp() in CSS and the maths still lands. */
+  /* Desktop camera: pan and ease the plate so the bay sits centre-frame,
+     never showing past the plate's edge. Plaque goes beside the bay, on
+     whichever side has room. */
   useLayoutEffect(() => {
     if (!isDesktop) return;
-    const stage = stageRef.current;
-    const bay = bayRefs.current[active];
-    const track = trackRef.current;
-    if (!stage || !bay || !track) return;
+    const scene = sceneRef.current;
+    if (!scene) return;
     const compute = () => {
-      const stageW = stage.clientWidth;
-      const bayW = bay.offsetWidth;
-      setOffset(stageW / 2 - bayW / 2 - bay.offsetLeft);
+      const W = scene.clientWidth;
+      const H = scene.clientHeight;
+      const { fx, scale: s } = BAYS[active];
+      const tx = Math.min(0, Math.max(W - W * s, W / 2 - fx * W * s));
+      const ty = Math.min(0, Math.max(H - H * s, H / 2 - 0.5 * H * s));
+      const bayX = tx + fx * W * s;
+      const plaqueW = plaqueRef.current?.offsetWidth ?? 300;
+      const gap = 0.085 * W * s;
+      const right = bayX + gap;
+      const plaqueLeft =
+        right + plaqueW <= W - 16 ? right : Math.max(16, bayX - gap - plaqueW);
+      setCam({ tx, ty, s, bayX, sx: (bayX / W) * 100, plaqueLeft, plaqueTop: H * 0.3 });
     };
     compute();
     const ro = new ResizeObserver(compute);
-    ro.observe(stage);
+    ro.observe(scene);
     return () => ro.disconnect();
   }, [active, isDesktop]);
 
-  /* Mobile: the browser scrolls; we read the nearest bay back. */
+  /* Mobile: read the nearest bay back from the strip's scroll position. */
   useEffect(() => {
     if (isDesktop) return;
-    const track = trackRef.current;
-    if (!track) return;
+    const scene = sceneRef.current;
+    const camera = cameraRef.current;
+    if (!scene || !camera) return;
     let raf = 0;
     const onScroll = () => {
       cancelAnimationFrame(raf);
       raf = requestAnimationFrame(() => {
-        const centre = track.scrollLeft + track.clientWidth / 2;
+        const centre = scene.scrollLeft + scene.clientWidth / 2;
+        const w = camera.clientWidth;
         let best = 0;
         let bestD = Infinity;
-        bayRefs.current.forEach((el, i) => {
-          if (!el) return;
-          const d = Math.abs(el.offsetLeft + el.offsetWidth / 2 - centre);
+        BAYS.slice(0, count).forEach((b, i) => {
+          const d = Math.abs(b.fx * w - centre);
           if (d < bestD) {
             bestD = d;
             best = i;
@@ -130,50 +159,51 @@ export function FounderGalleryWalk({ items }: { items: GalleryWalkItem[] }) {
         setActive(best);
       });
     };
-    track.addEventListener("scroll", onScroll, { passive: true });
+    /* Land on the current bay without animating — a phone that opens on bay
+       01 when the state says 03 would announce one thing and show another. */
+    scene.scrollLeft = BAYS[Math.min(count - 1, 2)].fx * camera.clientWidth - scene.clientWidth / 2;
+    scene.addEventListener("scroll", onScroll, { passive: true });
     return () => {
-      track.removeEventListener("scroll", onScroll);
+      scene.removeEventListener("scroll", onScroll);
       cancelAnimationFrame(raf);
     };
-  }, [isDesktop]);
+  }, [isDesktop, count]);
 
-  /* Mobile arrows and keyboard scroll the strip; desktop just sets state. */
   const walkTo = useCallback(
     (i: number) => {
       const target = clamp(i);
       if (isDesktop) {
-        go(target);
+        setActive(target);
         return;
       }
-      const el = bayRefs.current[target];
-      const track = trackRef.current;
-      if (!el || !track) return;
-      track.scrollTo({
-        left: el.offsetLeft + el.offsetWidth / 2 - track.clientWidth / 2,
+      const scene = sceneRef.current;
+      const camera = cameraRef.current;
+      if (!scene || !camera) return;
+      scene.scrollTo({
+        left: BAYS[target].fx * camera.clientWidth - scene.clientWidth / 2,
         behavior: "smooth",
       });
     },
-    [clamp, go, isDesktop],
+    [clamp, isDesktop],
   );
 
-  /* Drag (desktop only — mobile has native swipe). */
+  /* Drag — desktop only; the phone strip is native. */
   const onPointerDown = (e: PointerEvent<HTMLDivElement>) => {
     if (!isDesktop || e.button !== 0) return;
-    drag.current = { x: e.clientX, moved: false, id: e.pointerId };
+    drag.current = { x: e.clientX, id: e.pointerId, moved: false };
   };
   const onPointerMove = (e: PointerEvent<HTMLDivElement>) => {
     const d = drag.current;
-    if (!d || d.id !== e.pointerId) return;
-    if (Math.abs(e.clientX - d.x) > 6) d.moved = true;
+    if (d && d.id === e.pointerId && Math.abs(e.clientX - d.x) > 6) d.moved = true;
   };
   const onPointerUp = (e: PointerEvent<HTMLDivElement>) => {
     const d = drag.current;
     if (!d || d.id !== e.pointerId) return;
-    const dx = e.clientX - d.x;
     drag.current = null;
+    if (d.moved) dragMoved.current = true;
+    const dx = e.clientX - d.x;
     if (Math.abs(dx) >= DRAG_THRESHOLD) step(dx < 0 ? 1 : -1);
   };
-  /* A drag that ends on a bay must not also follow the link. */
   const onClickCapture = (e: MouseEvent<HTMLDivElement>) => {
     if (dragMoved.current) {
       e.preventDefault();
@@ -181,17 +211,12 @@ export function FounderGalleryWalk({ items }: { items: GalleryWalkItem[] }) {
       dragMoved.current = false;
     }
   };
-  const onPointerUpCapture = (e: PointerEvent<HTMLDivElement>) => {
-    if (drag.current && drag.current.moved) dragMoved.current = true;
-    onPointerUp(e);
-  };
 
-  /* Horizontal wheel only. Vertical intent belongs to the page. Attached
-     natively because React registers onWheel as passive, and a passive
-     listener cannot stop the browser's own horizontal scroll. */
+  /* Horizontal wheel only; vertical intent belongs to the page. Native, so
+     preventDefault works (React's onWheel is passive). */
   useEffect(() => {
-    const stage = stageRef.current;
-    if (!stage || !isDesktop) return;
+    const scene = sceneRef.current;
+    if (!scene || !isDesktop) return;
     const onWheel = (e: globalThis.WheelEvent) => {
       const horizontal = e.shiftKey ? e.deltaY : e.deltaX;
       const vertical = e.shiftKey ? 0 : e.deltaY;
@@ -206,135 +231,108 @@ export function FounderGalleryWalk({ items }: { items: GalleryWalkItem[] }) {
         wheelLock.current = now + WHEEL_COOLDOWN;
       }
     };
-    stage.addEventListener("wheel", onWheel, { passive: false });
-    return () => stage.removeEventListener("wheel", onWheel);
+    scene.addEventListener("wheel", onWheel, { passive: false });
+    return () => scene.removeEventListener("wheel", onWheel);
   }, [isDesktop, step]);
 
   const onKeyDown = (e: KeyboardEvent<HTMLDivElement>) => {
-    if (e.key === "ArrowRight") {
+    const map: Record<string, number> = { ArrowRight: active + 1, ArrowLeft: active - 1, Home: 0, End: count - 1 };
+    if (e.key in map) {
       e.preventDefault();
-      walkTo(active + 1);
-    } else if (e.key === "ArrowLeft") {
-      e.preventDefault();
-      walkTo(active - 1);
-    } else if (e.key === "Home") {
-      e.preventDefault();
-      walkTo(0);
-    } else if (e.key === "End") {
-      e.preventDefault();
-      walkTo(count - 1);
+      walkTo(map[e.key]);
     }
   };
 
   const current = items[active];
+  const cameraStyle: CSSProperties | undefined =
+    isDesktop && cam ? { transform: `translate(${cam.tx}px, ${cam.ty}px) scale(${cam.s})` } : undefined;
+  const plaqueStyle: CSSProperties | undefined =
+    isDesktop && cam ? { left: cam.plaqueLeft, top: cam.plaqueTop } : undefined;
+  const spotStyle =
+    isDesktop && cam
+      ? ({ "--sx": `${cam.sx}%`, "--sy": "48%" } as CSSProperties)
+      : undefined;
 
   return (
-    <section
-      aria-labelledby={regionId}
-      className={`${styles.room} section pt-10 pb-0`}
-      style={
-        {
-          "--bay-w": "clamp(15rem, 24vw, 22rem)",
-          "--gap": "clamp(1.25rem, 3vw, 3rem)",
-        } as CSSProperties
-      }
-    >
-      <div className={`shell ${styles.head}`}>
-        <p className="room-label">Room 03 · The Collection</p>
-        <h2
-          id={regionId}
-          className="mt-4 font-serif text-4xl leading-[1.02] text-cream md:text-6xl text-balance"
-        >
-          Choose your next move.
-        </h2>
-        <p className="mt-3 max-w-prose text-cream/80">
-          Walk the room. Every product opens a different door.
-        </p>
-      </div>
+    <section aria-labelledby={headingId} className={styles.room}>
+      <div className="relative">
+        {/* Copy over the frame, top left, as drawn. */}
+        <div className={`${styles.head} px-5 lg:px-0`}>
+          <p className="room-label">Room 03 · The Collection</p>
+          <h2
+            id={headingId}
+            className="mt-3 font-serif text-4xl leading-[1.02] text-cream md:text-6xl text-balance"
+          >
+            Choose your next move.
+          </h2>
+          <p className="mt-2 max-w-prose text-cream/85 md:text-lg">
+            Walk the room. Every product opens a different door.
+          </p>
+        </div>
 
-      <div
-        ref={stageRef}
-        className={`${styles.stage} relative mt-10 md:mt-14`}
-        tabIndex={0}
-        role="group"
-        aria-roledescription="carousel"
-        aria-label="The FOUNDER Collection — walk the room"
-        aria-describedby={liveId}
-        onKeyDown={onKeyDown}
-        onPointerDown={onPointerDown}
-        onPointerMove={onPointerMove}
-        onPointerUp={onPointerUpCapture}
-        onPointerCancel={() => (drag.current = null)}
-        onClickCapture={onClickCapture}
-        style={{ touchAction: isDesktop ? "pan-y" : undefined, cursor: isDesktop ? "grab" : undefined }}
-      >
-        <div className={styles.floor} aria-hidden />
-        <ul
-          ref={trackRef}
-          className={`${styles.track} lg:px-0`}
-          style={isDesktop ? { transform: `translate3d(${offset}px, 0, 0)` } : undefined}
+        <div
+          ref={sceneRef}
+          className={styles.scene}
+          tabIndex={0}
+          role="group"
+          aria-roledescription="carousel"
+          aria-label="The FOUNDER Collection — walk the room"
+          aria-describedby={liveId}
+          onKeyDown={onKeyDown}
+          onPointerDown={onPointerDown}
+          onPointerMove={onPointerMove}
+          onPointerUp={onPointerUp}
+          onPointerCancel={() => (drag.current = null)}
+          onClickCapture={onClickCapture}
+          style={isDesktop ? { touchAction: "pan-y" } : undefined}
         >
-          {items.map((item, i) => {
-            const pos = i - active;
-            return (
-              <li
-                key={item.href}
-                ref={(el) => {
-                  bayRefs.current[i] = el;
-                }}
-                className={styles.bay}
-                data-pos={Math.max(-2, Math.min(2, pos))}
-                aria-current={pos === 0 ? "true" : undefined}
-              >
-                <Link
-                  href={item.href}
-                  className={styles.bayLink}
-                  draggable={false}
-                  onClick={(e) => {
-                    /* A click on a neighbour walks to it first; the second
-                       click enters the room. The active bay is a plain link. */
-                    if (pos !== 0) {
-                      e.preventDefault();
-                      walkTo(i);
-                    }
-                  }}
-                  aria-label={`${item.name} — ${item.descriptor}. ${item.state}. ${item.action}`}
-                >
-                  <div className={styles.arch}>
-                    <div className={styles.product}>
-                      <Image
-                        src={item.image}
-                        alt={item.alt}
-                        fill
-                        sizes="(max-width: 1023px) 70vw, 24vw"
-                        priority={i === 0}
-                        loading={i === 0 ? "eager" : "lazy"}
-                        draggable={false}
-                      />
-                    </div>
-                  </div>
-                  <div className={styles.plinth} aria-hidden />
-                  <p className={styles.caption} aria-hidden>
-                    {item.name}
-                  </p>
-                </Link>
-              </li>
-            );
-          })}
-        </ul>
+          <div ref={cameraRef} className={styles.camera} style={cameraStyle}>
+            <Image
+              src={PLATE.src}
+              alt={PLATE_ALT}
+              fill
+              priority
+              sizes="(max-width: 1023px) 260vw, 100vw"
+              draggable={false}
+            />
+            {/* One link per bay, inside the camera so it travels with the
+                plate. Clicking a neighbour walks to it; the active bay is a
+                plain link into its room. */}
+            <ul className="m-0 list-none p-0">
+              {items.slice(0, count).map((item, i) => (
+                <li key={item.href}>
+                  <Link
+                    href={item.href}
+                    className={styles.hot}
+                    style={{ left: `${BAYS[i].fx * 100}%` }}
+                    aria-current={i === active ? "true" : undefined}
+                    aria-label={`${item.name} — ${item.descriptor}. ${item.state}. ${item.action}`}
+                    draggable={false}
+                    onClick={(e) => {
+                      if (i !== active) {
+                        e.preventDefault();
+                        walkTo(i);
+                      }
+                    }}
+                  />
+                  <span aria-hidden className={styles.snap} style={{ left: `${BAYS[i].fx * 100}%` }} />
+                </li>
+              ))}
+            </ul>
+          </div>
+          {isDesktop && <div key={active} className={styles.spot} style={spotStyle} aria-hidden />}
+        </div>
 
-        {/* The plaque: beside the active bay on desktop, under the strip on
-            phones so it never covers packaging. Keyed on the product so the
-            content crossfades rather than snapping. */}
-        <div className={styles.plaque}>
+        {/* The plaque: beside the active bay; under the strip on phones. */}
+        <div ref={plaqueRef} className={styles.plaque} style={plaqueStyle}>
           <div key={current.href} className={styles.plaqueInner}>
             <p className="room-label">
               {current.n} · {current.archetype}
             </p>
-            <p className="mt-3 font-serif text-[1.75rem] font-light uppercase leading-none tracking-[0.02em] text-cream">
+            <p className="mt-3 font-serif text-[1.65rem] font-light uppercase leading-none tracking-[0.03em] text-cream">
               {current.name}
             </p>
-            <p className="mt-2 text-[0.8125rem] text-cream/80">{current.descriptor}</p>
+            <p className="mt-2 text-[0.8125rem] text-cream/85">{current.descriptor}</p>
             <p className="mt-4 flex items-center gap-2 text-[0.5625rem] uppercase tracking-[0.18em] text-cream/80">
               <span
                 aria-hidden
@@ -351,57 +349,69 @@ export function FounderGalleryWalk({ items }: { items: GalleryWalkItem[] }) {
           </div>
         </div>
 
-      {/* Controls and the brass progress line. */}
-      <div className={`shell ${styles.controls}`}>
-        <div className="flex items-center gap-5">
-          <button
-            type="button"
-            className={styles.arrow}
-            onClick={() => walkTo(active - 1)}
-            disabled={active === 0}
-            aria-label={active > 0 ? `Previous: ${items[active - 1].name}` : "Previous product"}
-          >
-            <span aria-hidden>←</span>
-          </button>
-          <div className={`${styles.progress} flex-1`}>
+        <button
+          type="button"
+          className={`${styles.arrow} ${styles.arrowPrev}`}
+          onClick={() => walkTo(active - 1)}
+          disabled={active === 0}
+          aria-label={active > 0 ? `Previous: ${items[active - 1].name}` : "Previous product"}
+        >
+          <span aria-hidden>←</span>
+        </button>
+        <button
+          type="button"
+          className={`${styles.arrow} ${styles.arrowNext}`}
+          onClick={() => walkTo(active + 1)}
+          disabled={active === count - 1}
+          aria-label={active < count - 1 ? `Next: ${items[active + 1].name}` : "Next product"}
+        >
+          <span aria-hidden>→</span>
+        </button>
+
+        <p className={styles.cue} aria-hidden>
+          Drag to walk the room
+        </p>
+      </div>
+
+      {/* The rail: the brass line, one tick per bay, and the phone cue. */}
+      <div className={styles.rail}>
+        <div className="shell">
+          <div className={`${styles.progress} mx-8 lg:mx-16`}>
             <span
               className={styles.progressLine}
               style={{ width: `${(100 / (count - 1)) * active}%` }}
               aria-hidden
             />
-            {items.map((item, i) => (
-              <button
-                key={item.href}
-                type="button"
-                className={styles.tick}
-                style={{ left: `${(100 / (count - 1)) * i}%` }}
-                data-active={i === active}
-                onClick={() => walkTo(i)}
-                aria-label={`Go to ${item.name}`}
-                aria-current={i === active ? "true" : undefined}
-              />
+            {items.slice(0, count).map((item, i) => (
+              <span key={item.href}>
+                <button
+                  type="button"
+                  className={styles.tick}
+                  style={{ left: `${(100 / (count - 1)) * i}%` }}
+                  data-active={i === active}
+                  onClick={() => walkTo(i)}
+                  aria-label={`Go to ${item.name}`}
+                  aria-current={i === active ? "true" : undefined}
+                />
+                <span
+                  className={styles.tickLabel}
+                  style={{ left: `${(100 / (count - 1)) * i}%` }}
+                  data-active={i === active}
+                  aria-hidden
+                >
+                  {item.name}
+                </span>
+              </span>
             ))}
           </div>
-          <button
-            type="button"
-            className={styles.arrow}
-            onClick={() => walkTo(active + 1)}
-            disabled={active === count - 1}
-            aria-label={active < count - 1 ? `Next: ${items[active + 1].name}` : "Next product"}
-          >
-            <span aria-hidden>→</span>
-          </button>
+          <p className="mt-10 text-center text-[0.5625rem] uppercase tracking-[0.22em] text-cream/60 lg:hidden">
+            Swipe to walk the room
+          </p>
+          <p id={liveId} className="sr-only" aria-live="polite">
+            {current.n} · {current.name}. {current.descriptor}. {current.state}. {current.action}.
+          </p>
         </div>
-        <p className="mt-5 text-center text-[0.5625rem] uppercase tracking-[0.22em] text-cream/60">
-          <span className="hidden lg:inline">Drag to walk the room</span>
-          <span className="lg:hidden">Swipe to walk the room</span>
-        </p>
-        <p id={liveId} className="sr-only" aria-live="polite">
-          {current.n} · {current.name}. {current.descriptor}. {current.state}. {current.action}.
-        </p>
       </div>
-      </div>
-
     </section>
   );
 }

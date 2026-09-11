@@ -405,7 +405,7 @@ export default function HomePage() {
             <div className="relative aspect-[1003/1568] w-full overflow-hidden bg-emerald">
               <Image
                 src="/products/hold-the-room-vanity-mirror.webp"
-                alt="Hold the Room on a marble dressing table in front of a gilt mirror, a woman fastening her cuff in the reflection."
+                alt="Hold the Room and its Desert Pink carton on a marble dressing table in front of a gilt mirror, a woman fastening her cuff in the reflection."
                 fill
                 loading="lazy"
                 sizes="(max-width: 1024px) 90vw, 34vw"

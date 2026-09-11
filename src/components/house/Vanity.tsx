@@ -11,6 +11,7 @@
  * here when it changes there.
  */
 
+import Link from "next/link";
 import { useCallback, useEffect, useRef, useState } from "react";
 import s from "./vanity.module.css";
 
@@ -131,7 +132,9 @@ export function Vanity({ items, title, lede }: { items: VanityItem[]; title: str
         ))}
       </div>
 
-      <div ref={shelf} className={s.shelf} role="listbox" aria-label="The FOUNDER Collection, in ritual order">
+      {/* Each product is its own link: hover lights it, click enters its room.
+          Shelby, 11 Sep — "you should be able to click the actual product". */}
+      <div ref={shelf} className={s.shelf} aria-label="The FOUNDER Collection, in ritual order">
         {items.map((it, i) => {
           const p = PIECES[slugOf(it.href)];
           return (
@@ -139,20 +142,22 @@ export function Vanity({ items, title, lede }: { items: VanityItem[]; title: str
               key={it.href}
               ref={(el) => { slots.current[i] = el; }}
               data-i={i}
-              role="option"
-              tabIndex={0}
-              aria-selected={i === active}
-              aria-label={`${it.name}, ${it.descriptor}`}
               className={`${s.slot} ${i === active ? s.slotOn : ""}`}
               style={{ "--h": p.h } as React.CSSProperties}
               onMouseEnter={() => { if (!phone()) { paused.current = true; light(i); } }}
               onMouseLeave={() => { paused.current = false; }}
-              onClick={() => light(i)}
-              onFocus={() => light(i)}
             >
               <span className={s.cone} />
-              {/* eslint-disable-next-line @next/next/no-img-element -- already-optimised alpha webp cutouts, sized by the true-scale unit in CSS; next/image cannot size by a CSS variable */}
-              <img src={p.src} alt={it.alt} width={p.w} height={p.ph} loading={i === 2 ? "eager" : "lazy"} decoding="async" />
+              <Link
+                href={it.href}
+                className={s.piece}
+                aria-label={`${it.name} — ${it.descriptor}. Enter this room.`}
+                aria-current={i === active ? "true" : undefined}
+                onFocus={() => light(i)}
+              >
+                {/* eslint-disable-next-line @next/next/no-img-element -- already-optimised alpha webp cutouts, sized by the true-scale unit in CSS; next/image cannot size by a CSS variable */}
+                <img src={p.src} alt={it.alt} width={p.w} height={p.ph} loading={i === 2 ? "eager" : "lazy"} decoding="async" />
+              </Link>
               <span className={s.refl} />
             </div>
           );

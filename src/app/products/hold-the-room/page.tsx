@@ -161,7 +161,7 @@ export default function HoldTheRoomPage() {
         <div className="relative min-h-[60svh] lg:min-h-[46rem]">
           <Image
             src="/products/hold-the-room-vanity-mirror.webp"
-            alt="Hold the Room on a marble dressing table in front of a gilt mirror, a woman in a cream suit fastening her cuff in the reflection."
+            alt="Hold the Room and its Desert Pink carton on a marble dressing table in front of a gilt mirror, a woman in a cream suit fastening her cuff in the reflection."
             fill
             loading="lazy"
             sizes="(max-width: 1024px) 100vw, 52vw"

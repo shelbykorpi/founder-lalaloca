@@ -144,6 +144,8 @@
   transition: opacity 0.8s var(--ease);
   pointer-events: none;
 }
+.piece { display: block; line-height: 0; }
+.piece:focus-visible { outline: 1.5px solid var(--color-champagne); outline-offset: 10px; }
 .slot img {
   display: block;
   width: auto;

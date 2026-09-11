@@ -110,7 +110,7 @@ export function EmeraldDoorPortal({
             come from the picture, so this only lifts it. */}
         <span
           aria-hidden
-          className="absolute inset-0 bg-[radial-gradient(60%_70%_at_50%_45%,rgba(216,167,160,0.3)_0%,rgba(216,167,160,0.08)_40%,rgba(7,19,15,0)_70%)]"
+          className="absolute inset-0 bg-[radial-gradient(60%_70%_at_50%_45%,rgba(216,167,160,0.3)_0%,rgba(216,167,160,0.08)_40%,rgba(14,33,27,0)_70%)]"
         />
       </span>
 

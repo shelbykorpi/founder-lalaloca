@@ -151,7 +151,7 @@ export default function FoundHerPage() {
                       />
                       <span
                         aria-hidden
-                        className="absolute inset-0 bg-[linear-gradient(90deg,transparent_60%,rgba(7,19,15,0.85))]"
+                        className="absolute inset-0 bg-[linear-gradient(90deg,transparent_60%,rgba(14,33,27,0.7))]"
                       />
                     </span>
                   )}

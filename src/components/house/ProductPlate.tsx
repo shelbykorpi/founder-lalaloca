@@ -82,7 +82,7 @@ export function ProductPlate({ product }: { product: NextMoveProduct }) {
           over the lit part of the frame at any width. */}
       <div
         aria-hidden
-        className="pointer-events-none absolute inset-0 bg-[linear-gradient(180deg,rgba(7,19,15,0.55)_0%,rgba(7,19,15,0.25)_30%,rgba(7,19,15,0.95)_86%,#07130f_100%)] md:bg-[linear-gradient(90deg,#07130f_0%,rgba(7,19,15,0.95)_28%,rgba(7,19,15,0.6)_44%,rgba(7,19,15,0.05)_66%)]"
+        className="pointer-events-none absolute inset-0 bg-[linear-gradient(180deg,rgba(14,33,27,0.45)_0%,rgba(14,33,27,0.2)_30%,rgba(14,33,27,0.78)_86%,#0e211b_100%)] md:bg-[linear-gradient(90deg,#0e211b_0%,rgba(14,33,27,0.78)_28%,rgba(14,33,27,0.49)_44%,rgba(14,33,27,0.04)_66%)]"
       />
 
       <div className="shell relative flex w-full flex-1 items-end pb-16 pt-28 md:items-center md:py-24">
@@ -317,7 +317,7 @@ export function ProductPlate({ product }: { product: NextMoveProduct }) {
         />
         <div
           aria-hidden
-          className="absolute inset-0 bg-[linear-gradient(90deg,rgba(7,19,15,0.96)_0%,rgba(7,19,15,0.86)_34%,rgba(7,19,15,0.4)_62%,rgba(7,19,15,0.1)_100%)]"
+          className="absolute inset-0 bg-[linear-gradient(90deg,rgba(14,33,27,0.79)_0%,rgba(14,33,27,0.71)_34%,rgba(14,33,27,0.33)_62%,rgba(14,33,27,0.08)_100%)]"
         />
         <div className="shell relative py-24 md:py-32">
           <Reveal className="max-w-[30rem]">

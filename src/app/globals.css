@@ -54,9 +54,17 @@
      WHAT THE DARK BUYS US. Antique Gold is 3.04:1 on Founder Green and fails
      as small text; on #07130f it is 6.01:1 and passes. Going darker retires
      the gold-contrast problem rather than deepening it. */
-  --color-night: #07130f; /* the room with the lights off */
-  --color-night-deep: #030806; /* the hall between rooms */
-  --color-marble: #100f0d;
+  /* LIGHTS UP — 11 Sept 2026, Shelby: "brighten the atmosphere on the
+     entire website, it's a little too dark." One stop up across the house:
+     night #07130f → #0e211b, the hall #030806 → #091712, the marble a shade
+     warmer. Still the room after dark — the candle is lit now, not the
+     chandelier. Antique Gold on the new night measures 5.32:1 (was 6.01),
+     still AA for small text; Champagne 9.3:1; Desert Rose 7.9:1. Every
+     hard-coded rgba(7,19,15) scrim in the components moved to rgba(14,33,27)
+     with it, and the photograph lift lives in `.editorial-lift` below. */
+  --color-night: #0e211b; /* the room with the lights on low */
+  --color-night-deep: #091712; /* the hall between rooms */
+  --color-marble: #171513;
   --color-marble-vein: #725a42;
   --color-rose-deep: #b87978; /* Desert Rose in shadow / as a light source */
 
@@ -815,11 +823,22 @@
       radial-gradient(100% 80% at 82% 100%, rgba(176, 138, 100, 0.10) 0%, transparent 64%);
     color: var(--color-cream);
   }
-  /* Photograph continuing behind a section — darkened to hold type. */
+  /* Photograph continuing behind a section — darkened to hold type.
+     Lights up, 11 Sept: 0.86/0.78/0.92 → 0.74/0.64/0.82. */
   .house-scene-dim {
     position: absolute;
     inset: 0;
-    background: linear-gradient(180deg, rgba(7, 19, 15, 0.86) 0%, rgba(7, 19, 15, 0.78) 50%, rgba(7, 19, 15, 0.92) 100%);
+    background: linear-gradient(180deg, rgba(14, 33, 27, 0.74) 0%, rgba(14, 33, 27, 0.64) 50%, rgba(14, 33, 27, 0.82) 100%);
+  }
+
+  /* LIGHTS UP — the photography. Every room and editorial frame on the site
+     was graded for the #07130f world and reads a stop under. Rather than
+     re-export forty files, the lift is applied once here to every editorial
+     photograph (Next serves them as /_next/image?url=%2Feditorial%2F…, so
+     the substring match holds). Product cutouts under /products/ are not
+     touched — they were never dimmed. */
+  img[src*="editorial"] {
+    filter: brightness(1.2) contrast(0.97);
   }
 
   /* Hero actions go full width on phones. */

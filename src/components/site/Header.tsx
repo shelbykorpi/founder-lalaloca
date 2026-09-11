@@ -88,7 +88,7 @@ export function Header() {
           {/* Colourway 03 — Founder Green over Desert Rose — is the board's
               light-background alternate. It cannot survive on a night ground,
               so the dark rooms take Champagne over Desert Rose instead: the
-              same two-tone structure, both halves legible on #07130f. */}
+              same two-tone structure, both halves legible on #0e211b. */}
           <span className="md:hidden text-champagne">
             <Wordmark
               height={130 / FOUNDER_ASPECT}

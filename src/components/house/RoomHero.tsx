@@ -77,6 +77,8 @@ export function RoomHero({
       id={id}
       className={`relative isolate flex ${height} flex-col justify-end overflow-hidden bg-night text-cream`}
     >
+      {/* Lights up, 11 Sept 2026: every scrim alpha in this file is 0.82× what
+          it was, so the rooms show more of themselves behind the copy. */}
       {/* The wide frame on desktop; the portrait crop on phones. Two
           elements, CSS-hidden, so each breakpoint gets a picture composed
           for it rather than the same crop squeezed. Only the desktop frame
@@ -113,7 +115,7 @@ export function RoomHero({
             className="pointer-events-none absolute inset-0 md:hidden"
             style={{
               background:
-                "linear-gradient(180deg, rgba(7,19,15,0.30) 0%, rgba(7,19,15,0) 42%, rgba(7,19,15,0.55) 74%, rgba(7,19,15,0.9) 100%)",
+                "linear-gradient(180deg, rgba(14,33,27,0.25) 0%, rgba(14,33,27,0) 42%, rgba(14,33,27,0.45) 74%, rgba(14,33,27,0.74) 100%)",
             }}
           />
           <div
@@ -121,7 +123,7 @@ export function RoomHero({
             className="pointer-events-none absolute inset-0 hidden md:block"
             style={{
               background:
-                "linear-gradient(90deg, rgba(7,19,15,0.62) 0%, rgba(7,19,15,0.34) 24%, rgba(7,19,15,0.08) 46%, rgba(7,19,15,0) 62%), linear-gradient(0deg, rgba(7,19,15,0.5) 0%, rgba(7,19,15,0) 20%)",
+                "linear-gradient(90deg, rgba(14,33,27,0.51) 0%, rgba(14,33,27,0.28) 24%, rgba(14,33,27,0.07) 46%, rgba(14,33,27,0) 62%), linear-gradient(0deg, rgba(14,33,27,0.41) 0%, rgba(14,33,27,0) 20%)",
             }}
           />
         </>
@@ -130,8 +132,8 @@ export function RoomHero({
           aria-hidden
           className={`pointer-events-none absolute inset-0 ${
             align === "center"
-              ? "bg-[linear-gradient(180deg,rgba(7,19,15,0.25)_0%,rgba(7,19,15,0)_30%,rgba(7,19,15,0.55)_62%,rgba(7,19,15,0.94)_100%)]"
-              : "bg-[linear-gradient(180deg,rgba(7,19,15,0.35)_0%,rgba(7,19,15,0.12)_32%,rgba(7,19,15,0.9)_76%,#07130f_100%)] md:bg-[linear-gradient(90deg,#07130f_0%,#07130f_20%,rgba(7,19,15,0.93)_34%,rgba(7,19,15,0.6)_48%,rgba(7,19,15,0.08)_66%,rgba(7,19,15,0)_80%)]"
+              ? "bg-[linear-gradient(180deg,rgba(14,33,27,0.2)_0%,rgba(14,33,27,0)_30%,rgba(14,33,27,0.45)_62%,rgba(14,33,27,0.77)_100%)]"
+              : "bg-[linear-gradient(180deg,rgba(14,33,27,0.29)_0%,rgba(14,33,27,0.1)_32%,rgba(14,33,27,0.74)_76%,#0e211b_100%)] md:bg-[linear-gradient(90deg,#0e211b_0%,#0e211b_20%,rgba(14,33,27,0.76)_34%,rgba(14,33,27,0.49)_48%,rgba(14,33,27,0.07)_66%,rgba(14,33,27,0)_80%)]"
           }`}
         />
       )}

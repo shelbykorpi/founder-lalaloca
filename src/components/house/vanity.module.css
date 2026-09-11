@@ -40,8 +40,8 @@
   inset: 0;
   pointer-events: none;
   background:
-    linear-gradient(90deg, rgba(7, 19, 15, 0.42), transparent 20% 80%, rgba(7, 19, 15, 0.36)),
-    linear-gradient(180deg, rgba(7, 19, 15, 0.28), transparent 28% 72%, rgba(7, 19, 15, 0.5));
+    linear-gradient(90deg, rgba(14, 33, 27, 0.32), transparent 20% 80%, rgba(14, 33, 27, 0.27)),
+    linear-gradient(180deg, rgba(14, 33, 27, 0.21), transparent 28% 72%, rgba(14, 33, 27, 0.38));
 }
 
 .words {
@@ -68,7 +68,7 @@
   letter-spacing: 0.26em;
   text-transform: uppercase;
   color: var(--color-champagne);
-  background: rgba(7, 19, 15, 0.25);
+  background: rgba(14, 33, 27, 0.19);
   backdrop-filter: blur(6px);
   transition: border-color 0.3s, background 0.3s;
 }

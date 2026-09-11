@@ -162,7 +162,7 @@ export function EnterTheHouse({ className = "hairline text-cream" }: { className
           />
           <div
             aria-hidden
-            className="absolute inset-0 bg-[linear-gradient(90deg,rgba(7,19,15,0.92)_0%,rgba(7,19,15,0.7)_38%,rgba(7,19,15,0.15)_70%)]"
+            className="absolute inset-0 bg-[linear-gradient(90deg,rgba(14,33,27,0.75)_0%,rgba(14,33,27,0.57)_38%,rgba(14,33,27,0.12)_70%)]"
           />
           <span aria-hidden className="ambient-fire absolute inset-0" />
 

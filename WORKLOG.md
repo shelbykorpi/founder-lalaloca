@@ -967,3 +967,13 @@ at the folder" and the honest answer was no. Logging it all now.
   the new Room 02 — reshoot the set at 2400+ in the same light?
   HOLD THE ROOM 30 ml (Shopify) vs 50 ml (packaging) conflict still
   unresolved; Room 04 copy still says chamomile.
+- (same session, later) Serum Salon bottles: c-me-glow-bottle.png and
+  bounce-back-bottle.png were soft 720px upscales; Thirst Trap was sharp.
+  Both re-cut (rembg isnet-general-use) from the 1800px Etsy product
+  photos already on the Shopify listings, exported 2x (657×1440 and
+  478×1440). Same paths, so every place that uses product.bottle (salon,
+  homepage, PDP "other serums", quiz, door frame, SEO image) picks them up.
+  SerumAlcove <Image> width/height 140×280 → 360×720 so retina gets the
+  720-wide candidate. Thirst Trap untouched. Bounce Back's bottle is
+  photographed slightly slimmer than the other two — real photo, not
+  distorted to match. Commit bb71eab, unpushed.

@@ -69,8 +69,11 @@ export function SerumAlcove({ product, index }: { product: Product; index: numbe
             <Image
               src={product.bottle}
               alt={`The ${product.name} bottle.`}
-              width={140}
-              height={280}
+              /* 11 Sept 2026: 360×720, not 140×280. The bottle renders at
+                 ~220 CSS px, so on a retina screen Next was serving a 280 px
+                 file to a 440 px slot. The sources are now 2x cutouts. */
+              width={360}
+              height={720}
               loading={index === 0 ? "eager" : "lazy"}
               className="relative z-10 h-[62%] w-auto translate-y-[14%] object-contain transition-all duration-700 group-hover:-translate-y-[10%] group-hover:scale-[1.03]"
               style={{

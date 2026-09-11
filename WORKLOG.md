@@ -824,3 +824,9 @@ LEFT ALONE / WARNING for whoever lands the FOUND HER work above:
   unreferenced (the-room-is-yours.webp is still used on /found-her) — safe
   to delete when delete permission is available. Build clean. Committed,
   not pushed.
+- Later still, 10 Sept · Claude (Cowork): homepage — a Desert Rose FOUND HER
+  band now sits where the gallery was, between the Room 02 hero and Room 03:
+  label FOUND HER · BRAND.campaign ("You didn't become her. You found her.")
+  · "The story begins where the performance ends." · hairline to /found-her.
+  Same construction as the pledge band. Build clean, checked at 1440 and
+  390. Committed, not pushed.

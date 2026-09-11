@@ -258,11 +258,38 @@ export default function HomePage() {
           Follow the light ↓
         </a>
       </RoomHero>
-      {/* The three-tile gallery that followed this hero (The mirror · The note ·
-          The company, with an "Inside FOUNDER" link) was removed on
-          10 Sept 2026 at Shelby's direction. The room's hero stays: it is the
-          #room-house anchor that "Enter the house" and Room 07's doors resolve
-          to, and the copy on it is untouched. */}
+      {/* ══ FOUND HER — the note on the vanity ══════════════════════════════
+          10 Sept 2026. The three-tile gallery that used to follow this hero
+          (The mirror · The note · The company) came out at Shelby's
+          direction, and this band took its place: Desert Rose at full voice,
+          the one ground the board reserves for FOUND HER, between the lounge
+          and the collection. Same construction as the pledge band further
+          down — label, one serif line, one hairline — so the two rose moments
+          on the page read as the same gesture. The campaign line is
+          BRAND.campaign, never retyped. The hero above keeps the #room-house
+          anchor that "Enter the house" and Room 07's doors resolve to. */}
+      <section
+        aria-labelledby="found-her-band"
+        className="section-tight bg-rose py-14 text-charcoal md:py-16"
+      >
+        <div className="shell flex flex-col items-center gap-4 text-center">
+          <p className="room-label" style={{ color: "#5a2f2c" }}>
+            Found Her
+          </p>
+          <p
+            id="found-her-band"
+            className="max-w-[22ch] font-serif text-[clamp(1.6rem,3.4vw,2.75rem)] leading-tight text-balance"
+          >
+            {BRAND.campaign}
+          </p>
+          <p className="max-w-[34ch] text-charcoal/75">
+            The story begins where the performance ends.
+          </p>
+          <Link href="/found-her" className="hairline mt-2 text-charcoal">
+            Read their stories
+          </Link>
+        </div>
+      </section>
 
       {/* ══ 03 · THE COLLECTION ═════════════════════════════════════════════
           Six on the shelf at three stages, and the state line under each name

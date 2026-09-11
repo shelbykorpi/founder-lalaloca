@@ -906,3 +906,64 @@ LEFT ALONE / WARNING for whoever lands the FOUND HER work above:
   shows a quarter of it; the centred crop cut Shelby's face off the top.
   object-position is now 60% 35% — her head sits under the band's top edge
   and the floor is what's lost. Both files, same change.
+
+## 2026-09-11 (evening) · Claude (Cowork) — Vanity, stacked nav, Room 02 reshoot, lights up
+Five commits on main, all from Shelby's direct requests in one session.
+Read AGENTS.md / this log only AFTER the work — Shelby asked "did you look
+at the folder" and the honest answer was no. Logging it all now.
+- 7253e4a / 4a89493 — Room 03 is THE VANITY (src/components/house/Vanity.tsx
+  + vanity.module.css): five product cutouts standing on the console of a
+  real room, lit by hover/tap/keys, "Play the ritual", phone scroll-snap.
+  Replaced FounderGalleryWalk on the homepage (component kept on disk).
+  Rule it is built on: the product is never dimmed. Cutouts
+  public/products/*-vanity.webp (rembg u2net from Selfnamed renders);
+  room public/editorial/rooms/vanity-console.webp; bulb
+  public/brand/vanity-bulb.webp. Room 04's hold-the-room-vanity-mirror.webp
+  replaced in place with the current pink-carton Hold the Room. The vanity
+  products link to their product pages. Written up in the Claude project
+  as claude/founder-vanity-room-03.md.
+- b200bb2 — Header: every primary tab is a two-line stack (PRIMARY_NAV
+  `stack`): Shop/The Serums, The FOUNDER/Collection, Our/Story, Found/Her,
+  Young Founders'/Room, The/Library. Mobile menu and accessible names
+  unchanged. Breakpoint stays xl. CONFIRMED LIVE on founderbeauty.co.
+- f9be6fb — Room 02 hero: Shelby's portrait composited into the lounge
+  chair. Shelby rejected it ("fake, blurry") — correctly; a cutout on a
+  1672px plate. SUPERSEDED by:
+- 634d840 — Room 02 reshot as ONE photograph (generated, photoreal): woman
+  in rose silk in the green velvet chair by the marble fireplace, cream
+  blazer on the sofa, brass lamp. public/editorial/rooms/inside-founder-
+  lounge.webp now 2400×1339 (was 1672×806) + a true 3:4 phone frame
+  906×1209. Graded to the house. rooms.ts alt + position 66%. The ungraded
+  source and a second take are NOT in the repo (Claude workspace only).
+- 08030bc — LIGHTS UP, site-wide, Shelby: "a little too dark". In
+  globals.css: --color-night #07130f → #0e211b, --color-night-deep #030806
+  → #091712, --color-marble → #171513; one global rule
+  `img[src*="editorial"] { filter: brightness(1.2) contrast(0.97) }` lifts
+  every editorial photograph; .house-scene-dim eased. Every hard-coded
+  rgba(7,19,15)/#07130f scrim in RoomHero, ProductPlate, RoomTransition,
+  EmeraldDoorPortal, found-her, hold-the-room page and vanity.module.css
+  moved to rgba(14,33,27) AND multiplied by 0.82 (vanity 0.75).
+  vanity-console.webp re-exported 1.22× brighter. Board check: #07130f was
+  never a board token (it is Shelby's 27 Aug after-hours ground); the nine
+  board tokens are untouched; Antique Gold on the new night is 5.32:1
+  (was 6.01), still AA. Deep Emerald #0A2523 unchanged.
+- Also this session, outside the repo: all seven Selfnamed bottle labels
+  carry the FOUND HER signature (Sacramento, lower-right, tilted); cart
+  7 / $93.00. Site/Shopify product images are pre-signature — renders
+  should be re-pulled from the studios next time the *-pack/-cut/-vanity
+  images are regenerated.
+- NOT changed: commerce, buy path, hardcoded variant IDs, copy, wordmark,
+  monogram, room roles, any board token.
+- Verification caveat: `npm run build` cannot run from the Cowork VM
+  (Google Fonts blocked → next/font fails), so each commit was checked
+  with tsc --noEmit + eslint (both clean apart from two pre-existing
+  set-state-in-effect errors in PlateShades/ThresholdDoors, not mine) and
+  screenshots of the LIVE site with the CSS injected for the lights-up
+  preview. The Room 02 frame and the Vanity were checked as images, not
+  in a running build. Shelby should watch the first Vercel build.
+- UNPUSHED at time of writing: f9be6fb, 08030bc, 634d840 (b200bb2 and
+  earlier are live). Push: `git push origin main`.
+- Open for Shelby: the other room plates are still 1672px and softer than
+  the new Room 02 — reshoot the set at 2400+ in the same light?
+  HOLD THE ROOM 30 ml (Shopify) vs 50 ml (packaging) conflict still
+  unresolved; Room 04 copy still says chamomile.

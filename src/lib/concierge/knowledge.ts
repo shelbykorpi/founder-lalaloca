@@ -105,7 +105,7 @@ const BRAND_FACTS: Fact[] = [
     id: "brand:who",
     cues: ["founder", "brand", "who are you", "about", "philosophy", "lalaloca", "stand for", "why"],
     text: [
-      `${BRAND.structure} FOUNDER is the only brand name — on the order, the receipt, the bottle and the packaging. The First Room is the three serums that ship today; the FOUNDER Collection is the full routine. LALALOCA is what the First Room was called when it was built, and it still holds that name in Our Story and in the Young Founders\u2019 Room.`,
+      `${BRAND.structure} FOUNDER is the master brand and the seller of record — the name on the order, the receipt and the packaging. LALALOCA is the name of the serum collection.`,
       `Belief: ${BRAND.belief} Campaign line: ${BRAND.campaign} Tagline: ${BRAND.tagline}`,
       `The brand line is set on two lines and never one: "${BRAND.campaignLines[0]}" / "${BRAND.campaignLines[1]}"`,
       `Not every woman has a company. Every woman is building something. Three serums, and the rest of what the brand does is about the women who buy it.`,

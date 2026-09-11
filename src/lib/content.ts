@@ -344,7 +344,7 @@ export const policies = {
       },
       {
         heading: "About the names",
-        body: "FOUNDER is the only name — at checkout, on your receipt, on the confirmation email and on the packaging. The First Room is the three serums that ship today: Thirst Trap, C Me Glow and Bounce Back. The FOUNDER Collection is the full routine. One house, two rooms.",
+        body: "FOUNDER is the seller and the name you’ll see at checkout, on your receipt, on the confirmation email and on the packaging. LALALOCA is the name of the serum collection itself — Thirst Trap, C Me Glow and Bounce Back. One company, two names doing different jobs.",
       },
       {
         heading: "Still to confirm",

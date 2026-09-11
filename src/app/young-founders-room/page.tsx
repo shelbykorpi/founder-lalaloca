@@ -35,7 +35,7 @@ import { DocumentaryImage, assetExists } from "@/components/young-founders/Docum
 
 const TITLE = "The Young Founders’ Room";
 const DESCRIPTION =
-  "Meet the young collaborators who helped shape the First Room and learn how twenty percent of its profits supports StandUp for Kids Tucson each month.";
+  "Meet the young collaborators who helped shape the first LALALOCA Collection and learn how 20% of its net profits supports StandUp for Kids Tucson each month.";
 
 /** The Tucson chapter's own page. Supplied and verified — do not substitute. */
 const STANDUP_TUCSON = "https://www.standupforkids.org/tucson/";
@@ -123,7 +123,7 @@ export default function YoungFoundersRoomPage() {
             <br />
             They were <em className="font-serif not-italic italic">collaborators</em>.
             <span className="mt-6 block border-t border-rose/40 pt-5 text-[0.75rem] uppercase tracking-[0.2em] text-rose">
-              Twenty percent of First Room profits. Every month. Directly to StandUp for Kids Tucson.
+              20% of LALALOCA net profits. Every month. Directly to StandUp for Kids Tucson.
             </span>
           </>
         }
@@ -132,7 +132,7 @@ export default function YoungFoundersRoomPage() {
           See how it began <span aria-hidden>→</span>
         </a>
         <TrackedLink href="/shop" event="young_founders_shop_click" variant="ghost">
-          Shop the First Room
+          Shop LALALOCA
         </TrackedLink>
       </RoomHero>
 
@@ -168,7 +168,7 @@ export default function YoungFoundersRoomPage() {
             </div>
 
             <p className="mt-8 font-serif text-2xl leading-snug text-bronze-ink md:text-3xl">
-              Twenty percent of First Room profits.
+              20% of LALALOCA net profits.
               <br />
               Every month.
               <br />
@@ -182,7 +182,7 @@ export default function YoungFoundersRoomPage() {
                 on this page. */}
             <div className="mt-8 flex flex-wrap gap-3">
               <TrackedLink href="/shop" event="young_founders_shop_click">
-                Shop the First Room
+                Shop LALALOCA
               </TrackedLink>
               <TrackedLink
                 href={STANDUP_TUCSON}
@@ -465,7 +465,7 @@ export default function YoungFoundersRoomPage() {
 
           <div className="mt-10 flex flex-wrap gap-3">
             <TrackedLink href="/shop" event="young_founders_shop_click" variant="ghost">
-              Shop the First Room
+              Shop the LALALOCA Collection
             </TrackedLink>
             <TrackedLink
               href={STANDUP_TUCSON}
@@ -517,7 +517,7 @@ export default function YoungFoundersRoomPage() {
           </p>
           <div className="mt-10 flex flex-wrap justify-center gap-3">
             <TrackedLink href="/shop" event="young_founders_shop_click">
-              Shop the First Room
+              Shop LALALOCA
             </TrackedLink>
             <TrackedLink
               href={STANDUP_TUCSON}

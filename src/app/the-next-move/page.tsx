@@ -33,7 +33,7 @@ import { ShadePicker } from "@/components/shop/ShadePicker";
 export const metadata: Metadata = {
   title: "The Next Move — Presale",
   description:
-    "Three new FOUNDER essentials: Clean Break, Smooth Talker and Double Take. A first run — prepaid, with the ship date by email before it leaves.",
+    "Three new FOUNDER essentials: Clean Break, Smooth Talker and Double Take. Reserve your place — nothing is charged today.",
   alternates: { canonical: "/the-next-move" },
 };
 
@@ -224,19 +224,18 @@ export default function TheNextMovePage() {
         <div className="shell grid gap-8 border-t border-charcoal/12 pt-10 sm:grid-cols-3">
           <div>
             <h2 id="terms-heading" className="font-serif text-2xl text-charcoal">
-              First run
+              In stock
             </h2>
             <p className="mt-2 text-sm leading-relaxed text-charcoal/80">
-              Each of the three is priced. They are a first run: you prepay, and we
-              email you the ship date before it leaves — reply to cancel if the
-              timing stops working.
+              Each of the three is priced and in stock. Add it to your bag and
+              check out — no waitlist, no deposit.
             </p>
           </div>
           <div>
-            <h2 className="font-serif text-2xl text-charcoal">Shipping</h2>
+            <h2 className="font-serif text-2xl text-charcoal">Ships fast</h2>
             <p className="mt-2 text-sm leading-relaxed text-charcoal/80">
-              The serums are dispatched within one business day. The collection
-              ships when the first run lands. Free US shipping on every order.
+              Dispatched within one business day, with free US shipping on every
+              order. First run, in limited numbers.
             </p>
           </div>
           <div>
@@ -271,11 +270,11 @@ export default function TheNextMovePage() {
       <section className="section-tight bg-night py-14">
         <div className="shell max-w-3xl">
           <p className="text-cream/85">
-            Shipping today: the First Room serums. And the full FOUNDER Collection.
+            On sale now: the LALALOCA serums, and the full FOUNDER Collection.
           </p>
           <div className="mt-4 flex flex-col gap-4 sm:flex-row sm:gap-8">
             <Link href="/shop" className="link-underline text-cream">
-              The First Room <span aria-hidden>↗</span>
+              The LALALOCA Collection <span aria-hidden>↗</span>
             </Link>
             <Link href="/founder-collection" className="link-underline text-cream">
               The FOUNDER Collection <span aria-hidden>↗</span>

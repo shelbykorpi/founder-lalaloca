@@ -78,7 +78,7 @@ export function welcomeText(email: string): string {
     "Two things worth knowing about while you’re here.",
 
     "",
-    "THE FIRST ROOM",
+    "THE LALALOCA COLLECTION",
     "Three serums, sold under FOUNDER. If you don’t know where to start, there’s",
     "a two-minute version of that question here:",
     "https://www.founderbeauty.co/find-your-serum",

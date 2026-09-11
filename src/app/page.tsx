@@ -79,8 +79,8 @@ const LINE = [
     image: "/products/opening-line-cut.webp",
     alt: "Opening Line: the oil-to-milk cleanser bottle, Founder Green label with cream and green stripes and a white pump.",
     href: "/products/opening-line",
-    state: "First run · Prepaid, ships when it lands",
-    action: `First run · ${formatPrice(bySlug["opening-line"].price)}`,
+    state: "In stock · Ships in one business day",
+    action: `Shop · ${formatPrice(bySlug["opening-line"].price)}`,
     ready: true,
   },
   {
@@ -91,8 +91,8 @@ const LINE = [
     image: "/products/clean-break-cut.webp",
     alt: "Clean Break: the purifying face wash bottle, Founder Green label with cream and green stripes and a white pump.",
     href: "/products/clean-break",
-    state: "First run · Prepaid, ships when it lands",
-    action: `First run · ${formatPrice(bySlug["clean-break"].price)}`,
+    state: "In stock · Ships in one business day",
+    action: `Shop · ${formatPrice(bySlug["clean-break"].price)}`,
     ready: true,
   },
   {
@@ -103,8 +103,8 @@ const LINE = [
     image: "/products/hold-the-room-cut.webp",
     alt: "Hold the Room: the airless bottle and its carton, Desert Pink with a cream cartouche and gold crest.",
     href: "/products/hold-the-room",
-    state: "First run · Prepaid, ships when it lands",
-    action: `First run · ${formatPrice(holdTheRoom.price)}`,
+    state: "Preorder · Ships from the first run",
+    action: `Preorder · ${formatPrice(holdTheRoom.price)}`,
     ready: true,
   },
   {
@@ -115,8 +115,8 @@ const LINE = [
     image: "/products/double-take-cut.webp",
     alt: "Double Take: the small eye-cream bottle and its carton, Desert Pink with a cream cartouche and gold crest.",
     href: "/products/double-take",
-    state: "First run · Prepaid, ships when it lands",
-    action: `First run · ${formatPrice(bySlug["double-take"].price)}`,
+    state: "In stock · Ships in one business day",
+    action: `Shop · ${formatPrice(bySlug["double-take"].price)}`,
     ready: true,
   },
   {
@@ -127,8 +127,8 @@ const LINE = [
     image: "/products/smooth-talker-cut.webp",
     alt: "Smooth Talker: the tinted stick in 25 Medium and its brass carton, with a cream cartouche and gold crest.",
     href: "/products/smooth-talker",
-    state: "First run · 3 shades",
-    action: `First run · ${formatPrice(bySlug["smooth-talker"].price)}`,
+    state: "In stock · 3 shades",
+    action: `Shop · ${formatPrice(bySlug["smooth-talker"].price)}`,
     ready: true,
   },
 ];
@@ -155,7 +155,7 @@ const NOTES = [
     src: "/editorial/trio-parlor.webp",
     w: 1915,
     h: 821,
-    alt: "The three First Room serums on a counter in a dark panelled parlour.",
+    alt: "The three LALALOCA serums on a counter in a dark panelled parlour.",
     line: "Nothing loud. Everything intentional.",
   },
   {
@@ -306,7 +306,7 @@ export default function HomePage() {
         height="min-h-[68svh]"
         label="Room 03 · The Collection"
         title="Private tools. Public power."
-        lede="Six pieces for the twenty minutes before you walk in. The three serums ship today. The collection is a first run — prepaid, and we email you the ship date before it leaves."
+        lede="Six pieces for the twenty minutes before you walk in. The first ships now. The rest are yours to hold — nothing charged until they’re priced, and you hear first."
       >
         <Link href="/founder-collection" className="btn btn-primary">
           Explore the collection
@@ -328,7 +328,7 @@ export default function HomePage() {
         alt="The serum salon: three lit marble niches in teal, gold and red, one bottle in each, over a black marble counter, pink desert sky through the arches either side."
         position="center center"
         height="min-h-[64svh]"
-        label="The serum salon · The First Room"
+        label="The serum salon · The LALALOCA Collection"
         title="Three serums. Three energies."
         lede="Some days you close. Some days you glow. Some days you start again."
       >
@@ -343,7 +343,7 @@ export default function HomePage() {
         <div className="shell">
           <Reveal>
             <div className="flex flex-wrap items-baseline justify-between gap-4">
-              <p className="room-label">Ships today · The First Room</p>
+              <p className="room-label">Ships now · The LALALOCA serums</p>
               <Link href="/shop#set-heading" className="hairline text-cream">
                 All three for {formatPrice(SET.price)} — save{" "}
                 {formatPrice(products.reduce((sum, p) => sum + p.price, 0) - SET.price)}
@@ -492,10 +492,10 @@ export default function HomePage() {
       <section className="section-tight bg-rose py-14 text-charcoal md:py-16">
         <div className="shell flex flex-col items-center gap-4 text-center">
           <p className="room-label" style={{ color: "#5a2f2c" }}>
-            The First Room × StandUp for Kids
+            LALALOCA × StandUp for Kids
           </p>
           <p className="max-w-[26ch] font-serif text-[clamp(1.35rem,2.6vw,2rem)] leading-snug">
-            Twenty percent of First Room profits. Every month. Directly to StandUp for Kids Tucson.
+            20% of LALALOCA net profits. Every month. Directly to StandUp for Kids Tucson.
           </p>
           <Link href="/young-founders-room" className="hairline mt-2 text-charcoal">
             How the giving works

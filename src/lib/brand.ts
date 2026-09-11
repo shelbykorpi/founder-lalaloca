@@ -23,14 +23,8 @@
 
 export const BRAND = {
   display: "FOUNDER",
-  collection: "The First Room",
-  collectionFull: "The First Room",
-  /* Origin lore, not a shoppable brand. LALALOCA is the name the three serums
-     were built under and the name the Young Founders collaboration carries.
-     It stays in Our Story and in their room; it comes off the nav, the bar and
-     the page titles, because a customer should not have to learn an org chart
-     to buy a serum. */
-  originName: "LALALOCA",
+  collection: "LALALOCA",
+  collectionFull: "The LALALOCA Collection",
   editorial: "FOUND HER",
 
   /**
@@ -40,11 +34,11 @@ export const BRAND = {
    */
   legal: {
     name: "FOUNDER",
-    note: "FOUNDER is the name on your order, on the bottle and on the door.",
+    note: "FOUNDER is the name on your order. LALALOCA is the name of the collection.",
   },
 
   /** Structural line — what the customer needs to understand in one read. */
-  structure: "One house. The First Room, and the FOUNDER Collection.",
+  structure: "FOUNDER presents the LALALOCA Collection.",
 
   /**
    * The announcement bar. 3 Sept 2026: the bar used to carry `structure`,
@@ -53,7 +47,7 @@ export const BRAND = {
    * one line every visitor reads on every page. Facts only: free US shipping
    * is the published policy, $38 and $98 are the Shopify prices.
    */
-  bar: "Free US shipping · The House Trio $98 · 20% of First Room profits to StandUp for Kids Tucson",
+  bar: "Free US shipping on every order · Three serums, $38 each · All three for $98",
 
   /**
    * The door mark: the F-key. v2.13 makes it the secondary identifier — the
@@ -92,17 +86,19 @@ export const PRIMARY_NAV: { href: string; label: string; stack?: string[] }[] = 
      first-time visitor could not find the shop. Every benchmark brand leads
      the bar with the shop. The collaboration keeps its band on /shop and its
      whole room at /young-founders-room; it has not gone anywhere. */
-  { href: "/shop", label: "Shop" },
+  { href: "/shop", label: "Shop the Serums" },
   /* The second line, sold under FOUNDER itself. Kept next to the LALALOCA
      lockup so the two collections read as siblings, not as a shop and a
      sub-page. */
-  { href: "/founder-collection", label: "The Ritual" },
+  { href: "/founder-collection", label: "The FOUNDER Collection" },
+  { href: "/our-story", label: "Our Story" },
   { href: "/found-her", label: "Found Her" },
-  { href: "/our-story", label: "The House" },
+  { href: "/young-founders-room", label: "Young Founders\u2019 Room" },
   /* 10 Sept 2026: the reading room. One page per ingredient named on a
      label, with the study behind it. Last in the bar because it is reference,
      not a room in the loop — the six-tab run measures ~700px, which is why
      the desktop bar now starts at xl (see Header.tsx). */
+  { href: "/library", label: "The Library" },
   /* Share Your Story is not a tab: the page folded into Found Her (see the
      redirect in next.config.ts), so the nav says FOUND HER once and means
      both. The footer keeps a deep link to the invitation itself. */
@@ -112,10 +108,10 @@ export const FOOTER_NAV = [
   {
     heading: "Shop",
     links: [
-      { href: "/shop", label: "The First Room · three serums" },
+      { href: "/shop", label: "The LALALOCA Collection" },
       { href: "/founder-collection", label: "The FOUNDER Collection" },
       { href: "/shop#set-heading", label: "The House Trio · $98" },
-      { href: "/the-next-move", label: "The Next Move — the first run" },
+      { href: "/the-next-move", label: "The Next Move — reserve" },
       { href: "/products/thirst-trap", label: "Thirst Trap" },
       { href: "/products/c-me-glow", label: "C Me Glow" },
       { href: "/products/bounce-back", label: "Bounce Back" },
@@ -128,7 +124,6 @@ export const FOOTER_NAV = [
       { href: "/found-her", label: "Found Her" },
       { href: "/our-story", label: "Our Story" },
       { href: "/found-her#share", label: "Share Your Story" },
-      { href: "/young-founders-room", label: "Young Founders\u2019 Room" },
       { href: "/library", label: "The Library" },
     ],
   },

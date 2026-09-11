@@ -180,7 +180,7 @@ export const FOUNDER_COLLECTION: FounderProduct[] = [
       },
       {
         q: "Is this one of the serums?",
-        a: "No. The First Room is the three serums; Hold the Room opens the FOUNDER Collection — the same house, the next room. They’re made to be worn together.",
+        a: "No. LALALOCA is the serum collection; Hold the Room opens the FOUNDER Collection — the same house, the next line. They’re made to be worn together.",
       },
     ],
     sellable: true,

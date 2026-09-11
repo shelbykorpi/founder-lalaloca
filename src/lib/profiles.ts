@@ -92,7 +92,7 @@ export const profiles: FoundHerProfile[] = [
         body: [
           "In 2020, I was building a business from my kitchen.",
           "There were cloth face masks, satin sleep sets, hair accessories, shipping supplies, and boxes everywhere. I sourced the products, handled production, created the listings, answered customer messages, and packed orders late into the night.",
-          "That business, v3rywell, shipped more than 35,000 orders \u2014 over $720,000 of them in the first twelve months.",
+          "That business, v3rywell, did just under one million dollars in its first year.",
           "People saw the sales. They didn’t see the hours, uncertainty, mistakes, pressure, or how many problems had to be solved before a single order reached someone’s door.",
           "Before EcoYield.ai, there was BitThermal.",
           "BitThermal began with an idea: use the heat created by immersion-cooled Bitcoin mining to help heat large-scale poultry operations. It was an unconventional idea that brought together technology, energy, agriculture, and a problem most people had never considered.",

@@ -1,10 +1,13 @@
 "use client";
 
+import Link from "next/link";
 import { useCallback, useEffect, useRef, useState } from "react";
 import s from "./concierge.module.css";
 import { CONTACT_EMAIL } from "@/lib/brand";
 import { DESK_ORDER, DESKS, type Desk } from "@/lib/concierge/desks";
+import { LAID_OUT, OCCASIONS, type Occasion } from "@/lib/concierge/occasions";
 import { HONEYPOT_FIELD } from "@/lib/formGuard";
+import { track } from "@/lib/analytics";
 
 /**
  * The concierge: a brass bell on the desk, and a leather folio behind it.
@@ -60,6 +63,10 @@ export function Concierge() {
   const [busy, setBusy] = useState(false);
   const [draft, setDraft] = useState("");
   const [showMore, setShowMore] = useState(false);
+  /* Set only when the conversation was opened by pressing an occasion, so
+     "I've laid something out for you." is said once, in answer to a question
+     the house asked — never over a message she typed herself. */
+  const [laidOut, setLaidOut] = useState(false);
 
   const logRef = useRef<HTMLDivElement>(null);
   const fieldRef = useRef<HTMLInputElement>(null);
@@ -98,8 +105,11 @@ export function Concierge() {
     return () => document.removeEventListener("keydown", onKey);
   }, [open]);
 
+  /* `at` exists because an occasion sets the desk and asks in the same tick,
+     and `setDesk` has not landed by the time the request is built. Everything
+     else calls it with one argument and gets the desk in state. */
   const ask = useCallback(
-    async (text: string) => {
+    async (text: string, at: Desk = desk) => {
       const message = text.trim();
       if (!message || busy) return;
 
@@ -121,7 +131,7 @@ export function Concierge() {
           headers: { "content-type": "application/json" },
           body: JSON.stringify({
             message,
-            desk,
+            desk: at,
             history,
             rendered_at: renderedAt.current,
             [HONEYPOT_FIELD]: hpRef.current?.value ?? "",
@@ -165,6 +175,18 @@ export function Concierge() {
       }
     },
     [busy, desk, turns],
+  );
+
+  /* An occasion is a rule and nothing more: it picks the desk and phrases the
+     question. The answer still comes from /api/concierge — see occasions.ts. */
+  const chooseOccasion = useCallback(
+    (occasion: Occasion) => {
+      setDesk(occasion.desk);
+      setLaidOut(true);
+      track("concierge_occasion", { occasion: occasion.label });
+      ask(occasion.ask, occasion.desk);
+    },
+    [ask],
   );
 
   return (
@@ -261,6 +283,7 @@ export function Concierge() {
               onClick={() => {
                 setDesk(key);
                 setTurns([]);
+                setLaidOut(false);
               }}
             >
               {DESKS[key].label}
@@ -299,7 +322,31 @@ export function Concierge() {
                 <div className={s.view}>
                   <div className={s.menuScroll}>
                     <h2 className={s.welcome}>{content.title}</h2>
-                    <p className={s.askline}>How can I be of service?</p>
+
+                    {/* THE FIRST QUESTION IS NOT ABOUT SKIN (brief §12). The
+                        occasions live on the Beauty desk, which is the desk
+                        the folio opens on, so they are the first thing anyone
+                        sees. The other three desks are for a woman who
+                        already knows what she needs and keep their own line. */}
+                    {desk === "beauty" ? (
+                      <>
+                        <p className={s.askline}>What are you walking into?</p>
+                        <div className={s.occasions}>
+                          {OCCASIONS.map((occasion) => (
+                            <button
+                              key={occasion.label}
+                              type="button"
+                              tabIndex={open ? 0 : -1}
+                              onClick={() => chooseOccasion(occasion)}
+                            >
+                              {occasion.label}
+                            </button>
+                          ))}
+                        </div>
+                      </>
+                    ) : (
+                      <p className={s.askline}>How can I be of service?</p>
+                    )}
 
                     {content.courses.map((course) => (
                       <section className={s.course} key={course.label}>
@@ -352,6 +399,7 @@ export function Concierge() {
               ) : (
                 /* ---------------- the conversation ---------------- */
                 <div className={s.view}>
+                  {laidOut && <p className={s.laidOut}>{LAID_OUT}</p>}
                   <div className={s.log} ref={logRef} aria-live="polite">
                     {turns.map((turn, i) =>
                       turn.who === "you" ? (
@@ -388,6 +436,13 @@ export function Concierge() {
                       </button>
                     ))}
                   </div>
+                  {/* The way out of the folio and onto the shelf. It goes to
+                      the vanity rather than to a named product: the concierge
+                      has just said which pieces it would lay out and this
+                      component is not allowed to second-guess it. */}
+                  <Link href="/#room-collection" className={s.toVanity} tabIndex={open ? 0 : -1}>
+                    See them on the vanity →
+                  </Link>
                 </div>
               )}
 

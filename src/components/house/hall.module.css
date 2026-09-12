@@ -1,0 +1,181 @@
+/*
+ * THE GRAND HALL's wall of doors. See HallPlaques.tsx for the rule it is
+ * built on: the only thing that changes between one plaque and the next is
+ * how much light is on it.
+ *
+ * Motion is the house tokens. Nothing here scales past 1; a door does not
+ * grow when you look at it. What happens on hover is that the light under it
+ * comes up — a warm wash from below the plaque, the way a lit room shows
+ * itself at the foot of a shut door.
+ */
+
+.wall {
+  position: relative;
+  margin-top: 2.75rem;
+}
+
+/* The brass hairline threading the whole wall — the picture rail. Only where
+   there is a single row to thread. */
+.rail {
+  display: none;
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 0;
+  height: 1px;
+  background: linear-gradient(
+    90deg,
+    transparent,
+    color-mix(in srgb, var(--color-bronze) 55%, transparent) 12%,
+    color-mix(in srgb, var(--color-bronze) 55%, transparent) 88%,
+    transparent
+  );
+}
+@media (min-width: 1280px) {
+  .rail { display: block; }
+}
+
+.doors {
+  display: grid;
+  gap: 1px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  background: color-mix(in srgb, var(--color-bronze) 18%, transparent);
+  border: 1px solid color-mix(in srgb, var(--color-bronze) 18%, transparent);
+}
+@media (min-width: 640px) { .doors { grid-template-columns: repeat(2, 1fr); } }
+@media (min-width: 1024px) { .doors { grid-template-columns: repeat(3, 1fr); } }
+@media (min-width: 1280px) { .doors { grid-template-columns: repeat(6, 1fr); } }
+
+.door {
+  position: relative;
+  isolation: isolate;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  /* No reserved height on a phone: one door per row is as tall as its own
+     words, and a 12.5rem box round three lines of type is a hole. The
+     reserved height is for the grid, where six doors have to line up. */
+  gap: 1.5rem;
+  padding: 1.35rem 1.25rem 1.15rem;
+  overflow: hidden;
+  text-decoration: none;
+  /* Panelling, not a card: a deep green field with the moulding drawn in as
+     an inset hairline, the way the leaves of the entrance doors are panelled.
+     Shelby on the first House Map: "lines and boxes" are not this house. A
+     plaque screwed to a panel is neither — it is hardware. */
+  background: linear-gradient(
+    180deg,
+    color-mix(in srgb, var(--color-emerald) 42%, var(--color-night)) 0%,
+    var(--color-night) 72%
+  );
+  color: color-mix(in srgb, var(--color-cream) 52%, transparent);
+  transition:
+    color var(--motion-reveal) var(--ease-house),
+    background var(--motion-reveal) var(--ease-house);
+}
+/* The moulding. One hairline, set in from the edge — the panel line on a
+   door leaf, and the same double-rule construction the product labels use. */
+.door::before {
+  content: "";
+  position: absolute;
+  inset: 0.5rem;
+  border: 1px solid color-mix(in srgb, var(--color-bronze) 20%, transparent);
+  pointer-events: none;
+  transition: border-color var(--motion-reveal) var(--ease-house);
+}
+.door:hover::before,
+.door:focus-visible::before { border-color: color-mix(in srgb, var(--color-bronze) 46%, transparent); }
+.doorFound::before { border-color: color-mix(in srgb, var(--color-bronze) 32%, transparent); }
+
+.door:hover,
+.door:focus-visible {
+  color: var(--color-cream);
+  background: linear-gradient(
+    180deg,
+    color-mix(in srgb, var(--color-emerald) 78%, var(--color-night)) 0%,
+    color-mix(in srgb, var(--color-emerald) 30%, var(--color-night)) 72%
+  );
+  outline: none;
+}
+.door:focus-visible { outline: 2px solid var(--color-bronze); outline-offset: -2px; }
+@media (min-width: 640px) {
+  .door { min-height: 12.5rem; gap: 2.25rem; padding: 1.5rem 1.25rem 1.25rem; }
+  /* Two lines reserved for the engraving, so the rule under every plaque
+     falls on the same line across the row — "Young Founders' Room" wraps and
+     the others do not. */
+  .name { min-height: 2.2em; }
+}
+
+/* A room she has already stood in keeps its light on. */
+.doorFound { color: color-mix(in srgb, var(--color-cream) 82%, transparent); }
+.doorFound .name { color: var(--color-cream); }
+
+/* The light under the door. It is behind the plaque, low in the frame, and
+   it comes up rather than switching on. */
+.glow {
+  position: absolute;
+  inset: auto 0 -40% 0;
+  z-index: -1;
+  height: 80%;
+  opacity: 0;
+  background: radial-gradient(
+    60% 100% at 50% 100%,
+    color-mix(in srgb, var(--color-rose) 44%, transparent) 0%,
+    color-mix(in srgb, var(--color-bronze) 20%, transparent) 42%,
+    transparent 78%
+  );
+  transition: opacity var(--motion-room) var(--ease-house);
+}
+.door:hover .glow,
+.door:focus-visible .glow { opacity: 1; }
+.doorFound .glow { opacity: 0.32; }
+
+.plaque {
+  display: flex;
+  flex-direction: column;
+  gap: 0.55rem;
+  padding-bottom: 1rem;
+  border-bottom: 1px solid color-mix(in srgb, var(--color-bronze) 30%, transparent);
+  transition: border-color var(--motion-micro) var(--ease-house);
+}
+.door:hover .plaque,
+.door:focus-visible .plaque { border-color: color-mix(in srgb, var(--color-champagne) 65%, transparent); }
+
+.name {
+  font-family: var(--font-serif);
+  font-weight: 300;
+  font-size: clamp(1.15rem, 1.5vw, 1.4rem);
+  line-height: 1.1;
+  color: color-mix(in srgb, var(--color-cream) 78%, transparent);
+  transition: color var(--motion-reveal) var(--ease-house);
+}
+.door:hover .name, .door:focus-visible .name { color: var(--color-cream); }
+
+.line {
+  font-family: var(--font-sans);
+  font-size: 0.5625rem;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  line-height: 1.6;
+  color: inherit;
+}
+
+.foot {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.45rem;
+  font-family: var(--font-sans);
+  font-size: 0.5625rem;
+  letter-spacing: 0.24em;
+  text-transform: uppercase;
+  color: var(--color-champagne);
+  transition: color var(--motion-micro) var(--ease-house);
+}
+.doorLocked .foot { color: var(--color-bronze); }
+.lock { width: 0.6rem; height: 0.7rem; }
+
+@media (prefers-reduced-motion: reduce) {
+  .door, .glow, .plaque, .name, .foot { transition: none; }
+}

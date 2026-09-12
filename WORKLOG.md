@@ -1054,3 +1054,85 @@ it navigable and adds the missing room. Everything additive.
   stays shut with its plaque. Phone: a corridor she slides along, opened at
   her own door. house.ts: `plan` coordinates replaced by `door` image.
   Clean rebuild verified; screenshots 1440/390.
+
+## 2026-09-12 · Claude (Cowork) — THE FOUNDER HOUSE, Phase 2a: the front door,
+## the hall, and the concierge's first question
+Rebased onto 75236c0 mid-session — the House Map became a hall of doors while
+this was being built, so `lib/house.ts` (`plan` → `door`) was picked up before
+anything shipped. Nothing in this entry touches the map, the key, the Salon,
+the bag, the checkout permalink, product data, product routes, SEO/JSON-LD,
+the Header, the Footer, `rooms.ts`, or any board token.
+- REWRITTEN src/components/house/ThresholdDoors.tsx, and MOUNTED for the first
+  time (it has been dead code since it was written). It was a button and a
+  2.2s animation: you pressed, you watched. Now the leaves are bound to the
+  gesture — scroll or trackpad on desktop, thumb-drag on a phone, and they
+  hold wherever you stop. Past 45% they take over and swing (1500ms). Enter /
+  Space / ↓ / PageDown / Escape all open them; ENTER THE HOUSE still works for
+  anyone who would rather press a button. Between the leaves there is now NO
+  backdrop, so what widens as they part is the real page, not a picture of
+  one. SHOP DIRECTLY sits under the invitation from the first frame — a woman
+  who came to buy never opens a door (brief §16).
+  · WELCOME BACK (brief §10): if the Founder Key already has rooms in it the
+    invitation is WELCOME BACK. / WE KEPT YOUR ROOM. and the brass key turns
+    90° in the lock before the leaves move. Contextual by construction — once
+    a session, and only for a woman the house has met.
+  · Still never a gate: client-mount only (verified — the served HTML for /
+    contains no door markup and does contain both the hall and SHOP THE
+    SERUMS), once per session, skipped entirely under prefers-reduced-motion,
+    aria-hidden leaves, unmounts when open.
+  · The mount decision moved out of an effect into `useSyncExternalStore` with
+    a cached verdict, which removed one of the two standing
+    react-hooks/set-state-in-effect errors. The verdict is also cleared on
+    open so a client-side navigation back to / cannot rebuild the door in
+    front of a woman already standing in the hall.
+- NEW src/components/house/HallPlaques.tsx + hall.module.css — THE GRAND HALL
+  (brief §4). Room 02 was a dead end: one hairline reading "Follow the light
+  ↓" and a very long scroll before anything else was a door. Now six plaques
+  read from `lib/house.ts`, so the hall and the map can never disagree about
+  what the house contains. Deliberately NOT a second row of room photographs:
+  Room 06 four sections down is already that, and two photographic corridors
+  on one page is a stutter. These are engraved plaques on panelling — a green
+  field with the moulding drawn as an inset brass hairline, the same
+  double-rule construction the product labels use. The only thing that changes
+  between one plaque and the next is how much light is on it: a room she has
+  stood in keeps its light on, an unvisited one is dim, the Salon says SHUT
+  and carries its lock. That is the whole of the recognition (brief §11) — no
+  badges, no counters, no points. The count lives in the Founder Key, once.
+  "Follow the light ↓" now points at #hall-doors.
+- NEW src/lib/concierge/occasions.ts + the Beauty desk's opening (brief §12).
+  The folio used to open on a bill of fare, which asks a woman to know which
+  department her problem belongs to before she has said anything. It now opens
+  on WHAT ARE YOU WALKING INTO? and seven occasions — a board meeting, a first
+  date, a long flight, a big night, Monday morning, starting over, I just want
+  to feel expensive. Each is a RULE AND NOTHING MORE: it picks the desk and
+  phrases the question the way she would have phrased it. The answer still
+  comes from /api/concierge. No new model, no new endpoint, no client-side
+  knowledge base, no recommendation logic in the browser. Every ask is a
+  QUESTION — an occasion that pre-loaded an answer ("the peptide cream is what
+  you want for a long flight") would be this file inventing product
+  performance. "I've laid something out for you." is said once, above the
+  answer, only when an occasion was pressed. `ask()` took an optional desk
+  argument because setDesk has not landed in the same tick. The three other
+  desks are unchanged and keep "How can I be of service?".
+- NEW src/lib/houseSound.ts (brief §14) — staged, silent, SHIPPING NO AUDIO.
+  Default off including a first visit; /public/sound/ does not exist and a cue
+  with no file resolves to silence; prefers-reduced-motion is read as reduced
+  everything. When the recordings exist the work is: drop the files in, add a
+  control. No component changes.
+- analytics.ts: threshold_open (carries only whether the key had rooms),
+  threshold_shop_direct, hall_plaque, concierge_occasion. Counts, never who.
+- VERIFIED with a real `npm run build` in the Cowork cloud container (Google
+  Fonts resolves there) — passes, 65 pages. tsc clean. eslint: one error and
+  one warning left, both pre-existing and neither mine (PlateShades
+  set-state-in-effect; CatalogCard unused import). Playwright at 1440 and 390:
+  doors shut, doors pushed halfway, arrival on the hero, the hall, a plaque
+  under the light, the concierge open on the occasions, and Welcome back with
+  a seeded key. Contrast measured (not estimated) on all 21 pieces of type in
+  the hall: 0 failures, tightest 4.90:1 on the 9px plaque line. The audit
+  script had silently skipped every `color(srgb …)` value on the first run and
+  reported a clean 9 rows out of 21 — it now throws on a colour it cannot
+  parse rather than passing it.
+- NOT done, still Phase 2: Vanity per-product beats (drawer, mirror light,
+  shade case), Boardroom curtain/light drift, the Found Her portrait corridor
+  with Leave her a note / Add your portrait.
+- Committed, unpushed (on top of 75236c0, which is also unpushed).

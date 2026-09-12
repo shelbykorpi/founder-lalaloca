@@ -416,6 +416,67 @@
 }
 .chips button:hover { border-color: var(--green); color: var(--green-dk); }
 
+/* ---------- the occasions ----------
+   "What are you walking into?" — the first thing on the card (brief §12).
+   Engraved plates rather than chips: a hairline box, the occasion in
+   Cormorant, nothing else in it. Two columns so seven plates read as a short
+   list and not a keypad, and the last one runs full width because "I just
+   want to feel expensive" is the longest and the best of them. */
+.occasions {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 5px;
+  margin: 2px 0 4px;
+}
+.occasions button {
+  min-height: 44px;
+  padding: 8px 10px;
+  cursor: pointer;
+  text-align: left;
+  font-family: var(--font-cormorant), Georgia, serif;
+  font-size: 14.5px;
+  line-height: 1.15;
+  color: var(--green);
+  background: rgba(255, 255, 255, 0.3);
+  border: 1px solid rgba(176, 138, 100, 0.45);
+  transition: border-color 0.3s, background 0.3s, color 0.3s;
+}
+.occasions button:hover,
+.occasions button:focus-visible {
+  border-color: var(--green);
+  background: rgba(255, 255, 255, 0.62);
+  color: var(--green-dk);
+  outline: none;
+}
+.occasions button:last-child { grid-column: 1 / -1; font-style: italic; }
+.toVanity {
+  display: inline-flex;
+  align-items: center;
+  min-height: 44px;
+  font-size: 8px;
+  letter-spacing: 0.24em;
+  text-transform: uppercase;
+  color: var(--brass-dk);
+  text-decoration: none;
+  border-bottom: 1px solid rgba(176, 138, 100, 0.4);
+  transition: color 0.3s, border-color 0.3s;
+}
+.toVanity:hover, .toVanity:focus-visible { color: var(--green); border-color: var(--green); outline: none; }
+/* "I've laid something out for you." — said once, above the answer. */
+.laidOut {
+  flex: none;
+  margin: 0 0 6px;
+  padding-bottom: 6px;
+  font-family: var(--font-cormorant), Georgia, serif;
+  font-style: italic;
+  font-size: 15px;
+  color: var(--green);
+  border-bottom: 1px solid rgba(176, 138, 100, 0.35);
+}
+@media (prefers-reduced-motion: reduce) {
+  .occasions button, .toVanity { transition: none; }
+}
+
 /* ---------- composer ---------- */
 .composer {
   flex: none;

@@ -10,6 +10,8 @@ import { getRoom } from "@/lib/rooms";
 import { DoorFrame } from "@/components/house/DoorFrame";
 import { RoomHero } from "@/components/house/RoomHero";
 import { Vanity } from "@/components/house/Vanity";
+import { ThresholdDoors } from "@/components/house/ThresholdDoors";
+import { HallPlaques } from "@/components/house/HallPlaques";
 import { BRAND } from "@/lib/brand";
 import { FOUNDER_COLLECTION } from "@/lib/founderCollection";
 import { NEXT_MOVE } from "@/lib/nextMove";
@@ -194,6 +196,11 @@ const NOTES = [
 export default function HomePage() {
   return (
     <div className="bg-emerald-deep text-cream">
+      {/* THE FRONT DOOR — 12 Sept 2026, brief §3. An overlay, never a gate:
+          client-mounted only, once a session, skipped entirely under reduced
+          motion, and carrying SHOP DIRECTLY from the first frame. Everything
+          below is in the server HTML whether it mounts or not. */}
+      <ThresholdDoors />
       <HouseShell room={2}>
 
       {/* ══ 01 · THE THRESHOLD ══════════════════════════════════════════════
@@ -266,10 +273,15 @@ export default function HomePage() {
           </>
         }
       >
-        <a href="#room-collection" className="hairline text-cream">
+        <a href="#hall-doors" className="hairline text-cream">
           Follow the light ↓
         </a>
       </RoomHero>
+      {/* THE WALL OF DOORS — brief §4. The hall was a dead end: one hairline
+          and a very long scroll before anything else was a door. Six plaques,
+          read from lib/house.ts so the map and the hall can never disagree
+          about what the house contains. */}
+      <HallPlaques />
       {/* ══ FOUND HER — the note on the vanity ══════════════════════════════
           10 Sept 2026. The three-tile gallery that used to follow this hero
           (The mirror · The note · The company) came out at Shelby's

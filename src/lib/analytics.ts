@@ -66,7 +66,16 @@ export type TrackEvent =
   | "house_map_open"
   | "house_map_go"
   | "house_key_note"
-  | "salon_door";
+  | "salon_door"
+  /* The threshold and the hall. `threshold_open` carries only whether the
+     key already had rooms in it, so we can see whether returning visitors
+     open the door faster — never who she is. `hall_plaque` counts which
+     wing was chosen from the Grand Hall, `concierge_occasion` which
+     occasion was pressed. */
+  | "threshold_open"
+  | "threshold_shop_direct"
+  | "hall_plaque"
+  | "concierge_occasion";
 
 /** GA4 reserved names. Anything unmapped passes through as a custom event. */
 const GA4_NAME: Partial<Record<TrackEvent, string>> = {

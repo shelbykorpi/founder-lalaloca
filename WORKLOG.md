@@ -1249,3 +1249,19 @@ and fit it into the atmosphere."
   cannot. Marble reflections off (at the lip there is drawer front, not
   marble, below the base); poses flattened to dx and z only; ground + cast
   shadows kept. Verified 1280/1440/1920/390.
+- (fourth pass — the scene changed entirely) Shelby: "change this scene
+  entirely to something you can put together flawlessly that flows with the
+  web page." Three passes of seating cutouts on a photographed dressing table
+  were each better and none right: a cutout rendered in one light from one
+  height cannot stand on a table photographed in another. The room is now
+  BUILT, the way the Library's shelf is: Founder Green panelling in shadow
+  with a moulded panel behind each piece and two sconces' warmth from above;
+  a black marble console drawn as three faces (top face you look down onto,
+  brass nosing, front face) in the after-hours stone; the five standing ON
+  the top face with a contact shadow, a cast to the right, and their
+  reflection lying in the polished stone in front of them (new .pool wrapper
+  in Vanity.tsx); the lit piece gets a picture-light down its panel and a
+  warm pool at its feet, and no piece is ever dimmed. Head-on, at the
+  camera's own height, so the cutouts' own light and viewpoint are the only
+  ones in the scene. The dressing-table plates stay in the repo, unused. Phone
+  draws the console under the slide track. Verified 1280/1440/1920/390.

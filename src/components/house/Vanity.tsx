@@ -173,8 +173,12 @@ export function Vanity({ items, title, lede }: { items: VanityItem[]; title: str
               >
                 {/* eslint-disable-next-line @next/next/no-img-element -- already-optimised alpha webp cutouts, sized by the true-scale unit in CSS; next/image cannot size by a CSS variable */}
                 <img src={p.src} alt={it.alt} width={p.w} height={p.ph} loading={i === 2 ? "eager" : "lazy"} decoding="async" />
-                {/* eslint-disable-next-line @next/next/no-img-element -- the same cached cutout, upside down in the marble */}
-                <img src={p.src} alt="" aria-hidden="true" className={s.mirror} width={p.w} height={p.ph} loading="lazy" decoding="async" />
+                {/* the pool: the console's top face in front of the base,
+                    with the piece's reflection lying in the polished stone */}
+                <span className={s.pool} aria-hidden="true">
+                  {/* eslint-disable-next-line @next/next/no-img-element -- the same cached cutout, upside down in the marble */}
+                  <img src={p.src} alt="" className={s.mirror} width={p.w} height={p.ph} loading="lazy" decoding="async" />
+                </span>
               </Link>
               <span className={s.refl} />
             </div>

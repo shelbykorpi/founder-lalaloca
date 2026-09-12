@@ -91,6 +91,15 @@
 
   /* Motion */
   --ease-door: cubic-bezier(0.22, 0.61, 0.24, 1);
+  /* THE HOUSE MOTION LANGUAGE — 12 Sept 2026. Three durations and one
+     ease, used by everything built from here on: micro for hover, focus
+     and ticks; reveal for copy and images; room for doors, the map and
+     passing between rooms. Slow, physical, never bouncy. prefers-reduced-
+     motion collapses all of it below. */
+  --motion-micro: 200ms;
+  --motion-reveal: 480ms;
+  --motion-room: 900ms;
+  --ease-house: cubic-bezier(0.22, 0.61, 0.24, 1);
 }
 
 @layer base {

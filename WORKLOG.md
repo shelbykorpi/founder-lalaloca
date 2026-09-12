@@ -990,3 +990,55 @@ at the folder" and the honest answer was no. Logging it all now.
   remembers." (/library). No new copy minted — all from the approved bank
   or already live. "Nothing loud. Everything intentional." dropped from
   this row (still in the bank). No new image files; page.tsx only.
+
+## 2026-09-12 · Claude (Cowork) — THE FOUNDER HOUSE, Phase 1
+Shelby's brief: the site as one continuous house (arrive → enter → explore →
+discover → belong → purchase) with a key that follows her, a map, a locked
+Salon, private-club recognition instead of points — without touching
+conversion. Audit + architecture plan in the Claude project
+(claude/founder-house-architecture-plan.md). The site was already a
+seven-room loop (rooms.ts / HouseShell / RoomHero / doors); Phase 1 makes
+it navigable and adds the missing room. Everything additive.
+- NEW src/lib/house.ts — the map view: seven wings (Grand Hall = the
+  lounge, Vanity = /shop + Room 03, Boardroom = /founder-collection, Found
+  Her (+ /our-story), Library, Young Founders', Salon [locked]) with
+  plaque, one-line, href, `matches(pathname, hash)`, plan coordinates.
+  rooms.ts is untouched — it stays the walking order for the rail/doors.
+- NEW src/lib/houseKey.ts — the Founder Key data model, staged: rooms
+  visited, saved products, stories saved, invitations, tier
+  (guest/keyholder/founding/house), notes seen. localStorage
+  (founder:key:v1); nothing sent anywhere; the shape a Shopify customer
+  account would hydrate in Phase 3. Recognition lines said once: "Another
+  door has opened." (2nd room), "You found another key." (3rd), "You know
+  the way now." (all six).
+- NEW components/house/HouseKeyProvider.tsx — an external store
+  (useSyncExternalStore) so a visit is recorded in an effect without
+  setState (the repo's react-hooks/set-state-in-effect rule). Mounted in
+  layout.tsx; records the wing on every route change.
+- NEW components/house/FounderKey.tsx + HouseMap.tsx + founder-key.module.css
+  — fixed brass key bottom-left (icon-only on phones, plaque + "N of 6
+  rooms" from md); opens the House Map: an editorial floor plan (hairline
+  walls, seven plaques, "You are here" in rose, found rooms lit, the Salon
+  locked with a lock mark) on ≥820px and a plain list below. Dialog
+  semantics: Escape, focus trap, focus return, body scroll lock, closes on
+  route change. Header nav untouched — the map is a second way in.
+- NEW app/salon/page.tsx + components/house/SalonDoor.tsx — the locked
+  door: shut Founder Green doors (threshold-doors.webp), brass plaque THE
+  SALON / BY INVITATION; pressing the plaque explains who it is for (early
+  customers, FOUND HER writers, invitation) — not a paywall; "Leave your
+  name at the door" reuses EmailSignup source="waitlist". `open` prop is
+  the Phase 3 seam.
+- globals.css: motion tokens --motion-micro 200ms / --motion-reveal 480ms /
+  --motion-room 900ms / --ease-house. analytics.ts: house_map_open,
+  house_map_go, house_key_note, salon_door (counts, never who).
+- RoomProgress.tsx: the phone pill removed — the key is the phone's one
+  house control. Desktop rail unchanged.
+- VERIFIED with a real `npm run build` (the repo source synced to the Cowork
+  cloud container, where Google Fonts resolves) — passes, /salon static.
+  Playwright screenshots at 1440 and 390: key, open map, Salon pressed.
+  tsc + eslint clean.
+- NOT done (Phase 2, scoped in the plan): scroll-opened threshold doors,
+  Grand Hall door plaques, Vanity per-product beats, Boardroom drift, Found
+  Her corridor + Leave her a note / Add your portrait, concierge "What are
+  you walking into?", returning-visitor key-turn beat, sound stub.
+- Committed, unpushed (with everything since 4a89493).

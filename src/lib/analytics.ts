@@ -60,7 +60,13 @@ export type TrackEvent =
   | "young_founders_door_skipped"
   | "young_founders_shop_click"
   | "young_founders_learn_click"
-  | "young_founders_donate_click";
+  | "young_founders_donate_click"
+  /* The Founder Key and the House Map. Counts of doors — which wing was
+     opened from the map, how many rooms a key has found — never who. */
+  | "house_map_open"
+  | "house_map_go"
+  | "house_key_note"
+  | "salon_door";
 
 /** GA4 reserved names. Anything unmapped passes through as a custom event. */
 const GA4_NAME: Partial<Record<TrackEvent, string>> = {

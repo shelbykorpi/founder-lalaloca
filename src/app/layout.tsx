@@ -10,6 +10,8 @@ import { JsonLd, brandSchema, organizationSchema, websiteSchema } from "@/lib/se
 import { Analytics } from "@/components/site/Analytics";
 import { WebVitals } from "@/components/site/WebVitals";
 import { Concierge } from "@/components/concierge/Concierge";
+import { HouseKeyProvider } from "@/components/house/HouseKeyProvider";
+import { FounderKey } from "@/components/house/FounderKey";
 
 const cormorant = Cormorant_Garamond({
   subsets: ["latin"],
@@ -97,6 +99,7 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
             CrUX to reach a reporting quorum. Inert without a GA4 ID. */}
         <WebVitals />
         <BagProvider>
+        <HouseKeyProvider>
           <a
             href="#main"
             className="sr-only focus:not-sr-only focus:absolute focus:left-4 focus:top-4 focus:z-50 focus:bg-bronze focus:px-4 focus:py-3 focus:text-sm focus:text-night"
@@ -112,6 +115,10 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
               have a screen reader announce it as part of whatever she is
               reading. */}
           <Concierge />
+          {/* The Founder Key — the house control that follows her on every
+              page. Fixed, bottom-left; the concierge bell keeps the right. */}
+          <FounderKey />
+        </HouseKeyProvider>
         </BagProvider>
       </body>
     </html>

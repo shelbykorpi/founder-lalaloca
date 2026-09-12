@@ -1,0 +1,163 @@
+/*
+ * THE FOUNDER KEY and THE HOUSE MAP — 12 September 2026.
+ *
+ * Motion: the house tokens (globals.css). The map does not zoom in; it
+ * settles, like a page turned. The key dock never moves.
+ */
+
+/* ---- the key ------------------------------------------------------------ */
+.dock {
+  position: fixed;
+  left: 1rem;
+  bottom: 1rem;
+  z-index: 40;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 0.5rem;
+}
+@media (min-width: 1024px) {
+  .dock { left: 1.5rem; bottom: 1.5rem; }
+}
+.key {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.75rem;
+  min-height: 2.75rem;
+  padding: 0.5rem 1rem 0.5rem 0.8rem;
+  border: 1px solid color-mix(in srgb, var(--color-bronze) 45%, transparent);
+  background: color-mix(in srgb, var(--color-night-deep) 88%, transparent);
+  color: var(--color-champagne);
+  backdrop-filter: blur(8px);
+  transition: border-color var(--motion-micro) var(--ease-house), color var(--motion-micro) var(--ease-house);
+}
+.key:hover, .key:focus-visible { border-color: var(--color-champagne); color: var(--color-cream); outline: none; }
+.glyph { width: 1.75rem; height: 0.875rem; color: var(--color-bronze); transition: color var(--motion-micro); }
+.key:hover .glyph, .key:focus-visible .glyph { color: var(--color-champagne); }
+/* Phones: the key is hardware only — a 44px brass key with no label — so it
+   never sits on a hero's own action strip. The plaque text appears from md. */
+.label { display: none; flex-direction: column; align-items: flex-start; line-height: 1.15; text-align: left; }
+@media (min-width: 768px) { .label { display: flex; } }
+@media (max-width: 767px) { .key { padding: 0.5rem 0.7rem; gap: 0; } }
+.labelTop { font-family: var(--font-sans); font-size: 0.625rem; letter-spacing: 0.2em; text-transform: uppercase; }
+.labelSub { font-family: var(--font-serif); font-size: 0.8125rem; color: color-mix(in srgb, var(--color-cream) 60%, transparent); }
+.note {
+  margin: 0;
+  padding: 0.55rem 0.9rem;
+  font-family: var(--font-serif);
+  font-style: italic;
+  font-size: 0.95rem;
+  color: var(--color-cream);
+  border-left: 1px solid var(--color-rose);
+  background: color-mix(in srgb, var(--color-night-deep) 88%, transparent);
+  backdrop-filter: blur(8px);
+  animation: keynote var(--motion-reveal) var(--ease-house) both;
+}
+@keyframes keynote { from { opacity: 0; transform: translateY(6px); } to { opacity: 1; transform: none; } }
+
+/* ---- the map ------------------------------------------------------------ */
+.map { position: fixed; inset: 0; z-index: 60; pointer-events: none; }
+.scrim {
+  position: absolute; inset: 0;
+  background: color-mix(in srgb, var(--color-night-deep) 78%, transparent);
+  opacity: 0;
+  transition: opacity var(--motion-room) var(--ease-house);
+}
+.panel {
+  position: absolute;
+  left: 50%; top: 50%;
+  width: min(64rem, calc(100vw - 2rem));
+  max-height: calc(100vh - 2rem);
+  overflow: auto;
+  transform: translate(-50%, -50%) translateY(14px);
+  opacity: 0;
+  padding: clamp(1.25rem, 3vw, 2.5rem);
+  border: 1px solid color-mix(in srgb, var(--color-bronze) 40%, transparent);
+  background:
+    radial-gradient(120% 90% at 20% 0%, rgba(216, 167, 160, 0.06) 0%, transparent 60%),
+    var(--color-night);
+  box-shadow: 0 40px 120px rgba(0, 0, 0, 0.6);
+  transition: opacity var(--motion-room) var(--ease-house), transform var(--motion-room) var(--ease-house);
+}
+.mapOpen { pointer-events: auto; }
+.mapOpen .scrim { opacity: 1; }
+.mapOpen .panel { opacity: 1; transform: translate(-50%, -50%); }
+
+.head { position: relative; padding-right: 3rem; }
+.title { margin-top: 0.5rem; font-size: clamp(1.6rem, 3vw, 2.4rem); line-height: 1.05; }
+.found { margin-top: 0.5rem; font-family: var(--font-sans); font-size: 0.625rem; letter-spacing: 0.22em; text-transform: uppercase; color: color-mix(in srgb, var(--color-cream) 55%, transparent); }
+.close {
+  position: absolute; right: 0; top: 0;
+  width: 2.75rem; height: 2.75rem;
+  display: grid; place-items: center;
+  color: color-mix(in srgb, var(--color-cream) 70%, transparent);
+  border: 1px solid transparent;
+  transition: color var(--motion-micro), border-color var(--motion-micro);
+}
+.close svg { width: 1rem; height: 1rem; }
+.close:hover, .close:focus-visible { color: var(--color-champagne); border-color: color-mix(in srgb, var(--color-bronze) 45%, transparent); outline: none; }
+
+/* the plan itself — desktop only; phones get the list */
+.plan {
+  position: relative;
+  display: none;
+  margin-top: 1.75rem;
+  aspect-ratio: 16 / 9;
+  border: 1px solid color-mix(in srgb, var(--color-bronze) 55%, transparent);
+  background: color-mix(in srgb, var(--color-night-deep) 60%, transparent);
+}
+@media (min-width: 820px) { .plan { display: block; } }
+.wallH, .wallV { position: absolute; background: color-mix(in srgb, var(--color-bronze) 35%, transparent); }
+.wallH { left: 0; right: 0; height: 1px; }
+.wallV { top: 0; bottom: 0; width: 1px; }
+
+.room {
+  position: absolute;
+  display: flex; flex-direction: column; justify-content: center; align-items: center;
+  text-align: center;
+  text-decoration: none;
+  color: color-mix(in srgb, var(--color-cream) 55%, transparent);
+  transition: color var(--motion-micro) var(--ease-house), background var(--motion-reveal) var(--ease-house);
+}
+.room:hover, .room:focus-visible { color: var(--color-cream); background: color-mix(in srgb, var(--color-champagne) 6%, transparent); outline: none; }
+.room:focus-visible .plaque { border-color: var(--color-champagne); }
+.roomFound { color: color-mix(in srgb, var(--color-cream) 85%, transparent); }
+.roomHere { color: var(--color-cream); background: color-mix(in srgb, var(--color-rose) 8%, transparent); }
+.roomLocked { color: color-mix(in srgb, var(--color-cream) 40%, transparent); }
+.plaque {
+  display: flex; flex-direction: column; gap: 0.3rem;
+  padding: 0.6rem 0.9rem;
+  border: 1px solid color-mix(in srgb, var(--color-bronze) 45%, transparent);
+  transition: border-color var(--motion-micro);
+}
+.roomHere .plaque { border-color: var(--color-rose); }
+.plaqueName { font-family: var(--font-serif); font-size: clamp(0.95rem, 1.4vw, 1.25rem); color: inherit; }
+.plaqueLine { font-family: var(--font-sans); font-size: 0.5625rem; letter-spacing: 0.18em; text-transform: uppercase; opacity: 0.8; }
+.here {
+  position: absolute; bottom: 0.6rem;
+  display: inline-flex; align-items: center; gap: 0.4rem;
+  font-family: var(--font-sans); font-size: 0.5625rem; letter-spacing: 0.22em; text-transform: uppercase; color: var(--color-rose);
+}
+.here::before { content: ""; width: 0.4rem; height: 0.4rem; border-radius: 50%; background: var(--color-rose); box-shadow: 0 0 10px var(--color-rose); }
+.lock { position: absolute; top: 0.6rem; right: 0.6rem; width: 0.75rem; height: 0.875rem; color: var(--color-bronze); }
+.lock svg { width: 100%; height: 100%; }
+
+/* the list — every plaque, in order, for phones and screen readers */
+.list { margin: 1.5rem 0 0; padding: 0; list-style: none; display: grid; gap: 0.25rem; }
+@media (min-width: 820px) { .list { grid-template-columns: repeat(4, 1fr); gap: 0.25rem 1rem; margin-top: 1.25rem; } }
+.list a {
+  display: flex; align-items: center; min-height: 2.75rem;
+  font-family: var(--font-serif); font-size: 1.05rem;
+  color: color-mix(in srgb, var(--color-cream) 75%, transparent);
+  border-bottom: 1px solid color-mix(in srgb, var(--color-bronze) 18%, transparent);
+  text-decoration: none;
+  transition: color var(--motion-micro);
+}
+.list a:hover, .list a:focus-visible { color: var(--color-champagne); outline: none; }
+.listHere { color: var(--color-rose) !important; }
+.listLock { font-family: var(--font-sans); font-size: 0.5625rem; letter-spacing: 0.18em; text-transform: uppercase; color: color-mix(in srgb, var(--color-cream) 45%, transparent); }
+@media (min-width: 820px) { .list { display: none; } }
+
+@media (prefers-reduced-motion: reduce) {
+  .scrim, .panel, .note, .room, .key { transition: none; animation: none; }
+}

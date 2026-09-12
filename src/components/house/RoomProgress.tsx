@@ -2,7 +2,7 @@
 
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { useEffect, useId, useRef, useState } from "react";
+import { useEffect, useState } from "react";
 import { ROOMS, roomForPathname, roomLabel } from "@/lib/rooms";
 
 /**
@@ -23,9 +23,6 @@ export function RoomProgress({ room: forced }: { room?: number } = {}) {
      active room there follows the scroll; everywhere else it is the route's. */
   const [homeRoom, setHomeRoom] = useState<1 | 2>(1);
   const active = pathname === "/" ? homeRoom : (routeRoom?.number ?? 1);
-  const [open, setOpen] = useState(false);
-  const menuId = useId();
-  const buttonRef = useRef<HTMLButtonElement>(null);
 
   useEffect(() => {
     if (pathname !== "/") return;
@@ -43,17 +40,6 @@ export function RoomProgress({ room: forced }: { room?: number } = {}) {
     };
   }, [pathname]);
 
-  useEffect(() => {
-    if (!open) return;
-    const onKey = (event: KeyboardEvent) => {
-      if (event.key === "Escape") {
-        setOpen(false);
-        buttonRef.current?.focus();
-      }
-    };
-    window.addEventListener("keydown", onKey);
-    return () => window.removeEventListener("keydown", onKey);
-  }, [open]);
 
   if (!routeRoom) return null;
   const current = ROOMS[active - 1];
@@ -101,45 +87,9 @@ export function RoomProgress({ room: forced }: { room?: number } = {}) {
         })}
       </nav>
 
-      {/* Phone pill + menu */}
-      <div className="fixed bottom-4 left-4 z-30 lg:hidden">
-        {open && (
-          <ul
-            id={menuId}
-            role="list"
-            className="mb-2 w-[min(20rem,calc(100vw-2rem))] border border-bronze/40 bg-night-deep/95 p-2 shadow-[0_20px_60px_rgba(0,0,0,0.6)] backdrop-blur"
-          >
-            {ROOMS.map((r) => (
-              <li key={r.slug}>
-                <Link
-                  href={r.href}
-                  aria-current={r.number === active ? "location" : undefined}
-                  onClick={() => setOpen(false)}
-                  className={`flex min-h-11 items-center gap-3 px-3 text-[0.6875rem] uppercase tracking-[0.18em] ${
-                    r.number === active ? "text-rose" : "text-cream/85 hover:text-rose"
-                  }`}
-                >
-                  <span className="font-serif text-base normal-case tracking-normal text-champagne">
-                    {String(r.number).padStart(2, "0")}
-                  </span>
-                  {r.name}
-                </Link>
-              </li>
-            ))}
-          </ul>
-        )}
-        <button
-          ref={buttonRef}
-          type="button"
-          aria-expanded={open}
-          aria-controls={menuId}
-          onClick={() => setOpen((v) => !v)}
-          className="flex min-h-11 items-center gap-2 border border-bronze/40 bg-night-deep/90 px-4 text-[0.625rem] uppercase tracking-[0.2em] text-cream backdrop-blur hover:border-rose hover:text-rose"
-        >
-          <span aria-hidden className="block h-px w-4 bg-rose" />
-          {roomLabel(current)}
-        </button>
-      </div>
+      {/* 12 Sept 2026: the phone pill that lived here is gone — the Founder
+          Key (FounderKey.tsx) is the one house control on a phone now, and
+          it opens the full map rather than a list. The desktop rail stays. */}
     </>
   );
 }

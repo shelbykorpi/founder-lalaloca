@@ -11,7 +11,7 @@ import { DoorFrame } from "@/components/house/DoorFrame";
 import { RoomHero } from "@/components/house/RoomHero";
 import { Vanity } from "@/components/house/Vanity";
 import { ThresholdDoors } from "@/components/house/ThresholdDoors";
-import { HallPlaques } from "@/components/house/HallPlaques";
+import { GrandHall } from "@/components/house/GrandHall";
 import { BRAND } from "@/lib/brand";
 import { FOUNDER_COLLECTION } from "@/lib/founderCollection";
 import { NEXT_MOVE } from "@/lib/nextMove";
@@ -277,11 +277,15 @@ export default function HomePage() {
           Follow the light ↓
         </a>
       </RoomHero>
-      {/* THE WALL OF DOORS — brief §4. The hall was a dead end: one hairline
-          and a very long scroll before anything else was a door. Six plaques,
+      {/* THE GRAND HALL — brief §4. Third pass, 12 Sept: the house’s own doors at
+          standing height, each with its room through the opening; press one and
+          you walk through. Was a wall of engraved plaques for an hour — Shelby:
+          "not the immersive feeling of being located in each room". The hall was
+          a dead end before that: one hairline
+          and a very long scroll before anything else was a door. Six doors,
           read from lib/house.ts so the map and the hall can never disagree
           about what the house contains. */}
-      <HallPlaques />
+      <GrandHall />
       {/* ══ FOUND HER — the note on the vanity ══════════════════════════════
           10 Sept 2026. The three-tile gallery that used to follow this hero
           (The mirror · The note · The company) came out at Shelby's

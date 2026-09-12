@@ -1136,3 +1136,42 @@ the Header, the Footer, `rooms.ts`, or any board token.
   shade case), Boardroom curtain/light drift, the Found Her portrait corridor
   with Leave her a note / Add your portrait.
 - Committed, unpushed (on top of 75236c0, which is also unpushed).
+
+## 2026-09-12 · Claude (Cowork) — Phase 2b: the Grand Hall is a hall
+Shelby on 2b29a47's plaque wall: "not giving the immersive feeling of being
+located in each room or that you're navigating yourself to each room. Pull
+life-like images." Right. A plaque tells you a room exists; it does not put
+you in front of its door.
+- REMOVED components/house/HallPlaques.tsx + hall.module.css (lived one hour).
+- NEW components/house/GrandHall.tsx + grand-hall.module.css — the house's own
+  doors at standing height along a marble floor: /door/edoor-scene.webp with
+  each wing's room (house.ts `door`) photographed through the opening, the
+  leaves swinging on their hinges, a reflection of each door in the floor. The
+  door in front of you stands open and lit; the others wait smaller and darker
+  down the hall; hover/focus opens any of them; rooms she has already found
+  keep their light; the Salon gives five degrees and stays shut. Desktop: look
+  along it (arrows, ← →, drag). Phone: a corridor she slides along, centre
+  snap. Same leaf geometry as the House Map, at the scale of a room, in the
+  page rather than over it. NO NEW IMAGES were composited — every pixel is a
+  photograph the house already has (Gamma image generation is out of credits
+  on Shelby's workspace: 46 remaining, a photo costs more; see below).
+- NEW components/house/WalkThrough.tsx — `useWalkThrough()`: press a door and
+  the room seen through its opening grows from the opening's own rectangle
+  until it fills the viewport over --motion-room, the plaque is said once,
+  then the route changes (brief §13, "the doorway expands toward the camera
+  and becomes the frame of the next scene"). A real <Link> underneath:
+  modifier-click, reduced motion, no JS all get a plain navigation; the
+  overlay dies with the page it was born on. Not yet wired into the House Map
+  or Room 06 — one-line change each if wanted; the map is another agent's
+  fresh work so it was left alone.
+- Verified: real build, tsc clean, eslint unchanged (the two pre-existing).
+  Playwright 1440/390: the hall, a door hovered open, the walk-through at
+  450ms and 1150ms, arrival on /founder-collection; the phone corridor before
+  and after Next door.
+- WHAT WOULD MAKE IT TRULY FIRST-PERSON, and needs an image budget: one
+  photograph of the whole corridor — six emerald doors receding down a marble
+  hall, sconces, one pink door at the end — with the doors as hotspots on the
+  photograph and the walk-through growing out of each. The prompt is written
+  (in the Phase 2 project doc); generation needs Gamma credits or renders from
+  Shelby's own generator dropped into public/editorial/rooms/.
+- Committed, unpushed (three commits ahead of origin/main plus this one).

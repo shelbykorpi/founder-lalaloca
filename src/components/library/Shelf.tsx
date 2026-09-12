@@ -29,6 +29,15 @@ const CLOTH: Record<string, string> = {
 };
 
 const HEIGHTS = ["15rem", "13.75rem", "15.5rem", "13.25rem", "14.5rem", "15.25rem", "14rem"];
+/* Thickness varies the way a real run of books does — a slim monograph beside
+   a thick one — and one in eleven leans a degree against its neighbour (a lean at the end of a wrapped row hangs off the ledge, so it is only ever one, early).
+   Both are position-based, like the heights, so the shelf is the same on
+   every visit. */
+const WIDTHS = ["3.3rem", "2.7rem", "3.7rem", "2.5rem", "3.1rem", "3.5rem", "2.9rem", "3.2rem"];
+const LEANS = ["0deg", "0deg", "0deg", "-1.4deg", "0deg", "0deg", "0deg", "0deg", "0deg", "0deg", "0deg"];
+/* Gilt stamps on the dark cloths; a blind, dark stamp on cream and rose,
+   where foil would not read. */
+const GILT = new Set([s.humectant, s.lipid, s.peptide]);
 
 export function Shelf({ entries }: { entries: LibraryEntry[] }) {
   return (
@@ -38,8 +47,14 @@ export function Shelf({ entries }: { entries: LibraryEntry[] }) {
           <li key={e.slug}>
             <Link
               href={`/library/${e.slug}`}
-              className={`${s.book} ${CLOTH[e.kind] ?? s.botanical}`}
-              style={{ "--h": HEIGHTS[i % HEIGHTS.length] } as CSSProperties}
+              className={`${s.book} ${CLOTH[e.kind] ?? s.botanical} ${GILT.has(CLOTH[e.kind] ?? s.botanical) ? s.gilt : ""}`}
+              style={
+                {
+                  "--h": HEIGHTS[i % HEIGHTS.length],
+                  "--w": WIDTHS[i % WIDTHS.length],
+                  "--lean": LEANS[i % LEANS.length],
+                } as CSSProperties
+              }
               aria-label={`${e.name} — ${e.kind}. Open the reading.`}
             >
               <span className={s.title} aria-hidden>

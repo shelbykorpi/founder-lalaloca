@@ -1175,3 +1175,21 @@ you in front of its door.
   (in the Phase 2 project doc); generation needs Gamma credits or renders from
   Shelby's own generator dropped into public/editorial/rooms/.
 - Committed, unpushed (three commits ahead of origin/main plus this one).
+
+## 2026-09-12 · Claude (Cowork) — The Library's books are bound, not drawn
+Shelby: "make these books look more life-like and realistic while keeping the
+FOUNDER colour schemes." Shelf.tsx + shelf.module.css only; no images, no new
+colours, no change to the entries or their links.
+- Each spine now has a ROUND (a light band a fifth of the way across, falling
+  into the joint shadow), RAISED BANDS at head and tail with gilt fillets,
+  GRAIN (one 160px SVG feTurbulence tile blended overlay, plus a faint weave),
+  handled-dark head and tail, a contact shadow on the ledge, and a STAMPED
+  title — gilt gradient clipped to the letters on the dark cloths, a dark
+  blind stamp on cream and rose where foil would not read.
+- Thickness now varies by position (eight widths) and one book in eleven leans
+  1.4° against its neighbour. The second lean was removed after a phone
+  screenshot showed it hanging off the end of a wrapped row.
+- The ledge is a plank with a brass nosing and the books' shadow lying on it.
+- Verified: real build, tsc, eslint clean for the component; screenshots at
+  1440 (rest + Hyaluronic acid pulled) and 390.
+- Committed, unpushed.

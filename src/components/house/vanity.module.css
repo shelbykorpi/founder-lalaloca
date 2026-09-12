@@ -97,10 +97,9 @@
 /* the mirror lights */
 .lights {
   position: absolute;
-  left: 50%;
+  left: 38.5vw;
   top: 30%;
-  transform: translateX(-50%);
-  width: min(940px, 70vw);
+  width: 42vw;
   display: grid;
   grid-template-columns: repeat(5, 1fr);
   z-index: 2;
@@ -132,13 +131,17 @@
 /* the products on the console */
 .shelf {
   position: absolute;
-  left: 50%;
-  /* the marble: its back edge is at ~78% of the plate's height, and with
-     the plate covering at 58% that lands close to 21% up the room at every
-     common aspect (measured at 1280, 1440 and 1920) */
+  /* THE CLEAR MARBLE. The plate covers by width at every aspect wider than
+     1.64, so the photograph's features sit at fixed fractions of the
+     viewport: her tray ends at 37.5vw, the photograph at 80.5vw. The five
+     stand on the stone between the two — a bottle drawn over a tray it is
+     not standing in reads as a mistake — and the last one stands just in
+     front of her candle. The back edge of the marble is ~78% of the plate's
+     height, which with the plate at 58% is ~21% up the room. */
+  left: 38.5vw;
+  width: 42vw;
   bottom: 21%;
-  transform: translateX(-50%);
-  width: min(940px, 70vw);
+  transform: none;
   display: grid;
   grid-template-columns: repeat(5, 1fr);
   align-items: end;
@@ -152,6 +155,9 @@
   padding: 0 4px;
   cursor: pointer;
   -webkit-tap-highlight-color: transparent;
+  /* its place on the marble — see PIECES.pose in Vanity.tsx */
+  transform: translate(var(--dx, 0), calc(var(--dy, 0) * var(--unit))) scale(var(--depth, 1));
+  transform-origin: 50% 100%;
 }
 .cone {
   position: absolute;
@@ -165,22 +171,74 @@
   transition: opacity 0.8s var(--ease);
   pointer-events: none;
 }
-.piece { display: block; line-height: 0; }
+.piece { position: relative; display: block; line-height: 0; }
 .piece:focus-visible { outline: 1.5px solid var(--color-champagne); outline-offset: 10px; }
 .slot img {
   display: block;
   width: auto;
   max-width: 100%;
   height: calc(var(--h) * var(--unit));
-  filter: brightness(0.86) saturate(0.92) drop-shadow(0 18px 22px rgba(0, 0, 0, 0.55));
+  /* No displaced drop-shadow. A shadow that falls 18px BELOW a bottle says
+     the bottle is 18px in the air; the darkness under a standing thing is
+     at its base, and it is drawn there by .ground and .cast instead. */
+  filter: brightness(0.9) saturate(0.94) drop-shadow(0 1px 2px rgba(0, 0, 0, 0.5));
   transform-origin: 50% 100%;
   transition: filter 0.8s var(--ease), transform 0.8s var(--ease);
 }
 .slotOn .cone { opacity: 1; }
+/* The lit piece is LIT — brighter, warmer — and stays exactly where it stands.
+   The old pass lifted it 12px and grew it 6%, which is a bottle levitating. */
 .slotOn img {
-  filter: brightness(1.07) saturate(1.02) drop-shadow(0 26px 32px rgba(0, 0, 0, 0.62)) drop-shadow(0 0 46px rgba(214, 190, 154, 0.34));
-  transform: translateY(-12px) scale(1.06);
+  filter: brightness(1.08) saturate(1.02) drop-shadow(0 1px 2px rgba(0, 0, 0, 0.5)) drop-shadow(0 0 40px rgba(214, 190, 154, 0.3));
+  transform: scale(1.015);
 }
+
+/* ---- what puts it on the marble ---------------------------------------- */
+/* the dark under the base: an ellipse the width of the piece, tight, soft */
+.ground {
+  position: absolute;
+  left: 50%;
+  bottom: calc(var(--unit) * -1.2);
+  width: 64%;
+  height: calc(var(--unit) * 5.5);
+  transform: translateX(-50%);
+  background: radial-gradient(50% 50% at 50% 50%, rgba(8, 10, 8, 0.78) 0%, rgba(8, 10, 8, 0.42) 42%, transparent 74%);
+  filter: blur(2.5px);
+  pointer-events: none;
+  z-index: 0;
+}
+/* the cast: the window is to the left, so each piece throws a soft shadow to
+   the right across the stone, longer than it is tall is not right for a
+   window this large — it is short, wide and faint */
+.cast {
+  position: absolute;
+  left: 58%;
+  bottom: calc(var(--unit) * -0.5);
+  width: 70%;
+  height: calc(var(--unit) * 7);
+  transform: translateX(-30%) skewX(-28deg);
+  background: radial-gradient(60% 50% at 40% 60%, rgba(10, 12, 10, 0.34) 0%, rgba(10, 12, 10, 0.14) 45%, transparent 75%);
+  filter: blur(6px);
+  pointer-events: none;
+  z-index: 0;
+}
+/* the reflection: the same cutout upside down in the polished marble,
+   foreshortened (a horizontal surface seen from a chair compresses it),
+   dim, and gone within a third of its height */
+.mirror {
+  position: absolute;
+  left: 0;
+  top: 100%;
+  transform: scaleY(-0.42);
+  transform-origin: 50% 0;
+  opacity: 0.22;
+  filter: blur(1.2px) brightness(0.75) saturate(0.85) !important;
+  -webkit-mask-image: linear-gradient(180deg, rgba(0, 0, 0, 0.95) 0%, rgba(0, 0, 0, 0.3) 45%, transparent 100%);
+  mask-image: linear-gradient(180deg, rgba(0, 0, 0, 0.95) 0%, rgba(0, 0, 0, 0.3) 45%, transparent 100%);
+  pointer-events: none;
+  transition: opacity 0.8s var(--ease);
+}
+.slotOn .mirror { opacity: 0.3; transform: scaleY(-0.42) scaleX(1.015); }
 .refl {
   position: absolute;
   left: 50%;
@@ -193,7 +251,7 @@
   transition: opacity 0.8s var(--ease);
   pointer-events: none;
 }
-.slotOn .refl { opacity: 1; }
+.slotOn .refl { opacity: 0.55; }
 
 /* one placard, for whichever piece is lit */
 .placard {
@@ -219,17 +277,17 @@
 /* the names along the console's edge — the only navigation */
 .names {
   position: absolute;
-  left: 50%;
+  left: 36vw;
   bottom: clamp(18px, 3.4vh, 30px);
-  transform: translateX(-50%);
-  width: min(940px, 70vw);
+  width: 47vw;
   display: grid;
   grid-template-columns: repeat(5, 1fr);
   z-index: 3;
 }
 .names button {
-  font-size: 1rem;
+  font-size: 0.95rem;
   letter-spacing: 0.02em;
+  white-space: nowrap;
   color: rgba(247, 239, 232, 0.45);
   padding: 8px 4px;
   transition: color 0.4s;
@@ -259,7 +317,7 @@
     scrollbar-width: none;
   }
   .shelf::-webkit-scrollbar { display: none; }
-  .slot { flex: 0 0 72vw; scroll-snap-align: center; min-height: 300px; }
+  .slot { flex: 0 0 72vw; scroll-snap-align: center; min-height: 300px; transform: none; }
   .slot:first-child { margin-left: 14vw; }
   .slot:last-child { margin-right: 14vw; }
   .placard { position: relative; right: auto; top: auto; width: auto; text-align: left; padding-inline: 16px; margin-top: 22px; min-height: 190px; }

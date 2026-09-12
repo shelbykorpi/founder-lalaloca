@@ -1218,3 +1218,18 @@ and fit it into the atmosphere."
 - Vanity.tsx unchanged. LINE data, links, placard, ritual, keys all as before.
 - Verified: build, tsc, eslint; screenshots 1280/1440/1920/390.
 - Committed, unpushed (with 53a1a85, the Library shelf).
+- (second pass, same session) Shelby: "some are floating in the air and not
+  sitting life-like on the vanity." Correct — they were a flat line-up at one
+  height on a table that recedes, with a drop-shadow displaced 18px below each
+  (a shadow below a thing says the thing is in the air), lifted 12px on hover,
+  and two of them drawn over her tray. Now: each piece has a POSE
+  (Vanity.tsx PIECES.pose — dx/dy/depth/z), so the two cleansers stand back by
+  the glass, the hero holds the middle, the eye cream and the stick come
+  forward, lower and larger, overlapping the way things on a real table do;
+  a GROUND ellipse and a CAST to the right (the window is left) replace the
+  displaced drop-shadow; each piece has its REFLECTION in the polished marble
+  (the same cutout, upside down, foreshortened to 42%, dim, gone in a third of
+  its height); the lit piece brightens and stays put — no lift. The row now
+  sits on the clear marble between her tray (ends at 37.5vw) and the edge of
+  the photograph (80.5vw), the last piece just in front of her candle.
+  Verified 1280/1440/1920/390.

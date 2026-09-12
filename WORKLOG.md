@@ -1193,3 +1193,28 @@ colours, no change to the entries or their links.
 - Verified: real build, tsc, eslint clean for the component; screenshots at
   1440 (rest + Hyaluronic acid pulled) and 390.
 - Committed, unpushed.
+
+## 2026-09-12 · Claude (Cowork) — Room 03: she sits down at the vanity
+Shelby sent a room — gilt tri-fold mirror on a marble dressing table, fluted
+Founder Green drawers, peonies, a candle, velvet curtains — "so it feels like
+you're sitting at the vanity looking at the products. Use the image provided
+and fit it into the atmosphere."
+- NEW public/editorial/rooms/vanity-dressing-table.webp (2054×1254) and
+  -m.webp (1254² for phones): her photograph graded from noon into the house's
+  evening (exposure ×0.70, gamma 1.08, warmed R+4%/B−10%, greens +6%, a
+  vignette), with 400px out-of-focus wings either side made from a progressive
+  blur of its own edges — so a 16:9 viewport keeps the mirror's crown rather
+  than cropping a square. Nothing was composited or invented; the wings are
+  her room, defocused. Old plate vanity-console.webp left in place (unused).
+- vanity.module.css: room → the new plate at 50% 58%; the pieces' baseline to
+  bottom 21% (the marble's back edge, measured at 1280/1440/1920); the row and
+  the names narrowed to min(940px, 70vw) so the five stand in front of the
+  central glass with her tray to the left and her candle to the right; --unit
+  0.44vh → 0.31vh so the pieces read as nearer than her tray, not four times
+  its size; the boardroom-mirror bulbs hidden (this mirror has a window, not
+  bulbs) while the warm glow above the lit piece stays; a real scrim over the
+  left third because the words sit over the window. Phone: the -m plate and
+  108px of shelf padding to walk the pieces down onto the marble.
+- Vanity.tsx unchanged. LINE data, links, placard, ritual, keys all as before.
+- Verified: build, tsc, eslint; screenshots 1280/1440/1920/390.
+- Committed, unpushed (with 53a1a85, the Library shelf).

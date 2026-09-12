@@ -23,25 +23,42 @@
  *
  * Swapping the room later is one file: replace vanity-console.webp with an
  * empty console shot in the same house and nothing else moves.
+ *
+ * 12 SEPTEMBER 2026 — SHE SITS DOWN. Shelby: "change this scene to the
+ * products sitting on an immersive vanity so it feels like you're sitting at
+ * the vanity looking at the products", and sent the room: a gilt tri-fold
+ * mirror on a marble dressing table, fluted Founder Green drawers with brass
+ * pulls, peonies, a candle, velvet curtains. That is now the room —
+ * public/editorial/rooms/vanity-dressing-table.webp — graded from her noon
+ * into the house's evening (exposure down, warmed, the greens deepened, a
+ * vignette) and given soft out-of-focus wings either side so a 16:9 viewport
+ * does not crop the mirror's crown off a square photograph. The camera is
+ * seated: the five pieces stand on the marble in front of the central glass,
+ * her tray to the left and her candle to the right, and the mirror's own
+ * light warms above whichever one is lit. The bulbs from the old boardroom
+ * mirror are gone — this mirror has no bulbs, it has a window.
  */
 
 .room {
   --ease: cubic-bezier(0.22, 0.61, 0.36, 1);
-  --unit: clamp(2.2px, 0.44vh, 4.1px); /* 1% of the tallest product */
+  --unit: clamp(1.8px, 0.31vh, 3px); /* 1% of the tallest product — seated at the table, the pieces are nearer than her tray but not four times its size */
   position: relative;
   isolation: isolate;
   height: clamp(640px, 92vh, 880px);
   overflow: hidden;
-  background: var(--color-night) url("/editorial/rooms/vanity-console.webp") 50% 60% / cover no-repeat;
+  background: var(--color-night) url("/editorial/rooms/vanity-dressing-table.webp") 50% 58% / cover no-repeat;
 }
 .room::before {
   content: "";
   position: absolute;
   inset: 0;
   pointer-events: none;
+  /* The words sit over the window, which is the brightest thing in the room,
+     so the left third carries a real scrim; the placard sits over the curtain
+     and needs almost none. */
   background:
-    linear-gradient(90deg, rgba(14, 33, 27, 0.32), transparent 20% 80%, rgba(14, 33, 27, 0.27)),
-    linear-gradient(180deg, rgba(14, 33, 27, 0.21), transparent 28% 72%, rgba(14, 33, 27, 0.38));
+    linear-gradient(90deg, rgba(14, 33, 27, 0.78) 0%, rgba(14, 33, 27, 0.5) 20%, transparent 44% 80%, rgba(14, 33, 27, 0.3)),
+    linear-gradient(180deg, rgba(14, 33, 27, 0.36), transparent 30% 76%, rgba(14, 33, 27, 0.34));
 }
 
 .words {
@@ -81,9 +98,9 @@
 .lights {
   position: absolute;
   left: 50%;
-  top: 27%;
+  top: 30%;
   transform: translateX(-50%);
-  width: min(1120px, 92vw);
+  width: min(940px, 70vw);
   display: grid;
   grid-template-columns: repeat(5, 1fr);
   z-index: 2;
@@ -93,6 +110,7 @@
 .light img {
   width: 32px;
   height: 32px;
+  display: none; /* the boardroom's bulbs; this mirror has none */
   opacity: 0.85;
   filter: brightness(0.42) saturate(0.7);
   transition: filter 0.7s var(--ease), transform 0.7s var(--ease), opacity 0.7s;
@@ -115,9 +133,12 @@
 .shelf {
   position: absolute;
   left: 50%;
-  bottom: clamp(58px, 10vh, 96px);
+  /* the marble: its back edge is at ~78% of the plate's height, and with
+     the plate covering at 58% that lands close to 21% up the room at every
+     common aspect (measured at 1280, 1440 and 1920) */
+  bottom: 21%;
   transform: translateX(-50%);
-  width: min(1120px, 92vw);
+  width: min(940px, 70vw);
   display: grid;
   grid-template-columns: repeat(5, 1fr);
   align-items: end;
@@ -201,7 +222,7 @@
   left: 50%;
   bottom: clamp(18px, 3.4vh, 30px);
   transform: translateX(-50%);
-  width: min(1120px, 92vw);
+  width: min(940px, 70vw);
   display: grid;
   grid-template-columns: repeat(5, 1fr);
   z-index: 3;
@@ -218,7 +239,7 @@
 
 /* phone: the vanity becomes a track you slide along */
 @media (max-width: 820px) {
-  .room { height: auto; padding-block: 28px 24px; }
+  .room { height: auto; padding-block: 28px 24px; background-image: url("/editorial/rooms/vanity-dressing-table-m.webp"); background-position: 50% 72%; }
   .words { position: relative; left: auto; top: auto; padding-inline: 16px; max-width: none; }
   .lights { display: none; }
   .shelf {
@@ -232,7 +253,9 @@
     overflow-x: auto;
     scroll-snap-type: x mandatory;
     margin-top: 26px;
-    padding: 20px 0 0;
+    /* the marble runs at ~78% of the room on a phone; the padding walks the
+       pieces down onto it rather than leaving them hanging in the glass */
+    padding: 108px 0 0;
     scrollbar-width: none;
   }
   .shelf::-webkit-scrollbar { display: none; }

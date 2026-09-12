@@ -977,3 +977,16 @@ at the folder" and the honest answer was no. Logging it all now.
   720-wide candidate. Thirst Trap untouched. Bounce Back's bottle is
   photographed slightly slimmer than the other two — real photo, not
   distorted to match. Commit bb71eab, unpushed.
+- (12 Sept, same session) Room 06 · Notes from the house rebuilt. Was four
+  unrelated frames (journal, shop counter, pink dressing room, mirrors)
+  with four bank mood lines dealt at random — Shelby: "do not flow, nor
+  does the copy." Now four rooms of the house in walking order, each tile
+  a Link to its room, a brass hairline threading the row at xl, eyebrow
+  "01 · Found Her" etc., lede "Four rooms, in the order you walk them. A
+  line waits in each.": found-her-hall-doors → "The note was left for
+  you." (/found-her); serum-salon-arches → "Pick the one that's yours."
+  (/shop, the salon's own through-line); collection-vanity → "A mirror, a
+  ritual, a reminder." (/founder-collection); library-shelves → "The house
+  remembers." (/library). No new copy minted — all from the approved bank
+  or already live. "Nothing loud. Everything intentional." dropped from
+  this row (still in the bank). No new image files; page.tsx only.

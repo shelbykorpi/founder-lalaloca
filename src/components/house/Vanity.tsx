@@ -32,22 +32,22 @@ type Slug = "opening-line" | "clean-break" | "hold-the-room" | "double-take" | "
 /* The cutouts, the step each product belongs to, its tick colour, and its
    height as a percentage of the tallest piece — so all five stand at one
    true scale. Heights measured from the cutouts themselves. */
-/* THE ARRANGEMENT — 12 Sept 2026. Five pieces in a row at one height is a
-   line-up, and on a table seen from a chair a line-up floats: the marble
-   recedes, so a thing further back stands higher in the frame and a little
-   smaller, a thing nearer stands lower and larger, and they overlap the way
-   objects on a real dressing table do. `pose` is each piece's place on the
-   marble: dx/dy nudge it across and toward the chair (dy in product units,
-   positive = nearer), depth scales it, z decides who stands in front. The
-   small eye cream comes forward where you would actually keep it; the two
-   cleansers stand back by the glass; the hero holds the middle. */
+/* THE ARRANGEMENT — 12 Sept 2026, and then again. A staggered still-life
+   across the marble was tried and Shelby was right that it did not sit: a
+   cutout standing mid-way across a receding plane has no edge to stand ON.
+   So the five stand along the LIP of the counter — its front edge, the one
+   line in the photograph that is a true horizontal at the camera's height —
+   like things set out on a shelf. One baseline, because a shelf has one.
+   `pose` keeps a little sideways breathing room (dx) and the stacking order
+   (z: the small pieces in front of the tall ones where they overlap). dy and
+   depth are held at 0 / 1 and left in the type for the day the room changes. */
 type Pose = { dx: string; dy: number; depth: number; z: number };
 const PIECES: Record<Slug, { src: string; step: string; tick: string; h: number; w: number; ph: number; pose: Pose }> = {
-  "opening-line":  { src: "/products/opening-line-vanity.webp",  step: "01 · Cleanse", tick: "#F7EFE8", h: 99.5,  w: 350, ph: 1199, pose: { dx: "6%",   dy: 3,   depth: 0.97, z: 3 } },
-  "clean-break":   { src: "/products/clean-break-vanity.webp",   step: "02 · Cleanse", tick: "#F7EFE8", h: 100,   w: 337, ph: 1205, pose: { dx: "-2%",  dy: -8,  depth: 0.90, z: 1 } },
-  "hold-the-room": { src: "/products/hold-the-room-vanity.webp", step: "03 · Treat",   tick: "#D8A7A0", h: 97.6,  w: 692, ph: 1176, pose: { dx: "0%",   dy: -1,  depth: 0.96, z: 2 } },
-  "double-take":   { src: "/products/double-take-vanity.webp",   step: "04 · Treat",   tick: "#D8A7A0", h: 63.3,  w: 729, ph: 763,  pose: { dx: "-10%", dy: 11,  depth: 1.06, z: 5 } },
-  "smooth-talker": { src: "/products/smooth-talker-vanity.webp", step: "05 · Finish",  tick: "#B08A64", h: 71.4,  w: 566, ph: 860,  pose: { dx: "0%",   dy: 6,   depth: 1.0,  z: 4 } },
+  "opening-line":  { src: "/products/opening-line-vanity.webp",  step: "01 · Cleanse", tick: "#F7EFE8", h: 99.5,  w: 350, ph: 1199, pose: { dx: "2%",   dy: 0, depth: 1, z: 3 } },
+  "clean-break":   { src: "/products/clean-break-vanity.webp",   step: "02 · Cleanse", tick: "#F7EFE8", h: 100,   w: 337, ph: 1205, pose: { dx: "-2%",  dy: 0, depth: 1, z: 1 } },
+  "hold-the-room": { src: "/products/hold-the-room-vanity.webp", step: "03 · Treat",   tick: "#D8A7A0", h: 97.6,  w: 692, ph: 1176, pose: { dx: "0%",   dy: 0, depth: 1, z: 2 } },
+  "double-take":   { src: "/products/double-take-vanity.webp",   step: "04 · Treat",   tick: "#D8A7A0", h: 63.3,  w: 729, ph: 763,  pose: { dx: "-4%",  dy: 0, depth: 1, z: 5 } },
+  "smooth-talker": { src: "/products/smooth-talker-vanity.webp", step: "05 · Finish",  tick: "#B08A64", h: 71.4,  w: 566, ph: 860,  pose: { dx: "2%",   dy: 0, depth: 1, z: 4 } },
 };
 
 const slugOf = (href: string): Slug => href.replace(/^\/products\//, "") as Slug;

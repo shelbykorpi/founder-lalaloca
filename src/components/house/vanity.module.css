@@ -41,12 +41,21 @@
 
 .room {
   --ease: cubic-bezier(0.22, 0.61, 0.36, 1);
-  --unit: clamp(1.8px, 0.31vh, 3px); /* 1% of the tallest product — seated at the table, the pieces are nearer than her tray but not four times its size */
+  /* 1% of the tallest product. In vw, not vh, because the room photograph
+     covers by width and every feature in it — her tray, the lip of the
+     counter, her candle — scales with the viewport's width. Sized so the
+     pieces at the front of the counter read a little larger than her perfume
+     bottle mid-counter, which is what being nearer does. */
+  --unit: clamp(1.6px, 0.155vw, 3px);
   position: relative;
   isolation: isolate;
   height: clamp(640px, 92vh, 880px);
   overflow: hidden;
-  background: var(--color-night) url("/editorial/rooms/vanity-dressing-table.webp") 50% 58% / cover no-repeat;
+  /* Anchored to the BOTTOM, so the counter — the only part of the picture
+     the pieces touch — is always in the same place relative to the room's
+     floor whatever the viewport's height; a wide screen loses a little of the
+     mirror's crown rather than the counter's lip. */
+  background: var(--color-night) url("/editorial/rooms/vanity-dressing-table.webp") 50% 100% / cover no-repeat;
 }
 .room::before {
   content: "";
@@ -140,7 +149,12 @@
      height, which with the plate at 58% is ~21% up the room. */
   left: 38.5vw;
   width: 42vw;
-  bottom: 21%;
+  /* THE LIP. The counter's front edge is at 86.5% of the plate's height
+     (measured: marble ends and the fluted drawer front begins at y≈1085 of
+     1254 at the centre). Covering by width, the plate is 61.05vw tall and
+     bottom-anchored, so the lip sits 13.5% × 61.05vw = 8.24vw up from the
+     floor of the room. The pieces stand a hair behind it. */
+  bottom: 8.6vw;
   transform: none;
   display: grid;
   grid-template-columns: repeat(5, 1fr);
@@ -226,6 +240,7 @@
    foreshortened (a horizontal surface seen from a chair compresses it),
    dim, and gone within a third of its height */
 .mirror {
+  display: none; /* at the lip there is no marble in front of the base to reflect in */
   position: absolute;
   left: 0;
   top: 100%;

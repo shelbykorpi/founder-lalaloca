@@ -1233,3 +1233,19 @@ and fit it into the atmosphere."
   sits on the clear marble between her tray (ends at 37.5vw) and the edge of
   the photograph (80.5vw), the last piece just in front of her candle.
   Verified 1280/1440/1920/390.
+- (third pass) Shelby: "just put it on a shelf … place each item on a counter
+  where it looks life-like." The staggered still-life did not sit either — a
+  cutout standing mid-way across a receding plane has no edge to stand on.
+  Now the five stand along the LIP of the counter: its front edge, the one
+  true horizontal in the photograph at the camera's height, brass rail and
+  fluted drawers directly beneath — a shelf, with a shelf's one baseline. The
+  plate is bottom-anchored so the lip is always at 8.6vw from the room's
+  floor (86.5% of a plate 61.05vw tall), and --unit is in vw so the pieces
+  scale with the photograph rather than the window height. The plate was
+  re-rendered with DEPTH OF FIELD — sharp from the counter's back edge down,
+  the mirror and the room behind softening toward the top and half a stop
+  darker — which is what a lens focused on the front of a table does and
+  which also means the mirror is no longer asked to reflect five things it
+  cannot. Marble reflections off (at the lip there is drawer front, not
+  marble, below the base); poses flattened to dx and z only; ground + cast
+  shadows kept. Verified 1280/1440/1920/390.

@@ -1042,3 +1042,15 @@ it navigable and adds the missing room. Everything additive.
   Her corridor + Leave her a note / Add your portrait, concierge "What are
   you walking into?", returning-visitor key-turn beat, sound stub.
 - Committed, unpushed (with everything since 4a89493).
+- Second pass, same day. Shelby on the floor plan: "static and unrealistic
+  … lines and boxes." Right. The House Map is now A HALL OF DOORS: the
+  house's own brass-framed emerald double doors (/door/edoor-scene.webp
+  with the edoor-leaf-left/right cutouts, leaf positions measured by pixel
+  match: left 22.556% / top 9.406% / 27.44% × 87.43%, right at 50%) in a
+  row down a dark hall, each wing's own room photographed through the
+  opening (the -m portrait crops from rooms.ts). Her room stands open and
+  lit with You Are Here beneath; hover/focus swings any other door open
+  (rotateY on the outer hinge, warm light through the doorway); the Salon
+  stays shut with its plaque. Phone: a corridor she slides along, opened at
+  her own door. house.ts: `plan` coordinates replaced by `door` image.
+  Clean rebuild verified; screenshots 1440/390.

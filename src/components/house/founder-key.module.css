@@ -34,11 +34,7 @@
 .key:hover, .key:focus-visible { border-color: var(--color-champagne); color: var(--color-cream); outline: none; }
 .glyph { width: 1.75rem; height: 0.875rem; color: var(--color-bronze); transition: color var(--motion-micro); }
 .key:hover .glyph, .key:focus-visible .glyph { color: var(--color-champagne); }
-/* Phones: the key is hardware only — a 44px brass key with no label — so it
-   never sits on a hero's own action strip. The plaque text appears from md. */
-.label { display: none; flex-direction: column; align-items: flex-start; line-height: 1.15; text-align: left; }
-@media (min-width: 768px) { .label { display: flex; } }
-@media (max-width: 767px) { .key { padding: 0.5rem 0.7rem; gap: 0; } }
+.label { display: flex; flex-direction: column; align-items: flex-start; line-height: 1.15; text-align: left; }
 .labelTop { font-family: var(--font-sans); font-size: 0.625rem; letter-spacing: 0.2em; text-transform: uppercase; }
 .labelSub { font-family: var(--font-serif); font-size: 0.8125rem; color: color-mix(in srgb, var(--color-cream) 60%, transparent); }
 .note {
@@ -55,39 +51,38 @@
 }
 @keyframes keynote { from { opacity: 0; transform: translateY(6px); } to { opacity: 1; transform: none; } }
 
-/* ---- the map ------------------------------------------------------------ */
+/* ---- the map — the hall of doors ---------------------------------------- */
 .map { position: fixed; inset: 0; z-index: 60; pointer-events: none; }
 .scrim {
   position: absolute; inset: 0;
-  background: color-mix(in srgb, var(--color-night-deep) 78%, transparent);
+  background: color-mix(in srgb, var(--color-night-deep) 82%, transparent);
   opacity: 0;
   transition: opacity var(--motion-room) var(--ease-house);
 }
-.panel {
+.hall {
   position: absolute;
-  left: 50%; top: 50%;
-  width: min(64rem, calc(100vw - 2rem));
-  max-height: calc(100vh - 2rem);
-  overflow: auto;
-  transform: translate(-50%, -50%) translateY(14px);
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  padding: clamp(1rem, 3vh, 2.5rem) 0 clamp(1rem, 3vh, 2rem);
   opacity: 0;
-  padding: clamp(1.25rem, 3vw, 2.5rem);
-  border: 1px solid color-mix(in srgb, var(--color-bronze) 40%, transparent);
+  transform: translateY(12px);
+  overflow: hidden;
+  /* the hall itself: dark marble floor, a warm pool of light, the walls falling away */
   background:
-    radial-gradient(120% 90% at 20% 0%, rgba(216, 167, 160, 0.06) 0%, transparent 60%),
-    var(--color-night);
-  box-shadow: 0 40px 120px rgba(0, 0, 0, 0.6);
+    radial-gradient(70% 45% at 50% 100%, rgba(176, 138, 100, 0.16) 0%, transparent 70%),
+    linear-gradient(180deg, #040a08 0%, #0b1a15 45%, #050d0a 100%);
   transition: opacity var(--motion-room) var(--ease-house), transform var(--motion-room) var(--ease-house);
 }
 .mapOpen { pointer-events: auto; }
 .mapOpen .scrim { opacity: 1; }
-.mapOpen .panel { opacity: 1; transform: translate(-50%, -50%); }
+.mapOpen .hall { opacity: 1; transform: none; }
 
-.head { position: relative; padding-right: 3rem; }
-.title { margin-top: 0.5rem; font-size: clamp(1.6rem, 3vw, 2.4rem); line-height: 1.05; }
-.found { margin-top: 0.5rem; font-family: var(--font-sans); font-size: 0.625rem; letter-spacing: 0.22em; text-transform: uppercase; color: color-mix(in srgb, var(--color-cream) 55%, transparent); }
+.head { position: relative; padding: 0 clamp(1rem, 5vw, 4rem); padding-right: 4.5rem; flex: 0 0 auto; }
+.title { margin-top: 0.4rem; font-size: clamp(1.5rem, 2.8vw, 2.3rem); line-height: 1.05; }
+.found { margin-top: 0.4rem; font-family: var(--font-sans); font-size: 0.625rem; letter-spacing: 0.22em; text-transform: uppercase; color: color-mix(in srgb, var(--color-cream) 55%, transparent); }
 .close {
-  position: absolute; right: 0; top: 0;
+  position: absolute; right: clamp(1rem, 5vw, 4rem); top: 0;
   width: 2.75rem; height: 2.75rem;
   display: grid; place-items: center;
   color: color-mix(in srgb, var(--color-cream) 70%, transparent);
@@ -97,67 +92,96 @@
 .close svg { width: 1rem; height: 1rem; }
 .close:hover, .close:focus-visible { color: var(--color-champagne); border-color: color-mix(in srgb, var(--color-bronze) 45%, transparent); outline: none; }
 
-/* the plan itself — desktop only; phones get the list */
-.plan {
-  position: relative;
-  display: none;
-  margin-top: 1.75rem;
-  aspect-ratio: 16 / 9;
-  border: 1px solid color-mix(in srgb, var(--color-bronze) 55%, transparent);
-  background: color-mix(in srgb, var(--color-night-deep) 60%, transparent);
+/* the row of doors — a corridor you slide along on a phone, a wall on desktop */
+.doors {
+  flex: 1 1 auto;
+  min-height: 0;
+  display: flex;
+  align-items: center;
+  gap: clamp(0.5rem, 1.2vw, 1.25rem);
+  margin: 0;
+  padding: 1.5rem clamp(1rem, 5vw, 4rem) 0.5rem;
+  list-style: none;
+  overflow-x: auto;
+  overflow-y: hidden;
+  scroll-snap-type: x mandatory;
+  scrollbar-width: none;
+  /* the floor: a faint marble sheen the doors stand on */
+  background:
+    linear-gradient(180deg, transparent 72%, rgba(176, 138, 100, 0.07) 73%, rgba(0, 0, 0, 0.35) 100%);
 }
-@media (min-width: 820px) { .plan { display: block; } }
-.wallH, .wallV { position: absolute; background: color-mix(in srgb, var(--color-bronze) 35%, transparent); }
-.wallH { left: 0; right: 0; height: 1px; }
-.wallV { top: 0; bottom: 0; width: 1px; }
+.doors::-webkit-scrollbar { display: none; }
+.door {
+  flex: 0 0 min(68vw, 16rem);
+  scroll-snap-align: center;
+}
+@media (min-width: 820px) {
+  .doors { justify-content: center; }
+  .door { flex: 1 1 0; max-width: 15rem; }
+}
+.doorLink { display: block; text-decoration: none; color: inherit; outline: none; }
 
-.room {
-  position: absolute;
-  display: flex; flex-direction: column; justify-content: center; align-items: center;
-  text-align: center;
-  text-decoration: none;
-  color: color-mix(in srgb, var(--color-cream) 55%, transparent);
-  transition: color var(--motion-micro) var(--ease-house), background var(--motion-reveal) var(--ease-house);
+/* the door photograph, 900 × 1297 */
+.frame {
+  position: relative;
+  display: block;
+  aspect-ratio: 900 / 1297;
+  perspective: 1200px;
+  filter: brightness(0.62) saturate(0.9);
+  transition: filter var(--motion-reveal) var(--ease-house), transform var(--motion-reveal) var(--ease-house);
 }
-.room:hover, .room:focus-visible { color: var(--color-cream); background: color-mix(in srgb, var(--color-champagne) 6%, transparent); outline: none; }
-.room:focus-visible .plaque { border-color: var(--color-champagne); }
-.roomFound { color: color-mix(in srgb, var(--color-cream) 85%, transparent); }
-.roomHere { color: var(--color-cream); background: color-mix(in srgb, var(--color-rose) 8%, transparent); }
-.roomLocked { color: color-mix(in srgb, var(--color-cream) 40%, transparent); }
+.doorFound .frame { filter: brightness(0.8); }
+.doorHere .frame { filter: brightness(1.02); }
+.doorLink:hover .frame, .doorLink:focus-visible .frame { filter: brightness(1); transform: translateY(-4px); }
+.doorLocked .doorLink:hover .frame, .doorLocked .doorLink:focus-visible .frame { filter: brightness(0.85); transform: none; }
+.surround { object-fit: cover; }
+.opening { position: absolute; display: block; overflow: hidden; perspective: 900px; transform-style: preserve-3d; }
+.room { object-fit: cover; object-position: 50% 45%; }
+/* the light of the room falling out through the doorway */
+.glow {
+  position: absolute; inset: 0;
+  background: radial-gradient(80% 60% at 50% 40%, rgba(255, 236, 200, 0.22) 0%, transparent 70%);
+  opacity: 0;
+  transition: opacity var(--motion-room) var(--ease-house);
+}
+.leaf {
+  position: absolute; top: 0; bottom: 0; width: 50.1%;
+  transform-style: preserve-3d;
+  backface-visibility: hidden;
+  transition: transform var(--motion-room) var(--ease-house), filter var(--motion-room) var(--ease-house);
+}
+.leaf img { object-fit: fill; }
+.leafL { left: 0; transform-origin: 0% 50%; }
+.leafR { right: 0; transform-origin: 100% 50%; }
+/* the room she is in stands open; every other door opens to her hand */
+.doorHere .leafL, .doorLink:hover .leafL, .doorLink:focus-visible .leafL { transform: rotateY(-72deg); filter: brightness(0.55); }
+.doorHere .leafR, .doorLink:hover .leafR, .doorLink:focus-visible .leafR { transform: rotateY(72deg); filter: brightness(0.55); }
+.doorHere .glow, .doorLink:hover .glow, .doorLink:focus-visible .glow { opacity: 1; }
+/* the Salon: shut, and it stays shut */
+.doorLocked .leafL, .doorLocked .doorLink:hover .leafL, .doorLocked .doorLink:focus-visible .leafL { transform: rotateY(-4deg); filter: none; }
+.doorLocked .leafR, .doorLocked .doorLink:hover .leafR, .doorLocked .doorLink:focus-visible .leafR { transform: rotateY(4deg); filter: none; }
+.doorLocked .glow { opacity: 0 !important; }
+
+/* the brass plaque under each door */
 .plaque {
-  display: flex; flex-direction: column; gap: 0.3rem;
-  padding: 0.6rem 0.9rem;
-  border: 1px solid color-mix(in srgb, var(--color-bronze) 45%, transparent);
-  transition: border-color var(--motion-micro);
+  display: flex; flex-direction: column; align-items: center; gap: 0.3rem;
+  margin-top: 0.9rem;
+  text-align: center;
+  color: color-mix(in srgb, var(--color-cream) 60%, transparent);
+  transition: color var(--motion-micro);
 }
-.roomHere .plaque { border-color: var(--color-rose); }
-.plaqueName { font-family: var(--font-serif); font-size: clamp(0.95rem, 1.4vw, 1.25rem); color: inherit; }
-.plaqueLine { font-family: var(--font-sans); font-size: 0.5625rem; letter-spacing: 0.18em; text-transform: uppercase; opacity: 0.8; }
+.doorFound .plaque { color: color-mix(in srgb, var(--color-cream) 85%, transparent); }
+.doorHere .plaque, .doorLink:hover .plaque, .doorLink:focus-visible .plaque { color: var(--color-cream); }
+.plaqueName { font-family: var(--font-serif); font-size: clamp(1rem, 1.5vw, 1.3rem); line-height: 1.1; }
+.plaqueLine { font-family: var(--font-sans); font-size: 0.5625rem; letter-spacing: 0.18em; text-transform: uppercase; opacity: 0.75; }
+.doorLocked .plaqueLine { color: var(--color-champagne); opacity: 1; }
 .here {
-  position: absolute; bottom: 0.6rem;
+  margin-top: 0.25rem;
   display: inline-flex; align-items: center; gap: 0.4rem;
   font-family: var(--font-sans); font-size: 0.5625rem; letter-spacing: 0.22em; text-transform: uppercase; color: var(--color-rose);
 }
 .here::before { content: ""; width: 0.4rem; height: 0.4rem; border-radius: 50%; background: var(--color-rose); box-shadow: 0 0 10px var(--color-rose); }
-.lock { position: absolute; top: 0.6rem; right: 0.6rem; width: 0.75rem; height: 0.875rem; color: var(--color-bronze); }
-.lock svg { width: 100%; height: 100%; }
-
-/* the list — every plaque, in order, for phones and screen readers */
-.list { margin: 1.5rem 0 0; padding: 0; list-style: none; display: grid; gap: 0.25rem; }
-@media (min-width: 820px) { .list { grid-template-columns: repeat(4, 1fr); gap: 0.25rem 1rem; margin-top: 1.25rem; } }
-.list a {
-  display: flex; align-items: center; min-height: 2.75rem;
-  font-family: var(--font-serif); font-size: 1.05rem;
-  color: color-mix(in srgb, var(--color-cream) 75%, transparent);
-  border-bottom: 1px solid color-mix(in srgb, var(--color-bronze) 18%, transparent);
-  text-decoration: none;
-  transition: color var(--motion-micro);
-}
-.list a:hover, .list a:focus-visible { color: var(--color-champagne); outline: none; }
-.listHere { color: var(--color-rose) !important; }
-.listLock { font-family: var(--font-sans); font-size: 0.5625rem; letter-spacing: 0.18em; text-transform: uppercase; color: color-mix(in srgb, var(--color-cream) 45%, transparent); }
-@media (min-width: 820px) { .list { display: none; } }
 
 @media (prefers-reduced-motion: reduce) {
-  .scrim, .panel, .note, .room, .key { transition: none; animation: none; }
+  .scrim, .hall, .note, .frame, .leaf, .glow, .key, .plaque { transition: none; animation: none; }
 }

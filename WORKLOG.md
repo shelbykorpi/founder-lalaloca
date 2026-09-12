@@ -1265,3 +1265,7 @@ and fit it into the atmosphere."
   camera's own height, so the cutouts' own light and viewpoint are the only
   ones in the scene. The dressing-table plates stay in the repo, unused. Phone
   draws the console under the slide track. Verified 1280/1440/1920/390.
+- (fifth) The panel mouldings behind each piece came out. Shelby: "remove the
+  grid stuff, I'm not going to say it again." Nothing is drawn on the wall
+  now except light. Standing rule for this room, third time stated in this
+  log: NO GRIDS, NO GRAPHS, NO LINES that read as a diagram.

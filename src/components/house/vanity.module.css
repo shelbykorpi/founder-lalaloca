@@ -1,6 +1,6 @@
 /*
  * THE VANITY — Room 03. The five pieces on a black marble console against
- * the house's own panelling.
+ * the house's own wall.
  *
  * 12 SEPTEMBER 2026, FIFTH PASS, AND THE LAST OF ITS KIND. Three passes today
  * tried to seat Selfnamed cutouts on a photograph of a dressing table. Each
@@ -14,15 +14,15 @@
  * is built, which is the one room today nobody had to send back. Everything
  * in it is head-on, at the camera's own height, in the house's own materials:
  *
- *   the wall     Founder Green panelling in shadow, one moulded panel behind
- *                each piece, two sconces' worth of warm light from above
+ *   the wall     Founder Green in shadow — a wall, with light on it and
+ *                nothing drawn on it — two sconces' worth of warmth above
  *   the console  a slab of black marble — a top face you look slightly down
  *                onto, a brass nosing, a front face — the same stone as the
  *                after-hours surfaces and the Library's ledge
  *   the pieces   at true relative scale, standing ON the top face: a contact
  *                shadow under the base, a cast to the right, and their
  *                reflection lying in the polished stone in front of them
- *   the light    the lit piece gets a picture-light on the panel behind it
+ *   the light    the lit piece gets a fall of light on the wall behind it
  *                and a warm pool at its feet; the others keep every bit of
  *                their own light. THE PRODUCT IS STILL NEVER DIMMED.
  *
@@ -52,7 +52,7 @@
   height: clamp(640px, 90vh, 880px);
   overflow: hidden;
   color: var(--color-cream);
-  /* THE WALL. Panelling in shadow: emerald falling to night, warmed from
+  /* THE WALL. Emerald falling to night, warmed from
      above by sconces either side of the room, grain over all of it. */
   background:
     radial-gradient(38% 42% at 22% 0%, rgba(214, 190, 154, 0.16) 0%, transparent 70%),
@@ -157,7 +157,7 @@
 .tick { display: inline-block; width: 18px; height: 2px; background: var(--stepc, var(--color-cream)); vertical-align: middle; margin-left: 8px; }
 .name { font-size: clamp(1.7rem, 2.8vw, 2.3rem); line-height: 1; }
 
-/* ---- the panelling behind the pieces — one panel per piece ------------- */
+/* ---- the light on the wall behind each piece --------------------------- */
 .lights {
   position: absolute;
   left: 50%;
@@ -177,14 +177,8 @@
   margin: 0 0.6rem;
 }
 .light img { display: none; }
-/* the moulding: an inset hairline panel, brass, faint */
-.light::before {
-  content: "";
-  position: absolute;
-  inset: 22% 0.25rem 1.5rem;
-  border: 1px solid rgba(176, 138, 100, 0.16);
-  transition: border-color 0.9s var(--ease);
-}
+/* No mouldings, no panel lines. Shelby, twice: no grid. The wall is a wall;
+   the only thing on it is light. */
 /* the picture-light: a warm fall of light down the panel from its head */
 .light::after {
   content: "";
@@ -198,7 +192,6 @@
   opacity: 0;
   transition: opacity 0.9s var(--ease);
 }
-.lightOn::before { border-color: rgba(214, 190, 154, 0.42); }
 .lightOn::after { opacity: 1; }
 
 /* ---- the pieces on the console ---------------------------------------- */

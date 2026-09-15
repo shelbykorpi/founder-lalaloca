@@ -1269,3 +1269,21 @@ and fit it into the atmosphere."
   grid stuff, I'm not going to say it again." Nothing is drawn on the wall
   now except light. Standing rule for this room, third time stated in this
   log: NO GRIDS, NO GRAPHS, NO LINES that read as a diagram.
+
+## 2026-09-15 · Claude (Cowork) — the threshold frame
+- Shelby supplied a new threshold photograph (1672×941): the left 42% is
+  the lacquered Founder Green door, deliberately empty, for the headline and
+  buttons; two women at the open door on the right. public/editorial/rooms/
+  threshold-doors.webp replaced at FULL width (no crop, q86); threshold-
+  doors-m.webp is a 3:4 crop from the right edge (705×941) so both women are
+  in the phone frame. page.tsx hero: object-position 58% → 85% (the women
+  stay in frame as the viewport narrows; the door gives way, not the room);
+  the desktop scrim that ran to 94% is gone — replaced by a feather that
+  peaks at 28% and is clear by 44%, per her note "avoid adding another heavy
+  gradient". Phone bottom fade unchanged. rooms.ts alt + position updated.
+- founder-key.module.css: the phone rule (icon-only key below md) had been
+  lost when the hall-of-doors CSS was written from an older copy; restored.
+  On phones the key no longer sits over the hero's ENTER THE HOUSE button.
+- Verified: real build in the cloud copy synced from HEAD b5f24a0, then
+  doors opened and the hero shot at 1920/1440/1024/390.
+- Committed, unpushed.

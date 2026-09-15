@@ -205,7 +205,16 @@ export default function HomePage() {
 
       {/* ══ 01 · THE THRESHOLD ══════════════════════════════════════════════
           Full bleed, and the copy sits in the photograph's own dark half so
-          it never needs a scrim over her face. */}
+          it never needs a scrim over her face.
+
+          15 Sept 2026, new frame: the left 42% of the photograph IS the
+          door — lacquered Founder Green, deliberately empty — and it is the
+          ground for the headline and the buttons. So: full width, no heavy
+          gradient on top of it (the one that was here went to 94% and hid
+          the door), and the picture anchored at 85% so the two women stay
+          inside the frame as the viewport narrows and the door, not the
+          room, is what gives way. Below md the phone crop takes over with
+          its own bottom fade. */}
       <section id="room-threshold" className="relative isolate min-h-[calc(100svh-4rem)] overflow-hidden">
         <Image
           src={threshold.hero.src}
@@ -213,7 +222,7 @@ export default function HomePage() {
           fill
           priority
           sizes="100vw"
-          className="hidden object-cover object-[58%_center] md:block"
+          className="hidden object-cover object-[85%_center] md:block"
         />
         <Image
           src={threshold.heroMobile.src}
@@ -226,7 +235,7 @@ export default function HomePage() {
         <AmbientLighting />
         <div
           aria-hidden
-          className="absolute inset-0 bg-[linear-gradient(180deg,rgba(10,37,35,0)_38%,rgba(10,37,35,0.9)_82%,#0a2523_100%)] md:bg-[linear-gradient(90deg,#0a2523_0%,rgba(10,37,35,0.94)_26%,rgba(10,37,35,0.55)_44%,rgba(10,37,35,0)_62%)]"
+          className="absolute inset-0 bg-[linear-gradient(180deg,rgba(10,37,35,0)_38%,rgba(10,37,35,0.9)_82%,#0a2523_100%)] md:bg-[linear-gradient(90deg,rgba(10,37,35,0.28)_0%,rgba(10,37,35,0.12)_30%,rgba(10,37,35,0)_44%)]"
         />
         <div className="shell relative flex min-h-[calc(100svh-4rem)] flex-col justify-end pb-16 pt-24 md:justify-center md:py-24">
           <div className="max-w-[44rem]">

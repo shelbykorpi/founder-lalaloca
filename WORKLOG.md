@@ -1287,3 +1287,56 @@ and fit it into the atmosphere."
 - Verified: real build in the cloud copy synced from HEAD b5f24a0, then
   doors opened and the hero shot at 1920/1440/1024/390.
 - Committed, unpushed.
+
+## 2026-09-16 · Claude (Cowork) — The site's product images checked against
+## the Selfnamed cart, and Hold the Room's record retranscribed
+Shelby: "double check that the website has the correct images of each
+product, use what is in the Selfnamed cart to reference the correct product
+and packaging, then apply new images where necessary."
+- THE CART (7 lines, $93.00): Peptide Age-Defying Eye Cream 15 ml = DOUBLE
+  TAKE · Color Correcting Ceramide Stick 20/25/35 = SMOOTH TALKER · Blemish
+  Purifying Face Wash 140 ml = CLEAN BREAK · Peptide Ageless AM/PM Cream 50 ml
+  = HOLD THE ROOM · Sensitive Skin Oil-To-Milk Cleanser 150 ml = OPENING
+  LINE. Every label carries the FOUND HER signature. The seven 3000×3980
+  design-mockup renders were pulled from the cart page at full resolution.
+- WHAT WAS WRONG ON THE SITE: hold-the-room-hero.webp was the retired
+  all-green bottle and carton; double-take-hero.webp and smooth-talker-hero
+  .webp were the retired all-green packs; clean-break-hero and opening-line-
+  hero were generated scenes with cartons that do not exist (both ship as a
+  bottle only) and stripe patterns that are not the label's; the three shade
+  heroes were studio shots of the old design; every -cut/-vanity/-pack was
+  pre-signature. hold-the-room-tall/-card/-vanity-hero/-flatlay/-wide are the
+  black Blanka bottle or the green design and are UNUSED — left on disk.
+- REPLACED (public/products/, same file names so nothing else moved):
+  <slug>-cut.webp, -vanity.webp, -pack.webp and -hero.webp for the five, plus
+  smooth-talker-20/25/35-hero.webp and smooth-talker-shades-pack.webp — 24
+  files. Cutouts matted with rembg isnet-general-use (white pumps intact).
+  The -hero plates are the render standing on the house's black marble
+  console against the night wall — the room Room 03 draws in CSS — built in
+  PIL (/home/claude/cart/build_assets.py, not in the repo) with the piece's
+  reflection in the stone; head-on, at the camera's height, nothing invented.
+  Room 03's PIECES table (Vanity.tsx) re-measured off the new cutouts.
+- HOLD THE ROOM'S RECORD WAS A DIFFERENT PRODUCT. founderCollection.ts was
+  transcribed from Blanka's "Extreme Moisture Blend" — 30 ml, chamomile and
+  witch hazel, made in North America — while the packaging in the cart (and
+  the label Shelby approved, PEPTIDE MOISTURIZING CREAM · 50 ml · peptide
+  complex, hyaluronic acid, vitamin E) is Selfnamed's Peptide Ageless AM/PM
+  Cream. A live $36 preorder page was describing a formula that is not being
+  ordered. Retranscribed from the Selfnamed listing's INCI tab: category,
+  size 50 ml / 1.69 fl oz, key actives (the label's words), the full 40-line
+  INCI (footnote marks dropped, footnotes kept in a comment), origin "Made in
+  the EU", fragrance FAQ (fragrance + essential-oil components, no chamomile
+  oil), the size FAQ. Copy that said "chamomile and witch hazel, 30 ml" fixed
+  on /, /founder-collection (meta) and /products/hold-the-room (meta, the
+  "carton that ships" note). Library: Hold the Room unlinked from chamomile
+  and witch hazel, linked to hexapeptide-11, hyaluronic acid, vitamin C and
+  vitamin E; the witch-hazel reading now has no product and stays because the
+  route is indexed — consider retiring it. Alt texts for the new heroes and
+  the shade stripes (all three sticks share one stripe, they are not shade-
+  coloured) rewritten.
+- STILL OPEN, NOT MINE TO CHANGE: Shopify's Hold the Room variant
+  (47361868169385) still says 30 ml; the Shopify product images for all five
+  are pre-signature; docs/BRAND_BOARD.md still records the 30 ml amendment.
+- Verified: build, tsc; screenshots of /products/hold-the-room, /products/
+  double-take, /products/smooth-talker and Room 03 at 1440.
+- Committed, unpushed.

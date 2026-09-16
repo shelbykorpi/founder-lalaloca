@@ -48,10 +48,11 @@ import { products, formatPrice, SET } from "@/lib/products";
  *   · The review build's catalogue. It drops Clean Break — a real product with
  *     finished artwork and a verified label — and replaces it with product
  *     pages for Opening Line and Sign Here, which have no formula. It also
- *     still captions Hold the Room "Peptide moisturizer · 50 mL" (it is a
- *     moisturizing cream, 30 ml) and invents "150 mL" for Opening Line, which
- *     is a regulated declaration for a product that does not exist. Every
- *     figure on this page is read from the repo.
+ *     invented "150 mL" for Opening Line before that product existed — a
+ *     regulated declaration for a product that did not exist. Every figure on
+ *     this page is read from the repo. (16 Sept 2026: Hold the Room IS now the
+ *     50 ml peptide cream — the Selfnamed cart settled it; founderCollection.ts
+ *     was retranscribed from that listing.)
  *   · Calling the three LALALOCA serums "the archive". They are the products
  *     on sale.
  */
@@ -454,8 +455,9 @@ export default function HomePage() {
             <p className="room-label">Room 04 · The Anchor</p>
             <h2 className="headline-house mt-5 text-balance text-cream">Hold the room.</h2>
             <p className="mt-7 max-w-[42ch] text-[0.9375rem] leading-relaxed text-cream/80">
-              {holdTheRoom.hero} A rich moisturizing cream with chamomile and witch hazel —
-              the last step of the routine, and the one that stays comfortable all day.
+              {holdTheRoom.hero} A firming peptide cream with hyaluronic acid and vitamin E —
+              the last step of the routine, morning and night, and the one that stays
+              comfortable all day.
             </p>
             <p className="mt-7 max-w-[40ch] border-l-2 border-bronze py-3 pl-5 text-[0.8125rem] leading-relaxed text-cream/70">
               {holdTheRoom.preorder}

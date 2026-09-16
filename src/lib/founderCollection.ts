@@ -12,15 +12,21 @@
  *   02 · THE ANCHOR     HOLD THE ROOM  moisturizer          <- this file
  *   03 · THE SIGNATURE  SIGN HERE      conditioning lip treatment
  *
- * The board originally spec'd THE ANCHOR as a peptide cream at 50 ml. The
- * sourced product is 30 ml and built on chamomile and witch hazel, so the
- * SPEC was amended (docs/BRAND_BOARD.md) while the NAME was kept. Archive
- * names — THE FIRST MOVE, SOFT POWER, THE LAST WORD — remain retired.
+ * The board spec'd THE ANCHOR as a peptide cream at 50 ml. For a while the
+ * sourced product was a 30 ml chamomile-and-witch-hazel cream from Blanka
+ * ("Extreme Moisture Blend"), and this record was transcribed from that
+ * listing. ON 16 SEPTEMBER 2026 THAT STOPPED BEING TRUE: the product in the
+ * Selfnamed cart — the one the packaging is printed for, PEPTIDE MOISTURIZING
+ * CREAM · 50 ml / 1.69 fl oz, peptide complex, hyaluronic acid, vitamin E —
+ * is Selfnamed's Peptide Ageless AM/PM Cream, and the record below is
+ * transcribed from THAT listing. The board spec and the product agree again.
+ * Archive names — THE FIRST MOVE, SOFT POWER, THE LAST WORD — remain retired.
  *
- * SOURCE OF TRUTH FOR EVERYTHING FACTUAL: the supplier listing (Blanka,
- * "Extreme Moisture Blend", SKU 100249-BLNK-MB-03-02-HM-SM3D). Size, INCI and
- * directions are transcribed from it and must not be edited to read better.
- * Nothing here states a clinical result; appearance language only.
+ * SOURCE OF TRUTH FOR EVERYTHING FACTUAL: the supplier listing (Selfnamed,
+ * "Peptide Ageless AM/PM Cream", /face-care/peptide-ageless-am-pm-cream-o7VB3).
+ * Size, INCI and directions are transcribed from it and must not be edited to
+ * read better. Nothing here states a clinical result; appearance language
+ * only. The label's own words are used for the category and the key actives.
  *
  * SELLABLE AS A PREORDER since 19 Aug 2026. The product exists in Shopify
  * (variant 47361868169385, $34.00) and the variant is wired in
@@ -92,57 +98,68 @@ export const FOUNDER_COLLECTION: FounderProduct[] = [
   {
     slug: "hold-the-room",
     name: "Hold the Room",
-    category: "Moisturizing Cream",
+    category: "Peptide Moisturizing Cream",
     archetype: "The Anchor",
     archetypeFor: "For the part that comes after arriving.",
     hero: "Anyone can make an entrance. Staying is the harder skill.",
-    what: "A rich cream moisturizer with chamomile extract and witch hazel, for skin that needs more than water.",
+    what: "A firming peptide cream for morning and night, with hyaluronic acid and vitamin E, for skin that needs more than water.",
     need: "Skin that goes dry, tight or dull-looking and doesn’t hold onto moisture for long.",
     benefit:
-      "Skin feels smoother and stays comfortably hydrated, morning or night.",
+      "Skin feels smoother, firmer to the touch and stays comfortably hydrated, morning or night.",
     price: 36.0,
-    size: "30 ml / 1 fl oz",
-    supplierSku: "100249-BLNK-MB-03-02-HM-SM3D",
+    size: "50 ml / 1.69 fl oz",
+    supplierSku: "selfnamed:peptide-ageless-am-pm-cream-o7VB3",
     timing: "Morning or night",
     routine: "The last step, after your serums.",
-    keyActive: "Chamomile extract and witch hazel",
-    /* Verbatim from the supplier listing. Duplicate entries (aqua, glycerin)
-       are in the source as printed and are left alone — a tidied INCI is an
-       edited INCI. */
+    keyActive: "Peptide complex, hyaluronic acid and vitamin E",
+    /* Verbatim from the Selfnamed INCI tab, 16 Sept 2026, in the order
+       printed. The listing's footnotes — ➀ organic farming, ➁ from natural
+       essential oils, ➂ pure mineral pigment — are dropped from the names
+       and kept here: ➀ jojoba, mango butter, blueberry seed oil, ginkgo;
+       ➁ the five allergen components at the end; ➂ the iron oxide. */
     ingredients: [
-      "Aqua",
+      "Aqua/Water",
+      "Simmondsia Chinensis (Jojoba) Seed Oil",
       "Glycerin",
-      "Olea Europaea (Olive) Fruit Oil",
-      "Dimethicone",
-      "PEG-100 Stearate",
-      "Glyceryl Stearate",
-      "Petrolatum",
-      "Isopropyl Myristate",
-      "Hydrogenated Polyisobutene",
-      "Dipropylene Glycol",
-      "Polysorbate 60",
+      "Pentylene Glycol",
+      "Polyglyceryl-6 Stearate",
       "Cetearyl Alcohol",
-      "Sorbitan Stearate",
-      "Aqua",
-      "Glycerin",
-      "Glyceryl Acrylate/Acrylic Acid Copolymer",
-      "PVM/MA Copolymer",
-      "Propylene Glycol",
-      "1,2-Hexanediol",
-      "Polyacrylamide",
-      "C13-14 Isoparaffin",
-      "Laureth-7",
-      "Water",
-      "Hydroxyacetophenone",
-      "Phenoxyethanol",
-      "Ethylhexylglycerin",
-      "Carbomer",
-      "Triethanolamine",
+      "Sodium PCA",
+      "Dipalmitoyl Hydroxyproline",
+      "Propanediol",
+      "Aroma/Fragrance",
+      "Dicaprylyl Carbonate",
+      "Polyglyceryl-6 Behenate",
+      "Mangifera Indica (Mango) Seed Butter",
+      "Caprylic/Capric Triglyceride",
+      "Coco-Caprylate",
+      "Fragaria Ananassa (Strawberry) Seed Oil",
+      "Vaccinium Myrtillus (Blueberry) Seed Oil",
       "Xanthan Gum",
-      "Fragrance",
-      "Anthemis Nobilis Flower Oil",
+      "Hexapeptide-11",
+      "Phytosterols",
+      "Octyldodecanol",
+      "Palmitic Acid",
+      "Stearic Acid",
+      "Tocopherol",
+      "Ascorbyl Palmitate",
+      "Hydrolyzed Hyaluronic Acid",
+      "Sodium Hyaluronate",
+      "Sodium Phytate",
+      "Potassium Hydroxide",
+      "Leuconostoc/Radish Root Ferment Filtrate",
+      "Ginkgo Biloba (Ginkgo) Leaf Extract",
+      "Citric Acid",
+      "Sodium Benzoate",
+      "Potassium Sorbate",
+      "CI 77491 (Iron Oxides)",
+      "Linalyl Acetate",
+      "Geranyl Acetate",
+      "Linalool",
+      "Geraniol",
+      "Citronellol",
     ],
-    origin: "Made in North America.",
+    origin: "Made in the EU.",
     bottle: "/products/hold-the-room-pack.webp",
     bottleAlt:
       "The Hold the Room airless pump bottle beside its Desert Pink carton, both carrying a Champagne Cream cartouche with a gold F-key crest, the label reading Hold the Room, the anchor, peptide moisturizing cream.",
@@ -164,15 +181,15 @@ export const FOUNDER_COLLECTION: FounderProduct[] = [
     faqs: [
       {
         q: "Does it contain fragrance?",
-        a: "Yes. Fragrance and chamomile flower oil are both on the ingredient list. If you avoid fragrance in skincare, this is the one to skip — we would rather say so here than have you find out at home.",
+        a: "Yes. Fragrance is on the ingredient list, along with the essential-oil components that come with it — linalool, geraniol, citronellol and their acetates. If you avoid fragrance in skincare, this is the one to skip — we would rather say so here than have you find out at home.",
       },
       {
         q: "Where does it go in a routine?",
         a: "Last. Serums first, thinnest to thickest, then this. In the morning, finish with SPF.",
       },
       {
-        q: "Is 30 ml enough?",
-        a: "Yes. A cream this rich uses far less per application than a serum does — 30 ml is the standard size for the category, and the airless pump means none of it is left in the bottle.",
+        q: "How much is 50 ml?",
+        a: "The standard size for a face cream. A cream this rich uses far less per application than a serum does, and the airless pump means none of it is left in the bottle.",
       },
       {
         q: "When does it ship?",

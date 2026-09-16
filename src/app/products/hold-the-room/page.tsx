@@ -28,18 +28,13 @@ import {
  *
  * WHAT IS NOT TAKEN FROM THE MOCK-UP: THE JAR.
  *
- * The mock shows a deep green jar with a brushed gold lid, captioned
- * PEPTIDE MOISTURIZER, 50 mL / 1.69 FL. OZ. Hold the Room is a frosted white
- * airless pump bottle with a black cap and base; it is a moisturizing cream
- * with chamomile extract and witch hazel; it is 30 ml / 1 fl oz; and it ships
- * in a plain supplier carton printed EXTREME MOISTURE BLEND. Four differences,
- * on a page with a live $34 button — a customer would open the box and find a
- * different object in a different format at a different size.
- *
- * So the layout is built and the photograph is ours. The frame this design
- * really wants — the pack alone, centred, spotlit on dark stone — does not
- * exist yet; it is shot 12 on the list. Until it does, the dressing-table
- * frame runs full width and the copy sits in its dark half.
+ * The mock shows a deep green jar with a brushed gold lid. Hold the Room is a
+ * white airless pump bottle. 16 SEPT 2026: the product is now Selfnamed's
+ * Peptide Ageless AM/PM Cream, 50 ml / 1.69 fl oz, in the FOUNDER label and
+ * Desert Pink carton exactly as they sit in the Selfnamed cart — the hero is
+ * that render, cut out and standing on the house's black marble console (the
+ * same room Room 03 draws), which is shot 12 on the list finally made without
+ * a photographer. See founderCollection.ts for the record's source of truth.
  *
  * COMMERCE STAYS. The review build's footer reads "COMMERCE NOT CONNECTED",
  * so neither mock had to carry the preorder notice, the full INCI, the FAQs or
@@ -52,7 +47,7 @@ const product = FOUNDER_COLLECTION[0];
 export const metadata: Metadata = {
   title: `${product.name} — ${product.category}`,
   description:
-    "Hold the Room, the anchor of the FOUNDER Collection. A rich cream with chamomile and witch hazel, 30 ml. Preorder against the first run.",
+    "Hold the Room, the anchor of the FOUNDER Collection. A firming peptide cream with hyaluronic acid and vitamin E, 50 ml. Preorder against the first run.",
   alternates: { canonical: "/products/hold-the-room" },
 };
 
@@ -76,7 +71,7 @@ export default function HoldTheRoomPage() {
       <section className="relative isolate flex min-h-[calc(100svh-7rem)] flex-col justify-end overflow-hidden">
         <Image
           src="/products/hold-the-room-hero.webp"
-          alt="Hold the Room and its carton standing in a lit arched alcove in a Founder Green panelled wall, the alcove trimmed in antique gold with a desert rose hairline."
+          alt="Hold the Room — the white airless pump bottle with its cream label and green-and-rose striped bands, beside its Desert Pink carton — standing on a black marble console against a dark green wall, reflected in the stone."
           fill
           priority
           sizes="100vw"
@@ -196,8 +191,8 @@ export default function HoldTheRoomPage() {
             </ol>
 
             <p className="mt-8 border-t border-charcoal/12 pt-6 text-xs leading-relaxed text-charcoal/70">
-              Shown: styled imagery. The carton that ships is plain — FOUNDER BEAUTY over the
-              supplier&rsquo;s product name, Extreme Moisture Blend, 30 ml / 1 US fl oz.
+              Shown: the FOUNDER label and carton as ordered from the manufacturer, 50 ml / 1.69
+              fl oz. The carton carries the ingredient list and lot in four languages.
             </p>
           </Reveal>
         </div>

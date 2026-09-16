@@ -31,7 +31,9 @@ type Slug = "opening-line" | "clean-break" | "hold-the-room" | "double-take" | "
 
 /* The cutouts, the step each product belongs to, its tick colour, and its
    height as a percentage of the tallest piece — so all five stand at one
-   true scale. Heights measured from the cutouts themselves. */
+   true scale. 16 Sept 2026: the cutouts are now the Selfnamed CART renders
+   (the packaging as ordered, signature and all), matted with isnet; the
+   seven renders share one camera, so the heights are read straight off them. */
 /* THE ARRANGEMENT — 12 Sept 2026, and then again. A staggered still-life
    across the marble was tried and Shelby was right that it did not sit: a
    cutout standing mid-way across a receding plane has no edge to stand ON.
@@ -43,11 +45,11 @@ type Slug = "opening-line" | "clean-break" | "hold-the-room" | "double-take" | "
    depth are held at 0 / 1 and left in the type for the day the room changes. */
 type Pose = { dx: string; dy: number; depth: number; z: number };
 const PIECES: Record<Slug, { src: string; step: string; tick: string; h: number; w: number; ph: number; pose: Pose }> = {
-  "opening-line":  { src: "/products/opening-line-vanity.webp",  step: "01 · Cleanse", tick: "#F7EFE8", h: 99.5,  w: 350, ph: 1199, pose: { dx: "2%",   dy: 0, depth: 1, z: 3 } },
-  "clean-break":   { src: "/products/clean-break-vanity.webp",   step: "02 · Cleanse", tick: "#F7EFE8", h: 100,   w: 337, ph: 1205, pose: { dx: "-2%",  dy: 0, depth: 1, z: 1 } },
-  "hold-the-room": { src: "/products/hold-the-room-vanity.webp", step: "03 · Treat",   tick: "#D8A7A0", h: 97.6,  w: 692, ph: 1176, pose: { dx: "0%",   dy: 0, depth: 1, z: 2 } },
-  "double-take":   { src: "/products/double-take-vanity.webp",   step: "04 · Treat",   tick: "#D8A7A0", h: 63.3,  w: 729, ph: 763,  pose: { dx: "-4%",  dy: 0, depth: 1, z: 5 } },
-  "smooth-talker": { src: "/products/smooth-talker-vanity.webp", step: "05 · Finish",  tick: "#B08A64", h: 71.4,  w: 566, ph: 860,  pose: { dx: "2%",   dy: 0, depth: 1, z: 4 } },
+  "opening-line":  { src: "/products/opening-line-vanity.webp",  step: "01 · Cleanse", tick: "#F7EFE8", h: 98.7,  w: 391,  ph: 1399, pose: { dx: "2%",   dy: 0, depth: 1, z: 3 } },
+  "clean-break":   { src: "/products/clean-break-vanity.webp",   step: "02 · Cleanse", tick: "#F7EFE8", h: 100,   w: 374,  ph: 1400, pose: { dx: "-2%",  dy: 0, depth: 1, z: 1 } },
+  "hold-the-room": { src: "/products/hold-the-room-vanity.webp", step: "03 · Treat",   tick: "#D8A7A0", h: 96.5,  w: 815,  ph: 1400, pose: { dx: "0%",   dy: 0, depth: 1, z: 2 } },
+  "double-take":   { src: "/products/double-take-vanity.webp",   step: "04 · Treat",   tick: "#D8A7A0", h: 62.1,  w: 1330, ph: 1400,  pose: { dx: "-4%",  dy: 0, depth: 1, z: 5 } },
+  "smooth-talker": { src: "/products/smooth-talker-vanity.webp", step: "05 · Finish",  tick: "#B08A64", h: 70.2,  w: 908,  ph: 1400,  pose: { dx: "2%",   dy: 0, depth: 1, z: 4 } },
 };
 
 const slugOf = (href: string): Slug => href.replace(/^\/products\//, "") as Slug;

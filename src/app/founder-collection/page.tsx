@@ -65,7 +65,7 @@ import {
 export const metadata: Metadata = {
   title: "The FOUNDER Collection",
   description:
-    "The FOUNDER Collection. Hold the Room — a moisturizing cream with chamomile and witch hazel, 30 ml. The last step, after your serums.",
+    "The FOUNDER Collection. Hold the Room — a firming peptide cream with hyaluronic acid and vitamin E, 50 ml. The last step, after your serums.",
   alternates: { canonical: "/founder-collection" },
 };
 

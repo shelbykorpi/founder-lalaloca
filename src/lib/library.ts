@@ -92,7 +92,10 @@ export const LIBRARY: LibraryEntry[] = [
       "The molecule comes in sizes. Larger weights stay at the surface and give an immediate feeling of softness; smaller weights sit a little deeper and keep the effect going. That is the thinking behind a serum built on several weights at once — different sizes doing different jobs, rather than one doing everything.",
       "It is not a wrinkle treatment and it does not add anything permanent. What it does is make well-hydrated skin look the way well-hydrated skin looks: smoother, more even, and better at holding makeup in place.",
     ],
-    products: [{ ...P.thirstTrap, as: "eight-weight hyaluronic acid" }],
+    products: [
+      { ...P.thirstTrap, as: "eight-weight hyaluronic acid" },
+      { ...P.holdTheRoom, as: "hyaluronic acid" },
+    ],
     study: {
       authors: "Pavicic T, Gauglitz GG, Lersch P, et al.",
       title:
@@ -173,6 +176,7 @@ export const LIBRARY: LibraryEntry[] = [
     products: [
       { ...P.cMeGlow, as: "vitamin C" },
       { ...P.doubleTake, as: "Vitamin C" },
+      { ...P.holdTheRoom, as: "vitamin C" },
     ],
     study: {
       authors: "Humbert PG, Haftek M, Creidi P, et al.",
@@ -198,10 +202,7 @@ export const LIBRARY: LibraryEntry[] = [
       "It suits skin that flushes, tightens or simply objects to things. In a cleanser it takes the edge off the wash; in a cream it is the reason the product feels kind.",
       "The study below is unusual for a botanical: a randomised comparison against a low-strength hydrocortisone cream in people with eczema, in which the chamomile cream held its own. That is a medical context, not a cosmetic one — we cite it because it is the best evidence on the ingredient, not because our products treat anything.",
     ],
-    products: [
-      { ...P.holdTheRoom, as: "chamomile extract" },
-      { ...P.openingLine, as: "Camomile" },
-    ],
+    products: [{ ...P.openingLine, as: "Camomile" }],
     study: {
       authors: "Patzelt-Wenczler R, Ponce-Pöschl E.",
       title: "Proof of efficacy of Kamillosan® cream in atopic eczema.",
@@ -225,7 +226,10 @@ export const LIBRARY: LibraryEntry[] = [
       "It has a mixed reputation, and the reason is the bottle on the pharmacy shelf — a distillate in alcohol that can dry skin out. In a cream the extract arrives without the alcohol, which is where the benefit is and the drawback is not.",
       "The best evidence on it is a series of controlled tests on redness, in which a hamamelis lotion calmed the skin's response to an irritating light exposure better than the same lotion without it.",
     ],
-    products: [{ ...P.holdTheRoom, as: "witch hazel" }],
+    /* 16 Sept 2026: Hold the Room is now the Selfnamed peptide cream, which has
+       no witch hazel. No product on the shelf carries it today; the reading
+       stays because the route is indexed and the evidence is good. */
+    products: [],
     study: {
       authors: "Hughes-Formella BJ, Bohnsack K, Rippke F, et al.",
       title: "Anti-inflammatory effect of hamamelis lotion in a UVB erythema test.",
@@ -426,6 +430,7 @@ export const LIBRARY: LibraryEntry[] = [
     products: [
       { ...P.smoothTalker, as: "Vitamin E" },
       { ...P.doubleTake, as: "Vitamin E" },
+      { ...P.holdTheRoom, as: "vitamin E" },
     ],
     study: {
       authors: "Lin JY, Selim MA, Shea CR, et al.",
@@ -450,7 +455,10 @@ export const LIBRARY: LibraryEntry[] = [
       "In the laboratory it does something genuinely interesting: it switches on the cell's own housekeeping systems, the ones that clear damaged proteins and protect against oxidative stress, and in doing so it kept skin cells from ageing early under stress. That is the mechanism behind every peptide cream that mentions elasticity.",
       "What does not exist yet is a controlled trial of the peptide on people. We use it in Double Take for what the cell biology supports — skin that looks smoother and better rested — and we describe it that way.",
     ],
-    products: [{ ...P.doubleTake, as: "Hexapeptide-11" }],
+    products: [
+      { ...P.doubleTake, as: "Hexapeptide-11" },
+      { ...P.holdTheRoom, as: "Hexapeptide-11" },
+    ],
     study: {
       authors: "Sklirou AD, Ralli M, Dominguez M, Papassideri I, Skaltsounis AL, Trougakos IP.",
       title: "Hexapeptide-11 is a novel modulator of the proteostasis network in human diploid fibroblasts.",

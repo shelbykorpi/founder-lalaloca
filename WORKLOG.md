@@ -1340,3 +1340,40 @@ and packaging, then apply new images where necessary."
 - Verified: build, tsc; screenshots of /products/hold-the-room, /products/
   double-take, /products/smooth-talker and Room 03 at 1440.
 - Committed, unpushed.
+
+## 2026-09-17 · Claude (Cowork) — Website audit, Phase 1: the map, not the redesign
+
+Shelby set an operating protocol for the site: six phases, Discovery first,
+and "do not begin redesigning until the complete system has been mapped."
+This session is Phase 1 only. Nothing in src/, public/ or docs/ changed.
+
+- ADDED FOUNDER_AUDIT.md at the repo root — the living record the protocol
+  asks for: brand rules, architecture, live inspection, twenty findings
+  (Observed / Location / Component / Consequence / Recommendation),
+  decisions, open questions, conflicts, remaining work P0–P5, regression
+  risks. Every contradiction is marked [CONFLICT] and left for Shelby;
+  nothing was resolved silently.
+- HOW IT WAS MAPPED. Two read-only passes over the repo (frontend; commerce
+  and data); Playwright over all 24 routes at 1440 / 1024 / 390 with status,
+  h1, canonical, robots, weight, console, small targets and link check; a
+  second pass that scrolls before the full-page capture so Reveal-gated
+  sections render; the cart flow to the Shopify permalink; reduced motion;
+  first visit. Shopify read (9 active products, variants, prices, stock).
+  Sources of truth read: docs/BRAND_BOARD.md, AGENTS.md, OWNER_ACTIONS.md,
+  the project docs on pricing (4 Sept) and the Selfnamed line (30 Aug).
+- THE THREE P0s, so nobody has to open the file to know them: (1) the
+  Hold the Room page sells the Selfnamed 50 ml peptide cream while the
+  Shopify variant it adds to the bag is still the Blanka 30 ml chamomile
+  cream, SKU and description included — a customer would hold two
+  contradictory documents; (2) "In stock. Ships within one business day"
+  is printed unconditionally on every FOUNDER plate and the collection page
+  while Shopify holds one unit of each; (3) all four Selfnamed plates say
+  the ingredient list "will be published here before the first order ships"
+  three lines under "In stock".
+- NOT CHANGED, DELIBERATELY: the AGENTS.md rule that the v2.14 products "do
+  NOT appear on the site" is now contradicted by the live site and by
+  founder decisions; recorded as F-05, not edited, because amending a rule
+  is her call. Screenshots stayed in /tmp/audit (evidence, not product).
+- NEXT: Shelby answers the seven open questions in §6 (the first — which
+  cream is Hold the Room — unblocks the rest); P0 truth corrections can
+  proceed on her answer; Phases 2–4 before any P2+ implementation.

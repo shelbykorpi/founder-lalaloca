@@ -1449,3 +1449,20 @@ EFFECT / VALIDATION form; this is the short version.
   Screenshots in /tmp/shots2 (not committed).
 - Committed, unpushed. Push: cd ~/Founder:LALALOCA && rm -f .git/index.lock
   .git/HEAD.lock && git push origin main
+
+## 2026-09-17 (evening) · Claude (Cowork) — Bounce Back's bottle was squashed
+
+Shelby: on /shop Bounce Back "does not look like the others, its shrunk and
+mushed together." The cutout `public/products/bounce-back-bottle.png` was
+478×1440 — an aspect of 0.33 — while Thirst Trap (324×720) and C Me Glow
+(657×1440) are 0.45. Same glass, same cap, same label, so the file had been
+compressed sideways by about 27%: narrow label, thin cap, cramped script.
+Every place that renders it sizes by height with `w-auto`, so the bottle
+came out 111 px wide beside two at 150.
+- Resampled the cutout to 652×1440 (the mean aspect of the other two, LANCZOS);
+  the "Lala Loca" script and the label now match its siblings. No other file
+  or code changed; the alcoves, the home Serum Salon row, the product page
+  and the feed all read the same path.
+- Verified: build; /shop alcoves at 1440 render the three bottles at
+  150 / 152 / 151 px wide, 334 tall.
+- Committed, unpushed.

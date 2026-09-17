@@ -33,9 +33,20 @@ finished hero swaps in one week.
   38–42% width) · the F-key monogram geometry (never redrawn, never fused to
   the wordmark).
 - **Never invent:** ingredients, claims, reviews, clinical results,
-  certifications, prices, launch dates, or charitable terms. The three
-  v2.14 pre-sale products (OPENING LINE, HOLD THE ROOM, SIGN HERE) do NOT
-  appear on the site — production is not locked.
+  certifications, prices, launch dates, ship dates, stock, or charitable
+  terms.
+- **The FOUNDER Collection is live, as a PREORDER.** Amended 17 Sept 2026;
+  this line used to say the v2.14 products "do NOT appear on the site", and
+  the site had been selling them since 4 Sept. Five SKUs — Opening Line,
+  Clean Break, Hold the Room, Double Take, Smooth Talker — all Selfnamed,
+  all priced in Shopify, all sold against the first run with the preorder
+  notice in `lib/nextMove.ts` (`PREORDER_NOTE`). Each record carries
+  `availability`; flip a SKU to `"in-stock"` only on the day its stock is
+  physically counted in, never before. SIGN HERE has no supplier and is not
+  on the site. Every product fact traces to a supplier listing or a concept
+  doc in the Claude project; INCI is transcribed, never tidied.
+- **Read `FOUNDER_AUDIT.md`** before touching the site: it is the living
+  record of findings, decisions, open questions and regression risks.
 - **British spelling** throughout (moisturiser, labelled). It is not a typo.
 - **No customer PII in this repo.** Ever. The Etsy export lives outside git.
 - **20% of net profits** (Young Founders' Room): four occurrences, same

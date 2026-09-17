@@ -3,9 +3,9 @@
 import {
   createContext,
   useContext,
-  useEffect,
   useId,
   useState,
+  useSyncExternalStore,
   type ReactNode,
 } from "react";
 import Image from "next/image";
@@ -44,13 +44,9 @@ export function useSelectedShade(): Shade | null {
  * where the reading happens — in the shadow, above the reserve block, in the
  * order a person actually decides: which shade, then reserve it.
  *
- * WHY IT IS NOT `shop/ShadePicker`. That one is built for the cream page — a
- * 3:2 framed image with a stripe under it and charcoal-on-cream chips. This
- * one is a full-bleed plate with chips that must read on a night ground.
- * Threading a tone flag through every class of a component that is live on a
- * converting page, to serve a track that will replace it, is the wrong trade.
- * Both are live: this one on /products/smooth-talker, that one on
- * /the-next-move, which is still a cream campaign page.
+ * It replaced `shop/ShadePicker`, the cream campaign page's picker, which
+ * went with that page on 17 Sept 2026 (/the-next-move now redirects to the
+ * collection). This is the only shade picker.
  *
  * NO `useSearchParams`, DELIBERATELY. It opts the tree into client rendering
  * and demands a Suspense boundary, which here would wrap the whole plate and
@@ -73,6 +69,7 @@ type Ctx = {
 };
 
 const ShadeCtx = createContext<Ctx | null>(null);
+const noSubscribe = () => () => {};
 
 function useShades(): Ctx {
   const ctx = useContext(ShadeCtx);
@@ -92,20 +89,25 @@ export function PlateShades({
   const groupId = useId();
   const fallback =
     shades.find((s) => s.handle === defaultHandle) ?? shades[0];
-  const [selected, setSelected] = useState<Shade>(fallback);
+  /* Her pick, once she has made one. Null until then. */
+  const [picked, setPicked] = useState<Shade | null>(null);
 
-  /* ?shade=20-light stays linkable. Read after mount rather than through
-     useSearchParams — see the note above. An unknown value is ignored rather
-     than erroring; a bad query string should never break the page. */
-  useEffect(() => {
-    const wanted = new URLSearchParams(window.location.search).get("shade");
-    if (!wanted) return;
-    const match = shades.find((s) => s.handle === wanted);
-    if (match) setSelected(match);
-  }, [shades]);
+  /* ?shade=20-light stays linkable. Read through useSyncExternalStore rather
+     than useSearchParams — see the note above — and rather than an effect
+     that sets state (the lint rule is right: that was a second render for
+     nothing). The server snapshot is null, so the default shade prerenders;
+     the client snapshot reads the query once on hydration. An unknown value
+     is ignored; a bad query string never breaks the page. */
+  const wanted = useSyncExternalStore(
+    noSubscribe,
+    () => new URLSearchParams(window.location.search).get("shade"),
+    () => null,
+  );
+  const fromUrl = wanted ? shades.find((s) => s.handle === wanted) ?? null : null;
+  const selected = picked ?? fromUrl ?? fallback;
 
   return (
-    <ShadeCtx.Provider value={{ shades, selected, select: setSelected, groupId }}>
+    <ShadeCtx.Provider value={{ shades, selected, select: setPicked, groupId }}>
       {children}
     </ShadeCtx.Provider>
   );

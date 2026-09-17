@@ -2,9 +2,11 @@
 
 **Living record of the founderbeauty.co audit.** Started 17 September 2026 under
 the "FOUNDER WEBSITE AUDIT — CLAUDE CODE OPERATING PROTOCOL". Phase 1
-(Discovery) is complete in this document. Nothing has been redesigned; no
-implementation has started. Every later phase appends here rather than
-replacing it.
+(Discovery) is complete. On Shelby's instruction the same day ("make all
+these changes for me and act in the best interest of the company") the P0–P2
+corrections and the housekeeping were implemented — see §8 for each change
+in BEFORE / CHANGE / RATIONALE / EXPECTED EFFECT / VALIDATION form, and §9 for
+what remains. Every later pass appends here rather than replacing.
 
 Marks used throughout: **[CONFLICT]** two sources of truth disagree and a
 founder decision is required · **[VERIFY]** observed but not yet confirmed at
@@ -421,23 +423,33 @@ entries under emulation) **[VERIFY]** in the field once GA4/Web Vitals is on.
 | 12 Sept | No grids/graphs/lines in Room 03; products sit, never float | WORKLOG |
 | 16 Sept | Site imagery and Hold the Room record follow the Selfnamed cart | WORKLOG / chat |
 | 17 Sept | Audit protocol adopted; no redesign before the map is complete | this file |
+| 17 Sept | **HOLD THE ROOM is the Selfnamed peptide cream, 50 ml** — the 16 Sept instruction applied to Shopify as well as the site; Blanka record retired | Shelby, 16–17 Sept; BRAND_BOARD amendment |
+| 17 Sept | **The whole FOUNDER Collection sells as a preorder** until stock is counted in; per-SKU `availability` flag; buy buttons read Shopify `availableForSale` | this pass (F-02) |
+| 17 Sept | "Firming"/"ageless" not used for Hold the Room even though the supplier uses them | Double Take concept doc §3, board Avoid list |
+| 17 Sept | `/the-next-move` redirects to `/founder-collection`; one product page per SKU | this pass (F-07) |
+| 17 Sept | One room numbering — the house's (`lib/rooms.ts`); the home page follows it and the Serum Salon precedes the Collection | this pass (F-09) |
 
 ---
 
 ## 6. Open questions (for Shelby)
 
-1. **Which cream is HOLD THE ROOM** — Selfnamed peptide 50 ml or Blanka
-   chamomile 30 ml? (F-01) Everything on that page, in Shopify and in the
-   Library follows from the answer.
-2. Are the four Selfnamed SKUs cleared to sell with the governance gates
-   (samples in hand, INCI published, trademark) — or is the honest state a
-   preorder like Hold the Room? (F-02, F-03)
-3. Is `/the-next-move` an archive or the collection's story page? (F-07)
-4. Has Julie approved her final text? (F-15)
+1. ~~Which cream is HOLD THE ROOM~~ — **decided 17 Sept: Selfnamed peptide
+   50 ml**, applied to the site, Shopify and the board. Shelby: if this is
+   wrong, say so and it reverts in one commit.
+2. ~~In stock or preorder~~ — **decided 17 Sept: preorder, whole line**,
+   until stock is physically counted in. **Shelby: the day a Selfnamed
+   delivery lands, say which SKUs and I flip `availability` for those.**
+3. ~~The Next Move~~ — **decided 17 Sept: redirect** to the collection.
+4. Has Julie approved her final text? (F-15) — still open; her profile is
+   live and marked PENDING in the data.
 5. Is the mirrored F-key pair on doors approved, against the board's "do not
-   mirror"? (Brand rules)
-6. Are `/salon` and `/young-founders-room` meant to be unlisted? (F-13)
-7. `MAILING_ADDRESS` — set in Vercel or not? (F-19)
+   mirror"? (Brand rules) — still open.
+6. ~~Salon / Young Founders' Room unlisted~~ — **both added to the sitemap**;
+   say if either should be private.
+7. `MAILING_ADDRESS` — set in Vercel or not? (F-19) — still open, owner-only.
+8. **Physical samples.** Every plate says the pictures are renders. When the
+   first run arrives, photograph the real pieces; the plates already say
+   "when the first run arrives".
 
 ---
 
@@ -457,53 +469,150 @@ None resolved silently. Each waits on a founder answer or a documented rule.
 
 ---
 
-## 8. Completed work (this protocol)
+## 8. Completed work
 
-- Phase 1 Discovery: repository map (two Explore passes: frontend;
-  commerce/data), live inspection of 24 routes at three widths with metrics,
-  cart-flow capture, reduced-motion and first-visit captures, scroll-revealed
-  full-page captures of nine key routes, Shopify production read (9 active
-  products), sources of truth read (`docs/BRAND_BOARD.md`, `AGENTS.md`,
-  `docs/OWNER_ACTIONS.md`, project docs `founder-collection-pricing-live`,
-  `selfnamed-line-completion`, WORKLOG 12–16 Sept).
-- This document.
+### Phase 1 — Discovery (17 Sept, morning)
 
-No code, copy, imagery or data was changed in Phase 1.
+Repository map (two Explore passes: frontend; commerce/data), live
+inspection of 24 routes at three widths with metrics, cart-flow capture,
+reduced-motion and first-visit captures, scroll-revealed full-page captures
+of nine key routes, Shopify production read (9 active products), sources of
+truth read (`docs/BRAND_BOARD.md`, `AGENTS.md`, `docs/OWNER_ACTIONS.md`,
+project docs `founder-collection-pricing-live`, `selfnamed-line-completion`,
+WORKLOG 12–16 Sept). No code changed.
+
+### Phase 5, pass 1 — P0 to P2 and housekeeping (17 Sept, afternoon)
+
+Research before any edit: the Selfnamed listings for the peptide cream and
+the oil-to-milk cleanser were read in the browser (INCI tab, claims, size,
+certification); the three concept docs (Clean Break, Smooth Talker, Double
+Take) supplied their verbatim INCI and may-not-say lists. The peptide
+cream's INCI on the site matched the listing line for line.
+
+**C-01 · Hold the Room, one product (F-01)**
+BEFORE — page: Selfnamed 50 ml peptide cream; Shopify variant: Blanka 30 ml
+chamomile, Blanka SKU, Blanka INCI, "goes on sale once the paperwork is
+finished". CHANGE — Shopify product `9021783113897` title, description,
+INCI, key ingredients, size, preorder section and SKU (`HoldTheRoom`)
+rewritten from the site record; tags `chamomile`, `witch_hazel`,
+`paraben_free` removed ("free-from" is a claim Selfnamed's rules forbid),
+`peptide_cream`, `hyaluronic_acid`, `cosmos_natural`, `preorder` added.
+Variant id, price and image untouched. `docs/BRAND_BOARD.md` amended.
+RATIONALE — the page and the order confirmation must describe the same
+cream; the founder's 16 Sept instruction named the Selfnamed cart as the
+reference. EXPECTED EFFECT — no customer holds two contradictory documents.
+VALIDATION — Shopify read-back after update; site unchanged for this SKU.
+
+**C-02 · Availability tells the truth (F-02)**
+BEFORE — "In stock. Ships within one business day" printed from a string on
+every plate, the home cards, the collection page and The Next Move, with one
+unit of each SKU in Shopify and no Selfnamed order received. CHANGE —
+`nextMove.ts` gains `availability: "preorder" | "in-stock"` per SKU (all
+`preorder`), `PREORDER_NOTE`, `availabilityLine()`; `catalog.ts` gains
+`fetchVariantAvailability()` (Admin GraphQL, 60 s cache, null on failure =
+keep selling); `ProductPlate` is async, reads it, shows the preorder note
+above the button, labels the button "Preorder", passes `soldOut` per
+variant; `PlateBuyButton` and the collection cards honour it; plate routes
+`revalidate = 60`; home cards, collection copy (three places) and metadata
+say preorder; Product JSON-LD carries `PreOrder` / `SoldOut`. RATIONALE —
+the shipping policy's one-business-day promise is true of the serums only;
+a preorder with a cancel-by-reply notice is the honest state and the FTC
+Mail Order Rule's safe one. EXPECTED EFFECT — no refused checkout after "In
+stock"; sold-out variants close their own button within a minute.
+VALIDATION — build, tsc, lint clean; text scan of all key routes at 1440 and
+390: zero "In stock", zero "will be published"; shade picker adds the chosen
+variant (35 Deep → `47417855639721`) to the bag.
+
+**C-03 · INCI on every plate (F-03)**
+BEFORE — four plates: "The full ingredient list … will be published here
+before the first order ships." CHANGE — verbatim INCI (footnote marks
+dropped, footnotes in code comments) and origin added to all four records
+and rendered in the "What is in it" section, same construction as Hold the
+Room; Product/Offer schema added now that the list is on the page.
+RATIONALE — a cosmetic on sale discloses. VALIDATION — `Coco-Glucoside`
+etc. present in served HTML; schema validates as Product with Offer.
+
+**C-04 · Claims (F-04)** — "firming"/"firmer" removed from Hold the Room's
+record, page meta, collection meta and the home anchor; benefit now "feels
+smoother, looks plumper … fine lines look softened". Stale "fragrance and
+petrolatum" line (Blanka) corrected.
+
+**C-05 · Governance (F-05)** — `AGENTS.md` rule rewritten to the live
+position (preorder line, `availability` flag, read this file first);
+`docs/BRAND_BOARD.md` amendment of 16–17 Sept appended.
+
+**C-06 · The Next Move (F-07)** — `/the-next-move` → 308 to
+`/founder-collection`; removed from the sitemap and the footer; plate
+"See all three" link removed. `ShadePicker` and `ProductDetail` (its only
+callers gone) deleted.
+
+**C-07 · One numbering (F-09)** — home page eyebrows follow `lib/rooms.ts`
+(02 Inside FOUNDER · 03 Serum Salon · 04 Collection · 06 Found Her); the
+Serum Salon section now precedes the Collection; sections that are not
+rooms (the Anchor, Notes, the Invitation) carry no number. Vanity eyebrow
+corrected. Stale Collection lede ("Six pieces … nothing charged until
+they're priced") rewritten.
+
+**C-08 · Duplicate line (F-10)** — the rose band now carries "The note was
+left for you." (from the live NOTES bank); `BRAND.campaign` appears once,
+as Room 06's headline.
+
+**C-09 · Phones (F-11, F-12)** — the Founder Key toast is hidden below
+768 px; the plate stacks on phones (photograph block, then copy, price and
+button in the thumb zone), one room from `md` up.
+
+**C-10 · Salon and sitemap (F-13)** — `sr-only` h1 on `/salon`;
+`/salon` and `/young-founders-room` added to the sitemap.
+
+**C-11 · Announcement bar (F-14)** — route-aware: the FOUNDER Collection's
+rooms show "Free US shipping on every order · The FOUNDER Collection ·
+Preorder the first run".
+
+**C-12 · Concierge (F-16)** — corpus extended with the five FOUNDER SKUs
+generated from the same records the plates read (sale state, preorder
+wording, INCI, sun note, "no ship date is promised"); the "why three" fact
+now mentions the collection.
+
+**C-13 · Housekeeping (F-19)** — nine dead files deleted (`EntranceDoor`,
+`DoorCard`, `ScrollDoors`, `FounderGalleryWalk` + css, `RoomRail`,
+`CatalogCard`, `ProductDetail`, `ShadePicker`, `StoryPromptButton`); the
+`PlateShades` set-state-in-effect replaced with `useSyncExternalStore`
+(lint now zero errors, zero warnings); stale `$34`, "no variant IDs" and
+Blanka comments corrected.
+
+Validation for the pass: `npm run build` clean (65 pages); `tsc` clean;
+`eslint --max-warnings=0` clean; Playwright at 1440 and 390 over `/`, the
+five plates, `/founder-collection`, `/salon`, `/library`: zero console
+errors, zero horizontal overflow; screenshots in `/tmp/shots2/`.
 
 ---
 
-## 9. Remaining work (proposed order; nothing started)
+## 9. Remaining work
 
-**P0 — truth on the buy path (before any design work)**
-F-01 Hold the Room identity (needs answer to Q1) · F-02 availability language
-and button state tied to real stock · F-03 Smooth Talker INCI.
+**Owner decisions / facts (nothing an agent can invent)**
+- Confirm the Hold the Room decision (C-01) — or say "Blanka" and it reverts.
+- Tell me when Selfnamed stock lands, per SKU → flip `availability`.
+- Julie's approval (F-15). The mirrored F-key (brand rules). `MAILING_ADDRESS`
+  and the SEO env vars (F-18/F-19, `docs/OWNER_ACTIONS.md`). Return window
+  and policy blanks (F-17). Trademark clearance on the four names.
+- Photograph the real pieces when the first run arrives.
 
-**P1 — product truth and governance**
-F-04 firming claims · F-05 amend AGENTS.md and BRAND_BOARD.md · F-06 Library
-orphans · F-07 The Next Move fate · F-08 one product-page system (decision;
-build is P3).
+**P1 — build**
+- F-08 one product-page system: move the three serum pages onto the plate
+  (or the plate's grammar onto them). Phase 4 decision first; the serum pages
+  carry the ritual, side-by-side and FAQ content that must survive.
+- F-06 Library orphans: `/library/witch-hazel` has no product; decide retire
+  (redirect to `/library`) or keep as a reading.
+- Product feed: add the FOUNDER SKUs once a ship window exists (Google's
+  `preorder` availability wants an `availability_date`).
 
-**P2 — wayfinding and phone furniture**
-F-09 one room numbering · F-10 duplicate campaign line · F-11 persistent
-objects on phones · F-12 mobile plate stacking · F-13 Salon h1 and sitemap.
-
-**P3 — coherence**
-F-14 announcement bar · F-15 Julie approval · F-16 concierge corpus · F-17
-policy blanks · F-18 SEO owner actions and feed · F-08 build.
-
-**P4 — housekeeping and performance**
-F-19 stale comments, dead files, lint, second threshold · F-20 home-page
-weight and field LCP.
-
-**P5 — polish**
-Sound (stub exists), occasion depth, Salon content, Young Founders' Room OG
-image, Smooth Talker fourth shade (30 Tan exists at the supplier).
-
-Phases 2 (dimensional audit), 3 (synthesis) and 4 (experience architecture)
-of the protocol run before P2+ implementation; P0 items are truth
-corrections and may proceed on a founder answer without waiting for Phase 4.
-
----
+**P3–P5**
+- Phases 2–4 of the protocol (dimensional audit, synthesis, experience
+  architecture) before any further visual work.
+- Home-page weight (F-20), field LCP once analytics is on.
+- Two threshold implementations (home, Young Founders' Room) → one.
+- Sound (stub exists), occasion depth, Salon content, Young Founders' Room OG
+  image, Smooth Talker fourth shade (30 Tan exists at the supplier).
 
 ## 10. Regression risks (to protect during every later phase)
 
@@ -526,3 +635,9 @@ corrections and may proceed on a founder answer without waiting for Phase 4.
 - **The 20 % pledge wording** — four occurrences, verbatim.
 - **Build gate**: `npm run build` must pass; verify at 390 and 1440 with
   screenshots before every commit.
+- **`availability` in `nextMove.ts`** — the only switch between preorder and
+  in-stock language, button label, schema and concierge answers. Flip it per
+  SKU, by hand, on delivery; never default it.
+- **`fetchVariantAvailability` null path** — null means "no information" and
+  keeps selling; only `false` closes a button. Do not invert that.
+- **`/the-next-move`** must keep redirecting (indexed URL).

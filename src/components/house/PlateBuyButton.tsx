@@ -13,12 +13,21 @@ import type { NextMoveProduct } from "@/lib/nextMove";
  * variant, so the bag matches the frame. For a single-variant SKU there is no
  * provider, `useSelectedShade` returns null, and the product's own variant is
  * used. It never renders a button without a variant to sell.
+ *
+ * `available` is Shopify's answer per variant, read by the plate sixty
+ * seconds stale at most (17 Sept 2026, F-02). A variant Shopify will not sell
+ * renders "Sold out" and nothing else; a variant with no answer sells, because
+ * an unreachable API must not close the shop. The label follows the record's
+ * sale state: a preorder says so on the button itself, not only in the note.
  */
 export function PlateBuyButton({
   product,
+  available,
   className = "btn btn-primary mt-5 w-full max-w-[20rem]",
 }: {
   product: NextMoveProduct;
+  /** variantId → availableForSale. Missing key = no information = sells. */
+  available?: Record<string, boolean> | null;
   className?: string;
 }) {
   const shade = useSelectedShade();
@@ -26,6 +35,7 @@ export function PlateBuyButton({
   if (!variantId) return null;
 
   const name = shade ? `${product.name} · ${shade.code} ${shade.name}` : product.name;
+  const soldOut = available?.[variantId] === false;
 
   return (
     <AddToBagButton
@@ -39,6 +49,8 @@ export function PlateBuyButton({
       }}
       href={`/products/${product.slug}`}
       className={className}
+      label={product.availability === "preorder" ? "Preorder" : "Add to bag"}
+      soldOut={soldOut}
       showPrice
     />
   );

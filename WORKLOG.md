@@ -1377,3 +1377,75 @@ This session is Phase 1 only. Nothing in src/, public/ or docs/ changed.
 - NEXT: Shelby answers the seven open questions in §6 (the first — which
   cream is Hold the Room — unblocks the rest); P0 truth corrections can
   proceed on her answer; Phases 2–4 before any P2+ implementation.
+
+## 2026-09-17 (afternoon) · Claude (Cowork) — Audit Phase 5, pass 1: the buy
+## path tells the truth, and the housekeeping
+
+Shelby, on reading FOUNDER_AUDIT.md: "make all these changes for me and act
+in the best interest of the company FOUNDER." This is P0–P2 and the P4
+housekeeping from that file, plus the Shopify side of P0. Every change is
+logged in FOUNDER_AUDIT.md §8 in BEFORE / CHANGE / RATIONALE / EXPECTED
+EFFECT / VALIDATION form; this is the short version.
+
+- RESEARCH FIRST. The Selfnamed listings for the peptide cream and the
+  oil-to-milk cleanser were read in the browser (INCI tab, size, claims,
+  certification); the peptide cream's INCI on the site matched the listing
+  line for line. The three concept docs supplied the other INCIs verbatim.
+- HOLD THE ROOM IS ONE PRODUCT. The Shopify listing (9021783113897) still
+  described Blanka's 30 ml chamomile cream while the page sold Selfnamed's
+  50 ml peptide cream; a customer would have held two contradictory
+  documents. Shopify title, description, INCI, size, preorder section and
+  SKU (HoldTheRoom) rewritten from the site record; chamomile / witch_hazel
+  / paraben_free tags removed, peptide_cream / hyaluronic_acid /
+  cosmos_natural / preorder added. Variant id, price and image untouched.
+  docs/BRAND_BOARD.md amended (16–17 Sept). "Firming"/"ageless" not used —
+  the supplier says both; the house's own may-not-say list forbids them.
+- THE WHOLE LINE IS A PREORDER, AND SAYS SO. nextMove.ts: `availability`
+  per SKU (all "preorder" — no Selfnamed order has been received, the pack
+  shots are renders), PREORDER_NOTE, availabilityLine(). catalog.ts:
+  fetchVariantAvailability() (Admin GraphQL, 60 s cache, null = keep
+  selling, false = "Sold out"). ProductPlate is async and reads it; the
+  preorder note sits above a button labelled Preorder; plate routes
+  revalidate every 60 s; home cards, collection copy and metadata, LineCard
+  say preorder; Product/Offer JSON-LD on all four plates (PreOrder /
+  SoldOut). "In stock" no longer appears anywhere from a constant.
+  FLIP `availability` PER SKU THE DAY STOCK IS COUNTED IN, NEVER BEFORE.
+- INCI ON EVERY PLATE. Opening Line, Clean Break, Smooth Talker, Double Take
+  now carry the full supplier list and origin; "will be published before
+  the first order ships" is gone.
+- /the-next-move → 308 to /founder-collection (second, older product page
+  for the same SKUs; out of the sitemap and the footer). ShadePicker and
+  ProductDetail deleted with it.
+- ONE ROOM NUMBERING (lib/rooms.ts). Home eyebrows now 02 Inside FOUNDER ·
+  03 Serum Salon · 04 Collection · 06 Found Her; the Serum Salon section
+  moved ahead of the Collection; the Anchor, Notes and Invitation carry no
+  number. Vanity eyebrow fixed. Stale Collection lede ("Six pieces …
+  nothing charged until they're priced") rewritten.
+- BRAND.campaign appears once on the home page (Room 06); the rose band now
+  says "The note was left for you."
+- PHONES: the key toast is hidden under 768 px; the plate stacks (picture,
+  then copy, price and button) below md.
+- /salon has an sr-only h1; /salon and /young-founders-room are in the
+  sitemap. Announcement bar is route-aware (collection rooms: "The FOUNDER
+  Collection · Preorder the first run"). Concierge corpus knows the five
+  FOUNDER SKUs (generated from the records; preorder wording; "no ship date
+  is promised").
+- HOUSEKEEPING: deleted EntranceDoor, DoorCard, ScrollDoors,
+  FounderGalleryWalk (+css), RoomRail, CatalogCard, ProductDetail,
+  ShadePicker, StoryPromptButton (no callers, verified by grep, DoorFrame
+  kept — page.tsx uses it). PlateShades: setState-in-effect →
+  useSyncExternalStore; eslint is now zero errors, zero warnings. Stale $34
+  / "no variant IDs" / Blanka / petrolatum comments corrected. AGENTS.md
+  rule that the v2.14 products "do NOT appear on the site" rewritten to the
+  live position.
+- NOT DONE, DELIBERATELY: the serum pages are still the old template (F-08 —
+  a Phase 4 decision, and they carry the sales history); Julie's profile
+  stays live (approval is Shelby's to confirm); Library orphans, policy
+  blanks, env vars, feed — all listed in FOUNDER_AUDIT.md §9.
+- VERIFIED: npm run build (65 pages), tsc, eslint --max-warnings=0;
+  Playwright at 1440 and 390 over /, the five plates, /founder-collection,
+  /salon, /library — zero console errors, zero overflow, zero "In stock",
+  zero "will be published"; shade picker adds 35 Deep → 47417855639721.
+  Screenshots in /tmp/shots2 (not committed).
+- Committed, unpushed. Push: cd ~/Founder:LALALOCA && rm -f .git/index.lock
+  .git/HEAD.lock && git push origin main

@@ -163,3 +163,42 @@ export const fetchCatalogProduct = unstable_cache(
   ["catalog-product"],
   { revalidate: 60, tags: ["shopify-catalog"] },
 );
+
+/**
+ * Whether Shopify will still sell these variants — 17 Sept 2026, audit
+ * finding F-02. The FOUNDER Collection holds one unit of each SKU, and the
+ * plates used to say "In stock" from a string constant, so after the first
+ * order a page would keep promising what checkout would refuse. This asks
+ * Shopify, sixty seconds stale at most, and the buy button reads the answer.
+ *
+ * Keyed by numeric variant id (the same id the bag and the cart permalink
+ * use). Null when Shopify cannot be reached — callers treat null as "no
+ * information" and keep selling, because a bad API minute must not close the
+ * shop; a `false` is a real answer and closes that one button.
+ */
+export const fetchVariantAvailability = unstable_cache(
+  async (variantIds: string[]): Promise<Record<string, boolean> | null> => {
+    if (!hasAdminCredentials() || variantIds.length === 0) return null;
+    try {
+      const ids = variantIds.map((id) => `gid://shopify/ProductVariant/${id}`);
+      const data = await adminGraphql(
+        `query VariantAvailability($ids: [ID!]!) {
+          nodes(ids: $ids) {
+            ... on ProductVariant { legacyResourceId availableForSale }
+          }
+        }`,
+        { ids },
+      );
+      const out: Record<string, boolean> = {};
+      for (const node of data?.nodes ?? []) {
+        if (node?.legacyResourceId) out[String(node.legacyResourceId)] = Boolean(node.availableForSale);
+      }
+      return out;
+    } catch (error) {
+      console.warn("[catalog] variant availability unavailable:", error);
+      return null;
+    }
+  },
+  ["catalog-variant-availability"],
+  { revalidate: 60, tags: ["shopify-catalog"] },
+);

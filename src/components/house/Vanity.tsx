@@ -126,7 +126,7 @@ export function Vanity({ items, title, lede }: { items: VanityItem[]; title: str
   return (
     <section className={s.room} aria-labelledby="vanity-heading">
       <div className={s.words}>
-        <p className="eyebrow text-champagne">Room 03 · The Collection</p>
+        <p className="eyebrow text-champagne">The vanity · Room 04</p>
         <h2 id="vanity-heading" className={`${s.title} mt-3 font-serif font-light text-cream`}>{title}</h2>
         <p className="mt-3 max-w-[40ch] text-[0.9rem] leading-relaxed text-cream/70">{lede}</p>
         <button type="button" className={s.play} onClick={togglePlay} aria-pressed={playing}>

@@ -5,16 +5,15 @@ import Link from "next/link";
 /**
  * One card in the FOUNDER line.
  *
- * Shared by /founder-collection and /the-next-move so the two can never
- * drift into two different treatments of the same products. The pattern:
+ * The one card treatment for the line on /founder-collection (it was also
+ * /the-next-move's until that page redirected here, 17 Sept 2026). The pattern:
  * a 3:2 image tile with a hover reveal, a rule in the SKU's own accent, and
  * beneath it eyebrow · name · category · state.
  *
- * THE STATE LINE IS LOAD-BEARING. Every product in this line is at a
- * different stage — one takes money, three take reservations, two are only
- * names — and a grid that renders them identically is a grid that implies
- * six things you can buy. `state` says which is which, in words, on every
- * card.
+ * THE STATE LINE IS LOAD-BEARING. Every card says, in words, what buying it
+ * means today — a preorder against the first run, in stock, or sold out —
+ * because a grid that renders them identically implies five things on a
+ * shelf.
  *
  * A card with no image is a named-but-unmade step: by the board's rule that
  * is not a product listing, so it gets the name, a purely categorical
@@ -47,7 +46,7 @@ export function LineCard({
   /** The rule under the image. The SKU's own colour, not a house default. */
   accent: string;
   href: string;
-  /** Plain words: "Preorder · $34.00", "Reserve — no price yet", "In the making". */
+  /** Plain words: "Preorder · Ships from the first run", "Sold out". */
   state: string;
   action?: ReactNode;
 }) {

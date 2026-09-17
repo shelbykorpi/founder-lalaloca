@@ -29,11 +29,11 @@
  * only. The label's own words are used for the category and the key actives.
  *
  * SELLABLE AS A PREORDER since 19 Aug 2026. The product exists in Shopify
- * (variant 47361868169385, $34.00) and the variant is wired in
+ * (variant 47361868169385, $36.00 since 4 Sept) and the variant is wired in
  * shopifyLinks.ts, so `sellable` is true and the buy path renders.
  *
- * It is a PREORDER, not stock: Shopify holds 0 on hand and sells anyway
- * ("continue selling when out of stock"). That contradicts the published
+ * It is a PREORDER, not stock: nothing has been received from the supplier;
+ * Shopify sells ahead of it. That contradicts the published
  * shipping policy — /policies/shipping promises dispatch within one business
  * day — so `preorder` below states the exception in plain words on the page
  * itself. If the preorder note is ever removed, remove the buy path with it;
@@ -102,10 +102,14 @@ export const FOUNDER_COLLECTION: FounderProduct[] = [
     archetype: "The Anchor",
     archetypeFor: "For the part that comes after arriving.",
     hero: "Anyone can make an entrance. Staying is the harder skill.",
-    what: "A firming peptide cream for morning and night, with hyaluronic acid and vitamin E, for skin that needs more than water.",
+    /* Appearance language only. The supplier's own page says "firming" and
+       "ageless"; the house does not — "firms" is a physiological claim and
+       "ageless" is on the board's Avoid list (Double Take concept doc §3).
+       Corrected 17 Sept 2026, audit F-04. */
+    what: "A peptide cream for morning and night, with hyaluronic acid and vitamin E, for skin that needs more than water.",
     need: "Skin that goes dry, tight or dull-looking and doesn’t hold onto moisture for long.",
     benefit:
-      "Skin feels smoother, firmer to the touch and stays comfortably hydrated, morning or night.",
+      "Skin feels smoother, looks plumper and stays comfortably hydrated, morning or night. Fine lines look softened.",
     price: 36.0,
     size: "50 ml / 1.69 fl oz",
     supplierSku: "selfnamed:peptide-ageless-am-pm-cream-o7VB3",

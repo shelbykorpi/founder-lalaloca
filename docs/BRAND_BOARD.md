@@ -269,3 +269,41 @@ preorder with the verification gates still open, and reaffirmed that on
 button correcting the shipping promise. The gates themselves remain open work,
 not cancelled work: stability documentation, component and leakage testing,
 regulatory artwork, trademark clearance, fulfilment timing.
+
+## Amendment — the anchor moved to Selfnamed, 16–17 September 2026
+
+The 16 August amendment above is superseded. On 16 September Shelby directed
+that the site follow the Selfnamed cart for every product and its packaging,
+and the anchor in that cart is Selfnamed's **Peptide Ageless AM/PM Cream** —
+which is, to the millilitre and the word, what the board specified for slot
+02: a **peptide moisturiser, 50 ml airless pump**. The Blanka 30 ml
+chamomile cream is no longer the product.
+
+| | v2.14 spec | As sourced now |
+|---|---|---|
+| Size | 50 ml airless pump | **50 ml / 1.69 fl oz** airless pump |
+| Actives | peptides | **Hexapeptide-11, hyaluronic acid, vitamin C, vitamin E, sodium PCA** (the label says "peptide complex, hyaluronic acid and vitamin E") |
+| INCI | outstanding | **published** — transcribed verbatim in `src/lib/founderCollection.ts` from the Selfnamed INCI tab, 16 Sept, re-checked 17 Sept |
+| Certification | — | COSMOS Natural (ECOCERT), 99% natural origin |
+| Origin | — | Made in the EU |
+| Retail | outstanding | **$36.00** (Shopify, since 4 Sept) |
+
+The name and the slot are unchanged; the Shopify variant (`47361868169385`)
+is unchanged, so no cart link moved. The Shopify listing's title,
+description, INCI and SKU were brought into line on 17 Sept so that the page
+and the order confirmation describe the same cream.
+
+**Claims discipline carried over from the Double Take concept doc:** the
+supplier's page says "firming" and "ageless"; the site says neither. "Firms"
+is a physiological claim and "ageless" is on the board's Avoid list. The site
+says smoother, plumper-looking, hydrated, fine lines look softened — and
+nothing more.
+
+**Sale state, whole line (17 Sept 2026):** all five FOUNDER Collection SKUs
+are sold as a **preorder against the first run** — no Selfnamed order has
+been received, the pack shots are renders, and the shipping policy's
+one-business-day promise applies to the serums only. The site says so on
+every plate and card, and the buy button reads Shopify's `availableForSale`
+so a sold-out variant closes itself. The governance gates from the v2.14
+list (stability documentation, component and leakage testing, regulatory
+artwork, trademark clearance, fulfilment timing) remain open work.

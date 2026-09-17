@@ -55,6 +55,10 @@
   animation: keynote var(--motion-reveal) var(--ease-house) both;
 }
 @keyframes keynote { from { opacity: 0; transform: translateY(6px); } to { opacity: 1; transform: none; } }
+/* Phones: no note. On a 390px canvas the note stacked over the key sat on
+   top of the hero's own button on four pages (17 Sept 2026, audit F-11).
+   The key still fills; the room count is in the map. */
+@media (max-width: 767px) { .note { display: none; } }
 
 /* ---- the map — the hall of doors ---------------------------------------- */
 .map { position: fixed; inset: 0; z-index: 60; pointer-events: none; }

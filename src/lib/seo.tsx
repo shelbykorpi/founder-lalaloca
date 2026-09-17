@@ -1,5 +1,6 @@
 import { BRAND, CONTACT_EMAIL, SITE } from "./brand";
 import type { FounderProduct } from "./founderCollection";
+import type { NextMoveProduct } from "./nextMove";
 import type { Product } from "./products";
 import type { ProductReviews } from "./reviews";
 
@@ -286,6 +287,60 @@ export function founderProductSchema(product: FounderProduct) {
           },
         },
       },
+    },
+  };
+}
+
+/**
+ * The four Selfnamed SKUs on the plate — added 17 Sept 2026, the day their
+ * INCI went on the page (the schema waited for that on purpose; see the
+ * plate's header). Availability is the record's own state, never assumed:
+ * PreOrder until the stock is counted in, InStock after; `soldOut` — a live
+ * answer from Shopify — overrides both. A shaded SKU is one Product with one
+ * Offer at one price; shades are not separate products.
+ */
+export function nextMoveProductSchema(product: NextMoveProduct, soldOut = false) {
+  const availability = soldOut
+    ? "https://schema.org/SoldOut"
+    : product.availability === "preorder"
+      ? "https://schema.org/PreOrder"
+      : "https://schema.org/InStock";
+  return {
+    "@context": "https://schema.org",
+    "@type": "Product",
+    "@id": `${SITE.url}/products/${product.slug}#product`,
+    name: product.name,
+    description: product.description,
+    category: product.category,
+    image: `${SITE.url}${product.pack.src}`,
+    brand: { "@id": `${SITE.url}/#organization` },
+    size: product.size,
+    ...(product.shades
+      ? { color: product.shades.map((s) => `${s.code} ${s.name}`).join(", ") }
+      : {}),
+    audience: { "@type": "PeopleAudience", suggestedGender: "female" },
+    offers: {
+      "@type": "Offer",
+      price: product.price.toFixed(2),
+      priceCurrency: "USD",
+      url: `${SITE.url}/products/${product.slug}`,
+      availability,
+      itemCondition: "https://schema.org/NewCondition",
+      seller: { "@id": `${SITE.url}/#organization` },
+      /* Free US shipping, 3–5 days in transit. Handling time is only
+         declared once the SKU is in stock; a preorder has none to promise. */
+      shippingDetails:
+        product.availability === "in-stock" && !soldOut
+          ? US_SHIPPING
+          : {
+              "@type": "OfferShippingDetails",
+              shippingRate: { "@type": "MonetaryAmount", value: "0", currency: "USD" },
+              shippingDestination: { "@type": "DefinedRegion", addressCountry: "US" },
+              deliveryTime: {
+                "@type": "ShippingDeliveryTime",
+                transitTime: { "@type": "QuantitativeValue", minValue: 3, maxValue: 5, unitCode: "DAY" },
+              },
+            },
     },
   };
 }

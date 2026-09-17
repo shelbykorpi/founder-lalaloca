@@ -14,7 +14,7 @@ import { ThresholdDoors } from "@/components/house/ThresholdDoors";
 import { GrandHall } from "@/components/house/GrandHall";
 import { BRAND } from "@/lib/brand";
 import { FOUNDER_COLLECTION } from "@/lib/founderCollection";
-import { NEXT_MOVE } from "@/lib/nextMove";
+import { NEXT_MOVE, availabilityLine, type Availability } from "@/lib/nextMove";
 import { products, formatPrice, SET } from "@/lib/products";
 
 /**
@@ -72,6 +72,9 @@ export const metadata: Metadata = {
 const holdTheRoom = FOUNDER_COLLECTION[0];
 const threshold = getRoom(1);
 const bySlug = Object.fromEntries(NEXT_MOVE.map((p) => [p.slug, p]));
+/* The card's verb follows the record's sale state (17 Sept 2026, F-02):
+   a preorder says Preorder, the way Hold the Room's card always has. */
+const actionWord = (a: Availability) => (a === "preorder" ? "Preorder" : "Shop");
 
 const LINE = [
   {
@@ -83,8 +86,8 @@ const LINE = [
     alt: "Opening Line: the oil-to-milk cleanser bottle, Founder Green label with cream and green stripes and a white pump.",
     href: "/products/opening-line",
     hook: bySlug["opening-line"].hook,
-    state: "In stock · Ships in one business day",
-    action: `Shop · ${formatPrice(bySlug["opening-line"].price)}`,
+    state: availabilityLine(bySlug["opening-line"].availability),
+    action: `${actionWord(bySlug["opening-line"].availability)} · ${formatPrice(bySlug["opening-line"].price)}`,
     ready: true,
   },
   {
@@ -96,8 +99,8 @@ const LINE = [
     alt: "Clean Break: the purifying face wash bottle, Founder Green label with cream and green stripes and a white pump.",
     href: "/products/clean-break",
     hook: bySlug["clean-break"].hook,
-    state: "In stock · Ships in one business day",
-    action: `Shop · ${formatPrice(bySlug["clean-break"].price)}`,
+    state: availabilityLine(bySlug["clean-break"].availability),
+    action: `${actionWord(bySlug["clean-break"].availability)} · ${formatPrice(bySlug["clean-break"].price)}`,
     ready: true,
   },
   {
@@ -122,8 +125,8 @@ const LINE = [
     alt: "Double Take: the small eye-cream bottle and its carton, Desert Pink with a cream cartouche and gold crest.",
     href: "/products/double-take",
     hook: bySlug["double-take"].hook,
-    state: "In stock · Ships in one business day",
-    action: `Shop · ${formatPrice(bySlug["double-take"].price)}`,
+    state: availabilityLine(bySlug["double-take"].availability),
+    action: `${actionWord(bySlug["double-take"].availability)} · ${formatPrice(bySlug["double-take"].price)}`,
     ready: true,
   },
   {
@@ -135,8 +138,8 @@ const LINE = [
     alt: "Smooth Talker: the tinted stick in 25 Medium and its brass carton, with a cream cartouche and gold crest.",
     href: "/products/smooth-talker",
     hook: bySlug["smooth-talker"].hook,
-    state: "In stock · 3 shades",
-    action: `Shop · ${formatPrice(bySlug["smooth-talker"].price)}`,
+    state: `${availabilityLine(bySlug["smooth-talker"].availability)} · 3 shades`,
+    action: `${actionWord(bySlug["smooth-talker"].availability)} · ${formatPrice(bySlug["smooth-talker"].price)}`,
     ready: true,
   },
 ];
@@ -314,11 +317,14 @@ export default function HomePage() {
           <p className="room-label" style={{ color: "#5a2f2c" }}>
             Found Her
           </p>
+          {/* Not BRAND.campaign: that line is Room 06's own headline further
+              down this page, and one page says a thing once (17 Sept 2026,
+              audit F-10). This is the Found Her note from the NOTES bank. */}
           <p
             id="found-her-band"
             className="max-w-[22ch] font-serif text-[clamp(1.6rem,3.4vw,2.75rem)] leading-tight text-balance"
           >
-            {BRAND.campaign}
+            The note was left for you.
           </p>
           <p className="max-w-[34ch] text-charcoal/75">
             The story begins where the performance ends.
@@ -329,48 +335,11 @@ export default function HomePage() {
         </div>
       </section>
 
-      {/* ══ 03 · THE COLLECTION ═════════════════════════════════════════════
-          Six on the shelf at three stages, and the state line under each name
-          is what stops a reservation reading as a sale. */}
-      {/* THE COLLECTION ROOM IS DARK, and it was cream until 30 August.
-          Two reasons it had to move. Every tile in it is already a dark
-          object — a photograph under a near-black gradient with cream type —
-          so a cream ground was a white mat around six dark pictures rather
-          than a lit room. And a grid of products is browsing, not reading;
-          `.paper` is for the things people read, which is why the ritual and
-          the ingredient lists further in are still lit. */}
-      <RoomHero
-        id="room-collection"
-        as="h2"
-        src="/editorial/rooms/collection-mirror.webp"
-        mobileSrc="/editorial/rooms/collection-mirror-m.webp"
-        alt="The FOUNDER Collection boardroom: a long black marble table set with striped packs at every seat, an empty green chair with a rose silk over its arm before a bulb-lit mirror."
-        position="56% center"
-        height="min-h-[68svh]"
-        label="Room 03 · The Collection"
-        title="Private tools. Public power."
-        lede="Six pieces for the twenty minutes before you walk in. The first ships now. The rest are yours to hold — nothing charged until they’re priced, and you hear first."
-      >
-        <Link href="/founder-collection" className="btn btn-primary">
-          Explore the collection
-        </Link>
-      </RoomHero>
-      {/* THE VANITY — 11 Sept 2026, replacing the gallery walk. The corridor
-          was a rendered photograph with the products inside it: small, far
-          apart, one legible at a time, and wrong the moment the packaging
-          changed. Now the five stand on the console of a real room, sharp,
-          at true relative scale, never dimmed; the mirror light follows
-          whichever one you look at. Data is still LINE above. See Vanity.tsx
-          and the note at the head of vanity.module.css. */}
-      <Vanity
-        items={LINE}
-        title="The twenty minutes before you walk in."
-        lede="Five pieces on the vanity, in the order you use them. Light one."
-      />
-
-      {/* ══ THE SERUM SALON ═════════════════════════════════════════════════
-          The products taking money get a room of their own, not a footnote
-          under the collection. */}
+      {/* ══ 03 · THE SERUM SALON ════════════════════════════════════════════
+          The products taking money get a room of their own, and it comes
+          before the collection because that is its number in the house —
+          Room 03 in lib/rooms.ts — and because these are the three that ship
+          today (17 Sept 2026, audit F-09: one numbering, the house's). */}
       <RoomHero
         as="h2"
         src="/editorial/rooms/serum-salon-arches.webp"
@@ -378,7 +347,7 @@ export default function HomePage() {
         alt="The serum salon: three lit marble niches in teal, gold and red, one bottle in each, over a black marble counter, pink desert sky through the arches either side."
         position="center center"
         height="min-h-[64svh]"
-        label="The serum salon · The LALALOCA Collection"
+        label="Room 03 · The Serum Salon"
         title="Three serums. Three energies."
         lede="Some days you close. Some days you glow. Some days you start again."
       >
@@ -393,7 +362,7 @@ export default function HomePage() {
         <div className="shell">
           <Reveal>
             <div className="flex flex-wrap items-baseline justify-between gap-4">
-              <p className="room-label">Ships now · The LALALOCA serums</p>
+              <p className="room-label">Ships now · The LALALOCA Collection</p>
               <Link href="/shop#set-heading" className="hairline text-cream">
                 All three for {formatPrice(SET.price)} — save{" "}
                 {formatPrice(products.reduce((sum, p) => sum + p.price, 0) - SET.price)}
@@ -434,7 +403,46 @@ export default function HomePage() {
         </div>
       </section>
 
-      <DoorFrame label="Room 04 · The Anchor" />
+      {/* ══ 04 · THE COLLECTION ═════════════════════════════════════════════
+          Five on the vanity, every one a preorder against the first run, and
+          the state line under each name is what says so. */}
+      {/* THE COLLECTION ROOM IS DARK, and it was cream until 30 August.
+          Two reasons it had to move. Every tile in it is already a dark
+          object — a photograph under a near-black gradient with cream type —
+          so a cream ground was a white mat around six dark pictures rather
+          than a lit room. And a grid of products is browsing, not reading;
+          `.paper` is for the things people read, which is why the ritual and
+          the ingredient lists further in are still lit. */}
+      <RoomHero
+        id="room-collection"
+        as="h2"
+        src="/editorial/rooms/collection-mirror.webp"
+        mobileSrc="/editorial/rooms/collection-mirror-m.webp"
+        alt="The FOUNDER Collection boardroom: a long black marble table set with striped packs at every seat, an empty green chair with a rose silk over its arm before a bulb-lit mirror."
+        position="56% center"
+        height="min-h-[68svh]"
+        label="Room 04 · The FOUNDER Collection"
+        title="Private tools. Public power."
+        lede="Five pieces for the twenty minutes before you walk in — priced, and sold against the first run. You hear from us before anything ships."
+      >
+        <Link href="/founder-collection" className="btn btn-primary">
+          Explore the collection
+        </Link>
+      </RoomHero>
+      {/* THE VANITY — 11 Sept 2026, replacing the gallery walk. The corridor
+          was a rendered photograph with the products inside it: small, far
+          apart, one legible at a time, and wrong the moment the packaging
+          changed. Now the five stand on the console of a real room, sharp,
+          at true relative scale, never dimmed; the mirror light follows
+          whichever one you look at. Data is still LINE above. See Vanity.tsx
+          and the note at the head of vanity.module.css. */}
+      <Vanity
+        items={LINE}
+        title="The twenty minutes before you walk in."
+        lede="Five pieces on the vanity, in the order you use them. Light one."
+      />
+
+      <DoorFrame label="The Anchor" />
 
       {/* ══ 04 · THE ANCHOR ═════════════════════════════════════════════════ */}
       <section id="room-anchor" className="section bg-founder-green">
@@ -452,10 +460,10 @@ export default function HomePage() {
             </div>
           </Reveal>
           <Reveal delay={120}>
-            <p className="room-label">Room 04 · The Anchor</p>
+            <p className="room-label">The Anchor · Hold the Room</p>
             <h2 className="headline-house mt-5 text-balance text-cream">Hold the room.</h2>
             <p className="mt-7 max-w-[42ch] text-[0.9375rem] leading-relaxed text-cream/80">
-              {holdTheRoom.hero} A firming peptide cream with hyaluronic acid and vitamin E —
+              {holdTheRoom.hero} A peptide cream with hyaluronic acid and vitamin E —
               the last step of the routine, morning and night, and the one that stays
               comfortable all day.
             </p>
@@ -471,7 +479,7 @@ export default function HomePage() {
         </div>
       </section>
 
-      {/* ══ 05 · FOUND HER ══════════════════════════════════════════════════ */}
+      {/* ══ 06 · FOUND HER ══════════════════════════════════════════════════ */}
       <section id="room-found-her" className="relative isolate overflow-hidden">
         <Image
           src="/editorial/rooms/found-her-hall-sky.webp"
@@ -487,7 +495,7 @@ export default function HomePage() {
         />
         <div className="shell relative py-20 md:py-28">
           <Reveal className="max-w-[34rem]">
-            <p className="room-label">Room 05 · Found Her</p>
+            <p className="room-label">Room 06 · Found Her</p>
             <p className="mt-5 font-serif text-2xl leading-snug text-blush">
               Stories from women who built before anyone applauded.
             </p>
@@ -507,13 +515,13 @@ export default function HomePage() {
         </div>
       </section>
 
-      <DoorFrame label="Room 06 · Notes from the house" />
+      <DoorFrame label="Notes from the house" />
 
-      {/* ══ 06 · NOTES FROM THE HOUSE ═══════════════════════════════════════ */}
+      {/* ══ NOTES FROM THE HOUSE ════════════════════════════════════════════ */}
       <section id="room-notes" className="section bg-emerald-deep">
         <div className="shell">
           <Reveal>
-            <p className="room-label">Room 06 · Notes from the house</p>
+            <p className="room-label">Notes from the house</p>
           </Reveal>
           <Reveal delay={60}>
             <p className="mt-3 max-w-[38ch] font-serif text-[1.15rem] leading-snug text-cream/75">
@@ -574,11 +582,11 @@ export default function HomePage() {
         </div>
       </section>
 
-      {/* ══ 07 · THE INVITATION ═════════════════════════════════════════════ */}
+      {/* ══ THE INVITATION ══════════════════════════════════════════════════ */}
       <section id="room-invitation" className="section-tight bg-founder-green py-16 md:py-20">
         <div className="shell">
           <Reveal className="max-w-xl">
-            <p className="room-label">Room 07 · The invitation</p>
+            <p className="room-label">The invitation</p>
             <h2 className="headline-house mt-5 text-balance text-cream">
               Be first through the door.
             </h2>

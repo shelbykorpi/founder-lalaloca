@@ -49,6 +49,31 @@
  *  `variantId` below; the shaded SKU carries a `variantId` per shade. */
 export const RESERVING = false;
 
+/**
+ * SALE STATE — 17 Sept 2026, audit finding F-02/F-03.
+ *
+ * Until this pass every plate printed "In stock. Ships within one business
+ * day" unconditionally, while Shopify held one unit of each SKU, no Selfnamed
+ * order had been placed (the cart was still a cart on 16 Sept), the pack
+ * shots were renders "not photographs of a filled sample", and the INCI was
+ * promised "before the first order ships". A product in that state is a
+ * PREORDER, and the page now says so in the same words Hold the Room has used
+ * since 19 Aug. Flip a SKU to "in-stock" on the day its stock is counted in,
+ * and only then — the shipping policy's one-business-day promise hangs on it.
+ */
+export type Availability = "preorder" | "in-stock";
+
+/** The preorder notice, one wording for the whole line. */
+export const PREORDER_NOTE =
+  "Preorder. It ships from the first run — not the next-business-day dispatch the serums get. We’ll email you before it ships, and you can reply to cancel if the timing no longer works.";
+
+/** The one-line state under a card or a button. */
+export function availabilityLine(a: Availability): string {
+  return a === "preorder"
+    ? "Preorder · Ships from the first run"
+    : "In stock · Ships within one business day";
+}
+
 export type NextMoveProduct = {
   slug: string;
   name: string;
@@ -66,6 +91,17 @@ export type NextMoveProduct = {
   size: string;
   /** Live retail price in USD. Matches the Shopify variant price. */
   price: number;
+  /** See `Availability` above. Never derived; set by hand when stock lands. */
+  availability: Availability;
+  /**
+   * Full INCI, verbatim from the supplier's listing or studio, in printed
+   * order. Footnote marks (➀ organic farming · ➁ from natural essential oils
+   * · ➂ pure mineral pigments) are dropped from the names and noted in the
+   * comment above each list. Never reordered, never "tidied".
+   */
+  ingredients: string[];
+  /** Origin as the supplier states it. */
+  origin: string;
   /** Shopify variant id for a single-variant SKU. Shaded SKUs carry it per
    *  shade instead (see `shades[].variantId`), so this is optional. Passed to
    *  the bag as the line id; cartPermalink resolves a raw numeric id directly. */
@@ -78,9 +114,9 @@ export type NextMoveProduct = {
    * products. Each carries its own hero because the carton stripe shifts
    * with the shade, so the picture has to change with the choice.
    *
-   * `handle` is the stable identifier for a URL or a future Shopify
-   * variant. NO SHOPIFY VARIANT IDS EXIST FOR THESE YET, and none are
-   * invented here: the picker records an intent, not a purchase.
+   * `handle` is the stable identifier for a URL; `variantId` is the real
+   * Shopify variant for that shade (created 4 Sep 2026), so the picker adds
+   * the shade she is looking at, not a placeholder.
    */
   shades?: {
     /** Numeric code as printed: "20". */
@@ -177,7 +213,32 @@ export const NEXT_MOVE: NextMoveProduct[] = [
     keyIngredients: ["Camomile", "Sea Buckthorn", "Cloudberry"],
     size: "150 ml / 5.07 fl oz",
     price: 36.0,
+    availability: "preorder",
     variantId: "47400898920617",
+    /* Verbatim from the Selfnamed listing's INCI tab, read 17 Sept 2026.
+       ➀ (organic farming): sunflower seed oil, camomile flower extract,
+       sea buckthorn fruit extract, cloudberry fruit extract. The listing
+       states 100% natural origin, 39% organic origin, COSMOS Organic. */
+    ingredients: [
+      "Caprylic/Capric Triglyceride",
+      "Glycerin",
+      "Helianthus Annuus (Sunflower) Seed Oil",
+      "Aqua",
+      "Sucrose Laurate",
+      "Sucrose Palmitate",
+      "Alcohol",
+      "Tocopherol",
+      "Mica (CI 77019)",
+      "Parfum",
+      "Chamomilla Recutita (Camomile) Flower Extract",
+      "Hippophae Rhamnoides (Sea Buckthorn) Fruit Extract",
+      "Rubus Chamaemorus (Cloudberry) Fruit Extract",
+      "CI 77491 (Iron Oxides)",
+      "Glycolipids",
+      "Limonene",
+      "Linalyl Acetate",
+    ],
+    origin: "Made in the EU.",
     description:
       "A gentle daily cleanser for dry and delicate skin. The rich, oily texture turns to a silky milk on contact with water, dissolving make-up and impurities without stripping moisture from the skin.",
     detailCta: "Reserve Opening Line",
@@ -219,7 +280,38 @@ export const NEXT_MOVE: NextMoveProduct[] = [
     keyIngredients: ["Mate Leaf", "Iceland Moss", "Juniper Callus"],
     size: "140 ml / 4.73 fl oz",
     price: 34.0,
+    availability: "preorder",
     variantId: "47417854689449",
+    /* Verbatim from the Selfnamed studio, 24 Aug 2026 (concept doc §2).
+       ➀ mate leaf extract · ➁ linalool, linalyl acetate · ➂ ultramarines. */
+    ingredients: [
+      "Aqua/Water",
+      "Coco-Glucoside",
+      "Cocamidopropyl Betaine",
+      "Glycerin",
+      "Xanthan Gum",
+      "Propanediol",
+      "Sodium PCA",
+      "Sodium Levulinate",
+      "Lactic Acid",
+      "Ilex Paraguariensis (Mate) Leaf Extract",
+      "Parfum/Fragrance",
+      "Acacia Senegal Gum",
+      "Sodium Anisate",
+      "Alcohol",
+      "Rhamnose",
+      "CI 77007 (Ultramarines)",
+      "Glucose",
+      "Glucuronic Acid",
+      "Cetraria Islandica (Iceland Moss) Extract",
+      "Usnea Barbata (Lichen) Extract",
+      "Juniperus Communis (Juniper) Callus Extract",
+      "Silica",
+      "Kaolin",
+      "Linalool",
+      "Linalyl Acetate",
+    ],
+    origin: "Made in the EU.",
     description:
       "A gentle daily face wash for blemish-prone skin. It washes away impurities and excess oil without harsh surfactants, leaving skin feeling fresh.",
     detailCta: "Reserve Clean Break",
@@ -259,6 +351,40 @@ export const NEXT_MOVE: NextMoveProduct[] = [
     keyIngredients: ["Ceramides", "Cocoa Butter", "Vitamin E"],
     size: "12 g / 0.42 oz",
     price: 42.0,
+    availability: "preorder",
+    /* Verbatim from the Selfnamed studio, 21 Aug 2026 (concept doc §2).
+       ➀ jojoba, cocoa butter, sea buckthorn oil, black cumin oil ·
+       ➁ terpineol, linalyl acetate, anethole, geraniol · ➂ the iron oxides.
+       Zinc oxide leads the list; see `sunNote` — no SPF is claimed. */
+    ingredients: [
+      "Zinc Oxide",
+      "Dicaprylyl Carbonate",
+      "Oryza Sativa (Rice) Bran Oil",
+      "Vegetable Oil",
+      "Isoamyl Laurate",
+      "Helianthus Annuus (Sunflower) Seed Wax",
+      "Oryza Sativa (Rice) Bran Wax",
+      "Rhus Succedanea Fruit Wax",
+      "Simmondsia Chinensis (Jojoba) Seed Oil",
+      "Silica",
+      "Theobroma Cacao (Cocoa) Seed Butter",
+      "Parfum/Fragrance",
+      "Tocopherol",
+      "Hippophae Rhamnoides (Sea Buckthorn) Fruit Oil",
+      "Nigella Sativa (Black Cumin) Seed Oil",
+      "Glycolipids",
+      "Aluminum Hydroxide",
+      "Glycosphingolipids",
+      "Aqua/Water",
+      "Vanillin",
+      "Terpineol",
+      "Linalyl Acetate",
+      "Anethole",
+      "Geraniol",
+      "CI 77891 (Titanium Dioxide)",
+      "CI 77491, CI 77492, CI 77499 (Iron Oxides)",
+    ],
+    origin: "Made in the EU.",
     /* Three shades. The 25 Aug set was a straight pack shot per shade;
        these replace it with the same three in use — stick and carton on a
        surface, the shade being blended in the mirror behind. Same file
@@ -345,7 +471,54 @@ export const NEXT_MOVE: NextMoveProduct[] = [
     keyIngredients: ["Hexapeptide-11", "Vitamin C", "Vitamin E"],
     size: "15 ml / 0.51 fl oz",
     price: 46.0,
+    availability: "preorder",
     variantId: "47417855115433",
+    /* Verbatim from the Selfnamed studio, 20 Aug 2026 (concept doc §2).
+       ➀ jojoba, borage seed oil, blueberry seed oil, mango seed butter,
+       ginkgo · ➁ the five allergen components at the end · ➂ the iron
+       oxide. The listing states 99% natural origin, 8% organic origin. */
+    ingredients: [
+      "Aqua/Water",
+      "Glycerin",
+      "Coconut Alkanes",
+      "Pentylene Glycol",
+      "Simmondsia Chinensis (Jojoba) Seed Oil",
+      "Sodium PCA",
+      "Polyglyceryl-6 Stearate",
+      "Cetearyl Alcohol",
+      "Borago Officinalis (Borage) Seed Oil",
+      "Caprylic/Capric Triglyceride",
+      "Dipalmitoyl Hydroxyproline",
+      "Ricinus Communis (Castor) Seed Oil",
+      "Propanediol",
+      "Aroma/Fragrance",
+      "Polyglyceryl-6 Behenate",
+      "Xanthan Gum",
+      "Fragaria Ananassa (Strawberry) Seed Oil",
+      "Rhus Verniciflua Peel Cera/Rhus Succedanea Fruit Cera",
+      "Vaccinium Myrtillus (Blueberry) Seed Oil",
+      "Cellulose",
+      "Hexapeptide-11",
+      "Phytosterols",
+      "Ascorbyl Palmitate",
+      "Tocopherol",
+      "Mangifera Indica (Mango) Seed Butter",
+      "Sodium Phytate",
+      "Potassium Hydroxide",
+      "Leuconostoc/Radish Root Ferment Filtrate",
+      "Octyldodecanol",
+      "Ginkgo Biloba (Ginkgo) Leaf Extract",
+      "Citric Acid",
+      "Sodium Benzoate",
+      "Potassium Sorbate",
+      "CI 77491 (Iron Oxides)",
+      "Linalyl Acetate",
+      "Geranyl Acetate",
+      "Linalool",
+      "Geraniol",
+      "Citronellol",
+    ],
+    origin: "Made in the EU.",
     description:
       "A hydrating peptide eye cream that helps the appearance of fine lines look softened and the eye area look smoother. Comfortable under makeup.",
     detailCta: "Reserve Double Take",

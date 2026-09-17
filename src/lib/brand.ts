@@ -48,6 +48,13 @@ export const BRAND = {
    * is the published policy, $38 and $98 are the Shopify prices.
    */
   bar: "Free US shipping on every order · Three serums, $38 each · All three for $98",
+  /**
+   * The same bar in the FOUNDER Collection's rooms (17 Sept 2026, audit
+   * F-14): a $34–$46 plate with another line's price list over it read as
+   * someone else's shop. Shipping is the fact both lines share; the second
+   * half names the line she is standing in.
+   */
+  barCollection: "Free US shipping on every order · The FOUNDER Collection · Preorder the first run",
 
   /**
    * The door mark: the F-key. v2.13 makes it the secondary identifier — the
@@ -115,7 +122,6 @@ export const FOOTER_NAV = [
       { href: "/shop", label: "The LALALOCA Collection" },
       { href: "/founder-collection", label: "The FOUNDER Collection" },
       { href: "/shop#set-heading", label: "The House Trio · $98" },
-      { href: "/the-next-move", label: "The Next Move — reserve" },
       { href: "/products/thirst-trap", label: "Thirst Trap" },
       { href: "/products/c-me-glow", label: "C Me Glow" },
       { href: "/products/bounce-back", label: "Bounce Back" },

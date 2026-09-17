@@ -8,10 +8,11 @@ import {
   PlateShadeChips,
 } from "@/components/house/PlateShades";
 import { PlateBuyButton } from "@/components/house/PlateBuyButton";
-import { CAMPAIGN, type NextMoveProduct } from "@/lib/nextMove";
+import { CAMPAIGN, PREORDER_NOTE, availabilityLine, type NextMoveProduct } from "@/lib/nextMove";
 import { formatPrice } from "@/lib/products";
-import { SITE } from "@/lib/brand";
-import { JsonLd, breadcrumbSchema } from "@/lib/seo";
+import { BRAND, SITE } from "@/lib/brand";
+import { fetchVariantAvailability } from "@/lib/catalog";
+import { JsonLd, breadcrumbSchema, nextMoveProductSchema } from "@/lib/seo";
 
 /**
  * THE PLATE — the after-hours product page, for the three campaign SKUs.
@@ -23,8 +24,8 @@ import { JsonLd, breadcrumbSchema } from "@/lib/seo";
  * capitals — engraved, not shouted. A rail across the foot steps sideways
  * through the line.
  *
- * ONE TEMPLATE, THREE PRODUCTS, FOR THE SAME REASON AS `shop/ProductDetail`:
- * the differences between these three are facts, not design. Three hand-built
+ * ONE TEMPLATE, FOUR PRODUCTS, for the reason the old cream template had:
+ * the differences between them are facts, not design. Three hand-built
  * pages drift — a 24-word hook on one and none on the next — and that drift is
  * what the copy cut of 23 Aug existed to undo.
  *
@@ -37,10 +38,22 @@ import { JsonLd, breadcrumbSchema } from "@/lib/seo";
  * id handed to the bag is the Shopify variant id, which the cart permalink
  * resolves straight to checkout.
  *
- * PRODUCT SCHEMA STILL WAITS. An Offer now has a price and availability to
- * declare, but the INCI is not yet published on the page, so a full schema is
- * left for the pass that publishes ingredients. Breadcrumbs only for now — an
- * honest omission, not an invented value.
+ * IT TELLS THE TRUTH ABOUT STOCK (17 Sept 2026, audit F-02/F-03). The sale
+ * state comes from the record (`availability`), the button's right to sell
+ * comes from Shopify (`fetchVariantAvailability`, sixty seconds stale at
+ * most), and the words under the button follow both. A preorder carries the
+ * same notice Hold the Room has carried since August; a variant Shopify will
+ * not sell says "Sold out". Nothing on this page says "in stock" from a
+ * string constant any more.
+ *
+ * IT PUBLISHES THE INCI. The full list, verbatim from the supplier, in the
+ * same section Hold the Room uses — and only now that it is on the page does
+ * the plate carry Product/Offer schema, with the same availability.
+ *
+ * ON A PHONE THE OBJECT COMES FIRST. Below `md` the photograph is its own
+ * block above the copy rather than a backdrop under it, so the product is the
+ * thing she looks at and the price and button land in the thumb zone; from
+ * `md` up it is one room with the copy in its shadow, as before.
  *
  * THE PACK SHOTS ARE RENDERS. Every one of the three concept docs records it,
  * and every one says reshoot when a physical sample exists. A page this
@@ -54,38 +67,50 @@ import { JsonLd, breadcrumbSchema } from "@/lib/seo";
  * OTC drug in the US. So the disclaimer sits under the reserve block, above
  * the fold, where the assumption would be formed.
  */
-export function ProductPlate({ product }: { product: NextMoveProduct }) {
+export async function ProductPlate({ product }: { product: NextMoveProduct }) {
   const shades = product.shades?.length ? product.shades : null;
   const inCampaign = CAMPAIGN.slugs.includes(product.slug as never);
+
+  /* Every variant this page can sell, asked about in one call. */
+  const variantIds = shades ? shades.map((s) => s.variantId) : product.variantId ? [product.variantId] : [];
+  const available = await fetchVariantAvailability(variantIds);
+  /* "Sold out" for the schema only when NOTHING on the page can be sold. */
+  const allSoldOut =
+    variantIds.length > 0 && variantIds.every((id) => available?.[id] === false);
+  const isPreorder = product.availability === "preorder";
 
   /* The plate, written once. When the product has shades the whole section is
      wrapped in the picker's provider so the photograph and the chips halfway
      down the copy share one selection; the copy between them stays a server
      component either way. */
   const plate = (
-    <section className="relative isolate flex min-h-[calc(100svh-7rem)] flex-col justify-end overflow-hidden">
-      {shades ? (
-        <PlateShadeImage />
-      ) : (
-        <Image
-          src={product.detailHero.src}
-          alt={product.detailHero.alt}
-          fill
-          priority
-          sizes="100vw"
-          className="object-cover object-[70%_center]"
+    <section className="relative isolate flex flex-col overflow-hidden bg-[#0e211b] md:min-h-[calc(100svh-7rem)] md:justify-end">
+      {/* The photograph: a block of its own on a phone, the whole room from
+          md up. `fill` needs a positioned box either way, so the wrapper is
+          relative-with-aspect below md and absolute-inset above it. */}
+      <div className="relative aspect-[4/5] w-full sm:aspect-[4/3] md:absolute md:inset-0 md:aspect-auto">
+        {shades ? (
+          <PlateShadeImage />
+        ) : (
+          <Image
+            src={product.detailHero.src}
+            alt={product.detailHero.alt}
+            fill
+            priority
+            sizes="100vw"
+            className="object-cover object-[62%_center] md:object-[70%_center]"
+          />
+        )}
+        {/* Deep on the left where the words go, clear on the right where the
+            product is. On a phone only a soft foot so the block meets the copy
+            below without a seam. */}
+        <div
+          aria-hidden
+          className="pointer-events-none absolute inset-0 bg-[linear-gradient(180deg,rgba(14,33,27,0.18)_0%,rgba(14,33,27,0)_40%,rgba(14,33,27,0.55)_86%,#0e211b_100%)] md:bg-[linear-gradient(90deg,#0e211b_0%,rgba(14,33,27,0.78)_28%,rgba(14,33,27,0.49)_44%,rgba(14,33,27,0.04)_66%)]"
         />
-      )}
+      </div>
 
-      {/* Deep on the left where the words go, clear on the right where the
-          product is. Two gradients rather than one, so the copy never sits
-          over the lit part of the frame at any width. */}
-      <div
-        aria-hidden
-        className="pointer-events-none absolute inset-0 bg-[linear-gradient(180deg,rgba(14,33,27,0.45)_0%,rgba(14,33,27,0.2)_30%,rgba(14,33,27,0.78)_86%,#0e211b_100%)] md:bg-[linear-gradient(90deg,#0e211b_0%,rgba(14,33,27,0.78)_28%,rgba(14,33,27,0.49)_44%,rgba(14,33,27,0.04)_66%)]"
-      />
-
-      <div className="shell relative flex w-full flex-1 items-end pb-16 pt-28 md:items-center md:py-24">
+      <div className="shell relative flex w-full flex-1 items-start pb-14 pt-8 md:items-center md:py-24">
         <div className="max-w-[26rem]">
           <p className="room-label">{CAMPAIGN.name}</p>
 
@@ -111,8 +136,19 @@ export function ProductPlate({ product }: { product: NextMoveProduct }) {
             {formatPrice(product.price)}
           </p>
 
+          {/* The exception, then the button. Never the other way round. */}
+          {isPreorder && (
+            <div className="mt-7 max-w-[24rem] border-l-2 border-bronze py-3 pl-4">
+              <p className="room-label">Preorder</p>
+              <p className="mt-2 text-[0.8125rem] leading-relaxed text-cream/75">
+                {PREORDER_NOTE}
+              </p>
+            </div>
+          )}
+
           <PlateBuyButton
             product={product}
+            available={available}
             className="btn btn-primary mt-6 w-full max-w-[20rem]"
           />
 
@@ -125,7 +161,15 @@ export function ProductPlate({ product }: { product: NextMoveProduct }) {
           )}
 
           <p className="mt-5 max-w-[26rem] text-[0.6875rem] leading-relaxed text-cream/55">
-            In stock. Ships within one business day, with free US shipping.
+            {availabilityLine(product.availability)} · Free US shipping ·{" "}
+            {BRAND.legal.name} is the seller of record ·{" "}
+            <Link className="underline underline-offset-2 hover:opacity-70" href="/policies/shipping">
+              Shipping
+            </Link>{" "}
+            ·{" "}
+            <Link className="underline underline-offset-2 hover:opacity-70" href="/policies/returns">
+              Returns
+            </Link>
           </p>
         </div>
       </div>
@@ -144,6 +188,7 @@ export function ProductPlate({ product }: { product: NextMoveProduct }) {
             { name: "The FOUNDER Collection", path: "/founder-collection" },
             { name: product.name, path: `/products/${product.slug}` },
           ]),
+          nextMoveProductSchema(product, allSoldOut),
         ]}
       />
 
@@ -201,22 +246,27 @@ export function ProductPlate({ product }: { product: NextMoveProduct }) {
                 page would otherwise assume the opposite. */}
             <p className="mt-8 border-t border-charcoal/12 pt-6 text-xs leading-relaxed text-charcoal/70">
               Shown: renders of the approved packaging, not photographs of a
-              filled sample. We&rsquo;ll photograph the real thing before it ships.
+              filled sample. We&rsquo;ll photograph the real thing when the first
+              run arrives.
             </p>
           </Reveal>
         </div>
       </section>
 
       {/* ══ WHAT IS IN IT ═══════════════════════════════════════════════════
-          A product being reserved discloses on the same terms as a product
-          being sold. Fragrance and allergens are on the page, not in a PDF. */}
+          A product on preorder discloses on the same terms as a product on
+          the shelf. The whole INCI is on the page, not in a PDF and not
+          "before the first order ships". */}
       <section className="section bg-shell text-charcoal">
         <div className="shell grid gap-14 lg:grid-cols-2 lg:gap-20">
           <Reveal>
             <p className="room-label room-label-dk">What is in it</p>
             <h3 className="mt-5 font-serif text-3xl font-light text-charcoal">
-              The parts worth knowing before you decide.
+              The whole list, including the parts people avoid.
             </h3>
+            <p className="mt-6 border-t border-charcoal/12 pt-6 text-[0.8125rem] leading-[1.9] text-charcoal/70">
+              {product.ingredients.join(", ")}.
+            </p>
             <dl className="mt-8 grid gap-x-8 gap-y-5 border-t border-charcoal/12 pt-6 sm:grid-cols-2">
               <div>
                 <dt className="room-label room-label-dk">Key ingredients</dt>
@@ -244,6 +294,10 @@ export function ProductPlate({ product }: { product: NextMoveProduct }) {
                   </dd>
                 </div>
               )}
+              <div>
+                <dt className="room-label room-label-dk">Made</dt>
+                <dd className="mt-2 text-[0.9375rem] text-charcoal">{product.origin}</dd>
+              </div>
             </dl>
           </Reveal>
 
@@ -261,8 +315,8 @@ export function ProductPlate({ product }: { product: NextMoveProduct }) {
               </p>
             )}
             <p className="mt-8 border-t border-charcoal/12 pt-6 text-xs leading-relaxed text-charcoal/70">
-              The full ingredient list is printed on the carton and will be
-              published here before the first order ships.
+              The same list is printed on the carton. If you react to any of
+              it, patch test first: a little on the inner forearm, then a day.
             </p>
           </Reveal>
         </div>
@@ -326,18 +380,14 @@ export function ProductPlate({ product }: { product: NextMoveProduct }) {
               Leave the door open behind you.
             </p>
             {/* Only a campaign member is one of three. Opening Line was not in
-                the August shoot, so it points at the collection, not the trio. */}
+                the August shoot, so it is simply part of the line. Both point
+                at the collection shelf; the campaign page redirects there. */}
             <p className="mt-6 max-w-[26rem] text-[0.9375rem] leading-relaxed text-cream/70">
               {inCampaign
-                ? `${product.name} is one of three in ${CAMPAIGN.name}.`
+                ? `${product.name} is one of three in ${CAMPAIGN.name}, and one of five in the FOUNDER Collection.`
                 : `${product.name} is part of the FOUNDER Collection.`}
             </p>
             <div className="mt-9 flex flex-wrap items-center gap-x-8 gap-y-4">
-              {inCampaign && (
-                <Link href="/the-next-move" className="hairline text-cream">
-                  See all three
-                </Link>
-              )}
               <Link href="/founder-collection" className="hairline text-cream">
                 The whole line
               </Link>

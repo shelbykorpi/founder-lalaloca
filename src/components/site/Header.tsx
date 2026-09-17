@@ -22,6 +22,14 @@ import { useBag } from "@/components/bag/BagProvider";
  * Rose instead — the same two-tone structure, both halves legible on night.
  */
 
+/* The FOUNDER Collection's rooms: the shelf and its five plates. */
+const COLLECTION_PLATES = ["opening-line", "clean-break", "hold-the-room", "double-take", "smooth-talker"];
+function isCollectionRoom(pathname: string | null): boolean {
+  if (!pathname) return false;
+  if (pathname.startsWith("/founder-collection")) return true;
+  return COLLECTION_PLATES.some((slug) => pathname === `/products/${slug}`);
+}
+
 export function Header() {
   const pathname = usePathname();
   const { count, openBag } = useBag();
@@ -48,7 +56,7 @@ export function Header() {
       <p
         className="py-2 text-center text-[0.625rem] uppercase tracking-[0.24em] bg-night-deep text-cream/80"
       >
-        {BRAND.bar}
+        {isCollectionRoom(pathname) ? BRAND.barCollection : BRAND.bar}
       </p>
 
       {/* The FOUNDER/BEAUTY lockup is far shorter than the stacked mark it

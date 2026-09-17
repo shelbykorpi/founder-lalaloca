@@ -36,6 +36,8 @@
 import { BRAND } from "../brand";
 import { policies } from "../content";
 import { formatPrice, products, SET } from "../products";
+import { FOUNDER_COLLECTION } from "../founderCollection";
+import { NEXT_MOVE, PREORDER_NOTE, availabilityLine } from "../nextMove";
 
 /** One retrievable chunk. `id` exists so a bad answer can be traced to a source. */
 export type Fact = {
@@ -82,6 +84,72 @@ function productFacts(): Fact[] {
   });
 }
 
+/* ── The FOUNDER Collection: generated from the same records the plates read ──
+   Added 17 Sept 2026 (audit F-16). Until then a question about Hold the Room
+   or Smooth Talker at the Beauty desk fell to a generic reply, because the
+   corpus knew only the serums. Every line here is a field the site already
+   publishes; the sale state and the preorder wording are the plate's own. */
+
+function founderCollectionFacts(): Fact[] {
+  const anchor = FOUNDER_COLLECTION.map((p): Fact[] => [
+    {
+      id: `founder:${p.slug}`,
+      cues: [p.name.toLowerCase(), p.slug, p.archetype.toLowerCase(), "moisturiser", "moisturizer", "cream", "peptide"],
+      text: [
+        `${p.name} — ${p.archetype}, the last step of the FOUNDER Collection. ${p.category}. ${p.size}, ${formatPrice(p.price)}.`,
+        `Sale state: PREORDER against the first run. ${p.preorder ?? PREORDER_NOTE}`,
+        `What it is: ${p.what}`,
+        `The need it addresses: ${p.need}`,
+        `Cosmetic benefit as approved: ${p.benefit}`,
+        `Key actives exactly as printed on the label: ${p.keyActive}`,
+        `When: ${p.timing}. In a routine: ${p.routine}`,
+        `How to use: ${p.howToUse.map((s) => `${s.step} — ${s.detail}`).join(" ")}`,
+        p.ingredients
+          ? `Full ingredient list: ${p.ingredients.join(", ")}. ${p.origin}`
+          : `The full INCI list is NOT published on the site. Do not recite one.`,
+        `It is fragranced. Say so plainly if asked about fragrance or sensitivity.`,
+      ].join("\n"),
+    },
+    ...p.faqs.map((f, i) => ({
+      id: `faq:${p.slug}:${i}`,
+      cues: [p.name.toLowerCase(), ...f.q.toLowerCase().split(/\W+/).filter((w) => w.length > 4)],
+      text: `Published Q&A for ${p.name}. Q: ${f.q} A: ${f.a}`,
+    })),
+  ]);
+  const line = NEXT_MOVE.map((p): Fact => ({
+    id: `founder:${p.slug}`,
+    cues: [p.name.toLowerCase(), p.slug, p.category.toLowerCase(), ...p.keyIngredients.map((k) => k.toLowerCase())],
+    text: [
+      `${p.name} — part of the FOUNDER Collection. ${p.category}. ${p.size}, ${formatPrice(p.price)}.${p.shades ? ` Shades: ${p.shades.map((s) => `${s.code} ${s.name}`).join(", ")} — one formula, one price.` : ""}`,
+      `Sale state: ${availabilityLine(p.availability)}.${p.availability === "preorder" ? ` ${PREORDER_NOTE}` : ""}`,
+      `What it is: ${p.what} ${p.description}`,
+      `Cosmetic benefits as approved: ${p.benefits.join("; ")}.`,
+      `Key ingredients exactly as the supplier lists them: ${p.keyIngredients.join(", ")}.`,
+      `Said plainly on the page: ${p.plainly}`,
+      p.sunNote ? `Sun note, verbatim: ${p.sunNote}` : "",
+      p.facts?.length ? `Also stated: ${p.facts.join("; ")}.` : "",
+      `Full ingredient list: ${p.ingredients.join(", ")}. ${p.origin}`,
+      `The pack shots on the site are renders of the approved packaging, not photographs of a filled sample.`,
+    ]
+      .filter(Boolean)
+      .join("\n"),
+  }));
+  return [
+    ...anchor.flat(),
+    ...line,
+    {
+      id: "founder:collection",
+      cues: ["founder collection", "the collection", "five", "routine", "next move", "opening line", "clean break", "double take", "smooth talker", "hold the room", "preorder", "first run", "when will it ship"],
+      text: [
+        `The FOUNDER Collection is the house's second line, alongside the LALALOCA serums: Opening Line (oil-to-milk cleanser), Clean Break (purifying face wash), Hold the Room (peptide moisturising cream), Double Take (peptide eye cream) and Smooth Talker (ceramide tone stick, three shades).`,
+        `Every piece is priced and sold as a PREORDER against the first run; none ships next-business-day the way the serums do. ${PREORDER_NOTE}`,
+        `No ship date is promised. If asked when, say the customer hears by email before it ships and can cancel by replying; do not guess a date.`,
+        `The serums (LALALOCA) are in stock and ship within one business day.`,
+      ].join("\n"),
+    },
+  ];
+}
+
 /* ── The set ─────────────────────────────────────────────────────────────── */
 
 const full = products.reduce((sum, p) => sum + p.price, 0);
@@ -115,7 +183,7 @@ const BRAND_FACTS: Fact[] = [
   {
     id: "brand:three",
     cues: ["why three", "only three", "more products", "fourth", "range"],
-    text: `There are three serums because a fourth has not earned its place. Hydration, brightness, cushion — morning and night. They are built to sit together, which is what the Trio is.`,
+    text: `There are three serums because a fourth serum has not earned its place. Hydration, brightness, cushion — morning and night. They are built to sit together, which is what the Trio is. The rest of the house is the FOUNDER Collection — five pieces for the routine around the serums, sold as a preorder against the first run.`,
   },
   {
     id: "brand:claims",
@@ -226,6 +294,7 @@ const CORRECTIONS: Fact[] = [
 
 export const FACTS: Fact[] = [
   ...productFacts(),
+  ...founderCollectionFacts(),
   SET_FACT,
   ...BRAND_FACTS,
   ...policyFacts(),

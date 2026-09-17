@@ -12,11 +12,15 @@ export default function sitemap(): MetadataRoute.Sitemap {
     "",
     "/shop",
     "/founder-collection",
-    "/the-next-move",
     "/our-story",
     "/found-her",
     "/find-your-serum",
     "/library",
+    /* Added 17 Sept 2026 (audit F-13): both are real, indexable rooms.
+       /the-next-move left the list the same day — it now redirects to
+       /founder-collection. */
+    "/young-founders-room",
+    "/salon",
     /* Three deliberate absences:
        /account — robots.ts disallows it and the page carries noindex. A URL
          that is both submitted and blocked is a Search Console error.

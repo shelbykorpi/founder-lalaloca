@@ -47,7 +47,7 @@ const product = FOUNDER_COLLECTION[0];
 export const metadata: Metadata = {
   title: `${product.name} — ${product.category}`,
   description:
-    "Hold the Room, the anchor of the FOUNDER Collection. A firming peptide cream with hyaluronic acid and vitamin E, 50 ml. Preorder against the first run.",
+    "Hold the Room, the anchor of the FOUNDER Collection. A peptide cream with hyaluronic acid and vitamin E, 50 ml. Preorder against the first run.",
   alternates: { canonical: "/products/hold-the-room" },
 };
 
@@ -209,8 +209,8 @@ export default function HoldTheRoomPage() {
               The whole list, including the parts people avoid.
             </h3>
             <p className="mt-5 max-w-[44ch] text-[0.9375rem] leading-relaxed text-charcoal/70">
-              Fragrance and petrolatum are both on it. We&rsquo;d rather you read that here
-              than find it at home.
+              Fragrance is on it, with the essential-oil components that come with it.
+              We&rsquo;d rather you read that here than find it at home.
             </p>
             {product.ingredients && (
               <p className="mt-6 border-t border-charcoal/12 pt-6 text-[0.8125rem] leading-[1.9] text-charcoal/70">

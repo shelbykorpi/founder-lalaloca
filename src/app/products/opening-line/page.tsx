@@ -8,6 +8,11 @@ import { ProductPlate, plateMetadata } from "@/components/house/ProductPlate";
    source of truth; this file only names it. */
 const product = NEXT_MOVE.find((p) => p.slug === "opening-line");
 
+/* The plate asks Shopify whether its variants can still be sold, and the
+   answer is cached sixty seconds; the page revalidates on the same clock so
+   a sold-out button is never more than a minute behind the till. */
+export const revalidate = 60;
+
 export const metadata: Metadata = product
   ? plateMetadata(product)
   : { title: "Not found" };

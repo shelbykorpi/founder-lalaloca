@@ -4,9 +4,9 @@ import Link from "next/link";
 import { AddToBagButton } from "@/components/bag/AddToBagButton";
 import { EmailSignup } from "@/components/site/EmailSignup";
 import { FOUNDER_COLLECTION } from "@/lib/founderCollection";
-import { fetchCollectionProducts, type CatalogProduct } from "@/lib/catalog";
+import { fetchCollectionProducts, fetchVariantAvailability, type CatalogProduct } from "@/lib/catalog";
 import { LineCard } from "@/components/shop/LineCard";
-import { NEXT_MOVE, CAMPAIGN } from "@/lib/nextMove";
+import { NEXT_MOVE, CAMPAIGN, availabilityLine } from "@/lib/nextMove";
 import { formatPrice, products, SET } from "@/lib/products";
 import { Reveal } from "@/components/house/Reveal";
 import { RoomHero } from "@/components/house/RoomHero";
@@ -65,7 +65,7 @@ import {
 export const metadata: Metadata = {
   title: "The FOUNDER Collection",
   description:
-    "The FOUNDER Collection. Hold the Room — a firming peptide cream with hyaluronic acid and vitamin E, 50 ml. The last step, after your serums.",
+    "The FOUNDER Collection. Opening Line, Clean Break, Hold the Room, Double Take, Smooth Talker — five pieces, sold against the first run. Hold the Room, the peptide cream, is the last step.",
   alternates: { canonical: "/founder-collection" },
 };
 
@@ -77,6 +77,11 @@ export default async function FounderCollectionPage() {
      appears here within a minute. Until then the shelf falls back to Hold
      the Room built from local data, so this page never renders empty. */
   const catalog = await fetchCollectionProducts("founder-collection");
+  /* Shopify's own answer per variant, so a one-unit SKU that has sold shows
+     "Sold out" on its card rather than adding to the bag (17 Sept 2026). */
+  const availability = await fetchVariantAvailability(
+    NEXT_MOVE.flatMap((p) => (p.shades ? p.shades.map((s) => s.variantId) : p.variantId ? [p.variantId] : [])),
+  );
   const cards: CatalogProduct[] =
     catalog && catalog.length > 0
       ? catalog
@@ -113,7 +118,7 @@ export default async function FounderCollectionPage() {
      Six entries at three different stages, and the grid has to say which
      is which rather than implying six things you can buy:
 
-       Hold the Room     on sale as a preorder, $34
+       Hold the Room     on sale as a preorder, $36
        Opening Line      ) real products, artwork finished, NO PRICE YET —
        Clean Break       ) reservations only. Opening Line joined this group
        Smooth Talker     ) on 30 Aug when it finally found a supplier.
@@ -121,10 +126,8 @@ export default async function FounderCollectionPage() {
        Sign Here         ) named on the board, not made. Not a product
                            listing: no price, no formula, no claim.
 
-     Hold the Room is the odd one visually and deliberately not disguised:
-     it is a Blanka product in plain supplier packaging while the other
-     three are Selfnamed in the striped house system. Its accent is Antique
-     Gold rather than a stripe colourway, because it does not have one. */
+     Since 16 Sept 2026 all five are Selfnamed in the striped house system;
+     Hold the Room keeps its Antique Gold accent as the anchor. */
   /* Sign Here was removed from the site entirely on 4 Sep 2026 (a name with no
      formula), so the waitlist is empty and the grid is the five live SKUs. */
   const waitlist: { character: string; name: string; category: string }[] = [];
@@ -148,8 +151,7 @@ export default async function FounderCollectionPage() {
     hoverImage: c.hoverImage
       ? { src: c.hoverImage.url, alt: c.hoverImage.alt }
       : undefined,
-    /* Antique Gold, not a stripe colourway — Hold the Room is Blanka in
-       plain supplier packaging and does not have one. */
+    /* Antique Gold for the anchor. */
     accent: "var(--color-bronze)",
     href:
       c.handle === "founder-collection"
@@ -212,8 +214,8 @@ export default async function FounderCollectionPage() {
        as the campaign page and the "See all three" destination. */
     href: `/products/${entry.slug}`,
     state: entry.shades
-      ? `${formatPrice(entry.price)} · ${entry.shades.length} shades`
-      : formatPrice(entry.price),
+      ? `${availabilityLine(entry.availability)} · ${entry.shades.length} shades`
+      : availabilityLine(entry.availability),
     action: entry.shades ? (
       /* A grid card can't pick a shade, so the shaded SKU sends her to its
          own page where the picker and buy button live. */
@@ -232,6 +234,8 @@ export default async function FounderCollectionPage() {
         }}
         href={`/products/${entry.slug}`}
         className="btn btn-primary w-full"
+        label={entry.availability === "preorder" ? "Preorder" : "Add to bag"}
+        soldOut={availability?.[entry.variantId!] === false}
         showPrice
       />
     ),
@@ -321,7 +325,7 @@ export default async function FounderCollectionPage() {
           </h2>
           <p className="mt-4 max-w-[46ch] text-[0.9375rem] leading-relaxed text-cream/75">
             Five pieces, laid out the way you&rsquo;d lay out a strategy — the whole
-            routine, every one in stock and ready to ship.
+            routine, priced, and sold against the first run.
           </p>
 
           <div className="mt-8 grid gap-10 sm:grid-cols-2 lg:grid-cols-3">
@@ -342,14 +346,9 @@ export default async function FounderCollectionPage() {
           </div>
 
           <p className="mt-10 max-w-prose text-xs leading-relaxed text-cream/65">
-            Every piece ships within one business day, with free US shipping.{" "}
-            <Link
-              href="/the-next-move"
-              className="underline underline-offset-2 hover:opacity-70"
-            >
-              See {CAMPAIGN.name}
-            </Link>
-            .
+            Every piece is a preorder against the first run: free US shipping,
+            an email before it ships, and you can reply to that email to cancel.
+            The serums, next door, ship within one business day.
           </p>
         </div>
       </section>
@@ -389,12 +388,12 @@ export default async function FounderCollectionPage() {
         <div className="shell max-w-3xl">
           <p className="eyebrow text-blush">The FOUNDER Collection</p>
           <h2 className="mt-5 font-serif text-3xl leading-tight md:text-4xl">
-            The whole routine. In stock, and yours today.
+            The whole routine. Priced, and yours to hold.
           </h2>
           <p className="mt-6 max-w-prose text-cream/85">
             Opening Line to Hold the Room — cleanse, wash, treat, finish. Five
-            pieces, each one priced and in stock, shipping within one business
-            day. {product.name} is the anchor and the last step.
+            pieces, each one priced and on preorder against the first run.{" "}
+            {product.name} is the anchor and the last step.
           </p>
           <p className="mt-6 font-serif text-xl text-blush">
             Take your seat.

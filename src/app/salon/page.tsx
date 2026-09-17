@@ -35,6 +35,10 @@ export default function SalonPage() {
         />
         <div aria-hidden className="absolute inset-0 bg-[linear-gradient(180deg,rgba(14,33,27,0.35)_0%,rgba(14,33,27,0.15)_40%,rgba(14,33,27,0.92)_100%)]" />
         <div className="shell relative flex min-h-[calc(100svh-5rem)] flex-col items-center justify-end pb-16 pt-24 text-center md:justify-center">
+          {/* The plaque is a button, and a heading cannot live inside one, so
+              the page's h1 is here for readers and machines (17 Sept 2026,
+              audit F-13 — this was the one route with no h1). */}
+          <h1 className="sr-only">The Salon · By invitation</h1>
           <SalonDoor />
         </div>
       </section>

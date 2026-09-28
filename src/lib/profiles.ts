@@ -262,17 +262,15 @@ export const profiles: FoundHerProfile[] = [
     standfirst:
       "Six years building her name as a makeup artist in New York, three years in beauty in Los Angeles, and now MakeupGemz \u2014 with a law degree next, because, in her words, who says you can\u2019t do both?",
     /* PENDING HER APPROVAL. Submitted through the site on 20 September
-       2026 (both permissions ticked). On 28 September Aly sent Shelby
-       rewritten answers to the first three questions and asked for those
-       to be used; the other three are from her form submission.
+       2026 (both permissions ticked). On 28 September Aly sent Shelby a
+       complete rewrite of all six answers and asked for it to be used
+       instead of the form; every answer below is from that rewrite.
 
        Copy-edited at Shelby's direction \u2014 "grammar and spelling, while
-       preserving her voice and story": commas, hyphens, a numeral spelled
-       out, "falling-outs", an Oxford comma to match her own. No sentence
-       added, none removed, nothing reworded for tone. Her rewrite of
-       "What are you proud of?" arrived ending in an ellipsis after "makeup
-       tutorials"; it ends there with a full stop \u2014 if more was meant to
-       follow, it goes in when she sends it.
+       preserving her voice and story": a comma after "LA", "graduating
+       from college", "a relatable IG page", and "live-streaming"
+       hyphenated as she hyphenates it herself in her second answer. No
+       sentence added, none removed, nothing reworded for tone.
 
        Published ahead of her sign-off on the Julie precedent (the
        founder's call): her page omits the "she read and approved" line
@@ -298,7 +296,7 @@ export const profiles: FoundHerProfile[] = [
       {
         question: "What did it take?",
         body: [
-          "Countless sleepless nights, no days off, and choosing work over play. I invested good money in my dreams and said no far more than yes. I spent a lot of time alone. I had falling-outs with \u201cbest friends\u201d every time I leveled up, was hated by the girls I worked with in NYC for years (it\u2019s okay \u2014 I was well loved in LA), and didn\u2019t always have support from those who mattered most. I was single for eight years and overcame significant adversity as a child and young adult. Every day, I chose faith over fear and good hard habits over easy bad ones. I chose sobriety at 32. I made sacrifices, worked extremely hard, stayed in my own lane, and had the audacity not to care what anyone thought of me. More than anything, it took discipline, strength, resilience, and perseverance. A mind-over-matter mentality.",
+          "Discipline, sacrifice, and resilience. Countless sleepless nights, no days off, and saying no far more than yes. I invested heavily in my dreams, overcame significant adversity, and learned to stay in my own lane. More than anything, it took perseverance, strength, and a mind-over-matter mentality.",
         ],
       },
       {

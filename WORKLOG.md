@@ -1505,3 +1505,18 @@ edits as necessary while preserving her voice and story."
   /found-her and /found-her/aly-v — no console errors, no overflow, no
   approval line. Sitemap and RSS carry her.
 - Committed, unpushed.
+
+## 2026-09-28 (later) · Claude (Cowork) — Aly V: her full rewrite
+
+Aly sent a complete rewrite of all six answers (the earlier message had
+carried three). Her page now uses the rewrite throughout. The one answer
+that changed in substance is "What did it take?" — she replaced the long
+form answer with a shorter one: discipline, sacrifice, resilience, and a
+mind-over-matter mentality. The sobriety line, the NYC falling-outs and
+the single years are no longer on the page because she took them out. Her
+"proud" answer is now complete (the ellipsis is gone), so that note is
+gone from the record. Copy edits as before: a comma after "LA", "from
+college", "a relatable IG page", "live-streaming" as she hyphenates it.
+The approval draft in Shelby's Gmail was replaced with one that no longer
+mentions the ellipsis. Verified: tsc, eslint, build, /found-her/aly-v at
+1440 and 390. Committed, unpushed.

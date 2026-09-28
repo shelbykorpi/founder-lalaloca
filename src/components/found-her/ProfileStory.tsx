@@ -112,7 +112,11 @@ export function ProfileStory({ profile }: { profile: FoundHerProfile }) {
           <div>
             <p className="eyebrow text-champagne">{BRAND.question}</p>
             <p className="mt-3 text-sm leading-relaxed text-cream/80">
-              Hers is the first. The next ones belong to women who wrote in.
+              {/* Was "Hers is the first. The next ones belong to women who
+                  wrote in." — written for the founder's page and shown on
+                  every story, so Julie's and Aly's pages called each of them
+                  the first. Corrected 28 Sept 2026. */}
+              Every story here was sent in by the woman who lived it. Yours can be next.
             </p>
             <Link href="/found-her#share" className="btn btn-primary mt-5">
               Share your story

@@ -1,10 +1,13 @@
 /**
  * FOUND HER — published profiles.
  *
- * Every profile here is a real woman's own account, published only after she
- * has read the final text and approved it. Nothing in this file is written on
- * anyone's behalf, and nothing is added to it without that approval. The shape
- * below is what a CMS should map onto when one is connected.
+ * Every profile here is a real woman's own account, sent in by her. Nothing in
+ * this file is written on anyone's behalf: her answers are hers, copy-edited
+ * at most, and the standfirst is the one line the house writes. A story goes
+ * up once she has approved the final text — or, at the founder's call, ahead
+ * of it, in which case `approvedOn` stays "PENDING" and her page claims no
+ * approval until she gives it. The shape below is what a CMS should map onto
+ * when one is connected.
  */
 
 export type FoundHerProfile = {
@@ -239,6 +242,81 @@ export const profiles: FoundHerProfile[] = [
         question: "What would you tell a woman beginning now?",
         body: [
           "You don\u2019t need proof that your dream is going to work before you start. Sometimes you have to be a little delusional first. Believe in the life you want before it exists and then start building it.",
+        ],
+      },
+    ],
+  },
+  {
+    slug: "aly-v",
+    name: "Aly V",
+    role: "Building MakeupGemz",
+    location: "Pensacola, Florida",
+    portrait: {
+      src: "/editorial/aly-v-frame.webp",
+      alt: "A framed collage for Aly V: a watercolour vision board \u2014 the New York skyline at dusk, palm trees and pink hills in Los Angeles, an open makeup kit with brushes and palettes, a ring light and camera, a stack of law books with a fountain pen, three small dogs asleep on a velvet cushion, and handwritten notes reading \u201cFaith over fear\u201d, \u201cMind over matter\u201d and \u201cWho says you can\u2019t do both?\u201d \u2014 in a carved green-and-gold frame with a brass nameplate carrying her name.",
+      aspect: "3 / 4",
+      note: "There\u2019s no one in the frame \u2014 it\u2019s a painting we put together from her story.",
+    },
+    building: "MakeupGemz \u2014 makeup and beauty on Instagram, Whatnot and Skool. Next, a law degree.",
+    tagline: "Faith over fear. Who says you can\u2019t do both?",
+    standfirst:
+      "Six years building her name as a makeup artist in New York, three years in beauty in Los Angeles, and now MakeupGemz \u2014 with a law degree next, because, in her words, who says you can\u2019t do both?",
+    /* PENDING HER APPROVAL. Submitted through the site on 20 September
+       2026 (both permissions ticked). On 28 September Aly sent Shelby
+       rewritten answers to the first three questions and asked for those
+       to be used; the other three are from her form submission.
+
+       Copy-edited at Shelby's direction \u2014 "grammar and spelling, while
+       preserving her voice and story": commas, hyphens, a numeral spelled
+       out, "falling-outs", an Oxford comma to match her own. No sentence
+       added, none removed, nothing reworded for tone. Her rewrite of
+       "What are you proud of?" arrived ending in an ellipsis after "makeup
+       tutorials"; it ends there with a full stop \u2014 if more was meant to
+       follow, it goes in when she sends it.
+
+       Published ahead of her sign-off on the Julie precedent (the
+       founder's call): her page omits the "she read and approved" line
+       until approvedOn carries her real date. When Aly says yes to the
+       page as it stands: put her date in approvedOn, delete publishedOn.
+       The standfirst is the one line written by us, and it names no
+       brand but her own. */
+    approvedOn: "PENDING",
+    publishedOn: "2026-09-28",
+    answers: [
+      {
+        question: "When did you find her?",
+        body: [
+          "I found her in NYC. After graduating from USD, I took a leap of faith and enrolled in makeup school in the city to follow my dreams.",
+        ],
+      },
+      {
+        question: "What are you building?",
+        body: [
+          "I\u2019m building MakeupGemz, an online makeup and beauty platform featuring relatable beauty and lifestyle content on Instagram, a live-streaming Whatnot channel, and a Skool community for makeup tutorials. I\u2019m also planning to return to school for my JD. Who says you can\u2019t do both?",
+        ],
+      },
+      {
+        question: "What did it take?",
+        body: [
+          "Countless sleepless nights, no days off, and choosing work over play. I invested good money in my dreams and said no far more than yes. I spent a lot of time alone. I had falling-outs with \u201cbest friends\u201d every time I leveled up, was hated by the girls I worked with in NYC for years (it\u2019s okay \u2014 I was well loved in LA), and didn\u2019t always have support from those who mattered most. I was single for eight years and overcame significant adversity as a child and young adult. Every day, I chose faith over fear and good hard habits over easy bad ones. I chose sobriety at 32. I made sacrifices, worked extremely hard, stayed in my own lane, and had the audacity not to care what anyone thought of me. More than anything, it took discipline, strength, resilience, and perseverance. A mind-over-matter mentality.",
+        ],
+      },
+      {
+        question: "What are you proud of?",
+        body: [
+          "I\u2019m most proud of choosing faith over fear and never giving up. After graduating from college, I spent six years in NYC building my career as a makeup artist and became a published MUA. After moving to LA, I worked at Valentino Beauty for three years and then launched MakeupGemz, which now includes a Whatnot channel, a relatable IG page, and a Skool community for makeup tutorials.",
+        ],
+      },
+      {
+        question: "What makes you feel most like yourself?",
+        body: [
+          "Recording makeup videos in my studio, live-streaming on Whatnot, and working at my desk as a paralegal.",
+        ],
+      },
+      {
+        question: "What would you tell a woman beginning now?",
+        body: [
+          "Don\u2019t care what anyone else thinks. Do whatever you want. You can achieve far more than you can fathom if you have the courage to chase your dreams.",
         ],
       },
     ],

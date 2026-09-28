@@ -26,11 +26,9 @@ export const metadata: Metadata = {
 };
 
 export default function FoundHerPage() {
-  /* The first two profiles hang on the gallery wall itself; everyone after
-     them joins the grid below. The wall is a composited photograph —
-     found-her-wall.webp — so hanging the next frame means regenerating that
-     image (and its mobile crop) and adjusting the click-overlay widths, not
-     just adding data. */
+  /* Every published profile hangs in the band under the hero, two to a
+     row, in the order of `profiles` — adding a story is data only: her
+     record in lib/profiles.ts and her portrait in public/editorial. */
   return (
     <>
       {/* Declares the archive as a list of real articles, so the section itself
@@ -120,12 +118,19 @@ export default function FoundHerPage() {
             {profiles.map((profile, i) => (
               <li
                 key={profile.slug}
-                className="relative border-t border-rose/20 md:border-t-0 md:border-l md:border-rose/20 md:first:border-l-0"
+                /* Two to a row. The seam between a pair is the left border
+                   of the right-hand card; every row after the first gets a
+                   top border. Written for any count (a third story landed on
+                   28 Sept 2026 and sat against the page edge with a diamond
+                   on it when this assumed exactly two). */
+                className={`relative border-t border-rose/20 ${
+                  i % 2 === 1 ? "md:border-l" : ""
+                } ${i < 2 ? "md:border-t-0" : ""}`}
               >
-                {/* The rose diamond that sits on the seam between the two, as
+                {/* The rose diamond that sits on the seam between a pair, as
                     in the mock-up. Desktop only, on the left border of the
-                    second card. */}
-                {i > 0 && (
+                    right-hand card. */}
+                {i % 2 === 1 && (
                   <span
                     aria-hidden
                     className="absolute left-0 top-1/2 z-10 hidden -translate-x-1/2 -translate-y-1/2 text-rose md:block"
@@ -179,6 +184,55 @@ export default function FoundHerPage() {
                 </Link>
               </li>
             ))}
+            {/* An odd number of stories left half a row empty. The empty
+                half is now the next frame on the wall — the house's own
+                frame with nothing in it and a blank plate — and it opens
+                the form. Added 28 Sept 2026 with the third story. */}
+            {profiles.length % 2 === 1 && (
+              <li className="relative border-t border-rose/20 md:border-l md:border-t-0">
+                <span
+                  aria-hidden
+                  className="absolute left-0 top-1/2 z-10 hidden -translate-x-1/2 -translate-y-1/2 text-rose md:block"
+                >
+                  ◇
+                </span>
+                <Link
+                  href="#share"
+                  className="group flex min-h-[13rem] items-stretch focus-visible:outline focus-visible:-outline-offset-2 focus-visible:outline-2 focus-visible:outline-rose"
+                >
+                  <span className="relative block w-[38%] max-w-[13rem] shrink-0 overflow-hidden bg-night-deep">
+                    <Image
+                      src="/editorial/found-her-empty-frame.webp"
+                      alt="An empty frame on the FOUND HER wall: the carved green-and-gold frame, the rose mat and a blank brass nameplate, waiting."
+                      fill
+                      loading="lazy"
+                      sizes="(max-width: 768px) 40vw, 13rem"
+                      className="object-cover transition-transform duration-700 group-hover:scale-[1.04]"
+                    />
+                    <span
+                      aria-hidden
+                      className="absolute inset-0 bg-[linear-gradient(90deg,transparent_60%,rgba(14,33,27,0.7))]"
+                    />
+                  </span>
+                  <span className="flex flex-1 items-center justify-between gap-4 px-6 py-6 md:px-8">
+                    <span className="min-w-0">
+                      <span className="block font-serif text-[clamp(1.75rem,3vw,2.5rem)] uppercase leading-none tracking-[0.02em] text-cream/55 transition-colors group-hover:text-rose">
+                        Yours
+                      </span>
+                      <span className="mt-3 block text-sm leading-relaxed text-cream/75">
+                        The next frame is waiting. I found her when…
+                      </span>
+                    </span>
+                    <span className="hidden shrink-0 items-center gap-2 text-[0.6875rem] uppercase tracking-[0.22em] text-cream/80 transition-colors group-hover:text-rose sm:flex">
+                      Write yours
+                      <span aria-hidden className="transition-transform duration-300 group-hover:translate-x-1">
+                        →
+                      </span>
+                    </span>
+                  </span>
+                </Link>
+              </li>
+            )}
           </ul>
         )}
       </section>

@@ -1466,3 +1466,42 @@ came out 111 px wide beside two at 150.
 - Verified: build; /shop alcoves at 1440 render the three bottles at
   150 / 152 / 151 px wide, 334 tall.
 - Committed, unpushed.
+
+## 2026-09-28 · Claude (Cowork) — FOUND HER: Aly V's story, and a wall that
+## takes more than two
+
+Shelby: "I just got another Found Her submission we need to add to the
+website", then Aly's rewritten answers to the first three questions, "she
+preferred these answers — keep her story but make grammar and spelling
+edits as necessary while preserving her voice and story."
+
+- ALY V — /found-her/aly-v. Record in lib/profiles.ts, same shape as
+  Julie's: role "Building MakeupGemz", Pensacola, standfirst (the one line
+  we write; names no brand but hers), wall line "Faith over fear. Who says
+  you can't do both?". Q1–Q3 are her 28 Sept rewrite; Q4–Q6 her 20 Sept
+  form answers. Copy edits only (commas, hyphens, "eight", an Oxford comma
+  to match her own) — no sentence added, none removed. Her proud answer
+  arrived ending "…makeup tutorials…"; it ends there with a full stop.
+- PORTRAIT — public/editorial/aly-v-frame.webp. A watercolour vision board
+  generated in Canva (NYC, LA, her kit, ring light, law books, three dogs,
+  notes in her own phrases), deliberately with NO person in it, set in the
+  house frame taken from Julie's with the brass nameplate re-lettered "Aly V"
+  in Cormorant Garamond. Page note: it's a painting, not her.
+- PUBLISHED AHEAD OF HER APPROVAL on the Julie precedent: approvedOn
+  PENDING, publishedOn 2026-09-28, so her page makes no approval claim. A
+  draft to Aly is waiting in Shelby's Gmail with the link; Airtable row set
+  to Drafting with slug and full notes. When she says yes: her date into
+  approvedOn, delete publishedOn.
+- THE WALL — found-her/page.tsx assumed exactly two stories (diamond and
+  seam on "i > 0"); the third card sat against the page edge. Now two to a
+  row for any count, and an odd count gets a waiting frame
+  (found-her-empty-frame.webp — the house frame, empty, blank plate) that
+  opens the form: "YOURS — The next frame is waiting."
+- ProfileStory's footer said "Hers is the first. The next ones belong to
+  women who wrote in." on every story, including Julie's. Now: "Every story
+  here was sent in by the woman who lived it. Yours can be next."
+  profiles.ts header rewritten to the actual policy.
+- Verified: tsc, eslint (0/0), build; Playwright at 1440 and 390 over
+  /found-her and /found-her/aly-v — no console errors, no overflow, no
+  approval line. Sitemap and RSS carry her.
+- Committed, unpushed.

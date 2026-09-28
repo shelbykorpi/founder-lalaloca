@@ -1520,3 +1520,24 @@ college", "a relatable IG page", "live-streaming" as she hyphenates it.
 The approval draft in Shelby's Gmail was replaced with one that no longer
 mentions the ellipsis. Verified: tsc, eslint, build, /found-her/aly-v at
 1440 and 390. Committed, unpushed.
+
+## 2026-09-28 (evening) · Claude (Cowork) — Aly V: her own photograph in the frame
+
+Aly sent a photo to go with her story. Shelby: keep the woman exactly as
+she is, and put her in front of the vision-board concept.
+- Cut out with rembg isnet-general-use, then cleaned by hand in code: the
+  chair's cushion and shadow by her right shoulder, the pink chair spill
+  and the neon-sign fringe in her hair, a speck of the sign at her left.
+  Her face, skin, make-up and clothes are not retouched or recoloured —
+  the cherries on her top stayed red (an early de-spill pass darkened them
+  and was corrected). The other brands' boxes on her shelf are gone with
+  the background.
+- The backdrop is a second Canva render of the same board, recomposed with
+  every element around the edges and a clear blush centre so she stands in
+  it rather than over the notes. She is bottom-aligned at 78%, with a soft
+  warm contact shadow; the result sits in the same house frame and "Aly V"
+  plate as before. public/editorial/aly-v-frame.webp replaced.
+- Record: new alt text and note ("Aly's own photograph, set against a
+  painting we made from her story"), position 50% 42% for the wall crop.
+- Verified: build; /found-her and /found-her/aly-v at 1440 and 390.
+  Committed, unpushed.

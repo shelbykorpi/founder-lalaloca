@@ -253,9 +253,15 @@ export const profiles: FoundHerProfile[] = [
     location: "Pensacola, Florida",
     portrait: {
       src: "/editorial/aly-v-frame.webp",
-      alt: "A framed collage for Aly V: a watercolour vision board \u2014 the New York skyline at dusk, palm trees and pink hills in Los Angeles, an open makeup kit with brushes and palettes, a ring light and camera, a stack of law books with a fountain pen, three small dogs asleep on a velvet cushion, and handwritten notes reading \u201cFaith over fear\u201d, \u201cMind over matter\u201d and \u201cWho says you can\u2019t do both?\u201d \u2014 in a carved green-and-gold frame with a brass nameplate carrying her name.",
+      /* Her own photograph, which she sent with her story on 28 Sept 2026.
+         She is untouched — same face, same light, same colour. Only the
+         room behind her changed: her studio shelf (other brands' boxes and
+         a neon sign) was cut away and the vision board painted for her
+         story set in its place, in the house frame with her nameplate. */
+      alt: "Aly V, smiling, her long dark hair over her shoulders, in a white top with cherries \u2014 her own photograph, set in front of a watercolour vision board painted for her story: the New York skyline, palm trees in Los Angeles, an open makeup kit, a ring light and camera, law books, sleeping dogs on a velvet cushion, and handwritten notes reading \u201cFaith over fear\u201d, \u201cMind over matter\u201d and \u201cWho says you can\u2019t do both?\u201d \u2014 in a carved green-and-gold frame with a brass nameplate carrying her name.",
       aspect: "3 / 4",
-      note: "There\u2019s no one in the frame \u2014 it\u2019s a painting we put together from her story.",
+      position: "50% 42%",
+      note: "Aly\u2019s own photograph, set against a painting we made from her story.",
     },
     building: "MakeupGemz \u2014 makeup and beauty on Instagram, Whatnot and Skool. Next, a law degree.",
     tagline: "Faith over fear. Who says you can\u2019t do both?",

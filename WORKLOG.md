@@ -1559,3 +1559,20 @@ watercolour collage — two worlds, and she sat low and small over the art.
 - aly-v-frame.webp replaced (same house frame and "Aly V" plate); alt text
   and note rewritten. Verified: build; /found-her and /found-her/aly-v at
   1440 and 390. Committed, unpushed.
+
+## 2026-09-28 (late) · Claude (Cowork) — Aly V's portrait, graded to the house
+
+Shelby: "fix the colouring on Aly's picture, it looks too bright on the
+website." It did: on the dark green Found Her band her bright daylight
+studio read as a light box next to Shelby's lamp-lit portrait and Julie's
+painted frame.
+- Graded the portrait inside the frame (the frame and plate untouched):
+  the room comes down about 1.5 stops with a highlight roll-off so the
+  wall has no white left in it, pinks eased back, lamp-warm amber, a
+  vignette into the frame's shadow and a soft pool of light on her face;
+  a whisper of green in the deepest shadows. Aly herself gets a gentle
+  exposure step and the same warmth only. The two grades meet inside her
+  silhouette so there is no halo round her hair.
+- public/editorial/aly-v-frame.webp replaced; comment in profiles.ts.
+- Verified: build; /found-her and /found-her/aly-v at 1440 and 390, with
+  the image cache cleared. Committed, unpushed.

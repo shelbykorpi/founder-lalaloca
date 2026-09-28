@@ -260,7 +260,12 @@ export const profiles: FoundHerProfile[] = [
          wall built around her story — New York and LA pinned up, her dogs,
          law books and brushes, a ring light, and her own two lines on
          notes. Placed as she sat for the photo: centred, bottom edge
-         meeting the frame, the wall about a metre behind her. */
+         meeting the frame, the wall about a metre behind her.
+         Graded 28 Sept to the house's evening light — on the dark wall the
+         daylight room glowed like a light box beside Shelby's and Julie's
+         frames. The room took most of it (exposure down, highlights rolled
+         off, lamp-warm, vignette into the frame); she took a gentle
+         exposure step with the same warmth, nothing else. */
       alt: "Aly V, smiling, her long dark hair over her shoulders, in a white top with cherries \u2014 her own photograph, set in a blush-pink studio: pinned to the wall behind her, a picture of the New York skyline, palm trees at a Los Angeles sunset, a framed photo of three small dogs, and notes reading \u201cFaith over fear\u201d and \u201cWho says you can\u2019t do both?\u201d; law books and makeup brushes to one side, a pink peony and a ring light to the other \u2014 in a carved green-and-gold frame with a brass nameplate carrying her name.",
       aspect: "3 / 4",
       position: "50% 40%",

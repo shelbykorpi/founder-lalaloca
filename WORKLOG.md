@@ -1541,3 +1541,21 @@ she is, and put her in front of the vision-board concept.
   painting we made from her story"), position 50% 42% for the wall crop.
 - Verified: build; /found-her and /found-her/aly-v at 1440 and 390.
   Committed, unpushed.
+
+## 2026-09-28 (night) · Claude (Cowork) — Aly V: the portrait, re-placed
+
+Shelby: "fix the placement of Aly's photo. Redesign the background to make
+this picture feel more aligned." The first composite stood a photograph on a
+watercolour collage — two worlds, and she sat low and small over the art.
+- New backdrop (Canva render): a photographic, softly lit blush studio wall
+  in the same daylight as her selfie — New York and LA polaroids, a framed
+  photo of three dogs, "Faith over fear" and "Who says you can't do both?"
+  on pinned notes, law books and brushes left, a peony and ring light right.
+  Given a touch of lens softness and nudged toward her white balance.
+- Placement as she sat for the photo: centred on her face, 84% scale, bottom
+  edge meeting the frame, a diffuse shadow on the wall behind her and a thin
+  light wrap at her edges. Last neon-sign flecks in her left hair cleaned.
+  Her face, skin, make-up and clothes are untouched.
+- aly-v-frame.webp replaced (same house frame and "Aly V" plate); alt text
+  and note rewritten. Verified: build; /found-her and /found-her/aly-v at
+  1440 and 390. Committed, unpushed.

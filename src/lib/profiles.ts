@@ -252,24 +252,21 @@ export const profiles: FoundHerProfile[] = [
     role: "Building MakeupGemz",
     location: "Pensacola, Florida",
     portrait: {
-      src: "/editorial/aly-v-frame.webp",
-      /* Her own photograph, which she sent with her story on 28 Sept 2026.
-         She is untouched — same face, same light, same colour. Only the
-         room behind her changed: her studio shelf (other brands' boxes and
-         a neon sign) was cut away and replaced with a softly lit studio
-         wall built around her story — New York and LA pinned up, her dogs,
-         law books and brushes, a ring light, and her own two lines on
-         notes. Placed as she sat for the photo: centred, bottom edge
-         meeting the frame, the wall about a metre behind her.
-         Graded 28 Sept to the house's evening light — on the dark wall the
-         daylight room glowed like a light box beside Shelby's and Julie's
-         frames. The room took most of it (exposure down, highlights rolled
-         off, lamp-warm, vignette into the frame); she took a gentle
-         exposure step with the same warmth, nothing else. */
-      alt: "Aly V, smiling, her long dark hair over her shoulders, in a white top with cherries \u2014 her own photograph, set in a blush-pink studio: pinned to the wall behind her, a picture of the New York skyline, palm trees at a Los Angeles sunset, a framed photo of three small dogs, and notes reading \u201cFaith over fear\u201d and \u201cWho says you can\u2019t do both?\u201d; law books and makeup brushes to one side, a pink peony and a ring light to the other \u2014 in a carved green-and-gold frame with a brass nameplate carrying her name.",
-      aspect: "3 / 4",
-      position: "50% 40%",
-      note: "Aly\u2019s own photograph. The studio around her was made for her story.",
+      src: "/editorial/aly-v.webp",
+      /* Her own photograph, sent with her story on 28 Sept 2026, styled to
+         the house at Shelby's direction ("keep the model exactly the same,
+         you may change the outfit"): a Founder Green satin blazer over a
+         champagne silk camisole, and the FOUNDER study after hours behind
+         her — green panelling, a brass picture lamp, a door ajar, a desert
+         rose cushion. The outfit and room were generated from her photo;
+         HER FACE IS HER OWN — the original pixels, aligned landmark to
+         landmark (≈1 px) and colour-matched into the new light, so no model
+         re-drew her features. Same spec as Shelby's portrait: 1122×1402,
+         4:5, unframed; position 50% 12% keeps the crown of her head in the
+         3:2 story masthead. */
+      alt: "Aly V, smiling softly, her long dark hair over her shoulders, in a deep green satin blazer over a champagne silk camisole and a fine gold necklace, seated before dark green panelling with a brass lamp over a gilt-framed painting, a door ajar with warm light beyond, and a dusky rose silk cushion at her shoulder.",
+      position: "50% 12%",
+      note: "Aly\u2019s own photograph, styled for FOUNDER \u2014 the outfit and the room are ours, her face is untouched.",
     },
     building: "MakeupGemz \u2014 makeup and beauty on Instagram, Whatnot and Skool. Next, a law degree.",
     tagline: "Faith over fear. Who says you can\u2019t do both?",

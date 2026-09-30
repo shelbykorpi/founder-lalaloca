@@ -1576,3 +1576,28 @@ painted frame.
 - public/editorial/aly-v-frame.webp replaced; comment in profiles.ts.
 - Verified: build; /found-her and /found-her/aly-v at 1440 and 390, with
   the image cache cleared. Committed, unpushed.
+
+## 2026-09-28 (late night) · Claude (Cowork) — Aly V: her photo, branded to the house
+
+Shelby: "brand this image to the FOUNDER brand bible and keep the model
+exactly the same, you may change the outfit. Make sure this image is ready
+to implement on a website."
+- Styled in Canva from her own photo: a Founder Green satin blazer over a
+  champagne silk camisole (her gold necklace kept), and the FOUNDER study
+  after hours behind her — green panelling, brass picture lamp over a gilt
+  frame, a door ajar with warm light, a desert rose silk cushion. No logos,
+  no other brands' boxes, no neon.
+- IDENTITY GUARANTEE. The model re-rendered her face texture even though
+  her landmarks held (MediaPipe face landmarker: mean 1.0 px drift after a
+  similarity fit). So her ORIGINAL face was warped back onto the styled
+  image by that same fit, feathered inside the face oval, and colour-
+  matched (LAB, 75%) into the new lamp light. Eyes, lashes, make-up, lips,
+  skin texture: her pixels, not a model's.
+- Web-ready at Shelby's portrait spec: public/editorial/aly-v.webp,
+  1122×1402 (4:5), 73 KB, unframed like the founder's own portrait;
+  position 50% 12% so the 3:2 story masthead keeps the top of her head.
+  aly-v-frame.webp (the framed collage/studio versions) retired.
+- Note on the page: "Aly's own photograph, styled for FOUNDER — the outfit
+  and the room are ours, her face is untouched." Alt text rewritten.
+- Verified: build; /found-her and /found-her/aly-v at 1440 and 390.
+  Committed, unpushed.

@@ -152,16 +152,16 @@ export const FOOTER_NAV = [
 /**
  * Homepage hero image.
  *
- * Composition this layout is tuned for: 16:9, subject on the right third,
- * near-black on the left so the headline sits on the photograph without a heavy
- * scrim over her face.
+ * Composition this layout is tuned for: 16:9, the open doors centred, dark
+ * marble either side so the headline sits on the left wall under a soft shade
+ * (30 Sept 2026: the front hall replaced the two-women threshold).
  *
  * Install a new one with `./scripts/set-hero.sh <file>`, then set
  * `approved: true` to remove the placeholder note under the hero.
  */
 export const HERO = {
-  src: "/editorial/rooms/threshold-doors.webp",
-  alt: "Two tall green doors, a brass F on each leaf, standing open onto a firelit sitting room in the FOUNDER house.",
+  src: "/editorial/rooms/threshold-hall.webp",
+  alt: "Tall Founder Green double doors, a brass F on each leaf, standing open onto a rose-lit salon in the FOUNDER house.",
   approved: true,
   placeholderNote:
     "Placeholder image · run ./scripts/set-hero.sh to install the approved campaign photograph",

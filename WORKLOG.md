@@ -1601,3 +1601,31 @@ to implement on a website."
   and the room are ours, her face is untouched." Alt text rewritten.
 - Verified: build; /found-her and /found-her/aly-v at 1440 and 390.
   Committed, unpushed.
+
+## 2026-09-30 · Claude (Cowork) — Homepage hero: the front hall
+
+Shelby: "make the attached image the hero image" (founderbeauty.co).
+- New Room 01 frame: Founder Green double doors, a brass F on each leaf,
+  standing open onto a rose-lit salon; black marble, candle sconces and
+  green tufted benches either side. No people in it.
+- Files at the room-hero family spec: public/editorial/rooms/
+  threshold-hall.webp (1672×941, her file at native size, q82) and
+  threshold-hall-m.webp (705×941, cropped on the doorway). New names so no
+  cache serves the old frame.
+- lib/rooms.ts threshold record points at the pair, position "center",
+  alt rewritten. lib/brand.ts HERO (unused constant) kept truthful.
+- page.tsx: both crops centred; the left wall is busy with flames, so
+  the copy now sits under a shade (md→xl wider, since the copy's rem
+  measure reaches further across the frame; xl+ 90% → 0 by the left
+  door). Phone fade is measured in px from the bottom (the copy block is
+  fixed-height and bottom-pinned), so the small label stays readable on a
+  375×667 phone as well as a 390×844 one.
+- Independent check (separate agent; calibrated with one planted
+  difference, which it caught): fixed a stale "scrim over her face"
+  comment and the faint phone label. Left as found: the hero writes its
+  object-position in page.tsx rather than reading rooms.ts (it did before);
+  the service bell sits over "Enter the house" at 390 (pre-existing).
+- Old threshold-doors.webp (two women) left in place, now unreferenced;
+  threshold-doors-m.webp is still the Salon wing's door in lib/house.ts.
+- Verified: build, tsc, eslint; / at 1440, 1024, 820, 390, 375 — no overflow,
+  no page errors, right crop served at each width.

@@ -208,17 +208,20 @@ export default function HomePage() {
       <HouseShell room={2}>
 
       {/* ══ 01 · THE THRESHOLD ══════════════════════════════════════════════
-          Full bleed, and the copy sits in the photograph's own dark half so
-          it never needs a scrim over her face.
+          Full bleed, the doors centred, the copy on the hall's left wall.
 
-          15 Sept 2026, new frame: the left 42% of the photograph IS the
-          door — lacquered Founder Green, deliberately empty — and it is the
-          ground for the headline and the buttons. So: full width, no heavy
-          gradient on top of it (the one that was here went to 94% and hid
-          the door), and the picture anchored at 85% so the two women stay
-          inside the frame as the viewport narrows and the door, not the
-          room, is what gives way. Below md the phone crop takes over with
-          its own bottom fade. */}
+          30 Sept 2026, new frame (Shelby's): the front hall — the Founder
+          Green double doors standing open on the rose-lit salon, black
+          marble and candlelight either side. The doors are the subject, so
+          the picture is centred and the left wall is the ground for the
+          copy. That wall is busy with candle flames, so it carries a shade
+          (90% → 0 by the left door's edge from xl; wider between md and xl,
+          where the copy's fixed measure reaches further across the frame); there is no face in this frame
+          for a scrim to cover. Below md the phone crop (705×941, centred on
+          the doorway) keeps the F and the chandelier above the copy; its
+          fade is measured in px from the bottom, because the copy block is a
+          fixed height pinned to the bottom, so the shade follows the copy
+          (the label included) on short phones instead of a % of the frame. */}
       <section id="room-threshold" className="relative isolate min-h-[calc(100svh-4rem)] overflow-hidden">
         <Image
           src={threshold.hero.src}
@@ -226,7 +229,7 @@ export default function HomePage() {
           fill
           priority
           sizes="100vw"
-          className="hidden object-cover object-[85%_center] md:block"
+          className="hidden object-cover object-center md:block"
         />
         <Image
           src={threshold.heroMobile.src}
@@ -234,12 +237,12 @@ export default function HomePage() {
           fill
           loading="eager"
           sizes="100vw"
-          className="object-cover object-[center_40%] md:hidden"
+          className="object-cover object-center md:hidden"
         />
         <AmbientLighting />
         <div
           aria-hidden
-          className="absolute inset-0 bg-[linear-gradient(180deg,rgba(10,37,35,0)_38%,rgba(10,37,35,0.9)_82%,#0a2523_100%)] md:bg-[linear-gradient(90deg,rgba(10,37,35,0.28)_0%,rgba(10,37,35,0.12)_30%,rgba(10,37,35,0)_44%)]"
+          className="absolute inset-0 bg-[linear-gradient(0deg,#0a2523_0,rgba(10,37,35,0.93)_240px,rgba(10,37,35,0.8)_460px,rgba(10,37,35,0)_620px)] md:bg-[linear-gradient(90deg,rgba(10,37,35,0.92)_0%,rgba(10,37,35,0.82)_40%,rgba(10,37,35,0.4)_56%,rgba(10,37,35,0)_68%)] xl:bg-[linear-gradient(90deg,rgba(10,37,35,0.9)_0%,rgba(10,37,35,0.78)_28%,rgba(10,37,35,0.35)_42%,rgba(10,37,35,0)_52%)]"
         />
         <div className="shell relative flex min-h-[calc(100svh-4rem)] flex-col justify-end pb-16 pt-24 md:justify-center md:py-24">
           <div className="max-w-[44rem]">

@@ -47,11 +47,11 @@ export const ROOMS: Room[] = [
     href: "/",
     pathname: "/",
     hero: {
-      src: "/editorial/rooms/threshold-doors.webp",
-      alt: "Two women at the threshold of the FOUNDER house: one in a deep green silk gown, her hand on the brass F handle of the open Founder Green door, and one in a cream suit and rose silk blouse, the firelit sitting room, candles and the city at night behind them.",
-      position: "85% center",
+      src: "/editorial/rooms/threshold-hall.webp",
+      alt: "The FOUNDER front hall at night: tall Founder Green double doors, a brass F on each leaf, standing open onto a rose-lit salon with a crystal chandelier and blossom on a brass table; black marble walls, lit candles in brass sconces and green tufted benches either side.",
+      position: "center",
     },
-    heroMobile: { src: "/editorial/rooms/threshold-doors-m.webp" },
+    heroMobile: { src: "/editorial/rooms/threshold-hall-m.webp" },
     through: "The fire’s lit and someone kept your seat. Come in.",
   },
   {

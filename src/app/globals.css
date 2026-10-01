@@ -905,3 +905,138 @@
     animation: none !important;
   }
 }
+
+
+/* ═══════════════════════════════════════════════════════════════════════════
+   FOUNDER — luxury house finish · 1 Oct 2026
+   Material polish only: no new palette, no new brand symbols, no commerce
+   logic. These rules make the existing architecture feel more deliberate
+   and tactile without turning the house into generic glassmorphism.
+   ═══════════════════════════════════════════════════════════════════════════ */
+@layer components {
+  .luxury-header {
+    box-shadow:
+      0 1px 0 color-mix(in srgb, var(--color-bronze) 12%, transparent),
+      0 12px 42px rgba(0, 0, 0, 0.24);
+  }
+
+  .luxury-announcement {
+    background:
+      linear-gradient(90deg, rgba(9, 23, 18, 0.98), rgba(22, 77, 73, 0.72) 50%, rgba(9, 23, 18, 0.98));
+    border-bottom: 1px solid color-mix(in srgb, var(--color-bronze) 15%, transparent);
+  }
+
+  .luxury-footer {
+    background-image:
+      radial-gradient(70% 70% at 12% 15%, rgba(176, 138, 100, 0.08), transparent 62%),
+      radial-gradient(70% 70% at 88% 88%, rgba(216, 167, 160, 0.06), transparent 62%);
+  }
+
+  .luxury-product-card {
+    position: relative;
+  }
+
+  .luxury-product-media {
+    border: 1px solid color-mix(in srgb, var(--color-bronze) 20%, transparent);
+    box-shadow:
+      0 22px 60px rgba(0, 0, 0, 0.22),
+      inset 0 1px 0 rgba(255, 255, 255, 0.035);
+    transition:
+      transform 650ms cubic-bezier(0.22, 1, 0.36, 1),
+      border-color 350ms ease,
+      box-shadow 650ms cubic-bezier(0.22, 1, 0.36, 1);
+  }
+
+  .luxury-product-card:hover .luxury-product-media {
+    transform: translateY(-4px);
+    border-color: color-mix(in srgb, var(--color-bronze) 48%, transparent);
+    box-shadow:
+      0 30px 78px rgba(0, 0, 0, 0.34),
+      0 0 0 1px rgba(216, 190, 154, 0.04);
+  }
+
+  .luxury-product-media::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    background:
+      linear-gradient(180deg, rgba(255,255,255,0.035), transparent 24%),
+      linear-gradient(0deg, rgba(9,23,18,0.24), transparent 28%);
+    z-index: 2;
+  }
+
+  .luxury-product-image {
+    transition:
+      transform 1100ms cubic-bezier(0.22, 1, 0.36, 1),
+      opacity 500ms ease;
+  }
+
+  .luxury-product-card:hover .luxury-product-image {
+    transform: scale(1.025);
+  }
+
+  .collection-proof-strip {
+    position: relative;
+    overflow: hidden;
+  }
+
+  .collection-proof-strip::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    background: linear-gradient(
+      90deg,
+      transparent,
+      color-mix(in srgb, var(--color-bronze) 7%, transparent) 50%,
+      transparent
+    );
+  }
+
+  .btn {
+    position: relative;
+    overflow: hidden;
+    transition:
+      transform 220ms ease,
+      background-color 240ms ease,
+      color 240ms ease,
+      border-color 240ms ease,
+      box-shadow 240ms ease;
+  }
+
+  .btn:hover:not(:disabled) {
+    transform: translateY(-1px);
+  }
+
+  .btn-primary {
+    box-shadow:
+      inset 0 1px 0 rgba(255,255,255,0.24),
+      0 12px 30px rgba(0,0,0,0.14);
+  }
+
+  .btn-primary:hover:not(:disabled) {
+    box-shadow:
+      inset 0 1px 0 rgba(255,255,255,0.24),
+      0 16px 38px rgba(0,0,0,0.2);
+  }
+
+  .headline-house,
+  .display-house,
+  .display-product {
+    text-shadow: 0 1px 24px rgba(0,0,0,0.12);
+  }
+
+  .room-label {
+    text-shadow: 0 1px 12px rgba(0,0,0,0.18);
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .luxury-product-media,
+    .luxury-product-image,
+    .btn {
+      transition: none !important;
+      transform: none !important;
+    }
+  }
+}

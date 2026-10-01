@@ -435,17 +435,13 @@ export default function HomePage() {
           Explore the collection
         </Link>
       </RoomHero>
-      {/* THE VANITY — 11 Sept 2026, replacing the gallery walk. The corridor
-          was a rendered photograph with the products inside it: small, far
-          apart, one legible at a time, and wrong the moment the packaging
-          changed. Now the five stand on the console of a real room, sharp,
-          at true relative scale, never dimmed; the mirror light follows
-          whichever one you look at. Data is still LINE above. See Vanity.tsx
-          and the note at the head of vanity.module.css. */}
+      {/* THE VANITY — launch edit. The five products now read as a luxury
+          campaign sequence rather than a literal shelf simulation: one large
+          editorial frame, one active piece, one controlled detail panel. */}
       <Vanity
         items={LINE}
         title="The twenty minutes before you walk in."
-        lede="Five pieces on the vanity, in the order you use them. Light one."
+        lede="Five pieces. One sequence. Choose the piece that gets you ready for what comes next."
       />
 
       <DoorFrame label="The Anchor" />

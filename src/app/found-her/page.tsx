@@ -159,14 +159,29 @@ export default function FoundHerPage() {
                   >
                     <div className="relative min-h-[26rem] overflow-hidden">
                       {profile.portrait && (
-                        <Image
-                          src={profile.portrait.src}
-                          alt={profile.portrait.alt}
-                          fill
-                          sizes="(max-width: 768px) 100vw, 50vw"
-                          className="object-cover transition-transform duration-[1200ms] ease-out group-hover:scale-[1.025]"
-                          style={{ objectPosition: profile.portrait.position ?? "center" }}
-                        />
+                        <>
+                          {profile.portrait.fit === "contain" && (
+                            <>
+                              <Image
+                                src={profile.portrait.src}
+                                alt=""
+                                fill
+                                sizes="(max-width: 768px) 100vw, 50vw"
+                                className="scale-110 object-cover blur-3xl opacity-30"
+                                aria-hidden
+                              />
+                              <span aria-hidden className="absolute inset-0 bg-night-deep/40" />
+                            </>
+                          )}
+                          <Image
+                            src={profile.portrait.src}
+                            alt={profile.portrait.alt}
+                            fill
+                            sizes="(max-width: 768px) 100vw, 50vw"
+                            className={`${profile.portrait.fit === "contain" ? "object-contain" : "object-cover"} transition-transform duration-[1200ms] ease-out group-hover:scale-[1.015]`}
+                            style={{ objectPosition: profile.portrait.position ?? "center" }}
+                          />
+                        </>
                       )}
                       <div aria-hidden className="absolute inset-0 bg-[linear-gradient(180deg,transparent_55%,rgba(7,19,15,0.35)_100%)]" />
                       <span className="absolute left-5 top-5 text-[0.58rem] uppercase tracking-[0.22em] text-cream/72">

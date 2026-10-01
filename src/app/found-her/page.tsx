@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import Image from "next/image";
 import Link from "next/link";
 import { HouseShell } from "@/components/house/HouseShell";
+import { FramedPortrait } from "@/components/found-her/FramedPortrait";
 import { EmailSignup } from "@/components/site/EmailSignup";
 import { StoryForm } from "@/components/story/StoryForm";
 import { BRAND } from "@/lib/brand";
@@ -80,22 +81,32 @@ export default function FoundHerPage() {
               href={`/found-her/${featured.slug}`}
               className="group grid min-h-[78svh] lg:grid-cols-[1.08fr_0.92fr]"
             >
-              <div className="relative min-h-[58svh] overflow-hidden bg-night">
-                {featured.portrait && (
-                  <Image
-                    src={featured.portrait.src}
-                    alt={featured.portrait.alt}
-                    fill
-                    sizes="(max-width: 1024px) 100vw, 54vw"
-                    className="object-cover transition-transform duration-[1400ms] ease-out group-hover:scale-[1.02]"
-                    style={{ objectPosition: featured.portrait.position ?? "center" }}
-                  />
-                )}
+              {/* HER PORTRAIT, HUNG. The wall is the page's own dark green,
+                  the light falls from above the frame the way a picture light
+                  does, and the frame carries a real shadow so it sits off the
+                  wall rather than printed on it. */}
+              <div className="relative flex min-h-[58svh] items-center justify-center overflow-hidden bg-[#0c1f1a] px-10 py-16 md:px-14 md:py-20">
                 <div
                   aria-hidden
-                  className="absolute inset-0 bg-[linear-gradient(180deg,transparent_45%,rgba(6,17,14,0.28)_100%)]"
+                  className="pointer-events-none absolute inset-x-0 top-0 h-[70%] bg-[radial-gradient(58%_84%_at_50%_-6%,rgba(255,228,176,0.24)_0%,rgba(255,228,176,0.07)_46%,transparent_74%)]"
                 />
-                <div className="absolute bottom-5 left-5 right-5 flex items-center justify-between text-[0.625rem] uppercase tracking-[0.24em] text-cream/70 md:bottom-8 md:left-8 md:right-8">
+                <div
+                  aria-hidden
+                  className="pointer-events-none absolute inset-0 bg-[linear-gradient(180deg,transparent_52%,rgba(4,12,10,0.6)_100%)]"
+                />
+                {featured.portrait && (
+                  <FramedPortrait
+                    src={featured.portrait.src}
+                    alt={featured.portrait.alt}
+                    position={featured.portrait.position}
+                    name={featured.name}
+                    role={featured.role}
+                    priority
+                    sizes="(max-width: 1024px) 78vw, 30vw"
+                    className="relative z-10 max-w-[23rem] drop-shadow-[0_30px_64px_rgba(0,0,0,0.6)] md:max-w-[26rem]"
+                  />
+                )}
+                <div className="absolute bottom-5 left-5 right-5 z-10 flex items-center justify-between text-[0.625rem] uppercase tracking-[0.24em] text-cream/70 md:bottom-8 md:left-8 md:right-8">
                   <span>FOUNDER Editorial</span>
                   <span>In her own words</span>
                 </div>
@@ -116,6 +127,15 @@ export default function FoundHerPage() {
                   <p className="mt-7 max-w-[42rem] text-[1rem] leading-[1.8] text-cream/74">
                     {featured.standfirst}
                   </p>
+                  {/* Said plainly wherever a composed artwork stands in for
+                      a photograph of her. Restored 1 Oct 2026 — the field
+                      existed and rendered nowhere, so the artwork was reading
+                      as her own photograph. */}
+                  {featured.portrait?.note && (
+                    <p className="mt-8 max-w-[44ch] text-[0.6875rem] leading-relaxed text-cream/45">
+                      {featured.portrait.note}
+                    </p>
+                  )}
                   <div className="mt-10 flex items-center justify-between border-t border-bronze/20 pt-6">
                     <span className="text-[0.625rem] uppercase tracking-[0.2em] text-cream/45">
                       {featured.role}
@@ -157,34 +177,44 @@ export default function FoundHerPage() {
                     href={`/found-her/${profile.slug}`}
                     className="group grid min-h-[34rem] grid-rows-[1fr_auto] bg-night-deep"
                   >
-                    <div className="relative min-h-[26rem] overflow-hidden">
-                      {profile.portrait && (
-                        <>
-                          {profile.portrait.fit === "contain" && (
-                            <>
-                              <Image
-                                src={profile.portrait.src}
-                                alt=""
-                                fill
-                                sizes="(max-width: 768px) 100vw, 50vw"
-                                className="scale-110 object-cover blur-3xl opacity-30"
-                                aria-hidden
-                              />
-                              <span aria-hidden className="absolute inset-0 bg-night-deep/40" />
-                            </>
-                          )}
-                          <Image
+                    {/* The same wall, further down the hall. */}
+                    <div className="relative flex min-h-[26rem] items-center justify-center overflow-hidden bg-[#0c1f1a] px-8 py-12">
+                      <div
+                        aria-hidden
+                        className="pointer-events-none absolute inset-x-0 top-0 h-[70%] bg-[radial-gradient(58%_84%_at_50%_-6%,rgba(255,228,176,0.2)_0%,rgba(255,228,176,0.06)_46%,transparent_74%)]"
+                      />
+                      <div
+                        aria-hidden
+                        className="pointer-events-none absolute inset-0 bg-[linear-gradient(180deg,transparent_52%,rgba(4,12,10,0.55)_100%)]"
+                      />
+                      {profile.portrait &&
+                        (profile.portrait.preframed ? (
+                          /* Already framed artwork — hung as it is, never a
+                             frame inside a frame. */
+                          <div
+                            className="relative z-10 w-full max-w-[19rem]"
+                            style={{ aspectRatio: profile.portrait.aspect ?? "3 / 4" }}
+                          >
+                            <Image
+                              src={profile.portrait.src}
+                              alt={profile.portrait.alt}
+                              fill
+                              sizes="(max-width: 768px) 70vw, 22vw"
+                              className="object-contain drop-shadow-[0_26px_56px_rgba(0,0,0,0.6)] transition-transform duration-[1200ms] ease-out group-hover:scale-[1.02]"
+                            />
+                          </div>
+                        ) : (
+                          <FramedPortrait
                             src={profile.portrait.src}
                             alt={profile.portrait.alt}
-                            fill
-                            sizes="(max-width: 768px) 100vw, 50vw"
-                            className={`${profile.portrait.fit === "contain" ? "object-contain" : "object-cover"} transition-transform duration-[1200ms] ease-out group-hover:scale-[1.015]`}
-                            style={{ objectPosition: profile.portrait.position ?? "center" }}
+                            position={profile.portrait.position}
+                            name={profile.name}
+                            role={profile.role}
+                            sizes="(max-width: 768px) 70vw, 24vw"
+                            className="relative z-10 max-w-[19rem] drop-shadow-[0_26px_56px_rgba(0,0,0,0.6)]"
                           />
-                        </>
-                      )}
-                      <div aria-hidden className="absolute inset-0 bg-[linear-gradient(180deg,transparent_55%,rgba(7,19,15,0.35)_100%)]" />
-                      <span className="absolute left-5 top-5 text-[0.58rem] uppercase tracking-[0.22em] text-cream/72">
+                        ))}
+                      <span className="absolute left-5 top-5 z-10 text-[0.58rem] uppercase tracking-[0.22em] text-cream/72">
                         FOUND HER / {String(index + 2).padStart(3, "0")}
                       </span>
                     </div>
@@ -195,6 +225,11 @@ export default function FoundHerPage() {
                       <p className="mt-4 max-w-[38ch] text-sm leading-relaxed text-cream/65">
                         {profile.tagline ?? profile.building}
                       </p>
+                      {profile.portrait?.note && (
+                        <p className="mt-5 max-w-[46ch] text-[0.6875rem] leading-relaxed text-cream/45">
+                          {profile.portrait.note}
+                        </p>
+                      )}
                       <p className="mt-6 text-[0.625rem] uppercase tracking-[0.2em] text-champagne">
                         Read her story →
                       </p>

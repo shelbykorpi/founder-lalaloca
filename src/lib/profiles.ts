@@ -29,6 +29,10 @@ export type FoundHerProfile = {
         portrait stands in for her. Exists so a composed artwork is never
         mistaken for a photograph of the woman herself. */
     note?: string;
+    /** True when the artwork ALREADY carries its own frame and nameplate.
+        Those hang on the wall as they are — putting them inside the FOUNDER
+        frame would be a frame inside a frame. */
+    preframed?: boolean;
   };
   /** One line for the archive card */
   building: string;
@@ -198,6 +202,8 @@ export const profiles: FoundHerProfile[] = [
       alt: "A framed collage for Julie Schoener: a watercolour vision board \u2014 mountains at sunrise, friends laughing over coffee, a climber, hot-air balloons, handwritten notes from her story \u2014 in a carved green-and-gold frame with a brass nameplate carrying her name.",
       aspect: "3 / 4",
       note: "The picture in the frame isn’t Julie — it’s a painting we put together for her story.",
+      /* Her artwork is already a framed collage, nameplate and all. */
+      preframed: true,
     },
     building: "Stay Delusional — a brand for believing in the life before it exists.",
     tagline: "Redefined success. On her own terms.",

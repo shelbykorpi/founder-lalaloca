@@ -5,6 +5,57 @@ date · agent · what changed · what was left alone · anything unpushed.
 
 ---
 
+## 2026-10-01 · Claude (Cowork) — the gallery comes back to FOUND HER
+
+Shelby: "i liked when we had the frames around each person photo... almost
+like walking a gallery. a very realistic gallery."
+
+WHAT WAS THERE BEFORE, AND WHY IT DID NOT COME BACK AS-IS. Frames last
+existed at 0a412af and were removed by 325cd58 ("one continuous cinematic
+room"). The old version baked each portrait into its own rendered wall —
+founder-portrait-wall.webp WAS Shelby and could only ever be Shelby. That is
+why it died: 1601ff3 made the wall "take any number of stories", and baked
+composites cannot. Restoring that approach would re-break the moment a
+fourth woman is approved.
+
+SO THE FRAME IS NOW AN OVERLAY, NOT A COMPOSITE.
+- public/editorial/found-her-frame.webp — the existing empty-frame artwork
+  with its aperture cut to transparent. 61 KB with alpha (the same cut as a
+  PNG was 757 KB; WebP alpha is the whole reason this is affordable).
+- src/components/found-her/FramedPortrait.tsx — portrait behind, frame over,
+  name engraved on the brass as LIVE TEXT. Any approved portrait is framed
+  on arrival; nothing to render, nothing to commission.
+
+THE GEOMETRY IS MEASURED, NOT EYEBALLED. Aperture read off the artwork at
+x 166..918, y 208..1242 of 1086x1448 -> left 15.285% / top 14.365% /
+69.245% x 71.409%. Nameplate centred 50.1% / 93.4%. Verified by compositing
+Shelby and Aly into the frame in PIL at those exact percentages before a
+line of CSS was written — both sit correctly.
+
+A BUG CAUGHT BEFORE IT SHIPPED. The plate is a fixed size; names are not.
+A hardcoded 1.55cqw fits "SHELBY KORPI · FOUNDER" and overruns the bezel on
+"ALY V · BUILDING MAKEUPGEMZ". The engraving is now sized to its own label —
+24.8cqw of usable brass / 0.66em per character, capped at 1.55 — so a longer
+name shrinks and never overruns. Checked against all three profiles.
+
+JULIE IS NOT PUT IN THE FRAME. julie-schoener-frame.webp is ALREADY a framed
+collage with its own nameplate; inside the FOUNDER frame it would be a frame
+within a frame. Added `preframed?: boolean` to the portrait type and set it
+for her — she hangs on the same wall, lit and shadowed, as her own artwork.
+Data-driven, so the next pre-framed piece needs no page change.
+
+RESTORED A DISCLOSURE THAT HAD GONE MISSING. `portrait.note` is defined in
+profiles.ts and documented as "rendered above her Read her story link... so
+a composed artwork is never mistaken for a photograph of the woman herself".
+It rendered NOWHERE — so Julie's watercolour was reading as a photograph of
+Julie. Now rendered in both the featured block and the archive cards. Shelby
+asked for exactly this line weeks ago; the request was interrupted and the
+field has been inert since.
+
+Their copy, their headings and their page structure are untouched. Only the
+way portraits are presented changed: each now hangs on a lit wall with a
+real drop shadow, so scrolling the page walks the hall.
+
 ## 2026-10-01 · Claude (Cowork) — rebased onto 19 commits of other agents' work
 
 Shelby's push was rejected: another agent had pushed 19 commits (Our Story

@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "updated": "2026-10-01T21:10:00Z",
+  "updated": "2026-10-01T23:59:00Z",
   "updatedBy": "Founder Chief (Claude · Cowork)",
   "headline": "Google Analytics is set up (FOUNDER Beauty · G-YP5SS23BXF) and goes live on the site with your next push. To count sales too, Shopify needs the same property connected; that's your one click below.",
   "auditPath": "docs/desk/executive-audit-2026-10-01.md",
@@ -179,6 +179,12 @@
       "id": "ga4-route",
       "question": "Google Analytics: your G-ID or set it up for you?",
       "answer": "Set it up for me. Done 1 Oct: Google Analytics account 'FOUNDER Beauty', property 'founderbeauty.co' (New York time to match Shopify, USD), web stream 'FOUNDER website', ID G-YP5SS23BXF. Terms accepted with your OK. Data sharing: Google products & services off, Recommendations off, Modeling and Technical support on.",
+      "decidedOn": "2026-10-01"
+    },
+    {
+      "id": "free-shipping",
+      "question": "Is free shipping actually applied at checkout?",
+      "answer": "Yes. Every product is on Shopify's General profile with a $0 US rate, and checkout selects it automatically. It shows once an address is entered (before that Shopify says 'Enter shipping address'). The rate is renamed 'Free Standard Shipping · 3–5 business days' so the word FREE is obvious. Express is paused until the Collection ships (your call), because checkout's delivery dates promised Express arrival before Oct 12. The site hides the $15 Express line until then.",
       "decidedOn": "2026-10-01"
     }
   ],
@@ -381,6 +387,14 @@
     {
       "date": "2026-10-02",
       "text": "Shelby: cancel or archive test order #1001 in Shopify admin. It shows as paid ($39.99), so if a real card was charged, refund it when cancelling; otherwise Archive is enough."
+    },
+    {
+      "date": "2026-10-12",
+      "text": "Turn Express Shipping back on in Shopify (it's paused while the Collection ship date is set). The Oct 12 ship-date reminder now includes this step; the site's Express lines return automatically when COLLECTION_SHIPS goes to null."
+    },
+    {
+      "date": "2026-10-05",
+      "text": "Shelby: enter real packed weights for the FOUNDER Collection products in Shopify (Opening Line, Clean Break, Double Take and the three Smooth Talker shades show 0 lb; Hold the Room shows 1 oz). Shipping is free for customers either way, but weights decide what you pay for labels."
     }
   ]
 }

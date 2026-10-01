@@ -113,6 +113,16 @@ export const COLLECTION_SHIP_SENTENCE = COLLECTION_SHIPS
   : "In stock. Ships within one business day, free anywhere in the US.";
 
 /** The one-line state under a card or a button. */
+/**
+ * Express ($15, 1–2 business days) is switched OFF in Shopify while the
+ * Collection ship date is set (Shelby, 1 Oct 2026): checkout's delivery-date
+ * estimates don't know about COLLECTION_SHIPS, so Express promised arrival
+ * before the pieces even ship. The site only mentions Express when it's on.
+ * When COLLECTION_SHIPS goes back to null, turn Express back on in Shopify
+ * (Settings → Shipping → General profile → Domestic → Express Shipping).
+ */
+export const EXPRESS_OFFERED = COLLECTION_SHIPS === null;
+
 export function availabilityLine(a: Availability): string {
   return a === "preorder" ? "Preorder · Ships from the first run" : COLLECTION_SHIP_LINE;
 }

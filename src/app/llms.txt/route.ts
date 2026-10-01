@@ -1,7 +1,7 @@
 import { BRAND, SITE, INSTAGRAM } from "@/lib/brand";
 import { formatPrice, products, SET } from "@/lib/products";
 import { FOUNDER_COLLECTION } from "@/lib/founderCollection";
-import { COLLECTION_SHIPS, NEXT_MOVE } from "@/lib/nextMove";
+import { COLLECTION_SHIPS, EXPRESS_OFFERED, NEXT_MOVE } from "@/lib/nextMove";
 
 /**
  * /llms.txt — a plain-text brief for AI answer engines.
@@ -84,7 +84,9 @@ export function GET() {
     "",
     "## Shipping and returns",
     "",
-    "- Free US shipping on every order, 3–5 business days. Express is $15, 1–2 days.",
+    EXPRESS_OFFERED
+      ? "- Free US shipping on every order, 3–5 business days. Express is $15, 1–2 days."
+      : "- Free US shipping on every order, 3–5 business days.",
     "- Checkout is handled by Shopify.",
     COLLECTION_SHIPS
       ? `- Serum orders leave within one business day. The FOUNDER Collection ships on ${COLLECTION_SHIPS.label}.`

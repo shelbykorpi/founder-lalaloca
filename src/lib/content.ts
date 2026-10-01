@@ -7,7 +7,7 @@
  */
 
 import { CONTACT_EMAIL, GA_MEASUREMENT_ID } from "./brand";
-import { COLLECTION_SHIPS } from "./nextMove";
+import { COLLECTION_SHIPS, EXPRESS_OFFERED } from "./nextMove";
 
 /* ---------------- FOUND HER — editorial platform ---------------- */
 
@@ -278,7 +278,7 @@ export const policies = {
     sections: [
       {
         heading: "What it costs and how long it takes",
-        body: `Standard shipping is free anywhere in the United States and takes 3–5 business days. Express is $15 and takes 1–2 business days. Orders are dispatched within one business day${COLLECTION_SHIPS ? `, except orders that include FOUNDER Collection pieces, which ship on ${COLLECTION_SHIPS.label}` : ""}. You’ll get a tracking number either way.`,
+        body: `Standard shipping is free anywhere in the United States and takes 3–5 business days.${EXPRESS_OFFERED ? " Express is $15 and takes 1–2 business days." : ""} Orders are dispatched within one business day${COLLECTION_SHIPS ? `, except orders that include FOUNDER Collection pieces, which ship on ${COLLECTION_SHIPS.label}` : ""}. You’ll get a tracking number either way.`,
       },
       {
         heading: "Outside the United States",

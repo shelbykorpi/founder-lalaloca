@@ -13,6 +13,7 @@ import { formatPrice, products, SET } from "@/lib/products";
 import { JsonLd, breadcrumbSchema, collectionSchema, setSchema } from "@/lib/seo";
 import { fetchVariantAvailability } from "@/lib/catalog";
 import { VARIANT_ID } from "@/lib/shopifyLinks";
+import { EXPRESS_OFFERED } from "@/lib/nextMove";
 
 export const metadata: Metadata = {
   title: "Shop the LALALOCA Collection",
@@ -371,8 +372,9 @@ export default async function ShopPage() {
           <div>
             <h2 className="font-serif text-2xl text-cream">Shipping</h2>
             <p className="mt-2 text-sm text-cream/80">
-              Free US shipping, 3–5 business days. Express $15, 1–2 days. Ships
-              from Arizona within one business day.
+              Free US shipping, 3–5 business days.
+              {EXPRESS_OFFERED ? " Express $15, 1–2 days." : ""} Ships from Arizona
+              within one business day.
             </p>
             <Link href="/policies/shipping" className="link-underline mt-2 text-cream">
               Details <span aria-hidden>↗</span>

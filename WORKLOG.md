@@ -2061,3 +2061,14 @@ Shelby: "put the logos right below my story and above the 'Founder. Found her'".
 - The press band in `ProfileStory.tsx` now sits between the interview (cream paper) and the closing pull quote. The order is: story, then "Never just one version of herself" with six marks, then FOUNDER. FOUND HER., then the two calls to action. The hairline was dropped (it's now a paper-to-dark change) and padding went to py-16/md:py-20.
 - The closing pull quote now uses text-balance, so phones break it "FOUNDER. / FOUND HER." instead of leaving "HER." alone. This also applies to any other profile with a closing line.
 - Checked at 1440 and 390.
+
+## 2026-10-01 23:59Z: Free shipping verified at checkout; Express paused until Oct 12 (Cowork FOUNDER team)
+
+Shelby: "My site is offering free shipping but I did not see that applied at checkout."
+- **Shopify was already correct.** All 11 variants are on the General profile (US zone): Standard $0, Express $15. All require shipping. `draftOrderCalculate` for a US address returned Standard 0.00 and Express 15.00. A live checkout (test browser, a downtown Phoenix business address, no name or email, nothing submitted) showed the free rate preselected and Shipping: FREE.
+  - Before an address is entered, Shopify shows "Shipping: Enter shipping address", which is most likely what Shelby saw.
+- **Renamed the rates** so checkout says it outright: "Free Standard Shipping" with "3–5 business days", and "Express Shipping" with "1–2 business days". Prices are unchanged.
+- **Found:** checkout's delivery-date estimates ignore the Collection ship date. For Hold the Room it promised "Thu, Oct 8–Tue, Oct 13" (Standard) and "Tue, Oct 6–Wed, Oct 7" (Express). Shelby chose to **pause Express until Oct 12**: method definition 807373209769 is now active:false. Standard dates still start before the 12th; the site, bag and shipping policy carry the Oct 12 line.
+- **Site.** New `EXPRESS_OFFERED = COLLECTION_SHIPS === null` in nextMove.ts gates the "$15 Express" mentions on /shop, the shipping policy (content.ts) and llms.txt. They return automatically when the ship date is cleared.
+  - The Oct 12 reminder (trig_01GTwrLC27uaqksov1tzh6xF) now also re-enables Express in Shopify, with the IDs in its prompt.
+- **Flag for Shelby.** FOUNDER Collection weights are 0 lb (Hold the Room 1 oz). This doesn't affect what customers pay, but it does affect label buying. Added to the Desk reminders.

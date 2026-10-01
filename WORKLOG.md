@@ -1963,3 +1963,19 @@ untick pre-selected consent, brand it, move to checkout.founderbeauty.co** ·
   date, 4 in_stock), schema, shipping policy. Brand Council: no blockers;
   its 4 important notes applied (concierge line, mixed-order wording, 12 Oct
   reminder, Shopify descriptions).
+
+## 2026-10-01 · Claude (Cowork, Founder Chief) — checkout consent + branding (Shopify admin)
+
+Shelby approved all three checkout changes. Done in Shopify admin (no repo
+code): Settings → Checkout → Marketing options → "Preselect checkbox in
+certain regions" = None (was Automated · United States), so the email box
+is never pre-ticked. Checkout editor branding: logo = approved FOUNDER/BEAUTY
+wordmark, colourway 03 (Founder Green over Desert Rose), rendered from the
+site's live Wordmark type, 150 px (board desktop size); asset uploaded to
+Shopify Files ("FOUNDER Beauty wordmark") and kept at
+docs/brand/founder-wordmark-editorial-03.png. Palette: primary #164D49,
+background #F7EFE8 (main + header); accent/buttons Founder Green;
+typography Cormorant (headings) / Jost (body). Order summary keeps Shopify's
+light grey; corner radius isn't editable on this plan. Verified on the live
+checkout at 1440 and 390. Subdomain waits on Shelby's GoDaddy CNAME
+(checkout → shops.myshopify.com); see docs/desk/brief.json.

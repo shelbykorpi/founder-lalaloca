@@ -1,8 +1,8 @@
 {
   "version": 1,
-  "updated": "2026-10-01T17:30:00Z",
+  "updated": "2026-10-01T18:30:00Z",
   "updatedBy": "Founder Chief (Claude · Cowork)",
-  "headline": "Audit done. Four decisions made today. The team is on Batch 0 and Batch 1. Your next answers are below, most important first.",
+  "headline": "Shipping now says October 12 everywhere, checkout is branded and no longer pre-ticks marketing, and this Desk now holds the plan. Your next answers are below, most important first.",
   "auditPath": "docs/desk/executive-audit-2026-10-01.md",
   "waitingOnYou": [
     {
@@ -16,9 +16,9 @@
     {
       "id": "checkout-dns",
       "priority": "now",
-      "question": "Add one DNS record at GoDaddy for checkout.founderbeauty.co (the team gives you the exact record).",
-      "why": "Checkout now runs on founderbeauty.myshopify.com. You approved moving it to your own domain, and the DNS step needs your GoDaddy login.",
-      "answerFormat": "'Done', or 'walk me through it'.",
+      "question": "Add one DNS record at GoDaddy: type CNAME, name 'checkout', value 'shops.myshopify.com'.",
+      "why": "That moves checkout off founderbeauty.myshopify.com onto checkout.founderbeauty.co. Once the record exists, the team connects it in Shopify. One thing to know: Shopify uses its primary domain for checkout and for the order emails, so the team will set it up so the myshopify address keeps working and nothing on founderbeauty.co changes.",
+      "answerFormat": "'Done' (the team checks it), or 'walk me through it'.",
       "askedOn": "2026-10-01"
     },
     {
@@ -41,7 +41,7 @@
       "id": "shopify-titles",
       "priority": "next",
       "question": "Approve the cleaned Shopify product titles and tags (the team will show you the list before anything changes).",
-      "why": "Listings like 'Plumping Glow Drops… Dry Skin Hydration' and Bounce Back's 'Face Neck Lifting', plus anti-wrinkle tags, are what Google and the Shop app show strangers.",
+      "why": "Listings like 'Plumping Glow Drops… Dry Skin Hydration' and Bounce Back's 'Face Neck Lifting', plus anti-wrinkle tags, are what Google and the Shop app show strangers. Checkout now shows these titles too, e.g. 'THIRST TRAP 8-Layer Hyaluronic Acid Serum, Plumping Glow Drops, Marine Collagen, Dry Skin Hydration (50ml)' in the order summary.",
       "answerFormat": "'Show me the list'.",
       "askedOn": "2026-10-01"
     },
@@ -184,7 +184,7 @@
           "title": "Say 'Ships October 12' everywhere for the FOUNDER Collection (site bar, product pages, bag, Google data, Shopify text)",
           "owner": "product-merchandising → frontend-engineer",
           "status": "done",
-          "note": "Site, schema and feed done; two Shopify descriptions in progress"
+          "note": "Site, schema, feed and both Shopify descriptions"
         },
         {
           "title": "This team leads site changes; rule written into AGENTS.md",
@@ -194,12 +194,14 @@
         {
           "title": "Untick pre-selected marketing consent in checkout",
           "owner": "crm-retention-sales",
-          "status": "doing"
+          "status": "done",
+          "note": "Done in Shopify: no region pre-selects the box"
         },
         {
           "title": "Brand the checkout (wordmark, house colours, square corners)",
           "owner": "frontend-engineer",
-          "status": "doing"
+          "status": "done",
+          "note": "Wordmark (colourway 03), cream ground, Founder Green buttons, Cormorant headings, Jost body"
         },
         {
           "title": "Move checkout to checkout.founderbeauty.co",

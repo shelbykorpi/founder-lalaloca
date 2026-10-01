@@ -1,5 +1,5 @@
 import { BRAND, SITE } from "@/lib/brand";
-import { profiles, publicationDate } from "@/lib/profiles";
+import { approvedProfiles, publicationDate } from "@/lib/profiles";
 
 /**
  * FOUND HER as an RSS feed.
@@ -37,7 +37,7 @@ function rfc822(isoDate: string) {
 }
 
 export function GET() {
-  const profileItems = profiles.map((profile) =>
+  const profileItems = approvedProfiles.map((profile) =>
     [
       "    <item>",
       `      <title>${xml(`${profile.name} — ${profile.building}`)}</title>`,

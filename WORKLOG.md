@@ -1979,3 +1979,14 @@ typography Cormorant (headings) / Jost (body). Order summary keeps Shopify's
 light grey; corner radius isn't editable on this plan. Verified on the live
 checkout at 1440 and 390. Subdomain waits on Shelby's GoDaddy CNAME
 (checkout → shops.myshopify.com); see docs/desk/brief.json.
+
+## 2026-10-01 20:15Z: Shopify titles and tags; House Trio made from singles (Cowork FOUNDER team)
+
+Shelby's answers: titles "Change them, I trust you"; trio "Made from singles"; #1001 "A test" (she cancels it; the team doesn't touch orders).
+
+- **Titles (Shopify only; the site reads its own product data, not Shopify titles).** All nine now read NAME · what it is · line · size, e.g. "THIRST TRAP 8-Layer Hyaluronic Acid Serum · LALALOCA · 50 ml", "HOLD THE ROOM Peptide Moisturizing Cream · FOUNDER Collection · 50 ml". Handles, prices, descriptions and images unchanged. These titles show in checkout, order emails, Shop, Meta, Copilot and Google.
+- **Tags.** Bounce Back: removed anti_aging_serum, anti_aging_skincare, lifting_face_serum, neck_firming_serum, skin_tightening, wrinkle_serum, serum_for_fine_lines, elasticity_serum, mature_skin_serum, firming_serum, glass; added night_serum, lalaloca. Thirst Trap: removed the_closer, skin_barrier_serum, plumping_serum, glass; added the_poker_face, lalaloca. Trio: the_closer → the_poker_face, glass removed. CAUTION: the four LALALOCA products were written as full tag lists, and the pre-change lists weren't saved, so a tag outside the planned removals (C Me Glow had no planned change) can't be confirmed as kept. FOUNDER Collection tags were not touched.
+- **House Trio = bundle of the singles.** `productVariantRelationshipBulkUpdate` on trio variant 47320268931241 (ID unchanged, so cart permalinks still work), with components Thirst Trap 47320268964009, C Me Glow 47320268898473 and Bounce Back 47320268996777, ×1 each. Stock now derives from the singles: 74 today (Bounce Back), was 149 separate.
+  - **GOTCHA:** creating the bundle reset the parent price to the sum of its parts ($114). `priceInput: FIXED` on a follow-up call did nothing; `productVariantsBulkUpdate` price 98.00 fixed it. Live checkout re-verified at $98.00 with the three serums listed under the trio. It was $114 for a few minutes; no orders came in (latest order is still #1001).
+  - Next time, pass `priceInput: {calculation: FIXED, price: "98.00"}` in the same call that creates the components.
+- Desk brief updated: trio, #1001, titles moved to decided; GA4 now waits on Shelby's Google sign-in; reminder for her to cancel or archive #1001.

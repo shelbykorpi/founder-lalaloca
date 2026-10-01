@@ -1,16 +1,16 @@
 {
   "version": 1,
-  "updated": "2026-10-01T18:30:00Z",
+  "updated": "2026-10-01T20:15:00Z",
   "updatedBy": "Founder Chief (Claude · Cowork)",
-  "headline": "Shipping now says October 12 everywhere, checkout is branded and no longer pre-ticks marketing, and this Desk now holds the plan. Your next answers are below, most important first.",
+  "headline": "Shopify titles are clean, the House Trio now sells from the single serums' stock at $98, and checkout is branded. Next from you: sign in to Google so the team can set up Analytics, and add the checkout DNS record.",
   "auditPath": "docs/desk/executive-audit-2026-10-01.md",
   "waitingOnYou": [
     {
       "id": "ga4",
       "priority": "now",
-      "question": "Paste your Google Analytics 4 measurement ID (G-…).",
-      "why": "Analytics isn't live, so launch traffic and sales can't be traced to their source. The team installs it on the site and in Shopify, with cross-domain tracking.",
-      "answerFormat": "The G-ID, or 'make the property for me' (you'll need to sign in once).",
+      "question": "Open Chrome signed in to the Google account that should own FOUNDER's analytics, then tell the team 'signed in'.",
+      "why": "You chose 'set it up for me'. The team creates the GA4 property, installs it on the site and in Shopify with cross-domain tracking. You sign in once; the team never types a password, and asks you before accepting Google's terms.",
+      "answerFormat": "'Signed in' (and which Google account, if you have more than one).",
       "askedOn": "2026-10-01"
     },
     {
@@ -22,27 +22,11 @@
       "askedOn": "2026-10-01"
     },
     {
-      "id": "stock-truth",
-      "priority": "now",
-      "question": "Is the House Trio pre-packed or made up from single serums? And is order #1001 (6 Aug, $39.99, shown unfulfilled) a test?",
-      "why": "Trio stock (149) isn't linked to the singles, so stock can be double-counted. An unfulfilled paid order is a customer waiting.",
-      "answerFormat": "'Pre-packed' or 'assembled'; '#1001 test, cancel it' or '#1001 real, ship it'.",
-      "askedOn": "2026-10-01"
-    },
-    {
       "id": "mailing-address",
       "priority": "now",
       "question": "Which postal address can go in the footer of marketing emails? A PO box is fine.",
       "why": "US law (CAN-SPAM) requires a physical address in marketing email. The welcome email is missing one.",
       "answerFormat": "The address.",
-      "askedOn": "2026-10-01"
-    },
-    {
-      "id": "shopify-titles",
-      "priority": "next",
-      "question": "Approve the cleaned Shopify product titles and tags (the team will show you the list before anything changes).",
-      "why": "Listings like 'Plumping Glow Drops… Dry Skin Hydration' and Bounce Back's 'Face Neck Lifting', plus anti-wrinkle tags, are what Google and the Shop app show strangers. Checkout now shows these titles too, e.g. 'THIRST TRAP 8-Layer Hyaluronic Acid Serum, Plumping Glow Drops, Marine Collagen, Dry Skin Hydration (50ml)' in the order summary.",
-      "answerFormat": "'Show me the list'.",
       "askedOn": "2026-10-01"
     },
     {
@@ -172,6 +156,30 @@
       "question": "Julie and Aly's FOUND HER pages",
       "answer": "Recorded as approved on 30 Sept (in the site's profile data).",
       "decidedOn": "2026-09-30"
+    },
+    {
+      "id": "trio",
+      "question": "Is the House Trio pre-packed or made from single serums?",
+      "answer": "Made from singles. Done 1 Oct: the trio is now a Shopify bundle of Thirst Trap + C Me Glow + Bounce Back, so it sells from their stock (74 today, set by Bounce Back) instead of a separate 149. Price stays $98, checked on a live checkout. Checkout and the packing slip now list the three serums under the trio.",
+      "decidedOn": "2026-10-01"
+    },
+    {
+      "id": "order-1001",
+      "question": "Is order #1001 (6 Aug) a test?",
+      "answer": "A test. You cancel or archive it in Shopify admin; the team doesn't touch orders.",
+      "decidedOn": "2026-10-01"
+    },
+    {
+      "id": "shopify-titles",
+      "question": "Clean Shopify titles and tags?",
+      "answer": "'Change them, I trust you.' Done 1 Oct: all nine titles now read NAME · what it is · line · size (e.g. 'THIRST TRAP 8-Layer Hyaluronic Acid Serum · LALALOCA · 50 ml'). Claims-risk tags removed from Bounce Back (anti-aging, wrinkle, tightening, lifting, firming…) and 'the_closer' replaced by 'the_poker_face'. Handles, prices, descriptions and images unchanged.",
+      "decidedOn": "2026-10-01"
+    },
+    {
+      "id": "ga4-route",
+      "question": "Google Analytics: your G-ID or set it up for you?",
+      "answer": "Set it up for me. Waiting on your Google sign-in.",
+      "decidedOn": "2026-10-01"
     }
   ],
   "batches": [
@@ -213,13 +221,13 @@
           "title": "Google Analytics on the site and in Shopify, cross-domain, UTMs",
           "owner": "growth-marketing + frontend-engineer",
           "status": "blocked",
-          "note": "Needs your G-ID"
+          "note": "Waiting on your Google sign-in in Chrome"
         },
         {
           "title": "Trio stock linkage; order #1001",
           "owner": "product-merchandising",
-          "status": "blocked",
-          "note": "Needs your answer"
+          "status": "done",
+          "note": "Trio is a bundle of the three singles; $98 confirmed at checkout. #1001 is a test: yours to cancel or archive."
         },
         {
           "title": "Mailing address in marketing emails",
@@ -228,10 +236,10 @@
           "note": "Needs your address"
         },
         {
-          "title": "Clean Shopify titles, tags and featured images",
+          "title": "Clean Shopify titles and tags (images kept, your call)",
           "owner": "product-merchandising + claims-compliance",
-          "status": "blocked",
-          "note": "Needs your approval of the list"
+          "status": "done",
+          "note": "Nine titles and four tag sets rewritten 1 Oct"
         }
       ]
     },
@@ -243,7 +251,8 @@
         {
           "title": "Feed and trio data read live stock; no hard-coded 'in stock'",
           "owner": "frontend-engineer",
-          "status": "todo"
+          "status": "todo",
+          "note": "Trio stock is now real in Shopify (bundle of singles); the site still needs to read it live."
         },
         {
           "title": "Remove the site-wide canonical trap; fix the last hard-coded analytics brand; FOUNDER brand entity in search data",
@@ -368,6 +377,10 @@
     {
       "date": "2026-10-12",
       "text": "Ship date. Confirm with Shelby the Collection orders have shipped (or the new date), then set COLLECTION_SHIPS = null in src/lib/nextMove.ts and clear the founder.badge metafield in Shopify. Until then the site keeps saying 'Ships October 12'."
+    },
+    {
+      "date": "2026-10-02",
+      "text": "Shelby: cancel or archive test order #1001 in Shopify admin. It shows as paid ($39.99), so if a real card was charged, refund it when cancelling; otherwise Archive is enough."
     }
   ]
 }

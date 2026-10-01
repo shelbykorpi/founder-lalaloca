@@ -184,8 +184,7 @@ export type NextMoveProduct = {
    * vanity renders from Shelby's Drive, labels read at full resolution;
    * Smooth Talker's carton tagline and both net-weight lines were retouched
    * to the approved artwork ("Evens tone and smooths for the finish.",
-   * 12 g / 0.42 oz). Opening Line has no dark render yet and keeps its shelf
-   * frame until one is made.
+   * 12 g / 0.42 oz). Opening Line's dark render arrived later the same day.
    */
   scene: { src: string; alt: string };
   /**
@@ -296,11 +295,12 @@ export const NEXT_MOVE: NextMoveProduct[] = [
       src: "/products/opening-line-pack.webp",
       alt: "The Opening Line bottle: a white airless pump wrapped in cream and Founder Green stripes, a deep green plaque at the front reading Opening Line, the opener, oil-to-milk cleanser.",
     },
-    /* 4:5 crop of the shelf frame, centred on the bottle — no dark vanity
-       render of Opening Line exists yet (1 Oct 2026). Replace when one does. */
+    /* Dark vanity render supplied by Shelby 1 Oct 2026, label read at full
+       resolution (Opening Line · The Opener · Oil-to-Milk Cleanser ·
+       150 ml / 5.07 fl oz). Replaces the interim shelf crop. */
     scene: {
-      src: "/products/opening-line-card-dark.webp",
-      alt: "The Opening Line bottle — a white airless pump with a Founder Green label, striped bands top and bottom — standing on a black marble console against a dark green wall, reflected in the stone.",
+      src: "/products/opening-line-card-vanity.webp",
+      alt: "The Opening Line bottle, beaded with water, on a dark green marble basin edge — a lit candle, a dark green towel, white flowers and a brass tap around it.",
     },
     setting: {
       src: "/products/opening-line-setting.webp",

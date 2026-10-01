@@ -1770,3 +1770,12 @@ res; Smooth Talker's carton tagline ("Even tone and nourish" → approved
 no dark render: its card is a 4:5 crop of the existing shelf frame, centred
 on the bottle, until one is made. Hover pack shots unchanged.
 Verified: tsc, eslint, build; grid at 1440/390, hover.
+
+## 2026-10-01 · Claude (Cowork) — Opening Line dark vanity card
+
+Shelby supplied a dark vanity render of Opening Line. Label read at full
+res (Opening Line · The Opener · Oil-to-Milk Cleanser · 150 ml / 5.07 fl
+oz), no retouch. Now the grid card (`opening-line-card-vanity.webp`); the
+interim shelf crop `opening-line-card-dark.webp` is removed from the repo.
+All five /founder-collection cards are dark vanity scenes.
+Verified: tsc, eslint, build; grid at 1440/390.

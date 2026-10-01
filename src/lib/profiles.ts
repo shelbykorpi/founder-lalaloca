@@ -263,25 +263,10 @@ export const profiles: FoundHerProfile[] = [
     tagline: "Faith over fear. Who says you can\u2019t do both?",
     standfirst:
       "Six years building her name as a makeup artist in New York, three years in beauty in Los Angeles, and now MakeupGemz \u2014 with a law degree next, because, in her words, who says you can\u2019t do both?",
-    /* PENDING HER APPROVAL. Submitted through the site on 20 September
-       2026 (both permissions ticked). On 28 September Aly sent Shelby a
-       complete rewrite of all six answers and asked for it to be used
-       instead of the form; every answer below is from that rewrite.
-
-       Copy-edited at Shelby's direction \u2014 "grammar and spelling, while
-       preserving her voice and story": a comma after "LA", "graduating
-       from college", "a relatable IG page", and "live-streaming"
-       hyphenated as she hyphenates it herself in her second answer. No
-       sentence added, none removed, nothing reworded for tone.
-
-       Published ahead of her sign-off on the Julie precedent (the
-       founder's call): her page omits the "she read and approved" line
-       until approvedOn carries her real date. When Aly says yes to the
-       page as it stands: put her date in approvedOn, delete publishedOn.
-       The standfirst is the one line written by us, and it names no
-       brand but her own. */
-    approvedOn: "PENDING",
-    publishedOn: "2026-09-28",
+    /* Approved by Aly for publication on 30 September 2026. The story uses
+       her 28 September rewrite, with grammar and spelling copy-edits only;
+       her voice and story remain hers. */
+    approvedOn: "2026-09-30",
     answers: [
       {
         question: "When did you find her?",

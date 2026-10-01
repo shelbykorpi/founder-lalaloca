@@ -207,7 +207,7 @@ export function faqSchema(faqs: { q: string; a: string }[]) {
  * is fraud, draws a manual penalty, and would cost more than every rich result
  * it could win. The function cannot be called in a way that invents one.
  */
-export function productSchema(product: Product, reviews?: ProductReviews | null) {
+export function productSchema(product: Product, reviews?: ProductReviews | null, soldOut = false) {
   return {
     "@context": "https://schema.org",
     "@type": "Product",
@@ -248,7 +248,7 @@ export function productSchema(product: Product, reviews?: ProductReviews | null)
       price: product.price.toFixed(2),
       priceCurrency: "USD",
       url: `${SITE.url}/products/${product.slug}`,
-      availability: "https://schema.org/InStock",
+      availability: soldOut ? "https://schema.org/SoldOut" : "https://schema.org/InStock",
       itemCondition: "https://schema.org/NewCondition",
       seller: { "@id": `${SITE.url}/#organization` },
       shippingDetails: US_SHIPPING,

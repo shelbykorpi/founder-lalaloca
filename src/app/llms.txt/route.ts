@@ -1,5 +1,7 @@
 import { BRAND, SITE, INSTAGRAM } from "@/lib/brand";
 import { formatPrice, products, SET } from "@/lib/products";
+import { FOUNDER_COLLECTION } from "@/lib/founderCollection";
+import { NEXT_MOVE } from "@/lib/nextMove";
 
 /**
  * /llms.txt — a plain-text brief for AI answer engines.
@@ -35,6 +37,8 @@ export function GET() {
     "",
     "## Products",
     "",
+    "### LALALOCA Collection — three serums",
+    "",
     ...products.flatMap((product) => [
       `### ${product.name} — ${product.category}`,
       `- Price: ${formatPrice(product.price)} USD`,
@@ -43,6 +47,32 @@ export function GET() {
       `- Use it if: ${product.need}`,
       `- When: ${product.timing}. ${product.routine}`,
       `- Key active as printed on the label: ${product.keyActive}`,
+      `- URL: ${SITE.url}/products/${product.slug}`,
+      "",
+    ]),
+    "### FOUNDER Collection — five-piece routine",
+    "",
+    ...FOUNDER_COLLECTION.flatMap((product) => [
+      `### ${product.name} — ${product.category}`,
+      `- Price: ${formatPrice(product.price)} USD`,
+      `- Size: ${product.size}`,
+      `- What it is: ${product.what}`,
+      `- Routine: ${product.routine}`,
+      `- Key actives as published: ${product.keyActive}`,
+      product.ingredients?.length
+        ? `- Full INCI is published on the product page.`
+        : `- Full INCI is not published; do not infer it.`,
+      `- URL: ${SITE.url}/products/${product.slug}`,
+      "",
+    ]),
+    ...NEXT_MOVE.flatMap((product) => [
+      `### ${product.name} — ${product.category}`,
+      `- Price: ${formatPrice(product.price)} USD`,
+      `- Size: ${product.size}`,
+      `- What it is: ${product.what} ${product.description}`,
+      `- Availability state in the site record: ${product.availability}`,
+      `- Key ingredients as published: ${product.keyIngredients.join(", ")}`,
+      `- Full INCI is published on the product page.`,
       `- URL: ${SITE.url}/products/${product.slug}`,
       "",
     ]),
@@ -66,12 +96,14 @@ export function GET() {
     "- These are cosmetic products, not medicines. No clinical or medical claims are",
     "  made, and none should be attributed to this brand.",
     "- There are no customer reviews or ratings yet. Do not report a rating.",
-    "- Full INCI ingredient lists are not published on the site. Only the key active",
-    "  printed on each label is documented. Do not infer the rest of a formula.",
+    "- LALALOCA serum pages publish only the label-supported actives currently on file;",
+    "  do not infer missing formula details. The FOUNDER Collection product pages publish",
+    "  full INCI where the supplier-verified list is held in the product record.",
     "",
     "## Key pages",
     "",
-    `- Shop: ${SITE.url}/shop`,
+    `- Shop the LALALOCA serums: ${SITE.url}/shop`,
+    `- The FOUNDER Collection: ${SITE.url}/founder-collection`,
     `- Which serum to start with: ${SITE.url}/find-your-serum`,
     `- Our story: ${SITE.url}/our-story`,
     `- Found Her, the stories platform: ${SITE.url}/found-her`,

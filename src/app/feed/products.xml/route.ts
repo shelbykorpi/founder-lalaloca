@@ -1,5 +1,7 @@
 import { BRAND, SITE } from "@/lib/brand";
 import { products, SET } from "@/lib/products";
+import { FOUNDER_COLLECTION } from "@/lib/founderCollection";
+import { NEXT_MOVE } from "@/lib/nextMove";
 
 /**
  * Google Merchant Center product feed (RSS 2.0 + the `g:` namespace).
@@ -53,6 +55,7 @@ type FeedItem = {
   link: string;
   image: string;
   price: number;
+  brand?: string;
   /** Optional extras that only some items carry. */
   extra?: string[];
 };
@@ -68,7 +71,7 @@ function item(entry: FeedItem) {
     "      <g:availability>in_stock</g:availability>",
     "      <g:condition>new</g:condition>",
     `      <g:price>${entry.price.toFixed(2)} USD</g:price>`,
-    `      <g:brand>${xml(BRAND.collection)}</g:brand>`,
+    `      <g:brand>${xml(entry.brand ?? BRAND.collection)}</g:brand>`,
     /* No barcodes issued. Declaring that is required; omitting it silently is
        what gets a feed disapproved. */
     "      <g:identifier_exists>no</g:identifier_exists>",
@@ -116,6 +119,39 @@ export function GET() {
      feed. It is a multipack, and Google wants that stated explicitly — an
      unmarked bundle competing against its own components looks like duplicate
      inventory. */
+  const founderItems = [
+    ...FOUNDER_COLLECTION.map((product) =>
+      item({
+        id: product.slug,
+        title: `${BRAND.display} ${product.name} — ${product.category}, ${product.size}`,
+        description: `${product.what} ${product.need} ${product.routine} Key actives as published: ${product.keyActive}. Cosmetic product; no clinical claims are made.`,
+        link: `${SITE.url}/products/${product.slug}`,
+        image: `${SITE.url}${product.bottle}`,
+        price: product.price,
+        brand: BRAND.display,
+        extra: [
+          `      <g:product_type>${xml(`Skincare > ${product.category}`)}</g:product_type>`,
+          `      <g:item_group_id>founder-collection</g:item_group_id>`,
+        ],
+      }),
+    ),
+    ...NEXT_MOVE.map((product) =>
+      item({
+        id: product.slug,
+        title: `${BRAND.display} ${product.name} — ${product.category}, ${product.size}`,
+        description: `${product.what} ${product.description} Key ingredients as published: ${product.keyIngredients.join(", ")}. Cosmetic product; no clinical claims are made.`,
+        link: `${SITE.url}/products/${product.slug}`,
+        image: `${SITE.url}${product.pack.src}`,
+        price: product.price,
+        brand: BRAND.display,
+        extra: [
+          `      <g:product_type>${xml(`Beauty > ${product.category}`)}</g:product_type>`,
+          `      <g:item_group_id>founder-collection</g:item_group_id>`,
+        ],
+      }),
+    ),
+  ];
+
   const trio = item({
     id: "lalaloca-trio",
     title: `${BRAND.collection} ${SET.name} — ${SET.detail}`,
@@ -138,6 +174,7 @@ export function GET() {
     `    <link>${xml(SITE.url)}</link>`,
     `    <description>${xml(SITE.description)}</description>`,
     ...items,
+    ...founderItems,
     trio,
     "  </channel>",
     "</rss>",

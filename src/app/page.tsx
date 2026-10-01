@@ -153,49 +153,6 @@ const LINE = [
    so there is nothing "in the making" to tile. Kept typed so the grid below
    simply renders nothing rather than needing its markup pulled. */
 
-/* ROOM 06 · NOTES FROM THE HOUSE — 12 Sept 2026. Shelby: the images did not
-   flow and neither did the copy. They were four unrelated frames (a journal,
-   a shop counter, a pink dressing room, the mirrors) with four mood lines
-   dealt out at random. Now they are four rooms of this house in the order
-   she walks them — Found Her, the Salon, the Collection, the Library — each
-   one a note in that room's own words, each tile the door to it. Every line
-   is from the approved bank or already live on its room; nothing new is
-   minted. The eyebrow names the room so the row reads as a corridor. */
-const NOTES = [
-  {
-    room: "Found Her",
-    href: "/found-her",
-    src: "/editorial/rooms/found-her-hall-doors.webp",
-    position: "50% 50%",
-    alt: "The Found Her hall: portraits along dark green panelling, tall doors standing open at the end.",
-    line: "The note was left for you.",
-  },
-  {
-    room: "The Serum Salon",
-    href: "/shop",
-    src: "/editorial/rooms/serum-salon-arches.webp",
-    position: "50% 55%",
-    alt: "Three lit alcoves in the salon wall — teal, gold and red — one serum standing in each.",
-    line: "Pick the one that\u2019s yours.",
-  },
-  {
-    room: "The Collection",
-    href: "/founder-collection",
-    src: "/editorial/collection-vanity.webp",
-    position: "60% 50%",
-    alt: "A row of bulb-lit gilt mirrors along a marble dressing counter, FOUNDER on the glass.",
-    line: "Your routine, start to finish.",
-  },
-  {
-    room: "The Library",
-    href: "/library",
-    src: "/editorial/rooms/library-shelves.webp",
-    position: "50% 40%",
-    alt: "The library shelf: cloth-bound books, a brass ledge, The Room Is Yours on a spine.",
-    line: "Every key ingredient, and a study on each.",
-  },
-];
-
 export default function HomePage() {
   return (
     <div className="bg-emerald-deep text-cream">
@@ -512,56 +469,6 @@ export default function HomePage() {
               </Link>
             </div>
           </Reveal>
-        </div>
-      </section>
-
-      <DoorFrame label="Notes from the house" />
-
-      {/* ══ NOTES FROM THE HOUSE ════════════════════════════════════════════ */}
-      <section id="room-notes" className="section bg-emerald-deep">
-        <div className="shell">
-          <Reveal>
-            <p className="room-label">Notes from the house</p>
-          </Reveal>
-          <Reveal delay={60}>
-            <p className="mt-3 max-w-[38ch] font-serif text-[1.15rem] leading-snug text-cream/75">
-              Four rooms, in the order you walk them. A line waits in each.
-            </p>
-          </Reveal>
-          {/* One corridor, not four cards: a brass hairline runs behind the
-              row and each tile is the door to its room. Hover lifts the
-              picture and lights the line; the eyebrow names the room. */}
-          <div className="relative mt-10">
-            <span aria-hidden className="brass-line absolute inset-x-0 top-[38%] hidden xl:block" />
-            <ol className="relative grid gap-8 sm:grid-cols-2 xl:grid-cols-4 xl:gap-6">
-              {NOTES.map((note, i) => (
-                <Reveal key={note.href} as="li" delay={(i % 4) * 90} className="m-0 list-none">
-                  <Link href={note.href} className="group block no-underline">
-                    <span className="eyebrow block text-cream/55 transition-colors group-hover:text-champagne">
-                      {String(i + 1).padStart(2, "0")} · {note.room}
-                    </span>
-                    <span className="relative mt-3 block aspect-[3/2] w-full overflow-hidden bg-emerald ring-1 ring-bronze/25 transition-transform duration-700 group-hover:-translate-y-1">
-                      <Image
-                        src={note.src}
-                        alt={note.alt}
-                        fill
-                        loading="lazy"
-                        sizes="(max-width: 640px) 90vw, (max-width: 1280px) 45vw, 22vw"
-                        className="object-cover transition-transform duration-[1200ms] group-hover:scale-[1.03]"
-                        style={{ objectPosition: note.position }}
-                      />
-                    </span>
-                    <span className="mt-4 block font-serif text-[1.35rem] leading-snug text-blush transition-colors group-hover:text-cream">
-                      {note.line}
-                    </span>
-                    <span className="hairline mt-3 inline-block text-cream/60 group-hover:text-champagne">
-                      Enter →
-                    </span>
-                  </Link>
-                </Reveal>
-              ))}
-            </ol>
-          </div>
         </div>
       </section>
 

@@ -13,7 +13,7 @@ import { JsonLd, breadcrumbSchema, editorialListSchema } from "@/lib/seo";
 export const metadata: Metadata = {
   title: "Found Her",
   description:
-    "FOUND HER: the FOUNDER Models. Women who rebuilt, started something and kept going, telling what they built, what it took, and the moment they recognized the woman they had become.",
+    "FOUND HER — intimate stories from women about what they built, what it took, and the moment they finally recognized the woman they had become.",
   alternates: {
     canonical: "/found-her",
     types: { "application/rss+xml": "/feed/found-her.xml" },
@@ -259,61 +259,6 @@ export default function FoundHerPage() {
               <p className="mt-5 text-[1rem] leading-[1.85] text-cream/72">
                 No audition. No performance. No need to make the story prettier than it was.
               </p>
-            </div>
-          </div>
-        </section>
-
-        {/* The FOUNDER Models (Shelby, 1 Oct 2026): the women who submit are the
-            models of this brand. Worded as who they are and what may come
-            next, never as a claim about who is in existing product imagery.
-            "Some may be invited" matches the optional product-feature box on
-            the form below. Desert Rose ground with ink type, as on Our Story. */}
-        <section className="bg-rose py-20 text-charcoal md:py-28" aria-labelledby="models-heading">
-          <div className="shell grid gap-12 lg:grid-cols-[0.8fr_1.2fr] lg:items-start lg:gap-20">
-            <div className="lg:sticky lg:top-36 lg:self-start">
-              <p className="eyebrow text-founder-green">The FOUNDER Models</p>
-              <h2
-                id="models-heading"
-                className="mt-5 max-w-[11ch] font-serif text-[clamp(3rem,6vw,5.5rem)] font-light leading-[0.92] text-night"
-              >
-                The women this brand is modeled on.
-              </h2>
-            </div>
-            <div className="max-w-[46rem] lg:pt-3">
-              <p className="font-serif text-[clamp(1.5rem,2.8vw,2.4rem)] leading-[1.25] text-night">
-                We call them the FOUNDER Models. Not cast for a look. Recognized for a life.
-              </p>
-              <p className="mt-8 space-y-2 text-[1.05rem] leading-[1.7] text-charcoal">
-                <span className="block">She rebuilt when everything came down.</span>
-                <span className="block">She started something before anyone believed in it.</span>
-                <span className="block">She walked away from what was breaking her.</span>
-                <span className="block">She went back to school, back to work, back to herself.</span>
-                <span className="block">She failed in private and showed up again the next morning.</span>
-              </p>
-              <p className="mt-7 text-[1rem] leading-[1.85] text-charcoal">
-                She is resilient, though she would probably never use the word. She would just tell
-                you she kept going.
-              </p>
-              <p className="mt-5 text-[1rem] leading-[1.85] text-charcoal">
-                A FOUNDER Model is not a type, a size, an age or a face. She is defined by what she
-                lived through and what she built after it: the fear and the doing it anyway, the
-                ending and the start that followed.
-              </p>
-              <p className="mt-5 text-[1rem] leading-[1.85] text-charcoal">
-                Every woman who shares her story in FOUND HER becomes part of that. Some may be
-                invited further, with their words and portrait on our products, so the woman who
-                picks one up sees a real woman looking back.
-              </p>
-              <p className="mt-9 border-l border-founder-green pl-5 font-serif text-[clamp(1.45rem,2.7vw,2rem)] italic leading-[1.35] text-night">
-                You were never supposed to look like the model. The model was always supposed to
-                look like you.
-              </p>
-              <Link
-                href="#share"
-                className="btn mt-10 bg-founder-green text-cream hover:bg-rose-deep hover:text-night"
-              >
-                Share your story
-              </Link>
             </div>
           </div>
         </section>

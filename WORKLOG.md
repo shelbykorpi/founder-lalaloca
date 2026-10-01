@@ -2294,3 +2294,7 @@ Shelby: say the women of FOUND HER are the FOUNDER Models (the ones who rebuilt,
 - **Deliberately worded about who these women are and what may come next.** It makes no claim about who appears in existing product or campaign imagery.
 - Meta description now leads with the FOUNDER Models.
 - Checked at 1440 and 390.
+
+## 2026-10-01 23:20Z: "The FOUNDER Models" section removed (Cowork FOUNDER team)
+
+Shelby: "dont use that i dont like it." src/app/found-her/page.tsx is restored to its 8edaff3 version (md5 528749fd…, matching GitHub). The section and its meta description change are gone. a90071a was never pushed; this commit undoes it. Do not reintroduce that copy.

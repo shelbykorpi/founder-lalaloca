@@ -20,6 +20,21 @@ export const metadata: Metadata = {
   },
 };
 
+/** "The women of FOUNDER", Shelby's words, verbatim (1 Oct 2026). */
+const WOMEN_OF_FOUNDER = {
+  who: [
+    "The woman who started over.",
+    "Who built something from nothing.",
+    "Who was underestimated and kept going.",
+    "Who lost herself and found her way back.",
+    "Who survived the chapter she thought would break her.",
+    "Who chose herself.",
+    "Who began again.",
+  ],
+  stories: ["The wins.", "The failures.", "The risks.", "The rebuilds.", "The moments that changed everything."],
+  you: ["Your story.", "What you built.", "What you survived.", "What you are still becoming."],
+};
+
 export default function FoundHerPage() {
   const [featured, ...rest] = approvedProfiles;
 
@@ -69,6 +84,95 @@ export default function FoundHerPage() {
                 </Link>
                 <Link href="#share" className="hairline text-cream">
                   Tell yours
+                </Link>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        {/* THE WOMEN OF FOUNDER (Shelby, 1 Oct 2026: "add this message to the
+            top of the main page … revise format as necessary"). Her words,
+            verbatim and in her order; only the layout is ours. Cream ground so
+            it reads as a letter between the dark hero and the dark featured
+            portrait. On desktop the title and opening stay in view beside the
+            longer column. */}
+        <section className="bg-cream py-20 text-charcoal md:py-28" aria-labelledby="women-heading">
+          <div className="shell grid gap-12 lg:grid-cols-[0.85fr_1.15fr] lg:items-start lg:gap-20">
+            <div className="lg:sticky lg:top-36 lg:self-start">
+              <span aria-hidden className="block h-px w-10 bg-rose" />
+              <h2
+                id="women-heading"
+                className="mt-5 max-w-[9ch] font-serif text-[clamp(3rem,6vw,5.5rem)] font-light leading-[0.92] tracking-[-0.02em] text-night"
+              >
+                The women of FOUNDER
+              </h2>
+              <p className="mt-8 max-w-[24rem] text-[1.05rem] leading-[1.7] text-charcoal/80">
+                The women you see here do not represent perfection.
+              </p>
+              <p className="mt-3 font-serif text-[clamp(2rem,3.6vw,3rem)] italic leading-[1.05] text-night">
+                They represent becoming.
+              </p>
+            </div>
+
+            <div className="max-w-[40rem] space-y-8 text-[1.02rem] leading-[1.75] text-charcoal/80 lg:pt-3">
+              <p className="space-y-2">
+                {WOMEN_OF_FOUNDER.who.map((l) => (
+                  <span key={l} className="block">
+                    {l}
+                  </span>
+                ))}
+              </p>
+              <div>
+                <p className="font-serif text-[clamp(1.6rem,2.8vw,2.3rem)] leading-[1.2] text-night">
+                  These are the women of FOUNDER.
+                </p>
+                <p className="mt-3 space-y-1">
+                  <span className="block">Not because their stories are perfect.</span>
+                  <span className="block font-serif text-[1.4rem] italic text-night">Because they are real.</span>
+                </p>
+              </div>
+              <div>
+                <p>FOUND HER exists to share those stories.</p>
+                <p className="mt-3 space-y-1 font-serif text-[clamp(1.25rem,2.2vw,1.6rem)] italic leading-[1.45] text-night">
+                  {WOMEN_OF_FOUNDER.stories.map((l) => (
+                    <span key={l} className="block">
+                      {l}
+                    </span>
+                  ))}
+                </p>
+              </div>
+              <p className="border-l border-bronze pl-5 font-serif text-[clamp(1.35rem,2.4vw,1.8rem)] italic leading-[1.4] text-night">
+                Because sometimes another woman’s story is exactly what you need to keep going.
+              </p>
+              <div>
+                <p>
+                  And as this community grows, the women representing FOUNDER will come from this
+                  community.
+                </p>
+                <p className="mt-3 font-serif text-[clamp(1.6rem,2.8vw,2.3rem)] leading-[1.2] text-night">
+                  From you.
+                </p>
+                <p className="mt-3 space-y-1">
+                  {WOMEN_OF_FOUNDER.you.map((l) => (
+                    <span key={l} className="block">
+                      {l}
+                    </span>
+                  ))}
+                </p>
+              </div>
+              <div>
+                <p>Because FOUNDER was never meant to show women what they should look like.</p>
+                <p className="mt-3 font-serif text-[clamp(1.6rem,2.8vw,2.3rem)] leading-[1.2] text-night">
+                  It was built to show the world what women are capable of.
+                </p>
+              </div>
+              <div className="border-t border-charcoal/12 pt-10">
+                <p className="font-serif text-[clamp(2rem,4.4vw,3.4rem)] font-light leading-[1.05] text-night">
+                  And maybe the next woman someone needs to see—
+                  <span className="block italic text-bronze-ink">is you.</span>
+                </p>
+                <Link href="#share" className="btn btn-dark mt-10">
+                  Tell your story
                 </Link>
               </div>
             </div>

@@ -2298,3 +2298,13 @@ Shelby: say the women of FOUND HER are the FOUNDER Models (the ones who rebuilt,
 ## 2026-10-01 23:20Z: "The FOUNDER Models" section removed (Cowork FOUNDER team)
 
 Shelby: "dont use that i dont like it." src/app/found-her/page.tsx is restored to its 8edaff3 version (md5 528749fd…, matching GitHub). The section and its meta description change are gone. a90071a was never pushed; this commit undoes it. Do not reintroduce that copy.
+
+## 2026-10-01 23:40Z: FOUND HER, "The women of FOUNDER" under the hero (Cowork FOUNDER team)
+
+Shelby supplied the text: "add this message to the top of the main page … revise format as necessary".
+- **New section on /found-her**, directly after the hero and before the featured portrait. It is on a cream ground, so it reads as a letter between the two dark blocks.
+- **Her words, verbatim and in her order.** All 29 lines were checked against the rendered section: 0 missing. Only the formatting is ours:
+  - The h2 is "The women of FOUNDER". "The women you see here do not represent perfection. / They represent becoming." stays in view on desktop.
+  - The "Who…" lines are stacked. "The wins … The moments that changed everything." is in serif italic. "Because sometimes another woman's story…" is a pull line.
+  - It closes large with "And maybe the next woman someone needs to see— / is you." and a "Tell your story" button (to #share).
+- Data is in the `WOMEN_OF_FOUNDER` constant. Checked at 1440 and 390. The removed "FOUNDER Models" copy was NOT reused.

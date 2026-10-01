@@ -1,11 +1,12 @@
 import Script from "next/script";
+import { GA_MEASUREMENT_ID } from "@/lib/brand";
 
 /**
  * Google Analytics 4.
  *
- * Inert until NEXT_PUBLIC_GA_ID is set, so this ships safely before the
- * property exists and switches on with one environment variable — no code
- * change, no redeploy of anything but config.
+ * The ID is GA_MEASUREMENT_ID in src/lib/brand.ts: production reports to the
+ * FOUNDER Beauty property; previews and local builds render nothing unless
+ * NEXT_PUBLIC_GA_ID is set.
  *
  * CROSS-DOMAIN IS THE WHOLE GAME HERE. Checkout leaves this site for Shopify.
  * Without `linker`, GA4 treats the Shopify checkout as a brand-new session
@@ -18,7 +19,7 @@ import Script from "next/script";
  * installed there too, or the purchase never reaches this property at all.
  */
 
-const GA_ID = process.env.NEXT_PUBLIC_GA_ID;
+const GA_ID = GA_MEASUREMENT_ID;
 
 /** Both hosts a single customer journey can touch. */
 const LINKED_DOMAINS = ["founderbeauty.co", "founderbeauty.myshopify.com"];

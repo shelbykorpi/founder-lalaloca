@@ -1990,3 +1990,17 @@ Shelby's answers: titles "Change them, I trust you"; trio "Made from singles"; #
   - **GOTCHA:** creating the bundle reset the parent price to the sum of its parts ($114). `priceInput: FIXED` on a follow-up call did nothing; `productVariantsBulkUpdate` price 98.00 fixed it. Live checkout re-verified at $98.00 with the three serums listed under the trio. It was $114 for a few minutes; no orders came in (latest order is still #1001).
   - Next time, pass `priceInput: {calculation: FIXED, price: "98.00"}` in the same call that creates the components.
 - Desk brief updated: trio, #1001, titles moved to decided; GA4 now waits on Shelby's Google sign-in; reminder for her to cancel or archive #1001.
+
+## 2026-10-01 21:10Z: Google Analytics 4 is set up (Cowork FOUNDER team)
+
+Shelby chose "Set it up for me", was already signed in to Chrome, chose "New FOUNDER account", and approved accepting the GA terms.
+- **Account and property.** Account "FOUNDER Beauty" (separate from her old V3RY / "Etsy - GA4" account). Property "founderbeauty.co", America/New_York to match Shopify's store timezone, USD. Industry Beauty & Fitness, Small; objectives Drive sales and Understand traffic. Web stream "FOUNDER website", https://www.founderbeauty.co, stream id 15937315110, enhanced measurement on. **Measurement ID G-YP5SS23BXF.**
+  - Data sharing: Google products & services off, Recommendations for your business off, Modeling contributions and Technical support on. GA Terms and the Data Processing Terms accepted with Shelby's explicit OK.
+- **Site.** `GA_MEASUREMENT_ID` in `src/lib/brand.ts` = `NEXT_PUBLIC_GA_ID` override, else G-YP5SS23BXF in production only (`VERCEL_ENV`), so previews and local builds stay out of the numbers. `Analytics.tsx` and the privacy policy's GA sentence both read it.
+  - No Vercel env step needed.
+  - Verified on a production build: gtag loads and `g/collect?tid=G-YP5SS23BXF` fires. This sent one test page view from localhost.
+  - The cross-domain linker (founderbeauty.co ↔ founderbeauty.myshopify.com) was already in place.
+- **Still to do.**
+  - Connect the same property in Shopify (Google & YouTube app; Shelby approves Google's OAuth screen), so purchases arrive.
+  - Add the domains in GA Admin › Data streams › Configure tag settings › Configure your domains, including checkout.founderbeauty.co once the DNS is live.
+  - A UTM convention for Instagram and email links.

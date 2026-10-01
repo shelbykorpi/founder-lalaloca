@@ -6,7 +6,7 @@
  * statistics or press; and the customer stays the main character.
  */
 
-import { CONTACT_EMAIL } from "./brand";
+import { CONTACT_EMAIL, GA_MEASUREMENT_ID } from "./brand";
 import { COLLECTION_SHIPS } from "./nextMove";
 
 /* ---------------- FOUND HER — editorial platform ---------------- */
@@ -363,7 +363,7 @@ export const policies = {
       },
       {
         heading: "What your browser keeps",
-        body: `Your bag and a couple of settings (like whether you’ve already walked through the front doors) are saved in your own browser so they’re still there when you come back. Your bag goes to Shopify when you check out. The site is hosted on Vercel, which keeps standard server logs.${process.env.NEXT_PUBLIC_GA_ID ? " We use Google Analytics to count visits and see which pages are read; it sets cookies in your browser and sends that usage data to Google." : ""}`,
+        body: `Your bag and a couple of settings (like whether you’ve already walked through the front doors) are saved in your own browser so they’re still there when you come back. Your bag goes to Shopify when you check out. The site is hosted on Vercel, which keeps standard server logs.${GA_MEASUREMENT_ID ? " We use Google Analytics to count visits and see which pages are read; it sets cookies in your browser and sends that usage data to Google." : ""}`,
       },
       {
         heading: "What we don’t do",

@@ -189,6 +189,21 @@ export const CONTACT_EMAIL =
 export const CONTACT_MAILTO = `mailto:${CONTACT_EMAIL}`;
 
 /**
+ * Google Analytics 4 measurement ID: account "FOUNDER Beauty", property
+ * "founderbeauty.co", web stream "FOUNDER website" (created 1 Oct 2026 under
+ * Shelby's Google login). A measurement ID is public by design, as it ships in
+ * every page's HTML, so it lives here rather than only in Vercel.
+ *
+ * NEXT_PUBLIC_GA_ID overrides it anywhere. Without the override, only the
+ * production deployment reports, so previews and local builds never put test
+ * visits into the real numbers. The same ID must also be connected inside
+ * Shopify, or checkout purchases never reach the property.
+ */
+export const GA_MEASUREMENT_ID =
+  process.env.NEXT_PUBLIC_GA_ID?.trim() ||
+  (process.env.VERCEL_ENV === "production" ? "G-YP5SS23BXF" : "");
+
+/**
  * Canonical origin, resolved at build time.
  *
  * Set NEXT_PUBLIC_SITE_URL once the real domain is attached. Until then Vercel

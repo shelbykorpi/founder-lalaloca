@@ -1,16 +1,16 @@
 {
   "version": 1,
-  "updated": "2026-10-01T20:15:00Z",
+  "updated": "2026-10-01T21:10:00Z",
   "updatedBy": "Founder Chief (Claude · Cowork)",
-  "headline": "Shopify titles are clean, the House Trio now sells from the single serums' stock at $98, and checkout is branded. Next from you: sign in to Google so the team can set up Analytics, and add the checkout DNS record.",
+  "headline": "Google Analytics is set up (FOUNDER Beauty · G-YP5SS23BXF) and goes live on the site with your next push. To count sales too, Shopify needs the same property connected; that's your one click below.",
   "auditPath": "docs/desk/executive-audit-2026-10-01.md",
   "waitingOnYou": [
     {
       "id": "ga4",
       "priority": "now",
-      "question": "Open Chrome signed in to the Google account that should own FOUNDER's analytics, then tell the team 'signed in'.",
-      "why": "You chose 'set it up for me'. The team creates the GA4 property, installs it on the site and in Shopify with cross-domain tracking. You sign in once; the team never types a password, and asks you before accepting Google's terms.",
-      "answerFormat": "'Signed in' (and which Google account, if you have more than one).",
+      "question": "Connect Google Analytics inside Shopify: let the team open Shopify's Google & YouTube app and link it to the FOUNDER Beauty property (you approve Google's permission screen).",
+      "why": "The site now reports visits. Purchases happen in Shopify checkout, so without this link, sales never reach Analytics and you can't see which page, post or campaign earned them.",
+      "answerFormat": "'Go ahead' (the team asks again before any permission screen), or 'I'll do it'.",
       "askedOn": "2026-10-01"
     },
     {
@@ -178,7 +178,7 @@
     {
       "id": "ga4-route",
       "question": "Google Analytics: your G-ID or set it up for you?",
-      "answer": "Set it up for me. Waiting on your Google sign-in.",
+      "answer": "Set it up for me. Done 1 Oct: Google Analytics account 'FOUNDER Beauty', property 'founderbeauty.co' (New York time to match Shopify, USD), web stream 'FOUNDER website', ID G-YP5SS23BXF. Terms accepted with your OK. Data sharing: Google products & services off, Recommendations off, Modeling and Technical support on.",
       "decidedOn": "2026-10-01"
     }
   ],
@@ -220,8 +220,8 @@
         {
           "title": "Google Analytics on the site and in Shopify, cross-domain, UTMs",
           "owner": "growth-marketing + frontend-engineer",
-          "status": "blocked",
-          "note": "Waiting on your Google sign-in in Chrome"
+          "status": "doing",
+          "note": "Site tag ready (live on push). Shopify connection and UTMs next."
         },
         {
           "title": "Trio stock linkage; order #1001",

@@ -87,32 +87,16 @@ export const BRAND = {
    one-line tabs read as a run of small caps with no air between them. Break
    each name where it would break if you said it aloud: the verb or article
    on top, the noun underneath. */
+export const SHOP_NAV = [
+  { href: "/founder-collection", label: "The FOUNDER Collection", note: "Five pieces · cleanse to finish" },
+  { href: "/shop", label: "The LALALOCA Collection", note: "Three serums · three kinds of day" },
+] as const;
+
 export const PRIMARY_NAV: { href: string; label: string; stack?: string[] }[] = [
-  /* The collaboration lockup. `stack` is the three centred lines the desktop
-     bar shows; `label` is the one-line version the mobile menu uses and the
-     accessible name a screen reader hears, because a multiplication sign read
-     aloud between two proper nouns is not a sentence. */
-  /* 3 Sept 2026: the tab used to be the LALALOCA × StandUp for Kids lockup,
-     which is a beautiful thing to know and a confusing thing to click — a
-     first-time visitor could not find the shop. Every benchmark brand leads
-     the bar with the shop. The collaboration keeps its band on /shop and its
-     whole room at /young-founders-room; it has not gone anywhere. */
-  { href: "/shop", label: "Shop the Serums", stack: ["Shop", "The Serums"] },
-  /* The second line, sold under FOUNDER itself. Kept next to the LALALOCA
-     lockup so the two collections read as siblings, not as a shop and a
-     sub-page. */
-  { href: "/founder-collection", label: "The FOUNDER Collection", stack: ["The FOUNDER", "Collection"] },
-  { href: "/our-story", label: "Our Story", stack: ["Our", "Story"] },
   { href: "/found-her", label: "Found Her", stack: ["Found", "Her"] },
-  { href: "/young-founders-room", label: "Young Founders\u2019 Room", stack: ["Young Founders\u2019", "Room"] },
-  /* 10 Sept 2026: the reading room. One page per ingredient named on a
-     label, with the study behind it. Last in the bar because it is reference,
-     not a room in the loop — the six-tab run measures ~700px, which is why
-     the desktop bar now starts at xl (see Header.tsx). */
+  { href: "/our-story", label: "Our Story", stack: ["Our", "Story"] },
+  { href: "/young-founders-room", label: "Young Founders’ Room", stack: ["Young Founders’", "Room"] },
   { href: "/library", label: "The Library", stack: ["The", "Library"] },
-  /* Share Your Story is not a tab: the page folded into Found Her (see the
-     redirect in next.config.ts), so the nav says FOUND HER once and means
-     both. The footer keeps a deep link to the invitation itself. */
 ];
 
 /** The house's Instagram (Shelby, 1 Oct 2026). Footer link + Organization sameAs. */

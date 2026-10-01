@@ -10,7 +10,7 @@ import { JsonLd, aboutPageSchema, breadcrumbSchema } from "@/lib/seo";
 
 const TITLE = "Our Story";
 const DESCRIPTION =
-  "The story behind FOUNDER: from being bullied, to a modeling career and a Maxim cover, to entrepreneurship, beauty, technology, and a brand built around the whole woman.";
+  "The story behind FOUNDER: from being bullied for her looks to a modeling career, the cover of Maxim, entrepreneurship, beauty, technology, and a brand built around the whole woman.";
 
 export const metadata: Metadata = {
   title: TITLE,
@@ -64,9 +64,10 @@ export default function OurStoryPage() {
                 I know what it feels like to be judged by how you look.
               </h1>
               <p className="mt-6 max-w-[32rem] text-[0.98rem] leading-[1.75] text-cream/80 md:text-[1.05rem]">
-                I was picked on and bullied in school. Years later, I built a modeling career
-                and ended up on the cover of Maxim. Both experiences taught me the same thing:
-                what people see first is rarely the whole story.
+                I was picked on and bullied for my looks in school. I honestly never imagined I
+                would grow up to be considered beautiful, much less build a career around being
+                photographed. Years later, I was on the cover of Maxim. Life has a funny way of
+                showing you its version of karma.
               </p>
               <div className="mt-8 flex flex-wrap items-center gap-x-7 gap-y-4">
                 <Link href="#beginning" className="btn btn-primary">
@@ -96,20 +97,27 @@ export default function OurStoryPage() {
                 </p>
                 <div className="mt-7 space-y-5 text-[1rem] leading-[1.85] text-charcoal/76">
                   <p>
-                    Being bullied stays with you. Then life did something strange: I went into
-                    modeling, built a career in front of the camera, and eventually appeared on
+                    I was the girl who got made fun of for how I looked. At that age, I never
+                    thought I would be the pretty girl. I definitely never thought my face would
+                    become part of my career.
+                  </p>
+                  <p>
+                    But it did. Modeling took me into a completely different world. I shot
+                    catalogs, swimwear and high-fashion editorials. I worked as a ring girl for
+                    professional sports, worked alongside Kevin Hart, and eventually appeared on
                     the cover of Maxim.
                   </p>
                   <p>
-                    Suddenly, the thing I had once been picked apart for was being photographed,
-                    styled, praised, and put on a cover. I learned very quickly that criticism and
-                    attention can come from opposite directions and still leave you wondering who
-                    gets to decide how you should feel about yourself.
+                    There is something surreal about growing up being picked apart for your looks
+                    and then being paid to be photographed for them. I can laugh about the karma in
+                    that now, but it also taught me something early: attention does not automatically
+                    give you confidence, and being considered beautiful does not tell anyone who you are.
                   </p>
                   <p>
-                    That experience is part of why FOUNDER is not a brand about becoming prettier
-                    for other people. I wanted to build something that felt more like ownership:
-                    of your face, your ambition, your history, and the life you are creating.
+                    Modeling taught me how powerful an image can be. It also taught me how easy it
+                    is for people to stop at the image. FOUNDER comes from wanting to hold both
+                    truths at once — beauty can be fun, glamorous and powerful, but there should
+                    always be more to the woman than the picture.
                   </p>
                 </div>
               </div>

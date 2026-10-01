@@ -3,7 +3,7 @@ import { SITE } from "@/lib/brand";
 import { products } from "@/lib/products";
 import { FOUNDER_COLLECTION } from "@/lib/founderCollection";
 import { NEXT_MOVE } from "@/lib/nextMove";
-import { profiles, publicationDate } from "@/lib/profiles";
+import { approvedProfiles, publicationDate } from "@/lib/profiles";
 import { policies } from "@/lib/content";
 import { LIBRARY, LIBRARY_PUBLISHED } from "@/lib/library";
 
@@ -73,7 +73,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     })),
     /* Real approval dates, not build timestamps — a lastModified that changes
        on every deploy teaches crawlers to ignore the field. */
-    ...profiles.map((profile) => ({
+    ...approvedProfiles.map((profile) => ({
       url: `${SITE.url}/found-her/${profile.slug}`,
       lastModified: publicationDate(profile),
       changeFrequency: "yearly" as const,

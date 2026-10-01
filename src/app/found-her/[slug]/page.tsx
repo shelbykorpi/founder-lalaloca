@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
-import { getProfile, profiles, publicationDate } from "@/lib/profiles";
+import { approvedProfiles, getPublishedProfile, publicationDate } from "@/lib/profiles";
 import { ProfileStory } from "@/components/found-her/ProfileStory";
 import { BRAND } from "@/lib/brand";
 import { JsonLd, articleSchema, breadcrumbSchema, personSchema } from "@/lib/seo";
@@ -9,14 +9,14 @@ import { JsonLd, articleSchema, breadcrumbSchema, personSchema } from "@/lib/seo
    removed with their section on /found-her; their slugs redirect to the
    archive in next.config.ts. */
 export function generateStaticParams() {
-  return profiles.map((profile) => ({ slug: profile.slug }));
+  return approvedProfiles.map((profile) => ({ slug: profile.slug }));
 }
 
 export async function generateMetadata({
   params,
 }: PageProps<"/found-her/[slug]">): Promise<Metadata> {
   const { slug } = await params;
-  const profile = getProfile(slug);
+  const profile = getPublishedProfile(slug);
   if (!profile) return { title: "Not found" };
   return {
     title: `${profile.name} — ${BRAND.editorial}`,
@@ -34,7 +34,7 @@ export async function generateMetadata({
 export default async function ProfilePage({ params }: PageProps<"/found-her/[slug]">) {
   const { slug } = await params;
 
-  const profile = getProfile(slug);
+  const profile = getPublishedProfile(slug);
   if (!profile) notFound();
 
   return (

@@ -4,10 +4,10 @@
  * Every profile here is a real woman's own account, sent in by her. Nothing in
  * this file is written on anyone's behalf: her answers are hers, copy-edited
  * at most, and the standfirst is the one line the house writes. A story goes
- * up once she has approved the final text — or, at the founder's call, ahead
- * of it, in which case `approvedOn` stays "PENDING" and her page claims no
- * approval until she gives it. The shape below is what a CMS should map onto
- * when one is connected.
+ * up only once she has approved the final text. Profiles can be drafted here
+ * before that point, but pending records are never part of the public archive,
+ * feed, sitemap, social cards or article routes. The shape below is what a CMS
+ * should map onto when one is connected.
  */
 
 export type FoundHerProfile = {
@@ -42,10 +42,8 @@ export type FoundHerProfile = {
       and approved the final text" line — the site never claims an
       approval that hasn't happened. */
   approvedOn: string;
-  /** Only for a story published ahead of her sign-off (the founder's
-      call): the date it actually went live, so feeds, the sitemap and
-      article schema get a real date instead of the PENDING sentinel.
-      Remove it when approvedOn gets her real date. */
+  /** Legacy draft field from the pre-launch workflow. Pending profiles are
+      no longer exposed publicly; remove this when the record is approved. */
   publishedOn?: string;
 };
 
@@ -54,12 +52,10 @@ export function isApproved(profile: FoundHerProfile): boolean {
   return profile.approvedOn !== "PENDING";
 }
 
-/** The date machines cite: her approval date, or — for a story the
-    founder chose to publish ahead of sign-off — the day it went live. */
+/** The date machines cite. Public profiles are approval-gated, so the
+    approval date is also the publication date exposed to crawlers. */
 export function publicationDate(profile: FoundHerProfile): string {
-  return isApproved(profile)
-    ? profile.approvedOn
-    : (profile.publishedOn ?? profile.approvedOn);
+  return profile.approvedOn;
 }
 
 export const profiles: FoundHerProfile[] = [
@@ -332,6 +328,13 @@ export const profiles: FoundHerProfile[] = [
   },
 ];
 
+/** The only records allowed onto public FOUND HER surfaces. */
+export const approvedProfiles = profiles.filter(isApproved);
+
 export function getProfile(slug: string) {
   return profiles.find((profile) => profile.slug === slug);
+}
+
+export function getPublishedProfile(slug: string) {
+  return approvedProfiles.find((profile) => profile.slug === slug);
 }

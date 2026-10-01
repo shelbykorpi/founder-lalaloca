@@ -1,15 +1,12 @@
 import type { Metadata } from "next";
 import Image from "next/image";
 import Link from "next/link";
-import { RoomHero } from "@/components/house/RoomHero";
 import { HouseShell } from "@/components/house/HouseShell";
-import { EditorialRoomSection } from "@/components/house/EditorialRoomSection";
-import { getRoom } from "@/lib/rooms";
 import { EmailSignup } from "@/components/site/EmailSignup";
 import { StoryForm } from "@/components/story/StoryForm";
 import { BRAND } from "@/lib/brand";
-import { PROFILE_QUESTIONS, STORY_INTRO, STORY_STANDARD } from "@/lib/content";
-import { profiles } from "@/lib/profiles";
+import { STORY_STANDARD } from "@/lib/content";
+import { approvedProfiles } from "@/lib/profiles";
 import { JsonLd, breadcrumbSchema, editorialListSchema } from "@/lib/seo";
 
 export const metadata: Metadata = {
@@ -18,26 +15,19 @@ export const metadata: Metadata = {
     "Stories from women about what they started, survived, changed, finished, and finally gave themselves credit for — and the place to tell yours.",
   alternates: {
     canonical: "/found-her",
-    /* Advertises the feed in the document head, which is how aggregators,
-       newsletter platforms and feed-reading crawlers find it without being
-       told the URL. */
     types: { "application/rss+xml": "/feed/found-her.xml" },
   },
 };
 
 export default function FoundHerPage() {
-  /* Every published profile hangs in the band under the hero, two to a
-     row, in the order of `profiles` — adding a story is data only: her
-     record in lib/profiles.ts and her portrait in public/editorial. */
+  const [featured, ...rest] = approvedProfiles;
+
   return (
     <>
-      {/* Declares the archive as a list of real articles, so the section itself
-          can accrue topical authority instead of each story fending for
-          itself. Profiles only — they are the original reporting. */}
       <JsonLd
         schema={[
           editorialListSchema(
-            profiles.map((profile) => ({
+            approvedProfiles.map((profile) => ({
               title: `${profile.name} — ${profile.building}`,
               path: `/found-her/${profile.slug}`,
               description: profile.standfirst,
@@ -46,321 +36,230 @@ export default function FoundHerPage() {
           breadcrumbSchema([{ name: BRAND.editorial, path: "/found-her" }]),
         ]}
       />
-      {/* This is the first thing on the page after the (dark) header, so it
-          opens in a dark room rather than defaulting to the intro's cream —
-          a bright band right under a dark header is exactly the pale-island
-          bug this pass exists to remove. The profiles section right below
-          is the deliberate lit panel it hands off to. */}
-      <HouseShell room={6}>
-      <RoomHero
-        room={getRoom(6)}
-        height="min-h-[78svh]"
-        priority
-        title={BRAND.campaign}
-        lede="Stories from women who built before anyone applauded."
-      >
-        <Link href="#profiles-heading" className="btn btn-primary">
-          Read the stories
-        </Link>
-        <Link href="#share" className="hairline text-cream">
-          Write yours
-        </Link>
-      </RoomHero>
 
-      {/* ---------------- Profiles ---------------- */}
-      {/* ---------------- The gallery: the profiles ----------------
-          3 Sept 2026, to Shelby's mock-up: the desert-pink portrait hall is
-          the hero above; the profiles are a dark band directly beneath it,
-          split two-up with a rose diamond between. Each band is one link to
-          her story — portrait, name, her line, "Read her story". Portraits
-          are the profiles' own (Julie's is the painting made for her story,
-          and her note still says so). One markup for every width. */}
-      <section aria-labelledby="profiles-heading" className="house-marble">
-        <h2 id="profiles-heading" className="sr-only">
-          The profiles
-        </h2>
-        {profiles.length === 0 ? (
-          <div className="shell py-16">
-            <div className="paper-page max-w-3xl p-8 md:p-12">
-              <p className="headline max-w-[16ch] text-balance text-charcoal">
-                The first one hasn’t been published yet.
+      <HouseShell room={6}>
+        <section className="relative isolate min-h-[82svh] overflow-hidden bg-night-deep">
+          <Image
+            src="/editorial/rooms/found-her-hall-sky.webp"
+            alt="The FOUND HER gallery: portraits along a dark marble hall, a door at the end open onto a pink desert sky."
+            fill
+            priority
+            sizes="100vw"
+            className="object-cover object-center"
+          />
+          <div
+            aria-hidden
+            className="absolute inset-0 bg-[linear-gradient(90deg,rgba(6,17,14,0.96)_0%,rgba(6,17,14,0.88)_32%,rgba(6,17,14,0.56)_58%,rgba(6,17,14,0.15)_100%)]"
+          />
+          <div className="shell relative flex min-h-[82svh] items-end pb-16 pt-28 md:items-center md:py-24">
+            <div className="max-w-[46rem]">
+              <p className="room-label">FOUND HER · The private room</p>
+              <h1 className="mt-6 font-serif text-[clamp(4rem,10vw,8.5rem)] font-light leading-[0.82] tracking-[-0.045em] text-cream">
+                You didn’t become her.
+                <span className="block italic text-rose">You found her.</span>
+              </h1>
+              <p className="mt-8 max-w-[36rem] text-[clamp(1rem,1.5vw,1.25rem)] leading-[1.7] text-cream/78">
+                Portraits of women building consequential things — in their own words,
+                with their final approval, and without turning their lives into a slogan.
               </p>
-              <p className="mt-6 max-w-xl text-[1.0625rem] leading-[1.8] text-charcoal/85">
-                There’s nothing here because nobody has approved her story yet. We
-                could have filled this page with names and quotes nobody said, and
-                you’d probably never know. We’d know.
-              </p>
-              <p className="mt-5 max-w-xl leading-[1.8] text-charcoal/85">
-                The first profile will be the founder’s, in her own words. After that
-                it’s women who wrote in — one at a time, slowly, each of them reading
-                the final text before it goes anywhere.
-              </p>
-              <div className="mt-8">
-                <Link href="#share" className="btn btn-dark">
-                  I found her when…
+              <div className="mt-9 flex flex-wrap gap-5">
+                <Link href="#stories" className="btn btn-primary">
+                  Enter the archive
+                </Link>
+                <Link href="#share" className="hairline text-cream">
+                  Tell your story
                 </Link>
               </div>
-              <h3 className="eyebrow mt-10 text-bronze-ink">What we ask</h3>
-              <ul className="mt-5 space-y-3">
-                {PROFILE_QUESTIONS.map((question) => (
-                  <li
-                    key={question}
-                    className="border-b border-charcoal/10 pb-3 font-serif text-xl leading-snug text-charcoal last:border-0"
-                  >
-                    {question}
-                  </li>
-                ))}
-              </ul>
             </div>
           </div>
-        ) : (
-          <ul role="list" className="grid md:grid-cols-2">
-            {profiles.map((profile, i) => (
-              <li
-                key={profile.slug}
-                /* Two to a row. The seam between a pair is the left border
-                   of the right-hand card; every row after the first gets a
-                   top border. Written for any count (a third story landed on
-                   28 Sept 2026 and sat against the page edge with a diamond
-                   on it when this assumed exactly two). */
-                className={`relative border-t border-rose/20 ${
-                  i % 2 === 1 ? "md:border-l" : ""
-                } ${i < 2 ? "md:border-t-0" : ""}`}
-              >
-                {/* The rose diamond that sits on the seam between a pair, as
-                    in the mock-up. Desktop only, on the left border of the
-                    right-hand card. */}
-                {i % 2 === 1 && (
-                  <span
-                    aria-hidden
-                    className="absolute left-0 top-1/2 z-10 hidden -translate-x-1/2 -translate-y-1/2 text-rose md:block"
-                  >
-                    ◇
-                  </span>
+        </section>
+
+        {featured ? (
+          <section id="stories" className="bg-night-deep py-0" aria-labelledby="featured-story-heading">
+            <Link
+              href={`/found-her/${featured.slug}`}
+              className="group grid min-h-[78svh] lg:grid-cols-[1.08fr_0.92fr]"
+            >
+              <div className="relative min-h-[58svh] overflow-hidden bg-night">
+                {featured.portrait && (
+                  <Image
+                    src={featured.portrait.src}
+                    alt={featured.portrait.alt}
+                    fill
+                    sizes="(max-width: 1024px) 100vw, 54vw"
+                    className="object-cover transition-transform duration-[1400ms] ease-out group-hover:scale-[1.02]"
+                    style={{ objectPosition: featured.portrait.position ?? "center" }}
+                  />
                 )}
-                <Link
-                  href={`/found-her/${profile.slug}`}
-                  aria-label={`Read ${profile.name}’s story`}
-                  className="group flex min-h-[13rem] items-stretch focus-visible:outline focus-visible:-outline-offset-2 focus-visible:outline-2 focus-visible:outline-rose"
-                >
-                  {profile.portrait && (
-                    <span className="relative block w-[38%] max-w-[13rem] shrink-0 overflow-hidden bg-night-deep">
-                      <Image
-                        src={profile.portrait.src}
-                        alt={profile.portrait.alt}
-                        fill
-                        loading="lazy"
-                        sizes="(max-width: 768px) 40vw, 13rem"
-                        className="object-cover transition-transform duration-700 group-hover:scale-[1.04]"
-                        style={{ objectPosition: profile.portrait.position ?? "center" }}
-                      />
-                      <span
-                        aria-hidden
-                        className="absolute inset-0 bg-[linear-gradient(90deg,transparent_60%,rgba(14,33,27,0.7))]"
-                      />
-                    </span>
-                  )}
-                  <span className="flex flex-1 items-center justify-between gap-4 px-6 py-6 md:px-8">
-                    <span className="min-w-0">
-                      <span className="block font-serif text-[clamp(1.75rem,3vw,2.5rem)] uppercase leading-none tracking-[0.02em] text-champagne transition-colors group-hover:text-rose">
-                        {profile.name.split(" ")[0]}
-                      </span>
-                      <span className="mt-3 block text-sm leading-relaxed text-cream/75">
-                        {profile.tagline ?? profile.building}
-                      </span>
-                      {profile.portrait?.note ? (
-                        <span className="mt-2 block text-xs leading-relaxed text-cream/45">
-                          {profile.portrait.note}
-                        </span>
-                      ) : null}
-                    </span>
-                    <span className="hidden shrink-0 items-center gap-2 text-[0.6875rem] uppercase tracking-[0.22em] text-cream/80 transition-colors group-hover:text-rose sm:flex">
-                      Read her story
-                      <span aria-hidden className="transition-transform duration-300 group-hover:translate-x-1">
-                        →
-                      </span>
-                    </span>
-                  </span>
-                </Link>
-              </li>
-            ))}
-            {/* An odd number of stories left half a row empty. The empty
-                half is now the next frame on the wall — the house's own
-                frame with nothing in it and a blank plate — and it opens
-                the form. Added 28 Sept 2026 with the third story. */}
-            {profiles.length % 2 === 1 && (
-              <li className="relative border-t border-rose/20 md:border-l md:border-t-0">
-                <span
+                <div
                   aria-hidden
-                  className="absolute left-0 top-1/2 z-10 hidden -translate-x-1/2 -translate-y-1/2 text-rose md:block"
-                >
-                  ◇
-                </span>
-                <Link
-                  href="#share"
-                  className="group flex min-h-[13rem] items-stretch focus-visible:outline focus-visible:-outline-offset-2 focus-visible:outline-2 focus-visible:outline-rose"
-                >
-                  <span className="relative block w-[38%] max-w-[13rem] shrink-0 overflow-hidden bg-night-deep">
-                    <Image
-                      src="/editorial/found-her-empty-frame.webp"
-                      alt="An empty frame on the FOUND HER wall: the carved green-and-gold frame, the rose mat and a blank brass nameplate, waiting."
-                      fill
-                      loading="lazy"
-                      sizes="(max-width: 768px) 40vw, 13rem"
-                      className="object-cover transition-transform duration-700 group-hover:scale-[1.04]"
-                    />
-                    <span
-                      aria-hidden
-                      className="absolute inset-0 bg-[linear-gradient(90deg,transparent_60%,rgba(14,33,27,0.7))]"
-                    />
-                  </span>
-                  <span className="flex flex-1 items-center justify-between gap-4 px-6 py-6 md:px-8">
-                    <span className="min-w-0">
-                      <span className="block font-serif text-[clamp(1.75rem,3vw,2.5rem)] uppercase leading-none tracking-[0.02em] text-cream/55 transition-colors group-hover:text-rose">
-                        Yours
-                      </span>
-                      <span className="mt-3 block text-sm leading-relaxed text-cream/75">
-                        The next frame is waiting. I found her when…
-                      </span>
+                  className="absolute inset-0 bg-[linear-gradient(180deg,transparent_45%,rgba(6,17,14,0.28)_100%)]"
+                />
+                <div className="absolute bottom-5 left-5 right-5 flex items-center justify-between text-[0.625rem] uppercase tracking-[0.24em] text-cream/70 md:bottom-8 md:left-8 md:right-8">
+                  <span>FOUND HER / 001</span>
+                  <span>FOUNDER Editorial</span>
+                </div>
+              </div>
+
+              <div className="flex items-center border-l border-bronze/15 bg-[linear-gradient(180deg,#102821_0%,#0b1c18_100%)] px-6 py-14 md:px-10 lg:px-14">
+                <div className="max-w-xl">
+                  <p className="eyebrow text-champagne">The featured profile</p>
+                  <h2
+                    id="featured-story-heading"
+                    className="mt-6 font-serif text-[clamp(3.5rem,7vw,7rem)] font-light uppercase leading-[0.84] tracking-[-0.04em] text-cream"
+                  >
+                    {featured.name}
+                  </h2>
+                  <p className="mt-6 max-w-[28ch] font-serif text-[clamp(1.4rem,2.3vw,2rem)] italic leading-snug text-rose">
+                    {featured.tagline ?? featured.building}
+                  </p>
+                  <p className="mt-7 max-w-[42rem] text-[1rem] leading-[1.8] text-cream/74">
+                    {featured.standfirst}
+                  </p>
+                  <div className="mt-10 flex items-center justify-between border-t border-bronze/20 pt-6">
+                    <span className="text-[0.625rem] uppercase tracking-[0.2em] text-cream/45">
+                      {featured.role}
                     </span>
-                    <span className="hidden shrink-0 items-center gap-2 text-[0.6875rem] uppercase tracking-[0.22em] text-cream/80 transition-colors group-hover:text-rose sm:flex">
-                      Write yours
-                      <span aria-hidden className="transition-transform duration-300 group-hover:translate-x-1">
-                        →
-                      </span>
-                    </span>
-                  </span>
-                </Link>
-              </li>
-            )}
-          </ul>
+                    <span className="hairline text-cream">Read her story →</span>
+                  </div>
+                </div>
+              </div>
+            </Link>
+          </section>
+        ) : (
+          <section id="stories" className="house-marble py-20">
+            <div className="shell max-w-3xl">
+              <p className="eyebrow text-champagne">The archive</p>
+              <h2 className="headline-house mt-5 text-cream">The first approved profile is still being written.</h2>
+            </div>
+          </section>
         )}
-      </section>
-      {/* ---------------- The invitation ----------------
-          A call to action, not reading, so it is a dark room between the two
-          lit panels either side of it — the profiles above, the share form
-          below. The photograph already sits on its own near-black ground, so
-          the room reads as one continuous surface with it rather than a
-          cream field the photo's bg-ink used to interrupt. */}
-      <EditorialRoomSection surface="marble" aria-labelledby="invitation-heading">
-        <div className="shell grid items-center gap-10 lg:grid-cols-[minmax(0,26rem)_1fr] lg:gap-16">
-          <div className="relative mx-auto aspect-[4/5] w-full max-w-sm overflow-hidden bg-ink lg:mx-0 lg:max-w-none">
-            <Image
-              src="/editorial/the-room-is-yours.webp"
-              alt="A sheet of paper in a vintage typewriter, typed with the words “The room is yours.”"
-              fill
-              loading="lazy"
-              sizes="(max-width: 1024px) 90vw, 26rem"
-              className="object-cover"
-            />
-          </div>
 
-          <div>
-            <p className="eyebrow text-champagne">Your turn</p>
-            <h2 id="invitation-heading" className="headline mt-4 max-w-[14ch] text-balance text-cream">
-              Write yours.
-            </h2>
-            <p className="mt-6 max-w-md text-[1.0625rem] leading-[1.8] text-cream/85">
-              This archive isn’t ours to fill. Tell us what you started, what it took,
-              and the part you’ve never said out loud at a dinner party.
-            </p>
-            <p className="mt-5 max-w-md leading-[1.8] text-cream/80">
-              As long or as short as you like — there’s no format and no word count. If
-              you know the moment you found her, that’s the one we want.
-            </p>
-            <div className="mt-8">
-              <Link href="#share" className="btn btn-primary">
-                Write yours
-              </Link>
-            </div>
-          </div>
-        </div>
-      </EditorialRoomSection>
+        {rest.length > 0 && (
+          <section className="house-marble border-t border-bronze/15 py-20 md:py-28" aria-label="More FOUND HER stories">
+            <div className="shell">
+              <div className="mb-10 flex items-end justify-between gap-6">
+                <div>
+                  <p className="eyebrow text-champagne">The archive</p>
+                  <h2 className="mt-4 font-serif text-[clamp(2.8rem,5.5vw,5rem)] font-light leading-none text-cream">
+                    More women. More rooms.
+                  </h2>
+                </div>
+                <p className="hidden max-w-sm text-right text-sm leading-relaxed text-cream/55 md:block">
+                  Each profile is published only after the woman has approved the final text.
+                </p>
+              </div>
 
-      {/* ---------------- Share your story ----------------
-          This was its own page at /share-your-story, with its own tab in the
-          bar. It lives here now — the invitation above and the form it invites
-          you to are one page, and the old URL 301s to this anchor so every
-          link anyone ever shared still lands on the form. The dark "how we
-          handle what you send us" band that used to sit between them is gone:
-          the same four points arrive as the aside beside the form, and one
-          page should not recite them twice. */}
-      <section id="share" aria-labelledby="share-heading" className="scroll-mt-24">
-        {/* ---- The writing desk ----
-            The gallery hands off to a private desk: the typewriter frame the
-            house already owns, the invitation as live text beside it, and
-            the form itself on a page of paper lying on the marble below. One
-            form, one heading, every width — the two-breakpoint intro and the
-            separate phone figure are gone (3 Sept 2026). */}
-        <EditorialRoomSection
-          surface="scene"
-          scene="/editorial/the-room-is-yours.webp"
-          sceneAlt=""
-          /* 15%, not 35%: the typed sheet ("THE ROOM / IS YOURS.") sits at
-             16–27% of this portrait frame, and at 35% a wide band cut "IS
-             YOURS." in half at 1440 (launch crawl, 30 Sept 2026). At 15% both
-             typed lines stay whole from 768 to 1920. */
-          scenePosition="center 15%"
-          tight
-        >
-          <div className="shell grid items-center gap-10 lg:grid-cols-[minmax(0,30rem)_1fr] lg:gap-16">
-            <div>
-              <p className="room-label">Your turn at the desk</p>
-              <h2 id="share-heading" className="headline-house mt-5 text-balance text-cream">
-                I found her when …
-              </h2>
-              <p className="mt-6 max-w-[40ch] text-[1.0625rem] leading-relaxed text-cream/80">
-                {STORY_INTRO}
-              </p>
-            </div>
-          </div>
-        </EditorialRoomSection>
-        <EditorialRoomSection surface="paper" ambient={false}>
-          <div className="grid gap-12 lg:grid-cols-[1fr_minmax(0,22rem)] lg:gap-16">
-            <StoryForm />
-
-            <aside className="lg:pt-2">
-              <h3 className="eyebrow text-charcoal/70">Before you write</h3>
-              <ul className="mt-6 space-y-6 border-t border-charcoal/12 pt-6">
-                {STORY_STANDARD.map((item) => (
-                  <li key={item.title}>
-                    <h4 className="font-serif text-xl leading-tight text-charcoal">
-                      {item.title}
-                    </h4>
-                    <p className="mt-2 text-sm leading-relaxed text-charcoal/80">
-                      {item.detail}
-                    </p>
-                  </li>
+              <div className="grid gap-px bg-bronze/20 md:grid-cols-2">
+                {rest.map((profile, index) => (
+                  <Link
+                    key={profile.slug}
+                    href={`/found-her/${profile.slug}`}
+                    className="group grid min-h-[34rem] grid-rows-[1fr_auto] bg-night-deep"
+                  >
+                    <div className="relative min-h-[26rem] overflow-hidden">
+                      {profile.portrait && (
+                        <Image
+                          src={profile.portrait.src}
+                          alt={profile.portrait.alt}
+                          fill
+                          sizes="(max-width: 768px) 100vw, 50vw"
+                          className="object-cover transition-transform duration-[1200ms] ease-out group-hover:scale-[1.025]"
+                          style={{ objectPosition: profile.portrait.position ?? "center" }}
+                        />
+                      )}
+                      <div aria-hidden className="absolute inset-0 bg-[linear-gradient(180deg,transparent_55%,rgba(7,19,15,0.35)_100%)]" />
+                      <span className="absolute left-5 top-5 text-[0.58rem] uppercase tracking-[0.22em] text-cream/72">
+                        FOUND HER / {String(index + 2).padStart(3, "0")}
+                      </span>
+                    </div>
+                    <div className="border-t border-bronze/15 px-6 py-7">
+                      <h3 className="font-serif text-[clamp(2rem,3.8vw,3.5rem)] font-light uppercase leading-none text-cream">
+                        {profile.name}
+                      </h3>
+                      <p className="mt-4 max-w-[38ch] text-sm leading-relaxed text-cream/65">
+                        {profile.tagline ?? profile.building}
+                      </p>
+                      <p className="mt-6 text-[0.625rem] uppercase tracking-[0.2em] text-champagne">
+                        Read her story →
+                      </p>
+                    </div>
+                  </Link>
                 ))}
-              </ul>
-              {/* This note used to say the form wasn't wired to anything. It is
-                  now — so the note says what is still true instead, which is
-                  that the form will admit a failure rather than fake a success.
-                  Left in place deliberately: it is the sentence that makes the
-                  thank-you screen worth believing. */}
-              <p className="mt-8 border-l-2 border-bronze/50 py-1 pl-4 text-xs leading-relaxed text-charcoal/70">
-                If anything goes wrong when you send this, we’ll tell you plainly
-                rather than showing a thank-you screen over a message that went
-                nowhere.
-              </p>
-            </aside>
-          </div>
-        </EditorialRoomSection>
-      </section>
+              </div>
+            </div>
+          </section>
+        )}
 
-      {/* Kept on paper rather than pushed into a dark room: texture-stone's
-          blush/rose wash is built to sit on cream (it's the same pairing
-          PageIntro and Our Story's founder section use) and would barely
-          register against night — and this is a quiet closing note, not the
-          kind of call to action the dark rooms are for. */}
-      <EditorialRoomSection surface="panel" tight>
-        <div className="shell max-w-xl">
-          <h2 className="headline text-balance text-cream">
-            New stories, as they’re published.
-          </h2>
-          <EmailSignup tone="green" source="found-her" />
-        </div>
-      </EditorialRoomSection>
+        <section className="border-y border-bronze/15 bg-founder-green py-20 md:py-28">
+          <div className="shell grid gap-12 lg:grid-cols-[0.8fr_1.2fr] lg:items-start lg:gap-20">
+            <div>
+              <p className="eyebrow text-champagne">FOUND HER manifesto</p>
+              <h2 className="mt-5 max-w-[10ch] font-serif text-[clamp(3rem,6vw,5.5rem)] font-light leading-[0.92] text-cream">
+                Recognize her, then invite her in.
+              </h2>
+            </div>
+            <div className="max-w-[46rem] lg:pt-3">
+              <p className="font-serif text-[clamp(1.5rem,2.8vw,2.4rem)] leading-[1.25] text-cream/95">
+                FOUND HER is not a community page bolted onto commerce. It is the room where the women become the subject.
+              </p>
+              <p className="mt-7 text-[1rem] leading-[1.85] text-cream/72">
+                The work comes first: what she built, what it took, what changed, and the version of herself she finally recognized. Beauty sits around that work — never in place of it.
+              </p>
+              <p className="mt-5 text-[1rem] leading-[1.85] text-cream/72">
+                No audition. No invented quotes. No publication without explicit final approval.
+              </p>
+            </div>
+          </div>
+        </section>
+
+        <section id="share" className="scroll-mt-24 bg-night-deep py-20 md:py-28" aria-labelledby="share-heading">
+          <div className="shell grid gap-14 lg:grid-cols-[0.72fr_1.28fr] lg:gap-20">
+            <div className="lg:sticky lg:top-28 lg:self-start">
+              <p className="eyebrow text-champagne">The invitation</p>
+              <h2 id="share-heading" className="mt-5 max-w-[9ch] font-serif text-[clamp(3.4rem,7vw,6.5rem)] font-light leading-[0.9] text-cream">
+                Your story belongs here.
+              </h2>
+              <p className="mt-7 max-w-md text-[1rem] leading-[1.8] text-cream/72">
+                Tell us what you started, survived, changed, finished, or finally gave yourself credit for.
+              </p>
+              <div className="mt-10 space-y-5 border-t border-bronze/20 pt-7">
+                {STORY_STANDARD.slice(0, 3).map((item) => (
+                  <div key={item.title}>
+                    <h3 className="font-serif text-xl text-cream">{item.title}</h3>
+                    <p className="mt-2 text-sm leading-relaxed text-cream/58">{item.detail}</p>
+                  </div>
+                ))}
+              </div>
+            </div>
+
+            <div className="bg-cream p-6 text-charcoal shadow-[0_35px_90px_rgba(0,0,0,0.35)] md:p-10 lg:p-12">
+              <p className="eyebrow text-bronze-ink">Write it down</p>
+              <p className="mt-4 max-w-2xl font-serif text-[clamp(1.8rem,3vw,2.6rem)] leading-snug text-charcoal">
+                As long or as short as it needs to be. If there is one moment you found her, start there.
+              </p>
+              <div className="mt-10">
+                <StoryForm />
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <section className="bg-night-deep pb-24 pt-4">
+          <div className="shell border-t border-bronze/20 pt-12">
+            <div className="grid gap-8 md:grid-cols-[1fr_auto] md:items-end">
+              <div>
+                <p className="eyebrow text-champagne">The next profile</p>
+                <h2 className="mt-4 max-w-[12ch] font-serif text-[clamp(2.7rem,5vw,4.8rem)] font-light leading-none text-cream">
+                  New stories, as they’re approved.
+                </h2>
+              </div>
+              <div className="w-full max-w-md">
+                <EmailSignup tone="green" source="found-her" />
+              </div>
+            </div>
+          </div>
+        </section>
       </HouseShell>
     </>
   );

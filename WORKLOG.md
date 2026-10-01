@@ -2145,3 +2145,11 @@ Shelby: "the 'Founder. Found Her' section should be on each page. we can mix up 
 - Set: Shelby hall (unchanged look), Julie rose, Aly green. Future profiles default to hall until given a tone.
 - The closing is the house line, not attributed to the woman, so this doesn't alter anyone's approved answers.
 - Checked all three profiles at 1440 and 390; each shows the line exactly once.
+
+## 2026-10-02 02:05Z: Aly's portrait shown whole on her FOUND HER page (Cowork FOUNDER team)
+
+Shelby: "fix Aly's photo on this page, it cuts her neck off" (/found-her/aly-v).
+- Her portrait is 4:5 (1122×1402), but the profile masthead slot is 3:2, so object-position 50% 12% showed only the top and cut her off at the chin.
+- New optional `portrait.mastheadAspect`: a ratio for the masthead on her own page only, falling back to `aspect`, then 3:2. Aly's is set to "4 / 5", so the slot matches the photo and nothing is cropped (face, neck, shoulders, blazer).
+- `aspect` was left alone on purpose, because the /found-her gallery cards also read it. Her card stays 3:4 like the others (checked: 211×289 at 1440).
+- The masthead is 480×600 at 1440 and 350×438 at 390; both checked. Shelby's and Julie's pages are unchanged.

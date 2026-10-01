@@ -25,6 +25,10 @@ export type FoundHerProfile = {
     /** CSS aspect-ratio, e.g. "3 / 4". Defaults to the slot's own shape.
         Set it for framed artwork, which must never be cropped. */
     aspect?: string;
+    /** Ratio for the masthead on her own page only, when the 3:2 default
+        would crop her (e.g. "4 / 5" shows a 4:5 portrait whole). Leaves the
+        /found-her gallery card alone. */
+    mastheadAspect?: string;
     /** Small print rendered above her "Read her story" link wherever the
         portrait stands in for her. Exists so a composed artwork is never
         mistaken for a photograph of the woman herself. */
@@ -347,6 +351,10 @@ export const profiles: FoundHerProfile[] = [
          3:2 story masthead. */
       alt: "Aly V, smiling softly, her long dark hair over her shoulders, in a deep green satin blazer over a champagne silk camisole and a fine gold necklace, seated before dark green panelling with a brass lamp over a gilt-framed painting, a door ajar with warm light beyond, and a dusky rose silk cushion at her shoulder.",
       position: "50% 12%",
+      /* Shelby, 2 Oct 2026: the 3:2 masthead cut Aly off at the chin. Her
+         page now shows the portrait whole, so her neck, shoulders and the
+         blazer are in. */
+      mastheadAspect: "4 / 5",
       note: "Aly\u2019s own photograph, styled for FOUNDER \u2014 the outfit and the room are ours, her face is untouched.",
     },
     building: "MakeupGemz \u2014 makeup and beauty on Instagram, Whatnot and Skool. Next, a law degree.",

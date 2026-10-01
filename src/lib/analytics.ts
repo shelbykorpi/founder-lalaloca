@@ -119,6 +119,20 @@ declare global {
  * payload that GA4 discards silently. Routing every call site through this
  * makes the required shape the path of least resistance.
  */
+/**
+ * The two product lines share one bag and one analytics funnel.
+ *
+ * LALALOCA's three hand-written serum records use stable slugs. The FOUNDER
+ * Collection uses the Hold the Room slug plus raw numeric Shopify variant IDs
+ * for the self-publishing plates. Keep the brand decision here so every
+ * ecommerce event reports the house/collection hierarchy consistently.
+ */
+export function itemBrandFor(idOrSlug: string): "FOUNDER" | "LALALOCA" {
+  return idOrSlug === "hold-the-room" || /^\\d{8,}$/.test(idOrSlug)
+    ? "FOUNDER"
+    : "LALALOCA";
+}
+
 export function toTrackItem(
   product: { slug: string; name: string; category: string; price: number },
   extra: Partial<TrackItem> = {},
@@ -127,7 +141,7 @@ export function toTrackItem(
     item_id: product.slug,
     item_name: product.name,
     item_category: product.category,
-    item_brand: "LALALOCA",
+    item_brand: itemBrandFor(product.slug),
     price: product.price,
     quantity: 1,
     ...extra,

@@ -55,13 +55,13 @@ export function Header() {
 
   return (
     <header
-      className="sticky top-0 z-30 border-b backdrop-blur-md border-bronze/25 bg-night/85"
+      className="luxury-header sticky top-0 z-30 border-b border-bronze/20 bg-night/78 backdrop-blur-xl"
     >
       {/* Phones get the first segment only, on one line: the full bar wrapped
           to two lines and made the sticky header 122px tall at 390. The
           strings stay in brand.ts; this only splits them. */}
       <p
-        className="py-2 text-center text-[0.625rem] uppercase tracking-[0.24em] bg-night-deep text-cream/80"
+        className="luxury-announcement py-2 text-center text-[0.625rem] uppercase tracking-[0.26em] text-cream/75"
       >
         <span className="md:hidden">{barText.split(" · ")[0]}</span>
         <span className="hidden md:inline">{barText}</span>
@@ -234,13 +234,6 @@ export function Header() {
               className="eyebrow flex min-h-11 items-center text-cream/70"
             >
               Search
-            </Link>
-            <Link
-              href="/account"
-              onClick={close}
-              className="eyebrow flex min-h-11 items-center text-cream/70"
-            >
-              Account
             </Link>
           </div>
         </nav>

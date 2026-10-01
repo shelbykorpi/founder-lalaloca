@@ -1,7 +1,7 @@
 "use client";
 
 import { useBag } from "./BagProvider";
-import { track } from "@/lib/analytics";
+import { itemBrandFor, track } from "@/lib/analytics";
 import { formatPrice, SET } from "@/lib/products";
 
 /**
@@ -74,6 +74,7 @@ export function AddToBagButton({
               item_id: product.slug,
               item_name: product.name,
               item_category: product.category,
+              item_brand: itemBrandFor(product.slug),
               price: product.price,
               quantity: 1,
             },
@@ -129,6 +130,7 @@ export function AddSetButton({
               item_id: "all-three",
               item_name: "All three serums",
               item_category: SET.detail,
+              item_brand: "LALALOCA",
               price,
               quantity: 1,
             },

@@ -202,30 +202,49 @@ export default function HomePage() {
         />
         <div className="shell relative flex min-h-[calc(100svh-4rem)] flex-col justify-end pb-16 pt-24 md:justify-center md:py-24">
           <div className="max-w-[44rem]">
-            <p className="room-label">{BRAND.display} · The house after hours</p>
-            {/* Two lines. One face. One colour. */}
-            <h1 className="display-house mt-6 text-cream">
-              <span className="block">{BRAND.campaignLines[0]}</span>
-              <span className="block">{BRAND.campaignLines[1]}</span>
+            <p className="room-label">{BRAND.display} · Welcome inside</p>
+            <h1 className="mt-6 max-w-[12ch] font-serif text-[clamp(2.6rem,7vw,5rem)] font-light leading-[0.92] tracking-[-0.03em] text-cream">
+              Come for the beauty.
+              <span className="block italic text-blush">Stay for everything behind it.</span>
             </h1>
-            <p className="mt-7 max-w-[34rem] text-[1.0625rem] leading-relaxed text-cream/80">
-              Not a place to become someone else. A private world for women who already
-              know what they bring.
+            <p className="mt-7 max-w-[35rem] text-[1.02rem] leading-[1.75] text-cream/82">
+              Skincare is the first door. Inside: the FOUNDER Collection, the LALALOCA serums,
+              FOUND HER stories, and a house built to hold more than one version of a woman.
             </p>
-            <p className="mt-3 font-serif text-2xl text-blush">{BRAND.tagline}</p>
-            {/* 3 Sept 2026: the primary action sells. A woman could read the
-                whole threshold without a way to a product; now the gold button
-                is the shop and the house is the hairline beside it. */}
-            <div className="mt-9 flex flex-wrap items-center gap-x-8 gap-y-4">
+            <p className="mt-4 font-serif text-[1.45rem] text-blush">{BRAND.tagline}</p>
+            <div className="mt-9 flex flex-wrap items-center gap-x-5 gap-y-4">
               <Link href="/founder-collection" className="btn btn-primary w-full sm:w-auto">
-                Shop the FOUNDER Collection
+                Enter the FOUNDER Collection
               </Link>
-              {/* Both lines stay one tap from the threshold; the master-brand
-                  collection leads the launch and LALALOCA remains the second door. */}
-              <Link href="/shop" className="btn btn-ghost-light w-full sm:w-auto">
-                Shop the LALALOCA serums
+              <Link href="/found-her" className="btn btn-ghost-light w-full sm:w-auto">
+                Meet FOUND HER
               </Link>
             </div>
+          </div>
+        </div>
+      </section>
+
+      <section className="border-y border-bronze/15 bg-night-deep py-7 text-cream md:py-8" aria-label="Inside FOUNDER">
+        <div className="shell">
+          <p className="mb-5 text-[0.58rem] uppercase tracking-[0.24em] text-champagne/75">
+            Tonight in the house
+          </p>
+          <div className="grid gap-px overflow-hidden border border-bronze/15 bg-bronze/15 md:grid-cols-3">
+            <Link href="/founder-collection" className="group bg-night-deep px-5 py-5 no-underline transition-colors hover:bg-founder-green/35 md:px-6">
+              <span className="block text-[0.56rem] uppercase tracking-[0.22em] text-champagne/70">01 · The collection</span>
+              <span className="mt-2 block font-serif text-[1.35rem] text-cream">Five pieces. One routine.</span>
+              <span className="mt-2 block text-sm text-cream/55 group-hover:text-cream/75">Walk in →</span>
+            </Link>
+            <Link href="/found-her" className="group bg-night-deep px-5 py-5 no-underline transition-colors hover:bg-founder-green/35 md:px-6">
+              <span className="block text-[0.56rem] uppercase tracking-[0.22em] text-champagne/70">02 · FOUND HER</span>
+              <span className="mt-2 block font-serif text-[1.35rem] text-cream">Real women. Their own words.</span>
+              <span className="mt-2 block text-sm text-cream/55 group-hover:text-cream/75">Read the stories →</span>
+            </Link>
+            <Link href="/shop" className="group bg-night-deep px-5 py-5 no-underline transition-colors hover:bg-founder-green/35 md:px-6">
+              <span className="block text-[0.56rem] uppercase tracking-[0.22em] text-champagne/70">03 · LALALOCA</span>
+              <span className="mt-2 block font-serif text-[1.35rem] text-cream">Three serums. Three kinds of day.</span>
+              <span className="mt-2 block text-sm text-cream/55 group-hover:text-cream/75">Choose yours →</span>
+            </Link>
           </div>
         </div>
       </section>
@@ -238,19 +257,17 @@ export default function HomePage() {
         as="h2"
         room={getRoom(2)}
         height="min-h-[78svh]"
-        title="Come in. Stay awhile."
+        title="The elevator is waiting."
         lede={
           <>
-            The door closes softly behind you.
+            Pick a floor. Beauty, stories, the library, or the room we keep by invitation.
             <br />
-            The lights are low.
-            <br />
-            On the vanity, a note waits with your name on it.
+            There is no wrong first stop.
           </>
         }
       >
         <a href="#hall-doors" className="hairline text-cream">
-          Follow the light ↓
+          Choose your floor ↓
         </a>
       </RoomHero>
       {/* THE GRAND HALL — brief §4. Third pass, 12 Sept: the house’s own doors at
@@ -287,10 +304,10 @@ export default function HomePage() {
             id="found-her-band"
             className="max-w-[22ch] font-serif text-[clamp(1.6rem,3.4vw,2.75rem)] leading-tight text-balance"
           >
-            The note was left for you.
+            There’s always more to the woman than the photograph.
           </p>
           <p className="max-w-[34ch] text-charcoal/75">
-            Real women, in their own words, on what it actually took.
+            FOUND HER is where she tells the rest herself.
           </p>
           <Link href="/found-her" className="hairline mt-2 text-charcoal">
             Read their stories
@@ -385,8 +402,8 @@ export default function HomePage() {
         position="56% center"
         height="min-h-[68svh]"
         label="Room 04 · The FOUNDER Collection"
-        title="Private tools. Public power."
-        lede="Five pieces, one routine: cleanse, wash, moisturise, eyes, finish. In stock, and free to your door anywhere in the US."
+        title="Five pieces before whatever comes next."
+        lede="Cleanse, wash, moisturise, eyes, finish. A complete routine designed to get you ready and get out of the way."
       >
         <Link href="/founder-collection" className="btn btn-primary">
           Explore the collection
@@ -452,20 +469,22 @@ export default function HomePage() {
         <div className="shell relative py-20 md:py-28">
           <Reveal className="max-w-[34rem]">
             <p className="room-label">Room 06 · Found Her</p>
-            <p className="mt-5 font-serif text-2xl leading-snug text-blush">
-              Stories from women who built before anyone applauded.
+            <p className="mt-5 font-serif text-[1.35rem] leading-snug text-blush">
+              The titles are the least interesting part.
             </p>
-            <h2 className="headline-house mt-4 text-balance text-cream">{BRAND.campaign}</h2>
-            <p className="mt-6 max-w-[38ch] text-[0.9375rem] leading-relaxed text-cream/80">
-              Women telling it themselves: what they built, what it cost, and the
-              moment they recognised who they’d become.
+            <h2 className="mt-4 max-w-[12ch] font-serif text-[clamp(2.25rem,5vw,4rem)] font-light leading-[0.98] text-cream">
+              She was there all along.
+            </h2>
+            <p className="mt-6 max-w-[40ch] text-[0.95rem] leading-relaxed text-cream/80">
+              Shelby. Julie. Aly. Three very different stories about what it took, what changed,
+              and the woman each one found on the other side.
             </p>
             <div className="mt-9 flex flex-wrap items-center gap-x-8 gap-y-4">
-              <Link href="/found-her#share" className="btn btn-primary">
-                I found her when…
+              <Link href="/found-her" className="btn btn-primary">
+                Read the stories
               </Link>
-              <Link href="/found-her" className="hairline text-cream">
-                Read Found Her
+              <Link href="/found-her#share" className="hairline text-cream">
+                Tell yours
               </Link>
             </div>
           </Reveal>

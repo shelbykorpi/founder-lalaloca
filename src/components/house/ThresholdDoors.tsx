@@ -334,7 +334,7 @@ export function ThresholdDoors() {
               className="mt-4 font-sans text-[0.8125rem] tracking-[0.06em] text-cream/90"
               style={{ textShadow: "0 1px 12px rgba(0,0,0,0.8)" }}
             >
-              Serums $38 · The FOUNDER Collection from $34 · Free US shipping
+              Beauty · Stories · The rooms are open
             </p>
           </>
         )}

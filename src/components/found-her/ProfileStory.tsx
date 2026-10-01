@@ -159,14 +159,26 @@ export function ProfileStory({ profile }: { profile: FoundHerProfile }) {
       {profile.press && profile.press.length > 0 && (
         <section aria-label={`${profile.name} in the press`} className="room-dark">
           <div className="shell-narrow border-t border-cream/15 py-12 text-center md:py-16">
-            <p className="eyebrow text-champagne">{profile.name}</p>
+            {profile.pressIntro ? (
+              <>
+                <p className="eyebrow text-champagne">{profile.pressIntro.eyebrow}</p>
+                <h2 className="mt-4 text-balance font-serif text-[clamp(1.75rem,4vw,2.5rem)] leading-tight text-cream">
+                  {profile.pressIntro.headline}
+                </h2>
+                <p className="mx-auto mt-5 max-w-xl text-balance text-[0.9375rem] leading-relaxed text-cream/75">
+                  {profile.pressIntro.body}
+                </p>
+              </>
+            ) : (
+              <p className="eyebrow text-champagne">{profile.name}</p>
+            )}
             <ul
               style={
                 {
                   "--row-h": `${Math.max(...profile.press.map((p) => p.logo.rem))}rem`,
                 } as React.CSSProperties
               }
-              className="mt-8 grid grid-cols-1 gap-x-10 gap-y-10 sm:grid-cols-2 lg:grid-cols-3"
+              className="mt-12 grid grid-cols-1 gap-x-10 gap-y-10 sm:grid-cols-2 lg:grid-cols-3"
             >
               {profile.press.map((item) => (
                 <li key={item.publication} className="flex flex-col items-center">

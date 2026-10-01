@@ -56,6 +56,9 @@ export type FoundHerProfile = {
         read at the same weight side by side. */
     logo: { src: string; width: number; height: number; rem: number };
   }[];
+  /** The house's few lines above her press marks: why they belong together.
+      Written by the house (third person), not part of her answers. */
+  pressIntro?: { eyebrow: string; headline: string; body: string };
   /** The date she signed off on this text, or "PENDING" until she has.
       While it is "PENDING", her page drops the "published after she read
       and approved the final text" line — the site never claims an
@@ -99,6 +102,14 @@ export const profiles: FoundHerProfile[] = [
        Boyz", shortened at her request to match the others), as are WCK and
        Playboy ("ring girl with WCK"; "body paint model with Playboy Mansion
        events"). */
+    /* Shelby asked for this line on 1 Oct 2026: "being seen on… and not
+       limiting yourself to one version of yourself". Every place named in
+       the body is one of the credits below; nothing is added beyond them. */
+    pressIntro: {
+      eyebrow: "Where you may have seen her",
+      headline: "Never just one version of herself.",
+      body: "A magazine cover in Australia. A feature in Sweden. Ringside, on a show with Kevin Hart, at the Playboy Mansion. Now, nominated for an award in agriculture. None of them is the whole story. All of them are her.",
+    },
     press: [
       {
         publication: "Maxim Australia",

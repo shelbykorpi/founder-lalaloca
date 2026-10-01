@@ -2043,3 +2043,14 @@ Shelby: "Nominated for AgriNext Awards & Conference 2027", with the logo attache
 - **Caption.** "Nominated, AgriNext Awards 2027", her words shortened. Alt text is "AgriNext Conference". It's a nomination, not a win, and it's worded that way.
 - **Logo.** The green and black on white became cream, with the white gaps between the leaves kept as cutouts. Cropped and resized to 700×188 as `public/brand/press/agrinext-cream.png`, shown at rem 3.25.
 - **Band.** Six credits now. The flex-wrap broke into rows of 3/2/1 because the Playboy caption is wide, so the list became a grid: 1 column on phones, 2 at sm, 3 at lg. Desktop is two even rows of three. Checked at 1440 and 390.
+
+## 2026-10-01 23:30Z: A headline over Shelby's press credits (Cowork FOUNDER team)
+
+Shelby asked for a message above the logos "about being seen on… and not limiting yourself to one version of yourself", revised for a better narrative.
+- New optional `pressIntro` {eyebrow, headline, body} on `FoundHerProfile`. It's house-written and third person, not part of her answers. When present it replaces the name eyebrow; otherwise the name eyebrow still shows.
+- Copy:
+  - Eyebrow: "Where you may have seen her"
+  - Headline: "Never just one version of herself."
+  - Body: "A magazine cover in Australia. A feature in Sweden. Ringside, on a show with Kevin Hart, at the Playboy Mansion. Now, nominated for an award in agriculture. None of them is the whole story. All of them are her."
+- Every place in the body maps to one of her six credits; nothing is added. "Nominated", not "shortlisted". "On a show with Kevin Hart", matching her caption.
+- Headline is serif clamp(1.75–2.5rem), body 15px cream/75 at max-w-xl, logo grid mt-12. Checked at 1440 and 390 (with the sticky header hidden for the capture).

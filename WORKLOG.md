@@ -2240,3 +2240,17 @@ The live log after the key went in: Anthropic 400, "This API key is not scoped t
 - Vercel (with Shelby's OK, in Chrome): added `ANTHROPIC_WORKSPACE_ID` = `wrkspc_01FeWj2mrb8PaGUbNAPBXBcb` (Anthropic console → Workspaces → Default; not a secret), type Config, Production.
 - Next: Shelby pushes, which deploys with the variable. The team then tests POST /api/concierge live and, if Sonnet answers correctly, sets CONCIERGE_ENABLED = true.
 - The unused `Concierage` variable in Vercel is still there; Shelby can delete it.
+
+## 2026-10-01 22:20Z: Our Story is Shelby's letter on why she started FOUNDER (Cowork FOUNDER team)
+
+Shelby: "our story needs to tell the story of why i started founder", with the full text of her letter.
+- **src/app/our-story/page.tsx rewritten around her words.** Every sentence is hers, verbatim and in her order. A script checked all 163 of her lines against the rendered page: 0 missing. Our only edits were typographic (curly apostrophes) and layout.
+  - Her capitalised titles became the h2s: "FOUNDER is for the woman who kept going.", "Because women deserve to be seen.", "That's why FOUNDER is more than beauty.", "FOUND HER", "I want us to get better at celebrating each other.", "My vision for FOUNDER", "So this isn't only my story."
+  - The hero h1 is her first line; the hero paragraph is her second.
+  - Her one-line sentences are grouped into stanzas (a small `Blocks` renderer: p / lines / lead / quote), so the rhythm survives on screen.
+  - The letter closes "Welcome to FOUNDER. / The room is yours." (protected line, verbatim), signed "Shelby Korpi, Founder".
+- **Images kept:** the room hero, the journal (green), the collection still (night), the FOUND HER frame and its caption (rose), and Shelby's portrait (My vision). On desktop, images and headings stick beside the long text (`lg:sticky lg:top-36`).
+- **CTAs kept:** both collections, Enter FOUND HER (plus the consent line "told in the woman's own words and published only after she approves it"), Read my FOUND HER story, Tell your story.
+- **Removed from this page:** the biography (bullying, Maxim, the kitchen business, BitThermal/EcoYield) and the "brand vs FOUND HER" explainer. All of it is still in full on her FOUND HER profile, which the page links to.
+- Meta description updated to the letter. Checked at 1440 and 390.
+- Unpushed: 829e409 (concierge workspace ID) and this commit.

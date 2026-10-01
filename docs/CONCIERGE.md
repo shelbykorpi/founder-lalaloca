@@ -21,6 +21,30 @@ On Vercel it will also work with no key at all, using the `VERCEL_OIDC_TOKEN`
 that Vercel injects at runtime. The explicit key is worth setting anyway — it
 works locally too, and it makes the spend visible against one credential.
 
+### The direct Anthropic route (Claude Sonnet 5.5), live since 2 Oct 2026
+
+Vercel's AI Gateway answered every request with 403 from 1 Oct, so the
+concierge now talks to Anthropic directly whenever this is set:
+
+| Variable | What it does |
+|---|---|
+| `ANTHROPIC_API_KEY` | Shelby's Anthropic API key (console.anthropic.com → API keys). When set it wins over the gateway. Remove it and the gateway path resumes. |
+| `CONCIERGE_DIRECT_MODEL` | Optional. Default `claude-sonnet-5-5` (Claude Sonnet 5.5, $2 in / $10 out per million tokens). Paste any other id verbatim from the Anthropic console. |
+
+The direct route sends no temperature (Sonnet 5.5 rejects it with a 400), turns
+up-front thinking off (`thinking: between_tools`, `output_config.effort: low`)
+and reads every `text` block rather than `content[0]`, because thinking blocks
+come first. If the model ever rejects those controls, it retries once without
+them. If the call fails outright, `fallback.ts` answers from the site's own
+facts rather than showing an error.
+
+**The site switch is separate:** `CONCIERGE_ENABLED` in
+`src/lib/concierge/enabled.ts`. It's off until the key is confirmed working on
+production.
+
+Set a monthly spend limit in the Anthropic console as well. The route already
+rate-limits to 40 messages an hour per visitor.
+
 Optional:
 
 | Variable | What it does |

@@ -2196,3 +2196,20 @@ Shelby, mid-task: "remove the concierge from the site until it's fixed."
 - The API route and fallback.ts (b407359) stay deployed but unused. Nothing on the site calls them.
 - Verified on /, /shop and /found-her/aly-v at 1440 and 390: no bell, no "Ring…/Ask the concierge" text, and both replacements render.
 - **To restore:** set CONCIERGE_ENABLED = true. With the fallback in place it answers immediately, even before the AI is fixed.
+
+## 2026-10-02 03:40Z: Concierge on Claude Sonnet 5.5 via Shelby's Anthropic key (Cowork FOUNDER team)
+
+Shelby: "build a new concierge service that's hooked up to my Anthropic Sonnet."
+- **model.ts.** This finishes and commits the direct-Anthropic route that sat uncommitted in the working tree since 1 Oct (written by another agent after the AI Gateway 403s). Shelby's request now covers it. When `ANTHROPIC_API_KEY` is set it wins over the gateway.
+  - Default model `claude-sonnet-5-5`, checked against Anthropic's models overview on 2 Oct 2026. `CONCIERGE_DIRECT_MODEL` overrides it verbatim; the old prefix-stripping fallback from the gateway's model name is gone.
+- **Fixes to that draft, which would have failed on Sonnet 5.5 (per its docs):**
+  - **temperature removed**, because a non-default temperature/top_p/top_k returns 400 on Sonnet 5.5;
+  - **the reply is read from every `type: "text"` block**, not `content[0]`, because adaptive thinking is on by default and thinking blocks come first;
+  - **`thinking: {type: "between_tools"}` and `output_config: {effort: "low"}`**: no up-front thinking for a support reply. max_tokens is 1600, because thinking counts toward it;
+  - **one plain retry on a 400** (model, max_tokens, system, messages only) if a model rejects those controls, logged.
+  - A failure still falls through to fallback.ts.
+- **Tested against a stand-in Anthropic server** (anthropic-version 2023-06-01, x-api-key, thinking block then text block, 400 on temperature): the request carried no temperature, the correct model, thinking and effort, and the text was extracted cleanly. In reject mode, a 400 led to a plain retry, then a 200 and the right answer.
+- **docs/CONCIERGE.md** gained the direct-route section (env vars, Sonnet 5.5 specifics, the enable switch, the spend-limit advice).
+- **Still off on the site.** `CONCIERGE_ENABLED = false` stays until production is confirmed.
+  - Next: Shelby adds `ANTHROPIC_API_KEY` in Vercel (Production) and pushes.
+  - The team then tests POST /api/concierge live (the route works with the UI off), flips the switch, and checks the bell end to end.

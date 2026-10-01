@@ -2280,3 +2280,17 @@ Shelby: "a box to check if they would also like to be considered to be featured 
 - **`CONCIERGE_ENABLED = true`.** The bell returns on every page and the homepage launchers come back. Verified on a local build.
 - **Privacy policy.** The Beauty desk paragraph said "run through Vercel's AI Gateway"; it now says "Anthropic's Claude … sent to Anthropic", because the site now calls Anthropic directly.
 - Cleanup for Shelby: the unused Vercel variable "Concierage" can be deleted.
+
+## 2026-10-01 23:10Z: FOUND HER, "The FOUNDER Models" section (Cowork FOUNDER team)
+
+Shelby: say the women of FOUND HER are the FOUNDER Models (the ones who rebuilt, started something, stayed resilient), because the women submitting are the brand's models. "Revise this to a better narrative and emotional sounding."
+- **New section on /found-her.** It sits between "What FOUND HER is" and the "Your turn" form, on a Desert Rose ground with ink type and a green button (the same treatment as Our Story).
+  - Eyebrow "The FOUNDER Models"; h2 "The women this brand is modeled on."
+  - Lead: "We call them the FOUNDER Models. Not cast for a look. Recognized for a life."
+  - Five "She…" lines (rebuilt, started, walked away, went back, failed in private and showed up again), a paragraph on resilience, and a paragraph saying a FOUNDER Model is not a type, size, age or face.
+  - "Some may be invited further, with their words and portrait on our products." This matches the optional product-feature box.
+  - Pull line: "You were never supposed to look like the model. The model was always supposed to look like you."
+  - CTA "Share your story" goes to #share.
+- **Deliberately worded about who these women are and what may come next.** It makes no claim about who appears in existing product or campaign imagery.
+- Meta description now leads with the FOUNDER Models.
+- Checked at 1440 and 390.

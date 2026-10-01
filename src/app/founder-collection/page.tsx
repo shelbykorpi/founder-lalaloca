@@ -2,12 +2,11 @@ import type { Metadata } from "next";
 import Image from "next/image";
 import Link from "next/link";
 import { AddToBagButton } from "@/components/bag/AddToBagButton";
-import { EmailSignup } from "@/components/site/EmailSignup";
 import { FOUNDER_COLLECTION } from "@/lib/founderCollection";
 import { fetchCollectionProducts, fetchVariantAvailability, type CatalogProduct } from "@/lib/catalog";
 import { VARIANT_ID } from "@/lib/shopifyLinks";
 import { LineCard } from "@/components/shop/LineCard";
-import { NEXT_MOVE, CAMPAIGN, availabilityLine } from "@/lib/nextMove";
+import { NEXT_MOVE, ROUTINE_STEP, availabilityLine } from "@/lib/nextMove";
 import { formatPrice, products, SET } from "@/lib/products";
 import { Reveal } from "@/components/house/Reveal";
 import { RoomHero } from "@/components/house/RoomHero";
@@ -106,7 +105,7 @@ export default async function FounderCollectionPage() {
               url: "/products/hold-the-room-pack.webp",
               alt: "Hold the Room, the Desert Pink carton and its matching bottle together against a clean ground.",
             },
-            character: `03 · ${product.archetype}`,
+            character: ROUTINE_STEP["hold-the-room"],
             descriptor: product.category,
             hook: null,
             who: null,
@@ -208,7 +207,7 @@ export default async function FounderCollectionPage() {
     handle: entry.slug,
     name: entry.name,
     category: entry.category,
-    character: CAMPAIGN.name,
+    character: ROUTINE_STEP[entry.slug],
     image: entry.scene,
     hoverImage: entry.shades ? undefined : { src: entry.pack.src, alt: entry.pack.alt },
     accent: entry.stripes.b,
@@ -269,10 +268,10 @@ export default async function FounderCollectionPage() {
       image: undefined,
       hoverImage: undefined,
       accent: "var(--color-blush)",
-      href: "#waitlist",
+      href: "#shelf-heading",
       state: "In the making",
       action: (
-        <Link href="#waitlist" className="btn btn-ghost-light w-full">
+        <Link href="#shelf-heading" className="btn btn-ghost-light w-full">
           Join the waitlist
         </Link>
       ),
@@ -311,7 +310,7 @@ export default async function FounderCollectionPage() {
         priority
         position="center center"
         scrim="soft"
-        title={<span className="uppercase tracking-[0.01em] md:whitespace-nowrap">Take your seat.</span>}
+        title={<span className="md:whitespace-nowrap">Take your seat.</span>}
         lede={<span className="text-rose">Private tools. Public power.</span>}
         bar={<LineRail current="" />}
       >
@@ -334,7 +333,7 @@ export default async function FounderCollectionPage() {
             The line
           </h2>
           <p className="mt-4 max-w-[46ch] text-[0.9375rem] leading-relaxed text-cream/75">
-            Five pieces, laid out the way you&rsquo;d lay out a strategy. Cleanse,
+            Five pieces, laid out in the order you&rsquo;ll use them. Cleanse,
             wash, moisturise, eyes, finish.
           </p>
 
@@ -363,36 +362,6 @@ export default async function FounderCollectionPage() {
         </div>
       </section>
 
-      {/* ---- A room between the shelf and the reckoning ----
-          The brief asks for alternating editorial reveals through this page.
-          One is enough here: the grid above is already six pictures, and a
-          second gallery would turn a collection page into a mood board. This
-          is the pause before the page admits how much of the line is not
-          finished. */}
-      <section className="relative isolate overflow-hidden bg-night-deep">
-        <Reveal>
-          <div className="relative aspect-[16/9] w-full md:aspect-[1672/720]">
-            <Image
-              src="/editorial/rooms/collection-mirror.webp"
-              alt="The boardroom vanity: an empty green chair with a rose silk over its arm before a bulb-lit mirror, the collection laid at every seat."
-              fill
-              loading="lazy"
-              sizes="100vw"
-              className="object-cover"
-            />
-            <div
-              aria-hidden
-              className="absolute inset-0 bg-[linear-gradient(180deg,rgba(3,8,6,0.2)_0%,rgba(3,8,6,0)_40%,rgba(3,8,6,0.85)_100%)]"
-            />
-          </div>
-          <div className="shell -mt-16 relative pb-14 md:-mt-24 md:pb-16">
-            <p className="font-serif text-[clamp(1.5rem,3vw,2.25rem)] leading-snug text-cream">
-              A mirror, a ritual, a reminder.
-            </p>
-          </div>
-        </Reveal>
-      </section>
-
       {/* ---- The rest of the line ---- */}
       <section className="bg-founder-green py-16 text-cream md:py-20">
         <div className="shell max-w-3xl">
@@ -402,7 +371,7 @@ export default async function FounderCollectionPage() {
           </h2>
           <p className="mt-6 max-w-prose text-cream/85">
             Opening Line to Smooth Talker: cleanse, wash, moisturise, eyes, finish.
-            Five pieces for the twenty minutes before you walk in, and{" "}
+            Five pieces, one routine, and{" "}
             {product.name} is the one that holds it all together.
           </p>
           <p className="mt-6 font-serif text-xl text-blush">
@@ -411,20 +380,6 @@ export default async function FounderCollectionPage() {
         </div>
       </section>
 
-      {/* ---- The waitlist ---- */}
-      <section
-        id="waitlist"
-        className="section-tight bg-founder-green py-14 scroll-mt-24 md:py-16"
-      >
-        <div className="shell">
-          <div className="max-w-xl">
-            <h2 className="headline text-balance text-cream">
-              First to know what&rsquo;s next.
-            </h2>
-            <EmailSignup tone="green" source="waitlist" />
-          </div>
-        </div>
-      </section>
 
       {/* ---- The first room ----
           The three serums, at the foot and deliberately quieter than the

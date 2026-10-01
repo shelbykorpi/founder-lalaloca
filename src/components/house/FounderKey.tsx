@@ -7,6 +7,7 @@ import { HouseMap } from "./HouseMap";
 import { OPEN_WINGS, wingFor } from "@/lib/house";
 import { track } from "@/lib/analytics";
 import { useScrolledPast } from "@/lib/useScrolledPast";
+import { useBuyBandClear } from "@/lib/useBuyBandClear";
 import s from "./founder-key.module.css";
 
 /**
@@ -35,6 +36,9 @@ export function FounderKey() {
   /* Tucked away on the first screen, where the hero's own buttons are; it
      returns once she scrolls (see useScrolledPast). Open, it always shows. */
   const past = useScrolledPast();
+  /* Phones on /shop and /products/*: steps aside while a product name or a
+     buy button is under it (see useBuyBandClear). */
+  const onBuyBand = useBuyBandClear();
 
   const setOpen = (v: boolean) => setOpened({ on: pathname ?? "", open: v });
   const toggle = () => {
@@ -44,7 +48,7 @@ export function FounderKey() {
 
   return (
     <>
-      <div className={`${s.dock} ${past || open || note ? "" : s.dockTucked}`}>
+      <div className={`${s.dock} ${open || ((past || note) && !onBuyBand) ? "" : s.dockTucked}`}>
         {note && (
           <p className={s.note} role="status">
             {note}

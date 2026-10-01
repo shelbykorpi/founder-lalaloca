@@ -1699,14 +1699,36 @@ llms.txt line. Email: shelby@founderbeauty.co forwards through ImprovMX
 (MX mx1/mx2.improvmx.com); a Shopify email to it landed in Gmail on 15 Aug.
 Verified: tsc, eslint, build; schema and footer at 1440/390.
 
-## 2026-10-01 · Claude (Cowork) — agent team installed
+## 2026-10-01 · Claude (Cowork, Founder Chief) — team audit + edit pass
 
-Shelby's `founder_claude_agent_team` package: 12 roles in `docs/agents/`,
-`brand/FOUNDER_BRAND_OS.md`, `workflows/` (4), `docs/skills/founder-brand/`
-(remote tools may not write `.claude/`; AGENTS.md has the one-line copy),
-and the package CLAUDE.md as `docs/AGENT_TEAM_OS.md` (the root CLAUDE.md
-still points at AGENTS.md + WORKLOG.md — not overwritten). AGENTS.md gains
-"The agent team" section (precedence: facts here beat team docs) and its
-stale hero note now names threshold-hall. No site code touched. Also saved:
-project doc `claude/founder-agent-team-os.md`; account skills
-founder-beauty-brand, founder-beauty-team, founder-site-ship.
+Shelby: "have the team look at the current site and copy and make edit and
+suggestions". Specialists (creative/visual, UX/CRO, copy+claims,
+product+FOUND HER) audited the live site read-only; a frontend engineer and
+the lead implemented the SAFE-NOW items; an independent Brand Council
+reviewed (no blockers; its 3 IMPORTANT fixes applied).
+- Copy/claims: ~40 surgical rewrites (src/lib products/nextMove/
+  founderCollection/library/brand, home, shop, collection, our-story,
+  ProfileStory, YFR spelling). Timeframes and absolutes out ("by morning",
+  "stays where you put it", "never stripped", "supports the skin barrier",
+  "absorbs fast", "firm" as a verb); "twenty minutes" and "a mirror, a
+  ritual, a reminder" repeats cut; Library says "key ingredient".
+- "The Next Move" eyebrow retired → ROUTINE_STEP (01 · Cleanse … 05 ·
+  Finish) in nextMove.ts, used by plates, collection grid and Vanity.
+  Plate closing band links to the serums.
+- Thirst Trap gallery emptied (infographics with unreviewed timeline/
+  comparison claims; files kept). Collection: repeated boardroom band and
+  duplicate "waitlist" signup removed; "Take your seat." no longer caps.
+  /shop: duplicate Founding List removed; compare table → cards < 640px.
+- Home: second hero CTA "Shop the FOUNDER Collection"; pledge on night
+  ground with rose type (one rose room); Vanity anchor image lazy.
+- Door overlay: protected line on two lines, "Serums $38 · The FOUNDER
+  Collection from $34 · Free US shipping", real Shop directly button,
+  copy visible before the image paints.
+- Serum PDPs (mobile): buy block above the doors toggle (button ~1000px →
+  was ~1250); "LALALOCA ·" category prefix; 14-day returns link.
+- Bell/key hidden while bag or menu open (body data attrs) and tucked near
+  buy bands on phones (lib/useBuyBandClear.ts); 44px hit areas; mobile bar
+  one line; room-label/hairline 9px → 11px; Hold the Room stock line.
+- NOT done (needs Shelby): see project doc claude/team-audit-2026-10-01.md.
+- Verified: tsc, eslint, build; 10 pages at 1440/390 (no overflow/errors);
+  add-to-bag + checkout button on a serum and Hold the Room (Brand Council).

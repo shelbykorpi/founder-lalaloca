@@ -4,7 +4,6 @@ import Link from "next/link";
 import { EmailSignup } from "@/components/site/EmailSignup";
 import { Reveal } from "@/components/house/Reveal";
 import { HouseShell } from "@/components/house/HouseShell";
-import { EnterTheHouse } from "@/components/house/RoomTransition";
 import { AmbientLighting } from "@/components/house/AmbientLighting";
 import { getRoom } from "@/lib/rooms";
 import { DoorFrame } from "@/components/house/DoorFrame";
@@ -185,7 +184,7 @@ const NOTES = [
     src: "/editorial/collection-vanity.webp",
     position: "60% 50%",
     alt: "A row of bulb-lit gilt mirrors along a marble dressing counter, FOUNDER on the glass.",
-    line: "A mirror, a ritual, a reminder.",
+    line: "Your routine, start to finish.",
   },
   {
     room: "The Library",
@@ -193,7 +192,7 @@ const NOTES = [
     src: "/editorial/rooms/library-shelves.webp",
     position: "50% 40%",
     alt: "The library shelf: cloth-bound books, a brass ledge, The Room Is Yours on a spine.",
-    line: "The house remembers.",
+    line: "Every key ingredient, and a study on each.",
   },
 ];
 
@@ -264,7 +263,11 @@ export default function HomePage() {
               <Link href="/shop" className="btn btn-primary w-full sm:w-auto">
                 Shop the serums
               </Link>
-              <EnterTheHouse className="btn btn-ghost-light w-full sm:w-auto" />
+              {/* 1 Oct 2026 (team audit): both lines one tap from the hero. The
+                  house is still entered by scrolling and by the front doors. */}
+              <Link href="/founder-collection" className="btn btn-ghost-light w-full sm:w-auto">
+                Shop the FOUNDER Collection
+              </Link>
             </div>
           </div>
         </div>
@@ -330,7 +333,7 @@ export default function HomePage() {
             The note was left for you.
           </p>
           <p className="max-w-[34ch] text-charcoal/75">
-            The story begins where the performance ends.
+            Real women, in their own words, on what it actually took.
           </p>
           <Link href="/found-her" className="hairline mt-2 text-charcoal">
             Read their stories
@@ -351,7 +354,7 @@ export default function HomePage() {
         position="center center"
         height="min-h-[64svh]"
         label="Room 03 · The Serum Salon"
-        title="Three serums. Three energies."
+        title="Three serums. Three kinds of day."
         lede="Some days you close. Some days you glow. Some days you start again."
       >
         <Link href="/shop" className="btn btn-primary">
@@ -426,7 +429,7 @@ export default function HomePage() {
         height="min-h-[68svh]"
         label="Room 04 · The FOUNDER Collection"
         title="Private tools. Public power."
-        lede="Five pieces for the twenty minutes before you walk in. Cleanse, wash, moisturise, eyes, finish. In stock, and free to your door anywhere in the US."
+        lede="Five pieces, one routine: cleanse, wash, moisturise, eyes, finish. In stock, and free to your door anywhere in the US."
       >
         <Link href="/founder-collection" className="btn btn-primary">
           Explore the collection
@@ -467,8 +470,8 @@ export default function HomePage() {
             <h2 className="headline-house mt-5 text-balance text-cream">Hold the room.</h2>
             <p className="mt-7 max-w-[42ch] text-[0.9375rem] leading-relaxed text-cream/80">
               {holdTheRoom.hero} A peptide cream with hyaluronic acid and vitamin E.
-              It goes on after your serums, morning and night, and it stays comfortable
-              all day.
+              It goes on after your serums, morning and night, and skin feels smooth
+              and comfortable.
             </p>
             <div className="mt-9">
               <Link href="/products/hold-the-room" className="btn btn-primary">
@@ -569,15 +572,18 @@ export default function HomePage() {
       {/* ══ THE PLEDGE ══════════════════════════════════════════════════════
           Absent from the review build and from the creative deck. It is the
           house's largest truth claim and the wording never changes. */}
-      <section className="section-tight bg-rose py-14 text-charcoal md:py-16">
+      {/* 1 Oct 2026 (team audit): Desert Rose type on the night ground, so the
+          page has one rose room (Found Her), not two, and the pledge keeps its
+          own room before the green invitation. */}
+      <section className="section-tight bg-night-deep py-14 text-cream md:py-16">
         <div className="shell flex flex-col items-center gap-4 text-center">
-          <p className="room-label" style={{ color: "#5a2f2c" }}>
+          <p className="room-label">
             LALALOCA × StandUp for Kids
           </p>
-          <p className="max-w-[26ch] font-serif text-[clamp(1.35rem,2.6vw,2rem)] leading-snug">
+          <p className="max-w-[26ch] font-serif text-[clamp(1.35rem,2.6vw,2rem)] leading-snug text-rose">
             20% of LALALOCA net profits. Every month. Directly to StandUp for Kids Tucson.
           </p>
-          <Link href="/young-founders-room" className="hairline mt-2 text-charcoal">
+          <Link href="/young-founders-room" className="hairline mt-2 text-cream">
             How the giving works
           </Link>
         </div>
@@ -589,7 +595,7 @@ export default function HomePage() {
           <Reveal className="max-w-xl">
             <p className="room-label">The invitation</p>
             <h2 className="headline-house mt-5 text-balance text-cream">
-              Be first through the door.
+              Leave your name at the door.
             </h2>
             {/* No standfirst here: EmailSignup already carries its own heading
                 and explanation, and two of them read as a stutter. */}

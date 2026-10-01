@@ -104,7 +104,7 @@ export const products: Product[] = [
     moment:
       "The 6am one, when you’ve been up twice in the night and you’d like your face not to announce it.",
     benefit: "Skin feels softer and more comfortable, and makeup sits better on top.",
-    hook: "Looks expensive. Never looks exhausted. Eight weights of hyaluronic acid, so skin feels soft at four in the afternoon and makeup stays where you put it.",
+    hook: "Looks expensive. Never looks exhausted. Eight weights of hyaluronic acid, so skin feels soft and comfortable, and makeup sits better on top.",
     panels: {
       who: "Skin that goes tight, flaky or dull when it’s short on water, or makeup that starts sliding by lunch. If you’re new to the house, start here: it layers under everything.",
       how: "Press 3–5 drops into damp skin after cleansing (damp is the important part), then seal with moisturiser. Morning or night. Layering all three? This one goes first; it’s the lightest.",
@@ -146,18 +146,12 @@ export const products: Product[] = [
         a: "It’s a cosmetic product and skin varies. We don’t make clinical claims, and anyone who promises you a guaranteed result is overselling.",
       },
     ],
-    gallery: [
-      {
-        src: "/products/thirst-trap-texture.jpg",
-        alt: "The Thirst Trap serum and its texture on a soft surface.",
-        caption: "The finish",
-      },
-      {
-        src: "/products/thirst-trap-size.jpg",
-        alt: "The 50 ml Thirst Trap bottle shown at scale in the hand.",
-        caption: "50 ml, in the hand",
-      },
-    ],
+    /* 1 Oct 2026 (team audit): the two tiles here were infographics with
+       baked-in text — a week-by-week timeline and a "65% more than most
+       luxury serums" comparison — i.e. unreviewed results-timeframe and
+       competitor claims, with alt text describing other pictures. Off the
+       page until claims review; files kept in public/products. */
+    gallery: [],
     approvedCutout: true,
   },
   {
@@ -230,8 +224,8 @@ export const products: Product[] = [
     who: "Anyone who wants more cushion and bounce, particularly at the end of a long stretch.",
     moment:
       "The night after the week that took everything, when going to bed with a clean face is the whole plan.",
-    benefit: "Skin feels firmer and more cushioned, and looks smoother the next morning.",
-    hook: "Because starting over is still starting. A collagen night serum for skin that’s lost its spring. It feels firmer tonight and looks smoother by morning.",
+    benefit: "Skin feels firmer and more cushioned, and looks smoother.",
+    hook: "Because starting over is still starting. A collagen night serum for skin that’s lost its spring. It leaves skin feeling firmer and looking smoother.",
     panels: {
       who: "Skin that’s lost some spring, and a face that looks tired before you feel it. For the night after the week that took everything.",
       how: "Nights. Press 3–5 drops into damp skin after cleansing, palms flat and no rubbing, then moisturiser. A common pattern: C Me Glow in the morning, this at night.",

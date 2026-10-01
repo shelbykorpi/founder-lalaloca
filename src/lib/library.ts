@@ -199,7 +199,7 @@ export const LIBRARY: LibraryEntry[] = [
     standfirst: "The oldest calming ingredient in the book, and one of the few with a proper trial behind it.",
     body: [
       "Chamomile flower extract has been used on skin for as long as there has been skin to put it on. Its active constituents — bisabolol and the chamazulene that gives the oil its blue colour — are anti-inflammatory in the laboratory, and the feel on skin is exactly what you would expect: soothed, softened, less reactive.",
-      "It suits skin that flushes, tightens or simply objects to things. In a cleanser it takes the edge off the wash; in a cream it is the reason the product feels kind.",
+      "It suits skin that flushes, tightens or simply objects to things. In Opening Line it takes the edge off the cleanse, which is why the cleanse feels kind.",
       "The study below is unusual for a botanical: a randomised comparison against a low-strength hydrocortisone cream in people with eczema, in which the chamomile cream held its own. That is a medical context, not a cosmetic one — we cite it because it is the best evidence on the ingredient, not because our products treat anything.",
     ],
     products: [{ ...P.openingLine, as: "Camomile" }],
@@ -372,10 +372,10 @@ export const LIBRARY: LibraryEntry[] = [
     name: "Ceramides",
     inci: "Glycosphingolipids",
     kind: "Barrier lipid",
-    standfirst: "The mortar between the bricks. Skin's own barrier fat, replaced from the outside.",
+    standfirst: "The mortar between the bricks. Skin's own barrier fat, applied from the outside.",
     body: [
       "If the outer skin is a wall of cells, ceramides are the mortar. They are waxy lipids that make up around half of the material between those cells, and they are what stops water leaving and irritants getting in. Skin that is short on them feels tight, looks dull and reacts to things it should ignore.",
-      "Putting ceramides back from the outside works, and the evidence for it is unusually good: creams built around ceramides measurably increase hydration and reduce water loss through the skin, and in people whose barriers are genuinely compromised the effect is clinically visible.",
+      "Applying ceramides from the outside helps, and the evidence for it is unusually good: creams built around ceramides measurably increase hydration and reduce water loss through the skin.",
       "In a tinted stick they are the skincare half of the hybrid — the reason the finish feels comfortable through the day rather than drying down.",
     ],
     products: [{ ...P.smoothTalker, as: "Ceramides" }],
@@ -452,8 +452,8 @@ export const LIBRARY: LibraryEntry[] = [
     standfirst: "Six amino acids from yeast. Interesting cell biology; the human trials are not written yet.",
     body: [
       "A peptide is a short chain of amino acids — the building blocks of proteins — and a signal peptide is one whose shape happens to tell skin cells to do something. Hexapeptide-11 is six amino acids long and was first isolated from yeast.",
-      "In the laboratory it does something genuinely interesting: it switches on the cell's own housekeeping systems, the ones that clear damaged proteins and protect against oxidative stress, and in doing so it kept skin cells from ageing early under stress. That is the mechanism behind every peptide cream that mentions elasticity.",
-      "What does not exist yet is a controlled trial of the peptide on people. We use it in Double Take for what the cell biology supports — skin that looks smoother and better rested — and we describe it that way.",
+      "In the laboratory it does something genuinely interesting: it switches on the cell's own housekeeping systems, the ones that clear damaged proteins and protect against oxidative stress, and in doing so it kept skin cells from ageing early under stress. That is the mechanism peptide creams point to when they mention elasticity.",
+      "What does not exist yet is a controlled trial of the peptide on people. We use it in Double Take and Hold the Room for what the cell biology supports — skin that looks smoother and better rested — and we describe it that way.",
     ],
     products: [
       { ...P.doubleTake, as: "Hexapeptide-11" },

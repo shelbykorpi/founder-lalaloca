@@ -29,7 +29,7 @@ import { getRoom } from "@/lib/rooms";
 
 const TITLE = "The Library";
 const DESCRIPTION =
-  "Every ingredient named on a FOUNDER label, one short reading each — what it is, what it does, which products carry it, and one peer-reviewed study on the ingredient.";
+  "Every key ingredient named on a FOUNDER label, one short reading each — what it is, what it does, which products carry it, and one peer-reviewed study on the ingredient.";
 
 export const metadata: Metadata = {
   title: TITLE,
@@ -62,7 +62,7 @@ export default function LibraryPage() {
         priority
         label="The Library · Off the hall"
         title="Read what you’re wearing."
-        lede="Every ingredient on a FOUNDER label has a page here — what it is, what it does in the bottle, and one peer-reviewed study on the ingredient, cited as research, never as a promise."
+        lede="Every key ingredient on a FOUNDER label has a page here — what it is, what it does in the bottle, and one peer-reviewed study on the ingredient, cited as research, never as a promise."
       >
         <a href="#the-shelf" className="btn btn-primary">
           Pull a book from the shelf <span aria-hidden>↓</span>
@@ -80,7 +80,7 @@ export default function LibraryPage() {
         <div className="shell">
           <p className="eyebrow text-champagne">The shelf</p>
           <h2 className="mt-4 font-serif text-3xl leading-tight text-cream md:text-5xl">
-            Every ingredient in the house.
+            Every key ingredient in the house.
           </h2>
           <p className="mt-4 max-w-prose text-cream/75">
             Fifteen books, one per ingredient, in alphabetical order. Green cloth for the

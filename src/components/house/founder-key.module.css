@@ -71,6 +71,15 @@
    The key still fills; the room count is in the map. */
 @media (max-width: 767px) { .note { display: none; } }
 
+/* The bag drawer and the mobile menu own the screen while they are open; the
+   key steps aside (flags set on <body> by BagDrawer and Header). */
+:global(body[data-bag-open]) .dock,
+:global(body[data-menu-open]) .dock {
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+}
+
 /* ---- the map — the hall of doors ---------------------------------------- */
 .map { position: fixed; inset: 0; z-index: 60; pointer-events: none; }
 .scrim {

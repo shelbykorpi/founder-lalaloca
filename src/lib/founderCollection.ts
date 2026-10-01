@@ -193,7 +193,7 @@ export const FOUNDER_COLLECTION: FounderProduct[] = [
       },
       {
         q: "How much is 50 ml?",
-        a: "The standard size for a face cream. A cream this rich uses far less per application than a serum does, and the airless pump means none of it is left in the bottle.",
+        a: "The standard size for a face cream. The airless pump keeps the cream sealed between uses and gets nearly all of it out.",
       },
       {
         q: "When does it ship?",

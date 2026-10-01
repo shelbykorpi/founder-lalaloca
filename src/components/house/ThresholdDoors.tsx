@@ -223,6 +223,10 @@ export function ThresholdDoors() {
     top: 0,
     width: "100vw",
     height: "100%",
+    /* Deep Emerald under the photograph, so the invitation and SHOP DIRECTLY
+       read on the first frame instead of waiting on the image over a bare,
+       light page. */
+    backgroundColor: "#0a2523",
     backgroundImage: "url(/editorial/threshold-doors.webp)",
     backgroundSize: "cover",
     backgroundPosition: "center",
@@ -314,19 +318,32 @@ export function ThresholdDoors() {
             <p className="mt-3 font-serif text-[1.15rem] text-blush">We kept your room.</p>
           </>
         ) : (
-          <p
-            className="display-product text-cream"
-            style={{ textShadow: "0 2px 24px rgba(0,0,0,0.75)" }}
-          >
-            Open the door.
-          </p>
+          <>
+            {/* The protected line is always two lines (AGENTS.md): never
+                "Open the door." on its own. */}
+            <p
+              className="display-product text-cream"
+              style={{ textShadow: "0 2px 24px rgba(0,0,0,0.75)" }}
+            >
+              <span className="block">Open the door.</span>
+              <span className="mt-2 block">The room is yours.</span>
+            </p>
+            {/* What is behind the door, said plainly, so the invitation is
+                never a riddle about what the house sells. */}
+            <p
+              className="mt-4 font-sans text-[0.8125rem] tracking-[0.06em] text-cream/90"
+              style={{ textShadow: "0 1px 12px rgba(0,0,0,0.8)" }}
+            >
+              Serums $38 · The FOUNDER Collection from $34 · Free US shipping
+            </p>
+          </>
         )}
 
         <button
           ref={openRef}
           type="button"
           onClick={swing}
-          className="btn btn-ghost-light mt-8 backdrop-blur-[2px]"
+          className="btn btn-ghost-light mt-7 backdrop-blur-[2px]"
         >
           Enter the house
         </button>
@@ -344,7 +361,7 @@ export function ThresholdDoors() {
             }
             track("threshold_shop_direct", {});
           }}
-          className="mt-5 inline-flex min-h-11 items-center text-[0.625rem] uppercase tracking-[0.22em] text-cream/70 no-underline transition-colors hover:text-champagne"
+          className="mt-4 inline-flex min-h-11 items-center justify-center border border-cream/70 bg-night-deep/55 px-6 text-xs uppercase tracking-[0.2em] text-cream no-underline backdrop-blur-[2px] transition-colors hover:border-rose hover:bg-rose hover:text-night"
         >
           Shop directly
         </Link>

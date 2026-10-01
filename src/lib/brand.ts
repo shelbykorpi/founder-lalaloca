@@ -224,5 +224,5 @@ export const SITE = {
     process.env.VERCEL_ENV === "production" && process.env.ALLOW_INDEXING === "true",
   title: "FOUNDER | Beauty for what you’re building.",
   description:
-    "A private world for women who already know what they bring. Three serums, $38 each, free US shipping — and stories from women about what they built.",
+    "A private world for women who already know what they bring. Three serums, a five-piece routine, free US shipping, and stories from women about what they built.",
 };

@@ -125,7 +125,7 @@ export function ProfileStory({ profile }: { profile: FoundHerProfile }) {
           <div className="sm:border-l sm:border-cream/15 sm:pl-8">
             <p className="eyebrow text-champagne">{BRAND.collectionFull}</p>
             <p className="mt-3 text-sm leading-relaxed text-cream/80">
-              Three serums. The part of this that pays for the rest of it.
+              Three serums from the house that tells these stories.
             </p>
             <Link href="/shop" className="btn btn-ghost-light mt-5">
               Shop the collection

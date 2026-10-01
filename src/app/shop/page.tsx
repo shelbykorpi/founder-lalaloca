@@ -7,7 +7,6 @@ import { SerumAlcove } from "@/components/shop/SerumAlcove";
 import { HouseShell } from "@/components/house/HouseShell";
 import { EditorialRoomSection } from "@/components/house/EditorialRoomSection";
 import { getRoom } from "@/lib/rooms";
-import { EmailSignup } from "@/components/site/EmailSignup";
 import { TrackListView } from "@/components/site/TrackListView";
 import { BRAND, CONTACT_EMAIL, CONTACT_MAILTO } from "@/lib/brand";
 import { formatPrice, products, SET } from "@/lib/products";
@@ -49,7 +48,7 @@ export default function ShopPage() {
         align="center"
         height="min-h-[86svh]"
         priority
-        title="Three serums. Three energies."
+        title="Three serums. Three kinds of day."
         lede="One woman building what’s next."
         bar={
           <nav
@@ -148,7 +147,7 @@ export default function ShopPage() {
                   made rather than an unrelated upsell. */}
               <p className="mt-[1em] max-w-[26ch] text-[clamp(0.8rem,1.05vw,1.125rem)] leading-relaxed text-charcoal/85">
                 The Closer, The Entrance, The Comeback. Three full-size serums:
-                hydrate, brighten, firm. One for every kind of day.
+                hydrate, brighten, cushion.
               </p>
               <p className="mt-[1em] text-balance text-[clamp(0.8rem,1.05vw,1.125rem)] text-charcoal/85">
                 {formatPrice(SET.price)} for all three · valued at{" "}
@@ -181,7 +180,7 @@ export default function ShopPage() {
             <div className="mx-auto mt-6 h-px w-16 bg-bronze/70" aria-hidden />
             <p className="mx-auto mt-6 max-w-md text-charcoal/85">
               The Closer, The Entrance, The Comeback. Three full-size serums:
-              hydrate, brighten, firm. One for every kind of day.
+              hydrate, brighten, cushion.
             </p>
             <p className="mt-4 text-charcoal/85">
               {formatPrice(SET.price)} for all three · valued at{" "}
@@ -201,7 +200,38 @@ export default function ShopPage() {
           <h2 id="compare-heading" className="subhead mt-3 text-charcoal">
             Side by side
           </h2>
-          <div className="mt-8 overflow-x-auto">
+          {/* Phones: one card per serum, label/value rows — the table was
+              704px wide in a 302px box and cut words mid-word. Same data and
+              labels as the table; the table takes over from 640px. */}
+          <ul className="mt-8 border-t border-charcoal/20 sm:hidden" aria-label="The three serums compared">
+            {products.map((product) => (
+              <li key={product.slug} className="border-b border-charcoal/12 py-6">
+                <Link
+                  href={`/products/${product.slug}`}
+                  className="font-serif text-2xl text-charcoal hover:text-bronze-ink"
+                >
+                  {product.name}
+                </Link>
+                <span className="mt-1 block text-xs uppercase tracking-[0.14em] text-charcoal/70">
+                  {product.category}
+                </span>
+                <dl className="mt-4 space-y-3 text-sm">
+                  {[
+                    { label: "Use it if", value: product.need },
+                    { label: "When", value: product.timing },
+                    { label: "Key active on the label", value: product.keyActive },
+                    { label: "Size · price", value: `${product.size} · ${formatPrice(product.price)}` },
+                  ].map((row) => (
+                    <div key={row.label}>
+                      <dt className="eyebrow font-normal text-charcoal/70">{row.label}</dt>
+                      <dd className="mt-1 text-charcoal/80">{row.value}</dd>
+                    </div>
+                  ))}
+                </dl>
+              </li>
+            ))}
+          </ul>
+          <div className="mt-8 hidden overflow-x-auto sm:block">
             <table className="w-full min-w-[44rem] border-collapse text-left text-sm">
               <caption className="sr-only">
                 The three LALALOCA serums compared by what they are for, when to use
@@ -362,15 +392,9 @@ export default function ShopPage() {
           </div>
         </div>
       </EditorialRoomSection>
-      {/* ---------------- Founding List ---------------- */}
-      <section className="section-tight bg-founder-green py-14 md:py-16">
-        <div className="shell">
-          <div className="max-w-xl">
-            <h2 className="headline text-balance text-cream">Enter the Founding List.</h2>
-            <EmailSignup tone="green" source="shop" />
-          </div>
-        </div>
-      </section>
+      {/* The page-level Founding List signup was removed 1 Oct 2026: the
+          footer carries the identical form, and the two stacked read as a
+          stutter ("Enter the Founding List." twice). */}
       </HouseShell>
     </>
   );

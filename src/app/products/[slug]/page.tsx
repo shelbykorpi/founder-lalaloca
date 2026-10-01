@@ -81,9 +81,9 @@ export default async function ProductPage({ params }: PageProps<"/products/[slug
           The dark room, matching the after-hours plate: browsing and buying
           happen against the wall, not on paper. The long reading (the three
           panels below) is where the page switches to a lit surface. */}
-      <section className="bg-night pt-6 md:pt-10">
+      <section className="bg-night pt-3 md:pt-10">
         <div className="shell">
-          <nav aria-label="Breadcrumb" className="mb-4">
+          <nav aria-label="Breadcrumb" className="mb-2 md:mb-4">
             <ol className="flex items-center gap-2 text-[0.6875rem] uppercase tracking-[0.16em] text-cream/70">
               <li>
                 <Link href="/shop" className="inline-flex min-h-11 items-center hover:text-cream">
@@ -97,78 +97,90 @@ export default async function ProductPage({ params }: PageProps<"/products/[slug
             </ol>
           </nav>
 
-          <div className="grid gap-10 lg:grid-cols-[1fr_1fr] lg:gap-16">
-            <ProductDoor product={product} />
-
-            <div className="lg:pt-4">
-              {/* The product's energy colour — its alcove in the Serum
-                  Salon (teal / amber / red) — as a hairline over the name,
-                  so the page and the salon read as one room. */}
-              <span
-                aria-hidden
-                className="mb-4 block h-[2px] w-12"
-                style={{ background: product.accent }}
-              />
-              <h1 className="font-serif text-[clamp(2.5rem,6vw,3.75rem)] leading-none text-cream">
-                {product.name}
-              </h1>
-              {/* Identity first, then the label. The archetype sits beside the
-                  category rather than replacing it — the category is the
-                  approved label wording and is what a shopper scanning for
-                  "vitamin C serum" is actually looking for. */}
-              <p className="mt-3 text-xs uppercase tracking-[0.18em] text-cream/70">
-                <span className="text-champagne">{product.archetype}</span>
-                <span aria-hidden> · </span>
-                {product.category}
-              </p>
-
-              {/* The hero line runs first and the functional description
-                  immediately under it, so the page answers "who am I when I
-                  use this?" and "what does it do?" in the same glance. The
-                  order matters: lifestyle copy that displaces the product
-                  description reads as evasion. */}
-              {/* One paragraph above the fold — identity and function in the
-                  same breath (copy-cut spec, 23 Aug 2026). `hero` and `what`
-                  still exist on the product for cards and metadata; the page
-                  says it once. */}
-              {/* text-blush, matching the hook line's treatment on the
-                  after-hours plate — the one serif line that gets its own
-                  voice against the room. */}
-              <p className="mt-6 max-w-md font-serif text-[clamp(1.375rem,2.4vw,1.75rem)] leading-snug text-blush">
-                {product.hook}
-              </p>
-
-              <dl className="mt-8 grid grid-cols-2 gap-x-6 gap-y-4 border-y border-bronze/20 py-6 text-sm">
-                <div>
-                  <dt className="eyebrow text-champagne">Size</dt>
-                  <dd className="mt-1 text-cream">{product.size}</dd>
-                </div>
-                <div>
-                  <dt className="eyebrow text-champagne">Price</dt>
-                  <dd className="mt-1 text-cream">{formatPrice(product.price)}</dd>
-                </div>
-                <div>
-                  <dt className="eyebrow text-champagne">When</dt>
-                  <dd className="mt-1 text-cream">{product.timing}</dd>
-                </div>
-                <div>
-                  <dt className="eyebrow text-champagne">In your routine</dt>
-                  <dd className="mt-1 text-cream">{product.routine}</dd>
-                </div>
-              </dl>
-
-              <div className="mt-7 max-w-md">
-                {/* Lead action on a dark room is the gold fill, not the
-                    charcoal block btn-dark was built for on paper. */}
-                <AddToBagButton product={product} className="btn btn-primary w-full" showPrice />
-                <p className="mt-3 text-xs leading-relaxed text-cream/70">
-                  Free US shipping · Ships from Arizona within one business day ·
-                  Secure checkout by Shopify · {BRAND.legal.name} is the seller of record.
+          {/* Phones: elevator, then the buy block, then the doors toggle
+              (see ProductDoor). lg: elevator + toggle in column one, the
+              buy block spanning both rows of column two — as before. */}
+          <div className="grid gap-6 lg:grid-cols-[1fr_1fr] lg:grid-rows-[auto_1fr] lg:gap-x-16 lg:gap-y-3">
+            <ProductDoor product={product}>
+              <div className="lg:col-start-2 lg:row-span-2 lg:row-start-1 lg:pt-4">
+                {/* The product's energy colour — its alcove in the Serum
+                    Salon (teal / amber / red) — as a hairline over the name,
+                    so the page and the salon read as one room. */}
+                <span
+                  aria-hidden
+                  className="mb-3 block h-[2px] w-12 lg:mb-4"
+                  style={{ background: product.accent }}
+                />
+                <h1 className="font-serif text-[clamp(2.5rem,6vw,3.75rem)] leading-none text-cream">
+                  {product.name}
+                </h1>
+                {/* Identity first, then the label. The archetype sits beside the
+                    category rather than replacing it — the category is the
+                    approved label wording and is what a shopper scanning for
+                    "vitamin C serum" is actually looking for. */}
+                <p className="mt-3 text-xs uppercase tracking-[0.18em] text-cream/70">
+                  {/* The collection the serum belongs to, so the house →
+                      collection → product hierarchy reads on the page. */}
+                  LALALOCA<span aria-hidden> · </span>
+                  <span className="text-champagne">{product.archetype}</span>
+                  <span aria-hidden> · </span>
+                  {product.category}
                 </p>
+
+                {/* The hero line runs first and the functional description
+                    immediately under it, so the page answers "who am I when I
+                    use this?" and "what does it do?" in the same glance. The
+                    order matters: lifestyle copy that displaces the product
+                    description reads as evasion. */}
+                {/* One paragraph above the fold — identity and function in the
+                    same breath (copy-cut spec, 23 Aug 2026). `hero` and `what`
+                    still exist on the product for cards and metadata; the page
+                    says it once. */}
+                {/* text-blush, matching the hook line's treatment on the
+                    after-hours plate — the one serif line that gets its own
+                    voice against the room. */}
+                <p className="mt-4 max-w-md font-serif text-[clamp(1.125rem,2.4vw,1.75rem)] leading-snug text-blush lg:mt-6">
+                  {product.hook}
+                </p>
+
+                <dl className="mt-5 grid grid-cols-2 gap-x-6 gap-y-3 border-y border-bronze/20 py-4 text-sm lg:mt-8 lg:gap-y-4 lg:py-6">
+                  <div>
+                    <dt className="eyebrow text-champagne">Size</dt>
+                    <dd className="mt-1 text-cream">{product.size}</dd>
+                  </div>
+                  <div>
+                    <dt className="eyebrow text-champagne">Price</dt>
+                    <dd className="mt-1 text-cream">{formatPrice(product.price)}</dd>
+                  </div>
+                  <div>
+                    <dt className="eyebrow text-champagne">When</dt>
+                    <dd className="mt-1 text-cream">{product.timing}</dd>
+                  </div>
+                  <div>
+                    <dt className="eyebrow text-champagne">In your routine</dt>
+                    <dd className="mt-1 text-cream">{product.routine}</dd>
+                  </div>
+                </dl>
+
+                <div className="mt-5 max-w-md lg:mt-7">
+                  {/* Lead action on a dark room is the gold fill, not the
+                      charcoal block btn-dark was built for on paper. */}
+                  <AddToBagButton product={product} className="btn btn-primary w-full" showPrice />
+                  <p className="mt-3 text-xs leading-relaxed text-cream/70">
+                    Free US shipping · Ships from Arizona within one business day ·
+                    Secure checkout by Shopify · {BRAND.legal.name} is the seller of record.
+                  </p>
+                  <p className="text-xs leading-relaxed text-cream/70">
+                    <Link
+                      href="/policies/returns"
+                      className="inline-flex min-h-6 items-center underline underline-offset-4 hover:text-cream"
+                    >
+                      14-day returns on unopened products
+                    </Link>
+                  </p>
+                </div>
               </div>
-
-
-            </div>
+            </ProductDoor>
           </div>
         </div>
       </section>

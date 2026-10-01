@@ -10,7 +10,7 @@ import { profiles } from "@/lib/profiles";
 import { JsonLd, aboutPageSchema, breadcrumbSchema } from "@/lib/seo";
 
 const OUR_STORY_TITLE =
-  "FOUNDER is for women building something, and finding themselves along the way.";
+  "For the woman building something, and the moment she recognises who she’s become.";
 
 const OUR_STORY_LEDE =
   "I started with three serums. Now there are eight products, and I made every one for the woman about to walk into the room.";
@@ -58,7 +58,7 @@ export default function OurStoryPage() {
         room={getRoom(5)}
         height="min-h-[78svh]"
         priority
-        title="Every woman is building something."
+        title="Every woman is the founder of something."
         lede={OUR_STORY_TITLE}
       >
         <Link href="#story" className="btn btn-ghost-light">
@@ -92,13 +92,18 @@ export default function OurStoryPage() {
               woman who started the thing, kept it going, or began again after it fell
               over. Sometimes that’s a company. Usually it isn’t.
             </p>
-            <ul className="mt-8 flex flex-wrap gap-2">
-              {BUILDING.map((item) => (
-                <li
-                  key={item}
-                  className="border border-bronze/50 px-4 py-2 text-sm text-charcoal/85"
-                >
-                  {item}
+            {/* One running Cormorant line, not a row of pills: bordered chips
+                read as software tags (audit, 1 Oct 2026). Same items, same
+                order; still a list for a screen reader. */}
+            <ul className="mt-8 font-serif text-[1.375rem] leading-[1.6] text-charcoal/85">
+              {BUILDING.map((item, i) => (
+                <li key={item} className="inline">
+                  {i > 0 && (
+                    <span aria-hidden className="text-bronze-ink">
+                      {" · "}
+                    </span>
+                  )}
+                  <span className="whitespace-nowrap">{item}</span>
                 </li>
               ))}
             </ul>

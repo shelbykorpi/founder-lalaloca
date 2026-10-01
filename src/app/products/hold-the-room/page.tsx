@@ -6,6 +6,7 @@ import { Reveal } from "@/components/house/Reveal";
 import { LineRail } from "@/components/house/LineRail";
 import { BRAND } from "@/lib/brand";
 import { FOUNDER_COLLECTION } from "@/lib/founderCollection";
+import { availabilityLine } from "@/lib/nextMove";
 import { fetchVariantAvailability } from "@/lib/catalog";
 import { VARIANT_ID } from "@/lib/shopifyLinks";
 import { formatPrice } from "@/lib/products";
@@ -155,7 +156,7 @@ export default async function HoldTheRoomPage() {
                 screen. Nothing is lost: shipping and returns are one tap away
                 and both are restated in the bag before checkout. */}
             <p className="mt-5 max-w-[26rem] text-[0.6875rem] leading-relaxed text-cream/55">
-              Secure checkout · Free US shipping · {BRAND.legal.name} is the seller of record ·{" "}
+              {soldOut ? "Sold out" : availabilityLine("in-stock")} · Free US shipping · {BRAND.legal.name} is the seller of record ·{" "}
               <Link className="underline underline-offset-2 hover:opacity-70" href="/policies/shipping">
                 Shipping
               </Link>{" "}

@@ -66,6 +66,20 @@ export const RESERVING = false;
  * each variant is tracked with "continue selling" OFF, and the buy button
  * reads availableForSale, so a variant at 0 says "Sold out" by itself.
  */
+/**
+ * Where each piece sits in the FOUNDER Collection routine (cleanse, wash,
+ * moisturise, eyes, finish). The one label grid cards, plate eyebrows and
+ * the vanity all use — replaced the retired "The Next Move" campaign name
+ * as an eyebrow on 1 Oct 2026 (team audit: its page redirects away).
+ */
+export const ROUTINE_STEP: Record<string, string> = {
+  "opening-line": "01 · Cleanse",
+  "clean-break": "02 · Wash",
+  "hold-the-room": "03 · Moisturise",
+  "double-take": "04 · Eyes",
+  "smooth-talker": "05 · Finish",
+};
+
 export type Availability = "preorder" | "in-stock";
 
 /** The preorder notice, one wording for the whole line. */
@@ -208,12 +222,12 @@ export const NEXT_MOVE: NextMoveProduct[] = [
     slug: "opening-line",
     name: "Opening Line",
     category: "Oil-To-Milk Cleanser",
-    hook: "You can't control how the day opens.",
+    hook: "You can’t control how the day opens.",
     what: "A gentle daily cleanser that turns from oil to milk on contact with water.",
     benefits: [
       "Turns from oil-gel to silky milk",
       "Dissolves make-up and impurities",
-      "Leaves skin soft, never stripped",
+      "Leaves skin soft, not stripped",
     ],
     keyIngredients: ["Camomile", "Sea Buckthorn", "Cloudberry"],
     size: "150 ml / 5.07 fl oz",
@@ -350,7 +364,7 @@ export const NEXT_MOVE: NextMoveProduct[] = [
     what: "A creamy tone stick that evens the look of skin and lives in a pocket.",
     benefits: [
       "Evens the look of skin tone",
-      "Supports the skin barrier",
+      "Made with ceramides",
       "Blends with fingertips",
     ],
     keyIngredients: ["Ceramides", "Cocoa Butter", "Vitamin E"],
@@ -433,7 +447,7 @@ export const NEXT_MOVE: NextMoveProduct[] = [
       },
     ],
     description:
-      "A creamy tone-correcting stick that helps even the look of skin tone, supports the skin barrier and blends easily with fingertips for a natural-looking finish.",
+      "A creamy tone-correcting stick that helps even the look of skin tone, is made with ceramides and blends easily with fingertips for a natural-looking finish.",
     detailCta: "Reserve your shade",
     reservationStatus:
       "Pick your shade and hold your place in the first run. No charge today — price and ship date come to you by email first.",
@@ -471,7 +485,7 @@ export const NEXT_MOVE: NextMoveProduct[] = [
     benefits: [
       "Softens the look of fine lines",
       "Hydrates and smooths the look of skin",
-      "Absorbs fast. Wears under makeup",
+      "Light. Comfortable under makeup",
     ],
     keyIngredients: ["Hexapeptide-11", "Vitamin C", "Vitamin E"],
     size: "15 ml / 0.51 fl oz",
@@ -525,7 +539,7 @@ export const NEXT_MOVE: NextMoveProduct[] = [
     ],
     origin: "Made in the EU.",
     description:
-      "A hydrating peptide eye cream that helps the appearance of fine lines look softened and the eye area look smoother. Comfortable under makeup.",
+      "A hydrating peptide eye cream that helps fine lines look softened and the eye area look smoother. Comfortable under makeup.",
     detailCta: "Reserve Double Take",
     reservationStatus: "Hold your place in the first run. No charge today — price and ship date come to you by email first.",
     detailHero: {

@@ -212,7 +212,9 @@
   flex: 1;
   display: flex;
   flex-direction: column;
-  padding: 20px 20px 14px;
+  /* 28px at the foot (was 14) so the "More" target below has room to reach
+     44px without being clipped by the page edge. */
+  padding: 20px 20px 28px;
   min-height: 0;
   color: var(--ink);
   font-family: var(--font-jost), sans-serif;
@@ -223,8 +225,14 @@
 .kicker { font-size: 9.2px; letter-spacing: 0.25em; text-transform: uppercase; color: var(--ink); font-weight: 400; }
 .close {
   position: absolute;
-  top: -6px;
-  right: -8px;
+  /* A 44px hit area centred where the 16px glyph always sat (audit, 1 Oct
+     2026: the old box was ~22px). The glyph itself is unchanged. */
+  top: -16px;
+  right: -18px;
+  width: 44px;
+  height: 44px;
+  display: grid;
+  place-items: center;
   background: none;
   border: none;
   cursor: pointer;
@@ -232,7 +240,7 @@
   font-size: 16px;
   line-height: 1;
   font-weight: 300;
-  padding: 3px;
+  padding: 0;
   transition: color 0.3s;
 }
 .close:hover { color: var(--ink); }
@@ -525,7 +533,10 @@
   color: var(--ink-faint);
   text-align: center;
 }
-.disclaimer button { background: none; border: none; padding: 0; margin-left: 3px; cursor: pointer; font: inherit; color: var(--brass-dk); text-decoration: underline; }
+.disclaimer button { position: relative; background: none; border: none; padding: 0; margin-left: 3px; cursor: pointer; font: inherit; color: var(--brass-dk); text-decoration: underline; }
+/* "More" keeps its small type but gets a ~44px target. The extension runs
+   down and out, not up, so it never sits over the composer's Send button. */
+.disclaimer button::after { content: ""; position: absolute; top: -6px; bottom: -24px; left: -14px; right: -14px; }
 
 /* ---------- tabs ---------- */
 .tabs { position: absolute; right: -30px; top: 52px; display: flex; flex-direction: column; gap: 9px; z-index: 1; }
@@ -573,6 +584,18 @@
   .tabs { right: -28px; top: 40px; }
   .tabs button { width: 56px; height: 88px; font-size: 9.2px; padding-left: 24px; }
 }
+/* While the bag drawer or the mobile menu is open the bell and the folio step
+   aside: at z-index 70 the bell sat on the bag's Checkout footer. The flags
+   are set on <body> by BagDrawer and Header. Fixed elements, so no shift. */
+:global(body[data-bag-open]) .bell,
+:global(body[data-bag-open]) .folio,
+:global(body[data-menu-open]) .bell,
+:global(body[data-menu-open]) .folio {
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+}
+
 @media (prefers-reduced-motion: reduce) {
   .root *, .root *::before, .root *::after {
     animation-duration: 0.01ms !important;

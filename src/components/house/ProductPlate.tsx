@@ -8,7 +8,7 @@ import {
   PlateShadeChips,
 } from "@/components/house/PlateShades";
 import { PlateBuyButton } from "@/components/house/PlateBuyButton";
-import { CAMPAIGN, PREORDER_NOTE, availabilityLine, type NextMoveProduct } from "@/lib/nextMove";
+import { PREORDER_NOTE, ROUTINE_STEP, availabilityLine, type NextMoveProduct } from "@/lib/nextMove";
 import { formatPrice } from "@/lib/products";
 import { BRAND, SITE } from "@/lib/brand";
 import { fetchVariantAvailability } from "@/lib/catalog";
@@ -69,7 +69,6 @@ import { JsonLd, breadcrumbSchema, nextMoveProductSchema } from "@/lib/seo";
  */
 export async function ProductPlate({ product }: { product: NextMoveProduct }) {
   const shades = product.shades?.length ? product.shades : null;
-  const inCampaign = CAMPAIGN.slugs.includes(product.slug as never);
 
   /* Every variant this page can sell, asked about in one call. */
   const variantIds = shades ? shades.map((s) => s.variantId) : product.variantId ? [product.variantId] : [];
@@ -112,7 +111,7 @@ export async function ProductPlate({ product }: { product: NextMoveProduct }) {
 
       <div className="shell relative flex w-full flex-1 items-start pb-14 pt-8 md:items-center md:py-24">
         <div className="max-w-[26rem]">
-          <p className="room-label">{CAMPAIGN.name}</p>
+          <p className="room-label">The FOUNDER Collection · {ROUTINE_STEP[product.slug]}</p>
 
           <h1 className="display-product mt-5 text-cream">{product.name}</h1>
 
@@ -313,8 +312,8 @@ export async function ProductPlate({ product }: { product: NextMoveProduct }) {
               </p>
             )}
             <p className="mt-8 border-t border-charcoal/12 pt-6 text-xs leading-relaxed text-charcoal/70">
-              The same list is printed on the carton. If you react to any of
-              it, patch test first: a little on the inner forearm, then a day.
+              The same list is printed on the pack. Sensitive to any of
+              it? Patch test first: a little on the inner forearm, then wait a day.
             </p>
           </Reveal>
         </div>
@@ -381,13 +380,14 @@ export async function ProductPlate({ product }: { product: NextMoveProduct }) {
                 the August shoot, so it is simply part of the line. Both point
                 at the collection shelf; the campaign page redirects there. */}
             <p className="mt-6 max-w-[26rem] text-[0.9375rem] leading-relaxed text-cream/70">
-              {inCampaign
-                ? `${product.name} is one of three in ${CAMPAIGN.name}, and one of five in the FOUNDER Collection.`
-                : `${product.name} is part of the FOUNDER Collection.`}
+              {`${product.name} is one of five in the FOUNDER Collection, and it sits in the same routine as the LALALOCA serums.`}
             </p>
             <div className="mt-9 flex flex-wrap items-center gap-x-8 gap-y-4">
               <Link href="/founder-collection" className="hairline text-cream">
                 The whole line
+              </Link>
+              <Link href="/shop" className="hairline text-cream">
+                The serums
               </Link>
               <Link href="/" className="hairline text-cream">
                 Back to the house

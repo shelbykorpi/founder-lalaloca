@@ -39,24 +39,32 @@ export function Header() {
     if (!menuOpen) return;
     const { overflow } = document.body.style;
     document.body.style.overflow = "hidden";
+    /* The floating bell and house key step aside while the menu is open. */
+    document.body.dataset.menuOpen = "";
     const onKey = (e: KeyboardEvent) => e.key === "Escape" && setMenuOpen(false);
     document.addEventListener("keydown", onKey);
     return () => {
       document.body.style.overflow = overflow;
+      delete document.body.dataset.menuOpen;
       document.removeEventListener("keydown", onKey);
     };
   }, [menuOpen]);
 
   const close = () => setMenuOpen(false);
+  const barText = isCollectionRoom(pathname) ? BRAND.barCollection : BRAND.bar;
 
   return (
     <header
       className="sticky top-0 z-30 border-b backdrop-blur-md border-bronze/25 bg-night/85"
     >
+      {/* Phones get the first segment only, on one line: the full bar wrapped
+          to two lines and made the sticky header 122px tall at 390. The
+          strings stay in brand.ts; this only splits them. */}
       <p
         className="py-2 text-center text-[0.625rem] uppercase tracking-[0.24em] bg-night-deep text-cream/80"
       >
-        {isCollectionRoom(pathname) ? BRAND.barCollection : BRAND.bar}
+        <span className="md:hidden">{barText.split(" · ")[0]}</span>
+        <span className="hidden md:inline">{barText}</span>
       </p>
 
       {/* The FOUNDER/BEAUTY lockup is far shorter than the stacked mark it

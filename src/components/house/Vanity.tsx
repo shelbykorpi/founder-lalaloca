@@ -47,9 +47,9 @@ type Slug = "opening-line" | "clean-break" | "hold-the-room" | "double-take" | "
 type Pose = { dx: string; dy: number; depth: number; z: number };
 const PIECES: Record<Slug, { src: string; step: string; tick: string; h: number; w: number; ph: number; pose: Pose }> = {
   "opening-line":  { src: "/products/opening-line-vanity.webp",  step: "01 · Cleanse", tick: "#F7EFE8", h: 98.7,  w: 391,  ph: 1399, pose: { dx: "2%",   dy: 0, depth: 1, z: 3 } },
-  "clean-break":   { src: "/products/clean-break-vanity.webp",   step: "02 · Cleanse", tick: "#F7EFE8", h: 100,   w: 374,  ph: 1400, pose: { dx: "-2%",  dy: 0, depth: 1, z: 1 } },
-  "hold-the-room": { src: "/products/hold-the-room-vanity.webp", step: "03 · Treat",   tick: "#D8A7A0", h: 96.5,  w: 815,  ph: 1400, pose: { dx: "0%",   dy: 0, depth: 1, z: 2 } },
-  "double-take":   { src: "/products/double-take-vanity.webp",   step: "04 · Treat",   tick: "#D8A7A0", h: 62.1,  w: 1330, ph: 1400,  pose: { dx: "-4%",  dy: 0, depth: 1, z: 5 } },
+  "clean-break":   { src: "/products/clean-break-vanity.webp",   step: "02 · Wash", tick: "#F7EFE8", h: 100,   w: 374,  ph: 1400, pose: { dx: "-2%",  dy: 0, depth: 1, z: 1 } },
+  "hold-the-room": { src: "/products/hold-the-room-vanity.webp", step: "03 · Moisturise", tick: "#D8A7A0", h: 96.5,  w: 815,  ph: 1400, pose: { dx: "0%",   dy: 0, depth: 1, z: 2 } },
+  "double-take":   { src: "/products/double-take-vanity.webp",   step: "04 · Eyes", tick: "#D8A7A0", h: 62.1,  w: 1330, ph: 1400,  pose: { dx: "-4%",  dy: 0, depth: 1, z: 5 } },
   "smooth-talker": { src: "/products/smooth-talker-vanity.webp", step: "05 · Finish",  tick: "#B08A64", h: 70.2,  w: 908,  ph: 1400,  pose: { dx: "2%",   dy: 0, depth: 1, z: 4 } },
 };
 
@@ -179,7 +179,7 @@ export function Vanity({ items, title, lede }: { items: VanityItem[]; title: str
                 onFocus={() => light(i)}
               >
                 {/* eslint-disable-next-line @next/next/no-img-element -- already-optimised alpha webp cutouts, sized by the true-scale unit in CSS; next/image cannot size by a CSS variable */}
-                <img src={p.src} alt={it.alt} width={p.w} height={p.ph} loading={i === 2 ? "eager" : "lazy"} decoding="async" />
+                <img src={p.src} alt={it.alt} width={p.w} height={p.ph} loading="lazy" decoding="async" />
                 {/* the pool: the console's top face in front of the base,
                     with the piece's reflection lying in the polished stone */}
                 <span className={s.pool} aria-hidden="true">

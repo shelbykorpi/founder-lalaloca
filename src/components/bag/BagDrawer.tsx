@@ -119,9 +119,13 @@ export function BagDrawer() {
     document.addEventListener("keydown", onKeyDown);
     const { overflow } = document.body.style;
     document.body.style.overflow = "hidden";
+    /* The floating bell and house key read this and step aside, so neither
+       sits on the checkout footer (concierge.module.css, founder-key.module.css). */
+    document.body.dataset.bagOpen = "";
     return () => {
       document.removeEventListener("keydown", onKeyDown);
       document.body.style.overflow = overflow;
+      delete document.body.dataset.bagOpen;
       previouslyFocused?.focus();
     };
   }, [isOpen, closeBag]);
@@ -261,7 +265,7 @@ export function BagDrawer() {
                   {checkoutError}
                 </p>
               )}
-              <p className="mt-3 text-center text-[0.6875rem] leading-relaxed text-cream/60">
+              <p className="mt-3 text-center text-xs leading-relaxed text-cream/70">
                 Secure checkout by Shopify. FOUNDER is the name on your order. Cosmetic products.
               </p>
             </footer>

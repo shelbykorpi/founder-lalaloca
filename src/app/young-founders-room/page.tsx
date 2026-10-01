@@ -234,7 +234,7 @@ export default function YoungFoundersRoomPage() {
               <p>Trust is rarely built in one conversation.</p>
               <p>
                 It comes from returning. Remembering a name. Following up. Listening without
-                judgment. Becoming a person a young person recognizes—and eventually believes might
+                judgment. Becoming a person a young person recognises, and eventually believes might
                 still be there next week.
               </p>
               <p>
@@ -306,7 +306,7 @@ export default function YoungFoundersRoomPage() {
           <div className="max-w-prose space-y-4 text-charcoal/85">
             <p>
               There were samples on the table. Packaging options spread out in front of us.
-              Questions about color, texture, names, and what felt exciting enough to pick up.
+              Questions about colour, texture, names, and what felt exciting enough to pick up.
             </p>
             <p>
               I brought new products into the Outreach Center and asked the young people there to
@@ -425,7 +425,7 @@ export default function YoungFoundersRoomPage() {
                 <p>The mentor who listens.</p>
                 <p>The Outreach Center door that opens.</p>
                 <p>
-                  The moment a young person is asked for an opinion—and realizes someone genuinely
+                  The moment a young person is asked for an opinion, and realises someone genuinely
                   wants to hear the answer.
                 </p>
               </div>

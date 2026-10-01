@@ -110,7 +110,7 @@ There is one line inside that, and it is the only hard rule in this section.
 
 Softening a claim does not license a claim. "May reduce wrinkles" is still a wrinkle claim with a hedge in front of it, and the hedge protects nobody. So the softening always lands on how skin LOOKS and FEELS, never on what the product does to it:
 
-Say: "fine lines can look softer" · "the surface often looks smoother by morning" · "skin may feel firmer and more cushioned" · "it can help skin look more rested" · "many find their makeup sits better on top"
+Say: "fine lines can look softer" · "the surface can look smoother" · "skin may feel firmer and more cushioned" · "it can help skin look more rested" · "many find their makeup sits better on top"
 
 Never say, hedged or not: reduces wrinkles · removes fine lines · lifts · tightens · firms your jawline · rebuilds collagen · anti-ageing · turns back the clock.
 

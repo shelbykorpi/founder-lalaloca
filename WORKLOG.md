@@ -2113,3 +2113,11 @@ Shelby: "fix the image of the book, it is cut off where the writing is."
 - The slot now uses the photo's own ratio, `aspect-[1255/747]`, at max-w-40rem, so nothing is cropped. The section grid went from 0.8fr/1.2fr to 1fr/1fr with gap-16, so the landscape frame has room beside the text. `sizes` was updated to match.
 - The alt text now includes the handwritten line.
 - Checked at 1440 (side by side) and 390 (stacked); the whole sentence is visible in both.
+
+## 2026-10-02 01:20Z: Our Story: the FOUND HER frame on the wall in "Why FOUND HER belongs here" (Cowork FOUNDER team)
+
+Shelby: "the 'Why FOUND HER belongs here' section should have the framed picture of the multiple women with the writing on the wall."
+- Replaced `/editorial/founder-portrait-wall.webp` (Shelby's portrait on a cream wall) with `/editorial/story-frame.webp`: a gilt green frame under a brass picture light, holding several women with "I found her when…" lines handwritten across it. It was in `public/` but previously unused. The old image file is left in place.
+- The slot uses the image's own ratio, `aspect-[833/729]`, so the frame isn't cropped. The alt text transcribes all four handwritten lines.
+- **Honesty caption**, small, under the image: "An artwork for the FOUND HER wall, not a photograph of contributors." The women are generated and the lines read like quotes, while the section says FOUND HER stories are told in women's own words and published only after they approve them. It's the same safeguard `portrait.note` gives composed artwork on the FOUND HER pages. Shelby can drop it if she prefers.
+- Applied on top of 5ca108c (the journal fix, not yet on origin), so both changes are in the file. Checked at 1440 and 390.

@@ -298,16 +298,27 @@ export default function OurStoryPage() {
         <section className="bg-founder-green py-16 text-cream md:py-24">
           <div className="shell grid gap-12 lg:grid-cols-[1.05fr_0.95fr] lg:items-center lg:gap-20">
             <Reveal>
-              <div className="relative aspect-[4/3] overflow-hidden bg-night-deep">
-                <Image
-                  src="/editorial/founder-portrait-wall.webp"
-                  alt="A portrait wall inside the FOUNDER house."
-                  fill
-                  loading="lazy"
-                  sizes="(max-width: 1024px) 90vw, 50vw"
-                  className="object-cover"
-                />
-              </div>
+              {/* The FOUND HER frame on the wall (Shelby, 2 Oct 2026): several
+                  women in a gilt frame with "I found her when…" handwritten
+                  across the picture. Shown in its own shape (833 × 729) so the
+                  frame is never cropped. The women are composed artwork, not
+                  contributors, and the lines read like quotes, so the caption
+                  says so: this section promises stories in women's own words. */}
+              <figure>
+                <div className="relative aspect-[833/729] overflow-hidden bg-night-deep">
+                  <Image
+                    src="/editorial/story-frame.webp"
+                    alt="A gilt green frame on a cream wall under a brass picture light, holding a picture of several women with lines handwritten across it: I found her when I decided my worth is non-negotiable; I found her when I stopped shrinking for comfort; I found her when I chose peace over proving; I found her when I became my own safe place."
+                    fill
+                    loading="lazy"
+                    sizes="(max-width: 1024px) 90vw, 50vw"
+                    className="object-cover"
+                  />
+                </div>
+                <figcaption className="mt-3 text-[0.75rem] leading-relaxed text-cream/60">
+                  An artwork for the FOUND HER wall, not a photograph of contributors.
+                </figcaption>
+              </figure>
             </Reveal>
 
             <Reveal delay={100}>

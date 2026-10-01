@@ -43,8 +43,8 @@ export function StoryForm() {
         <p className="mt-4 text-sm leading-relaxed text-charcoal/80">
           A person reads every one of these — not a system, and not immediately. We’ve
           sent you a note confirming it arrived. If you ticked the second permission and
-          we’d like to publish, you’ll see the final text first and can say no then,
-          with no explanation needed.
+          we’d like to publish, you’ll receive the final text first. Nothing is published
+          until you explicitly approve that final version.
         </p>
       </div>
     );
@@ -204,8 +204,8 @@ export function StoryForm() {
           />
           <label htmlFor={`${uid}-publish`} className="text-sm leading-relaxed text-charcoal/80">
             You can consider this for publication. I understand I’ll see the final text
-            and can say no at that point.{" "}
-            <span className="text-charcoal/70">(Optional — say no and we’ll still read it.)</span>
+            first, and nothing will be published unless I explicitly approve that version.{" "}
+            <span className="text-charcoal/70">(Optional — decline and we’ll still read it.)</span>
           </label>
         </div>
 

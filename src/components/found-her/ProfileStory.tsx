@@ -105,52 +105,10 @@ export function ProfileStory({ profile }: { profile: FoundHerProfile }) {
         ))}
       </article>
 
-      {/* The pull quote is a section break, not reading — its own room,
-          one shade deeper than the masthead's, so it reads as a pause
-          between the interview and what comes after it. */}
-      {profile.closing && (
-        <section className="room-hall py-16 md:py-20">
-          <div className="shell text-center">
-            <p className="font-serif text-[clamp(2rem,5vw,3rem)] tracking-[0.06em]">
-              {profile.closing}
-            </p>
-          </div>
-        </section>
-      )}
-
-      {/* The close is two calls to action, not reading, so it leaves paper
-          and goes back to a dark room — .btn-dark/.btn-outline are
-          paper-only, hence primary/ghost-light here. */}
-      <section className="section-tight room-dark">
-        <div className="shell-narrow grid gap-8 sm:grid-cols-2">
-          <div>
-            <p className="eyebrow text-champagne">{BRAND.question}</p>
-            <p className="mt-3 text-sm leading-relaxed text-cream/80">
-              {/* Was "Hers is the first. The next ones belong to women who
-                  wrote in." — written for the founder's page and shown on
-                  every story, so Julie's and Aly's pages called each of them
-                  the first. Corrected 28 Sept 2026. */}
-              Every story here was sent in by the woman who lived it. Yours can be next.
-            </p>
-            <Link href="/found-her#share" className="btn btn-primary mt-5">
-              Share your story
-            </Link>
-          </div>
-          <div className="sm:border-l sm:border-cream/15 sm:pl-8">
-            <p className="eyebrow text-champagne">{BRAND.collectionFull}</p>
-            <p className="mt-3 text-sm leading-relaxed text-cream/80">
-              Three serums from the house that tells these stories.
-            </p>
-            <Link href="/shop" className="btn btn-ghost-light mt-5">
-              Shop the collection
-            </Link>
-          </div>
-        </div>
-      </section>
-
-      {/* Her press, last and quiet: one cream mark per publication under
-          her name, so it reads as her credential rather than a "seen in"
-          strip for the shop. Same room as the close, set off by a hairline.
+      {/* Her press, straight after her story and before the pull quote
+          (Shelby, 1 Oct 2026): one cream mark per publication, so it reads
+          as her credential rather than a "seen in" strip for the shop. It
+          leaves the paper for a dark room, so it needs no hairline.
           Each mark carries its own display height (--logo-h) so a heavy
           block wordmark and a fine serif one sit at the same weight; the
           logo row is as tall as the tallest mark (--row-h) wherever they sit
@@ -158,7 +116,7 @@ export function ProfileStory({ profile }: { profile: FoundHerProfile }) {
           keeps its own height. */}
       {profile.press && profile.press.length > 0 && (
         <section aria-label={`${profile.name} in the press`} className="room-dark">
-          <div className="shell-narrow border-t border-cream/15 py-12 text-center md:py-16">
+          <div className="shell-narrow py-16 text-center md:py-20">
             {profile.pressIntro ? (
               <>
                 <p className="eyebrow text-champagne">{profile.pressIntro.eyebrow}</p>
@@ -202,6 +160,49 @@ export function ProfileStory({ profile }: { profile: FoundHerProfile }) {
           </div>
         </section>
       )}
+
+      {/* The pull quote is a section break, not reading — its own room,
+          one shade deeper than the masthead's, so it reads as a pause
+          between the interview and what comes after it. */}
+      {profile.closing && (
+        <section className="room-hall py-16 md:py-20">
+          <div className="shell text-center">
+            <p className="text-balance font-serif text-[clamp(2rem,5vw,3rem)] tracking-[0.06em]">
+              {profile.closing}
+            </p>
+          </div>
+        </section>
+      )}
+
+      {/* The close is two calls to action, not reading, so it leaves paper
+          and goes back to a dark room — .btn-dark/.btn-outline are
+          paper-only, hence primary/ghost-light here. */}
+      <section className="section-tight room-dark">
+        <div className="shell-narrow grid gap-8 sm:grid-cols-2">
+          <div>
+            <p className="eyebrow text-champagne">{BRAND.question}</p>
+            <p className="mt-3 text-sm leading-relaxed text-cream/80">
+              {/* Was "Hers is the first. The next ones belong to women who
+                  wrote in." — written for the founder's page and shown on
+                  every story, so Julie's and Aly's pages called each of them
+                  the first. Corrected 28 Sept 2026. */}
+              Every story here was sent in by the woman who lived it. Yours can be next.
+            </p>
+            <Link href="/found-her#share" className="btn btn-primary mt-5">
+              Share your story
+            </Link>
+          </div>
+          <div className="sm:border-l sm:border-cream/15 sm:pl-8">
+            <p className="eyebrow text-champagne">{BRAND.collectionFull}</p>
+            <p className="mt-3 text-sm leading-relaxed text-cream/80">
+              Three serums from the house that tells these stories.
+            </p>
+            <Link href="/shop" className="btn btn-ghost-light mt-5">
+              Shop the collection
+            </Link>
+          </div>
+        </div>
+      </section>
     </>
   );
 }

@@ -2054,3 +2054,10 @@ Shelby asked for a message above the logos "about being seen on… and not limit
   - Body: "A magazine cover in Australia. A feature in Sweden. Ringside, on a show with Kevin Hart, at the Playboy Mansion. Now, nominated for an award in agriculture. None of them is the whole story. All of them are her."
 - Every place in the body maps to one of her six credits; nothing is added. "Nominated", not "shortlisted". "On a show with Kevin Hart", matching her caption.
 - Headline is serif clamp(1.75–2.5rem), body 15px cream/75 at max-w-xl, logo grid mt-12. Checked at 1440 and 390 (with the sticky header hidden for the capture).
+
+## 2026-10-01 23:45Z: Shelby's credits move up, under her story (Cowork FOUNDER team)
+
+Shelby: "put the logos right below my story and above the 'Founder. Found her'".
+- The press band in `ProfileStory.tsx` now sits between the interview (cream paper) and the closing pull quote. The order is: story, then "Never just one version of herself" with six marks, then FOUNDER. FOUND HER., then the two calls to action. The hairline was dropped (it's now a paper-to-dark change) and padding went to py-16/md:py-20.
+- The closing pull quote now uses text-balance, so phones break it "FOUNDER. / FOUND HER." instead of leaving "HER." alone. This also applies to any other profile with a closing line.
+- Checked at 1440 and 390.

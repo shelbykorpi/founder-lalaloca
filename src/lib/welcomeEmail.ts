@@ -69,13 +69,19 @@ export function welcomeText(email: string): string {
     "You’re in.",
 
     "",
-    "The Founding List is the short version of what we’re doing: which serum to",
-    "start with, new stories as they’re published, and word when something is",
-    "back in stock. A few emails a month, not a few a week. If that stops being",
-    "true, the way out is at the bottom of this email and every one after it.",
+    "The Founding List is the short version of what we’re doing: what is new in",
+    "the house, which product belongs in your routine, and new stories as they’re",
+    "published. A few emails a month, not a few a week. If that stops being true,",
+    "the way out is at the bottom of this email and every one after it.",
 
     "",
-    "Two things worth knowing about while you’re here.",
+    "Three doors worth knowing about while you’re here.",
+
+    "",
+    "THE FOUNDER COLLECTION",
+    "Five pieces, in the order you use them: cleanse, wash, moisturise, eyes,",
+    "finish. Start with the full line here:",
+    "https://www.founderbeauty.co/founder-collection",
 
     "",
     "THE LALALOCA COLLECTION",

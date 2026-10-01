@@ -48,6 +48,9 @@
   transition: transform 0.5s cubic-bezier(0.2, 0.7, 0.2, 1), opacity 0.4s;
 }
 .bell:hover { transform: translateY(-3px); }
+/* First screen: the bell waits (launch crawl, 30 Sept 2026 — at 390 it sat
+   on the hero's "Enter the House"). Still focusable; focus brings it back. */
+.bellTucked:not(:focus-visible) { opacity: 0; transform: translateY(12px); pointer-events: none; }
 .bell svg { width: 100%; display: block; overflow: visible; }
 
 .dome { transform-origin: 80px 92px; }
@@ -566,7 +569,7 @@
 
 @media (max-width: 560px) {
   .folio { right: 44px; left: 12px; bottom: 90px; width: auto; height: calc(100vh - 134px); }
-  .bell { right: 12px; bottom: 10px; width: 80px; }
+  .bell { right: 8px; bottom: max(8px, env(safe-area-inset-bottom)); width: 64px; }
   .tabs { right: -28px; top: 40px; }
   .tabs button { width: 56px; height: 88px; font-size: 9.2px; padding-left: 24px; }
 }

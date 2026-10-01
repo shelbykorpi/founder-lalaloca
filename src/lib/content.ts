@@ -292,63 +292,124 @@ export const policies = {
   returns: {
     title: "Returns",
     intro:
-      "If something arrives damaged or isn’t what you expected, we want to sort it out without a negotiation.",
+      "If it isn’t right, tell me. Here’s exactly how returns work, so nobody has to negotiate.",
     sections: [
       {
-        heading: "The principle",
-        body: `Write to ${CONTACT_EMAIL} and tell us what happened. Cosmetics have rules about what can be resold, so opened products are handled differently from sealed ones — but a genuine problem is our problem, not yours.`,
+        heading: "The window",
+        body: "You have 14 days from the day your order is delivered to send back anything unopened and unused, in its original packaging. We refund the price of the item to the card or account you paid with.",
       },
       {
-        heading: "Still to confirm",
-        body: "The return window, the condition requirements and refund timing need commercial and legal sign-off before they are published as terms.",
+        heading: "How to start one",
+        body: `Email ${CONTACT_EMAIL} with your order number and what you’re sending back. We’ll reply with the return address. Please don’t post anything back before you hear from us, or we can’t match it to your order.`,
+      },
+      {
+        heading: "Return postage",
+        body: "Return postage is yours to cover, unless we got something wrong. If we sent the wrong item or it arrived damaged, it’s on us.",
+      },
+      {
+        heading: "Opened products",
+        body: "Skincare that has been opened or used can’t come back. Once it’s opened we can’t resell it or pass it on to anyone else.",
+      },
+      {
+        heading: "Damaged or wrong",
+        body: `If something arrives broken, leaking or not what you ordered, email ${CONTACT_EMAIL} with your order number and a photo. We’ll send a replacement free, and you won’t pay a cent to send anything back.`,
+      },
+      {
+        heading: "When the money lands",
+        body: "We refund as soon as your return reaches us and we’ve checked it. After that, your bank or card company decides how fast it shows on your statement.",
+      },
+      {
+        heading: "Last updated",
+        body: "30 September 2026.",
       },
     ],
   },
   accessibility: {
     title: "Accessibility",
     intro:
-      "If you can’t use this site, it doesn’t work. Accessibility was built in rather than added afterwards.",
+      "If you can’t use this site, it doesn’t work. Accessibility was built in, not added afterwards.",
     sections: [
       {
         heading: "What’s built in",
         body: "Semantic headings and landmarks, keyboard operation for everything including the product doors, visible focus states, respect for reduced-motion settings, alternative text on imagery, and contrast held to WCAG AA for body text and controls.",
       },
       {
-        heading: "What’s still to come",
-        body: "A third-party audit including assistive-technology testing should be commissioned before public launch. If you hit a barrier here, tell us and we’ll fix it.",
+        heading: "Hit a barrier?",
+        body: `We haven’t had an outside audit yet, so you may find something we missed. Email ${CONTACT_EMAIL}, tell us what happened and what you were using, and we’ll fix it.`,
       },
     ],
   },
   privacy: {
     title: "Privacy",
     intro:
-      "Your details, and especially your story, are handled with specific permission that you can withdraw.",
+      "What we collect, why, and who else sees it.",
     sections: [
       {
-        heading: "Stories",
-        body: "A person reads every submission. Permission to reply to you and permission to publish your story are asked for separately, and neither is assumed. You can withdraw either at any time.",
+        heading: "When you buy",
+        body: "Checkout runs on Shopify. Your name, address, email and order go to Shopify so we can ship to you, and your payment details go to Shopify’s payment processors. We never see or store your full card number.",
       },
       {
-        heading: "Still to confirm",
-        body: "The full privacy notice, the list of data processors and the regional disclosures need legal review before publication.",
+        heading: "When you join the list",
+        body: "If you give us your email, we use it to send you FOUNDER news and launches. Every email has an unsubscribe link, and one click takes you off. Your email is kept in Shopify and our emails are sent through Resend.",
+      },
+      {
+        heading: "When you send your story",
+        body: "A person reads every FOUND HER submission. Permission to reply to you and permission to publish your story are asked for separately, and neither is assumed. Nothing is published until you’ve approved the final text. You can withdraw either permission at any time. Submissions are stored in Airtable.",
+      },
+      {
+        heading: "When you use the Beauty desk",
+        body: "The chat on this site is answered by an AI model, run through Vercel’s AI Gateway. What you type is sent to that model to write the reply. Please don’t type card numbers or anything you wouldn’t want in writing. If you ask for a person, or the desk can’t answer you, the conversation is saved in Airtable and emailed to us so a person can reply.",
+      },
+      {
+        heading: "What your browser keeps",
+        body: `Your bag and a couple of settings (like whether you’ve already walked through the front doors) are saved in your own browser so they’re still there when you come back. Your bag goes to Shopify when you check out. The site is hosted on Vercel, which keeps standard server logs.${process.env.NEXT_PUBLIC_GA_ID ? " We use Google Analytics to count visits and see which pages are read; it sets cookies in your browser and sends that usage data to Google." : ""}`,
+      },
+      {
+        heading: "What we don’t do",
+        body: "We don’t sell your information, and we don’t share it with anyone except the services named here, which we use to run the shop.",
+      },
+      {
+        heading: "Your say",
+        body: `Want to see what we hold on you, correct it or have it deleted? Email ${CONTACT_EMAIL} and we’ll do it. Shopify’s own privacy policy, linked at checkout, covers how Shopify handles your order.`,
+      },
+      {
+        heading: "Last updated",
+        body: "30 September 2026.",
       },
     ],
   },
   terms: {
     title: "Terms",
-    intro: "The terms of sale and site use need legal review before publication.",
+    intro:
+      "The deal between you and FOUNDER when you use this site or buy from it. Short on purpose.",
     sections: [
       {
+        heading: "Who you’re buying from",
+        body: "FOUNDER is the seller and the name you’ll see at checkout, on your receipt, on the confirmation email and on the packaging. LALALOCA is the name of the serum collection itself: Thirst Trap, C Me Glow and Bounce Back. One company, two names doing different jobs.",
+      },
+      {
+        heading: "Orders and prices",
+        body: "Prices are in US dollars. Sales tax, where it applies, is added at checkout. We ship to US addresses only. Your order is confirmed when checkout takes your payment and you get the confirmation email. If something sells out or we made a pricing mistake, we’ll tell you and refund you in full rather than leave you waiting.",
+      },
+      {
+        heading: "Shipping and returns",
+        body: "Shipping is free on every US order, and orders leave within one business day. Delivery times are the carrier’s estimates, not guarantees. Unopened items can come back within 14 days of delivery. The Shipping and Returns pages have the details.",
+      },
+      {
         heading: "About the products",
-        body: "These are cosmetic products. Nothing on this site is medical advice, and no clinical or regulatory claims are made or implied.",
+        body: "These are cosmetic products. Nothing on this site is medical advice, and no clinical or regulatory claims are made or implied. Read the full ingredient list on each product page before you buy, patch-test anything new, and stop using it if your skin disagrees.",
       },
       {
-        heading: "About the names",
-        body: "FOUNDER is the seller and the name you’ll see at checkout, on your receipt, on the confirmation email and on the packaging. LALALOCA is the name of the serum collection itself — Thirst Trap, C Me Glow and Bounce Back. One company, two names doing different jobs.",
+        heading: "Words and pictures",
+        body: "The words, photographs and designs on this site belong to FOUNDER, to the women who shared their stories with us, or to the people who licensed them to us, and they can’t be copied without permission. A FOUND HER story stays yours; we publish it only with your approval, and we take it down if you ask.",
       },
       {
-        heading: "Still to confirm",
-        body: "Governing law, limitation of liability and the purchase terms are marked for completion rather than invented.",
+        heading: "The legal part",
+        body: "We work hard to keep this site accurate and running, but we can’t promise it will always be error-free. To the extent the law allows, FOUNDER isn’t liable for indirect losses from using the site, and our total liability for any order is limited to what you paid for it. Nothing here takes away rights you have by law. These terms are governed by the laws of the State of Arizona. Questions? Email " + CONTACT_EMAIL + ".",
+      },
+      {
+        heading: "Last updated",
+        body: "30 September 2026.",
       },
     ],
   },

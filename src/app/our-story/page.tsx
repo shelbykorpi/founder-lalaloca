@@ -10,14 +10,14 @@ import { profiles } from "@/lib/profiles";
 import { JsonLd, aboutPageSchema, breadcrumbSchema } from "@/lib/seo";
 
 const OUR_STORY_TITLE =
-  "FOUNDER is for women building something — and finding themselves along the way.";
+  "FOUNDER is for women building something, and finding themselves along the way.";
 
 const OUR_STORY_LEDE =
-  "We make skincare. Three serums, sold under the name they’ve always had. The rest of what we do is about the women who buy it.";
+  "I started with three serums. Now there are eight products, and I made every one for the woman about to walk into the room.";
 
 /* The meta description is the headline plus one clause, rather than a second
    piece of copy that can drift away from it. */
-const ABOUT_DESCRIPTION = `${OUR_STORY_TITLE} The LALALOCA Collection is where it started.`;
+const ABOUT_DESCRIPTION = `${OUR_STORY_TITLE} Founded by Shelby Korpi. The LALALOCA serums came first; the FOUNDER Collection followed.`;
 
 export const metadata: Metadata = {
   title: "Our Story",
@@ -88,7 +88,7 @@ export default function OurStoryPage() {
           </div>
           <div className="max-w-[38rem]">
             <p className="text-[1.0625rem] leading-[1.8] text-charcoal/85">
-              When we say founder, we don’t mean a business registration. We mean the
+              When I say founder, I don’t mean a business registration. I mean the
               woman who started the thing, kept it going, or began again after it fell
               over. Sometimes that’s a company. Usually it isn’t.
             </p>
@@ -103,10 +103,9 @@ export default function OurStoryPage() {
               ))}
             </ul>
             <p className="mt-8 leading-[1.8] text-charcoal/85">
-              The other half of the name is the part people notice second. Founder.
-              Found her. There’s usually a moment somewhere in the building where a
-              woman looks up and recognizes who she’s become. We named the brand after
-              that moment rather than after ourselves.
+              The other half of the name took me longer to see. Founder. Found her.
+              Somewhere in the building there’s a moment when you look up and recognise
+              the woman you’ve become. I named the brand after that moment, not after me.
             </p>
           </div>
         </div>
@@ -122,31 +121,31 @@ export default function OurStoryPage() {
       <EditorialRoomSection surface="panel">
         <div className="shell grid gap-10 lg:grid-cols-[minmax(0,24rem)_1fr] lg:gap-16">
           <div>
-            <p className="eyebrow text-champagne">{BRAND.collectionFull}</p>
-            <h2 className="subhead mt-4">Where it started, and what we sell.</h2>
+            <p className="eyebrow text-champagne">What I make</p>
+            <h2 className="subhead mt-4">Where it started, and where it’s going.</h2>
           </div>
           <div className="max-w-[38rem]">
             <p className="font-serif text-2xl leading-snug text-cream">{OUR_STORY_LEDE}</p>
             <p className="mt-6 leading-[1.8] text-cream/85">
-              LALALOCA came first: three serums — Thirst Trap, C Me Glow and Bounce
-              Back — in the bottles they’re still sold in today. FOUNDER is the name on
-              the door now. LALALOCA is the collection inside, and the name on your
-              receipt.
+              LALALOCA came first: Thirst Trap, C Me Glow and Bounce Back, in the same
+              bottles you can buy today. I didn’t reformulate a thing to launch a new
+              brand. FOUNDER is the name on the door now, and LALALOCA is the serum
+              collection inside.
             </p>
             <p className="mt-5 leading-[1.8] text-cream/85">
-              We didn’t reformulate anything to launch a new brand, and we haven’t
-              redesigned a single bottle. The products are what they were. What changed
-              is what we’re building around them.
+              Then I built the FOUNDER Collection: Opening Line, Clean Break, Hold the
+              Room, Double Take and Smooth Talker. The whole routine, from the first
+              cleanse to the last touch of colour.
             </p>
             <p className="mt-8 font-serif text-2xl leading-snug text-bronze">
               {BRAND.supporting}
             </p>
             <div className="mt-8 flex flex-col gap-3 sm:flex-row">
               <Link href="/shop" className="btn btn-primary">
-                See the three serums
+                Shop the serums
               </Link>
-              <Link href="/found-her" className="btn btn-ghost-light">
-                Read Found Her
+              <Link href="/founder-collection" className="btn btn-ghost-light">
+                Shop the FOUNDER Collection
               </Link>
             </div>
           </div>

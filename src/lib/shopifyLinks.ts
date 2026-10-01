@@ -52,10 +52,9 @@ export const VARIANT_ID: Record<
   "c-me-glow": "47320268898473",
   "bounce-back": "47320268996777",
   "all-three": "47320268931241",
-  /* The FOUNDER Collection. Sold with Shopify inventory at 0 and
-     "continue selling when out of stock" ON — a preorder, not a lie about
-     stock. If that setting is ever turned off, checkout starts refusing the
-     line and `sellable` in founderCollection.ts must go back to false. */
+  /* The FOUNDER Collection anchor. In stock from launch (30 Sept 2026):
+     tracked, "continue selling when out of stock" OFF, so Shopify refuses
+     the line at 0 and the page reads availableForSale to say "Sold out". */
   "hold-the-room": "47361868169385",
 };
 

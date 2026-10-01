@@ -1,5 +1,5 @@
 /*
- * THE VANITY — Room 03. The five pieces on a black marble console against
+ * THE VANITY — inside Room 04. The five pieces on a black marble console against
  * the house's own wall.
  *
  * 12 SEPTEMBER 2026, FIFTH PASS, AND THE LAST OF ITS KIND. Three passes today
@@ -145,9 +145,14 @@
   text-align: right;
   z-index: 5;
 }
+/* The five placards share one grid cell, so the placard is always as tall as
+   its longest card. They used to be absolutely positioned over a fixed
+   min-height, and on a phone the lit card's "Enter this room" ran out of the
+   bottom onto the row of names (launch crawl, 30 Sept 2026). */
+.placard { display: grid; }
 .p {
-  position: absolute;
-  inset: 0;
+  grid-area: 1 / 1;
+  position: relative;
   opacity: 0;
   transform: translateY(6px);
   transition: opacity 0.6s var(--ease), transform 0.6s var(--ease);
@@ -362,8 +367,7 @@
   .slot { flex: 0 0 72vw; scroll-snap-align: center; min-height: 300px; transform: none; }
   .slot:first-child { margin-left: 14vw; }
   .slot:last-child { margin-right: 14vw; }
-  .placard { position: relative; right: auto; top: auto; width: auto; text-align: left; padding-inline: 16px; margin-top: 22px; min-height: 190px; }
-  .p { left: 16px; right: 16px; }
+  .placard { position: relative; right: auto; top: auto; width: auto; text-align: left; padding-inline: 16px; margin-top: 22px; }
   .names { position: relative; left: auto; bottom: auto; transform: none; width: auto; padding-inline: 8px; margin-top: 8px; }
   .names button { font-size: 0.7rem; }
 }

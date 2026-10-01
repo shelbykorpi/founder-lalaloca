@@ -161,7 +161,7 @@ export async function ProductPlate({ product }: { product: NextMoveProduct }) {
           )}
 
           <p className="mt-5 max-w-[26rem] text-[0.6875rem] leading-relaxed text-cream/55">
-            {availabilityLine(product.availability)} · Free US shipping ·{" "}
+            {allSoldOut ? "Sold out" : availabilityLine(product.availability)} · Free US shipping ·{" "}
             {BRAND.legal.name} is the seller of record ·{" "}
             <Link className="underline underline-offset-2 hover:opacity-70" href="/policies/shipping">
               Shipping
@@ -208,8 +208,8 @@ export async function ProductPlate({ product }: { product: NextMoveProduct }) {
             alt={product.scene.alt}
             fill
             loading="lazy"
-            sizes="(max-width: 1024px) 100vw, 52vw"
-            className="object-cover"
+            sizes="(max-width: 767px) 250vw, (max-width: 1023px) 100vw, 1672px"
+            className="object-cover object-[73%_center]"
           />
         </div>
 
@@ -245,9 +245,7 @@ export async function ProductPlate({ product }: { product: NextMoveProduct }) {
                 has been photographed yet. A customer reading an atmospheric
                 page would otherwise assume the opposite. */}
             <p className="mt-8 border-t border-charcoal/12 pt-6 text-xs leading-relaxed text-charcoal/70">
-              Shown: renders of the approved packaging, not photographs of a
-              filled sample. We&rsquo;ll photograph the real thing when the first
-              run arrives.
+              Shown: renders of the approved packaging.
             </p>
           </Reveal>
         </div>

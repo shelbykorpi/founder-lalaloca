@@ -115,7 +115,7 @@ export default function ShopPage() {
           the tariff-board text and the counter card beneath it are reading a
           lit surface that exists in the room, not a cream section standing
           in for one. bg-cream here is only the fallback behind the image. */}
-      <section aria-labelledby="set-heading" className="house-marble">
+      <section id="set-heading" aria-label="The House Trio" className="house-marble scroll-mt-32">
         {/* Desktop: the full parlour, live copy set into the tariff board */}
         <div className="relative hidden lg:block">
           <div className="relative aspect-[1915/821] w-full">
@@ -129,12 +129,11 @@ export default function ShopPage() {
             />
             <div
               className="absolute flex flex-col items-center justify-center text-center"
-              style={{ left: "67.9%", width: "28.2%", top: "14%", height: "73.9%" }}
+              style={{ left: "67.2%", width: "20.4%", top: "12%", height: "76%" }}
             >
               <p className="eyebrow text-bronze-ink">The House Trio</p>
               <h2
-                id="set-heading"
-                className="mt-[0.6em] font-serif text-[clamp(1.5rem,2.7vw,3.25rem)] leading-[1.05] text-charcoal"
+                className="mt-[0.6em] font-serif text-[clamp(1.375rem,2.3vw,2.75rem)] leading-[1.05] text-charcoal"
               >
                 No Woman Is Only
                 <br />
@@ -148,10 +147,10 @@ export default function ShopPage() {
                   the set reads as the same argument the collection page just
                   made rather than an unrelated upsell. */}
               <p className="mt-[1em] max-w-[26ch] text-[clamp(0.8rem,1.05vw,1.125rem)] leading-relaxed text-charcoal/85">
-                The Closer, The Entrance, The Comeback. Three full-size serums —
-                hydrate, brighten, firm — for three different kinds of days.
+                The Closer, The Entrance, The Comeback. Three full-size serums:
+                hydrate, brighten, firm. One for every kind of day.
               </p>
-              <p className="mt-[1em] text-[clamp(0.8rem,1.05vw,1.125rem)] text-charcoal/85">
+              <p className="mt-[1em] text-balance text-[clamp(0.8rem,1.05vw,1.125rem)] text-charcoal/85">
                 {formatPrice(SET.price)} for all three · valued at{" "}
                 {formatPrice(products.reduce((sum, p) => sum + p.price, 0))} · save{" "}
                 {formatPrice(products.reduce((sum, p) => sum + p.price, 0) - SET.price)}
@@ -181,8 +180,8 @@ export default function ShopPage() {
             </h2>
             <div className="mx-auto mt-6 h-px w-16 bg-bronze/70" aria-hidden />
             <p className="mx-auto mt-6 max-w-md text-charcoal/85">
-              The Closer, The Entrance, The Comeback. Three full-size serums —
-              hydrate, brighten, firm — for three different kinds of days.
+              The Closer, The Entrance, The Comeback. Three full-size serums:
+              hydrate, brighten, firm. One for every kind of day.
             </p>
             <p className="mt-4 text-charcoal/85">
               {formatPrice(SET.price)} for all three · valued at{" "}
@@ -343,11 +342,12 @@ export default function ShopPage() {
           <div>
             <h2 className="font-serif text-2xl text-cream">Returns</h2>
             <p className="mt-2 text-sm text-cream/80">
-              Damaged or not what you expected? Write to{" "}
+              Changed your mind? Unopened pieces can come back within 14 days of
+              delivery. Email{" "}
               <a href={CONTACT_MAILTO} className="link-underline text-cream">
                 {CONTACT_EMAIL}
               </a>{" "}
-              and we’ll make it right. A real problem is our problem.
+              first. Arrived damaged or wrong? That one’s on us.
             </p>
             <Link href="/policies/returns" className="link-underline mt-2 text-cream">
               Details <span aria-hidden>↗</span>

@@ -5,6 +5,7 @@ import { AddToBagButton } from "@/components/bag/AddToBagButton";
 import { EmailSignup } from "@/components/site/EmailSignup";
 import { FOUNDER_COLLECTION } from "@/lib/founderCollection";
 import { fetchCollectionProducts, fetchVariantAvailability, type CatalogProduct } from "@/lib/catalog";
+import { VARIANT_ID } from "@/lib/shopifyLinks";
 import { LineCard } from "@/components/shop/LineCard";
 import { NEXT_MOVE, CAMPAIGN, availabilityLine } from "@/lib/nextMove";
 import { formatPrice, products, SET } from "@/lib/products";
@@ -65,7 +66,7 @@ import {
 export const metadata: Metadata = {
   title: "The FOUNDER Collection",
   description:
-    "The FOUNDER Collection. Opening Line, Clean Break, Hold the Room, Double Take, Smooth Talker — five pieces, sold against the first run. Hold the Room, the peptide cream, is the last step.",
+    "The FOUNDER Collection: Opening Line, Clean Break, Hold the Room, Double Take and Smooth Talker. Cleanser to colour, $34–$46, free US shipping.",
   alternates: { canonical: "/founder-collection" },
 };
 
@@ -79,9 +80,10 @@ export default async function FounderCollectionPage() {
   const catalog = await fetchCollectionProducts("founder-collection");
   /* Shopify's own answer per variant, so a one-unit SKU that has sold shows
      "Sold out" on its card rather than adding to the bag (17 Sept 2026). */
-  const availability = await fetchVariantAvailability(
-    NEXT_MOVE.flatMap((p) => (p.shades ? p.shades.map((s) => s.variantId) : p.variantId ? [p.variantId] : [])),
-  );
+  const availability = await fetchVariantAvailability([
+    VARIANT_ID["hold-the-room"],
+    ...NEXT_MOVE.flatMap((p) => (p.shades ? p.shades.map((s) => s.variantId) : p.variantId ? [p.variantId] : [])),
+  ]);
   const cards: CatalogProduct[] =
     catalog && catalog.length > 0
       ? catalog
@@ -89,7 +91,7 @@ export default async function FounderCollectionPage() {
           {
             handle: "founder-collection",
             title: product.name,
-            variantId: "47361868169385",
+            variantId: VARIANT_ID["hold-the-room"],
             price: product.price,
             available: true,
             /* The boardroom frame, 10 Sep 2026 — same delivery as the four
@@ -104,14 +106,14 @@ export default async function FounderCollectionPage() {
               url: "/products/hold-the-room-pack.webp",
               alt: "Hold the Room, the Desert Pink carton and its matching bottle together against a clean ground.",
             },
-            character: `02 · ${product.archetype}`,
+            character: `03 · ${product.archetype}`,
             descriptor: product.category,
             hook: null,
             who: null,
             how: null,
             actives: null,
             door: null,
-            badge: "Preorder",
+            badge: null,
           },
         ];
   /* ── THE WHOLE LINE, IN ONE GRID ──────────────────────────────────────
@@ -159,7 +161,9 @@ export default async function FounderCollectionPage() {
         : `/products/${c.handle}`,
     state:
       c.handle === "founder-collection"
-        ? "Preorder · Ships from the first run"
+        ? availability?.[VARIANT_ID["hold-the-room"]] === false
+          ? "Sold out"
+          : availabilityLine("in-stock")
         : `${formatPrice(c.price)}`,
     action:
       c.handle === "founder-collection" ? (
@@ -177,7 +181,7 @@ export default async function FounderCollectionPage() {
           }}
           href="/products/hold-the-room"
           className="btn btn-primary w-full"
-          label="Preorder"
+          soldOut={availability?.[VARIANT_ID["hold-the-room"]] === false}
           showPrice
         />
       ) : (
@@ -213,9 +217,15 @@ export default async function FounderCollectionPage() {
        products and the shopper had to find hers again. /the-next-move stays
        as the campaign page and the "See all three" destination. */
     href: `/products/${entry.slug}`,
-    state: entry.shades
-      ? `${availabilityLine(entry.availability)} · ${entry.shades.length} shades`
-      : availabilityLine(entry.availability),
+    state: (
+      entry.shades
+        ? entry.shades.every((sh) => availability?.[sh.variantId] === false)
+        : availability?.[entry.variantId!] === false
+    )
+      ? "Sold out"
+      : entry.shades
+        ? `${availabilityLine(entry.availability)} · ${entry.shades.length} shades`
+        : availabilityLine(entry.availability),
     action: entry.shades ? (
       /* A grid card can't pick a shade, so the shaded SKU sends her to its
          own page where the picker and buy button live. */
@@ -324,8 +334,8 @@ export default async function FounderCollectionPage() {
             The line
           </h2>
           <p className="mt-4 max-w-[46ch] text-[0.9375rem] leading-relaxed text-cream/75">
-            Five pieces, laid out the way you&rsquo;d lay out a strategy — the whole
-            routine, priced, and sold against the first run.
+            Five pieces, laid out the way you&rsquo;d lay out a strategy. Cleanse,
+            wash, moisturise, eyes, finish.
           </p>
 
           <div className="mt-8 grid gap-10 sm:grid-cols-2 lg:grid-cols-3">
@@ -346,9 +356,9 @@ export default async function FounderCollectionPage() {
           </div>
 
           <p className="mt-10 max-w-prose text-xs leading-relaxed text-cream/65">
-            Every piece is a preorder against the first run: free US shipping,
-            an email before it ships, and you can reply to that email to cancel.
-            The serums, next door, ship within one business day.
+            Free US shipping on every piece, and your order leaves within one
+            business day. Changed your mind? Unopened pieces come back within
+            14 days.
           </p>
         </div>
       </section>
@@ -388,12 +398,12 @@ export default async function FounderCollectionPage() {
         <div className="shell max-w-3xl">
           <p className="eyebrow text-blush">The FOUNDER Collection</p>
           <h2 className="mt-5 font-serif text-3xl leading-tight md:text-4xl">
-            The whole routine. Priced, and yours to hold.
+            The whole routine, start to finish.
           </h2>
           <p className="mt-6 max-w-prose text-cream/85">
-            Opening Line to Hold the Room — cleanse, wash, treat, finish. Five
-            pieces, each one priced and on preorder against the first run.{" "}
-            {product.name} is the anchor and the last step.
+            Opening Line to Smooth Talker: cleanse, wash, moisturise, eyes, finish.
+            Five pieces for the twenty minutes before you walk in, and{" "}
+            {product.name} is the one that holds it all together.
           </p>
           <p className="mt-6 font-serif text-xl text-blush">
             Take your seat.

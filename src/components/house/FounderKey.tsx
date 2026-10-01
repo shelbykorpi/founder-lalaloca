@@ -6,6 +6,7 @@ import { useHouseKey } from "./HouseKeyProvider";
 import { HouseMap } from "./HouseMap";
 import { OPEN_WINGS, wingFor } from "@/lib/house";
 import { track } from "@/lib/analytics";
+import { useScrolledPast } from "@/lib/useScrolledPast";
 import s from "./founder-key.module.css";
 
 /**
@@ -31,6 +32,9 @@ export function FounderKey() {
   const mapId = useId();
   const here = wingFor(pathname ?? "/", "");
   const found = key.roomsVisited.length;
+  /* Tucked away on the first screen, where the hero's own buttons are; it
+     returns once she scrolls (see useScrolledPast). Open, it always shows. */
+  const past = useScrolledPast();
 
   const setOpen = (v: boolean) => setOpened({ on: pathname ?? "", open: v });
   const toggle = () => {
@@ -40,7 +44,7 @@ export function FounderKey() {
 
   return (
     <>
-      <div className={s.dock}>
+      <div className={`${s.dock} ${past || open || note ? "" : s.dockTucked}`}>
         {note && (
           <p className={s.note} role="status">
             {note}

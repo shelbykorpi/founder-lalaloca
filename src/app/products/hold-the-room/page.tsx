@@ -6,6 +6,8 @@ import { Reveal } from "@/components/house/Reveal";
 import { LineRail } from "@/components/house/LineRail";
 import { BRAND } from "@/lib/brand";
 import { FOUNDER_COLLECTION } from "@/lib/founderCollection";
+import { fetchVariantAvailability } from "@/lib/catalog";
+import { VARIANT_ID } from "@/lib/shopifyLinks";
 import { formatPrice } from "@/lib/products";
 import {
   JsonLd,
@@ -39,19 +41,25 @@ import {
  * COMMERCE STAYS. The review build's footer reads "COMMERCE NOT CONNECTED",
  * so neither mock had to carry the preorder notice, the full INCI, the FAQs or
  * the seller-of-record line. This page takes money, so it carries all four.
- * IF THE PREORDER NOTICE EVER RENDERS EMPTY, THE BUTTON MUST NOT RENDER EITHER.
+ * 30 Sept 2026: in stock, no preorder. The button renders whenever the record
+ * is sellable; a preorder note renders above it only if `preorder` is set
+ * again; Shopify's availableForSale turns the button into "Sold out" at 0.
  */
+
+export const revalidate = 60;
 
 const product = FOUNDER_COLLECTION[0];
 
 export const metadata: Metadata = {
   title: `${product.name} — ${product.category}`,
   description:
-    "Hold the Room, the anchor of the FOUNDER Collection. A peptide cream with hyaluronic acid and vitamin E, 50 ml. Preorder against the first run.",
+    "Hold the Room, the anchor of the FOUNDER Collection. A peptide cream with hyaluronic acid and vitamin E, 50 ml, $36. Free US shipping.",
   alternates: { canonical: "/products/hold-the-room" },
 };
 
-export default function HoldTheRoomPage() {
+export default async function HoldTheRoomPage() {
+  const available = await fetchVariantAvailability([VARIANT_ID["hold-the-room"]]);
+  const soldOut = available?.[VARIANT_ID["hold-the-room"]] === false;
   return (
     <div className="bg-night text-cream">
       <JsonLd
@@ -61,7 +69,7 @@ export default function HoldTheRoomPage() {
             { name: product.name, path: "/products/hold-the-room" },
           ]),
           faqSchema(product.faqs),
-          ...(product.sellable ? [founderProductSchema(product)] : []),
+          ...(product.sellable ? [founderProductSchema(product, soldOut)] : []),
         ]}
       />
 
@@ -74,22 +82,28 @@ export default function HoldTheRoomPage() {
           alt="Hold the Room — the white airless pump bottle with its cream label and green-and-rose striped bands, beside its Desert Pink carton — standing on a black marble console against a dark green wall, reflected in the stone."
           fill
           priority
-          sizes="100vw"
+          /* Below md the landscape frame is cropped to a tall phone box, so
+             it renders about 3.4× the viewport's width; asking for 100vw
+             served an 828px file stretched to ~2600 device pixels. */
+          sizes="(max-width: 767px) 340vw, 100vw"
           className="object-cover object-[68%_center]"
         />
         {/* Deep on the left where the words go, clear on the right where the
             product is. Two gradients rather than one so the copy never sits
-            over the lit part of the frame at any width. */}
+            over the lit part of the frame at any width. Below md the copy
+            covers most of the frame, so the phone shade goes deep from a
+            fifth of the way down (launch crawl, 30 Sept 2026: the headline
+            sat unreadable on the blurred pink carton). */}
         <div
           aria-hidden
-          className="absolute inset-0 bg-[linear-gradient(180deg,rgba(14,33,27,0.45)_0%,rgba(14,33,27,0.2)_30%,rgba(14,33,27,0.78)_86%,#0e211b_100%)] md:bg-[linear-gradient(90deg,#0e211b_0%,rgba(14,33,27,0.78)_28%,rgba(14,33,27,0.49)_44%,rgba(14,33,27,0.04)_66%)]"
+          className="absolute inset-0 bg-[linear-gradient(180deg,rgba(14,33,27,0.35)_0%,rgba(14,33,27,0.55)_20%,rgba(14,33,27,0.82)_38%,rgba(14,33,27,0.9)_70%,#0e211b_100%)] md:bg-[linear-gradient(90deg,#0e211b_0%,rgba(14,33,27,0.78)_28%,rgba(14,33,27,0.49)_44%,rgba(14,33,27,0.04)_66%)]"
         />
 
         <div className="shell relative flex w-full flex-1 items-end pb-16 pt-28 md:items-center md:py-24">
           <div className="max-w-[26rem]">
             <p className="room-label">The line</p>
             <p className="mt-3 text-[0.75rem] uppercase tracking-[0.22em] text-cream/80">
-              02 · {product.archetype}
+              03 · {product.archetype}
             </p>
 
             <h1 className="display-product mt-5 text-cream">{product.name}</h1>
@@ -110,23 +124,31 @@ export default function HoldTheRoomPage() {
               {formatPrice(product.price)}
             </p>
 
-            {/* The exception, then the button. Never the other way round. */}
+            {/* The exception (if there ever is one again), then the button. */}
             {product.sellable && product.preorder && (
-              <>
-                <div className="mt-7 max-w-[24rem] border-l-2 border-bronze py-3 pl-4">
-                  <p className="room-label">Preorder</p>
-                  <p className="mt-2 text-[0.8125rem] leading-relaxed text-cream/75">
-                    {product.preorder}
-                  </p>
-                </div>
-                <AddToBagButton
-                  product={product}
-                  href="/founder-collection"
-                  className="btn btn-ghost-light mt-6 w-full max-w-[20rem]"
-                  label="Preorder"
-                  showPrice
-                />
-              </>
+              <div className="mt-7 max-w-[24rem] border-l-2 border-bronze py-3 pl-4">
+                <p className="room-label">Preorder</p>
+                <p className="mt-2 text-[0.8125rem] leading-relaxed text-cream/75">
+                  {product.preorder}
+                </p>
+              </div>
+            )}
+            {product.sellable && (
+              <AddToBagButton
+                product={{
+                  slug: product.slug,
+                  name: product.name,
+                  category: product.category,
+                  price: product.price,
+                  size: product.size,
+                  bottle: product.bottle,
+                }}
+                href="/products/hold-the-room"
+                className="btn btn-primary mt-6 w-full max-w-[20rem]"
+                label={product.preorder ? "Preorder" : "Add to bag"}
+                soldOut={soldOut}
+                showPrice
+              />
             )}
 
             {/* Kept to one line so the line rail still lands on the first

@@ -112,8 +112,8 @@ const LINE = [
     alt: "Hold the Room: the airless bottle and its carton, Desert Pink with a cream cartouche and gold crest.",
     href: "/products/hold-the-room",
     hook: holdTheRoom.hero,
-    state: "Preorder · Ships from the first run",
-    action: `Preorder · ${formatPrice(holdTheRoom.price)}`,
+    state: availabilityLine("in-stock"),
+    action: `Shop · ${formatPrice(holdTheRoom.price)}`,
     ready: true,
   },
   {
@@ -407,8 +407,8 @@ export default function HomePage() {
       </section>
 
       {/* ══ 04 · THE COLLECTION ═════════════════════════════════════════════
-          Five on the vanity, every one a preorder against the first run, and
-          the state line under each name is what says so. */}
+          Five on the vanity, all in stock from launch (30 Sept 2026); the
+          state line under each name follows the record. */}
       {/* THE COLLECTION ROOM IS DARK, and it was cream until 30 August.
           Two reasons it had to move. Every tile in it is already a dark
           object — a photograph under a near-black gradient with cream type —
@@ -426,7 +426,7 @@ export default function HomePage() {
         height="min-h-[68svh]"
         label="Room 04 · The FOUNDER Collection"
         title="Private tools. Public power."
-        lede="Five pieces for the twenty minutes before you walk in — priced, and sold against the first run. You hear from us before anything ships."
+        lede="Five pieces for the twenty minutes before you walk in. Cleanse, wash, moisturise, eyes, finish. In stock, and free to your door anywhere in the US."
       >
         <Link href="/founder-collection" className="btn btn-primary">
           Explore the collection
@@ -466,16 +466,13 @@ export default function HomePage() {
             <p className="room-label">The Anchor · Hold the Room</p>
             <h2 className="headline-house mt-5 text-balance text-cream">Hold the room.</h2>
             <p className="mt-7 max-w-[42ch] text-[0.9375rem] leading-relaxed text-cream/80">
-              {holdTheRoom.hero} A peptide cream with hyaluronic acid and vitamin E —
-              the last step of the routine, morning and night, and the one that stays
-              comfortable all day.
-            </p>
-            <p className="mt-7 max-w-[40ch] border-l-2 border-bronze py-3 pl-5 text-[0.8125rem] leading-relaxed text-cream/70">
-              {holdTheRoom.preorder}
+              {holdTheRoom.hero} A peptide cream with hyaluronic acid and vitamin E.
+              It goes on after your serums, morning and night, and it stays comfortable
+              all day.
             </p>
             <div className="mt-9">
               <Link href="/products/hold-the-room" className="btn btn-primary">
-                Preorder · {formatPrice(holdTheRoom.price)}
+                Shop Hold the Room · {formatPrice(holdTheRoom.price)}
               </Link>
             </div>
           </Reveal>
@@ -504,7 +501,8 @@ export default function HomePage() {
             </p>
             <h2 className="headline-house mt-4 text-balance text-cream">{BRAND.campaign}</h2>
             <p className="mt-6 max-w-[38ch] text-[0.9375rem] leading-relaxed text-cream/80">
-              The woman. The cost. The turning point. The private truth beneath public success.
+              Women telling it themselves: what they built, what it cost, and the
+              moment they recognised who they’d become.
             </p>
             <div className="mt-9 flex flex-wrap items-center gap-x-8 gap-y-4">
               <Link href="/found-her#share" className="btn btn-primary">

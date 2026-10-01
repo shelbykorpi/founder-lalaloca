@@ -8,6 +8,7 @@ import { DESK_ORDER, DESKS, type Desk } from "@/lib/concierge/desks";
 import { LAID_OUT, OCCASIONS, type Occasion } from "@/lib/concierge/occasions";
 import { HONEYPOT_FIELD } from "@/lib/formGuard";
 import { track } from "@/lib/analytics";
+import { useScrolledPast } from "@/lib/useScrolledPast";
 
 /**
  * The concierge: a brass bell on the desk, and a leather folio behind it.
@@ -58,6 +59,9 @@ function renderBody(text: string) {
 export function Concierge() {
   const [open, setOpen] = useState(false);
   const [ringing, setRinging] = useState(false);
+  /* The bell waits off the first screen, where the hero's buttons are, and
+     comes out once she scrolls (see useScrolledPast). Open, it always shows. */
+  const past = useScrolledPast();
   const [desk, setDesk] = useState<Desk>("beauty");
   const [turns, setTurns] = useState<Turn[]>([]);
   const [busy, setBusy] = useState(false);
@@ -194,7 +198,7 @@ export function Concierge() {
       {/* ---------------- the bell ---------------- */}
       <button
         type="button"
-        className={`${s.bell} ${ringing ? s.ringing : ""}`}
+        className={`${s.bell} ${ringing ? s.ringing : ""} ${past || open ? "" : s.bellTucked}`}
         onClick={toggle}
         aria-expanded={open}
         aria-label={open ? "Close the concierge" : "Ring for service — open the FOUNDER concierge"}

@@ -97,8 +97,8 @@ export function GrandHall() {
           Six doors off the hall.
         </h2>
         <p className={s.lede}>
-          Walk along. The door in front of you is open. The house keeps a light on
-          in the rooms you have already found.
+          Five doors are open; the sixth is shut for now. The lights stay on in
+          every room you find.
         </p>
       </div>
 

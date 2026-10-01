@@ -3,49 +3,12 @@
 import Link from "next/link";
 import { useEffect, useMemo, useState } from "react";
 import { track } from "@/lib/analytics";
-import { PRIMARY_NAV } from "@/lib/brand";
-import { products } from "@/lib/products";
-import { profiles } from "@/lib/profiles";
+import type { SearchEntry } from "@/lib/searchIndex";
 
-type Result = {
-  href: string;
-  title: string;
-  kind: string;
-  detail: string;
-  haystack: string;
-};
-
-const index: Result[] = [
-  ...products.map((product) => ({
-    href: `/products/${product.slug}`,
-    title: product.name,
-    kind: "Serum",
-    detail: `${product.category} · ${product.benefit}`,
-    haystack:
-      `${product.name} ${product.category} ${product.what} ${product.need} ${product.benefit} ${product.keyActive} ${product.timing}`.toLowerCase(),
-  })),
-  ...profiles.map((profile) => ({
-    href: `/found-her/${profile.slug}`,
-    title: profile.name,
-    kind: "Found Her",
-    detail: profile.building,
-    haystack: `${profile.name} ${profile.role} ${profile.building} ${profile.standfirst}`.toLowerCase(),
-  })),
-  ...[
-    ...PRIMARY_NAV,
-    { href: "/find-your-serum", label: "Which serum?" },
-    { href: "/policies/shipping", label: "Shipping" },
-    { href: "/policies/returns", label: "Returns" },
-  ].map((item) => ({
-    href: item.href,
-    title: item.label,
-    kind: "Page",
-    detail: item.href,
-    haystack: `${item.label} ${item.href}`.toLowerCase(),
-  })),
-];
-
-export function SiteSearch() {
+/* The index is built on the server (lib/searchIndex.ts) and passed in as
+   data, so every product, Library entry and profile is searchable without
+   shipping their source files to the browser. */
+export function SiteSearch({ index }: { index: SearchEntry[] }) {
   const [query, setQuery] = useState("");
   const trimmed = query.trim().toLowerCase();
 
@@ -53,7 +16,7 @@ export function SiteSearch() {
     if (trimmed.length < 2) return [];
     const terms = trimmed.split(/\s+/);
     return index.filter((entry) => terms.every((term) => entry.haystack.includes(term)));
-  }, [trimmed]);
+  }, [trimmed, index]);
 
   /**
    * Report the search, debounced.

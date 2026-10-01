@@ -1,8 +1,9 @@
 "use client";
 
 /**
- * THE VANITY — Room 03. Five products standing on the console of a real room,
- * in the order they are used, where the mirror light follows your attention.
+ * THE VANITY — inside Room 04, The FOUNDER Collection. Five products
+ * standing on the console of a real room, in the order they are used,
+ * where the mirror light follows your attention.
  *
  * See vanity.module.css for the rule it is built on: the product is never
  * dimmed. This file owns only the lighting — which piece is lit, and how it
@@ -126,7 +127,11 @@ export function Vanity({ items, title, lede }: { items: VanityItem[]; title: str
   return (
     <section className={s.room} aria-labelledby="vanity-heading">
       <div className={s.words}>
-        <p className="eyebrow text-champagne">The vanity · Room 04</p>
+        {/* No room number: the vanity stands inside Room 04, The FOUNDER
+            Collection (lib/rooms.ts), whose hero sits directly above it and
+            already carries "Room 04". Two "Room 04"s in a row read as a
+            mistake (launch crawl, 30 Sept 2026). */}
+        <p className="eyebrow text-champagne">The vanity</p>
         <h2 id="vanity-heading" className={`${s.title} mt-3 font-serif font-light text-cream`}>{title}</h2>
         <p className="mt-3 max-w-[40ch] text-[0.9rem] leading-relaxed text-cream/70">{lede}</p>
         <button type="button" className={s.play} onClick={togglePlay} aria-pressed={playing}>

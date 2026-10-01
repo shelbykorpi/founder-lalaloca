@@ -1629,3 +1629,63 @@ Shelby: "make the attached image the hero image" (founderbeauty.co).
   threshold-doors-m.webp is still the Salon wing's door in lib/house.ts.
 - Verified: build, tsc, eslint; / at 1440, 1024, 820, 390, 375 — no overflow,
   no page errors, right crop served at each width.
+
+## 2026-09-30 · Claude (Code, layout subagent) — launch-crawl layout fixes
+
+Uncommitted; the lead agent commits. Copy files left to the copy agent.
+- Founder Key + service bell: new `lib/useScrolledPast.ts`; both controls
+  are faded out (still focusable) until she scrolls 45% of a screen, or at
+  once on a page too short to scroll. Bell 64px on phones; key/bell honour
+  safe-area inset. Footer bottom row pb-24 so neither sits on its last line.
+- Vanity: placards share one grid cell (no more fixed min-height), so
+  "Enter this room" no longer lands on the name row at 390. Eyebrow drops
+  "Room 04" (the Collection hero above already is Room 04).
+- /shop trio: desktop overlay re-fitted to the painted frame (67.2/20.4/12/76%),
+  heading clamp 2.3vw, price line balanced; `id="set-heading"` moved to the
+  section (visible at every width), h2 id removed, section aria-label.
+- /found-her share band: scenePosition center 15% so "THE ROOM / IS YOURS."
+  is never cut (768–1920).
+- /products/hold-the-room: phone scrim deeper; hero sizes 340vw below md.
+- ProductPlate "What it is" photo: object-[73%_center] (all five products
+  whole at 390–1920). NOT changed: its `sizes` (still serves 750w into a
+  ~1700px render — the blur); see the lead's report.
+- Search index built server-side in `lib/searchIndex.ts` from NEXT_MOVE,
+  FOUNDER_COLLECTION, LIBRARY, products, profiles, nav.
+- Not changed: lib/house.ts Vanity wing → /shop (see report).
+- Verified: tsc, eslint, build; screenshots 390/1024/1440/1920.
+
+## 2026-09-30 (evening) · Claude (Cowork, lead) — launch eve: in stock, policies, voice
+
+Shelby: the site goes live tomorrow; "make all listing active no more
+preorder"; returns 14 days unopened; brand email only in public; voice a
+mix of "I" (founder) and "we" (care).
+- IN STOCK. nextMove.ts: all four SKUs `availability: "in-stock"`;
+  founderCollection.ts Hold the Room `preorder: null`, FAQ ship answer and
+  routine order fixed (it is 03 of 5, after serums, before Double Take and
+  Smooth Talker). Hold the Room page renders its button whenever sellable,
+  reads Shopify availableForSale (revalidate 60) → "Sold out" at 0; "02 ·"
+  → "03 ·". Home, collection page, concierge, bar copy, schema (InStock,
+  US_SHIPPING) and the plates' render note ("Shown: renders of the approved
+  packaging.") follow. Shopify: Hold the Room inventory policy CONTINUE →
+  DENY, "— Preorder" off the title, SEO title/description corrected (was the
+  retired Blanka 30 ml chamomile cream). Every FOUNDER SKU is now tracked +
+  DENY, so Shopify refuses a line at 0 and the site shows Sold out.
+- POLICIES. content.ts: Returns (14 days, unopened, customer pays return
+  postage unless our error, damaged/wrong replaced or refunded, email to
+  start, refund timing), Privacy (Shopify, Resend, Airtable, Vercel + AI
+  Gateway for the Beauty desk, browser storage, rights), Terms (seller,
+  prices/tax, US only, cosmetic use, content, liability, Arizona law),
+  Accessibility (no "before launch" note). No "Still to confirm" left.
+  seo.tsx: MerchantReturnPolicy on the Organization; returnPolicyGap false.
+  llms.txt returns line. Shopify (admin UI; the connector lacks
+  write_legal_policies): Refund policy rewritten to match; Shipping, Contact,
+  Terms (3× [LINK], NOTE TO MERCHANT, gmail, street address) and Privacy
+  (automated → manual, contact line only: gmail/phone/address → brand email)
+  corrected. Payments confirmed: Shopify Payments accepting + payouts on.
+- VOICE. Our Story in Shelby's first person and now names the FOUNDER
+  Collection; home Found Her/Grand Hall lines, bag empty state (now offers
+  the collection too), shop returns tile, serum and Hold the Room copy
+  de-dashed. Serum wing plaque in lib/house.ts renamed "The Serum Salon"
+  (it opens /shop; slug kept for the key).
+- Layout fixes by a subagent (entry above) reviewed and kept; ProductPlate
+  "What it is" sizes now serves a large enough file.

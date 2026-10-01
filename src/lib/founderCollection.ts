@@ -114,7 +114,7 @@ export const FOUNDER_COLLECTION: FounderProduct[] = [
     size: "50 ml / 1.69 fl oz",
     supplierSku: "selfnamed:peptide-ageless-am-pm-cream-o7VB3",
     timing: "Morning or night",
-    routine: "The last step, after your serums.",
+    routine: "After your serums, before Double Take and Smooth Talker.",
     keyActive: "Peptide complex, hyaluronic acid and vitamin E",
     /* Verbatim from the Selfnamed INCI tab, 16 Sept 2026, in the order
        printed. The listing's footnotes — ➀ organic farming, ➁ from natural
@@ -177,19 +177,19 @@ export const FOUNDER_COLLECTION: FounderProduct[] = [
         detail: "Massage upward. Most routines stop at the jawline; this one doesn’t.",
       },
       {
-        step: "Last",
+        step: "After serums",
         detail:
-          "Serums go first, thinnest to thickest. The cream seals the routine. In the morning, SPF goes over the top.",
+          "Serums go first, thinnest to thickest, then the cream. Double Take and Smooth Talker follow. In the morning, SPF goes over the top.",
       },
     ],
     faqs: [
       {
         q: "Does it contain fragrance?",
-        a: "Yes. Fragrance is on the ingredient list, along with the essential-oil components that come with it — linalool, geraniol, citronellol and their acetates. If you avoid fragrance in skincare, this is the one to skip — we would rather say so here than have you find out at home.",
+        a: "Yes. Fragrance is on the ingredient list, along with the essential-oil components that come with it: linalool, geraniol, citronellol and their acetates. If you avoid fragrance in skincare, skip this one. I’d rather tell you here than have you find out at home.",
       },
       {
         q: "Where does it go in a routine?",
-        a: "Last. Serums first, thinnest to thickest, then this. In the morning, finish with SPF.",
+        a: "After your serums. Thinnest to thickest, so serums first, then this. Double Take and Smooth Talker come after it. In the morning, finish with SPF.",
       },
       {
         q: "How much is 50 ml?",
@@ -197,16 +197,16 @@ export const FOUNDER_COLLECTION: FounderProduct[] = [
       },
       {
         q: "When does it ship?",
-        a: "It’s a preorder against the first run, so it doesn’t follow the one-business-day dispatch the serums do. You’ll hear from us by email before it ships, and you can reply to that email to cancel if the timing no longer works.",
+        a: "Within one business day of your order, free anywhere in the US. You get a tracking link by email the day it leaves.",
       },
       {
         q: "Is this one of the serums?",
-        a: "No. LALALOCA is the serum collection; Hold the Room opens the FOUNDER Collection — the same house, the next line. They’re made to be worn together.",
+        a: "No. LALALOCA is the serum collection. Hold the Room is the anchor of the FOUNDER Collection, the second line from the same house. They’re made to be worn together.",
       },
     ],
     sellable: true,
-    preorder:
-      "Preorder. Hold the Room ships from the first run — not the next-business-day dispatch the serums get. We’ll email you before it ships, and you can reply to cancel if the timing no longer works.",
+    /* In stock from launch, 30 Sept 2026 (Shelby: "no more preorder"). */
+    preorder: null,
   },
 ];
 

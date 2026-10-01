@@ -635,9 +635,10 @@ errors, zero horizontal overflow; screenshots in `/tmp/shots2/`.
 - **The 20 % pledge wording** — four occurrences, verbatim.
 - **Build gate**: `npm run build` must pass; verify at 390 and 1440 with
   screenshots before every commit.
-- **`availability` in `nextMove.ts`** — the only switch between preorder and
-  in-stock language, button label, schema and concierge answers. Flip it per
-  SKU, by hand, on delivery; never default it.
+- **`availability` in `nextMove.ts`** — the switch between preorder and
+  in-stock language, button label, schema and concierge answers. All
+  "in-stock" since 30 Sept 2026 (launch); Shopify's availableForSale is what
+  shows "Sold out". Keep every FOUNDER variant on "continue selling" OFF.
 - **`fetchVariantAvailability` null path** — null means "no information" and
   keeps selling; only `false` closes a button. Do not invert that.
 - **`/the-next-move`** must keep redirecting (indexed URL).

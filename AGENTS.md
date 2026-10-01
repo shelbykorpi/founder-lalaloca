@@ -35,14 +35,16 @@ finished hero swaps in one week.
 - **Never invent:** ingredients, claims, reviews, clinical results,
   certifications, prices, launch dates, ship dates, stock, or charitable
   terms.
-- **The FOUNDER Collection is live, as a PREORDER.** Amended 17 Sept 2026;
-  this line used to say the v2.14 products "do NOT appear on the site", and
-  the site had been selling them since 4 Sept. Five SKUs — Opening Line,
-  Clean Break, Hold the Room, Double Take, Smooth Talker — all Selfnamed,
-  all priced in Shopify, all sold against the first run with the preorder
-  notice in `lib/nextMove.ts` (`PREORDER_NOTE`). Each record carries
-  `availability`; flip a SKU to `"in-stock"` only on the day its stock is
-  physically counted in, never before. SIGN HERE has no supplier and is not
+- **The FOUNDER Collection is live and IN STOCK** (Shelby, 30 Sept 2026,
+  launch eve: "make all listing active no more preorder"). Five SKUs —
+  Opening Line, Clean Break, Hold the Room, Double Take, Smooth Talker — all
+  Selfnamed, all priced in Shopify. Every record's `availability` is
+  `"in-stock"` and Hold the Room's `preorder` is null. Every variant is
+  tracked in Shopify with "continue selling when out of stock" OFF, and the
+  pages read availableForSale, so a variant at 0 shows "Sold out" by itself.
+  Do not switch anything back to preorder without Shelby saying so.
+  Returns: 14 days from delivery, unopened, customer pays return postage
+  unless the order was wrong or damaged (site and Shopify policies match). SIGN HERE has no supplier and is not
   on the site. Every product fact traces to a supplier listing or a concept
   doc in the Claude project; INCI is transcribed, never tidied.
 - **Read `FOUNDER_AUDIT.md`** before touching the site: it is the living

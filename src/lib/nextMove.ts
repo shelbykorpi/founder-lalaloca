@@ -60,6 +60,11 @@ export const RESERVING = false;
  * PREORDER, and the page now says so in the same words Hold the Room has used
  * since 19 Aug. Flip a SKU to "in-stock" on the day its stock is counted in,
  * and only then — the shipping policy's one-business-day promise hangs on it.
+ *
+ * 30 Sept 2026, launch eve: Shelby — "make all listing active no more
+ * preorder". Every SKU is "in-stock". What stops an oversell now is Shopify:
+ * each variant is tracked with "continue selling" OFF, and the buy button
+ * reads availableForSale, so a variant at 0 says "Sold out" by itself.
  */
 export type Availability = "preorder" | "in-stock";
 
@@ -213,7 +218,7 @@ export const NEXT_MOVE: NextMoveProduct[] = [
     keyIngredients: ["Camomile", "Sea Buckthorn", "Cloudberry"],
     size: "150 ml / 5.07 fl oz",
     price: 36.0,
-    availability: "preorder",
+    availability: "in-stock",
     variantId: "47400898920617",
     /* Verbatim from the Selfnamed listing's INCI tab, read 17 Sept 2026.
        ➀ (organic farming): sunflower seed oil, camomile flower extract,
@@ -280,7 +285,7 @@ export const NEXT_MOVE: NextMoveProduct[] = [
     keyIngredients: ["Mate Leaf", "Iceland Moss", "Juniper Callus"],
     size: "140 ml / 4.73 fl oz",
     price: 34.0,
-    availability: "preorder",
+    availability: "in-stock",
     variantId: "47417854689449",
     /* Verbatim from the Selfnamed studio, 24 Aug 2026 (concept doc §2).
        ➀ mate leaf extract · ➁ linalool, linalyl acetate · ➂ ultramarines. */
@@ -351,7 +356,7 @@ export const NEXT_MOVE: NextMoveProduct[] = [
     keyIngredients: ["Ceramides", "Cocoa Butter", "Vitamin E"],
     size: "12 g / 0.42 oz",
     price: 42.0,
-    availability: "preorder",
+    availability: "in-stock",
     /* Verbatim from the Selfnamed studio, 21 Aug 2026 (concept doc §2).
        ➀ jojoba, cocoa butter, sea buckthorn oil, black cumin oil ·
        ➁ terpineol, linalyl acetate, anethole, geraniol · ➂ the iron oxides.
@@ -471,7 +476,7 @@ export const NEXT_MOVE: NextMoveProduct[] = [
     keyIngredients: ["Hexapeptide-11", "Vitamin C", "Vitamin E"],
     size: "15 ml / 0.51 fl oz",
     price: 46.0,
-    availability: "preorder",
+    availability: "in-stock",
     variantId: "47417855115433",
     /* Verbatim from the Selfnamed studio, 20 Aug 2026 (concept doc §2).
        ➀ jojoba, borage seed oil, blueberry seed oil, mango seed butter,

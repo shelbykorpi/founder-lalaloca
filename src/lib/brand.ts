@@ -54,7 +54,7 @@ export const BRAND = {
    * someone else's shop. Shipping is the fact both lines share; the second
    * half names the line she is standing in.
    */
-  barCollection: "Free US shipping on every order · The FOUNDER Collection · Preorder the first run",
+  barCollection: "Free US shipping on every order · The FOUNDER Collection is here · Ships in one business day",
 
   /**
    * The door mark: the F-key. v2.13 makes it the secondary identifier — the

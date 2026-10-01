@@ -296,7 +296,11 @@ export default function FoundHerPage() {
           surface="scene"
           scene="/editorial/the-room-is-yours.webp"
           sceneAlt=""
-          scenePosition="center 35%"
+          /* 15%, not 35%: the typed sheet ("THE ROOM / IS YOURS.") sits at
+             16–27% of this portrait frame, and at 35% a wide band cut "IS
+             YOURS." in half at 1440 (launch crawl, 30 Sept 2026). At 15% both
+             typed lines stay whole from 768 to 1920. */
+          scenePosition="center 15%"
           tight
         >
           <div className="shell grid items-center gap-10 lg:grid-cols-[minmax(0,30rem)_1fr] lg:gap-16">

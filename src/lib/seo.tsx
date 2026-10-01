@@ -18,12 +18,9 @@ import type { ProductReviews } from "./reviews";
  * Notably absent, and deliberately:
  *
  *   aggregateRating / review — we have no reviews. Inventing them is fraud.
- *   hasMerchantReturnPolicy  — the return window is still "to confirm" in
- *                              content.ts. Publishing an unconfirmed commercial
- *                              term as machine-readable data would put a number
- *                              in Google's index that legal never signed off.
- *                              Add it the day the policy is finalised; see
- *                              returnPolicyGap below.
+ *   (hasMerchantReturnPolicy was absent until 30 Sept 2026, when Shelby set
+ *   the window: 14 days, unopened, customer pays return postage. It is now on
+ *   the Organization — see RETURN_POLICY.)
  *   gtin / mpn               — no barcodes issued yet.
  */
 
@@ -47,11 +44,22 @@ const US_SHIPPING = {
 } as const;
 
 /**
- * Set to true the day the return window is signed off, then add the policy
- * object below. Until then Product rich results will show a "missing return
- * policy" notice in Search Console — that is the correct trade.
+ * The return policy as data, matching /policies/returns word for word in
+ * substance (Shelby, 30 Sept 2026): 14 days from delivery, unopened, by
+ * mail, refund to the original payment, return postage paid by the customer.
  */
-export const returnPolicyGap = true;
+export const returnPolicyGap = false;
+const RETURN_POLICY = {
+  "@type": "MerchantReturnPolicy",
+  applicableCountry: "US",
+  returnPolicyCategory: "https://schema.org/MerchantReturnFiniteReturnWindow",
+  merchantReturnDays: 14,
+  returnMethod: "https://schema.org/ReturnByMail",
+  returnFees: "https://schema.org/ReturnFeesCustomerResponsibility",
+  refundType: "https://schema.org/FullRefund",
+  itemCondition: "https://schema.org/NewCondition",
+  merchantReturnLink: `${SITE.url}/policies/returns`,
+} as const;
 
 /**
  * Social and marketplace profiles, as a comma-separated env var.
@@ -99,6 +107,7 @@ export function organizationSchema() {
       "collagen firming serum",
     ],
     ...(SAME_AS.length ? { sameAs: SAME_AS } : {}),
+    hasMerchantReturnPolicy: RETURN_POLICY,
     contactPoint: {
       "@type": "ContactPoint",
       contactType: "customer service",
@@ -241,15 +250,12 @@ export function productSchema(product: Product, reviews?: ProductReviews | null)
 }
 
 /**
- * The FOUNDER Collection product, which sells ahead of stock.
- *
- * Deliberately does NOT reuse US_SHIPPING. That object carries a 1–2 day
- * handling time, true of the serums and false of a preorder; publishing it
- * here would put a dispatch promise we cannot keep into Google's index.
- * Shipping is still free and still 3–5 days in transit once it goes out, so
- * those stay; handlingTime is omitted rather than guessed.
+ * Hold the Room. PreOrder only while the record carries a preorder note;
+ * in stock (30 Sept 2026) it reuses US_SHIPPING, whose 1–2 day handling is
+ * now true of it. `soldOut` — Shopify's live answer — overrides both.
  */
-export function founderProductSchema(product: FounderProduct) {
+export function founderProductSchema(product: FounderProduct, soldOut = false) {
+  const inStock = !product.preorder && !soldOut;
   return {
     "@context": "https://schema.org",
     "@type": "Product",
@@ -266,14 +272,15 @@ export function founderProductSchema(product: FounderProduct) {
       "@type": "Offer",
       price: product.price.toFixed(2),
       priceCurrency: "USD",
-      url: `${SITE.url}/founder-collection`,
-      /* Preorder, not InStock: Shopify holds 0 on hand and oversells on
-         purpose. Claiming InStock here would be the same lie in a format
-         Google quotes back. Only rendered when `sellable` is true. */
-      availability: "https://schema.org/PreOrder",
+      url: `${SITE.url}/products/${product.slug}`,
+      availability: soldOut
+        ? "https://schema.org/SoldOut"
+        : product.preorder
+          ? "https://schema.org/PreOrder"
+          : "https://schema.org/InStock",
       itemCondition: "https://schema.org/NewCondition",
       seller: { "@id": `${SITE.url}/#organization` },
-      shippingDetails: {
+      shippingDetails: inStock ? US_SHIPPING : {
         "@type": "OfferShippingDetails",
         shippingRate: { "@type": "MonetaryAmount", value: "0", currency: "USD" },
         shippingDestination: { "@type": "DefinedRegion", addressCountry: "US" },

@@ -2,7 +2,8 @@
  * THE FOUNDER KEY and THE HOUSE MAP — 12 September 2026.
  *
  * Motion: the house tokens (globals.css). The map does not zoom in; it
- * settles, like a page turned. The key dock never moves.
+ * settles, like a page turned. The key dock never moves; on the first
+ * screen it only waits, faded, until the hero is behind her.
  */
 
 /* ---- the key ------------------------------------------------------------ */
@@ -18,6 +19,16 @@
 }
 @media (min-width: 1024px) {
   .dock { left: 1.5rem; bottom: 1.5rem; }
+}
+.dock { transition: opacity var(--motion-micro) var(--ease-house), transform var(--motion-micro) var(--ease-house); }
+/* The first screen belongs to the hero (launch crawl, 30 Sept 2026): the key
+   waits, faded and out of the way, until she scrolls past it. It stays in the
+   tab order, and a keyboard focus brings it straight back. */
+.dockTucked:not(:focus-within) { opacity: 0; transform: translateY(0.75rem); pointer-events: none; }
+/* Phones: the bottom of the screen is also where the browser's own bar and
+   the home indicator live. */
+@media (max-width: 767px) {
+  .dock { left: 0.75rem; bottom: max(0.75rem, env(safe-area-inset-bottom)); }
 }
 .key {
   display: inline-flex;
@@ -192,5 +203,5 @@
 .here::before { content: ""; width: 0.4rem; height: 0.4rem; border-radius: 50%; background: var(--color-rose); box-shadow: 0 0 10px var(--color-rose); }
 
 @media (prefers-reduced-motion: reduce) {
-  .scrim, .hall, .note, .frame, .leaf, .glow, .key, .plaque { transition: none; animation: none; }
+  .dock, .scrim, .hall, .note, .frame, .leaf, .glow, .key, .plaque { transition: none; animation: none; }
 }

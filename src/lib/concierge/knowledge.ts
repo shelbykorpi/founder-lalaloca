@@ -96,8 +96,8 @@ function founderCollectionFacts(): Fact[] {
       id: `founder:${p.slug}`,
       cues: [p.name.toLowerCase(), p.slug, p.archetype.toLowerCase(), "moisturiser", "moisturizer", "cream", "peptide"],
       text: [
-        `${p.name} — ${p.archetype}, the last step of the FOUNDER Collection. ${p.category}. ${p.size}, ${formatPrice(p.price)}.`,
-        `Sale state: PREORDER against the first run. ${p.preorder ?? PREORDER_NOTE}`,
+        `${p.name} — ${p.archetype} of the FOUNDER Collection. ${p.category}. ${p.size}, ${formatPrice(p.price)}.`,
+        p.preorder ? `Sale state: PREORDER. ${p.preorder}` : `Sale state: ${availabilityLine("in-stock")}. Free US shipping.`,
         `What it is: ${p.what}`,
         `The need it addresses: ${p.need}`,
         `Cosmetic benefit as approved: ${p.benefit}`,
@@ -129,7 +129,7 @@ function founderCollectionFacts(): Fact[] {
       p.sunNote ? `Sun note, verbatim: ${p.sunNote}` : "",
       p.facts?.length ? `Also stated: ${p.facts.join("; ")}.` : "",
       `Full ingredient list: ${p.ingredients.join(", ")}. ${p.origin}`,
-      `The pack shots on the site are renders of the approved packaging, not photographs of a filled sample.`,
+      `The pack shots on the site are renders of the approved packaging.`,
     ]
       .filter(Boolean)
       .join("\n"),
@@ -139,12 +139,12 @@ function founderCollectionFacts(): Fact[] {
     ...line,
     {
       id: "founder:collection",
-      cues: ["founder collection", "the collection", "five", "routine", "next move", "opening line", "clean break", "double take", "smooth talker", "hold the room", "preorder", "first run", "when will it ship"],
+      cues: ["founder collection", "the collection", "five", "routine", "next move", "opening line", "clean break", "double take", "smooth talker", "hold the room", "preorder", "in stock", "when will it ship"],
       text: [
         `The FOUNDER Collection is the house's second line, alongside the LALALOCA serums: Opening Line (oil-to-milk cleanser), Clean Break (purifying face wash), Hold the Room (peptide moisturising cream), Double Take (peptide eye cream) and Smooth Talker (ceramide tone stick, three shades).`,
-        `Every piece is priced and sold as a PREORDER against the first run; none ships next-business-day the way the serums do. ${PREORDER_NOTE}`,
-        `No ship date is promised. If asked when, say the customer hears by email before it ships and can cancel by replying; do not guess a date.`,
-        `The serums (LALALOCA) are in stock and ship within one business day.`,
+        `Every piece is in stock and ships within one business day, free anywhere in the US, the same as the serums. There is no preorder.`,
+        `If a piece shows "Sold out" on its page, it is sold out; do not promise a restock date.`,
+        `Returns: unopened items within 14 days of delivery. Details at /policies/returns.`,
       ].join("\n"),
     },
   ];

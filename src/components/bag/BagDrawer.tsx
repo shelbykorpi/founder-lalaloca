@@ -166,10 +166,14 @@ export function BagDrawer() {
           <div className="flex flex-1 flex-col items-center justify-center gap-6 px-8 text-center">
             <p className="subhead text-cream">Your bag is empty.</p>
             <p className="text-sm text-cream/75">
-              The house is open. Three serums, $38 each — or all three for $98.
+              Three serums, $38 each or $98 for all three. Or the FOUNDER Collection,
+              cleanser to colour. Shipping’s free either way.
             </p>
             <Link href="/shop" onClick={closeBag} className="btn btn-primary">
               Shop the serums
+            </Link>
+            <Link href="/founder-collection" onClick={closeBag} className="hairline text-cream">
+              Shop the FOUNDER Collection
             </Link>
           </div>
         ) : (

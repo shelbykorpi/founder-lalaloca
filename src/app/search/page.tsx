@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { PageIntro } from "@/components/site/PageIntro";
 import { SiteSearch } from "@/components/search/SiteSearch";
+import { buildSearchIndex } from "@/lib/searchIndex";
 
 export const metadata: Metadata = {
   title: "Search",
@@ -28,7 +29,7 @@ export default function SearchPage() {
           cream this section supplies — a form belongs on paper. */}
       <PageIntro eyebrow="Search" title="What are you after?" tone="dark" />
       <section className="section bg-cream pt-4">
-        <SiteSearch />
+        <SiteSearch index={buildSearchIndex()} />
       </section>
     </>
   );

@@ -52,7 +52,10 @@ export function Footer() {
         </div>
       </div>
 
-      <div className="shell border-t border-bronze/20 py-6">
+      {/* pb-24: the Founder Key and the service bell are fixed to the
+          foot of the screen, and at the very end of a page they sat on this
+          block's last line (launch crawl, 30 Sept 2026). */}
+      <div className="shell border-t border-bronze/20 pt-6 pb-24">
         <div className="flex flex-col gap-2 text-[0.6875rem] uppercase tracking-[0.16em] text-cream/70 sm:flex-row sm:items-center sm:justify-between">
           <p>
             © {new Date().getFullYear()} {BRAND.legal.name}. Cosmetic products.

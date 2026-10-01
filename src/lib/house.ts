@@ -39,8 +39,10 @@ export const WINGS: Wing[] = [
   },
   {
     slug: "vanity",
-    plaque: "The Vanity",
-    line: "The twenty minutes before you walk in.",
+    /* Slug kept (the key remembers visited wings by slug); the plaque says
+       what is actually through this door — the serums (30 Sept 2026). */
+    plaque: "The Serum Salon",
+    line: "Three lights. Pick the one that’s yours.",
     href: "/shop",
     matches: (p, h) =>
       p === "/shop" ||

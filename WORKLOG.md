@@ -2072,3 +2072,16 @@ Shelby: "My site is offering free shipping but I did not see that applied at che
 - **Site.** New `EXPRESS_OFFERED = COLLECTION_SHIPS === null` in nextMove.ts gates the "$15 Express" mentions on /shop, the shipping policy (content.ts) and llms.txt. They return automatically when the ship date is cleared.
   - The Oct 12 reminder (trig_01GTwrLC27uaqksov1tzh6xF) now also re-enables Express in Shopify, with the IDs in its prompt.
 - **Flag for Shelby.** FOUNDER Collection weights are 0 lb (Hold the Room 1 oz). This doesn't affect what customers pay, but it does affect label buying. Added to the Desk reminders.
+
+## 2026-10-02 00:10Z: FOUNDER Collection weights set from the packaging (Cowork FOUNDER team)
+
+Shelby: "you can pull up the weights, it's labeled on the packaging."
+- Shopify variant weights (`productVariantsBulkUpdate`, `inventoryItem.measurement.weight`) were set from the label net contents. Fluid ounces were taken as ounces of weight.
+  - Hold the Room 50 ml / 1.69 fl oz: saved as 1.7 oz (was 1 oz).
+  - Opening Line 150 ml / 5.07 fl oz: saved as 5.1 oz (was 0).
+  - Clean Break 140 ml / 4.73 fl oz: saved as 4.7 oz (was 0).
+  - Double Take 15 ml / 0.51 fl oz: saved as 0.5 oz (was 0).
+  - Smooth Talker 12 g / 0.42 oz, three shades: 12 g (was 0).
+  - Shopify rounds to one decimal.
+- Customers are unaffected: rates are flat ($0 standard; Express is paused).
+- **Caveat.** These are net contents, not packed weight. Container, carton and insert add weight; the serums sit at 5 oz against 1.69 fl oz of product. Label postage bought on these weights can come up short, so the Desk reminder asks Shelby to weigh one packed unit of each when stock lands.

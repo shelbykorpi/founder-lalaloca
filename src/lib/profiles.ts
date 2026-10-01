@@ -187,6 +187,7 @@ export const profiles: FoundHerProfile[] = [
       },
     ],
     closing: "FOUNDER. FOUND HER.",
+  },
   {
     slug: "julie-schoener",
     name: "Julie Schoener",

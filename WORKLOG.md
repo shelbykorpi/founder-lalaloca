@@ -5,6 +5,42 @@ date · agent · what changed · what was left alone · anything unpushed.
 
 ---
 
+## 2026-10-01 · Claude (Cowork) — Shopify stock + ship date, and a brighter Room 04
+
+SHOPIFY (live store, no repo change):
+- Stocked the five FOUNDER collection products at 5 each — Clean Break,
+  Double Take, Hold the Room, Opening Line, and Smooth Talker at 5 PER SHADE
+  (20 Light / 25 Medium / 35 Deep = 15). 35 units total.
+- Set founder.badge = "Ships October 12" on those same five. The namespace
+  had no founder.* metafields at all before this, so nothing was clobbered —
+  worth knowing: descriptor and hook are unset too, so the catalog is
+  running on its hand-written fallbacks.
+- Serums deliberately untouched per Shelby: Thirst Trap 98, C Me Glow 75,
+  Bounce Back 74, Trio 149, no badge. The trio was treated as a serum.
+
+REPO:
+- public/editorial/rooms/collection-mirror.webp — gamma 1.5 lift, mean
+  brightness 18.1 -> 37.1 of 255. The boardroom was so dark the products on
+  the table did not read at all.
+- collection-mirror-m.webp — gamma 1.3, mean 32.5 -> 46.9. Different gamma
+  on purpose: the mobile crop centres on the lit mirror and starts brighter,
+  so matching the OPERATION would not have matched the RESULT.
+- Gamma not brightness-multiply, so 255 stays 255 and the mirror bulbs
+  cannot clip. Highlights are mathematically safe. Files grew 98->121 KB and
+  49->55 KB, which is the cost of actually having shadow detail.
+- Only src/app/page.tsx (RoomHero, Room 04) uses these two files. The text
+  scrim over them is near-opaque on the left where the copy sits, so the
+  lift does not touch contrast on "Private tools. Public power."
+
+LEFT ALONE, FLAGGED TO SHELBY:
+- Two Shopify descriptions now contradict the badge: HOLD THE ROOM says
+  "In stock. Ships within one business day" and SMOOTH TALKER says "In stock
+  variants ship within one business day". Offered to fix; not touched.
+- src/app/founder-collection/page.tsx still describes the line as "one
+  product takes money, three take reservations and two aren't made". All
+  five now have prices and stock in Shopify. Stale framing, worth a pass
+  before the 12th.
+
 ## 2026-08-25 · Claude (Cowork) — deploys stopped at b60c6b9
 Shelby sent a Vercel deployment URL. Production was ~18h stale. Diagnosed
 from the outside (no Vercel log access):

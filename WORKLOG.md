@@ -2085,3 +2085,15 @@ Shelby: "you can pull up the weights, it's labeled on the packaging."
   - Shopify rounds to one decimal.
 - Customers are unaffected: rates are flat ($0 standard; Express is paused).
 - **Caveat.** These are net contents, not packed weight. Container, carton and insert add weight; the serums sit at 5 oz against 1.69 fl oz of product. Label postage bought on these weights can come up short, so the Desk reminder asks Shelby to weigh one packed unit of each when stock lands.
+
+## 2026-10-02 00:30Z: Shopify's own shipping terms checked; checkout's Shipping policy aligned (Cowork FOUNDER team)
+
+Shelby: "make sure Shopify is linked to the free shipping set up too."
+- **Already right.**
+  - One market (United States, primary). Its zone has Free Standard Shipping $0, which checkout preselects; Express is paused.
+  - Every variant is on the General profile.
+  - Channels are Online Store, Shop, POS, Vercel Storefronts and Pinterest. Shop and Pinterest read rates from the shipping profile.
+  - Site Merchant feed: every item carries `<g:shipping>` US / Standard / 0.00 USD with label free-us-standard. Product schema `US_SHIPPING` has shippingRate 0, handling 1–2 days, transit 3–5 days.
+- **Fixed: the Shopify Shipping policy**, which checkout links in its footer. It still read "Express shipping is $15 and takes 1 to 2 business days. Orders are dispatched within one business day" for everything. The second paragraph now matches the site: "Standard shipping is free and takes 3 to 5 business days. Orders are dispatched within one business day, except orders that include FOUNDER Collection pieces, which ship on October 12. Every parcel is sent with tracking." The other paragraphs are unchanged.
+  - The API token lacks `write_legal_policies`, so this was edited in Shopify admin in Chrome with Shelby's explicit OK. Verified via `shopPolicies`.
+  - The Oct 12 reminder (trig_01GTwrLC27uaqksov1tzh6xF) now includes restoring the Express sentence.

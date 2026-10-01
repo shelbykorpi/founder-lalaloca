@@ -35,6 +35,7 @@ export function BagDrawer() {
         item_id: l.id,
         item_name: l.name,
         item_category: l.category,
+        item_brand: itemBrandFor(l.id),
         price: l.price,
         quantity: l.quantity,
       })),

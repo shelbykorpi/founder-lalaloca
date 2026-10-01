@@ -295,7 +295,12 @@ export default function OurStoryPage() {
           </div>
         </section>
 
-        <section className="bg-founder-green py-16 text-cream md:py-24">
+        <section className="bg-rose py-16 text-charcoal md:py-24">
+          {/* Desert Rose ground (Shelby, 2 Oct 2026), FOUND HER's colour. Pink
+              is a light ground, so the type is ink and green rather than cream
+              and champagne: charcoal 6.88:1, Founder Green ~4.6:1. Every
+              button's hover is Desert Rose, which would vanish here, so this
+              one is Founder Green and deepens to Desert Rose in shadow. */}
           <div className="shell grid gap-12 lg:grid-cols-[1.05fr_0.95fr] lg:items-center lg:gap-20">
             <Reveal>
               {/* The FOUND HER frame on the wall (Shelby, 2 Oct 2026): several
@@ -315,18 +320,18 @@ export default function OurStoryPage() {
                     className="object-cover"
                   />
                 </div>
-                <figcaption className="mt-3 text-[0.75rem] leading-relaxed text-cream/60">
+                <figcaption className="mt-3 text-[0.75rem] leading-relaxed text-charcoal">
                   An artwork for the FOUND HER wall, not a photograph of contributors.
                 </figcaption>
               </figure>
             </Reveal>
 
             <Reveal delay={100}>
-              <p className="eyebrow text-champagne">Why FOUND HER belongs here</p>
-              <h2 className="mt-5 max-w-[12ch] font-serif text-[clamp(2rem,5vw,3.3rem)] font-light leading-[1.03] text-cream">
+              <p className="eyebrow text-founder-green">Why FOUND HER belongs here</p>
+              <h2 className="mt-5 max-w-[12ch] font-serif text-[clamp(2rem,5vw,3.3rem)] font-light leading-[1.03] text-night">
                 I do not want the products to be the most interesting thing about this brand.
               </h2>
-              <div className="mt-7 max-w-[40rem] space-y-5 text-[1rem] leading-[1.85] text-cream/76">
+              <div className="mt-7 max-w-[40rem] space-y-5 text-[1rem] leading-[1.85] text-charcoal">
                 <p>
                   FOUND HER gives women room to tell their own stories — what they built,
                   what it took, what changed, and what they are proud of now.
@@ -337,7 +342,10 @@ export default function OurStoryPage() {
                   women who to be. It was to make more room for who they already are.
                 </p>
               </div>
-              <Link href="/found-her" className="btn btn-primary mt-8">
+              <Link
+                href="/found-her"
+                className="btn mt-8 bg-founder-green text-cream hover:bg-rose-deep hover:text-night"
+              >
                 Enter FOUND HER
               </Link>
             </Reveal>

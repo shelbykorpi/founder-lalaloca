@@ -2121,3 +2121,15 @@ Shelby: "the 'Why FOUND HER belongs here' section should have the framed picture
 - The slot uses the image's own ratio, `aspect-[833/729]`, so the frame isn't cropped. The alt text transcribes all four handwritten lines.
 - **Honesty caption**, small, under the image: "An artwork for the FOUND HER wall, not a photograph of contributors." The women are generated and the lines read like quotes, while the section says FOUND HER stories are told in women's own words and published only after they approve them. It's the same safeguard `portrait.note` gives composed artwork on the FOUND HER pages. Shelby can drop it if she prefers.
 - Applied on top of 5ca108c (the journal fix, not yet on origin), so both changes are in the file. Checked at 1440 and 390.
+
+## 2026-10-02 01:35Z: Our Story: "Why FOUND HER belongs here" goes Desert Rose (Cowork FOUNDER team)
+
+Shelby: "change the green background to desert pink" (the section with the FOUND HER frame).
+- The section changed from `bg-founder-green text-cream` to `bg-rose text-charcoal` (Desert Rose #D8A7A0).
+- Type moved to ink for contrast on a light ground:
+  - eyebrow: champagne → Founder Green (~4.6:1);
+  - headline: cream → night;
+  - body: cream/76 → charcoal (6.88:1);
+  - caption: cream/60 → charcoal.
+- **Button.** The house hover is Desert Rose, which would disappear on this ground. The button is now Founder Green with cream text, and its hover deepens to Desert Rose in shadow (`--color-rose-deep` #B87978, night text). It stays in the pink family and stays visible.
+- Only this section changed; the green journal section above is untouched. The file already carries the journal fix (5ca108c) and the frame swap (287413c). Checked at 1440 and 390.

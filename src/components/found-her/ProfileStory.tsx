@@ -148,25 +148,32 @@ export function ProfileStory({ profile }: { profile: FoundHerProfile }) {
         </div>
       </section>
 
-      {/* Her press, last and quiet: one cream mark per publication, captioned
-          in her name so it reads as her credential rather than a "seen in"
-          strip for the shop. Same room as the close, set off by a hairline. */}
+      {/* Her press, last and quiet: one cream mark per publication under
+          her name, so it reads as her credential rather than a "seen in"
+          strip for the shop. Same room as the close, set off by a hairline.
+          Each mark carries its own display height (--logo-h) so a heavy
+          block wordmark and a fine serif one sit at the same weight; the
+          logos share a baseline-height row so captions line up. */}
       {profile.press && profile.press.length > 0 && (
         <section aria-label={`${profile.name} in the press`} className="room-dark">
-          <div className="shell-narrow border-t border-cream/15 py-12 md:py-16">
-            <ul className="flex flex-wrap items-center justify-center gap-x-16 gap-y-10">
+          <div className="shell-narrow border-t border-cream/15 py-12 text-center md:py-16">
+            <p className="eyebrow text-champagne">{profile.name}</p>
+            <ul className="mt-8 flex flex-wrap items-start justify-center gap-x-16 gap-y-10">
               {profile.press.map((item) => (
-                <li key={item.publication} className="flex flex-col items-center text-center">
-                  <Image
-                    src={item.logo.src}
-                    alt={item.publication}
-                    width={item.logo.width}
-                    height={item.logo.height}
-                    sizes="11rem"
-                    className="h-auto w-36 opacity-90 md:w-44"
-                  />
-                  <p className="mt-4 max-w-[18rem] text-balance text-[0.75rem] uppercase tracking-[0.16em] text-cream/75 sm:max-w-none">
-                    {profile.name} · {item.caption}
+                <li key={item.publication} className="flex flex-col items-center">
+                  <div className="flex h-[2.9rem] items-center md:h-14">
+                    <Image
+                      src={item.logo.src}
+                      alt={item.publication}
+                      width={item.logo.width}
+                      height={item.logo.height}
+                      sizes="12rem"
+                      style={{ "--logo-h": `${item.logo.rem}rem` } as React.CSSProperties}
+                      className="h-[calc(var(--logo-h)*0.82)] w-auto opacity-90 md:h-[var(--logo-h)]"
+                    />
+                  </div>
+                  <p className="mt-4 text-balance text-[0.75rem] uppercase tracking-[0.16em] text-cream/75">
+                    {item.caption}
                   </p>
                 </li>
               ))}

@@ -2012,3 +2012,12 @@ Shelby asked for the Maxim logo at the bottom of her FOUND HER page ("since I wa
 - **Data.** New optional `press[]` on `FoundHerProfile` (publication, caption, logo). Only Shelby has one.
 - **Page.** `ProfileStory.tsx` adds a last band in room-dark under a hairline, after the two calls to action and before the footer. The logo is w-36/md:w-44 at 90% opacity, captioned "SHELBY KORPI · ON THE COVER OF MAXIM AUSTRALIA" (12px, cream/75, balanced wrap). Alt text is "Maxim Australia". Checked at 1440 and 390.
 - **Open.** Our Story and her profile text say "the cover of Maxim", which is her approved wording. Whether to add "Australia" there is her call; the team has not changed it.
+
+## 2026-10-01 22:05Z: FHM Sweden joins Maxim Australia on Shelby's profile (Cowork FOUNDER team)
+
+Shelby: "Also featured in FHM Sweden", with the FHM logo attached.
+- **Logo.** Her file (red FHM with a black drop shadow) became a single-colour cream version: the letter fill only, with the drop shadow left out as one-colour logo versions do, on transparent. Saved as `public/brand/press/fhm-sweden-cream.png` (547×155). Not redrawn.
+- **Caption.** "Featured in FHM Sweden", which is her word "featured". No date or issue was given and none is claimed.
+- **Band layout.** Her name now appears once as a champagne eyebrow, with per-logo captions underneath ("On the cover of Maxim Australia" / "Featured in FHM Sweden").
+  - Each press logo carries `logo.rem`, its display height (phones 82%): Maxim 3.5, FHM 2.5. This keeps the heavy block FHM from shouting over the fine Maxim serif.
+  - Side by side at 1440, stacked at 390; both checked.

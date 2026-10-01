@@ -51,7 +51,10 @@ export type FoundHerProfile = {
   press?: {
     publication: string;
     caption: string;
-    logo: { src: string; width: number; height: number };
+    /** `rem` is the logo's display height on desktop (phones get 82% of
+        it). Set per mark so a heavy block wordmark and a fine serif one
+        read at the same weight side by side. */
+    logo: { src: string; width: number; height: number; rem: number };
   }[];
   /** The date she signed off on this text, or "PENDING" until she has.
       While it is "PENDING", her page drops the "published after she read
@@ -89,13 +92,19 @@ export const profiles: FoundHerProfile[] = [
     standfirst:
       "Before the titles, the patents and the polished photographs, there was a girl who had seizures as a child, was bullied for how she looked, learned what it felt like to be underestimated from both sides, and kept choosing to get back up.",
     approvedOn: "2026-10-01",
-    /* Shelby asked for this on 1 Oct 2026 and supplied the Maxim Australia
-       logo herself; the cover is already in her own answers below. */
+    /* Shelby asked for these on 1 Oct 2026 and supplied both logos herself.
+       The Maxim cover is already in her own answers below; FHM Sweden is
+       her word in chat ("also featured in FHM Sweden"). */
     press: [
       {
         publication: "Maxim Australia",
         caption: "On the cover of Maxim Australia",
-        logo: { src: "/brand/press/maxim-australia-cream.png", width: 579, height: 191 },
+        logo: { src: "/brand/press/maxim-australia-cream.png", width: 579, height: 191, rem: 3.5 },
+      },
+      {
+        publication: "FHM Sweden",
+        caption: "Featured in FHM Sweden",
+        logo: { src: "/brand/press/fhm-sweden-cream.png", width: 547, height: 155, rem: 2.5 },
       },
     ],
     answers: [

@@ -2153,3 +2153,16 @@ Shelby: "fix Aly's photo on this page, it cuts her neck off" (/found-her/aly-v).
 - New optional `portrait.mastheadAspect`: a ratio for the masthead on her own page only, falling back to `aspect`, then 3:2. Aly's is set to "4 / 5", so the slot matches the photo and nothing is cropped (face, neck, shoulders, blazer).
 - `aspect` was left alone on purpose, because the /found-her gallery cards also read it. Her card stays 3:4 like the others (checked: 211×289 at 1440).
 - The masthead is 480×600 at 1440 and 350×438 at 390; both checked. Shelby's and Julie's pages are unchanged.
+
+## 2026-10-02 02:25Z: Home: "Now playing in the house": Spin In The Dark, The Bela Vibe (Cowork FOUNDER team)
+
+Shelby: "can we add the song 'Spin in the Dark' by Bela Vibe to the homepage". She chose the Spotify player (over a background-music toggle, which would need a licence and an audio file) and the original version.
+- **Track.** "Spin In The Dark", The Bela Vibe, album *Moonfire In Shadows*, Spotify track 7dY2Gy12KLH8LkxcneRKce. The Extended Version (1rrolJizJDsarUm0Eg1Pyc) is not used.
+- **Placement.** New row inside the "Tonight in the house" rail, under the three tiles and above "Ring for service":
+  - left: eyebrow "Now playing in the house", serif title, and artist;
+  - right: Spotify's compact dark embed (`/embed/track/…?theme=0`, height 80, 26rem column on md+, full width on phones).
+  - `loading="lazy"`, nothing auto-plays. Signed-in Spotify users hear the full track; others hear Spotify's 30-second preview.
+  - There's no CSP, so no header change was needed; X-Frame-Options only governs us being framed.
+- **Gotcha.** `md:grid-cols-[minmax(0,1fr)_minmax(0,26rem)]` collapsed the iframe to a sliver because the fr track took all the space. A fixed `26rem` second track fixed it.
+- **Privacy policy** (content.ts) gains: "The home page includes a Spotify player, which loads from Spotify and may set Spotify's own cookies."
+- Verified at 1440 and 390: the Spotify frame loads with the correct track.

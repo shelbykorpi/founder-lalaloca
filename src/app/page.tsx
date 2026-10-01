@@ -256,6 +256,32 @@ export default function HomePage() {
               <span className="mt-2 block text-sm text-cream/55 group-hover:text-cream/75">Choose yours →</span>
             </Link>
           </div>
+          {/* NOW PLAYING (Shelby, 2 Oct 2026): "Spin In The Dark" by The Bela
+              Vibe, through Spotify's own embed, which is licensed for sites,
+              so no audio file and no music licence of ours is involved.
+              Signed-in Spotify listeners hear the full track; everyone else
+              gets Spotify's 30-second preview. Nothing auto-plays. Lazy, so
+              it costs nothing until the visitor scrolls near it. The privacy
+              policy names it, because Spotify may set its own cookies. */}
+          <div className="mt-5 grid gap-4 border-t border-bronze/10 pt-5 md:grid-cols-[minmax(0,1fr)_26rem] md:items-center md:gap-8">
+            <div>
+              <span className="block text-[0.56rem] uppercase tracking-[0.22em] text-champagne/70">
+                Now playing in the house
+              </span>
+              <span className="mt-2 block font-serif text-[1.35rem] text-cream">Spin In The Dark</span>
+              <span className="mt-1 block text-sm text-cream/55">The Bela Vibe</span>
+            </div>
+            <iframe
+              title="Spin In The Dark by The Bela Vibe, on Spotify"
+              src="https://open.spotify.com/embed/track/7dY2Gy12KLH8LkxcneRKce?utm_source=generator&theme=0"
+              width="100%"
+              height="80"
+              loading="lazy"
+              allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"
+              className="block w-full rounded-[12px] border-0"
+            />
+          </div>
+
           <div className="mt-5 flex flex-wrap items-center justify-between gap-3 border-t border-bronze/10 pt-5">
             <p className="text-sm text-cream/55">
               Need a recommendation, an order answer, or help finding your way through the house?

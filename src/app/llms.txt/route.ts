@@ -1,4 +1,4 @@
-import { BRAND, SITE } from "@/lib/brand";
+import { BRAND, SITE, INSTAGRAM } from "@/lib/brand";
 import { formatPrice, products, SET } from "@/lib/products";
 
 /**
@@ -31,6 +31,7 @@ export function GET() {
     `${BRAND.display} is the master brand. ${BRAND.collectionFull} is its skincare line.`,
     `${BRAND.legal.name} is the seller of record on every order, receipt and package.`,
     `Founded by Shelby Korpi. Ships from Arizona, United States.`,
+    `Instagram: ${INSTAGRAM.url}`,
     "",
     "## Products",
     "",

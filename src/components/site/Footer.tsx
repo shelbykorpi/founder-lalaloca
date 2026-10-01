@@ -1,6 +1,6 @@
 import Link from "next/link";
 import { FOUNDER_ASPECT, Wordmark } from "./Wordmark";
-import { BRAND, FOOTER_NAV } from "@/lib/brand";
+import { BRAND, FOOTER_NAV, INSTAGRAM } from "@/lib/brand";
 import { EmailSignup } from "./EmailSignup";
 
 /**
@@ -79,6 +79,15 @@ export function Footer() {
             >
               Accessibility
             </Link>
+            <a
+              href={INSTAGRAM.url}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex min-h-11 items-center hover:text-cream"
+            >
+              Instagram {INSTAGRAM.handle}
+              <span className="sr-only"> (opens in a new tab)</span>
+            </a>
           </div>
         </div>
         <p className="max-w-2xl text-[0.6875rem] leading-relaxed text-cream/65">

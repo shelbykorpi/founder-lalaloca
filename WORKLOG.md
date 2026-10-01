@@ -1689,3 +1689,12 @@ mix of "I" (founder) and "we" (care).
   (it opens /shop; slug kept for the key).
 - Layout fixes by a subagent (entry above) reviewed and kept; ProductPlate
   "What it is" sizes now serves a large enough file.
+
+## 2026-10-01 · Claude (Cowork) — Instagram
+
+Shelby: https://www.instagram.com/founder_beauty/. `INSTAGRAM` in brand.ts;
+footer bottom row link (new tab, sr-only note); Organization `sameAs` now
+always carries it (env NEXT_PUBLIC_SAME_AS adds to it, never replaces);
+llms.txt line. Email: shelby@founderbeauty.co forwards through ImprovMX
+(MX mx1/mx2.improvmx.com); a Shopify email to it landed in Gmail on 15 Aug.
+Verified: tsc, eslint, build; schema and footer at 1440/390.

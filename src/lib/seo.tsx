@@ -1,4 +1,4 @@
-import { BRAND, CONTACT_EMAIL, SITE } from "./brand";
+import { BRAND, CONTACT_EMAIL, INSTAGRAM, SITE } from "./brand";
 import type { FounderProduct } from "./founderCollection";
 import type { NextMoveProduct } from "./nextMove";
 import type { Product } from "./products";
@@ -73,10 +73,17 @@ const RETURN_POLICY = {
  * the single highest-value line in this file, and it is empty until the URLs
  * are supplied. They are not guessed at here.
  */
-const SAME_AS = (process.env.NEXT_PUBLIC_SAME_AS ?? "")
-  .split(",")
-  .map((url) => url.trim())
-  .filter(Boolean);
+/* Instagram is known (1 Oct 2026) so it is always present; anything in the
+   env var (Etsy, TikTok…) is added to it, never replacing it. */
+const SAME_AS = Array.from(
+  new Set([
+    INSTAGRAM.url,
+    ...(process.env.NEXT_PUBLIC_SAME_AS ?? "")
+      .split(",")
+      .map((url) => url.trim())
+      .filter(Boolean),
+  ]),
+);
 
 /* Was read straight from the environment here and was unset, so the structured
    data shipped with no contactPoint at all. It now comes from brand.ts — the

@@ -115,6 +115,12 @@ export const PRIMARY_NAV: { href: string; label: string; stack?: string[] }[] = 
      both. The footer keeps a deep link to the invitation itself. */
 ];
 
+/** The house's Instagram (Shelby, 1 Oct 2026). Footer link + Organization sameAs. */
+export const INSTAGRAM = {
+  handle: "@founder_beauty",
+  url: "https://www.instagram.com/founder_beauty/",
+} as const;
+
 export const FOOTER_NAV = [
   {
     heading: "Shop",

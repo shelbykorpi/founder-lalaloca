@@ -359,7 +359,7 @@ export const policies = {
       },
       {
         heading: "When you use the Beauty desk",
-        body: "The chat on this site is answered by an AI model, run through Vercel’s AI Gateway. What you type is sent to that model to write the reply. Please don’t type card numbers or anything you wouldn’t want in writing. If you ask for a person, or the desk can’t answer you, the conversation is saved in Airtable and emailed to us so a person can reply.",
+        body: "The chat on this site is answered by an AI model, Anthropic’s Claude. What you type is sent to Anthropic to write the reply. Please don’t type card numbers or anything you wouldn’t want in writing. If you ask for a person, or the desk can’t answer you, the conversation is saved in Airtable and emailed to us so a person can reply.",
       },
       {
         heading: "What your browser keeps",

@@ -2271,3 +2271,12 @@ Shelby: "a box to check if they would also like to be considered to be featured 
 - **Kept true elsewhere.** STORY_STANDARD is now "Separate permissions" and names the third, optional one. The privacy policy's story paragraph adds the product-feature sentence (Shelby to confirm the policy wording). The concierge knowledge base is updated too.
 - **NOT changed:** Shelby's confirmation email copy.
 - Checked at 1440 and 390.
+
+## 2026-10-01 22:58Z: Concierge back on the site (Cowork FOUNDER team)
+
+- **Production test.** The commits through 82242b2 are pushed and deployed with ANTHROPIC_WORKSPACE_ID. Two questions went to live POST /api/concierge:
+  - "dry skin + fine lines, which serum, retinol?" was answered by Sonnet in 5.5 s. It gave Thirst Trap with accurate details and declined to rule on prescription retinoids. `escalated: true`, so it was handed to a person as designed.
+  - "When will Hold the Room ship, is shipping free?" was answered in 3.5 s: Oct 12, free US shipping.
+- **`CONCIERGE_ENABLED = true`.** The bell returns on every page and the homepage launchers come back. Verified on a local build.
+- **Privacy policy.** The Beauty desk paragraph said "run through Vercel's AI Gateway"; it now says "Anthropic's Claude … sent to Anthropic", because the site now calls Anthropic directly.
+- Cleanup for Shelby: the unused Vercel variable "Concierage" can be deleted.

@@ -10,6 +10,11 @@
  * swap to the serum finder and to email. The API route stays deployed but
  * nothing on the site calls it.
  *
- * To bring it back: set this to true. Nothing else changes.
+ * Back on 1 Oct 2026, 22:55Z: the direct Anthropic route (Claude Sonnet 5.5,
+ * Shelby's key plus ANTHROPIC_WORKSPACE_ID) answered live questions on
+ * production correctly in 3-5 s, so the condition she set ("until it's fixed")
+ * is met.
+ *
+ * To take it off again: set this to false. Nothing else changes.
  */
-export const CONCIERGE_ENABLED = false;
+export const CONCIERGE_ENABLED = true;

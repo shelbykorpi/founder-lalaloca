@@ -2028,3 +2028,11 @@ Shelby: "On air with… or revised to say I was on the show with Kevin Hart and 
 - **Caption.** "On the show with Kevin Hart", short like the others. The logo itself reads "Kevin Hart Presents Plastic Cup Boyz", so the show is named. "On air" was not used, because the team can't confirm the broadcast detail. The alt text is "Kevin Hart Presents: Plastic Cup Boyz".
 - **Logo.** Her file is small (344×212) and multi-colour. It became one-colour cream: the red/dark areas turn cream and the white fills cut out, with a hard threshold so the grey shading on the "P" doesn't smudge. Saved as `public/brand/press/plastic-cup-boyz-cream.png`. Shown at rem 5.75, because "Kevin Hart" is unreadable any smaller.
 - **Band.** The row height is now the tallest mark (`--row-h`) when the logos sit side by side; stacked on phones, each keeps its own height so there are no dead gaps. Checked at 1440 (three across) and 390 (stacked).
+
+## 2026-10-01 22:50Z: WCK and Playboy credits on Shelby's profile (Cowork FOUNDER team)
+
+Shelby: "add ring girl with WCK and Body Paint Model with Playboy Mansion Events", with both logos attached.
+- **Captions.** "Ring girl with WCK" and "Body paint model at Playboy Mansion events", her words shortened to match the others. Alt text is "WCK" and "Playboy".
+- **WCK logo** (184×194 badge, white letters and fighter on a red sunburst). The white letters and fighter became cream. The red badge was dropped, and the white outside the badge was removed by flood fill from the corners. Saved as `public/brand/press/wck-cream.png` (156×188), shown at rem 4.75.
+- **Playboy logo** (3840×2160, black on transparent). Recoloured cream with the eye kept as a cutout, cropped and resized to 500×600. Saved as `public/brand/press/playboy-cream.png`, shown at rem 5.75.
+- The profile now has five credits: three plus two on desktop, stacked on phones. Both checked. No component change.

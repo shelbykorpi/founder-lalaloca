@@ -96,7 +96,9 @@ export const profiles: FoundHerProfile[] = [
        The Maxim cover is already in her own answers below; FHM Sweden and
        the Plastic Cup Boyz show are her words in chat ("also featured in
        FHM Sweden"; "I was on the show with Kevin Hart and Plastic Cup
-       Boyz", shortened at her request to match the others). */
+       Boyz", shortened at her request to match the others), as are WCK and
+       Playboy ("ring girl with WCK"; "body paint model with Playboy Mansion
+       events"). */
     press: [
       {
         publication: "Maxim Australia",
@@ -112,6 +114,16 @@ export const profiles: FoundHerProfile[] = [
         publication: "Kevin Hart Presents: Plastic Cup Boyz",
         caption: "On the show with Kevin Hart",
         logo: { src: "/brand/press/plastic-cup-boyz-cream.png", width: 344, height: 212, rem: 5.75 },
+      },
+      {
+        publication: "WCK",
+        caption: "Ring girl with WCK",
+        logo: { src: "/brand/press/wck-cream.png", width: 156, height: 188, rem: 4.75 },
+      },
+      {
+        publication: "Playboy",
+        caption: "Body paint model at Playboy Mansion events",
+        logo: { src: "/brand/press/playboy-cream.png", width: 500, height: 600, rem: 5.75 },
       },
     ],
     answers: [

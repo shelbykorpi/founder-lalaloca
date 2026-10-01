@@ -30,8 +30,15 @@ export type StoryRecord = {
   social: string;
   canPublish: boolean;
   canContact: boolean;
+  /** She asked to be considered for a feature on upcoming products. A request
+   *  to be considered, not permission to use anything (see the column note). */
+  wantsProductFeature: boolean;
   answers: Record<string, string>;
 };
+
+/** Added 1 Oct 2026. If a base is missing this column, the row is written
+ *  without it rather than lost (the email still carries the answer). */
+const PRODUCT_COLUMN = "Consider for products";
 
 export type RecordResult =
   | { recorded: true; url: string }
@@ -69,6 +76,7 @@ export async function recordStorySubmission(story: StoryRecord): Promise<RecordR
     Source: "Website form",
     "May publish": story.canPublish,
     "May contact": story.canContact,
+    [PRODUCT_COLUMN]: story.wantsProductFeature,
   };
 
   if (story.location) fields.Location = story.location;
@@ -79,19 +87,32 @@ export async function recordStorySubmission(story: StoryRecord): Promise<RecordR
   }
 
   try {
-    const response = await fetch(`https://api.airtable.com/v0/${BASE_ID}/${TABLE_ID}`, {
-      method: "POST",
-      headers: {
-        authorization: `Bearer ${API_KEY}`,
-        "content-type": "application/json",
-      },
-      /* typecast lets Airtable coerce the ISO string into the dateTime column
-         rather than rejecting the whole record over a format quibble. */
-      body: JSON.stringify({ records: [{ fields }], typecast: true }),
-    });
+    const post = (body: Record<string, unknown>) =>
+      fetch(`https://api.airtable.com/v0/${BASE_ID}/${TABLE_ID}`, {
+        method: "POST",
+        headers: {
+          authorization: `Bearer ${API_KEY}`,
+          "content-type": "application/json",
+        },
+        /* typecast lets Airtable coerce the ISO string into the dateTime column
+           rather than rejecting the whole record over a format quibble. */
+        body: JSON.stringify({ records: [{ fields: body }], typecast: true }),
+      });
 
+    let response = await post(fields);
     if (!response.ok) {
-      return { recorded: false, reason: `Airtable returned ${response.status}: ${await response.text()}` };
+      const detail = await response.text();
+      /* A base without the newer product column must not cost her the row. */
+      if (detail.includes("UNKNOWN_FIELD_NAME") && detail.includes(PRODUCT_COLUMN)) {
+        const rest = { ...fields };
+        delete rest[PRODUCT_COLUMN];
+        response = await post(rest);
+        if (!response.ok) {
+          return { recorded: false, reason: `Airtable returned ${response.status}: ${await response.text()}` };
+        }
+      } else {
+        return { recorded: false, reason: `Airtable returned ${response.status}: ${detail}` };
+      }
     }
 
     const json = await response.json();

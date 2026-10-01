@@ -153,9 +153,9 @@ export const STORY_STANDARD = [
       "Nothing is published until you have read the final text and said yes to it as written.",
   },
   {
-    title: "Two separate permissions",
+    title: "Separate permissions",
     detail:
-      "One to reply to you. A different one to consider your story for publication. Neither is bundled into the other.",
+      "One to reply to you. A different one to consider your story for publication. A third, only if you want it, to be considered for a feature on our products. None is bundled into another.",
   },
   {
     title: "Nothing is invented",
@@ -355,7 +355,7 @@ export const policies = {
       },
       {
         heading: "When you send your story",
-        body: "A person reads every FOUND HER submission. Permission to reply to you and permission to publish your story are asked for separately, and neither is assumed. Nothing is published until you’ve approved the final text. You can withdraw either permission at any time. Submissions are stored in Airtable.",
+        body: "A person reads every FOUND HER submission. Permission to reply to you and permission to publish your story are asked for separately, and neither is assumed. Nothing is published until you’ve approved the final text. You can also ask to be considered for a feature on our products; if you’re chosen, we contact you with the exact use and ask for your written permission before anything is used. You can withdraw any permission at any time. Submissions are stored in Airtable.",
       },
       {
         heading: "When you use the Beauty desk",

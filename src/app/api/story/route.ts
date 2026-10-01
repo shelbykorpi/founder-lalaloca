@@ -59,6 +59,12 @@ export async function POST(request: Request) {
   const email = clean(body.email);
   const canContact = body.permission_contact === true;
   const canPublish = body.permission_publish === true;
+  /* Optional, unticked by default: she asks to be considered for a feature on
+     upcoming products (part of her story and her photo). It is a request to be
+     considered, not a licence: if she is chosen, Shelby contacts her with the
+     exact proposed use and gets written permission first, as her confirmation
+     email already promises. */
+  const wantsProductFeature = body.permission_product === true;
 
   if (!name || !looksLikeEmail(email) || !canContact) {
     return Response.json(
@@ -92,6 +98,7 @@ export async function POST(request: Request) {
     social,
     canPublish,
     canContact,
+    wantsProductFeature,
     answers: Object.fromEntries(
       STORY_FIELDS.map((field) => [field.name, clean(body[field.name])]),
     ),
@@ -108,6 +115,11 @@ export async function POST(request: Request) {
     "PERMISSIONS",
     `  Reply to her:        yes`,
     `  Consider for publishing: ${canPublish ? "YES" : "no — read it, but do not publish"}`,
+    `  Consider for products:   ${
+      wantsProductFeature
+        ? "YES — she'd like to be considered for a product feature (story + photo). If chosen, contact her with the exact use and get written permission first."
+        : "no"
+    }`,
     "",
     "─".repeat(60),
     "",

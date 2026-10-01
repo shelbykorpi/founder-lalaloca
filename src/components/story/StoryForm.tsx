@@ -44,7 +44,8 @@ export function StoryForm() {
           A person reads every one of these — not a system, and not immediately. We’ve
           sent you a note confirming it arrived. If you ticked the second permission and
           we’d like to publish, you’ll receive the final text first. Nothing is published
-          until you explicitly approve that final version.
+          until you explicitly approve that final version. If you asked to be considered
+          for a product feature, we’ll reach out only if you’re chosen.
         </p>
       </div>
     );
@@ -99,6 +100,7 @@ export function StoryForm() {
       social: data.get("social"),
       permission_contact: data.get("permission_contact") === "on",
       permission_publish: data.get("permission_publish") === "on",
+      permission_product: data.get("permission_product") === "on",
       rendered_at: renderedAt.current,
       [HONEYPOT_FIELD]: data.get(HONEYPOT_FIELD) ?? "",
     };
@@ -113,7 +115,10 @@ export function StoryForm() {
       const result = await response.json().catch(() => ({}));
 
       if (response.ok && result.ok) {
-        track("story_submission", { consented_to_publish: payload.permission_publish === true });
+        track("story_submission", {
+          consented_to_publish: payload.permission_publish === true,
+          product_feature: payload.permission_product === true,
+        });
         setState("done");
         return;
       }
@@ -179,7 +184,7 @@ export function StoryForm() {
       ))}
 
       <fieldset className="mt-8 border-t border-charcoal/12 pt-6">
-        <legend className="eyebrow px-0 text-charcoal/80">Two separate permissions</legend>
+        <legend className="eyebrow px-0 text-charcoal/80">Your permissions</legend>
 
         <div className="mt-4 flex items-start gap-3">
           <input
@@ -209,9 +214,26 @@ export function StoryForm() {
           </label>
         </div>
 
+        <div className="mt-4 flex items-start gap-3">
+          <input
+            id={`${uid}-product`}
+            name="permission_product"
+            type="checkbox"
+            className="mt-1 h-6 w-6 shrink-0 accent-[#8a6335]"
+          />
+          <label htmlFor={`${uid}-product`} className="text-sm leading-relaxed text-charcoal/80">
+            I’d also like to be considered for a feature on upcoming FOUNDER products, with
+            part of my story and my photo. I understand you’ll reach out only if I’m chosen,
+            and nothing goes on a product until I’ve seen exactly how it will be used and
+            given my written permission.{" "}
+            <span className="text-charcoal/70">(Optional — leave it unticked and nothing changes.)</span>
+          </label>
+        </div>
+
         <p className="mt-4 text-xs leading-relaxed text-charcoal/70">
-          Sending this doesn’t mean it gets published. We publish very few, slowly, and
-          only with the second permission above. It does not add you to the mailing
+          Sending this doesn’t mean it gets published or chosen. We publish very few,
+          slowly, and only with the second permission above. Product features are
+          chosen by hand, and only from women who ticked the third. It does not add you to the mailing
           list — that’s a separate choice, made somewhere else.
         </p>
       </fieldset>

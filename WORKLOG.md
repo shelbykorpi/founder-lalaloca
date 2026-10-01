@@ -2254,3 +2254,20 @@ Shelby: "our story needs to tell the story of why i started founder", with the f
 - **Removed from this page:** the biography (bullying, Maxim, the kitchen business, BitThermal/EcoYield) and the "brand vs FOUND HER" explainer. All of it is still in full on her FOUND HER profile, which the page links to.
 - Meta description updated to the letter. Checked at 1440 and 390.
 - Unpushed: 829e409 (concierge workspace ID) and this commit.
+
+## 2026-10-01 22:50Z: FOUND HER form, optional box to be considered for product features (Cowork FOUNDER team)
+
+Shelby: "a box to check if they would also like to be considered to be featured on upcoming products with a bit of their story and their photo. I would reach out to them if chosen but they need to check the box to be considered."
+- **StoryForm.tsx.** A third checkbox, `permission_product`. It is optional and unticked by default. Label: "I'd also like to be considered for a feature on upcoming FOUNDER products, with part of my story and my photo. I understand you'll reach out only if I'm chosen, and nothing goes on a product until I've seen exactly how it will be used and given my written permission."
+  - The legend is now "Your permissions".
+  - The footnote says features are chosen by hand, and only from women who ticked it.
+  - The thank-you screen adds one sentence about it.
+  - The analytics event gains `product_feature`.
+- **Wording is tied to Shelby's existing promise.** Her confirmation email (storyEmail.ts, verbatim, untouched) already says product use needs separate contact with the exact proposed use, plus additional written permission. The box is a request to be considered, never a licence.
+- **api/story.** It reads `permission_product`. The owner email adds a "Consider for products" line: YES (with the reminder to get written permission first) or no.
+- **Airtable.** A new checkbox column was created in base "FOUNDER — Found Her" › Submissions: "Consider for products" (fldmvn3i8M0Eytpwv), with a description.
+  - airtable.ts writes it.
+  - If a base lacks the column (UNKNOWN_FIELD_NAME), it retries the row without it, so a submission is never lost. Tested with a stubbed fetch: 422, then a retry without the field, then recorded.
+- **Kept true elsewhere.** STORY_STANDARD is now "Separate permissions" and names the third, optional one. The privacy policy's story paragraph adds the product-feature sentence (Shelby to confirm the policy wording). The concierge knowledge base is updated too.
+- **NOT changed:** Shelby's confirmation email copy.
+- Checked at 1440 and 390.

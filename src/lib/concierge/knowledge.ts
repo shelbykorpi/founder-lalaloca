@@ -206,7 +206,7 @@ const BRAND_FACTS: Fact[] = [
     text: [
       `FOUND HER is the brand's stories platform: women writing about what they started, survived, changed, finished, and finally gave themselves credit for. "${BRAND.campaign}"`,
       `Submissions go through the form on the Found Her page, at /found-her#share. No purchase is ever required to be featured — that is a rule, not a promotion.`,
-      `Two separate permissions are asked for and neither is assumed: permission to reply, and permission to consider it for publication. Either can be withdrawn.`,
+      `Separate permissions are asked for and none is assumed: permission to reply, permission to consider it for publication, and an optional box to be considered for a feature on upcoming FOUNDER products with part of her story and her photo. Shelby reaches out only to women who are chosen, and nothing goes on a product without the exact use being shown to her and her written permission. Any permission can be withdrawn.`,
       `A person reads every submission. Profiles are edited by the FOUNDER team. The site must never claim final-text approval unless the contributor has actually approved it; publication and approval state are kept distinct in the profile record. Nothing is invented.`,
     ].join("\n"),
   },

@@ -153,15 +153,24 @@ export function ProfileStory({ profile }: { profile: FoundHerProfile }) {
           strip for the shop. Same room as the close, set off by a hairline.
           Each mark carries its own display height (--logo-h) so a heavy
           block wordmark and a fine serif one sit at the same weight; the
-          logos share a baseline-height row so captions line up. */}
+          logo row is as tall as the tallest mark (--row-h) wherever they sit
+          side by side, so captions line up; stacked on phones, each mark
+          keeps its own height. */}
       {profile.press && profile.press.length > 0 && (
         <section aria-label={`${profile.name} in the press`} className="room-dark">
           <div className="shell-narrow border-t border-cream/15 py-12 text-center md:py-16">
             <p className="eyebrow text-champagne">{profile.name}</p>
-            <ul className="mt-8 flex flex-wrap items-start justify-center gap-x-16 gap-y-10">
+            <ul
+              style={
+                {
+                  "--row-h": `${Math.max(...profile.press.map((p) => p.logo.rem))}rem`,
+                } as React.CSSProperties
+              }
+              className="mt-8 flex flex-wrap items-start justify-center gap-x-16 gap-y-10"
+            >
               {profile.press.map((item) => (
                 <li key={item.publication} className="flex flex-col items-center">
-                  <div className="flex h-[2.9rem] items-center md:h-14">
+                  <div className="flex items-center sm:h-[calc(var(--row-h)*0.82)] md:h-[var(--row-h)]">
                     <Image
                       src={item.logo.src}
                       alt={item.publication}

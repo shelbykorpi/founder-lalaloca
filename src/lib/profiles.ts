@@ -92,9 +92,11 @@ export const profiles: FoundHerProfile[] = [
     standfirst:
       "Before the titles, the patents and the polished photographs, there was a girl who had seizures as a child, was bullied for how she looked, learned what it felt like to be underestimated from both sides, and kept choosing to get back up.",
     approvedOn: "2026-10-01",
-    /* Shelby asked for these on 1 Oct 2026 and supplied both logos herself.
-       The Maxim cover is already in her own answers below; FHM Sweden is
-       her word in chat ("also featured in FHM Sweden"). */
+    /* Shelby asked for these on 1 Oct 2026 and supplied every logo herself.
+       The Maxim cover is already in her own answers below; FHM Sweden and
+       the Plastic Cup Boyz show are her words in chat ("also featured in
+       FHM Sweden"; "I was on the show with Kevin Hart and Plastic Cup
+       Boyz", shortened at her request to match the others). */
     press: [
       {
         publication: "Maxim Australia",
@@ -105,6 +107,11 @@ export const profiles: FoundHerProfile[] = [
         publication: "FHM Sweden",
         caption: "Featured in FHM Sweden",
         logo: { src: "/brand/press/fhm-sweden-cream.png", width: 547, height: 155, rem: 2.5 },
+      },
+      {
+        publication: "Kevin Hart Presents: Plastic Cup Boyz",
+        caption: "On the show with Kevin Hart",
+        logo: { src: "/brand/press/plastic-cup-boyz-cream.png", width: 344, height: 212, rem: 5.75 },
       },
     ],
     answers: [

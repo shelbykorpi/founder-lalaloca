@@ -2021,3 +2021,10 @@ Shelby: "Also featured in FHM Sweden", with the FHM logo attached.
 - **Band layout.** Her name now appears once as a champagne eyebrow, with per-logo captions underneath ("On the cover of Maxim Australia" / "Featured in FHM Sweden").
   - Each press logo carries `logo.rem`, its display height (phones 82%): Maxim 3.5, FHM 2.5. This keeps the heavy block FHM from shouting over the fine Maxim serif.
   - Side by side at 1440, stacked at 390; both checked.
+
+## 2026-10-01 22:30Z: Kevin Hart Presents: Plastic Cup Boyz added to Shelby's profile (Cowork FOUNDER team)
+
+Shelby: "On air with… or revised to say I was on the show with Kevin Hart and Plastic Cup Boyz… shorten it like the modeling ones". She supplied the logo.
+- **Caption.** "On the show with Kevin Hart", short like the others. The logo itself reads "Kevin Hart Presents Plastic Cup Boyz", so the show is named. "On air" was not used, because the team can't confirm the broadcast detail. The alt text is "Kevin Hart Presents: Plastic Cup Boyz".
+- **Logo.** Her file is small (344×212) and multi-colour. It became one-colour cream: the red/dark areas turn cream and the white fills cut out, with a hard threshold so the grey shading on the "P" doesn't smudge. Saved as `public/brand/press/plastic-cup-boyz-cream.png`. Shown at rem 5.75, because "Kevin Hart" is unreadable any smaller.
+- **Band.** The row height is now the tallest mark (`--row-h`) when the logos sit side by side; stacked on phones, each keeps its own height so there are no dead gaps. Checked at 1440 (three across) and 390 (stacked).

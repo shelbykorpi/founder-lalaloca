@@ -30,13 +30,27 @@ export function ProfileStory({ profile }: { profile: FoundHerProfile }) {
                    cropped; photographs fall back to the slot's 3:2. */
                 style={{ aspectRatio: profile.portrait.aspect ?? "3 / 2" }}
               >
+                {profile.portrait.fit === "contain" && (
+                  <>
+                    <Image
+                      src={profile.portrait.src}
+                      alt=""
+                      fill
+                      priority
+                      sizes="(max-width: 1024px) 100vw, 30rem"
+                      className="scale-110 object-cover blur-2xl opacity-35"
+                      aria-hidden
+                    />
+                    <span aria-hidden className="absolute inset-0 bg-night-deep/45" />
+                  </>
+                )}
                 <Image
                   src={profile.portrait.src}
                   alt={profile.portrait.alt}
                   fill
                   priority
                   sizes="(max-width: 1024px) 100vw, 30rem"
-                  className="object-cover"
+                  className={profile.portrait.fit === "contain" ? "object-contain" : "object-cover"}
                   style={{ objectPosition: profile.portrait.position ?? "center" }}
                 />
               </div>

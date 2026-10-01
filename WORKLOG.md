@@ -2213,3 +2213,22 @@ Shelby: "build a new concierge service that's hooked up to my Anthropic Sonnet."
 - **Still off on the site.** `CONCIERGE_ENABLED = false` stays until production is confirmed.
   - Next: Shelby adds `ANTHROPIC_API_KEY` in Vercel (Production) and pushes.
   - The team then tests POST /api/concierge live (the route works with the UI off), flips the switch, and checks the bell end to end.
+
+## 2026-10-02 04:20Z: The serums' Etsy reviews on the site (Cowork FOUNDER team)
+
+Shelby: "add my Etsy reviews of the serums on the FOUNDER website."
+- **Source.** Read in Etsy Shop Manager while Shelby was signed in; the shop is suspended, so public review pages 404. Orders matching "serum": 4.
+  - Nov 2025: Shelby's own test order.
+  - Nov 2025: a buyer who left no review.
+  - Dec 2025: Elli, Thirst Trap, reviewed 5★ on 23 Jan 2026.
+  - Mar 2026: Elli again, the Serum Set, full price, reviewed 5★ on 28 Mar 2026.
+  - So these two are EVERY serum review, not a selection. Transcribed verbatim; author is her public Etsy display name. No buyer PII is stored.
+- **NOT used:** the shop's 4.9★ from 5,722 reviews and its 42,933 sales. Those come almost entirely from the V3RY mask business the shop sold before it was renamed, and attaching them to the serums would mislead.
+- **lib/reviews.ts.** `Review` gains `source` ("site" | "etsy") and `item`. REVIEWS is "thirst-trap": [Elli, 23 Jan] and "all-three": [Elli, 28 Mar], with provenance in the comment. New helpers: `reviewsForSerumPage(slug)` (own reviews plus the Trio's; no duplicate on all-three), `allSerumReviews()`, and `getSchemaReviews(slug)`, which uses source "site" only.
+- **No rating markup.** Google's review-snippet rules forbid marking up reviews collected on another site, so productSchema receives only site reviews (none yet). Verified: no aggregateRating on /products/* or /shop.
+- **Display.** New `components/shop/EtsyReviews.tsx`, a "From our Etsy shop" paper section with stars, the item and month, a verbatim quote, and "Elli, Etsy buyer".
+  - Serum pages: after "The details". Thirst Trap shows both reviews; C Me Glow and Bounce Back show the Trio review. The note there reads "Every review there that includes this serum".
+  - /shop: both reviews, below the House Trio. Its note reads "These are every review the serums received there".
+  - Checked at 1440 and 390.
+- **Copy kept true elsewhere.** llms.txt, the concierge knowledge base (brand:claims) and the system prompt now say: no star rating; two verbatim Etsy reviews from one customer; never call them typical.
+- **Claims note.** Review one says "visibly tighter"; that is appearance language, a customer's own words, so it was kept. Nothing claims a medical result.

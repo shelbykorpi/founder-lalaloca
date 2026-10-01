@@ -13,6 +13,8 @@ import { formatPrice, products, SET } from "@/lib/products";
 import { JsonLd, breadcrumbSchema, collectionSchema, setSchema } from "@/lib/seo";
 import { fetchVariantAvailability } from "@/lib/catalog";
 import { VARIANT_ID } from "@/lib/shopifyLinks";
+import { allSerumReviews } from "@/lib/reviews";
+import { EtsyReviews } from "@/components/shop/EtsyReviews";
 import { EXPRESS_OFFERED } from "@/lib/nextMove";
 
 export const metadata: Metadata = {
@@ -202,6 +204,9 @@ export default async function ShopPage() {
           </div>
         </div>
       </section>
+
+      {/* Every serum review, carried over from Etsy (lib/reviews.ts). */}
+      <EtsyReviews reviews={allSerumReviews()} tone="marble" />
 
       {/* ---------------- Comparison ---------------- */}
       <EditorialRoomSection surface="paper" tight aria-labelledby="compare-heading">

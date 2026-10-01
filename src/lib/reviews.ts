@@ -43,6 +43,12 @@ export type Review = {
   published: string;
   /** True only where the platform can confirm a matching order. */
   verified: boolean;
+  /** Where it was left. Only "site" reviews may go into schema markup: Google's
+      review-snippet rules forbid marking up ratings collected on another site,
+      so Etsy reviews are shown on the page and never emitted as structured data. */
+  source: "site" | "etsy";
+  /** What she bought, as it is named on this site, e.g. "Thirst Trap". */
+  item: string;
 };
 
 export type ProductReviews = {
@@ -55,11 +61,77 @@ export type ProductReviews = {
 /**
  * Reviews per product slug.
  *
- * Deliberately empty. Do not add entries here by hand — a review written by
- * anyone other than a customer is exactly the thing this file exists to
- * prevent. Connect a platform instead.
+ * Do not add entries here by hand unless they are a real customer's review,
+ * copied word for word from where she left it, with its source. A review
+ * written by anyone other than a customer is exactly the thing this file exists
+ * to prevent. For new reviews, connect a platform instead.
+ *
+ * ── THE ETSY REVIEWS (added 2 Oct 2026, at Shelby's request) ────────────────
+ *
+ * LALALOCA sold on Etsy before this site. The serums sold there four times:
+ * one was Shelby's own test order, one buyer left no review, and one customer
+ * bought twice and reviewed both times. These two are therefore EVERY serum
+ * review the shop ever received, not a selection. Transcribed verbatim from
+ * Etsy Shop Manager → Orders (orders 3927946648 and 4002158875), stars and
+ * dates as shown. Author is her public Etsy display name.
+ *
+ * The shop's overall 4.9★ from 5,722 reviews is NOT used anywhere: almost all
+ * of it is the V3RY face-mask business the shop sold before it was renamed.
+ * Attaching that number to serums would be misleading.
+ *
+ * Review one was on an order placed with a public end-of-year sale code (50%
+ * off, open to every shopper); review two was a full-price repeat order. No
+ * incentive was offered for either review.
  */
-const REVIEWS: Partial<Record<string, Review[]>> = {};
+const REVIEWS: Partial<Record<string, Review[]>> = {
+  "thirst-trap": [
+    {
+      id: "etsy-3927946648",
+      rating: 5,
+      author: "Elli",
+      body: "I have a very unusual type of skin, that is a combination of dry and oily. I have tried moisturizer after moisturizer, and had various side effects with virtually no benefits from all of them. After using this product, my skin is smooth, shiny, less puffy, and visibly tighter. I have never seen anything like it. Planning on ordering the trio set when I finish this.",
+      published: "2026-01-23",
+      verified: true,
+      source: "etsy",
+      item: "Thirst Trap",
+    },
+  ],
+  "all-three": [
+    {
+      id: "etsy-4002158875",
+      rating: 5,
+      author: "Elli",
+      body: "Finally, a facial product that works magic and doesn't have any adverse effects. I am in love with this set! Fantastic product!",
+      published: "2026-03-28",
+      verified: true,
+      source: "etsy",
+      item: "The House Trio",
+    },
+  ],
+};
+
+/** Every review a serum page should show: its own, then the Trio's (which contains it). */
+export function reviewsForSerumPage(slug: string): Review[] {
+  const own = REVIEWS[slug] ?? [];
+  const trio = slug === "all-three" ? [] : (REVIEWS["all-three"] ?? []);
+  return [...own, ...trio];
+}
+
+/** Every serum review, oldest first: what the /shop page shows. */
+export function allSerumReviews(): Review[] {
+  return Object.values(REVIEWS)
+    .flat()
+    .filter((r): r is Review => !!r)
+    .sort((a, b) => a.published.localeCompare(b.published));
+}
+
+/** Only reviews collected on this site may be marked up (see `source`). */
+export function getSchemaReviews(slug: string): ProductReviews | null {
+  const items = (REVIEWS[slug] ?? []).filter((r) => r.source === "site");
+  if (items.length === 0) return null;
+  const total = items.reduce((sum, review) => sum + review.rating, 0);
+  return { count: items.length, average: Math.round((total / items.length) * 10) / 10, items };
+}
 
 export function getReviews(slug: string): ProductReviews | null {
   const items = REVIEWS[slug];

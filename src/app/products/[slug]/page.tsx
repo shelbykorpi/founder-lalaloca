@@ -7,7 +7,8 @@ import { AddToBagButton } from "@/components/bag/AddToBagButton";
 import { BRAND } from "@/lib/brand";
 import { JsonLd, breadcrumbSchema, productSchema } from "@/lib/seo";
 import { formatPrice, getProduct, otherProducts, products, SET } from "@/lib/products";
-import { getReviews } from "@/lib/reviews";
+import { getSchemaReviews, reviewsForSerumPage } from "@/lib/reviews";
+import { EtsyReviews } from "@/components/shop/EtsyReviews";
 import { fetchCatalogProduct } from "@/lib/catalog";
 import { CatalogProductPage } from "@/components/shop/CatalogProductPage";
 import { fetchVariantAvailability } from "@/lib/catalog";
@@ -62,7 +63,9 @@ export default async function ProductPage({ params }: PageProps<"/products/[slug
   /* Null until a review platform is connected. Everything downstream — the
      section below and the rating in the schema — is derived from this, so
      there is no path by which the page can show a rating nobody left. */
-  const reviews = getReviews(slug);
+  const reviews = getSchemaReviews(slug);
+  /* Shown on the page, never marked up: the Etsy reviews (lib/reviews.ts). */
+  const shownReviews = reviewsForSerumPage(slug);
   const variantId = VARIANT_ID[product.slug];
   const availability = await fetchVariantAvailability([variantId]);
   const soldOut = availability?.[variantId] === false;
@@ -248,6 +251,8 @@ export default async function ProductPage({ params }: PageProps<"/products/[slug
           </div>
         </div>
       </section>
+
+      <EtsyReviews reviews={shownReviews} scope="product" />
 
       {/* ---------------- Photography ----------------
           Looking, not reading — stays in the room. The placeholder tile is

@@ -197,7 +197,7 @@ const BRAND_FACTS: Fact[] = [
     text: [
       `These are cosmetic products. They act on how skin LOOKS and FEELS — hydration, texture, light. They do not treat, diagnose, cure or prevent any disease, and no clinical results are claimed anywhere on the site.`,
       `Every product page carries the line: cosmetic benefits only, and skin varies.`,
-      `The brand does not publish reviews or star ratings it did not receive. There are currently no customer reviews. Do not invent one, and do not imply popularity.`,
+      `The brand does not publish reviews or star ratings it did not receive. There is no star rating. The only customer reviews are two from the former Etsy shop, shown word for word on the serum pages: both 5 stars, from one customer (Thirst Trap, January 2026; the House Trio, March 2026). Quote nothing beyond what is on the page, never call them typical, and do not imply popularity.`,
     ].join("\n"),
   },
   {

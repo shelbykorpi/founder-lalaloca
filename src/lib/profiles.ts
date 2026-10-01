@@ -43,7 +43,13 @@ export type FoundHerProfile = {
   /** Sits under the name at the top of her page */
   standfirst: string;
   answers: { question: string; body: string[] }[];
+  /** The house line that closes her page. Every profile closes on
+      "FOUNDER. FOUND HER." (Shelby, 2 Oct 2026) unless this overrides it. */
   closing?: string;
+  /** The colour of that closing band, so the wall doesn't repeat itself
+      from page to page: "hall" (night, cream type), "rose" (Desert Rose,
+      night type) or "green" (Founder Green, cream type). Defaults to hall. */
+  closingTone?: "hall" | "rose" | "green";
   /** Publications she has appeared in, shown as a quiet band at the foot of
       her page. Only what she has told the house herself, with the
       publication's own logo as she supplied it. Never a "seen in" list for
@@ -255,9 +261,11 @@ export const profiles: FoundHerProfile[] = [
       },
     ],
     closing: "FOUNDER. FOUND HER.",
+    closingTone: "hall",
   },
   {
     slug: "julie-schoener",
+    closingTone: "rose",
     name: "Julie Schoener",
     role: "Building Stay Delusional",
     location: "Newport Beach",
@@ -320,6 +328,7 @@ export const profiles: FoundHerProfile[] = [
   },
   {
     slug: "aly-v",
+    closingTone: "green",
     name: "Aly V",
     role: "Building MakeupGemz",
     location: "Pensacola, Florida",

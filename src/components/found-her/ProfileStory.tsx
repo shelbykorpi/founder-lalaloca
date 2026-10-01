@@ -3,6 +3,16 @@ import Link from "next/link";
 import { BRAND } from "@/lib/brand";
 import { isApproved, type FoundHerProfile } from "@/lib/profiles";
 
+/** The line every profile closes on, unless the profile sets its own. */
+const HOUSE_CLOSING = "FOUNDER. FOUND HER.";
+
+/** Closing-band colours. Rose is a light ground, so its type is night ink. */
+const CLOSING_TONE = {
+  hall: "room-hall",
+  rose: "bg-rose text-night",
+  green: "bg-founder-green text-cream",
+} as const;
+
 /** The published-profile template: her portrait, then her answers, in her words. */
 export function ProfileStory({ profile }: { profile: FoundHerProfile }) {
   return (
@@ -162,17 +172,16 @@ export function ProfileStory({ profile }: { profile: FoundHerProfile }) {
       )}
 
       {/* The pull quote is a section break, not reading — its own room,
-          one shade deeper than the masthead's, so it reads as a pause
-          between the interview and what comes after it. */}
-      {profile.closing && (
-        <section className="room-hall py-16 md:py-20">
-          <div className="shell text-center">
-            <p className="text-balance font-serif text-[clamp(2rem,5vw,3rem)] tracking-[0.06em]">
-              {profile.closing}
-            </p>
-          </div>
-        </section>
-      )}
+          so it reads as a pause between the interview and what comes after
+          it. Every profile closes on it (Shelby, 2 Oct 2026), and each page
+          gets its own colour from `closingTone` so the wall varies. */}
+      <section className={`py-16 md:py-20 ${CLOSING_TONE[profile.closingTone ?? "hall"]}`}>
+        <div className="shell text-center">
+          <p className="text-balance font-serif text-[clamp(2rem,5vw,3rem)] tracking-[0.06em]">
+            {profile.closing ?? HOUSE_CLOSING}
+          </p>
+        </div>
+      </section>
 
       {/* The close is two calls to action, not reading, so it leaves paper
           and goes back to a dark room — .btn-dark/.btn-outline are

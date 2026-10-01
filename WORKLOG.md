@@ -2133,3 +2133,15 @@ Shelby: "change the green background to desert pink" (the section with the FOUND
   - caption: cream/60 → charcoal.
 - **Button.** The house hover is Desert Rose, which would disappear on this ground. The button is now Founder Green with cream text, and its hover deepens to Desert Rose in shadow (`--color-rose-deep` #B87978, night text). It stays in the pink family and stays visible.
 - Only this section changed; the green journal section above is untouched. The file already carries the journal fix (5ca108c) and the frame swap (287413c). Checked at 1440 and 390.
+
+## 2026-10-02 01:50Z: "FOUNDER. FOUND HER." closes every profile, in a different colour each (Cowork FOUNDER team)
+
+Shelby: "the 'Founder. Found Her' section should be on each page. we can mix up the colors" (FOUND HER profiles).
+- `ProfileStory.tsx`: the closing band is no longer conditional. It shows `profile.closing ?? "FOUNDER. FOUND HER."` on every profile.
+- New optional `closingTone` on `FoundHerProfile`:
+  - "hall": room-hall, night with cream type (the default);
+  - "rose": bg-rose with night type;
+  - "green": bg-founder-green with cream type.
+- Set: Shelby hall (unchanged look), Julie rose, Aly green. Future profiles default to hall until given a tone.
+- The closing is the house line, not attributed to the woman, so this doesn't alter anyone's approved answers.
+- Checked all three profiles at 1440 and 390; each shows the line exactly once.

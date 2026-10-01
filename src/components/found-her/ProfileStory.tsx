@@ -147,6 +147,33 @@ export function ProfileStory({ profile }: { profile: FoundHerProfile }) {
           </div>
         </div>
       </section>
+
+      {/* Her press, last and quiet: one cream mark per publication, captioned
+          in her name so it reads as her credential rather than a "seen in"
+          strip for the shop. Same room as the close, set off by a hairline. */}
+      {profile.press && profile.press.length > 0 && (
+        <section aria-label={`${profile.name} in the press`} className="room-dark">
+          <div className="shell-narrow border-t border-cream/15 py-12 md:py-16">
+            <ul className="flex flex-wrap items-center justify-center gap-x-16 gap-y-10">
+              {profile.press.map((item) => (
+                <li key={item.publication} className="flex flex-col items-center text-center">
+                  <Image
+                    src={item.logo.src}
+                    alt={item.publication}
+                    width={item.logo.width}
+                    height={item.logo.height}
+                    sizes="11rem"
+                    className="h-auto w-36 opacity-90 md:w-44"
+                  />
+                  <p className="mt-4 max-w-[18rem] text-balance text-[0.75rem] uppercase tracking-[0.16em] text-cream/75 sm:max-w-none">
+                    {profile.name} · {item.caption}
+                  </p>
+                </li>
+              ))}
+            </ul>
+          </div>
+        </section>
+      )}
     </>
   );
 }

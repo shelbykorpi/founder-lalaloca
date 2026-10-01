@@ -2004,3 +2004,11 @@ Shelby chose "Set it up for me", was already signed in to Chrome, chose "New FOU
   - Connect the same property in Shopify (Google & YouTube app; Shelby approves Google's OAuth screen), so purchases arrive.
   - Add the domains in GA Admin › Data streams › Configure tag settings › Configure your domains, including checkout.founderbeauty.co once the DNS is live.
   - A UTM convention for Instagram and email links.
+
+## 2026-10-01 21:45Z: Maxim Australia mark on Shelby's FOUND HER profile (Cowork FOUNDER team)
+
+Shelby asked for the Maxim logo at the bottom of her FOUND HER page ("since I was on it"). She chose her own profile over the main /found-her page, and the real logo over words.
+- **Logo.** She supplied it. It's MAXIM AUSTRALIA, so the caption says Maxim Australia. The file was cropped to the wordmark (her image's small "MAXIM MAGAZINE" line was dropped) and recoloured to cream #F7EFE8 on transparent, giving `public/brand/press/maxim-australia-cream.png` (579×191). The wordmark was not redrawn or altered.
+- **Data.** New optional `press[]` on `FoundHerProfile` (publication, caption, logo). Only Shelby has one.
+- **Page.** `ProfileStory.tsx` adds a last band in room-dark under a hairline, after the two calls to action and before the footer. The logo is w-36/md:w-44 at 90% opacity, captioned "SHELBY KORPI · ON THE COVER OF MAXIM AUSTRALIA" (12px, cream/75, balanced wrap). Alt text is "Maxim Australia". Checked at 1440 and 390.
+- **Open.** Our Story and her profile text say "the cover of Maxim", which is her approved wording. Whether to add "Australia" there is her call; the team has not changed it.

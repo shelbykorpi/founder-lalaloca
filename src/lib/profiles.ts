@@ -44,6 +44,15 @@ export type FoundHerProfile = {
   standfirst: string;
   answers: { question: string; body: string[] }[];
   closing?: string;
+  /** Publications she has appeared in, shown as a quiet band at the foot of
+      her page. Only what she has told the house herself, with the
+      publication's own logo as she supplied it. Never a "seen in" list for
+      FOUNDER the brand: this is her credential, not the product's. */
+  press?: {
+    publication: string;
+    caption: string;
+    logo: { src: string; width: number; height: number };
+  }[];
   /** The date she signed off on this text, or "PENDING" until she has.
       While it is "PENDING", her page drops the "published after she read
       and approved the final text" line — the site never claims an
@@ -80,6 +89,15 @@ export const profiles: FoundHerProfile[] = [
     standfirst:
       "Before the titles, the patents and the polished photographs, there was a girl who had seizures as a child, was bullied for how she looked, learned what it felt like to be underestimated from both sides, and kept choosing to get back up.",
     approvedOn: "2026-10-01",
+    /* Shelby asked for this on 1 Oct 2026 and supplied the Maxim Australia
+       logo herself; the cover is already in her own answers below. */
+    press: [
+      {
+        publication: "Maxim Australia",
+        caption: "On the cover of Maxim Australia",
+        logo: { src: "/brand/press/maxim-australia-cream.png", width: 579, height: 191 },
+      },
+    ],
     answers: [
       {
         question: "What are you building?",

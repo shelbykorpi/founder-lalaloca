@@ -111,6 +111,19 @@ function anthropicKey(): string | null {
   return env.ANTHROPIC_API_KEY ?? null;
 }
 
+/**
+ * Keys that aren't scoped to a workspace must name one on every request, or
+ * Anthropic answers 400 "This API key is not scoped to a workspace, so this
+ * request must include the anthropic-workspace-id header" (seen live, 2 Oct
+ * 2026). Shelby kept her key, so the workspace id lives in
+ * ANTHROPIC_WORKSPACE_ID (not a secret). Unset, no header is sent, which is
+ * right for a workspace-scoped key.
+ */
+function workspaceHeader(): Record<string, string> {
+  const id = env.ANTHROPIC_WORKSPACE_ID?.trim();
+  return id ? { "anthropic-workspace-id": id } : {};
+}
+
 /** Pinned: the version header is required, and silence here means breakage later. */
 const ANTHROPIC_VERSION = "2023-06-01";
 
@@ -170,6 +183,7 @@ async function callAnthropic(key: string, body: Record<string, unknown>): Promis
     headers: {
       "x-api-key": key,
       "anthropic-version": ANTHROPIC_VERSION,
+      ...workspaceHeader(),
       "content-type": "application/json",
     },
     body: JSON.stringify(body),

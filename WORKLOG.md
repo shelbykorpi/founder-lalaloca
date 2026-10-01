@@ -2232,3 +2232,11 @@ Shelby: "add my Etsy reviews of the serums on the FOUNDER website."
   - Checked at 1440 and 390.
 - **Copy kept true elsewhere.** llms.txt, the concierge knowledge base (brand:claims) and the system prompt now say: no star rating; two verbatim Etsy reviews from one customer; never call them typical.
 - **Claims note.** Review one says "visibly tighter"; that is appearance language, a customer's own words, so it was kept. Nothing claims a medical result.
+
+## 2026-10-02 04:45Z: Concierge sends the Anthropic workspace ID (Cowork FOUNDER team)
+
+The live log after the key went in: Anthropic 400, "This API key is not scoped to a workspace, so this request must include the anthropic-workspace-id header". Shelby chose to keep her key (option 2).
+- `model.ts`: new `workspaceHeader()` adds `anthropic-workspace-id: $ANTHROPIC_WORKSPACE_ID` to the direct-Anthropic request when that variable is set; nothing is added when it's unset. Tested against a stand-in Anthropic server, and the header arrived.
+- Vercel (with Shelby's OK, in Chrome): added `ANTHROPIC_WORKSPACE_ID` = `wrkspc_01FeWj2mrb8PaGUbNAPBXBcb` (Anthropic console → Workspaces → Default; not a secret), type Config, Production.
+- Next: Shelby pushes, which deploys with the variable. The team then tests POST /api/concierge live and, if Sonnet answers correctly, sets CONCIERGE_ENABLED = true.
+- The unused `Concierage` variable in Vercel is still there; Shelby can delete it.

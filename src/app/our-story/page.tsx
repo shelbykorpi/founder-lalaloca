@@ -144,8 +144,8 @@ export default function OurStoryPage() {
                   a life after loss, or a version of herself she had to fight to find again.
                 </p>
                 <p>
-                  Sometimes that is a company. Sometimes it is {BUILDING.slice(0, -1).join(", ")},
-                  or {BUILDING[BUILDING.length - 1]}.
+                  That is what the word means to me. Starting something. Taking responsibility
+                  for it. Staying with it long enough for it to become real.
                 </p>
                 <p>
                   FOUND HER came from the other side of that idea. There are moments when you

@@ -201,16 +201,33 @@ export async function ProductPlate({ product }: { product: NextMoveProduct }) {
           The split reverses: photograph left, cream panel right. Reading
           happens on paper; the room is for looking at. */}
       <section className="grid lg:grid-cols-[52%_48%]">
-        <div className="relative min-h-[60svh] lg:min-h-[46rem]">
-          <Image
-            src={product.scene.src}
-            alt={product.scene.alt}
-            fill
-            loading="lazy"
-            sizes="(max-width: 767px) 250vw, (max-width: 1023px) 100vw, 1672px"
-            className="object-cover object-[73%_center]"
-          />
-        </div>
+        {/* The styled counter shot where one exists (4:5, so the box takes
+            its shape and the bottle is never cropped), else the shelf scene.
+            Until 1 Oct this was always `scene` — the same frame as the hero
+            directly above it. */}
+        {product.setting ? (
+          <div className="relative aspect-[4/5] w-full">
+            <Image
+              src={product.setting.src}
+              alt={product.setting.alt}
+              fill
+              loading="lazy"
+              sizes="(max-width: 1023px) 100vw, 52vw"
+              className="object-cover"
+            />
+          </div>
+        ) : (
+          <div className="relative min-h-[60svh] lg:min-h-[46rem]">
+            <Image
+              src={product.scene.src}
+              alt={product.scene.alt}
+              fill
+              loading="lazy"
+              sizes="(max-width: 767px) 250vw, (max-width: 1023px) 100vw, 1672px"
+              className="object-cover object-[73%_center]"
+            />
+          </div>
+        )}
 
         <div className="flex flex-col justify-center bg-cream px-[var(--shell-pad)] py-16 text-charcoal lg:py-24">
           <Reveal className="mx-auto w-full max-w-[34rem] lg:mx-0">

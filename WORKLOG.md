@@ -1744,3 +1744,16 @@ Poker Face, The Entrance, The Comeback."; salon lede on home and /shop →
 again."; concierge register + trio fact updated. Smooth Talker keeps The
 Closer. docs/COPY_AUDIT_ARCHETYPES.md carries an amendment note.
 Verified: tsc, eslint, build; /, /shop, /products/thirst-trap at 1440/390.
+
+## 2026-10-01 · Claude (Cowork) — styled counter shots from Drive
+
+Shelby: replace product images as necessary from her Drive folder. The PDP
+"What it is" split repeated the hero above it on four products; it now
+shows the 30 Sept daylight-vanity renders via a new optional `setting`
+field (4:5, uncropped). Labels read at full res first; Double Take carton
+(Vitamin E/C order) and Smooth Talker carton + stick (11 g → 12 g / 0.42
+oz) retouched to the approved artwork. Grid cards and heroes unchanged.
+Shelf-render alts (and the Hold the Room grid card) rewritten — they
+described women, taps and props not in the pictures. Rejected images and
+reasons: project doc claude/product-image-refresh-2026-10-01.md.
+Verified: tsc, eslint, build; four PDP splits at 1440/390.

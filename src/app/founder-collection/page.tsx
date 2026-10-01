@@ -99,7 +99,7 @@ export default async function FounderCollectionPage() {
                the packshot is the hover, matching the other cards. */
             image: {
               url: "/products/hold-the-room-hero.webp",
-              alt: "Hold the Room and its carton on a dark marble console, a woman in cream buttoning her jacket in the mirror, the boardroom lit beyond the open doors.",
+              alt: "Hold the Room — the white airless pump bottle beside its Desert Pink carton — standing on a black marble console against a dark green wall, reflected in the stone.",
             },
             hoverImage: {
               url: "/products/hold-the-room-pack.webp",

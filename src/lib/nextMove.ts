@@ -179,8 +179,19 @@ export type NextMoveProduct = {
    * renders supplied 25 Aug, which fix all four drifts flagged in the audit.
    */
   pack: { src: string; alt: string };
-  /** Architectural scene, revealed on hover. Same corrected packaging. */
+  /** The collection-grid card image (3:2). Same corrected packaging. */
   scene: { src: string; alt: string };
+  /**
+   * The styled counter shot for the detail page's "What it is" split — the
+   * product on a marble vanity in daylight. Added 1 Oct 2026 from the 30 Sept
+   * render set in Shelby's Drive, so the split stops repeating the hero.
+   * 4:5 portrait, 1122x1402. Every label was read at full resolution before
+   * import; two were retouched to match the approved artwork and nothing
+   * else: Double Take's carton had Vitamin E above Vitamin C (swapped back),
+   * and Smooth Talker's carton and stick printed 11 g (corrected to the
+   * pack's 12 g / 0.42 oz). Renders, not photographs — the plate says so.
+   */
+  setting?: { src: string; alt: string };
   /**
    * Said plainly rather than buried — the board's Truth Standard. Fragrance
    * on an eye product, and a mineral-looking formula that is not a sunscreen,
@@ -280,7 +291,11 @@ export const NEXT_MOVE: NextMoveProduct[] = [
     },
     scene: {
       src: "/products/opening-line-hero.webp",
-      alt: "The Opening Line bottle and striped carton on a marble vanity ledge, a dish of cleanser beside them, dark green doors open onto a lit dressing room beyond.",
+      alt: "The Opening Line bottle — a white airless pump with a Founder Green label, striped bands top and bottom — standing on a black marble console against a dark green wall, reflected in the stone.",
+    },
+    setting: {
+      src: "/products/opening-line-setting.webp",
+      alt: "The Opening Line bottle, beaded with water, on the white marble edge of a basin in morning light — brass taps, a gilt mirror, white flowers and a folded towel around it.",
     },
     plainly:
       "Fragranced — a white-flower aroma with jasmine and sandalwood. Certified COSMOS Organic by ECOCERT, dermatologically tested, vegan. Suitable for sensitive skin.",
@@ -348,7 +363,11 @@ export const NEXT_MOVE: NextMoveProduct[] = [
     },
     scene: {
       src: "/products/clean-break-hero.webp",
-      alt: "The Clean Break pump bottle and striped carton on a marble basin surround, water running from a brass tap, dark green panelling behind.",
+      alt: "The Clean Break bottle — a white pump bottle with a Founder Green label, striped bands top and bottom — standing on a black marble console against a dark green wall, reflected in the stone.",
+    },
+    setting: {
+      src: "/products/clean-break-setting.webp",
+      alt: "The Clean Break pump bottle, beaded with water, on a green marble counter beside folded white towels, a stone soap dish and a sprig of green leaves.",
     },
     plainly:
       "Fragranced — a fresh green-tea aroma. Certified COSMOS Natural by ECOCERT. For blemish-prone skin; not an acne treatment.",
@@ -469,7 +488,11 @@ export const NEXT_MOVE: NextMoveProduct[] = [
        product tells a customer the wrong thing before she ever clicks. */
     scene: {
       src: "/products/smooth-talker-hero.webp",
-      alt: "The Smooth Talker tone stick and its carton on a brass side table in the FOUNDER dressing room, a swatch of 25 MEDIUM on a stone dish, a woman blending it at her cheek in the mirror.",
+      alt: "The Smooth Talker tone stick in 25 MEDIUM beside its brass carton, standing on a black marble console against a dark green wall, reflected in the stone.",
+    },
+    setting: {
+      src: "/products/smooth-talker-setting.webp",
+      alt: "Smooth Talker in 25 MEDIUM, the stick uncapped beside its champagne carton on a marble dressing table — white flowers, make-up brushes, a gilt mirror and a pair of pearl earrings around it.",
     },
     plainly:
       "Fragranced, with four declared allergens. Contains cocoa butter. Certified COSMOS Natural by ECOCERT.",
@@ -560,7 +583,11 @@ export const NEXT_MOVE: NextMoveProduct[] = [
     },
     scene: {
       src: "/products/double-take-hero.webp",
-      alt: "The Double Take bottle and carton on a marble dressing table with a pearl applicator, a gilt mirror and bulb light behind.",
+      alt: "The Double Take airless bottle and its Desert Pink carton standing on a black marble console against a dark green wall, reflected in the stone.",
+    },
+    setting: {
+      src: "/products/double-take-setting.webp",
+      alt: "The Double Take airless pump beside its Desert Pink carton on a marble vanity in warm light, a gilt mirror, white flowers and a rolled white towel around them.",
     },
     plainly:
       "Fragranced — a rose-geranium scent, with five declared allergens. Worth knowing for an eye-area product. Certified COSMOS Natural by ECOCERT, 99% natural origin, vegan.",

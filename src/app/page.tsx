@@ -260,13 +260,13 @@ export default function HomePage() {
                 whole threshold without a way to a product; now the gold button
                 is the shop and the house is the hairline beside it. */}
             <div className="mt-9 flex flex-wrap items-center gap-x-8 gap-y-4">
-              <Link href="/shop" className="btn btn-primary w-full sm:w-auto">
-                Shop the serums
-              </Link>
-              {/* 1 Oct 2026 (team audit): both lines one tap from the hero. The
-                  house is still entered by scrolling and by the front doors. */}
-              <Link href="/founder-collection" className="btn btn-ghost-light w-full sm:w-auto">
+              <Link href="/founder-collection" className="btn btn-primary w-full sm:w-auto">
                 Shop the FOUNDER Collection
+              </Link>
+              {/* Both lines stay one tap from the threshold; the master-brand
+                  collection leads the launch and LALALOCA remains the second door. */}
+              <Link href="/shop" className="btn btn-ghost-light w-full sm:w-auto">
+                Shop the LALALOCA serums
               </Link>
             </div>
           </div>

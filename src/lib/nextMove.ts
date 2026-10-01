@@ -277,8 +277,8 @@ export const NEXT_MOVE: NextMoveProduct[] = [
     origin: "Made in the EU.",
     description:
       "A gentle daily cleanser for dry and delicate skin. The rich, oily texture turns to a silky milk on contact with water, dissolving make-up and impurities without stripping moisture from the skin.",
-    detailCta: "Reserve Opening Line",
-    reservationStatus: "Hold your place in the first run. No charge today — price and ship date come to you by email first.",
+    detailCta: "Shop Opening Line",
+    reservationStatus: "In stock. Ships within one business day. Free US shipping.",
     detailHero: {
       src: "/products/opening-line-hero.webp",
       alt: "The Opening Line bottle — a white airless pump with a Founder Green label, striped bands top and bottom — standing on a black marble console against a dark green wall, reflected in the stone.",
@@ -357,8 +357,8 @@ export const NEXT_MOVE: NextMoveProduct[] = [
     origin: "Made in the EU.",
     description:
       "A gentle daily face wash for blemish-prone skin. It washes away impurities and excess oil without harsh surfactants, leaving skin feeling fresh.",
-    detailCta: "Reserve Clean Break",
-    reservationStatus: "Hold your place in the first run. No charge today — price and ship date come to you by email first.",
+    detailCta: "Shop Clean Break",
+    reservationStatus: "In stock. Ships within one business day. Free US shipping.",
     detailHero: {
       src: "/products/clean-break-hero.webp",
       alt: "The Clean Break bottle — a white pump bottle with a Founder Green label, striped bands top and bottom — standing on a black marble console against a dark green wall, reflected in the stone.",
@@ -476,9 +476,9 @@ export const NEXT_MOVE: NextMoveProduct[] = [
     ],
     description:
       "A creamy tone-correcting stick that helps even the look of skin tone, is made with ceramides and blends easily with fingertips for a natural-looking finish.",
-    detailCta: "Reserve your shade",
+    detailCta: "Choose your shade",
     reservationStatus:
-      "Pick your shade and hold your place in the first run. No charge today — price and ship date come to you by email first.",
+      "Choose your shade. In stock variants ship within one business day with free US shipping.",
     /* Unused for this SKU: the detail page shows the SELECTED shade, so the
        hero comes from `shades[]`. Kept non-optional for the type, pointed at
        the default shade so nothing can render empty. */
@@ -572,8 +572,8 @@ export const NEXT_MOVE: NextMoveProduct[] = [
     origin: "Made in the EU.",
     description:
       "A hydrating peptide eye cream that helps fine lines look softened and the eye area look smoother. Comfortable under makeup.",
-    detailCta: "Reserve Double Take",
-    reservationStatus: "Hold your place in the first run. No charge today — price and ship date come to you by email first.",
+    detailCta: "Shop Double Take",
+    reservationStatus: "In stock. Ships within one business day. Free US shipping.",
     detailHero: {
       src: "/products/double-take-hero.webp",
       alt: "The Double Take airless bottle and its Desert Pink carton standing on a black marble console against a dark green wall, reflected in the stone.",

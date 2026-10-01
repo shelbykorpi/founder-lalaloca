@@ -109,8 +109,8 @@ export const FOOTER_NAV = [
   {
     heading: "Shop",
     links: [
-      { href: "/shop", label: "The LALALOCA Collection" },
       { href: "/founder-collection", label: "The FOUNDER Collection" },
+      { href: "/shop", label: "The LALALOCA Collection" },
       { href: "/shop#set-heading", label: "The House Trio · $98" },
       { href: "/products/thirst-trap", label: "Thirst Trap" },
       { href: "/products/c-me-glow", label: "C Me Glow" },

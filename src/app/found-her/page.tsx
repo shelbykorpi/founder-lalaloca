@@ -96,8 +96,8 @@ export default function FoundHerPage() {
                   className="absolute inset-0 bg-[linear-gradient(180deg,transparent_45%,rgba(6,17,14,0.28)_100%)]"
                 />
                 <div className="absolute bottom-5 left-5 right-5 flex items-center justify-between text-[0.625rem] uppercase tracking-[0.24em] text-cream/70 md:bottom-8 md:left-8 md:right-8">
-                  <span>FOUND HER / 001</span>
                   <span>FOUNDER Editorial</span>
+                  <span>In her own words</span>
                 </div>
               </div>
 

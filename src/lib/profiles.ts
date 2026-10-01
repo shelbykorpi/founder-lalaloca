@@ -19,6 +19,9 @@ export type FoundHerProfile = {
     src: string;
     alt: string;
     position?: string;
+    /** Use contain when the portrait composition should be preserved rather
+        than cropped into the slot. */
+    fit?: "cover" | "contain";
     /** CSS aspect-ratio, e.g. "3 / 4". Defaults to the slot's own shape.
         Set it for framed artwork, which must never be cropped. */
     aspect?: string;

@@ -1,7 +1,7 @@
 import { BRAND, SITE, INSTAGRAM } from "@/lib/brand";
 import { formatPrice, products, SET } from "@/lib/products";
 import { FOUNDER_COLLECTION } from "@/lib/founderCollection";
-import { NEXT_MOVE } from "@/lib/nextMove";
+import { COLLECTION_SHIPS, NEXT_MOVE } from "@/lib/nextMove";
 
 /**
  * /llms.txt — a plain-text brief for AI answer engines.
@@ -86,7 +86,9 @@ export function GET() {
     "",
     "- Free US shipping on every order, 3–5 business days. Express is $15, 1–2 days.",
     "- Checkout is handled by Shopify.",
-    "- Orders leave within one business day.",
+    COLLECTION_SHIPS
+      ? `- Serum orders leave within one business day. The FOUNDER Collection ships on ${COLLECTION_SHIPS.label}.`
+      : "- Orders leave within one business day.",
     "- Returns: unopened items within 14 days of delivery; return postage is paid",
     "  by the customer unless the order was wrong or damaged. Opened skincare",
     "  cannot be returned. Details: /policies/returns",

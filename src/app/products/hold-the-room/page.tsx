@@ -107,7 +107,7 @@ export default async function HoldTheRoomPage() {
               03 · {product.archetype}
             </p>
 
-            <h1 className="display-product mt-5 text-cream">{product.name}</h1>
+            <h1 className="display-product mt-5 normal-case tracking-[0.01em] text-cream">{product.name}</h1>
 
             <p className="mt-4 text-[0.75rem] uppercase tracking-[0.22em] text-cream/70">
               {product.category}
@@ -152,10 +152,10 @@ export default async function HoldTheRoomPage() {
               />
             )}
 
-            {/* Kept to one line so the line rail still lands on the first
-                screen. Nothing is lost: shipping and returns are one tap away
-                and both are restated in the bag before checkout. */}
-            <p className="mt-5 max-w-[26rem] text-[0.6875rem] leading-relaxed text-cream/55">
+            {/* Short on purpose: at 13px (raised from 11px for legibility, 1 Oct)
+                it may wrap to two lines on a phone. Shipping and returns are
+                one tap away and restated in the bag before checkout. */}
+            <p className="mt-5 max-w-[26rem] text-[0.8125rem] leading-relaxed text-cream/75">
               {soldOut ? "Sold out" : availabilityLine("in-stock")} · Free US shipping · {BRAND.legal.name} is the seller of record ·{" "}
               <Link className="underline underline-offset-2 hover:opacity-70" href="/policies/shipping">
                 Shipping

@@ -1,0 +1,371 @@
+{
+  "version": 1,
+  "updated": "2026-10-01T17:30:00Z",
+  "updatedBy": "Founder Chief (Claude · Cowork)",
+  "headline": "Audit done. Four decisions made today. The team is on Batch 0 and Batch 1. Your next answers are below, most important first.",
+  "auditPath": "docs/desk/executive-audit-2026-10-01.md",
+  "waitingOnYou": [
+    {
+      "id": "ga4",
+      "priority": "now",
+      "question": "Paste your Google Analytics 4 measurement ID (G-…).",
+      "why": "Analytics isn't live, so launch traffic and sales can't be traced to their source. The team installs it on the site and in Shopify, with cross-domain tracking.",
+      "answerFormat": "The G-ID, or 'make the property for me' (you'll need to sign in once).",
+      "askedOn": "2026-10-01"
+    },
+    {
+      "id": "checkout-dns",
+      "priority": "now",
+      "question": "Add one DNS record at GoDaddy for checkout.founderbeauty.co (the team gives you the exact record).",
+      "why": "Checkout now runs on founderbeauty.myshopify.com. You approved moving it to your own domain, and the DNS step needs your GoDaddy login.",
+      "answerFormat": "'Done', or 'walk me through it'.",
+      "askedOn": "2026-10-01"
+    },
+    {
+      "id": "stock-truth",
+      "priority": "now",
+      "question": "Is the House Trio pre-packed or made up from single serums? And is order #1001 (6 Aug, $39.99, shown unfulfilled) a test?",
+      "why": "Trio stock (149) isn't linked to the singles, so stock can be double-counted. An unfulfilled paid order is a customer waiting.",
+      "answerFormat": "'Pre-packed' or 'assembled'; '#1001 test, cancel it' or '#1001 real, ship it'.",
+      "askedOn": "2026-10-01"
+    },
+    {
+      "id": "mailing-address",
+      "priority": "now",
+      "question": "Which postal address can go in the footer of marketing emails? A PO box is fine.",
+      "why": "US law (CAN-SPAM) requires a physical address in marketing email. The welcome email is missing one.",
+      "answerFormat": "The address.",
+      "askedOn": "2026-10-01"
+    },
+    {
+      "id": "shopify-titles",
+      "priority": "next",
+      "question": "Approve the cleaned Shopify product titles and tags (the team will show you the list before anything changes).",
+      "why": "Listings like 'Plumping Glow Drops… Dry Skin Hydration' and Bounce Back's 'Face Neck Lifting', plus anti-wrinkle tags, are what Google and the Shop app show strangers.",
+      "answerFormat": "'Show me the list'.",
+      "askedOn": "2026-10-01"
+    },
+    {
+      "id": "dark-default",
+      "priority": "next",
+      "question": "Make the night ground the official canvas in Brand Board v2.15, or go back to Cream-first with dark anchors?",
+      "why": "The Board says Cream; the site has been dark since your 27 Aug direction. The team is working from two systems until one is chosen.",
+      "answerFormat": "'Night is official' or 'Cream-first'.",
+      "askedOn": "2026-10-01"
+    },
+    {
+      "id": "shop-structure",
+      "priority": "next",
+      "question": "One shop for both lines, labelled 'LALALOCA Serums' and 'The FOUNDER Collection' everywhere? And which line gets the main home button?",
+      "why": "'Shop' is titled for LALALOCA and shows 3 of 8 products. This reopens your 11 Sept naming revert now that two lines are live.",
+      "answerFormat": "'Yes, one shop', plus which line leads.",
+      "askedOn": "2026-10-01"
+    },
+    {
+      "id": "hero-product",
+      "priority": "next",
+      "question": "Is Hold the Room the 'where to begin' product?",
+      "why": "Eight products and no obvious first purchase. One anchor makes the first order easier.",
+      "answerFormat": "'Yes', or name another.",
+      "askedOn": "2026-10-01"
+    },
+    {
+      "id": "sets",
+      "priority": "next",
+      "question": "Which sets, at what prices? Proposed at full price: Serum + Hold the Room ($74), the full five-piece routine ($194).",
+      "why": "Sets raise order value without discounting. Holiday gifting is the next moment.",
+      "answerFormat": "Which sets and their prices.",
+      "askedOn": "2026-10-01"
+    },
+    {
+      "id": "retention",
+      "priority": "next",
+      "question": "Approve the welcome and after-purchase emails and a reviews app (no incentives). What does 'first through the door' actually give the Founding List?",
+      "why": "The list promises access but nothing backs it yet. Proposed: 48-hour early entry to each release or set by private link.",
+      "answerFormat": "'Draft them for me to read', plus your early-entry choice.",
+      "askedOn": "2026-10-01"
+    },
+    {
+      "id": "found-her-consent",
+      "priority": "next",
+      "question": "Approve a third optional consent (photography and casting) and a signed per-use agreement for FOUND HER women.",
+      "why": "This is how FOUND HER women can properly become the faces of FOUNDER. You set the terms: length, fee or gift, and whether any styling is ever allowed.",
+      "answerFormat": "'Draft it'.",
+      "askedOn": "2026-10-01"
+    },
+    {
+      "id": "aly-image",
+      "priority": "next",
+      "question": "Did Aly approve the composited portrait (her face, generated outfit and room) as well as her text? Is founder-collection-door.webp a photo of you or a restyle?",
+      "why": "Written records protect you and her. The charter promises no composite women.",
+      "answerFormat": "Two short answers.",
+      "askedOn": "2026-10-01"
+    },
+    {
+      "id": "revenue-line",
+      "priority": "next",
+      "question": "Keep 'just under one million dollars in its first year' (Our Story and your FOUND HER profile)?",
+      "why": "The Etsy export shows $724,850 in the first twelve months. Keep it if other channels close the gap (and keep the receipts). Otherwise: '$725K in its first twelve months; more than 35,000 orders over its life.'",
+      "answerFormat": "'Keep' or 'change'.",
+      "askedOn": "2026-10-01"
+    },
+    {
+      "id": "claims-evidence",
+      "priority": "later",
+      "question": "Send what you have: serum ingredient lists, the source for '8-layer', ECOCERT certificates plus written permission to use them under FOUNDER, the dermatological test report, Clean Break's pH.",
+      "why": "Ingredient and certification claims need paperwork on file.",
+      "answerFormat": "Files, or 'ask Selfnamed for me' (draft only).",
+      "askedOn": "2026-10-01"
+    },
+    {
+      "id": "home-cut",
+      "priority": "later",
+      "question": "Approve a shorter home page (about 8 phone screens instead of 15), and decide whether the door overlay shows on phones.",
+      "why": "Restraint deepens the mystery and gets her to the products sooner. The team will show you a preview first.",
+      "answerFormat": "'Show me the preview'.",
+      "askedOn": "2026-10-01"
+    },
+    {
+      "id": "shoot",
+      "priority": "later",
+      "question": "The first real shoot: budget, photographer, date, and you on camera for the threshold and direct-gaze frames.",
+      "why": "Real women make the house human. The team has the shot list ready.",
+      "answerFormat": "A rough budget and month.",
+      "askedOn": "2026-10-01"
+    },
+    {
+      "id": "terms-salon-referral",
+      "priority": "later",
+      "question": "Three smaller ones: align the Terms wording with the certification claims; keep only Salon events that have dates; approve invitation-only referral terms and founder-story PR when drafted.",
+      "why": "Each is a public commitment or legal text.",
+      "answerFormat": "Answer when ready.",
+      "askedOn": "2026-10-01"
+    }
+  ],
+  "decided": [
+    {
+      "id": "shipping",
+      "question": "When do the five FOUNDER Collection products ship?",
+      "answer": "October 12. The site, schema and Merchant feed now say 'Ships October 12' (one switch in the code), and Shopify carries the same badge; two Shopify descriptions are being corrected. Serums still ship in one business day. Orders that include Collection pieces are described as shipping on the 12th.",
+      "decidedOn": "2026-10-01"
+    },
+    {
+      "id": "images",
+      "question": "Replace AI-generated women with empty rooms and frames?",
+      "answer": "No. Keep all current images.",
+      "decidedOn": "2026-10-01"
+    },
+    {
+      "id": "checkout",
+      "question": "Checkout changes",
+      "answer": "All three: untick pre-selected marketing consent, brand the checkout, move it to checkout.founderbeauty.co.",
+      "decidedOn": "2026-10-01"
+    },
+    {
+      "id": "lead-team",
+      "question": "Who leads site changes?",
+      "answer": "The Cowork FOUNDER team. Other agents propose; changes go through this team's build, check and log routine.",
+      "decidedOn": "2026-10-01"
+    },
+    {
+      "id": "julie-aly",
+      "question": "Julie and Aly's FOUND HER pages",
+      "answer": "Recorded as approved on 30 Sept (in the site's profile data).",
+      "decidedOn": "2026-09-30"
+    }
+  ],
+  "batches": [
+    {
+      "id": "b0",
+      "title": "Batch 0 · Protect trust and start measuring",
+      "window": "This week",
+      "items": [
+        {
+          "title": "Say 'Ships October 12' everywhere for the FOUNDER Collection (site bar, product pages, bag, Google data, Shopify text)",
+          "owner": "product-merchandising → frontend-engineer",
+          "status": "done",
+          "note": "Site, schema and feed done; two Shopify descriptions in progress"
+        },
+        {
+          "title": "This team leads site changes; rule written into AGENTS.md",
+          "owner": "founder-chief",
+          "status": "done"
+        },
+        {
+          "title": "Untick pre-selected marketing consent in checkout",
+          "owner": "crm-retention-sales",
+          "status": "doing"
+        },
+        {
+          "title": "Brand the checkout (wordmark, house colours, square corners)",
+          "owner": "frontend-engineer",
+          "status": "doing"
+        },
+        {
+          "title": "Move checkout to checkout.founderbeauty.co",
+          "owner": "frontend-engineer",
+          "status": "blocked",
+          "note": "Needs your GoDaddy DNS step"
+        },
+        {
+          "title": "Google Analytics on the site and in Shopify, cross-domain, UTMs",
+          "owner": "growth-marketing + frontend-engineer",
+          "status": "blocked",
+          "note": "Needs your G-ID"
+        },
+        {
+          "title": "Trio stock linkage; order #1001",
+          "owner": "product-merchandising",
+          "status": "blocked",
+          "note": "Needs your answer"
+        },
+        {
+          "title": "Mailing address in marketing emails",
+          "owner": "crm-retention-sales",
+          "status": "blocked",
+          "note": "Needs your address"
+        },
+        {
+          "title": "Clean Shopify titles, tags and featured images",
+          "owner": "product-merchandising + claims-compliance",
+          "status": "blocked",
+          "note": "Needs your approval of the list"
+        }
+      ]
+    },
+    {
+      "id": "b1",
+      "title": "Batch 1 · Truth, findability, the commercial spine",
+      "window": "About a week · team-run",
+      "items": [
+        {
+          "title": "Feed and trio data read live stock; no hard-coded 'in stock'",
+          "owner": "frontend-engineer",
+          "status": "todo"
+        },
+        {
+          "title": "Remove the site-wide canonical trap; fix the last hard-coded analytics brand; FOUNDER brand entity in search data",
+          "owner": "frontend-engineer",
+          "status": "doing",
+          "note": "Analytics brand bug fixed (collection items were reported as LALALOCA); canonical and brand entity next"
+        },
+        {
+          "title": "One buy block on all 8 product pages; sticky add-to-bag on phones; readable trust line",
+          "owner": "ux-cro-director → frontend-engineer",
+          "status": "todo"
+        },
+        {
+          "title": "Bag suggests the next routine step; delivery and returns line; shade shown",
+          "owner": "product-merchandising → frontend-engineer",
+          "status": "todo"
+        },
+        {
+          "title": "Routine numbering with serums at 'Treat'; footer lists all 8; search on phones; order tracking on /account",
+          "owner": "product-merchandising + ux-cro-director",
+          "status": "doing",
+          "note": "Footer now lists all 8 products; the rest next"
+        },
+        {
+          "title": "'How to use' on every FOUNDER Collection page, transcribed from supplier listings",
+          "owner": "copy-brand-voice",
+          "status": "todo"
+        },
+        {
+          "title": "Copy fixes and claims softening (never strengthening)",
+          "owner": "copy-brand-voice + claims-compliance",
+          "status": "todo"
+        },
+        {
+          "title": "Title-case product headings; 12px text floor; image loading; accessibility scan; speed baseline",
+          "owner": "frontend-engineer",
+          "status": "doing",
+          "note": "Title-case headings and a readable 13px trust line done; accessibility scan and speed baseline next"
+        }
+      ]
+    },
+    {
+      "id": "b2",
+      "title": "Batch 2 · One house",
+      "window": "2–3 weeks · preview before production",
+      "items": [
+        {
+          "title": "Home cut to about 8 phone screens; 'Walk on' band on one or two pages; cream rooms on shopping pages",
+          "owner": "creative-director + ux-cro-director",
+          "status": "todo",
+          "note": "Waiting on 'home-cut'"
+        },
+        {
+          "title": "One house shop with both lines",
+          "owner": "ux-cro-director + copy-brand-voice",
+          "status": "todo",
+          "note": "Waiting on 'shop-structure'"
+        },
+        {
+          "title": "Serums staged in the same night-vanity world, with the 'FOUNDER presents' eyebrow",
+          "owner": "creative-director",
+          "status": "todo"
+        },
+        {
+          "title": "Brand Board v2.15 redline",
+          "owner": "creative-director",
+          "status": "todo",
+          "note": "Waiting on 'dark-default'"
+        }
+      ]
+    },
+    {
+      "id": "b3",
+      "title": "Batch 3 · FOUND HER engine and retention",
+      "window": "30 days · drafts first",
+      "items": [
+        {
+          "title": "Consent ladder and per-use agreement; two-tier confirmation email",
+          "owner": "found-her-community + claims-compliance",
+          "status": "todo",
+          "note": "Waiting on 'found-her-consent'"
+        },
+        {
+          "title": "FOUND HER No. 001 format; 'From the wall' band; Instagram formats",
+          "owner": "found-her-community + growth-marketing",
+          "status": "todo"
+        },
+        {
+          "title": "Welcome and after-purchase emails; reviews app",
+          "owner": "crm-retention-sales",
+          "status": "todo",
+          "note": "Waiting on 'retention'"
+        },
+        {
+          "title": "Sets at full price; Smooth Talker shade guide",
+          "owner": "product-merchandising",
+          "status": "todo",
+          "note": "Waiting on 'sets'"
+        }
+      ]
+    },
+    {
+      "id": "b4",
+      "title": "Batch 4 · The first real shoot and the room membership",
+      "window": "60–90 days",
+      "items": [
+        {
+          "title": "Shot list frames 01, 05, 02, 09, 03, 08 with you and consenting FOUND HER women; swatches on real skin",
+          "owner": "visual-content-director",
+          "status": "todo",
+          "note": "Waiting on 'shoot'"
+        },
+        {
+          "title": "'The Room': early entry, invitation-only referral, first FOUND HER Dinner",
+          "owner": "crm-retention-sales + found-her-community",
+          "status": "todo"
+        }
+      ]
+    }
+  ],
+  "reminders": [
+    {
+      "date": "2026-10-12",
+      "text": "Ship date. Confirm with Shelby the Collection orders have shipped (or the new date), then set COLLECTION_SHIPS = null in src/lib/nextMove.ts and clear the founder.badge metafield in Shopify. Until then the site keeps saying 'Ships October 12'."
+    }
+  ]
+}

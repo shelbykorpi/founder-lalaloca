@@ -1,6 +1,7 @@
 import { BRAND, CONTACT_EMAIL, INSTAGRAM, SITE } from "./brand";
 import type { FounderProduct } from "./founderCollection";
 import type { NextMoveProduct } from "./nextMove";
+import { COLLECTION_SHIPS } from "./nextMove";
 import type { Product } from "./products";
 import type { ProductReviews } from "./reviews";
 
@@ -262,7 +263,9 @@ export function productSchema(product: Product, reviews?: ProductReviews | null,
  * now true of it. `soldOut` — Shopify's live answer — overrides both.
  */
 export function founderProductSchema(product: FounderProduct, soldOut = false) {
-  const inStock = !product.preorder && !soldOut;
+  /* Same dated-preorder rule as the other four (COLLECTION_SHIPS in nextMove.ts). */
+  const datedPreorder = !product.preorder && !soldOut && COLLECTION_SHIPS !== null;
+  const inStock = !product.preorder && !soldOut && !datedPreorder;
   return {
     "@context": "https://schema.org",
     "@type": "Product",
@@ -282,9 +285,10 @@ export function founderProductSchema(product: FounderProduct, soldOut = false) {
       url: `${SITE.url}/products/${product.slug}`,
       availability: soldOut
         ? "https://schema.org/SoldOut"
-        : product.preorder
+        : product.preorder || datedPreorder
           ? "https://schema.org/PreOrder"
           : "https://schema.org/InStock",
+      ...(datedPreorder && COLLECTION_SHIPS ? { availabilityStarts: COLLECTION_SHIPS.iso } : {}),
       itemCondition: "https://schema.org/NewCondition",
       seller: { "@id": `${SITE.url}/#organization` },
       shippingDetails: inStock ? US_SHIPPING : {
@@ -314,9 +318,12 @@ export function founderProductSchema(product: FounderProduct, soldOut = false) {
  * Offer at one price; shades are not separate products.
  */
 export function nextMoveProductSchema(product: NextMoveProduct, soldOut = false) {
+  /* While COLLECTION_SHIPS holds a date the honest machine state is PreOrder
+     with that date as availabilityStarts: on sale now, ships later. */
+  const datedPreorder = !soldOut && product.availability === "in-stock" && COLLECTION_SHIPS !== null;
   const availability = soldOut
     ? "https://schema.org/SoldOut"
-    : product.availability === "preorder"
+    : product.availability === "preorder" || datedPreorder
       ? "https://schema.org/PreOrder"
       : "https://schema.org/InStock";
   return {
@@ -339,12 +346,13 @@ export function nextMoveProductSchema(product: NextMoveProduct, soldOut = false)
       priceCurrency: "USD",
       url: `${SITE.url}/products/${product.slug}`,
       availability,
+      ...(datedPreorder && COLLECTION_SHIPS ? { availabilityStarts: COLLECTION_SHIPS.iso } : {}),
       itemCondition: "https://schema.org/NewCondition",
       seller: { "@id": `${SITE.url}/#organization` },
       /* Free US shipping, 3–5 days in transit. Handling time is only
          declared once the SKU is in stock; a preorder has none to promise. */
       shippingDetails:
-        product.availability === "in-stock" && !soldOut
+        product.availability === "in-stock" && !soldOut && !datedPreorder
           ? US_SHIPPING
           : {
               "@type": "OfferShippingDetails",

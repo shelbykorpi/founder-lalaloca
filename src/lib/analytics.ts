@@ -129,7 +129,7 @@ declare global {
  * ecommerce event reports the house/collection hierarchy consistently.
  */
 export function itemBrandFor(idOrSlug: string): "FOUNDER" | "LALALOCA" {
-  return idOrSlug === "hold-the-room" || /^\\d{8,}$/.test(idOrSlug)
+  return idOrSlug === "hold-the-room" || /^\d{8,}$/.test(idOrSlug)
     ? "FOUNDER"
     : "LALALOCA";
 }

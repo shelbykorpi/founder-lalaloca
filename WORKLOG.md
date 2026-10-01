@@ -1925,3 +1925,41 @@ oz), no retouch. Now the grid card (`opening-line-card-vanity.webp`); the
 interim shelf crop `opening-line-card-dark.webp` is removed from the repo.
 All five /founder-collection cards are dark vanity scenes.
 Verified: tsc, eslint, build; grid at 1440/390.
+
+## 2026-10-01 · Claude (Cowork, Founder Chief) — executive audit → Desk; ship date; lead team
+
+Shelby: send the audit to the FOUNDER Desk ("my one stop place"), let the team
+make changes, ask her when an answer is needed. Her decisions today:
+**Collection ships October 12** · **keep all current images** · **checkout:
+untick pre-selected consent, brand it, move to checkout.founderbeauty.co** ·
+**the Cowork FOUNDER team leads site changes** (now in AGENTS.md).
+- DESK: docs/desk/brief.json (plan, decisions, questions waiting on her,
+  reminders) + docs/desk/executive-audit-2026-10-01.md. FOUNDER-Desk app got
+  a read-only Brief tab (first in the rail, count badge; Rust `brief_load`
+  reads those two files under ~/Founder:LALALOCA/docs/desk, path-guarded, no
+  network, no new writes). Desk files backed up to FOUNDER-Desk/_backup/
+  2026-10-01-before-brief/. Needs one rebuild: Build FOUNDER Desk.command.
+  Keep brief.json current whenever the plan or a decision changes.
+- SHIP DATE: one constant, `COLLECTION_SHIPS` in nextMove.ts, drives the
+  collection-room bar, cards, plates, Hold the Room line, bag note ("Orders
+  with FOUNDER Collection pieces ship on October 12."), Hold the Room FAQ,
+  collection note, shipping-policy + terms sentence ("except orders that
+  include FOUNDER Collection pieces"), concierge, llms.txt, schema (PreOrder +
+  availabilityStarts) and the Merchant feed (preorder + availability_date).
+  No "Preorder" wording to customers. Serums untouched (one business day).
+  Shopify: Hold the Room and Smooth Talker descriptions' SHIPPING line now
+  "Ships October 12. Free US shipping." (badge metafield already said so).
+  ON 12 OCT: confirm with Shelby, set COLLECTION_SHIPS = null, clear badge.
+- BUG: itemBrandFor regex was /^\\d{8,}$/ (literal backslash), so every
+  FOUNDER Collection bag line reported item_brand LALALOCA. Fixed to /^\d{8,}$/.
+- Collection PDP h1s title case (normal-case utility; the overlay lockup
+  keeps caps); plate/Hold the Room trust line 11px cream/55 → 13px cream/75;
+  footer Shop column lists all eight products.
+- NOT done here: checkout untick/branding/subdomain (Shopify admin + Shelby's
+  DNS), rest of Batch 1 (see brief.json). Pre-existing eslint warning in
+  Vanity.tsx (`scene` unused) left alone — not this change.
+- Verified: tsc, eslint (0 errors), build; local render of /products/
+  opening-line at 390/1440, bag with a collection item, feed (5 preorder +
+  date, 4 in_stock), schema, shipping policy. Brand Council: no blockers;
+  its 4 important notes applied (concierge line, mixed-order wording, 12 Oct
+  reminder, Shopify descriptions).

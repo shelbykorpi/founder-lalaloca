@@ -40,6 +40,8 @@
  * a customer must never be able to buy this expecting next-day dispatch.
  */
 
+import { COLLECTION_SHIPS } from "./nextMove";
+
 export type FounderProductSlug = "hold-the-room";
 
 export type FounderProduct = {
@@ -197,7 +199,9 @@ export const FOUNDER_COLLECTION: FounderProduct[] = [
       },
       {
         q: "When does it ship?",
-        a: "Within one business day of your order, free anywhere in the US. You get a tracking link by email the day it leaves.",
+        a: COLLECTION_SHIPS
+          ? `On ${COLLECTION_SHIPS.label}, with the rest of the FOUNDER Collection, free anywhere in the US. You get a tracking link by email the day it leaves.`
+          : "Within one business day of your order, free anywhere in the US. You get a tracking link by email the day it leaves.",
       },
       {
         q: "Is this one of the serums?",

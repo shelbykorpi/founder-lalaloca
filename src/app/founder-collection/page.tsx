@@ -6,7 +6,7 @@ import { FOUNDER_COLLECTION } from "@/lib/founderCollection";
 import { fetchCollectionProducts, fetchVariantAvailability, type CatalogProduct } from "@/lib/catalog";
 import { VARIANT_ID } from "@/lib/shopifyLinks";
 import { LineCard } from "@/components/shop/LineCard";
-import { NEXT_MOVE, ROUTINE_STEP, availabilityLine } from "@/lib/nextMove";
+import { COLLECTION_SHIPS, NEXT_MOVE, ROUTINE_STEP, availabilityLine } from "@/lib/nextMove";
 import { formatPrice, products, SET } from "@/lib/products";
 import { Reveal } from "@/components/house/Reveal";
 import { RoomHero } from "@/components/house/RoomHero";
@@ -370,9 +370,10 @@ export default async function FounderCollectionPage() {
           </div>
 
           <p className="mt-10 max-w-prose text-xs leading-relaxed text-cream/65">
-            Free US shipping on every piece, and your order leaves within one
-            business day. Changed your mind? Unopened pieces come back within
-            14 days.
+            {COLLECTION_SHIPS
+              ? `Free US shipping on every piece. The collection ships on ${COLLECTION_SHIPS.label}.`
+              : "Free US shipping on every piece, and your order leaves within one business day."}{" "}
+            Changed your mind? Unopened pieces come back within 14 days.
           </p>
         </div>
       </section>

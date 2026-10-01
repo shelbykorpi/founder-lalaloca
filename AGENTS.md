@@ -35,11 +35,20 @@ finished hero swaps in one week.
 - **Never invent:** ingredients, claims, reviews, clinical results,
   certifications, prices, launch dates, ship dates, stock, or charitable
   terms.
-- **The FOUNDER Collection is live and IN STOCK** (Shelby, 30 Sept 2026,
-  launch eve: "make all listing active no more preorder"). Five SKUs —
-  Opening Line, Clean Break, Hold the Room, Double Take, Smooth Talker — all
-  Selfnamed, all priced in Shopify. Every record's `availability` is
-  `"in-stock"` and Hold the Room's `preorder` is null. Every variant is
+- **The FOUNDER Collection is on sale and SHIPS 12 OCTOBER** (Shelby, 1 Oct
+  2026: "Ships October 12"). Earlier, on 30 Sept launch eve, she said "make
+  all listing active no more preorder" — they stay active and buyable, no
+  "Preorder" wording, but every promise says the date. ONE constant drives it:
+  `COLLECTION_SHIPS` in src/lib/nextMove.ts (bar, cards, plates, bag, FAQ,
+  shipping policy note, concierge, llms.txt, schema PreOrder +
+  availabilityStarts, Merchant feed preorder + availability_date). Shopify
+  carries the same words as metafield `founder.badge` on the five products.
+  When stock is counted in: set `COLLECTION_SHIPS = null` and clear the badge.
+  Serums are unaffected (ship within one business day). Five SKUs — Opening
+  Line, Clean Break, Hold the Room, Double Take, Smooth Talker — all
+  Selfnamed, all priced in Shopify, stocked 5 each (Smooth Talker 5 per shade)
+  per the 1 Oct worklog. Every record's `availability` stays `"in-stock"` and
+  Hold the Room's `preorder` is null. Every variant is
   tracked in Shopify with "continue selling when out of stock" OFF, and the
   pages read availableForSale, so a variant at 0 shows "Sold out" by itself.
   Do not switch anything back to preorder without Shelby saying so.
@@ -53,6 +62,17 @@ finished hero swaps in one week.
 - **No customer PII in this repo.** Ever. The Etsy export lives outside git.
 - **20% of net profits** (Young Founders' Room): four occurrences, same
   wording, never paraphrased, no legal gloss added.
+
+## Who leads site changes (Shelby, 1 Oct 2026)
+
+**The Cowork FOUNDER team leads.** Other agents may propose changes (in a
+branch, a PR, or a WORKLOG note), but production changes go through this
+team's routine: fresh `origin/main`, build, 390/1440 screenshots, Brand
+Council, WORKLOG entry. Two teams pushing to main in parallel on 1 Oct caused
+a rejected push and a stale audit; this rule exists so that does not repeat.
+Shelby's live plan and open questions are in `docs/desk/brief.json`, which
+the FOUNDER Desk app reads (Brief tab). Keep it current when you change the
+plan or close a decision.
 
 ## The agent team (installed 1 Oct 2026)
 

@@ -54,7 +54,9 @@ export const BRAND = {
    * someone else's shop. Shipping is the fact both lines share; the second
    * half names the line she is standing in.
    */
-  barCollection: "Free US shipping on every order · The FOUNDER Collection is here · Ships in one business day",
+  /* The ship-date half of this bar lives in nextMove.ts (COLLECTION_SHIPS) and is
+     appended by Header.tsx, so the date is written in exactly one place. */
+  barCollection: "Free US shipping on every order · The FOUNDER Collection is here",
 
   /**
    * The door mark: the F-key. v2.13 makes it the secondary identifier — the
@@ -109,12 +111,18 @@ export const FOOTER_NAV = [
   {
     heading: "Shop",
     links: [
+      /* All eight products, both lines (audit 1 Oct: the footer named 3 of 8). */
       { href: "/founder-collection", label: "The FOUNDER Collection" },
+      { href: "/products/opening-line", label: "Opening Line" },
+      { href: "/products/clean-break", label: "Clean Break" },
+      { href: "/products/hold-the-room", label: "Hold the Room" },
+      { href: "/products/double-take", label: "Double Take" },
+      { href: "/products/smooth-talker", label: "Smooth Talker" },
       { href: "/shop", label: "The LALALOCA Collection" },
-      { href: "/shop#set-heading", label: "The House Trio · $98" },
       { href: "/products/thirst-trap", label: "Thirst Trap" },
       { href: "/products/c-me-glow", label: "C Me Glow" },
       { href: "/products/bounce-back", label: "Bounce Back" },
+      { href: "/shop#set-heading", label: "The House Trio · $98" },
       { href: "/find-your-serum", label: "Which serum?" },
     ],
   },

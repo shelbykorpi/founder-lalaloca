@@ -33,11 +33,11 @@
  * file first — noted in the concierge doc.
  */
 
-import { BRAND } from "../brand";
+import { BRAND, CONTACT_EMAIL } from "../brand";
 import { policies } from "../content";
 import { formatPrice, products, SET } from "../products";
 import { FOUNDER_COLLECTION } from "../founderCollection";
-import { NEXT_MOVE, PREORDER_NOTE, availabilityLine } from "../nextMove";
+import { COLLECTION_SHIPS, NEXT_MOVE, PREORDER_NOTE, availabilityLine } from "../nextMove";
 
 /** One retrievable chunk. `id` exists so a bad answer can be traced to a source. */
 export type Fact = {
@@ -142,7 +142,9 @@ function founderCollectionFacts(): Fact[] {
       cues: ["founder collection", "the collection", "five", "routine", "next move", "opening line", "clean break", "double take", "smooth talker", "hold the room", "preorder", "in stock", "when will it ship"],
       text: [
         `The FOUNDER Collection is the house's second line, alongside the LALALOCA serums: Opening Line (oil-to-milk cleanser), Clean Break (purifying face wash), Hold the Room (peptide moisturising cream), Double Take (peptide eye cream) and Smooth Talker (ceramide tone stick, three shades).`,
-        `Every piece is in stock and ships within one business day, free anywhere in the US, the same as the serums. There is no preorder.`,
+        COLLECTION_SHIPS
+          ? `Every piece is on sale now and ships on ${COLLECTION_SHIPS.label}, free anywhere in the US. The serums ship within one business day. If an order has both, do not promise how it will be split; point her to ${CONTACT_EMAIL}.`
+          : `Every piece is in stock and ships within one business day, free anywhere in the US, the same as the serums. There is no preorder.`,
         `If a piece shows "Sold out" on its page, it is sold out; do not promise a restock date.`,
         `Returns: unopened items within 14 days of delivery. Details at /policies/returns.`,
       ].join("\n"),
@@ -183,7 +185,11 @@ const BRAND_FACTS: Fact[] = [
   {
     id: "brand:three",
     cues: ["why three", "only three", "more products", "fourth", "range"],
-    text: `There are three LALALOCA serums because a fourth serum has not earned its place. Hydration, brightness, cushion — morning and night. They are built to sit together, which is what the Trio is. The rest of the house is the five-piece FOUNDER Collection: cleanse, wash, moisturise, eyes and finish. The current product records are in stock; Shopify availability on each page is the final word if an item sells out.`,
+    text: `There are three LALALOCA serums because a fourth serum has not earned its place. Hydration, brightness, cushion — morning and night. They are built to sit together, which is what the Trio is. The rest of the house is the five-piece FOUNDER Collection: cleanse, wash, moisturise, eyes and finish. ${
+      COLLECTION_SHIPS
+        ? `The serums are in stock and ship within one business day; the FOUNDER Collection is on sale now and ships on ${COLLECTION_SHIPS.label}.`
+        : "The current product records are in stock."
+    } Shopify availability on each page is the final word if an item sells out.`,
   },
   {
     id: "brand:claims",

@@ -86,11 +86,35 @@ export type Availability = "preorder" | "in-stock";
 export const PREORDER_NOTE =
   "Preorder. It ships from the first run — not the next-business-day dispatch the serums get. We’ll email you before it ships, and you can reply to cancel if the timing no longer works.";
 
+/**
+ * SHIP DATE — Shelby, 1 Oct 2026: the five FOUNDER Collection pieces ship on
+ * 12 October (Shopify carries the same words as metafield founder.badge,
+ * "Ships October 12"). They stay on sale; the date is the honest promise,
+ * and the serums keep their one-business-day dispatch.
+ *
+ * ON THE DAY THE STOCK IS COUNTED IN: set this to null and clear the Shopify
+ * badge. Every line, the announcement bar, the bag, the FAQ, the shipping
+ * policy note, the schema (PreOrder → InStock) and the Merchant feed follow
+ * this one value. Do not reintroduce a hand-written date anywhere else.
+ */
+export const COLLECTION_SHIPS: { iso: string; label: string } | null = {
+  iso: "2026-10-12",
+  label: "October 12",
+};
+
+/** "Ships October 12" while the date stands; the in-stock promise after. */
+export const COLLECTION_SHIP_LINE = COLLECTION_SHIPS
+  ? `Ships ${COLLECTION_SHIPS.label}`
+  : "In stock · Ships within one business day";
+
+/** The same promise as a sentence, for status lines and answers. */
+export const COLLECTION_SHIP_SENTENCE = COLLECTION_SHIPS
+  ? `The FOUNDER Collection ships on ${COLLECTION_SHIPS.label}, free anywhere in the US.`
+  : "In stock. Ships within one business day, free anywhere in the US.";
+
 /** The one-line state under a card or a button. */
 export function availabilityLine(a: Availability): string {
-  return a === "preorder"
-    ? "Preorder · Ships from the first run"
-    : "In stock · Ships within one business day";
+  return a === "preorder" ? "Preorder · Ships from the first run" : COLLECTION_SHIP_LINE;
 }
 
 export type NextMoveProduct = {
@@ -278,7 +302,7 @@ export const NEXT_MOVE: NextMoveProduct[] = [
     description:
       "A gentle daily cleanser for dry and delicate skin. The rich, oily texture turns to a silky milk on contact with water, dissolving make-up and impurities without stripping moisture from the skin.",
     detailCta: "Shop Opening Line",
-    reservationStatus: "In stock. Ships within one business day. Free US shipping.",
+    reservationStatus: COLLECTION_SHIP_SENTENCE,
     detailHero: {
       src: "/products/opening-line-hero.webp",
       alt: "The Opening Line bottle — a white airless pump with a Founder Green label, striped bands top and bottom — standing on a black marble console against a dark green wall, reflected in the stone.",
@@ -358,7 +382,7 @@ export const NEXT_MOVE: NextMoveProduct[] = [
     description:
       "A gentle daily face wash for blemish-prone skin. It washes away impurities and excess oil without harsh surfactants, leaving skin feeling fresh.",
     detailCta: "Shop Clean Break",
-    reservationStatus: "In stock. Ships within one business day. Free US shipping.",
+    reservationStatus: COLLECTION_SHIP_SENTENCE,
     detailHero: {
       src: "/products/clean-break-hero.webp",
       alt: "The Clean Break bottle — a white pump bottle with a Founder Green label, striped bands top and bottom — standing on a black marble console against a dark green wall, reflected in the stone.",
@@ -478,7 +502,7 @@ export const NEXT_MOVE: NextMoveProduct[] = [
       "A creamy tone-correcting stick that helps even the look of skin tone, is made with ceramides and blends easily with fingertips for a natural-looking finish.",
     detailCta: "Choose your shade",
     reservationStatus:
-      "Choose your shade. In stock variants ship within one business day with free US shipping.",
+      `Choose your shade. ${COLLECTION_SHIP_SENTENCE}`,
     /* Unused for this SKU: the detail page shows the SELECTED shade, so the
        hero comes from `shades[]`. Kept non-optional for the type, pointed at
        the default shade so nothing can render empty. */
@@ -573,7 +597,7 @@ export const NEXT_MOVE: NextMoveProduct[] = [
     description:
       "A hydrating peptide eye cream that helps fine lines look softened and the eye area look smoother. Comfortable under makeup.",
     detailCta: "Shop Double Take",
-    reservationStatus: "In stock. Ships within one business day. Free US shipping.",
+    reservationStatus: COLLECTION_SHIP_SENTENCE,
     detailHero: {
       src: "/products/double-take-hero.webp",
       alt: "The Double Take airless bottle and its Desert Pink carton standing on a black marble console against a dark green wall, reflected in the stone.",

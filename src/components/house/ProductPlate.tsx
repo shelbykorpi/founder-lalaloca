@@ -113,7 +113,7 @@ export async function ProductPlate({ product }: { product: NextMoveProduct }) {
         <div className="max-w-[26rem]">
           <p className="room-label">The FOUNDER Collection · {ROUTINE_STEP[product.slug]}</p>
 
-          <h1 className="display-product mt-5 text-cream">{product.name}</h1>
+          <h1 className="display-product mt-5 normal-case tracking-[0.01em] text-cream">{product.name}</h1>
 
           <p className="mt-4 text-[0.75rem] uppercase tracking-[0.22em] text-cream/70">
             {product.category}
@@ -159,7 +159,7 @@ export async function ProductPlate({ product }: { product: NextMoveProduct }) {
             </p>
           )}
 
-          <p className="mt-5 max-w-[26rem] text-[0.6875rem] leading-relaxed text-cream/55">
+          <p className="mt-5 max-w-[26rem] text-[0.8125rem] leading-relaxed text-cream/75">
             {allSoldOut ? "Sold out" : availabilityLine(product.availability)} · Free US shipping ·{" "}
             {BRAND.legal.name} is the seller of record ·{" "}
             <Link className="underline underline-offset-2 hover:opacity-70" href="/policies/shipping">

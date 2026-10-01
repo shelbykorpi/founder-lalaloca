@@ -7,6 +7,7 @@
  */
 
 import { CONTACT_EMAIL } from "./brand";
+import { COLLECTION_SHIPS } from "./nextMove";
 
 /* ---------------- FOUND HER — editorial platform ---------------- */
 
@@ -277,7 +278,7 @@ export const policies = {
     sections: [
       {
         heading: "What it costs and how long it takes",
-        body: "Standard shipping is free anywhere in the United States and takes 3–5 business days. Express is $15 and takes 1–2 business days. Orders are dispatched within one business day. You’ll get a tracking number either way.",
+        body: `Standard shipping is free anywhere in the United States and takes 3–5 business days. Express is $15 and takes 1–2 business days. Orders are dispatched within one business day${COLLECTION_SHIPS ? `, except orders that include FOUNDER Collection pieces, which ship on ${COLLECTION_SHIPS.label}` : ""}. You’ll get a tracking number either way.`,
       },
       {
         heading: "Outside the United States",
@@ -393,7 +394,7 @@ export const policies = {
       },
       {
         heading: "Shipping and returns",
-        body: "Shipping is free on every US order, and orders leave within one business day. Delivery times are the carrier’s estimates, not guarantees. Unopened items can come back within 14 days of delivery. The Shipping and Returns pages have the details.",
+        body: `Shipping is free on every US order, and orders leave within one business day${COLLECTION_SHIPS ? ` (orders that include FOUNDER Collection pieces ship on ${COLLECTION_SHIPS.label})` : ""}. Delivery times are the carrier’s estimates, not guarantees. Unopened items can come back within 14 days of delivery. The Shipping and Returns pages have the details.`,
       },
       {
         heading: "About the products",

@@ -1,7 +1,7 @@
 import { BRAND, SITE } from "@/lib/brand";
 import { products, SET } from "@/lib/products";
 import { FOUNDER_COLLECTION } from "@/lib/founderCollection";
-import { NEXT_MOVE } from "@/lib/nextMove";
+import { COLLECTION_SHIPS, NEXT_MOVE } from "@/lib/nextMove";
 
 /**
  * Google Merchant Center product feed (RSS 2.0 + the `g:` namespace).
@@ -56,6 +56,8 @@ type FeedItem = {
   image: string;
   price: number;
   brand?: string;
+  /** FOUNDER Collection items carry the dated preorder while COLLECTION_SHIPS stands. */
+  shipsOn?: string | null;
   /** Optional extras that only some items carry. */
   extra?: string[];
 };
@@ -68,7 +70,13 @@ function item(entry: FeedItem) {
     `      <g:description>${xml(entry.description)}</g:description>`,
     `      <g:link>${xml(entry.link)}</g:link>`,
     `      <g:image_link>${xml(entry.image)}</g:image_link>`,
-    "      <g:availability>in_stock</g:availability>",
+    ...(entry.shipsOn
+      ? [
+          "      <g:availability>preorder</g:availability>",
+          /* Arizona has no daylight saving: -0700 all year. Google's own example form. */
+          `      <g:availability_date>${entry.shipsOn}T00:00-0700</g:availability_date>`,
+        ]
+      : ["      <g:availability>in_stock</g:availability>"]),
     "      <g:condition>new</g:condition>",
     `      <g:price>${entry.price.toFixed(2)} USD</g:price>`,
     `      <g:brand>${xml(entry.brand ?? BRAND.collection)}</g:brand>`,
@@ -129,6 +137,7 @@ export function GET() {
         image: `${SITE.url}${product.bottle}`,
         price: product.price,
         brand: BRAND.display,
+        shipsOn: COLLECTION_SHIPS?.iso ?? null,
         extra: [
           `      <g:product_type>${xml(`Skincare > ${product.category}`)}</g:product_type>`,
           `      <g:item_group_id>founder-collection</g:item_group_id>`,
@@ -144,6 +153,7 @@ export function GET() {
         image: `${SITE.url}${product.pack.src}`,
         price: product.price,
         brand: BRAND.display,
+        shipsOn: COLLECTION_SHIPS?.iso ?? null,
         extra: [
           `      <g:product_type>${xml(`Beauty > ${product.category}`)}</g:product_type>`,
           `      <g:item_group_id>founder-collection</g:item_group_id>`,

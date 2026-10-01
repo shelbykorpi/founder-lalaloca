@@ -5,6 +5,7 @@ import { usePathname } from "next/navigation";
 import { useEffect, useState } from "react";
 import { BRAND, PRIMARY_NAV, SHOP_NAV } from "@/lib/brand";
 import { track } from "@/lib/analytics";
+import { COLLECTION_SHIP_LINE } from "@/lib/nextMove";
 import { FOUNDER_ASPECT, Wordmark } from "./Wordmark";
 import { useBag } from "@/components/bag/BagProvider";
 
@@ -51,7 +52,9 @@ export function Header() {
   }, [menuOpen]);
 
   const close = () => setMenuOpen(false);
-  const barText = isCollectionRoom(pathname) ? BRAND.barCollection : BRAND.bar;
+  const barText = isCollectionRoom(pathname)
+    ? `${BRAND.barCollection} · ${COLLECTION_SHIP_LINE}`
+    : BRAND.bar;
 
   return (
     <header

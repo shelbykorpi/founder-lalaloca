@@ -5,6 +5,7 @@ import Link from "next/link";
 import { useEffect, useRef, useState } from "react";
 import { useBag } from "./BagProvider";
 import { itemBrandFor, track } from "@/lib/analytics";
+import { COLLECTION_SHIPS } from "@/lib/nextMove";
 import { formatPrice } from "@/lib/products";
 import { cartPermalink } from "@/lib/shopifyLinks";
 
@@ -254,6 +255,14 @@ export function BagDrawer() {
               <p className="mt-1 text-xs text-cream/70">
                 Free US shipping. Taxes calculated at checkout.
               </p>
+              {/* The dated promise follows the same constant as every product
+                  page (COLLECTION_SHIPS); it disappears on its own when cleared. */}
+              {COLLECTION_SHIPS &&
+                lines.some((l) => itemBrandFor(l.id) === "FOUNDER") && (
+                  <p className="mt-1 text-xs text-cream/80">
+                    Orders with FOUNDER Collection pieces ship on {COLLECTION_SHIPS.label}.
+                  </p>
+                )}
               <button
                 type="button"
                 onClick={startCheckout}

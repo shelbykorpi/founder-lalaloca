@@ -1,43 +1,19 @@
 import type { Metadata } from "next";
+import Image from "next/image";
 import { JsonLd, breadcrumbSchema } from "@/lib/seo";
 import { Threshold } from "@/components/young-founders/Threshold";
 import { RoomHero } from "@/components/house/RoomHero";
 import { HouseShell } from "@/components/house/HouseShell";
 import { EditorialRoomSection } from "@/components/house/EditorialRoomSection";
+import { Reveal } from "@/components/house/Reveal";
 import { getRoom } from "@/lib/rooms";
 import { TrackedLink } from "@/components/young-founders/TrackedLink";
-import { DocumentaryImage, assetExists } from "@/components/young-founders/DocumentaryImage";
-
-/**
- * THE YOUNG FOUNDERS' ROOM.
- *
- * ── THE ONE NUMBER ──────────────────────────────────────────────────────────
- *
- * 20% of net profits. Every month. It appears four times on this page and it
- * is the same number in all four. An earlier draft of this commitment said
- * 10%; if that figure ever reappears here it is a regression, not an edit.
- *
- * ── WHAT IS DELIBERATELY NOT HERE ───────────────────────────────────────────
- *
- * No definition of "net profits" — the supplied wording is the approved
- * wording, and an accounting gloss added by a developer is a legal claim.
- * No impact statistics. No young person's name, circumstance or story beyond
- * what Shelby wrote. No stock photography standing in for people who are real.
- *
- * ── THE DOORS ───────────────────────────────────────────────────────────────
- *
- * Everything below renders on the server and is in the HTML. `Threshold` is a
- * decoration layered on top after hydration; it can fail, be skipped, be
- * turned off by a motion preference or never run at all, and the page is
- * unchanged. That is the only arrangement under which an entrance animation is
- * allowed to sit in front of a charity commitment.
- */
+import { DocumentaryImage } from "@/components/young-founders/DocumentaryImage";
 
 const TITLE = "The Young Founders’ Room";
 const DESCRIPTION =
-  "Meet the young collaborators who helped shape the first LALALOCA Collection and learn how 20% of its net profits supports StandUp for Kids Tucson each month.";
+  "How young people at StandUp for Kids Tucson helped shape the first LALALOCA Collection — and why 20% of LALALOCA net profits goes directly to the Tucson chapter each month.";
 
-/** The Tucson chapter's own page. Supplied and verified — do not substitute. */
 const STANDUP_TUCSON = "https://www.standupforkids.org/tucson/";
 
 export const metadata: Metadata = {
@@ -53,483 +29,315 @@ export const metadata: Metadata = {
   twitter: { card: "summary_large_image", title: TITLE, description: DESCRIPTION },
 };
 
-/* Where the approved photographs go. Named for what they show, so a missing
-   one is obvious in a directory listing. See docs/YOUNG_FOUNDERS_ROOM.md. */
 const PHOTO = {
-  outreachTeam: "/editorial/young-founders/outreach-team.webp",
   shelbyVolunteer: "/editorial/young-founders/shelby-volunteer.webp",
-  collaboration: "/editorial/young-founders/collaboration-table.webp",
-  /* StandUp for Kids' own published RESPECT graphic, used with the partner's
-     branding intact — a music afternoon at the Outreach Center. */
   respect: "/editorial/young-founders/respect-outreach-center.webp",
-  gala: "/editorial/young-founders/grit-and-gratitude-gala.webp",
 } as const;
 
-function Rule() {
-  return <hr className="my-8 h-px w-16 border-0 bg-bronze" />;
-}
-
-/* Two label colours for one badge: Bronze Ink is the WCAG-safe reading of
-   Antique Gold for a paper ground, Champagne is the reading for a dark room
-   (Antique Gold itself measures 3.04:1 on Founder Green and fails as small
-   type — the same reason the after-hours room-label class exists). Most of
-   this page is paper, so "paper" stays the default. */
-function Eyebrow({
-  children,
-  tone = "paper",
-}: {
-  children: string;
-  tone?: "paper" | "room";
-}) {
-  return (
-    <p className={`eyebrow ${tone === "room" ? "text-champagne" : "text-bronze-ink"}`}>
-      {children}
-    </p>
-  );
-}
+const MOMENTS = [
+  {
+    n: "01",
+    title: "Try it.",
+    body: "Early product samples came to the Outreach Center first. Young people used them, reacted to them, and told us what felt worth keeping.",
+  },
+  {
+    n: "02",
+    title: "Question it.",
+    body: "Packaging, colour, texture, names — nothing was too small to challenge. The point was not to be polite. The point was to be honest.",
+  },
+  {
+    n: "03",
+    title: "Shape it.",
+    body: "Their feedback changed real choices in the first LALALOCA Collection. Their contribution belongs in the history of the line.",
+  },
+] as const;
 
 export default function YoungFoundersRoomPage() {
-  /* The approved photographs are not in the repository yet. Where one is
-     missing its slot renders nothing, so the column it would have filled has to
-     collapse too — otherwise the layout reserves half a screen of cream for an
-     image that is not coming. Checked once here rather than guessed at in the
-     class strings. */
-  const has = {
-    outreachTeam: assetExists(PHOTO.outreachTeam),
-    shelbyVolunteer: assetExists(PHOTO.shelbyVolunteer),
-    collaboration: assetExists(PHOTO.collaboration),
-    respect: assetExists(PHOTO.respect),
-    gala: assetExists(PHOTO.gala),
-  };
-  const twoUp = (present: boolean, cols: string) => (present ? cols : "max-w-3xl");
-
   return (
     <>
-      <JsonLd
-        schema={[breadcrumbSchema([{ name: TITLE, path: "/young-founders-room" }])]}
-      />
+      <JsonLd schema={[breadcrumbSchema([{ name: TITLE, path: "/young-founders-room" }])]} />
 
       <Threshold focusTargetId="young-founders-heading" />
+
       <HouseShell room={7}>
-      <RoomHero
-        room={getRoom(7)}
-        height="min-h-[80svh]"
-        priority
-        headingId="young-founders-heading"
-        title="A room built with young voices."
-        lede={
-          <>
-            They were never treated like a charity project.
-            <br />
-            They were <em className="font-serif not-italic italic">collaborators</em>.
-            <span className="mt-6 block border-t border-rose/40 pt-5 text-[0.75rem] uppercase tracking-[0.2em] text-rose">
-              20% of LALALOCA net profits. Every month. Directly to StandUp for Kids Tucson.
-            </span>
-          </>
-        }
-      >
-        <a href="#how-it-began" className="btn btn-primary">
-          See how it began <span aria-hidden>→</span>
-        </a>
-        <TrackedLink href="/shop" event="young_founders_shop_click" variant="ghost">
-          Shop LALALOCA
-        </TrackedLink>
-      </RoomHero>
-
-      {/* ---- Hero: what the doors open onto ----
-          The first thing after the header, so it opens in the same dark room
-          rather than defaulting to cream — a bright band right under a dark
-          header is the pale-island bug this pass exists to remove. The
-          essay proper (Shelby's note, the interview-style sections below)
-          still moves onto paper; this is scene-setting, not the reading. */}
-      <EditorialRoomSection surface="marble" id="how-it-began" className="scroll-mt-24">
-        <div
-          className={`shell grid gap-10 lg:items-center lg:gap-16 ${twoUp(has.outreachTeam, "lg:grid-cols-2")}`}
+        <RoomHero
+          room={getRoom(7)}
+          height="min-h-[84svh]"
+          priority
+          headingId="young-founders-heading"
+          title="Before there was a collection, there was a table."
+          lede={
+            <>
+              At the StandUp for Kids Tucson Outreach Center, young people tried early
+              LALALOCA products, compared packaging, and told us exactly what they thought.
+              <span className="mt-6 block border-t border-rose/35 pt-5 text-[0.75rem] uppercase tracking-[0.2em] text-rose">
+                20% of LALALOCA net profits · Every month · Directly to StandUp for Kids Tucson
+              </span>
+            </>
+          }
         >
-          <div className="order-2 lg:order-1">
-            <Eyebrow tone="room">How it began</Eyebrow>
-            <h2 className="mt-5 font-serif text-4xl leading-[1.08] text-cream md:text-6xl">
-              THE YOUNG FOUNDERS’ ROOM
-            </h2>
-            <Rule />
-            <div className="max-w-prose space-y-4 text-cream/85">
-              <p>LALALOCA began with three serums.</p>
-              <p>
-                But part of the first collection was built somewhere far more important than a
-                beauty office: inside the StandUp for Kids Tucson Outreach Center.
-              </p>
-              <p>
-                Young people tried products, compared packaging, shared honest opinions, and helped
-                make real decisions about what LALALOCA would become.
-              </p>
-              <p>
-                From the very beginning, these young people helped shape the LALALOCA Collection.
-              </p>
-            </div>
+          <a href="#the-table" className="btn btn-primary">
+            Come to the table <span aria-hidden>→</span>
+          </a>
+          <TrackedLink href={STANDUP_TUCSON} event="young_founders_learn_click" external variant="ghost">
+            Meet StandUp for Kids Tucson
+          </TrackedLink>
+        </RoomHero>
 
-            <p className="mt-8 font-serif text-2xl leading-snug text-bronze-ink md:text-3xl">
-              20% of LALALOCA net profits.
-              <br />
-              Every month.
-              <br />
-              Directly to StandUp for Kids Tucson.
-            </p>
+        <section id="the-table" className="scroll-mt-24 border-y border-bronze/15 bg-night-deep py-20 md:py-28">
+          <div className="shell grid gap-14 lg:grid-cols-[0.9fr_1.1fr] lg:items-start lg:gap-20">
+            <Reveal>
+              <p className="eyebrow text-champagne">How it started</p>
+              <h2 className="mt-5 max-w-[10ch] font-serif text-[clamp(3.3rem,7vw,6.5rem)] font-light leading-[0.9] text-cream">
+                This room existed before the brand partnership did.
+              </h2>
+            </Reveal>
 
-            {/* "secondary" is the outline treatment (founder-green text) built
-                for a paper ground; on this now-dark room it would be near-
-                invisible, so the CTA takes "ghost" — cream border and text —
-                same as every other secondary CTA that lives in a dark room
-                on this page. */}
-            <div className="mt-8 flex flex-wrap gap-3">
-              <TrackedLink href="/shop" event="young_founders_shop_click">
-                Shop LALALOCA
-              </TrackedLink>
-              <TrackedLink
-                href={STANDUP_TUCSON}
-                event="young_founders_donate_click"
-                external
-                variant="ghost"
-              >
-                Give directly
-              </TrackedLink>
-            </div>
-          </div>
-
-          <div className="order-1 lg:order-2 empty:hidden">
-            <DocumentaryImage
-              src={PHOTO.outreachTeam}
-              alt="Shelby with the StandUp for Kids Tucson outreach team outside the Outreach Center, in their volunteer shirts."
-              ratio="4 / 3"
-              focal="50% 35%"
-              sizes="(min-width: 1024px) 50vw, 100vw"
-              priority
-            />
-          </div>
-        </div>
-      </EditorialRoomSection>
-
-      {/* ---- Shelby's note ---- */}
-      <EditorialRoomSection surface="panel" ambient={false}>
-        <div
-          className={`shell grid gap-10 lg:gap-16 ${twoUp(has.shelbyVolunteer, "lg:grid-cols-[1fr_0.85fr]")}`}
-        >
-          <div>
-            {/* Champagne, not Antique Gold: the gold measures 3.04:1 on
-                Founder Green and fails as small type. Champagne is the
-                token the after-hours rooms already use for this job. */}
-            <p className="eyebrow text-champagne">The Young Founders’ Room</p>
-            <h2 className="mt-5 font-serif text-3xl leading-tight md:text-5xl">
-              This began before the brand partnership.
-            </h2>
-            <p className="eyebrow mt-4 text-cream/70">A note from Shelby</p>
-            <hr className="my-8 h-px w-16 border-0 bg-bronze" />
-
-            <div className="max-w-prose space-y-4 text-cream/90">
-              <p>For the past three years, I have volunteered with StandUp for Kids Tucson.</p>
-              <p>
-                Twice a week, our outreach team walked the streets looking for young people
-                experiencing homelessness or instability. We brought practical resources, but the
-                most important thing we carried was consistency.
-              </p>
-              <p>Trust is rarely built in one conversation.</p>
-              <p>
-                It comes from returning. Remembering a name. Following up. Listening without
-                judgment. Becoming a person a young person recognises, and eventually believes might
-                still be there next week.
-              </p>
-              <p>
-                At the Outreach Center, I spent time mentoring, listening, helping young people
-                navigate difficult situations, and giving them a safe place to sit, talk, create, or
-                simply be young for a while.
-              </p>
-              <p>
-                I began volunteering because I believe every young person deserves to feel seen,
-                valued, and capable of moving forward with hope and purpose.
-              </p>
-              <p>What I did not expect was how much they would change me.</p>
-              <p>
-                Their resilience changed the way I understand strength. Their honesty changed the
-                way I listen. Their ideas changed the way I built LALALOCA.
-              </p>
-              <p>
-                Being allowed into even a small part of their stories has profoundly changed my own.
-              </p>
-              <p className="eyebrow pt-2 text-champagne">— Shelby Korpi, Founder</p>
-            </div>
-          </div>
-
-          <div className="lg:pt-24 empty:hidden">
-            <DocumentaryImage
-              src={PHOTO.shelbyVolunteer}
-              alt="Shelby Korpi in a StandUp for Kids volunteer shirt outside the Tucson Outreach Center."
-              /* matches the photograph's native frame so the baked-in
-                 VOLUNTEER SHELBY caption is never cropped */
-              ratio="1179 / 964"
-              focal="50% 30%"
-              sizes="(min-width: 1024px) 40vw, 100vw"
-            />
-          </div>
-        </div>
-      </EditorialRoomSection>
-
-      {/* ---- They helped build LALALOCA ---- */}
-      <EditorialRoomSection surface="paper">
-        <div className="grid gap-10 lg:grid-cols-[0.9fr_1fr] lg:gap-16">
-          <div>
-            <Eyebrow>The Young Founders’ Room</Eyebrow>
-            <h2 className="mt-5 font-serif text-3xl leading-tight text-charcoal md:text-5xl">
-              They helped build LALALOCA.
-            </h2>
-            <Rule />
-            <DocumentaryImage
-              src={PHOTO.collaboration}
-              alt="Serum samples and packaging options laid out on a table at the Outreach Center during a product feedback session."
-              ratio="4 / 3"
-              focal="50% 50%"
-              sizes="(min-width: 1024px) 40vw, 100vw"
-              className="mt-2"
-            />
-            {/* StandUp for Kids' own RESPECT graphic. Their branding and their
-                words stay on the image — it is the partner speaking, not us
-                describing them. Square, so it sits under the paragraph column
-                without fighting the 4:3 above it. */}
-            <DocumentaryImage
-              src={PHOTO.respect}
-              alt="An afternoon at the StandUp for Kids Tucson Outreach Center: a young person playing acoustic guitar at the table while a volunteer listens. The organization's RESPECT graphic reads: We StandUp for every individual, listening, honoring their voices and treating them with dignity."
-              ratio="1094 / 1062"
-              focal="50% 50%"
-              sizes="(min-width: 1024px) 40vw, 100vw"
-              className={has.collaboration ? "mt-6" : "mt-2"}
-            />
-          </div>
-
-          <div className="max-w-prose space-y-4 text-charcoal/85">
-            <p>
-              There were samples on the table. Packaging options spread out in front of us.
-              Questions about colour, texture, names, and what felt exciting enough to pick up.
-            </p>
-            <p>
-              I brought new products into the Outreach Center and asked the young people there to
-              tell me the truth.
-            </p>
-            <p>They did.</p>
-            <p>
-              They tried products. They helped choose packaging. They shared ideas. They noticed
-              things adults had overlooked. Their opinions shaped the first collection in real,
-              visible ways.
-            </p>
-            <p>They were never treated like a charity project.</p>
-            <p className="font-serif text-2xl text-charcoal">They were collaborators.</p>
-            <p>
-              For a young person who has spent too much time feeling overlooked, being asked, “What
-              do you think?” can mean more than it appears to mean.
-            </p>
-            <p>It says:</p>
-
-            {/* The three lines the section is really about. Desert Rose at full
-                voice, which the board reserves for exactly this kind of moment. */}
-            <div className="border-l border-bronze pl-5 font-serif text-xl leading-relaxed text-bronze-ink md:text-2xl">
-              <p>Your ideas have value.</p>
-              <p>Your voice can shape something real.</p>
-              <p>There is a place for you on the team.</p>
-            </div>
-
-            <p>
-              LALALOCA was built in creative partnership with young people from the StandUp for Kids
-              Tucson Outreach Center.
-            </p>
-            <p>
-              Their contribution is part of the collection’s history—and part of where it goes next.
-            </p>
-          </div>
-        </div>
-      </EditorialRoomSection>
-
-      {/* ---- The gala ---- */}
-      <EditorialRoomSection surface="paper">
-        <div
-          className={`grid gap-10 lg:items-center lg:gap-16 ${twoUp(has.gala, "lg:grid-cols-2")}`}
-        >
-          <div>
-            <Eyebrow>The Young Founders’ Room</Eyebrow>
-            <h2 className="mt-5 font-serif text-3xl leading-tight text-charcoal md:text-5xl">
-              From street outreach to the gala.
-            </h2>
-            <Rule />
-            <div className="max-w-prose space-y-4 text-charcoal/85">
-              <p>Some nights were spent walking Tucson’s streets.</p>
-              <p>Others were spent trying to fill a room.</p>
-              <p>
-                For the Grit &amp; Gratitude Gala, I helped host the event, pursue sponsorships,
-                secure donations, and bring community members together in support of StandUp for
-                Kids Tucson.
-              </p>
-              <p>A gala is one evening.</p>
-              <p>
-                The work it supports continues after the lights come down: outreach, mentorship,
-                guidance, referrals, practical support, and a safe place for young people
-                experiencing homelessness or at risk of it.
-              </p>
-              <p>
-                The event taught me that meaningful change requires more than care. It requires
-                people willing to turn that care into time, introductions, resources, and action.
-              </p>
-              <p>That is what we are asking LALALOCA to do now.</p>
-            </div>
-          </div>
-
-          <DocumentaryImage
-            src={PHOTO.gala}
-            alt="The Grit and Gratitude Gala in support of StandUp for Kids Tucson."
-            ratio="4 / 3"
-            focal="50% 45%"
-            sizes="(min-width: 1024px) 50vw, 100vw"
-          />
-        </div>
-      </EditorialRoomSection>
-
-      {/* ---- What your purchase opens ---- */}
-      <EditorialRoomSection surface="paper">
-        <div >
-          <Eyebrow>The Young Founders’ Room</Eyebrow>
-          <h2 className="mt-5 max-w-3xl font-serif text-3xl leading-tight text-charcoal md:text-5xl">
-            What your purchase opens.
-          </h2>
-          <Rule />
-
-          <div className="grid gap-10 lg:grid-cols-2 lg:gap-16">
-            <div className="max-w-prose space-y-4 text-charcoal/85">
-              <p>One skincare purchase will not end youth homelessness.</p>
-              <p>
-                But it can become part of a consistent commitment to the people working directly
-                with young people in Tucson.
-              </p>
-              <p>
-                Every LALALOCA purchase helps grow the monthly profit pool from which FOUNDER
-                donates 20% directly to StandUp for Kids Tucson.
-              </p>
-              <p>
-                That contribution helps support an organization providing relationship-based street
-                outreach, mentoring, guidance, referrals, and drop-in support.
-              </p>
-            </div>
-
-            <div className="max-w-prose space-y-4 text-charcoal/85">
-              <p className="font-serif text-2xl leading-snug text-charcoal md:text-3xl">
-                You are not buying a young person’s story.
-                <br />
-                You are helping continue the relationship.
-              </p>
-              <div className="border-l border-bronze pl-5 text-charcoal/85">
-                <p>The volunteer who returns.</p>
-                <p>The mentor who listens.</p>
-                <p>The Outreach Center door that opens.</p>
-                <p>
-                  The moment a young person is asked for an opinion, and realises someone genuinely
-                  wants to hear the answer.
+            <Reveal delay={100}>
+              <div className="max-w-[44rem] lg:pt-3">
+                <p className="font-serif text-[clamp(1.55rem,2.7vw,2.35rem)] leading-[1.28] text-cream/95">
+                  FOUNDER did not arrive with a cause and go looking for a story.
+                </p>
+                <p className="mt-7 text-[1rem] leading-[1.85] text-cream/72">
+                  Shelby had already been volunteering with StandUp for Kids Tucson for years.
+                  Twice a week, the work meant showing up, listening, following through, and
+                  returning often enough for trust to become real.
+                </p>
+                <p className="mt-5 text-[1rem] leading-[1.85] text-cream/72">
+                  When LALALOCA began to take shape, the Outreach Center became one of the places
+                  where early ideas were tested. Not as a focus group. Not as a campaign prop.
+                  As people whose opinions were worth asking for.
+                </p>
+                <blockquote className="mt-10 border-l border-rose/60 pl-6 font-serif text-[clamp(1.7rem,3vw,2.6rem)] italic leading-[1.22] text-rose">
+                  “What do you think?”
+                </blockquote>
+                <p className="mt-4 text-sm leading-relaxed text-cream/55">
+                  Sometimes the most powerful invitation is being asked the question and knowing
+                  the answer will actually matter.
                 </p>
               </div>
-              {/* Desert Rose is a dark-ground colour: on this cream panel it
-                  measures 2.03:1. Bronze Ink carries the same warmth at 4.71:1. */}
-              <p className="font-serif text-xl text-bronze-ink">
-                Your bottle is not the story.
-                <br />
-                What it helps continue is.
+            </Reveal>
+          </div>
+        </section>
+
+        <EditorialRoomSection surface="panel" ambient={false}>
+          <div className="shell grid gap-12 lg:grid-cols-[0.85fr_1.15fr] lg:items-center lg:gap-20">
+            <Reveal>
+              <DocumentaryImage
+                src={PHOTO.shelbyVolunteer}
+                alt="Shelby Korpi in a StandUp for Kids volunteer shirt outside the Tucson Outreach Center."
+                ratio="1179 / 964"
+                focal="50% 30%"
+                sizes="(min-width: 1024px) 42vw, 100vw"
+              />
+            </Reveal>
+
+            <Reveal delay={100}>
+              <p className="eyebrow text-champagne">A note from Shelby</p>
+              <h2 className="mt-5 max-w-[12ch] font-serif text-[clamp(3rem,6vw,5.4rem)] font-light leading-[0.92] text-cream">
+                Showing up came first.
+              </h2>
+              <div className="mt-8 max-w-[42rem] space-y-5 text-[1rem] leading-[1.85] text-cream/78">
+                <p>
+                  Trust is rarely built in one conversation. It comes from returning.
+                  Remembering a name. Following up. Listening without judgment.
+                </p>
+                <p>
+                  The young people I met through StandUp for Kids changed how I understand
+                  resilience, honesty, and what it means to make someone feel seen.
+                </p>
+                <p>
+                  When I began building LALALOCA, I wanted their opinions in the room because
+                  they had already changed the way I listened.
+                </p>
+                <p className="font-serif text-2xl italic text-cream">
+                  Their ideas changed the collection, too.
+                </p>
+              </div>
+              <p className="mt-8 text-[0.625rem] uppercase tracking-[0.22em] text-champagne">
+                Shelby Korpi · Founder
               </p>
+            </Reveal>
+          </div>
+        </EditorialRoomSection>
+
+        <section className="bg-cream py-20 text-charcoal md:py-28">
+          <div className="shell">
+            <Reveal className="max-w-4xl">
+              <p className="eyebrow text-bronze-ink">At the table</p>
+              <h2 className="mt-5 max-w-[12ch] font-serif text-[clamp(3.2rem,6vw,5.6rem)] font-light leading-[0.94]">
+                They did more than try the products.
+              </h2>
+              <p className="mt-7 max-w-2xl text-[1rem] leading-[1.8] text-charcoal/72">
+                They reacted, questioned, compared, and helped shape what made it into the first collection.
+              </p>
+            </Reveal>
+
+            <div className="mt-14 grid gap-px bg-charcoal/12 md:grid-cols-3">
+              {MOMENTS.map((moment, i) => (
+                <Reveal key={moment.n} delay={i * 90} className="bg-shell p-7 md:p-9">
+                  <p className="text-[0.6rem] uppercase tracking-[0.22em] text-bronze-ink/70">
+                    {moment.n}
+                  </p>
+                  <h3 className="mt-5 font-serif text-[clamp(2rem,3.5vw,3.2rem)] font-light leading-none text-charcoal">
+                    {moment.title}
+                  </h3>
+                  <p className="mt-5 text-sm leading-[1.8] text-charcoal/72">{moment.body}</p>
+                </Reveal>
+              ))}
             </div>
-          </div>
-        </div>
-      </EditorialRoomSection>
 
-      {/* ---- The commitment ---- */}
-      <EditorialRoomSection surface="panel" ambient={false}>
-        <div className="shell">
-          {/* Champagne, not Antique Gold — see the note by the note-from-Shelby
-              eyebrow above; same room, same failing contrast otherwise. */}
-          <p className="eyebrow text-champagne">Our commitment</p>
-          <h2 className="mt-5 max-w-4xl font-serif text-3xl leading-tight md:text-5xl">
-            20% of net profits. Every month. Directly to Tucson.
-          </h2>
-          <hr className="my-8 h-px w-16 border-0 bg-bronze" />
+            <Reveal delay={120} className="mt-14 grid gap-10 lg:grid-cols-[1.05fr_0.95fr] lg:items-center lg:gap-16">
+              <DocumentaryImage
+                src={PHOTO.respect}
+                alt="An afternoon at the StandUp for Kids Tucson Outreach Center: a young person playing acoustic guitar at the table while a volunteer listens. The organization's RESPECT graphic reads: We StandUp for every individual, listening, honoring their voices and treating them with dignity."
+                ratio="1094 / 1062"
+                focal="50% 50%"
+                sizes="(min-width: 1024px) 52vw, 100vw"
+              />
 
-          <div className="max-w-prose space-y-4 text-cream/90">
-            <p>
-              Each calendar month, FOUNDER will donate an amount equal to 20% of the net profits
-              earned from sales of the LALALOCA Collection directly to StandUp for Kids Tucson.
-            </p>
-            <p>This is not a limited campaign or a one-time launch donation.</p>
-            <p>
-              It is part of the continuing purpose of the collection the young people helped create.
-            </p>
+              <div>
+                <p className="eyebrow text-bronze-ink">The point</p>
+                <p className="mt-5 font-serif text-[clamp(2rem,4vw,3.8rem)] font-light leading-[1.08] text-charcoal">
+                  Your ideas have value.
+                  <br />
+                  Your voice can shape something real.
+                </p>
+                <p className="mt-7 max-w-md text-[1rem] leading-[1.8] text-charcoal/72">
+                  For young people who have spent too much time being spoken about instead of
+                  listened to, being asked for an opinion can carry more weight than it appears to.
+                </p>
+              </div>
+            </Reveal>
           </div>
+        </section>
 
-          <div className="mt-10 flex flex-wrap gap-3">
-            <TrackedLink href="/shop" event="young_founders_shop_click" variant="ghost">
-              Shop the LALALOCA Collection
-            </TrackedLink>
-            <TrackedLink
-              href={STANDUP_TUCSON}
-              event="young_founders_learn_click"
-              external
-              variant="ghost"
-            >
-              Learn about StandUp for Kids Tucson
-            </TrackedLink>
-            <TrackedLink
-              href={STANDUP_TUCSON}
-              event="young_founders_donate_click"
-              external
-              variant="ghost"
-            >
-              Donate directly
-            </TrackedLink>
+        <section className="relative isolate overflow-hidden bg-night-deep">
+          <Image
+            src="/editorial/rooms/young-founders-window.webp"
+            alt=""
+            fill
+            sizes="100vw"
+            className="object-cover object-center opacity-45"
+          />
+          <div aria-hidden className="absolute inset-0 bg-[linear-gradient(90deg,rgba(6,17,14,0.98)_0%,rgba(6,17,14,0.9)_46%,rgba(6,17,14,0.45)_100%)]" />
+          <div className="shell relative py-24 md:py-32">
+            <Reveal className="max-w-[46rem]">
+              <p className="eyebrow text-champagne">The commitment</p>
+              <div className="mt-4 font-serif text-[clamp(6rem,16vw,13rem)] font-light leading-[0.78] tracking-[-0.06em] text-rose">
+                20%
+              </div>
+              <h2 className="mt-7 max-w-[12ch] font-serif text-[clamp(2.6rem,5vw,4.8rem)] font-light leading-[0.96] text-cream">
+                of LALALOCA net profits. Every month. Directly to StandUp for Kids Tucson.
+              </h2>
+              <p className="mt-8 max-w-[40rem] text-[1rem] leading-[1.8] text-cream/72">
+                This is not a launch-week donation and not a limited campaign. Each calendar
+                month, FOUNDER will donate an amount equal to 20% of the net profits earned
+                from sales of the LALALOCA Collection directly to the Tucson chapter.
+              </p>
+              <div className="mt-10 flex flex-wrap gap-4">
+                <TrackedLink href="/shop" event="young_founders_shop_click">
+                  Shop LALALOCA
+                </TrackedLink>
+                <TrackedLink href={STANDUP_TUCSON} event="young_founders_donate_click" external variant="ghost">
+                  Give directly
+                </TrackedLink>
+              </div>
+            </Reveal>
           </div>
-        </div>
-      </EditorialRoomSection>
+        </section>
 
-      {/* ---- Hold open their room ----
-          A closing call to action, not reading, so — like the profile
-          template's own closing section — it leaves paper and goes back to a
-          dark room ahead of the (dark) footer, rather than ending the page on
-          a cream band that then has to explain itself to the footer above it. */}
-      <EditorialRoomSection surface="marble">
-        <div className="shell max-w-3xl text-center">
-          <h2 className="font-serif text-3xl leading-tight text-cream md:text-5xl">
-            Hold open their room.
-          </h2>
-          <hr className="mx-auto my-8 h-px w-16 border-0 bg-bronze" />
-          <div className="space-y-4 text-cream/85">
-            <p>Some rooms are claimed.</p>
-            <p>Some rooms are created.</p>
-            <p>
-              And some rooms matter because someone chose to hold the door open for the person
-              coming next.
-            </p>
-            <p>
-              LALALOCA started with young people who deserved to know that their ideas mattered.
-              Every purchase helps us continue showing them that they do.
-            </p>
+        <section className="bg-shell py-20 text-charcoal md:py-28">
+          <div className="shell grid gap-14 lg:grid-cols-[0.9fr_1.1fr] lg:gap-20">
+            <Reveal>
+              <p className="eyebrow text-bronze-ink">What a purchase can do</p>
+              <h2 className="mt-5 max-w-[10ch] font-serif text-[clamp(3rem,6vw,5.2rem)] font-light leading-[0.94]">
+                It does not buy someone’s story.
+              </h2>
+            </Reveal>
+
+            <Reveal delay={100}>
+              <div className="max-w-[44rem]">
+                <p className="font-serif text-[clamp(1.5rem,2.7vw,2.25rem)] leading-[1.28] text-charcoal">
+                  It helps keep support moving toward the people doing the work.
+                </p>
+                <p className="mt-7 text-[1rem] leading-[1.85] text-charcoal/72">
+                  One skincare purchase will not end youth homelessness. What it can do is become
+                  part of a consistent monthly commitment to an organization providing street
+                  outreach, mentoring, guidance, referrals, and drop-in support.
+                </p>
+                <div className="mt-9 border-l border-bronze pl-6 text-[1rem] leading-[1.9] text-charcoal/76">
+                  <p>The volunteer who returns.</p>
+                  <p>The mentor who listens.</p>
+                  <p>The Outreach Center door that opens.</p>
+                  <p>The moment someone asks, “What do you think?” — and waits for the answer.</p>
+                </div>
+              </div>
+            </Reveal>
           </div>
-          <p className="mt-10 font-serif text-3xl leading-snug text-cream md:text-4xl">
-            The room is yours.
-            <br />
-            <span className="text-rose">Hold the door.</span>
-          </p>
-          <div className="mt-10 flex flex-wrap justify-center gap-3">
-            <TrackedLink href="/shop" event="young_founders_shop_click">
-              Shop LALALOCA
-            </TrackedLink>
-            <TrackedLink
-              href={STANDUP_TUCSON}
-              event="young_founders_donate_click"
-              external
-              variant="ghost"
-            >
-              Give directly
-            </TrackedLink>
+        </section>
+
+        <section className="border-y border-bronze/15 bg-founder-green py-20 md:py-28">
+          <div className="shell grid gap-14 lg:grid-cols-[1.1fr_0.9fr] lg:items-center lg:gap-20">
+            <Reveal>
+              <p className="eyebrow text-champagne">What comes next</p>
+              <h2 className="mt-5 max-w-[11ch] font-serif text-[clamp(3rem,6vw,5.4rem)] font-light leading-[0.94] text-cream">
+                The work continues after the launch.
+              </h2>
+              <div className="mt-8 max-w-[42rem] space-y-5 text-[1rem] leading-[1.85] text-cream/76">
+                <p>
+                  The next chapter is not another campaign image. It is continuing to show up:
+                  outreach, mentorship, fundraising, introductions, and community support.
+                </p>
+                <p>
+                  FOUNDER is also helping support the upcoming Grit &amp; Gratitude Gala for
+                  StandUp for Kids Tucson — another way to bring people, resources, and attention
+                  into the room.
+                </p>
+              </div>
+            </Reveal>
+
+            <Reveal delay={100}>
+              <div className="border border-bronze/25 bg-night-deep/55 p-7 md:p-9">
+                <p className="text-[0.6rem] uppercase tracking-[0.22em] text-champagne">The next invitation</p>
+                <p className="mt-5 font-serif text-[clamp(2rem,3.6vw,3.2rem)] leading-[1.08] text-cream">
+                  Care is not the finish line.
+                  <br />
+                  Showing up is.
+                </p>
+                <div className="mt-8">
+                  <TrackedLink href={STANDUP_TUCSON} event="young_founders_learn_click" external variant="ghost">
+                    Learn about StandUp for Kids Tucson
+                  </TrackedLink>
+                </div>
+              </div>
+            </Reveal>
           </div>
-        </div>
-      </EditorialRoomSection>
+        </section>
+
+        <EditorialRoomSection surface="marble">
+          <div className="shell max-w-4xl text-center">
+            <Reveal>
+              <p className="eyebrow text-champagne">The Young Founders’ Room</p>
+              <h2 className="mt-5 font-serif text-[clamp(3.4rem,7vw,6rem)] font-light leading-[0.9] text-cream">
+                They helped shape the first collection.
+                <span className="mt-3 block italic text-rose">The promise is to keep showing up.</span>
+              </h2>
+              <p className="mx-auto mt-8 max-w-2xl text-[1rem] leading-[1.8] text-cream/70">
+                Shop the collection they helped influence, support the Tucson chapter directly,
+                or simply spend a few minutes learning about the work.
+              </p>
+              <div className="mt-10 flex flex-wrap justify-center gap-4">
+                <TrackedLink href="/shop" event="young_founders_shop_click">
+                  Shop LALALOCA
+                </TrackedLink>
+                <TrackedLink href={STANDUP_TUCSON} event="young_founders_donate_click" external variant="ghost">
+                  Give directly
+                </TrackedLink>
+              </div>
+            </Reveal>
+          </div>
+        </EditorialRoomSection>
       </HouseShell>
     </>
   );

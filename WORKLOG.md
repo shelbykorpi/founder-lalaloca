@@ -2036,3 +2036,10 @@ Shelby: "add ring girl with WCK and Body Paint Model with Playboy Mansion Events
 - **WCK logo** (184×194 badge, white letters and fighter on a red sunburst). The white letters and fighter became cream. The red badge was dropped, and the white outside the badge was removed by flood fill from the corners. Saved as `public/brand/press/wck-cream.png` (156×188), shown at rem 4.75.
 - **Playboy logo** (3840×2160, black on transparent). Recoloured cream with the eye kept as a cutout, cropped and resized to 500×600. Saved as `public/brand/press/playboy-cream.png`, shown at rem 5.75.
 - The profile now has five credits: three plus two on desktop, stacked on phones. Both checked. No component change.
+
+## 2026-10-01 23:10Z: AgriNext nomination on Shelby's profile; the press band becomes a grid (Cowork FOUNDER team)
+
+Shelby: "Nominated for AgriNext Awards & Conference 2027", with the logo attached.
+- **Caption.** "Nominated, AgriNext Awards 2027", her words shortened. Alt text is "AgriNext Conference". It's a nomination, not a win, and it's worded that way.
+- **Logo.** The green and black on white became cream, with the white gaps between the leaves kept as cutouts. Cropped and resized to 700×188 as `public/brand/press/agrinext-cream.png`, shown at rem 3.25.
+- **Band.** Six credits now. The flex-wrap broke into rows of 3/2/1 because the Playboy caption is wide, so the list became a grid: 1 column on phones, 2 at sm, 3 at lg. Desktop is two even rows of three. Checked at 1440 and 390.

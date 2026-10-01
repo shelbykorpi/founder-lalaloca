@@ -125,6 +125,13 @@ export const profiles: FoundHerProfile[] = [
         caption: "Body paint model at Playboy Mansion events",
         logo: { src: "/brand/press/playboy-cream.png", width: 500, height: 600, rem: 5.75 },
       },
+      {
+        /* Her words in chat, 1 Oct 2026: "Nominated for AgriNext Awards &
+           Conference 2027". */
+        publication: "AgriNext Conference",
+        caption: "Nominated, AgriNext Awards 2027",
+        logo: { src: "/brand/press/agrinext-cream.png", width: 700, height: 188, rem: 3.25 },
+      },
     ],
     answers: [
       {

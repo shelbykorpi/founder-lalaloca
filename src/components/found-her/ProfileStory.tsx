@@ -166,7 +166,7 @@ export function ProfileStory({ profile }: { profile: FoundHerProfile }) {
                   "--row-h": `${Math.max(...profile.press.map((p) => p.logo.rem))}rem`,
                 } as React.CSSProperties
               }
-              className="mt-8 flex flex-wrap items-start justify-center gap-x-16 gap-y-10"
+              className="mt-8 grid grid-cols-1 gap-x-10 gap-y-10 sm:grid-cols-2 lg:grid-cols-3"
             >
               {profile.press.map((item) => (
                 <li key={item.publication} className="flex flex-col items-center">

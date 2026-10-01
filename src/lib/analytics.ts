@@ -75,6 +75,7 @@ export type TrackEvent =
   | "threshold_open"
   | "threshold_shop_direct"
   | "hall_plaque"
+  | "concierge_open"
   | "concierge_occasion";
 
 /** GA4 reserved names. Anything unmapped passes through as a custom event. */

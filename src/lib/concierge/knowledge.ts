@@ -183,7 +183,7 @@ const BRAND_FACTS: Fact[] = [
   {
     id: "brand:three",
     cues: ["why three", "only three", "more products", "fourth", "range"],
-    text: `There are three serums because a fourth serum has not earned its place. Hydration, brightness, cushion — morning and night. They are built to sit together, which is what the Trio is. The rest of the house is the FOUNDER Collection — five pieces for the routine around the serums, sold as a preorder against the first run.`,
+    text: `There are three LALALOCA serums because a fourth serum has not earned its place. Hydration, brightness, cushion — morning and night. They are built to sit together, which is what the Trio is. The rest of the house is the five-piece FOUNDER Collection: cleanse, wash, moisturise, eyes and finish. The current product records are in stock; Shopify availability on each page is the final word if an item sells out.`,
   },
   {
     id: "brand:claims",
@@ -201,7 +201,7 @@ const BRAND_FACTS: Fact[] = [
       `FOUND HER is the brand's stories platform: women writing about what they started, survived, changed, finished, and finally gave themselves credit for. "${BRAND.campaign}"`,
       `Submissions go through the form on the Found Her page, at /found-her#share. No purchase is ever required to be featured — that is a rule, not a promotion.`,
       `Two separate permissions are asked for and neither is assumed: permission to reply, and permission to consider it for publication. Either can be withdrawn.`,
-      `A person reads every submission. Profiles are edited by the FOUNDER team and the contributor approves the final text before anything is published. Nothing is invented.`,
+      `A person reads every submission. Profiles are edited by the FOUNDER team. The site must never claim final-text approval unless the contributor has actually approved it; publication and approval state are kept distinct in the profile record. Nothing is invented.`,
     ].join("\n"),
   },
   {

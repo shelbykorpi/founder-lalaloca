@@ -192,14 +192,9 @@ export const profiles: FoundHerProfile[] = [
     tagline: "Redefined success. On her own terms.",
     standfirst:
       "She spent years on the path she was supposed to follow. Losing her mom changed how she looked at time — so she moved across the country, started over, and began building a life she was excited to wake up to.",
-    /* PENDING HER APPROVAL. Shelby chose to publish ahead of Julie's
-       sign-off on 19 August 2026 — publishedOn records that date for
-       feeds and schema, and her page omits the "she read and approved"
-       line until approvedOn carries her real date. When Julie says yes:
-       put her date in approvedOn and delete publishedOn.
-       Answers are verbatim from her submission of 15 August 2026. */
-    approvedOn: "PENDING",
-    publishedOn: "2026-08-19",
+    /* Approved by Julie for publication. Answers are verbatim from her
+       submission of 15 August 2026. */
+    approvedOn: "2026-09-30",
     answers: [
       {
         question: "When did you find her?",

@@ -42,7 +42,7 @@ export const WINGS: Wing[] = [
     /* Slug kept (the key remembers visited wings by slug); the plaque says
        what is actually through this door — the serums (30 Sept 2026). */
     plaque: "The Serum Salon",
-    line: "Three lights. Pick the one that’s yours.",
+    line: "Serums · Step out here.",
     href: "/shop",
     matches: (p, h) =>
       p === "/shop" ||
@@ -54,7 +54,7 @@ export const WINGS: Wing[] = [
   {
     slug: "boardroom",
     plaque: "The Boardroom",
-    line: "Take the head of the table.",
+    line: "The collection · Your floor.",
     href: "/founder-collection",
     matches: (p) => p === "/founder-collection" || p.startsWith("/the-next-move"),
     door: "/editorial/rooms/collection-boardroom-open-m.webp",
@@ -62,7 +62,7 @@ export const WINGS: Wing[] = [
   {
     slug: "gallery",
     plaque: "Found Her",
-    line: "The women who did it first.",
+    line: "Stories · Step out here.",
     href: "/found-her",
     matches: (p) => p.startsWith("/found-her") || p === "/our-story",
     door: "/editorial/rooms/found-her-hall-pink-m.webp",
@@ -70,7 +70,7 @@ export const WINGS: Wing[] = [
   {
     slug: "library",
     plaque: "The Library",
-    line: "Read the label. Then decide.",
+    line: "Ingredients · Research · Your floor.",
     href: "/library",
     matches: (p) => p.startsWith("/library"),
     door: "/editorial/rooms/library-shelves-m.webp",
@@ -78,7 +78,7 @@ export const WINGS: Wing[] = [
   {
     slug: "young-founders",
     plaque: "Young Founders’ Room",
-    line: "Pull up a chair.",
+    line: "The next generation · Your floor.",
     href: "/young-founders-room",
     matches: (p) => p === "/young-founders-room",
     door: "/editorial/rooms/young-founders-fireplace-m.webp",
@@ -86,7 +86,7 @@ export const WINGS: Wing[] = [
   {
     slug: "salon",
     plaque: "The Salon",
-    line: "By invitation.",
+    line: "Private floor.",
     href: "/salon",
     locked: true,
     matches: (p) => p === "/salon",

@@ -10,36 +10,16 @@ import { track } from "@/lib/analytics";
 import s from "./grand-hall.module.css";
 
 /**
- * THE GRAND HALL — a hall you stand in, not a wall you read (brief §4).
+ * THE GRAND HALL — the elevator lobby of the house.
  *
- * 12 September 2026, third pass. The first was six engraved plaques on
- * panelling. Shelby: "this is not giving the immersive feeling of being
- * located in each room or that you're navigating yourself to each room."
- * Right — a plaque tells you a room exists; it does not put you in front of
- * its door. So the hall is now the house's own doors, at standing height,
- * along a marble floor: the brass-framed emerald double doors from
- * /door/edoor-scene.webp with each wing's own room photographed through the
- * opening. You look along the hall; the door in front of you stands open and
- * lit; the others wait in shadow further down. Hover or focus and a door
- * swings open. Press it and you WALK THROUGH — the room grows out of the
- * doorway until it is the whole frame, and then you are on its page
- * (WalkThrough.tsx). On a phone the hall is a corridor you slide along.
+ * The imagery reads as a bank of emerald elevator doors, so the narrative
+ * now follows that architecture instead of describing a corridor of rooms.
+ * Each elevator is a destination inside FOUNDER: choose where you are going
+ * next, the doors part, and the next room fills the frame. On a phone, the
+ * elevator bank becomes a horizontal selector.
  *
- * SAME DOORS AS THE MAP, ON PURPOSE. The House Map became a hall of doors
- * earlier today, at 15rem. This is the same construction at the scale of a
- * room, in the page rather than over it — the map is the pocket plan, this is
- * the hall. The leaf geometry is the map's: measured by matching leaf pixels
- * to the scene.
- *
- * NO NEW PHOTOGRAPHY WAS COMPOSITED. Every image here is one the house
- * already has — the door plate and the room plates from rooms.ts. A door
- * with a room behind it is two photographs in a frame, not a montage, and
- * the leaves swinging are the leaves the entrance uses.
- *
- * WHAT DOES NOT CHANGE: every door is a real <Link>. A modifier-click, a
- * crawler, no JavaScript or reduced motion gets a plain navigation. The hall
- * itself is not in the row — a door back into the room you are standing in
- * is furniture.
+ * Every destination remains a real <Link>, so modifier-clicks, crawlers,
+ * reduced motion and no-JavaScript navigation still work normally.
  */
 const OPENING = { left: "22.556%", top: "9.406%", width: "54.78%", height: "87.433%" } as const;
 
@@ -92,23 +72,23 @@ export function GrandHall() {
   return (
     <section className={s.hall} aria-labelledby="hall-doors" onKeyDown={onKey}>
       <div className={s.words}>
-        <p className="room-label">The Grand Hall</p>
+        <p className="room-label">The Grand Hall · Elevator Lobby</p>
         <h2 id="hall-doors" className={`${s.title} font-serif font-light text-cream`}>
-          Six doors off the hall.
+          Choose your floor.
         </h2>
         <p className={s.lede}>
-          Five doors are open; the sixth is shut for now. The lights stay on in
-          every room you find.
+          Five destinations are open. One remains private. Step in and choose
+          where FOUNDER takes you next.
         </p>
       </div>
 
       <div className={s.corridor}>
-        <ul ref={trackRef} className={s.track} aria-label="The doors off the Grand Hall">
+        <ul ref={trackRef} className={s.track} aria-label="Elevators to the rooms of FOUNDER">
           {doors.map((wing, i) => {
             const found = key.roomsVisited.includes(wing.slug);
             const isActive = i === active;
             const cls = [s.bay, isActive ? s.bayOn : "", found ? s.bayFound : "", wing.locked ? s.bayLocked : ""].join(" ");
-            const label = `${wing.plaque} · ${wing.locked ? "By invitation" : wing.line}`;
+            const label = `${wing.plaque} · ${wing.locked ? "Private floor" : wing.line}`;
             return (
               <li
                 key={wing.slug}
@@ -120,7 +100,7 @@ export function GrandHall() {
                 <Link
                   href={wing.href}
                   className={s.door}
-                  aria-label={`${wing.plaque}${wing.locked ? ", by invitation" : ""}. Enter this room.`}
+                  aria-label={wing.locked ? `${wing.plaque}. Private floor.` : `Take the elevator to ${wing.plaque}.`}
                   onFocus={() => setActive(i)}
                   onClick={(e) => {
                     track("hall_plaque", { to: wing.slug, found });
@@ -172,7 +152,7 @@ export function GrandHall() {
 
                   <span className={s.plaque}>
                     <span className={s.plaqueName}>{wing.plaque}</span>
-                    <span className={s.plaqueLine}>{wing.locked ? "By invitation" : wing.line}</span>
+                    <span className={s.plaqueLine}>{wing.locked ? "Private floor · By invitation" : wing.line}</span>
                     <span className={s.plaqueFoot}>
                       {wing.locked ? (
                         <>
@@ -180,10 +160,10 @@ export function GrandHall() {
                             <rect x="1.5" y="6" width="9" height="7" rx="1" fill="none" stroke="currentColor" strokeWidth="1" />
                             <path d="M3.5 6V4a2.5 2.5 0 015 0v2" fill="none" stroke="currentColor" strokeWidth="1" />
                           </svg>
-                          Shut
+                          Private floor
                         </>
                       ) : (
-                        "Walk in →"
+                        "Take me there →"
                       )}
                     </span>
                   </span>
@@ -194,13 +174,13 @@ export function GrandHall() {
         </ul>
 
         <div className={s.controls}>
-          <button type="button" className={s.arrow} onClick={() => go(active - 1)} aria-label="Previous door">
+          <button type="button" className={s.arrow} onClick={() => go(active - 1)} aria-label="Previous elevator">
             <svg viewBox="0 0 24 24" aria-hidden><path d="M15 5l-7 7 7 7" fill="none" stroke="currentColor" strokeWidth="1.2" strokeLinecap="round" strokeLinejoin="round" /></svg>
           </button>
           <span className={s.count} aria-live="polite">
-            {String(active + 1).padStart(2, "0")} · {doors[active].plaque}
+            Next stop · {doors[active].plaque}
           </span>
-          <button type="button" className={s.arrow} onClick={() => go(active + 1)} aria-label="Next door">
+          <button type="button" className={s.arrow} onClick={() => go(active + 1)} aria-label="Next elevator">
             <svg viewBox="0 0 24 24" aria-hidden><path d="M9 5l7 7-7 7" fill="none" stroke="currentColor" strokeWidth="1.2" strokeLinecap="round" strokeLinejoin="round" /></svg>
           </button>
         </div>

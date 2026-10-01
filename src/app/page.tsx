@@ -11,6 +11,7 @@ import { RoomHero } from "@/components/house/RoomHero";
 import { Vanity } from "@/components/house/Vanity";
 import { ThresholdDoors } from "@/components/house/ThresholdDoors";
 import { GrandHall } from "@/components/house/GrandHall";
+import { ConciergeLauncher } from "@/components/concierge/ConciergeLauncher";
 import { BRAND } from "@/lib/brand";
 import { FOUNDER_COLLECTION } from "@/lib/founderCollection";
 import { NEXT_MOVE, availabilityLine, type Availability } from "@/lib/nextMove";
@@ -220,6 +221,15 @@ export default function HomePage() {
                 Meet FOUND HER
               </Link>
             </div>
+            <div className="mt-6 flex flex-wrap items-center gap-x-5 gap-y-3 text-[0.7rem] uppercase tracking-[0.18em] text-cream/60">
+              <span>Not sure where to start?</span>
+              <ConciergeLauncher
+                source="home-hero"
+                className="hairline text-champagne"
+              >
+                Ring the concierge
+              </ConciergeLauncher>
+            </div>
           </div>
         </div>
       </section>
@@ -245,6 +255,17 @@ export default function HomePage() {
               <span className="mt-2 block font-serif text-[1.35rem] text-cream">Three serums. Three kinds of day.</span>
               <span className="mt-2 block text-sm text-cream/55 group-hover:text-cream/75">Choose yours →</span>
             </Link>
+          </div>
+          <div className="mt-5 flex flex-wrap items-center justify-between gap-3 border-t border-bronze/10 pt-5">
+            <p className="text-sm text-cream/55">
+              Need a recommendation, an order answer, or help finding your way through the house?
+            </p>
+            <ConciergeLauncher
+              source="home-house-rail"
+              className="btn btn-ghost-light"
+            >
+              Ring for service
+            </ConciergeLauncher>
           </div>
         </div>
       </section>

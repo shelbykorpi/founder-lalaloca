@@ -10,6 +10,7 @@ import { HONEYPOT_FIELD } from "@/lib/formGuard";
 import { track } from "@/lib/analytics";
 import { useScrolledPast } from "@/lib/useScrolledPast";
 import { useBuyBandClear } from "@/lib/useBuyBandClear";
+import { CONCIERGE_OPEN_EVENT } from "./ConciergeLauncher";
 
 /**
  * The concierge: a brass bell on the desk, and a leather folio behind it.
@@ -112,6 +113,19 @@ export function Concierge() {
     document.addEventListener("keydown", onKey);
     return () => document.removeEventListener("keydown", onKey);
   }, [open]);
+
+  /* A page can now ring the concierge directly — from the homepage,
+     product pages, or any future room — without duplicating chat state. */
+  useEffect(() => {
+    const onOpen = () => {
+      setOpen(true);
+      setRinging(true);
+      setTimeout(() => setRinging(false), 1200);
+      setTimeout(() => fieldRef.current?.focus(), 480);
+    };
+    window.addEventListener(CONCIERGE_OPEN_EVENT, onOpen);
+    return () => window.removeEventListener(CONCIERGE_OPEN_EVENT, onOpen);
+  }, []);
 
   /* `at` exists because an occasion sets the desk and asks in the same tick,
      and `setDesk` has not landed by the time the request is built. Everything

@@ -4,7 +4,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { useEffect, useRef, useState } from "react";
 import { useBag } from "./BagProvider";
-import { track } from "@/lib/analytics";
+import { itemBrandFor, track } from "@/lib/analytics";
 import { formatPrice } from "@/lib/products";
 import { cartPermalink } from "@/lib/shopifyLinks";
 
@@ -59,7 +59,7 @@ export function BagDrawer() {
         item_id: l.id,
         item_name: l.name,
         item_category: l.category,
-        item_brand: "LALALOCA",
+        item_brand: itemBrandFor(l.id),
         price: l.price,
         quantity: l.quantity,
       })),
@@ -80,7 +80,7 @@ export function BagDrawer() {
           item_id: line.id,
           item_name: line.name,
           item_category: line.category,
-          item_brand: "LALALOCA",
+          item_brand: itemBrandFor(line.id),
           price: line.price,
           quantity: line.quantity,
         },

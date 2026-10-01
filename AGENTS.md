@@ -54,13 +54,38 @@ finished hero swaps in one week.
 - **20% of net profits** (Young Founders' Room): four occurrences, same
   wording, never paraphrased, no legal gloss added.
 
+## The agent team (installed 1 Oct 2026)
+
+Shelby's operating model for FOUNDER work. **Founder Chief** orchestrates and
+specialists do the work: creative-director, ux-cro-director,
+frontend-engineer, copy-brand-voice, product-merchandising, growth-marketing,
+crm-retention-sales, found-her-community, visual-content-director and
+claims-compliance. **brand-council-auditor** reviews material changes before
+they ship.
+
+- Roles: `docs/agents/*.md`. Routes, approvals and the quality bar:
+  `docs/AGENT_TEAM_OS.md`. Brand OS: `brand/FOUNDER_BRAND_OS.md`. Workflows
+  (site audit, launch, daily rhythm, approval matrix): `workflows/`. Skill:
+  `docs/skills/founder-brand/`.
+- To make Claude Code load the roles as subagents, Shelby copies them into
+  `.claude/` once (remote tools may not write there):
+  `mkdir -p .claude/agents .claude/skills && cp docs/agents/*.md .claude/agents/ && cp -R docs/skills/founder-brand .claude/skills/`
+- Precedence: Shelby's instruction in the task, then the Master Brand Board,
+  then approved packaging and photography, then the team OS, then the site.
+  Facts in this file (stock, prices, policies, protected lines) outrank the
+  team docs. Fix the lower source; never average the two.
+- The site never claims a change is live, sent or deployed unless the tool
+  returned success. Prices, SKUs, shipping, refund or legal terms, paid spend,
+  mass sends, published FOUND HER stories and major redesigns need Shelby's
+  approval first.
+
 ## Practical notes
 
 - Build: `npm run build`. It must pass before any commit. Verify changes at
   390px and 1440px — screenshots, not assumptions.
 - Commit with explicit file paths, never `git add -A`.
-- Hero images: `hero-open-door.webp` (desktop composite) and
-  `hero-open-door-m.webp` (mobile, cropped past the soft-focus F) are the
-  approved pair. `_candidates/` holds unadopted proposals — do not wire
+- Homepage hero (since 30 Sept 2026): `editorial/rooms/threshold-hall.webp`
+  (1672×941) and `threshold-hall-m.webp` (705×941), read from the threshold
+  record in `lib/rooms.ts`. `_candidates/` holds unadopted proposals — do not wire
   them in without Shelby's approval.
 - The desk app (~/FOUNDER-Desk) has its own AGENTS.md. Same rules.

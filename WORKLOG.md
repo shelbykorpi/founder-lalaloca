@@ -1698,3 +1698,15 @@ always carries it (env NEXT_PUBLIC_SAME_AS adds to it, never replaces);
 llms.txt line. Email: shelby@founderbeauty.co forwards through ImprovMX
 (MX mx1/mx2.improvmx.com); a Shopify email to it landed in Gmail on 15 Aug.
 Verified: tsc, eslint, build; schema and footer at 1440/390.
+
+## 2026-10-01 · Claude (Cowork) — agent team installed
+
+Shelby's `founder_claude_agent_team` package: 12 roles in `docs/agents/`,
+`brand/FOUNDER_BRAND_OS.md`, `workflows/` (4), `docs/skills/founder-brand/`
+(remote tools may not write `.claude/`; AGENTS.md has the one-line copy),
+and the package CLAUDE.md as `docs/AGENT_TEAM_OS.md` (the root CLAUDE.md
+still points at AGENTS.md + WORKLOG.md — not overwritten). AGENTS.md gains
+"The agent team" section (precedence: facts here beat team docs) and its
+stale hero note now names threshold-hall. No site code touched. Also saved:
+project doc `claude/founder-agent-team-os.md`; account skills
+founder-beauty-brand, founder-beauty-team, founder-site-ship.

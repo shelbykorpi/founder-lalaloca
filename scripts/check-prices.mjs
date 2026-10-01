@@ -31,11 +31,17 @@ const HANDLES = {
   "c-me-glow": "c-me-glow-vitamin-c-brightening-serum-with-niacinamide-50ml-full-size",
   "bounce-back": "bounce-back-collagen-firming-serum-marine-face-neck-lifting-50ml",
   "all-three": "lalaloca-serum-trio-hyaluronic-acid-vitamin-c-collagen-face-serums",
+  "hold-the-room": "hold-the-room-moisturizing-cream",
+  "opening-line": "opening-line-oil-to-milk-cleanser-camomile-sea-buckthorn-150-ml",
+  "clean-break": "clean-break-purifying-face-wash-mate-leaf-iceland-moss-gentle-daily-cleanser-for-blemish-prone-skin-140ml",
+  "double-take": "double-take-peptide-eye-cream-hexapeptide-11-vitamin-c-hydrating-eye-cream-for-fine-lines-15ml",
+  "smooth-talker": "smooth-talker-ceramide-tone-stick-skin-evening-stick-with-ceramides-cocoa-butter-12g",
 };
 
 async function repoPrices() {
   const products = await readFile("src/lib/products.ts", "utf8");
   const founder = await readFile("src/lib/founderCollection.ts", "utf8");
+  const nextMove = await readFile("src/lib/nextMove.ts", "utf8");
 
   const out = {};
   // Every serum entry declares `slug: "x"` ... `price: N` in order.
@@ -46,6 +52,11 @@ async function repoPrices() {
   if (set) out["all-three"] = Number(set[1]);
   const htr = founder.match(/slug: "hold-the-room"[\s\S]*?price: ([\d.]+)/);
   if (htr) out["hold-the-room"] = Number(htr[1]);
+
+  for (const slug of ["opening-line", "clean-break", "double-take", "smooth-talker"]) {
+    const match = nextMove.match(new RegExp(`slug: "${slug}"[\\s\\S]*?price: ([\\d.]+)`));
+    if (match) out[slug] = Number(match[1]);
+  }
   return out;
 }
 

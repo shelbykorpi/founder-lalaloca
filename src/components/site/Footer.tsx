@@ -13,8 +13,8 @@ import { EmailSignup } from "./EmailSignup";
  */
 export function Footer() {
   return (
-    <footer className="border-t border-bronze/20 bg-night-deep text-cream">
-      <div className="shell grid gap-12 py-14 md:py-16 lg:grid-cols-[1.1fr_1.4fr] lg:gap-20">
+    <footer className="luxury-footer border-t border-bronze/20 bg-night-deep text-cream">
+      <div className="shell grid gap-14 py-16 md:py-20 lg:grid-cols-[1.05fr_1.55fr] lg:gap-24">
         <div>
           {/* Colourway 05, Evening: Champagne Gold FOUNDER over Champagne
               Cream BEAUTY on Charcoal. It read `text-charcoal` until 11 August
@@ -25,7 +25,7 @@ export function Footer() {
             className="text-champagne"
             beautyClassName="text-cream"
           />
-          <p className="mt-4 max-w-sm font-serif text-[1.75rem] leading-tight text-cream/90">
+          <p className="mt-5 max-w-sm font-serif text-[clamp(1.8rem,3vw,2.4rem)] leading-[1.05] text-cream/90">
             {BRAND.tagline}
           </p>
           <EmailSignup source="footer" />

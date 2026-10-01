@@ -52,9 +52,9 @@ export function LineCard({
   action?: ReactNode;
 }) {
   return (
-    <article className="flex flex-col">
+    <article className="luxury-product-card flex flex-col">
       <Link href={href} className="group/card block" aria-label={name}>
-        <div className="relative aspect-[4/5] w-full overflow-hidden bg-night-deep">
+        <div className="luxury-product-media relative aspect-[4/5] w-full overflow-hidden bg-night-deep">
           {image ? (
             <>
               <Image
@@ -63,7 +63,7 @@ export function LineCard({
                 fill
                 loading="lazy"
                 sizes="(max-width: 768px) 90vw, 30vw"
-                className={`object-cover ${
+                className={`luxury-product-image object-cover ${
                   hoverImage
                     ? "transition-opacity duration-500 group-hover/card:opacity-0"
                     : ""
@@ -76,7 +76,7 @@ export function LineCard({
                   fill
                   loading="lazy"
                   sizes="(max-width: 768px) 90vw, 30vw"
-                  className="object-cover opacity-0 transition-opacity duration-500 group-hover/card:opacity-100"
+                  className="luxury-product-image object-cover opacity-0 transition-opacity duration-500 group-hover/card:opacity-100"
                 />
               )}
             </>

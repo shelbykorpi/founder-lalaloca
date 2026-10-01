@@ -10,6 +10,7 @@ import { JsonLd, brandSchema, organizationSchema, websiteSchema } from "@/lib/se
 import { Analytics } from "@/components/site/Analytics";
 import { WebVitals } from "@/components/site/WebVitals";
 import { Concierge } from "@/components/concierge/Concierge";
+import { CONCIERGE_ENABLED } from "@/lib/concierge/enabled";
 import { HouseKeyProvider } from "@/components/house/HouseKeyProvider";
 import { FounderKey } from "@/components/house/FounderKey";
 
@@ -114,7 +115,7 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
               page, not page content, and putting it in the main landmark would
               have a screen reader announce it as part of whatever she is
               reading. */}
-          <Concierge />
+          {CONCIERGE_ENABLED && <Concierge />}
           {/* The Founder Key — the house control that follows her on every
               page. Fixed, bottom-left; the concierge bell keeps the right. */}
           <FounderKey />

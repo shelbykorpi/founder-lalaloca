@@ -2184,3 +2184,15 @@ Shelby: "we need to get the concierge working. if we need just auto generated an
 - **Gotcha.** `screenOutbound` bans "erases?" anywhere, so "nothing here erases a line" was blocked; it now reads "no cream makes a line disappear, ours included".
 - **Tested** with a bogus AI_GATEWAY_API_KEY, which reproduces the live failure: 24 customer questions, all 200, 0 blocked, each answer read and checked against the site. The client code is unchanged; it already renders `{ok, text, tag}`.
 - **To get full AI answers back:** fix the Vercel AI Gateway 403, or commit the direct-Anthropic route and set ANTHROPIC_API_KEY in Vercel (Shelby's key). The fallback stays as the safety net either way.
+
+## 2026-10-02 03:10Z: Concierge taken off the site until it's fixed (Cowork FOUNDER team)
+
+Shelby, mid-task: "remove the concierge from the site until it's fixed."
+- New `src/lib/concierge/enabled.ts`: `CONCIERGE_ENABLED = false`, the single switch.
+- `layout.tsx` now renders `{CONCIERGE_ENABLED && <Concierge />}`, so there's no bell or panel on any page.
+- `page.tsx`, while off:
+  - the hero's "Not sure where to start? · Ring the concierge" becomes "Find your serum" (/find-your-serum, same hairline style);
+  - the "Tonight in the house" rail's "Ring for service" becomes "Email us" (mailto CONTACT_MAILTO, same btn-ghost-light).
+- The API route and fallback.ts (b407359) stay deployed but unused. Nothing on the site calls them.
+- Verified on /, /shop and /found-her/aly-v at 1440 and 390: no bell, no "Ring…/Ask the concierge" text, and both replacements render.
+- **To restore:** set CONCIERGE_ENABLED = true. With the fallback in place it answers immediately, even before the AI is fixed.

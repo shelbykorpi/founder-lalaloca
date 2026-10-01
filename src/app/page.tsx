@@ -12,7 +12,8 @@ import { Vanity } from "@/components/house/Vanity";
 import { ThresholdDoors } from "@/components/house/ThresholdDoors";
 import { GrandHall } from "@/components/house/GrandHall";
 import { ConciergeLauncher } from "@/components/concierge/ConciergeLauncher";
-import { BRAND } from "@/lib/brand";
+import { CONCIERGE_ENABLED } from "@/lib/concierge/enabled";
+import { BRAND, CONTACT_MAILTO } from "@/lib/brand";
 import { FOUNDER_COLLECTION } from "@/lib/founderCollection";
 import { NEXT_MOVE, availabilityLine, type Availability } from "@/lib/nextMove";
 import { products, formatPrice, SET } from "@/lib/products";
@@ -223,12 +224,20 @@ export default function HomePage() {
             </div>
             <div className="mt-6 flex flex-wrap items-center gap-x-5 gap-y-3 text-[0.7rem] uppercase tracking-[0.18em] text-cream/60">
               <span>Not sure where to start?</span>
-              <ConciergeLauncher
-                source="home-hero"
-                className="hairline text-champagne"
-              >
-                Ring the concierge
-              </ConciergeLauncher>
+              {/* Concierge off until it's fixed (lib/concierge/enabled.ts):
+                  the serum finder answers "where to start" meanwhile. */}
+              {CONCIERGE_ENABLED ? (
+                <ConciergeLauncher
+                  source="home-hero"
+                  className="hairline text-champagne"
+                >
+                  Ring the concierge
+                </ConciergeLauncher>
+              ) : (
+                <Link href="/find-your-serum" className="hairline text-champagne">
+                  Find your serum
+                </Link>
+              )}
             </div>
           </div>
         </div>
@@ -286,12 +295,18 @@ export default function HomePage() {
             <p className="text-sm text-cream/55">
               Need a recommendation, an order answer, or help finding your way through the house?
             </p>
-            <ConciergeLauncher
-              source="home-house-rail"
-              className="btn btn-ghost-light"
-            >
-              Ring for service
-            </ConciergeLauncher>
+            {CONCIERGE_ENABLED ? (
+              <ConciergeLauncher
+                source="home-house-rail"
+                className="btn btn-ghost-light"
+              >
+                Ring for service
+              </ConciergeLauncher>
+            ) : (
+              <a href={CONTACT_MAILTO} className="btn btn-ghost-light">
+                Email us
+              </a>
+            )}
           </div>
         </div>
       </section>

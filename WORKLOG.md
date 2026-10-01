@@ -2097,3 +2097,11 @@ Shelby: "make sure Shopify is linked to the free shipping set up too."
 - **Fixed: the Shopify Shipping policy**, which checkout links in its footer. It still read "Express shipping is $15 and takes 1 to 2 business days. Orders are dispatched within one business day" for everything. The second paragraph now matches the site: "Standard shipping is free and takes 3 to 5 business days. Orders are dispatched within one business day, except orders that include FOUNDER Collection pieces, which ship on October 12. Every parcel is sent with tracking." The other paragraphs are unchanged.
   - The API token lacks `write_legal_policies`, so this was edited in Shopify admin in Chrome with Shelby's explicit OK. Verified via `shopPolicies`.
   - The Oct 12 reminder (trig_01GTwrLC27uaqksov1tzh6xF) now includes restoring the Express sentence.
+
+## 2026-10-02 00:45Z: Home: "The Anchor" section removed (Cowork FOUNDER team)
+
+Shelby: "remove 'the anchor section' from the page" (founderbeauty.co home).
+- Removed from `src/app/page.tsx`: the `<DoorFrame label="The Anchor" />` divider and the `#room-anchor` section (green room, Hold the Room vanity-mirror image, "Hold the room." headline, Shop Hold the Room · $36 button). Nothing linked to `#room-anchor`. All imports are still in use.
+- The vanity now flows straight into Room 06 · FOUND HER. Hold the Room remains on the home page as 03 · The Anchor in the vanity sequence, and on its own product page.
+- `public/products/hold-the-room-vanity-mirror.webp` is left in place.
+- Checked at 1440 and 390.

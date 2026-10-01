@@ -439,40 +439,6 @@ export default function HomePage() {
         lede="Five pieces. One sequence. Choose the piece that gets you ready for what comes next."
       />
 
-      <DoorFrame label="The Anchor" />
-
-      {/* ══ 04 · THE ANCHOR ═════════════════════════════════════════════════ */}
-      <section id="room-anchor" className="section bg-founder-green">
-        <div className="shell grid gap-12 lg:grid-cols-[0.8fr_1fr] lg:items-center lg:gap-20">
-          <Reveal>
-            <div className="relative aspect-[1003/1568] w-full overflow-hidden bg-emerald">
-              <Image
-                src="/products/hold-the-room-vanity-mirror.webp"
-                alt="Hold the Room and its Desert Pink carton on a marble dressing table in front of a gilt mirror, a woman fastening her cuff in the reflection."
-                fill
-                loading="lazy"
-                sizes="(max-width: 1024px) 90vw, 34vw"
-                className="object-cover"
-              />
-            </div>
-          </Reveal>
-          <Reveal delay={120}>
-            <p className="room-label">The Anchor · Hold the Room</p>
-            <h2 className="headline-house mt-5 text-balance text-cream">Hold the room.</h2>
-            <p className="mt-7 max-w-[42ch] text-[0.9375rem] leading-relaxed text-cream/80">
-              {holdTheRoom.hero} A peptide cream with hyaluronic acid and vitamin E.
-              It goes on after your serums, morning and night, and skin feels smooth
-              and comfortable.
-            </p>
-            <div className="mt-9">
-              <Link href="/products/hold-the-room" className="btn btn-primary">
-                Shop Hold the Room · {formatPrice(holdTheRoom.price)}
-              </Link>
-            </div>
-          </Reveal>
-        </div>
-      </section>
-
       {/* ══ 06 · FOUND HER ══════════════════════════════════════════════════ */}
       <section id="room-found-her" className="relative isolate overflow-hidden">
         <Image

@@ -1,6 +1,6 @@
 import { BRAND } from "@/lib/brand";
 import { OG_CONTENT_TYPE, OG_SIZE, ogCard } from "@/lib/og";
-import { getProfile, profiles } from "@/lib/profiles";
+import { approvedProfiles, getPublishedProfile } from "@/lib/profiles";
 
 /**
  * A card per story.
@@ -13,13 +13,13 @@ export const size = OG_SIZE;
 export const contentType = OG_CONTENT_TYPE;
 
 export function generateStaticParams() {
-  return profiles.map((profile) => ({ slug: profile.slug }));
+  return approvedProfiles.map((profile) => ({ slug: profile.slug }));
 }
 
 export default async function Image({ params }: { params: Promise<{ slug: string }> }) {
   const { slug } = await params;
 
-  const profile = getProfile(slug);
+  const profile = getPublishedProfile(slug);
   return ogCard({
     eyebrow: BRAND.editorial,
     title: profile?.name ?? BRAND.campaign,

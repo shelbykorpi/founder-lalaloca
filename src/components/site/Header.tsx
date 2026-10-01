@@ -3,7 +3,7 @@
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useEffect, useState } from "react";
-import { BRAND, PRIMARY_NAV } from "@/lib/brand";
+import { BRAND, PRIMARY_NAV, SHOP_NAV } from "@/lib/brand";
 import { track } from "@/lib/analytics";
 import { FOUNDER_ASPECT, Wordmark } from "./Wordmark";
 import { useBag } from "@/components/bag/BagProvider";
@@ -139,6 +139,32 @@ export function Header() {
             so the breakpoint stays at xl. */}
         <nav aria-label="Primary" className="hidden xl:block">
           <ul className="flex items-center gap-6 xl:gap-9">
+            <li className="group/shop relative">
+              <button
+                type="button"
+                className={`eyebrow inline-flex min-h-11 items-center gap-2 border-b pb-1 transition-colors ${
+                  pathname === "/shop" || pathname.startsWith("/shop/") || isCollectionRoom(pathname)
+                    ? "border-bronze text-champagne"
+                    : "border-transparent text-cream/70 hover:border-rose/60 hover:text-cream"
+                }`}
+                aria-haspopup="true"
+              >
+                Shop
+                <span aria-hidden className="text-[0.55rem] transition-transform group-hover/shop:rotate-180 group-focus-within/shop:rotate-180">⌄</span>
+              </button>
+              <div className="pointer-events-none absolute left-1/2 top-[calc(100%+0.5rem)] w-[22rem] -translate-x-1/2 translate-y-2 border border-bronze/20 bg-night-deep/98 p-2 opacity-0 shadow-2xl backdrop-blur-xl transition-all duration-200 group-hover/shop:pointer-events-auto group-hover/shop:translate-y-0 group-hover/shop:opacity-100 group-focus-within/shop:pointer-events-auto group-focus-within/shop:translate-y-0 group-focus-within/shop:opacity-100">
+                {SHOP_NAV.map((item) => (
+                  <Link
+                    key={item.href}
+                    href={item.href}
+                    className="block border-b border-bronze/10 px-4 py-4 last:border-0 hover:bg-cream/[0.04]"
+                  >
+                    <span className="block font-serif text-[1.35rem] leading-none text-cream">{item.label}</span>
+                    <span className="mt-2 block text-[0.65rem] uppercase tracking-[0.16em] text-cream/50">{item.note}</span>
+                  </Link>
+                ))}
+              </div>
+            </li>
             {PRIMARY_NAV.map((item) => {
               const active =
                 pathname === item.href || pathname.startsWith(`${item.href}/`);
@@ -204,7 +230,21 @@ export function Header() {
         className="border-t xl:hidden border-bronze/20 bg-night"
       >
         <nav aria-label="Primary mobile" className="shell py-4">
-          <ul className="flex flex-col">
+          <div className="border-b border-bronze/20 pb-3">
+            <p className="eyebrow py-2 text-rose">Shop</p>
+            {SHOP_NAV.map((item) => (
+              <Link
+                key={item.href}
+                href={item.href}
+                onClick={close}
+                className="flex min-h-[3.25rem] items-center justify-between border-t border-bronze/10 font-serif text-xl text-cream"
+              >
+                <span>{item.label}</span>
+                <span aria-hidden className="text-champagne">→</span>
+              </Link>
+            ))}
+          </div>
+          <ul className="mt-2 flex flex-col">
             {PRIMARY_NAV.map((item) => (
               <li key={item.href}>
                 <Link

@@ -10,6 +10,8 @@ import { formatPrice, getProduct, otherProducts, products, SET } from "@/lib/pro
 import { getReviews } from "@/lib/reviews";
 import { fetchCatalogProduct } from "@/lib/catalog";
 import { CatalogProductPage } from "@/components/shop/CatalogProductPage";
+import { fetchVariantAvailability } from "@/lib/catalog";
+import { VARIANT_ID } from "@/lib/shopifyLinks";
 
 export function generateStaticParams() {
   return products.map((product) => ({ slug: product.slug }));
@@ -61,6 +63,9 @@ export default async function ProductPage({ params }: PageProps<"/products/[slug
      section below and the rating in the schema — is derived from this, so
      there is no path by which the page can show a rating nobody left. */
   const reviews = getReviews(slug);
+  const variantId = VARIANT_ID[product.slug];
+  const availability = await fetchVariantAvailability([variantId]);
+  const soldOut = availability?.[variantId] === false;
 
   return (
     <>
@@ -69,7 +74,7 @@ export default async function ProductPage({ params }: PageProps<"/products/[slug
           answer engines quotable facts rather than prose to paraphrase. */}
       <JsonLd
         schema={[
-          productSchema(product, reviews),
+          productSchema(product, reviews, soldOut),
           breadcrumbSchema([
             { name: "Shop", path: "/shop" },
             { name: product.name, path: `/products/${product.slug}` },
@@ -165,7 +170,7 @@ export default async function ProductPage({ params }: PageProps<"/products/[slug
                 <div className="mt-5 max-w-md lg:mt-7">
                   {/* Lead action on a dark room is the gold fill, not the
                       charcoal block btn-dark was built for on paper. */}
-                  <AddToBagButton product={product} className="btn btn-primary w-full" showPrice />
+                  <AddToBagButton product={product} className="btn btn-primary w-full" soldOut={soldOut} showPrice />
                   <p className="mt-3 text-xs leading-relaxed text-cream/70">
                     Free US shipping · Ships from Arizona within one business day ·
                     Secure checkout by Shopify · {BRAND.legal.name} is the seller of record.

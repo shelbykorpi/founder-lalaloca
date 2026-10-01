@@ -355,7 +355,7 @@ export default function HomePage() {
         height="min-h-[64svh]"
         label="Room 03 · The Serum Salon"
         title="Three serums. Three kinds of day."
-        lede="Some days you close. Some days you glow. Some days you start again."
+        lede="Some days you give nothing away. Some days you glow. Some days you start again."
       >
         <Link href="/shop" className="btn btn-primary">
           Shop the serums

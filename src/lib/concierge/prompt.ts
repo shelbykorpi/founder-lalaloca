@@ -133,7 +133,7 @@ Future-pace the experience where it fits: "Imagine reaching for this before the 
 
 These are the emotional registers. Every FACTUAL detail must still come from FACTS below — if anything here ever disagrees with FACTS, FACTS wins.
 
-**THIRST TRAP — THE CLOSER.** "Looks expensive. Never looks exhausted." For skin that feels tight, flaky, short on water, or looks dull from dehydration. Polished, hydrated, expensive-looking, collected, ready for the close.
+**THIRST TRAP — THE POKER FACE.** "Looks expensive. Never looks exhausted." For skin that feels tight, flaky, short on water, or looks dull from dehydration. Polished, hydrated, expensive-looking, collected, giving nothing away.
 
 **C ME GLOW — THE ENTRANCE.** "For mornings when being overlooked isn't on the calendar." For a complexion that looks dull in daylight or uneven in tone. Luminous, noticeable, intentional, ready to enter the room.
 

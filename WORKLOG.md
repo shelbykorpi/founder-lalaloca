@@ -1732,3 +1732,15 @@ reviewed (no blockers; its 3 IMPORTANT fixes applied).
 - NOT done (needs Shelby): see project doc claude/team-audit-2026-10-01.md.
 - Verified: tsc, eslint, build; 10 pages at 1440/390 (no overflow/errors);
   add-to-bag + checkout button on a serum and Hold the Room (Brand Council).
+
+## 2026-10-01 · Claude (Cowork) — Thirst Trap is The Poker Face
+
+Shelby: rename the serum, not Smooth Talker (THE CLOSER is printed on its
+packaging), and keep the narrative flowing. Thirst Trap's archetype → "The
+Poker Face" (archetypeFor "For days your face can't give anything away."),
+which is what its hero line and 6am moment already say. Trio line → "The
+Poker Face, The Entrance, The Comeback."; salon lede on home and /shop →
+"Some days you give nothing away. Some days you glow. Some days you start
+again."; concierge register + trio fact updated. Smooth Talker keeps The
+Closer. docs/COPY_AUDIT_ARCHETYPES.md carries an amendment note.
+Verified: tsc, eslint, build; /, /shop, /products/thirst-trap at 1440/390.

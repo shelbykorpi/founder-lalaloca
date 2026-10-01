@@ -146,7 +146,7 @@ export default function ShopPage() {
                   the set reads as the same argument the collection page just
                   made rather than an unrelated upsell. */}
               <p className="mt-[1em] max-w-[26ch] text-[clamp(0.8rem,1.05vw,1.125rem)] leading-relaxed text-charcoal/85">
-                The Closer, The Entrance, The Comeback. Three full-size serums:
+                The Poker Face, The Entrance, The Comeback. Three full-size serums:
                 hydrate, brighten, cushion.
               </p>
               <p className="mt-[1em] text-balance text-[clamp(0.8rem,1.05vw,1.125rem)] text-charcoal/85">
@@ -179,7 +179,7 @@ export default function ShopPage() {
             </h2>
             <div className="mx-auto mt-6 h-px w-16 bg-bronze/70" aria-hidden />
             <p className="mx-auto mt-6 max-w-md text-charcoal/85">
-              The Closer, The Entrance, The Comeback. Three full-size serums:
+              The Poker Face, The Entrance, The Comeback. Three full-size serums:
               hydrate, brighten, cushion.
             </p>
             <p className="mt-4 text-charcoal/85">
@@ -347,7 +347,7 @@ export default function ShopPage() {
       <section className="bg-night-deep py-16 text-center md:py-20" aria-label="The room is yours">
         <div className="shell">
           <p className="mx-auto max-w-[34rem] font-serif text-[clamp(1.375rem,2.6vw,2rem)] leading-snug text-cream">
-            Some days you close. Some days you glow. Some days you start again.
+            Some days you give nothing away. Some days you glow. Some days you start again.
           </p>
           <p className="mt-10 text-[0.6875rem] uppercase tracking-[0.24em] text-champagne">
             <span className="block">{BRAND.campaignLines[0]}</span>

@@ -35,7 +35,7 @@ export type Product = {
    * The test when editing: if a sentence would need substantiation under FTC
    * claims rules, it does not belong in these three fields.
    */
-  /** The identity: The Closer, The Entrance, The Comeback. */
+  /** The identity: The Poker Face, The Entrance, The Comeback. */
   archetype: string;
   /** One line for the collection page's identity band. */
   archetypeFor: string;
@@ -95,8 +95,12 @@ export const products: Product[] = [
     slug: "thirst-trap",
     name: "Thirst Trap",
     category: "8-Layer Hyaluronic Acid Serum",
-    archetype: "The Closer",
-    archetypeFor: "For when it needs to get done.",
+    /* Was "The Closer" until 1 Oct 2026 — that is Smooth Talker's room role,
+       printed on its live packaging, so the serum's site-only label moved.
+       The Poker Face: the face that gives nothing away — the hero line
+       ("Never looks exhausted") and the 6am moment were already this. */
+    archetype: "The Poker Face",
+    archetypeFor: "For days your face can’t give anything away.",
     hero: "Looks expensive. Never looks exhausted.",
     what: "A lightweight hydrating serum built on eight molecular weights of hyaluronic acid.",
     need: "Skin that goes tight, flaky or dull-looking when it’s short on water.",

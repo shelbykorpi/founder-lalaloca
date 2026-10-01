@@ -1,5 +1,11 @@
 # The three archetypes — copy audit and final copy
 
+> **Amended 1 Oct 2026:** Thirst Trap's archetype is now **The Poker Face**
+> (was The Closer — that is Smooth Talker's room role, printed on its live
+> packaging). Trio line: "The Poker Face, The Entrance, The Comeback."
+> Salon lede: "Some days you give nothing away. Some days you glow. Some days
+> you start again." Everything below is the 9 Aug record, unedited.
+
 Applied to the live site 9 August 2026. Build clean, every change rendered and
 checked at desktop, 1024 and mobile.
 

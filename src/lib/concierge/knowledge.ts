@@ -161,7 +161,7 @@ const SET_FACT: Fact = {
   text: [
     `The House Trio: ${SET.detail}, ${formatPrice(SET.price)}.`,
     `Bought separately the three come to ${formatPrice(full)}, so the set saves ${saving}%.`,
-    `Positioned as a wardrobe rather than a discount: The Closer, The Entrance, The Comeback — three formulas for three kinds of days. "No woman is only one version of herself."`,
+    `Positioned as a wardrobe rather than a discount: The Poker Face, The Entrance, The Comeback: three formulas for three kinds of days. "No woman is only one version of herself."`,
     `It is the same three full-size bottles, not samples.`,
   ].join("\n"),
 };

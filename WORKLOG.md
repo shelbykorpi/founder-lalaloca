@@ -5,6 +5,65 @@ date · agent · what changed · what was left alone · anything unpushed.
 
 ---
 
+## 2026-10-01 · Claude (Cowork) — rebased onto 19 commits of other agents' work
+
+Shelby's push was rejected: another agent had pushed 19 commits (Our Story
+rewrite, Young Founders rebuild, concierge, homepage copy) while this
+session worked. Exactly the collision AGENTS.md rule 1 exists for.
+
+Checked the overlap before touching anything: of my four files, only
+src/app/page.tsx was also theirs. The two .webp files and WORKLOG.md were
+untouched on their side.
+
+Rebased onto origin/main. Git auto-merged the Room 04 block cleanly, and the
+result is the right one semantically, not just mechanically:
+  MINE  alt (describes the new render) + position="center center"
+  THEIRS title "Five pieces before whatever comes next."
+         lede "Cleanse, wash, moisturise, eyes, finish..."
+Verified line by line after the rebase, not assumed.
+
+Their new lede drops "In stock", which retires the contradiction flagged in
+the entry below — the Room 04 hero no longer argues with the "Ships
+October 12" badge. The two Shopify product descriptions still do.
+
+Safety ref left at safety/pre-rebase-2026-10-01 (pre-rebase HEAD 347a367).
+Delete it once the push lands: git branch -D safety/pre-rebase-2026-10-01
+
+## 2026-10-01 · Claude (Cowork) — Room 04 gets the new boardroom
+
+Shelby supplied a replacement render for Room 04 (the FOUNDER Collection
+hero) and asked for it optimised for the layout.
+
+- Source is PORTRAIT, 1181x1331. The layout wants 1672x720 (2.322:1) on
+  desktop and 540x720 (3:4) on mobile, so the two breakpoints are cropped
+  from different regions rather than scaled from one:
+    desktop  y 210-719 band, the 2.322:1 slice holding the sconces, the
+             panelled wall, both rows of chairs, the bar shelf and the
+             window. Upscaled 1.42x (LANCZOS) then unsharp-masked to put
+             back the bite the upscale costs.
+    mobile   full height, centre 998px wide = 3:4, DOWNscaled to 540x720,
+             so the phone crop is the sharp one.
+- Gamma lift again, not brightness-multiply: 1.35 desktop (mean 24.8 ->
+  39.3), 1.25 mobile (-> 33.2). The mobile crop starts brighter, same
+  reasoning as the 2026-10-01 entry below.
+- Sizes: desktop 98 KB (was 121), mobile 39 KB (was 55). Smaller than what
+  it replaced at q82/q80.
+
+ALT TEXT REWRITTEN — mandatory, not polish. The old alt described "striped
+packs at every seat, an empty green chair with a rose silk over its arm
+before a bulb-lit mirror". None of that is in the new render. An alt that
+describes a picture the page no longer shows is worse than no alt.
+
+position: "56% center" -> "center center". The new composition is
+symmetrical — the table's vanishing point is dead centre — so an off-centre
+object-position breaks it at narrow viewports. Revert this one line if the
+old framing is wanted back.
+
+STILL TRUE, STILL FLAGGED: the lede under this hero says "In stock, and
+free to your door anywhere in the US" while the five products now carry a
+"Ships October 12" badge in Shopify. Same contradiction class as the two
+product descriptions flagged below. Not touched.
+
 ## 2026-10-01 · Claude (Cowork) — Shopify stock + ship date, and a brighter Room 04
 
 SHOPIFY (live store, no repo change):

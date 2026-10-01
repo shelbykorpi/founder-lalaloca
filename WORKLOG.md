@@ -2166,3 +2166,21 @@ Shelby: "can we add the song 'Spin in the Dark' by Bela Vibe to the homepage". S
 - **Gotcha.** `md:grid-cols-[minmax(0,1fr)_minmax(0,26rem)]` collapsed the iframe to a sliver because the fr track took all the space. A fixed `26rem` second track fixed it.
 - **Privacy policy** (content.ts) gains: "The home page includes a Spotify player, which loads from Spotify and may set Spotify's own cookies."
 - Verified at 1440 and 390: the Spotify frame loads with the correct track.
+
+## 2026-10-02 02:55Z: Concierge answers again: automatic answers when the model is down (Cowork FOUNDER team)
+
+Shelby: "we need to get the concierge working. if we need just auto generated answers that's fine too. but we're live now."
+- **Live diagnosis.** POST /api/concierge returned `{"ok":false,"configured":true}` with status 503, so every customer saw "The concierge isn't connected yet". VERCEL_OIDC_TOKEN is present, but Vercel AI Gateway rejects the call (403 since 1 Oct, per the other agent's uncommitted note in model.ts).
+  - That note adds a direct ANTHROPIC_API_KEY route. It is still uncommitted and was NOT touched or committed here.
+- **New `src/lib/concierge/fallback.ts`.** `answerWithoutModel(message)` is a rules-based answer desk that reads every fact from products.ts, founderCollection.ts, nextMove.ts (COLLECTION_SHIPS, EXPRESS_OFFERED) and the content.ts returns policy, so prices, ship dates and policy can never drift from the site. It covers:
+  - greetings and thanks;
+  - order status, tracking and changes (points to email with the order number);
+  - international (US only), shipping, returns, and discount questions (points to the House Trio, invents no code);
+  - claims about wrinkles and lifting (an honest answer, never a claim), SPF (C Me Glow goes under sunscreen), fish allergy (Thirst Trap's marine collagen), vegan and other allergens ("won't guess", email);
+  - per-product summary, how to use and ingredients (full INCI only where the site publishes it), multi-product comparison, the House Trio, the price list, which serum (finder link) and routine order;
+  - FOUND HER, the Founding List, about, and contact.
+  - Anything else gets "I'd rather not guess" plus the email. Punctuation is stripped before matching.
+- **route.ts.** `!isConfigured()` and a failed model call now return `fallbackReply(message)` (200, ok:true) instead of 503. Fallback text still goes through `screenOutbound`; if it's blocked, the reply is OUTBOUND_FALLBACK. screenInbound still runs first, so reactions, medical questions, pregnancy, lightening and human requests keep their fixed replies and escalation.
+- **Gotcha.** `screenOutbound` bans "erases?" anywhere, so "nothing here erases a line" was blocked; it now reads "no cream makes a line disappear, ours included".
+- **Tested** with a bogus AI_GATEWAY_API_KEY, which reproduces the live failure: 24 customer questions, all 200, 0 blocked, each answer read and checked against the site. The client code is unchanged; it already renders `{ok, text, tag}`.
+- **To get full AI answers back:** fix the Vercel AI Gateway 403, or commit the direct-Anthropic route and set ANTHROPIC_API_KEY in Vercel (Shelby's key). The fallback stays as the safety net either way.

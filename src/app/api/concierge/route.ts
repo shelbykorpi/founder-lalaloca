@@ -1,5 +1,6 @@
 import { guard, silentOk } from "@/lib/formGuard";
 import { escalate } from "@/lib/concierge/escalate";
+import { answerWithoutModel } from "@/lib/concierge/fallback";
 import { OUTBOUND_FALLBACK, screenInbound, screenOutbound } from "@/lib/concierge/guardrails";
 import { retrieve } from "@/lib/concierge/knowledge";
 import { complete, isConfigured, type Msg } from "@/lib/concierge/model";
@@ -47,6 +48,20 @@ function emailIn(history: Msg[]): string | undefined {
     if (hit) return hit[0];
   }
   return undefined;
+}
+
+/**
+ * No model, or the model failed: answer from the house's own facts instead of
+ * telling a live customer the desk isn't connected (Shelby, 2 Oct 2026: "if we
+ * need just auto generated answers that's fine too, but we're live now"). The
+ * fallback is screened on the way out like anything else.
+ */
+function fallbackReply(message: string) {
+  const answer = answerWithoutModel(message);
+  if (!screenOutbound(answer.text).clean) {
+    return reply({ text: OUTBOUND_FALLBACK, kind: "care", tag: "Passed to our team" });
+  }
+  return reply({ text: answer.text, ...(answer.tag ? { tag: answer.tag } : {}) });
 }
 
 function reply(body: {
@@ -118,7 +133,7 @@ export async function POST(request: Request) {
   }
 
   if (!isConfigured()) {
-    return Response.json({ ok: false, configured: false }, { status: 503 });
+    return fallbackReply(message);
   }
 
   /* ── 4 + 5. Retrieve, then answer ────────────────────────────────────────
@@ -129,8 +144,8 @@ export async function POST(request: Request) {
 
   const result = await complete(systemPrompt(desk, facts), history);
   if (!result.ok) {
-    console.error("[concierge] model call failed:", result.reason);
-    return Response.json({ ok: false, configured: result.configured }, { status: 503 });
+    console.error("[concierge] model call failed, answering from the fallback:", result.reason);
+    return fallbackReply(message);
   }
 
   /* Two tokens, both on their own line, both stripped before anything reaches

@@ -1757,3 +1757,16 @@ Shelf-render alts (and the Hold the Room grid card) rewritten — they
 described women, taps and props not in the pictures. Rejected images and
 reasons: project doc claude/product-image-refresh-2026-10-01.md.
 Verified: tsc, eslint, build; four PDP splits at 1440/390.
+
+## 2026-10-01 · Claude (Cowork) — dark vanity shots on the collection grid
+
+Shelby: the /founder-collection cards should use the darker images of each
+product. Hold the Room, Clean Break, Double Take and Smooth Talker cards now
+use the dark vanity renders from her Drive (`*-card-dark.webp`, 1122x1402);
+LineCard tile 3:2 → 4:5 so the bottles aren't cropped. Labels read at full
+res; Smooth Talker's carton tagline ("Even tone and nourish" → approved
+"Evens tone and smooths for the finish.") and carton + stick net weight
+(11 g → 12 g / 0.42 oz) retouched to the approved artwork. Opening Line has
+no dark render: its card is a 4:5 crop of the existing shelf frame, centred
+on the bottle, until one is made. Hover pack shots unchanged.
+Verified: tsc, eslint, build; grid at 1440/390, hover.

@@ -98,8 +98,8 @@ export default async function FounderCollectionPage() {
                all five carry the current striped artwork. Scene leads and
                the packshot is the hover, matching the other cards. */
             image: {
-              url: "/products/hold-the-room-hero.webp",
-              alt: "Hold the Room — the white airless pump bottle beside its Desert Pink carton — standing on a black marble console against a dark green wall, reflected in the stone.",
+              url: "/products/hold-the-room-card-dark.webp",
+              alt: "Hold the Room and its Desert Pink carton on a dark green marble vanity tray, a lit candle, pink roses, a gilt mirror and rose silk around them.",
             },
             hoverImage: {
               url: "/products/hold-the-room-pack.webp",

@@ -179,7 +179,14 @@ export type NextMoveProduct = {
    * renders supplied 25 Aug, which fix all four drifts flagged in the audit.
    */
   pack: { src: string; alt: string };
-  /** The collection-grid card image (3:2). Same corrected packaging. */
+  /**
+   * The collection-grid card image (4:5 card). From 1 Oct 2026 the dark
+   * vanity renders from Shelby's Drive, labels read at full resolution;
+   * Smooth Talker's carton tagline and both net-weight lines were retouched
+   * to the approved artwork ("Evens tone and smooths for the finish.",
+   * 12 g / 0.42 oz). Opening Line has no dark render yet and keeps its shelf
+   * frame until one is made.
+   */
   scene: { src: string; alt: string };
   /**
    * The styled counter shot for the detail page's "What it is" split — the
@@ -289,8 +296,10 @@ export const NEXT_MOVE: NextMoveProduct[] = [
       src: "/products/opening-line-pack.webp",
       alt: "The Opening Line bottle: a white airless pump wrapped in cream and Founder Green stripes, a deep green plaque at the front reading Opening Line, the opener, oil-to-milk cleanser.",
     },
+    /* 4:5 crop of the shelf frame, centred on the bottle — no dark vanity
+       render of Opening Line exists yet (1 Oct 2026). Replace when one does. */
     scene: {
-      src: "/products/opening-line-hero.webp",
+      src: "/products/opening-line-card-dark.webp",
       alt: "The Opening Line bottle — a white airless pump with a Founder Green label, striped bands top and bottom — standing on a black marble console against a dark green wall, reflected in the stone.",
     },
     setting: {
@@ -362,8 +371,8 @@ export const NEXT_MOVE: NextMoveProduct[] = [
       alt: "The Clean Break bottle: a white pump bottle wrapped in cream and Founder Green stripes, a deep green plaque at the front reading Clean Break, the reset, purifying face wash.",
     },
     scene: {
-      src: "/products/clean-break-hero.webp",
-      alt: "The Clean Break bottle — a white pump bottle with a Founder Green label, striped bands top and bottom — standing on a black marble console against a dark green wall, reflected in the stone.",
+      src: "/products/clean-break-card-dark.webp",
+      alt: "The Clean Break pump bottle, beaded with water, on a dark green marble counter beside a folded green towel, a lit candle and a brass tap behind it.",
     },
     setting: {
       src: "/products/clean-break-setting.webp",
@@ -487,8 +496,8 @@ export const NEXT_MOVE: NextMoveProduct[] = [
     /* The family shot leads now: a card showing one shade of a three-shade
        product tells a customer the wrong thing before she ever clicks. */
     scene: {
-      src: "/products/smooth-talker-hero.webp",
-      alt: "The Smooth Talker tone stick in 25 MEDIUM beside its brass carton, standing on a black marble console against a dark green wall, reflected in the stone.",
+      src: "/products/smooth-talker-card-dark.webp",
+      alt: "Smooth Talker in 25 MEDIUM, the stick uncapped beside its champagne carton on a dark marble dressing table, a gilt mirror, a string of pearls and make-up brushes behind.",
     },
     setting: {
       src: "/products/smooth-talker-setting.webp",
@@ -582,8 +591,8 @@ export const NEXT_MOVE: NextMoveProduct[] = [
       alt: "The Double Take airless pump bottle beside its Desert Pink carton, both carrying a Champagne Cream cartouche with a gold F-key crest, the label reading Double Take, the second look, peptide eye cream.",
     },
     scene: {
-      src: "/products/double-take-hero.webp",
-      alt: "The Double Take airless bottle and its Desert Pink carton standing on a black marble console against a dark green wall, reflected in the stone.",
+      src: "/products/double-take-card-dark.webp",
+      alt: "The Double Take airless pump beside its Desert Pink carton on dark green marble, a lit candle, a crystal bracelet and a rose quartz roller around them.",
     },
     setting: {
       src: "/products/double-take-setting.webp",

@@ -7,7 +7,8 @@ import Link from "next/link";
  *
  * The one card treatment for the line on /founder-collection (it was also
  * /the-next-move's until that page redirected here, 17 Sept 2026). The pattern:
- * a 3:2 image tile with a hover reveal, a rule in the SKU's own accent, and
+ * a 4:5 image tile with a hover reveal (3:2 until 1 Oct 2026, when the
+ * dark vanity renders came in — portrait product shots, uncropped), a rule in the SKU's own accent, and
  * beneath it eyebrow · name · category · state.
  *
  * THE STATE LINE IS LOAD-BEARING. Every card says, in words, what buying it
@@ -53,7 +54,7 @@ export function LineCard({
   return (
     <article className="flex flex-col">
       <Link href={href} className="group/card block" aria-label={name}>
-        <div className="relative aspect-[3/2] w-full overflow-hidden bg-night-deep">
+        <div className="relative aspect-[4/5] w-full overflow-hidden bg-night-deep">
           {image ? (
             <>
               <Image

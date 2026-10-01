@@ -11,6 +11,8 @@ import { TrackListView } from "@/components/site/TrackListView";
 import { BRAND, CONTACT_EMAIL, CONTACT_MAILTO } from "@/lib/brand";
 import { formatPrice, products, SET } from "@/lib/products";
 import { JsonLd, breadcrumbSchema, collectionSchema, setSchema } from "@/lib/seo";
+import { fetchVariantAvailability } from "@/lib/catalog";
+import { VARIANT_ID } from "@/lib/shopifyLinks";
 
 export const metadata: Metadata = {
   title: "Shop the LALALOCA Collection",
@@ -22,7 +24,14 @@ export const metadata: Metadata = {
   alternates: { canonical: "/shop" },
 };
 
-export default function ShopPage() {
+export default async function ShopPage() {
+  const variantIds = [
+    ...products.map((product) => VARIANT_ID[product.slug]),
+    VARIANT_ID["all-three"],
+  ];
+  const availability = await fetchVariantAvailability(variantIds);
+  const soldOut = (id: string) => availability?.[id] === false;
+
   return (
     <>
       {/* The collection as a ranked list, so the three serums can surface
@@ -98,7 +107,7 @@ export default function ShopPage() {
       <section id="serums" className="house-marble scroll-mt-24 pb-14 pt-12 md:pb-20 md:pt-16" aria-label="Serums">
         <div className="shell grid gap-x-8 gap-y-14 sm:grid-cols-2 lg:grid-cols-3">
           {products.map((product, index) => (
-            <SerumAlcove key={product.slug} product={product} index={index} />
+            <SerumAlcove key={product.slug} product={product} index={index} soldOut={soldOut(VARIANT_ID[product.slug])} />
           ))}
         </div>
       </section>
@@ -154,7 +163,7 @@ export default function ShopPage() {
                 {formatPrice(products.reduce((sum, p) => sum + p.price, 0))} · save{" "}
                 {formatPrice(products.reduce((sum, p) => sum + p.price, 0) - SET.price)}
               </p>
-              <AddSetButton className="mt-[1.4em] inline-flex min-h-11 w-full max-w-[22rem] items-center justify-center border border-bronze/40 bg-founder-green px-6 text-[clamp(0.6875rem,0.85vw,0.875rem)] uppercase tracking-[0.18em] text-cream transition-colors hover:bg-rose hover:text-night" />
+              <AddSetButton soldOut={soldOut(VARIANT_ID["all-three"])} className="mt-[1.4em] inline-flex min-h-11 w-full max-w-[22rem] items-center justify-center border border-bronze/40 bg-founder-green px-6 text-[clamp(0.6875rem,0.85vw,0.875rem)] uppercase tracking-[0.18em] text-cream transition-colors hover:bg-rose hover:text-night" />
             </div>
           </div>
         </div>
@@ -187,7 +196,7 @@ export default function ShopPage() {
               {formatPrice(products.reduce((sum, p) => sum + p.price, 0))} · save{" "}
               {formatPrice(products.reduce((sum, p) => sum + p.price, 0) - SET.price)}
             </p>
-            <AddSetButton className="btn mt-8 w-full border border-bronze/40 bg-founder-green text-cream hover:bg-rose hover:text-night sm:w-auto" />
+            <AddSetButton soldOut={soldOut(VARIANT_ID["all-three"])} className="btn mt-8 w-full border border-bronze/40 bg-founder-green text-cream hover:bg-rose hover:text-night sm:w-auto" />
           </div>
           </div>
         </div>

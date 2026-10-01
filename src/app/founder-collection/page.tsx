@@ -319,6 +319,21 @@ export default async function FounderCollectionPage() {
         </Link>
       </RoomHero>
 
+      <section className="collection-proof-strip border-y border-bronze/20 bg-night-deep" aria-label="Collection details">
+        <div className="shell grid grid-cols-3 divide-x divide-bronze/15">
+          {[
+            ["05", "Pieces"],
+            ["01", "Routine"],
+            ["US", "Free shipping"],
+          ].map(([value, label]) => (
+            <div key={label} className="px-3 py-5 text-center md:py-6">
+              <p className="font-serif text-[clamp(1.6rem,3vw,2.2rem)] leading-none text-champagne">{value}</p>
+              <p className="mt-2 text-[0.6rem] uppercase tracking-[0.2em] text-cream/55 md:text-[0.6875rem]">{label}</p>
+            </div>
+          ))}
+        </div>
+      </section>
+
 
       {/* ---- The line ----
           One grid, one card treatment, three stages of readiness. When the

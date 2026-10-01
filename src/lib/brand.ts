@@ -132,7 +132,6 @@ export const FOOTER_NAV = [
     links: [
       { href: "/policies/shipping", label: "Shipping" },
       { href: "/policies/returns", label: "Returns" },
-      { href: "/account", label: "Account" },
       { href: "/search", label: "Search" },
       { href: "/policies/accessibility", label: "Accessibility" },
     ],

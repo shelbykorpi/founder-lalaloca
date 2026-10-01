@@ -126,15 +126,19 @@ export default function OurStoryPage() {
         </section>
 
         <section className="border-y border-bronze/15 bg-founder-green py-16 text-cream md:py-24">
-          <div className="shell grid gap-12 lg:grid-cols-[0.8fr_1.2fr] lg:items-center lg:gap-20">
+          <div className="shell grid gap-12 lg:grid-cols-[1fr_1fr] lg:items-center lg:gap-16">
             <Reveal>
-              <div className="relative mx-auto aspect-[4/5] w-full max-w-[28rem] overflow-hidden border border-bronze/20 bg-night-deep shadow-[0_28px_70px_rgba(0,0,0,0.28)] lg:mx-0">
+              {/* The journal is a landscape frame (1255 × 747) and the handwriting
+                  sits on the left page. It used to be cropped into a 4:5
+                  portrait, which cut the words off (Shelby, 2 Oct 2026). The
+                  slot now takes the photo's own shape, so nothing is cropped. */}
+              <div className="relative mx-auto aspect-[1255/747] w-full max-w-[40rem] overflow-hidden border border-bronze/20 bg-night-deep shadow-[0_28px_70px_rgba(0,0,0,0.28)] lg:mx-0">
                 <Image
                   src="/editorial/our-story-journal.webp"
-                  alt="An open journal and fountain pen in the FOUNDER study."
+                  alt="An open journal and fountain pen in the FOUNDER study, the left page handwritten: I found her in the woman who refused to quit."
                   fill
                   loading="lazy"
-                  sizes="(max-width: 1024px) 88vw, 34vw"
+                  sizes="(max-width: 1024px) 92vw, 40rem"
                   className="object-cover"
                 />
               </div>

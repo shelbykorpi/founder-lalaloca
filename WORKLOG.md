@@ -2105,3 +2105,11 @@ Shelby: "remove 'the anchor section' from the page" (founderbeauty.co home).
 - The vanity now flows straight into Room 06 · FOUND HER. Hold the Room remains on the home page as 03 · The Anchor in the vanity sequence, and on its own product page.
 - `public/products/hold-the-room-vanity-mirror.webp` is left in place.
 - Checked at 1440 and 390.
+
+## 2026-10-02 01:00Z: Our Story: the journal image is no longer cropped (Cowork FOUNDER team)
+
+Shelby: "fix the image of the book, it is cut off where the writing is."
+- `/editorial/our-story-journal.webp` is landscape (1255×747), with the handwriting ("I found her in the woman who refused to quit.") on the left page. It was shown in a 4:5 portrait slot with object-cover, which cropped the left edge through the words.
+- The slot now uses the photo's own ratio, `aspect-[1255/747]`, at max-w-40rem, so nothing is cropped. The section grid went from 0.8fr/1.2fr to 1fr/1fr with gap-16, so the landscape frame has room beside the text. `sizes` was updated to match.
+- The alt text now includes the handwritten line.
+- Checked at 1440 (side by side) and 390 (stacked); the whole sentence is visible in both.

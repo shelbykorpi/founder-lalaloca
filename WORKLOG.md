@@ -2308,3 +2308,11 @@ Shelby supplied the text: "add this message to the top of the main page … revi
   - The "Who…" lines are stacked. "The wins … The moments that changed everything." is in serif italic. "Because sometimes another woman's story…" is a pull line.
   - It closes large with "And maybe the next woman someone needs to see— / is you." and a "Tell your story" button (to #share).
 - Data is in the `WOMEN_OF_FOUNDER` constant. Checked at 1440 and 390. The removed "FOUNDER Models" copy was NOT reused.
+
+## 2026-10-02: Our Story, "My vision for FOUNDER" moved up (Cowork FOUNDER team)
+
+Shelby: "put the my vision for founder under the first section our story."
+- The whole section (portrait, text and "Read my FOUND HER story") now follows the opening lines (#beginning). Previously it came after "I want us to get better at celebrating each other."
+- It was placed after the opening rather than directly under the hero, because the hero's sentence continues into the opening's first lines. Moving it to sit right under the hero is a one-line change if she prefers that.
+- No words changed; all 163 of her lines are still present. The header comment notes the reordering.
+- Checked at 1440 and 390.

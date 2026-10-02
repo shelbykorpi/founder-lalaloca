@@ -13,7 +13,9 @@ import { JsonLd, aboutPageSchema, breadcrumbSchema } from "@/lib/seo";
  * Our Story is Shelby's letter on why she started FOUNDER, in her own words
  * (Shelby, 1 Oct 2026: "our story needs to tell the story of why i started
  * founder", with the full text). Every sentence below is hers, verbatim and in
- * her order. Only the layout is ours: her capitalised section titles became
+ * her order, except that "My vision for FOUNDER" now follows the opening
+ * (Shelby, 2 Oct 2026: "put the my vision for founder under the first
+ * section"). Only the layout is ours: her capitalised section titles became
  * the h2s, and her one-sentence lines are grouped into stanzas so the rhythm
  * she wrote survives on screen. Her biography (the bullying, Maxim, the
  * kitchen business, BitThermal) moved off this page; it lives in full on her
@@ -496,6 +498,35 @@ export default function OurStoryPage() {
           </div>
         </section>
 
+        {/* ── My vision for FOUNDER ── */}
+        <section className="border-t border-bronze/15 bg-shell py-16 text-charcoal md:py-24">
+          <div className="shell grid gap-12 lg:grid-cols-[0.95fr_1.05fr] lg:items-start lg:gap-20">
+            <Reveal className="lg:sticky lg:top-36">
+              <div className="relative aspect-[4/5] overflow-hidden bg-night-deep">
+                <Image
+                  src={founder.portrait!.src}
+                  alt={founder.portrait!.alt}
+                  fill
+                  loading="lazy"
+                  sizes="(max-width: 1024px) 90vw, 42vw"
+                  className="object-cover"
+                  style={{ objectPosition: founder.portrait!.position ?? "center" }}
+                />
+              </div>
+            </Reveal>
+
+            <Reveal delay={100}>
+              <Heading tone="light">My vision for FOUNDER</Heading>
+              <div className="mt-8 max-w-[40rem]">
+                <Blocks blocks={VISION} tone="light" />
+              </div>
+              <Link href={`/found-her/${founder.slug}`} className="btn btn-dark mt-10">
+                Read my FOUND HER story
+              </Link>
+            </Reveal>
+          </div>
+        </section>
+
         {/* ── FOUNDER is for the woman who kept going ── */}
         <section className="border-y border-bronze/15 bg-founder-green py-16 text-cream md:py-24">
           <div className="shell grid gap-12 lg:grid-cols-[1fr_1fr] lg:items-start lg:gap-16">
@@ -643,35 +674,6 @@ export default function OurStoryPage() {
             </Reveal>
             <Reveal delay={100} className="max-w-[44rem]">
               <Blocks blocks={CELEBRATING} tone="light" />
-            </Reveal>
-          </div>
-        </section>
-
-        {/* ── My vision for FOUNDER ── */}
-        <section className="border-t border-bronze/15 bg-shell py-16 text-charcoal md:py-24">
-          <div className="shell grid gap-12 lg:grid-cols-[0.95fr_1.05fr] lg:items-start lg:gap-20">
-            <Reveal className="lg:sticky lg:top-36">
-              <div className="relative aspect-[4/5] overflow-hidden bg-night-deep">
-                <Image
-                  src={founder.portrait!.src}
-                  alt={founder.portrait!.alt}
-                  fill
-                  loading="lazy"
-                  sizes="(max-width: 1024px) 90vw, 42vw"
-                  className="object-cover"
-                  style={{ objectPosition: founder.portrait!.position ?? "center" }}
-                />
-              </div>
-            </Reveal>
-
-            <Reveal delay={100}>
-              <Heading tone="light">My vision for FOUNDER</Heading>
-              <div className="mt-8 max-w-[40rem]">
-                <Blocks blocks={VISION} tone="light" />
-              </div>
-              <Link href={`/found-her/${founder.slug}`} className="btn btn-dark mt-10">
-                Read my FOUND HER story
-              </Link>
             </Reveal>
           </div>
         </section>

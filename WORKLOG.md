@@ -2378,3 +2378,18 @@ Shelby asked to build out The Salon: an invitation, a nav tab, and email signup 
 - **No dates, places or specific events are stated anywhere**; none has been announced. The welcome email that goes out is the existing generic one.
 - components/house/SalonDoor.tsx is now unused (left in place).
 - **Verified.** tsc, eslint and build pass. The full flow was run in Playwright at 1440 and 390: the real 503 path, a mocked success, key, door, inside, localStorage written, and the return visit. 0 console errors apart from the expected 503.
+
+## 2026-10-02: Salon RSVPs notify Shelby; FOUNDER Desk gets a "Salon RSVPs" tab (Cowork FOUNDER team)
+
+Shelby asked to make sure the RSVP email submission is connected and notifies shelbykorpi@gmail.com, and that FOUNDER Desk gets an RSVP section for the emails collected.
+- **Connection verified on the live store.** A real customer already carries `source:salon` (with newsletter, SUBSCRIBED), so production /api/subscribe → Shopify works for the Salon form. Read-only check; no email was read into any file.
+- **api/subscribe.** When source === "salon", an email now goes to OWNER_EMAIL (default shelbykorpi@gmail.com) on EVERY RSVP, including from someone already on the list. Subject "Salon RSVP: <email>"; body gives the email, Pacific time, and whether they are new or existing. Reply-to is the guest. Failure is logged and never shown.
+  - This is the one deliberate exception to the route's "no notification" rule.
+  - Sent through Resend (RESEND_API_KEY), the same sender as the story form.
+- **FOUNDER Desk (~/FOUNDER-Desk).** Originals backed up to `_backup/2026-10-02-before-salon-rsvps/`.
+  - New `src/views/SalonRsvps.tsx` and a "Salon RSVPs" tab after Founding List.
+  - It reuses the existing read-only `shopify_subscribers` command with query `tag:'source:salon'`. No Rust change, no new command, no write: the desk's read-only rule holds.
+  - It shows a count, then email, name, "on the list since" (customer created date), orders and Open, plus an "Open in Shopify" link to the filtered customer list.
+  - No export and no send, matching the Founding List. Invitations go out from Shopify Email to the source:salon segment.
+- **Bug fixed in passing.** FoundingList's "From the footer" filter used `tag:footer`, which matches nobody, because the site tags `source:footer`. It now uses `tag:'source:footer'`. The quoted form was verified live.
+- **Desk verified in the cloud.** `npm ci` and `npm run build` (tsc + vite) pass; the new tab was rendered against sample data. `cargo check` was not run because no Rust changed. Shelby rebuilds the app with "Build FOUNDER Desk.command".

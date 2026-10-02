@@ -1,6 +1,7 @@
 import { guard, looksLikeEmail, silentOk } from "@/lib/formGuard";
 import { subscribeToList } from "@/lib/shopifyAdmin";
 import { sendWelcomeEmail } from "@/lib/welcomeEmail";
+import { OWNER_EMAIL, sendEmail } from "@/lib/email";
 
 /**
  * The Founding List.
@@ -75,6 +76,34 @@ export async function POST(request: Request) {
   if (result.newlySubscribed) {
     const welcomed = await sendWelcomeEmail(email);
     if (!welcomed.sent) console.error("[subscribe] welcome failed:", welcomed.reason);
+  }
+
+  /* THE ONE EXCEPTION TO "NO NOTIFICATION": a Salon RSVP (Shelby, 2 Oct
+     2026: "make sure the RSVP email submission … notifies my
+     shelbykorpi@gmail.com"). A Salon RSVP is a guest accepting an
+     invitation, not a footer signup, so it is worth a line in her inbox.
+     Sent on every RSVP, including from someone already on the list, because
+     the RSVP is the event. Reply-to is the guest. Failure is logged, never
+     shown: she is on the guest list either way. */
+  if (source === "salon") {
+    const notified = await sendEmail({
+      to: OWNER_EMAIL,
+      subject: `Salon RSVP: ${email}`,
+      replyTo: email,
+      text: [
+        "Someone just RSVP'd to The Salon on founderbeauty.co and received their key.",
+        "",
+        `Email:   ${email}`,
+        `When:    ${new Date().toLocaleString("en-US", { timeZone: "America/Los_Angeles", dateStyle: "medium", timeStyle: "short" })} (Pacific)`,
+        `List:    ${result.created ? "new to the Founding List" : result.newlySubscribed ? "existing customer, now subscribed" : "already on the Founding List"}`,
+        "",
+        "In Shopify they are tagged source:salon. Every RSVP is in FOUNDER Desk under Salon RSVPs,",
+        "and in Shopify → Customers, filtered by the tag source:salon.",
+        "",
+        "Reply to this email and it goes straight to them.",
+      ].join("\n"),
+    });
+    if (!notified.sent) console.error("[subscribe] salon RSVP notification failed:", notified.reason);
   }
 
   return Response.json({ ok: true });

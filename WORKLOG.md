@@ -2393,3 +2393,17 @@ Shelby asked to make sure the RSVP email submission is connected and notifies sh
   - No export and no send, matching the Founding List. Invitations go out from Shopify Email to the source:salon segment.
 - **Bug fixed in passing.** FoundingList's "From the footer" filter used `tag:footer`, which matches nobody, because the site tags `source:footer`. It now uses `tag:'source:footer'`. The quoted form was verified live.
 - **Desk verified in the cloud.** `npm ci` and `npm run build` (tsc + vite) pass; the new tab was rendered against sample data. `cargo check` was not run because no Rust changed. Shelby rebuilds the app with "Build FOUNDER Desk.command".
+
+## 2026-10-02: The Salon's images replaced with Shelby's own (Cowork FOUNDER team)
+
+Shelby supplied four images: "update and replace the current images with these in the salon."
+- **New `public/editorial/salon/`** (PNG → WebP q84):
+  - salon-first-look.webp: women trying FOUNDER at the candlelit bar, "FOUNDER. FOUND HER."
+  - salon-lounge.webp: the gilded FOUNDER / LALALOCA arch, guests, the city at night.
+  - salon-escape.webp: the moonlit villa terrace and pool.
+  - salon-gala.webp: a black-tie marble hall with chandeliers.
+- **Tiles.** The Dinners = lounge (position 64%), The Parties = gala, The Escapes = escape, The First Look = first-look. The tile shading is lighter (clear to 42%) and the tiles are taller (30rem), so the images read.
+- **Behind the door.** The interior seen when the key turns is now salon-first-look (object-position 70% 45%), replacing inside-founder-lounge-m.
+- **Gala image cropped to its left 80%.** The original carries another brand's "V" monogram banner ("Exclusive by invitation only") on the right and a "V" table card. The crop removes both. A faint "V" in the carpet remains, mostly under the tile shading. Flagged to Shelby.
+- Added under the tiles: "Imagery shows the mood of a Salon evening, not a past event." These are composed images and no event has happened yet; same principle as the FOUND HER wall caption.
+- Checked at 1440 and 390 through the full key flow; 0 console errors.

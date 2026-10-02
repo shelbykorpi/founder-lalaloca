@@ -147,7 +147,7 @@ export function SalonEntrance({ children }: { children: React.ReactNode }) {
                 <Image src="/door/edoor-scene.webp" alt="" fill sizes="(max-width: 1024px) 80vw, 26rem" className={s.surround} priority />
                 <span className={s.opening}>
                   <Image
-                    src="/editorial/rooms/inside-founder-lounge-m.webp"
+                    src="/editorial/salon/salon-first-look.webp"
                     alt=""
                     fill
                     sizes="(max-width: 1024px) 45vw, 15rem"

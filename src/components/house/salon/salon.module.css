@@ -21,7 +21,7 @@
   transform-style: preserve-3d;
   background: #120c08;
 }
-.room { object-fit: cover; object-position: 50% 40%; }
+.room { object-fit: cover; object-position: 70% 45%; }
 .glow {
   position: absolute;
   inset: 0;

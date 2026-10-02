@@ -25,34 +25,38 @@ export const metadata: Metadata = {
  * and says, truthfully, that the guest list hears first.
  */
 
+/* Shelby's own Salon imagery (2 Oct 2026: "update and replace the current
+   images with these in the salon"). Composed mood images of a Salon evening,
+   not photographs of an event that has happened; the note under the tiles
+   says so, the same way the FOUND HER wall's artwork is captioned. */
 const ROOMS = [
   {
     name: "The Dinners",
     line: "A long table, low candlelight and the kind of conversation that makes you miss your ride home.",
-    image: "/editorial/rooms/inside-founder-lounge.webp",
-    alt: "A woman in a rose silk gown in a green velvet chair beside a lit fireplace in a dark green panelled room.",
-    position: "60% 40%",
+    image: "/editorial/salon/salon-lounge.webp",
+    alt: "A candlelit FOUNDER evening above the city at night: guests in gowns with champagne, a velvet sofa, and a gilded arch holding FOUNDER and LALALOCA bottles among white orchids.",
+    position: "64% 50%",
   },
   {
     name: "The Parties",
     line: "Dressed up, music up, phones down. The nights the house will still be talking about on Monday.",
-    image: "/editorial/rooms/threshold-hall.webp",
-    alt: "Tall green doors standing open onto a rose-lit salon with a crystal chandelier, candles burning in brass sconces either side.",
-    position: "50% 45%",
+    image: "/editorial/salon/salon-gala.webp",
+    alt: "A black-tie evening in a marble hall under crystal chandeliers: a woman in a sequinned black gown with champagne, guests on a red-carpeted staircase behind a velvet rope.",
+    position: "45% 45%",
   },
   {
     name: "The Escapes",
     line: "A few days away with women who are building something. Somewhere beautiful. Somewhere quiet.",
-    image: "/editorial/rooms/found-her-hall-sky.webp",
-    alt: "A dark marble hall lined with portraits, a door at the end open onto a pink desert sky.",
-    position: "70% 50%",
+    image: "/editorial/salon/salon-escape.webp",
+    alt: "Two women in silk gowns with champagne on a candlelit terrace beside a lit pool, a full moon over the sea and coastline behind them, FOUNDER on the marble wall.",
+    position: "50% 50%",
   },
   {
     name: "The First Look",
     line: "New pieces and new rooms, shown to the Salon before they ever reach the shelf.",
-    image: "/editorial/rooms/vanity-dressing-table.webp",
-    alt: "A dressing table in the FOUNDER house, brass and marble lit by a ring of vanity bulbs.",
-    position: "50% 50%",
+    image: "/editorial/salon/salon-first-look.webp",
+    alt: "Women in gold and black silk trying FOUNDER products at a candlelit marble bar, the wall behind lettered FOUNDER. FOUND HER., the city lit up through the windows.",
+    position: "60% 50%",
   },
 ];
 
@@ -79,7 +83,7 @@ export default function SalonPage() {
 
             <ul className="mt-14 grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
               {ROOMS.map((room) => (
-                <li key={room.name} className="group relative isolate flex min-h-[26rem] flex-col justify-end overflow-hidden border border-bronze/20">
+                <li key={room.name} className="group relative isolate flex min-h-[30rem] flex-col justify-end overflow-hidden border border-bronze/20">
                   <Image
                     src={room.image}
                     alt={room.alt}
@@ -89,7 +93,7 @@ export default function SalonPage() {
                     className="-z-10 object-cover transition-transform duration-[1200ms] group-hover:scale-[1.04]"
                     style={{ objectPosition: room.position }}
                   />
-                  <span aria-hidden className="absolute inset-0 -z-10 bg-[linear-gradient(180deg,rgba(9,23,18,0.1)_0%,rgba(9,23,18,0.55)_45%,rgba(9,23,18,0.95)_100%)]" />
+                  <span aria-hidden className="absolute inset-0 -z-10 bg-[linear-gradient(180deg,rgba(9,23,18,0)_0%,rgba(9,23,18,0)_42%,rgba(9,23,18,0.78)_72%,rgba(9,23,18,0.96)_100%)]" />
                   <div className="p-6">
                     <span aria-hidden className="block h-px w-8 bg-champagne" />
                     <h3 className="mt-4 font-serif text-[1.85rem] font-light leading-none text-cream">{room.name}</h3>
@@ -98,6 +102,9 @@ export default function SalonPage() {
                 </li>
               ))}
             </ul>
+            <p className="mt-6 text-center text-[0.75rem] leading-relaxed text-cream/55">
+              Imagery shows the mood of a Salon evening, not a past event.
+            </p>
           </div>
         </section>
 

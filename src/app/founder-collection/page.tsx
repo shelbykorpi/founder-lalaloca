@@ -6,6 +6,7 @@ import { FOUNDER_COLLECTION } from "@/lib/founderCollection";
 import { fetchCollectionProducts, fetchVariantAvailability, type CatalogProduct } from "@/lib/catalog";
 import { VARIANT_ID } from "@/lib/shopifyLinks";
 import { LineCard } from "@/components/shop/LineCard";
+import { FounderNote } from "@/components/house/FounderNote";
 import { COLLECTION_SHIPS, NEXT_MOVE, ROUTINE_STEP, availabilityLine } from "@/lib/nextMove";
 import { formatPrice, products, SET } from "@/lib/products";
 import { Reveal } from "@/components/house/Reveal";
@@ -376,13 +377,20 @@ export default async function FounderCollectionPage() {
           inventing a price. */}
       <section className="section bg-night" aria-labelledby="shelf-heading">
         <div className="shell">
-          <h2 id="shelf-heading" className="room-label scroll-mt-24">
-            The line
-          </h2>
-          <p className="mt-4 max-w-[46ch] text-[0.9375rem] leading-relaxed text-cream/75">
-            Five pieces, laid out in the order you&rsquo;ll use them. Cleanse,
-            wash, moisturise, eyes, finish.
-          </p>
+          {/* The shelf header carries Shelby's handwritten note beside it
+              (2 Oct 2026), so it is the last thing read before the cards. */}
+          <div className="grid gap-10 md:grid-cols-[1fr_auto] md:items-center md:gap-16">
+            <div>
+              <h2 id="shelf-heading" className="room-label scroll-mt-24">
+                The line
+              </h2>
+              <p className="mt-4 max-w-[46ch] text-[0.9375rem] leading-relaxed text-cream/75">
+                Five pieces, laid out in the order you&rsquo;ll use them. Cleanse,
+                wash, moisturise, eyes, finish.
+              </p>
+            </div>
+            <FounderNote className="md:mr-4" />
+          </div>
 
           <div className="mt-8 grid gap-10 sm:grid-cols-2 lg:grid-cols-3">
             {line.map((card) => (

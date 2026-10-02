@@ -2350,3 +2350,14 @@ Shelby: "each listing … after the item description should highlight 1-3 main i
   - Smooth Talker's "Ceramides" are Glycosphingolipids + Glycolipids.
   - Names only; no benefit is attached to any ingredient.
 - Checked at 1440 and 390.
+
+## 2026-10-02: Shelby's handwritten note beside the FOUNDER Collection shelf (Cowork FOUNDER team)
+
+Shelby asked for a note that looks handwritten, from her, near where people look and buy, saying each product is hand-picked by her and has been part of her daily routine.
+- **New `components/house/FounderNote.tsx`.** A tilted cream note card with a strip of rose tape and faint ruled lines.
+  - Body in Homemade Apple, signature "Shelby" in Mrs Saint Delafield, both via next/font and loaded only where the note renders.
+  - This is a deliberate exception to the board's two-family rule, because it is meant to read as her hand.
+  - The text is real HTML; the figure is labelled for screen readers.
+- **Copy (drafted from her request; she can edit `FOUNDER_NOTE`):** "Every product here was hand-picked by me, and every one has been part of my own daily routine before it ever came to you. / If it's on this shelf, it's on mine." — Shelby
+- **Placement.** /founder-collection, in "The line" header, beside "Five pieces, laid out in the order you'll use them…". On phones it sits under that line, just above the first card.
+- Checked at 1440 and 390.

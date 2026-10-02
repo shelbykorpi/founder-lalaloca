@@ -36,6 +36,7 @@ export function LineCard({
   accent,
   href,
   state,
+  highlights,
   action,
 }: {
   name: string;
@@ -49,6 +50,9 @@ export function LineCard({
   href: string;
   /** Plain words: "Preorder · Ships from the first run", "Sold out". */
   state: string;
+  /** One to three key ingredients, shown under the description. Each must be
+      in the product's transcribed INCI (see the page that passes them). */
+  highlights?: string[];
   action?: ReactNode;
 }) {
   return (
@@ -107,7 +111,19 @@ export function LineCard({
           {name}
         </h3>
         <p className="mt-2 text-sm text-cream/70">{category}</p>
-        <p className="mt-2 text-sm text-cream">{state}</p>
+        {highlights && highlights.length > 0 && (
+          <ul aria-label="Key ingredients" className="mt-3 flex flex-wrap gap-1.5">
+            {highlights.slice(0, 3).map((h) => (
+              <li
+                key={h}
+                className="border border-champagne/35 px-2.5 py-1 text-[0.6875rem] uppercase tracking-[0.14em] text-champagne"
+              >
+                {h}
+              </li>
+            ))}
+          </ul>
+        )}
+        <p className="mt-3 text-sm text-cream">{state}</p>
       </Link>
 
       {action && <div className="mt-4">{action}</div>}

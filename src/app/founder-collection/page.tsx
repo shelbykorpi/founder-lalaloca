@@ -69,6 +69,35 @@ export const metadata: Metadata = {
   alternates: { canonical: "/founder-collection" },
 };
 
+/**
+ * KEY INGREDIENTS ON THE CARDS (Shelby, 2 Oct 2026: "highlight 1-3 main
+ * ingredients people would be excited to see in each product").
+ *
+ * Taken from the supplier's own key-ingredient lists (nextMove.ts
+ * keyIngredients, founderCollection.ts keyActive), and kept only where the
+ * ingredient is in that product's transcribed INCI. Checked 2 Oct 2026:
+ *   Opening Line  Hippophae Rhamnoides (Sea Buckthorn), Rubus Chamaemorus
+ *                 (Cloudberry), Chamomilla Recutita (Camomile)
+ *   Clean Break   Ilex Paraguariensis (Mate), Cetraria Islandica (Iceland
+ *                 Moss), Juniperus Communis (Juniper) Callus
+ *   Hold the Room Hexapeptide-11, Sodium Hyaluronate + Hydrolyzed
+ *                 Hyaluronic Acid, Tocopherol
+ *   Double Take   Hexapeptide-11, Ascorbyl Palmitate (a vitamin C ester),
+ *                 Tocopherol
+ *   Smooth Talker Glycosphingolipids + Glycolipids (the plant-derived
+ *                 ceramide-family lipids behind the supplier's "Ceramides"
+ *                 and the product's own "Ceramide Tone Stick" name),
+ *                 Theobroma Cacao (Cocoa) Seed Butter, Tocopherol.
+ * Names only: no benefit is attached to any ingredient here.
+ */
+const CARD_HIGHLIGHTS: Record<string, string[]> = {
+  "opening-line": ["Sea Buckthorn", "Cloudberry", "Camomile"],
+  "clean-break": ["Mate Leaf", "Iceland Moss", "Juniper Callus"],
+  "hold-the-room": ["Peptides", "Hyaluronic Acid", "Vitamin E"],
+  "double-take": ["Peptides", "Vitamin C", "Vitamin E"],
+  "smooth-talker": ["Ceramides", "Cocoa Butter", "Vitamin E"],
+};
+
 export default async function FounderCollectionPage() {
   const product = FOUNDER_COLLECTION[0];
 
@@ -147,6 +176,8 @@ export default async function FounderCollectionPage() {
     handle: c.handle,
     name: c.title,
     category: c.descriptor ?? "",
+    highlights:
+      CARD_HIGHLIGHTS[c.handle === "founder-collection" ? "hold-the-room" : c.handle] ?? undefined,
     character: c.character ?? undefined,
     image: c.image ? { src: c.image.url, alt: c.image.alt } : undefined,
     hoverImage: c.hoverImage
@@ -208,6 +239,7 @@ export default async function FounderCollectionPage() {
     name: entry.name,
     category: entry.category,
     character: ROUTINE_STEP[entry.slug],
+    highlights: CARD_HIGHLIGHTS[entry.slug],
     image: entry.scene,
     hoverImage: entry.shades ? undefined : { src: entry.pack.src, alt: entry.pack.alt },
     accent: entry.stripes.b,
@@ -364,6 +396,7 @@ export default async function FounderCollectionPage() {
                 accent={card.accent}
                 href={card.href}
                 state={card.state}
+                highlights={"highlights" in card ? card.highlights : undefined}
                 action={card.action}
               />
             ))}

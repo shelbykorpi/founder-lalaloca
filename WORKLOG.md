@@ -2334,3 +2334,19 @@ Shelby didn't like her card's opener ("doesn't sound polished") and wrote a new 
   - `cardIntro.headline` (four lines) now leads her card in rose serif italic, in place of the tagline.
   - The body keeps the rest in her order: "Before the companies…overlooked." / "Every time she was made to feel small…" / "What began as survival…" / the bold belief.
   - The tagline "Built with conviction. Led with grace." stays in profiles.ts but no longer shows on this card.
+
+## 2026-10-02: FOUNDER Collection cards show key ingredients (Cowork FOUNDER team)
+
+Shelby: "each listing … after the item description should highlight 1-3 main ingredients people would be excited to see."
+- **LineCard.tsx.** New optional `highlights` prop: up to 3 small champagne-outlined tags after the description line, before the ship line. The list has aria-label "Key ingredients". Other uses of LineCard are unaffected.
+- **founder-collection/page.tsx.** The `CARD_HIGHLIGHTS` map:
+  - Opening Line: Sea Buckthorn, Cloudberry, Camomile
+  - Clean Break: Mate Leaf, Iceland Moss, Juniper Callus
+  - Hold the Room: Peptides, Hyaluronic Acid, Vitamin E
+  - Double Take: Peptides, Vitamin C, Vitamin E
+  - Smooth Talker: Ceramides, Cocoa Butter, Vitamin E
+- **Provenance.** Every name comes from the supplier's own key-ingredient list (keyIngredients / keyActive) and was checked against that product's transcribed INCI; the INCI names are recorded in the code comment.
+  - "Vitamin C" in Double Take is Ascorbyl Palmitate.
+  - Smooth Talker's "Ceramides" are Glycosphingolipids + Glycolipids.
+  - Names only; no benefit is attached to any ingredient.
+- Checked at 1440 and 390.

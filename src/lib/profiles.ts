@@ -46,6 +46,10 @@ export type FoundHerProfile = {
   tagline?: string;
   /** Sits under the name at the top of her page */
   standfirst: string;
+  /** Optional longer opening for her card on /found-her, in her own words, as
+      short stanzas, closing on one belief set in bold. When absent the card
+      shows the standfirst. */
+  cardIntro?: { stanzas: string[][]; belief: string };
   answers: { question: string; body: string[] }[];
   /** The house line that closes her page. Every profile closes on
       "FOUNDER. FOUND HER." (Shelby, 2 Oct 2026) unless this overrides it. */
@@ -102,8 +106,31 @@ export const profiles: FoundHerProfile[] = [
     },
     building: "FOUNDER, EcoYield.ai, and a few things before both.",
     tagline: "Built with conviction. Led with grace.",
+    /* Shelby rewrote her opening on 2 Oct 2026 ("it doesn't sound polished").
+       The standfirst is her first two lines; the card carries the whole of it,
+       verbatim. */
     standfirst:
-      "Before the titles, the patents and the polished photographs, there was a girl who had seizures as a child, was bullied for how she looked, learned what it felt like to be underestimated from both sides, and kept choosing to get back up.",
+      "Before the companies, the recognition, and the rooms she once dreamed of entering—there was a girl who knew what it felt like to be overlooked.",
+    cardIntro: {
+      stanzas: [
+        [
+          "Before the companies, the recognition, and the rooms she once dreamed of entering—",
+          "there was a girl who knew what it felt like to be overlooked.",
+        ],
+        ["Bullied. Underestimated. Knocked down.", "But never defined by it."],
+        [
+          "Every closed door taught her how to build her own.",
+          "Every setback sharpened her.",
+          "Every time she was made to feel small, she learned how to stand taller.",
+        ],
+        [
+          "What began as survival became resilience.",
+          "What became resilience turned into ambition.",
+          "And that ambition became a life built on one belief:",
+        ],
+      ],
+      belief: "you do not have to become smaller to belong in the room.",
+    },
     approvedOn: "2026-10-01",
     /* Shelby asked for these on 1 Oct 2026 and supplied every logo herself.
        The Maxim cover is already in her own answers below; FHM Sweden and

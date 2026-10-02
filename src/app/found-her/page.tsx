@@ -228,9 +228,31 @@ export default function FoundHerPage() {
                   <p className="mt-6 max-w-[28ch] font-serif text-[clamp(1.4rem,2.3vw,2rem)] italic leading-snug text-rose">
                     {featured.tagline ?? featured.building}
                   </p>
-                  <p className="mt-7 max-w-[42rem] text-[1rem] leading-[1.8] text-cream/74">
-                    {featured.standfirst}
-                  </p>
+                  {featured.cardIntro ? (
+                    <div className="mt-7 max-w-[42rem] space-y-4 text-[0.98rem] leading-[1.7] text-cream/78">
+                      {featured.cardIntro.stanzas.map((stanza, i) => (
+                        <p key={i} className={i === 1 ? "font-serif text-[1.2rem] italic text-cream" : undefined}>
+                          {/* Her opening line ends on a dash and runs on, so
+                              the first stanza flows as one sentence rather
+                              than leaving "entering—" alone on a line. */}
+                          {i === 0
+                            ? stanza.join("")
+                            : stanza.map((line) => (
+                                <span key={line} className="block">
+                                  {line}
+                                </span>
+                              ))}
+                        </p>
+                      ))}
+                      <p className="pt-1 font-serif text-[clamp(1.25rem,2vw,1.6rem)] font-semibold leading-snug text-cream">
+                        {featured.cardIntro.belief}
+                      </p>
+                    </div>
+                  ) : (
+                    <p className="mt-7 max-w-[42rem] text-[1rem] leading-[1.8] text-cream/74">
+                      {featured.standfirst}
+                    </p>
+                  )}
                   {/* Said plainly wherever a composed artwork stands in for
                       a photograph of her. Restored 1 Oct 2026 — the field
                       existed and rendered nowhere, so the artwork was reading

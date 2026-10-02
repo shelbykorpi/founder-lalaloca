@@ -2316,3 +2316,17 @@ Shelby: "put the my vision for founder under the first section our story."
 - It was placed after the opening rather than directly under the hero, because the hero's sentence continues into the opening's first lines. Moving it to sit right under the hero is a one-line change if she prefers that.
 - No words changed; all 163 of her lines are still present. The header comment notes the reordering.
 - Checked at 1440 and 390.
+
+## 2026-10-02: Shelby's FOUND HER card opening, in her new words (Cowork FOUNDER team)
+
+Shelby didn't like her card's opener ("doesn't sound polished") and wrote a new one herself.
+- **profiles.ts.**
+  - The new optional field `cardIntro: { stanzas: string[][]; belief: string }` holds her text verbatim. The stanzas: "Before the companies…overlooked." / "Bullied. Underestimated. Knocked down. But never defined by it." / "Every closed door…stand taller." / "What began as survival…one belief:". The belief: "you do not have to become smaller to belong in the room."
+  - Her `standfirst` (profile masthead, meta description, OG, feed, search) is now her first two lines joined: "Before the companies, the recognition, and the rooms she once dreamed of entering—there was a girl who knew what it felt like to be overlooked."
+  - The old standfirst (seizures/bullied/both sides) is gone.
+- **/found-her featured card.** It renders cardIntro when present, otherwise the standfirst:
+  - stanza 2 is in serif italic;
+  - the belief is in bold serif;
+  - stanza 1 flows as one sentence so "entering—" isn't stranded on its own line.
+  - Tagline "Built with conviction. Led with grace." is unchanged.
+- Julie and Aly are unchanged. Checked at 1440 and 390, plus her profile masthead.

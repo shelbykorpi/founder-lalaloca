@@ -2330,3 +2330,7 @@ Shelby didn't like her card's opener ("doesn't sound polished") and wrote a new 
   - stanza 1 flows as one sentence so "entering—" isn't stranded on its own line.
   - Tagline "Built with conviction. Led with grace." is unchanged.
 - Julie and Aly are unchanged. Checked at 1440 and 390, plus her profile masthead.
+- **Follow-up (same day).** Shelby: "make this the headline: Bullied. Underestimated. Knocked down. But never defined by it. Every closed door taught her how to build her own. Every setback sharpened her."
+  - `cardIntro.headline` (four lines) now leads her card in rose serif italic, in place of the tagline.
+  - The body keeps the rest in her order: "Before the companies…overlooked." / "Every time she was made to feel small…" / "What began as survival…" / the bold belief.
+  - The tagline "Built with conviction. Led with grace." stays in profiles.ts but no longer shows on this card.

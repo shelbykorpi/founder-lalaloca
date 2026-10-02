@@ -225,13 +225,23 @@ export default function FoundHerPage() {
                   >
                     {featured.name}
                   </h2>
-                  <p className="mt-6 max-w-[28ch] font-serif text-[clamp(1.4rem,2.3vw,2rem)] italic leading-snug text-rose">
-                    {featured.tagline ?? featured.building}
-                  </p>
+                  {featured.cardIntro?.headline ? (
+                    <p className="mt-6 max-w-[30ch] font-serif text-[clamp(1.45rem,2.3vw,2.05rem)] leading-[1.22] text-rose">
+                      {featured.cardIntro.headline.map((line) => (
+                        <span key={line} className="block italic">
+                          {line}
+                        </span>
+                      ))}
+                    </p>
+                  ) : (
+                    <p className="mt-6 max-w-[28ch] font-serif text-[clamp(1.4rem,2.3vw,2rem)] italic leading-snug text-rose">
+                      {featured.tagline ?? featured.building}
+                    </p>
+                  )}
                   {featured.cardIntro ? (
                     <div className="mt-7 max-w-[42rem] space-y-4 text-[0.98rem] leading-[1.7] text-cream/78">
                       {featured.cardIntro.stanzas.map((stanza, i) => (
-                        <p key={i} className={i === 1 ? "font-serif text-[1.2rem] italic text-cream" : undefined}>
+                        <p key={i}>
                           {/* Her opening line ends on a dash and runs on, so
                               the first stanza flows as one sentence rather
                               than leaving "entering—" alone on a line. */}

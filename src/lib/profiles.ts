@@ -49,7 +49,7 @@ export type FoundHerProfile = {
   /** Optional longer opening for her card on /found-her, in her own words, as
       short stanzas, closing on one belief set in bold. When absent the card
       shows the standfirst. */
-  cardIntro?: { stanzas: string[][]; belief: string };
+  cardIntro?: { headline?: string[]; stanzas: string[][]; belief: string };
   answers: { question: string; body: string[] }[];
   /** The house line that closes her page. Every profile closes on
       "FOUNDER. FOUND HER." (Shelby, 2 Oct 2026) unless this overrides it. */
@@ -111,18 +111,21 @@ export const profiles: FoundHerProfile[] = [
        verbatim. */
     standfirst:
       "Before the companies, the recognition, and the rooms she once dreamed of entering—there was a girl who knew what it felt like to be overlooked.",
+    /* The headline lines lead the card in place of the tagline (Shelby,
+       2 Oct 2026: "make this the headline"). */
     cardIntro: {
+      headline: [
+        "Bullied. Underestimated. Knocked down.",
+        "But never defined by it.",
+        "Every closed door taught her how to build her own.",
+        "Every setback sharpened her.",
+      ],
       stanzas: [
         [
           "Before the companies, the recognition, and the rooms she once dreamed of entering—",
           "there was a girl who knew what it felt like to be overlooked.",
         ],
-        ["Bullied. Underestimated. Knocked down.", "But never defined by it."],
-        [
-          "Every closed door taught her how to build her own.",
-          "Every setback sharpened her.",
-          "Every time she was made to feel small, she learned how to stand taller.",
-        ],
+        ["Every time she was made to feel small, she learned how to stand taller."],
         [
           "What began as survival became resilience.",
           "What became resilience turned into ambition.",

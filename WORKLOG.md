@@ -2361,3 +2361,20 @@ Shelby asked for a note that looks handwritten, from her, near where people look
 - **Copy (drafted from her request; she can edit `FOUNDER_NOTE`):** "Every product here was hand-picked by me, and every one has been part of my own daily routine before it ever came to you. / If it's on this shelf, it's on mine." — Shelby
 - **Placement.** /founder-collection, in "The line" header, beside "Five pieces, laid out in the order you'll use them…". On phones it sits under that line, just above the first card.
 - Checked at 1440 and 390.
+
+## 2026-10-02: THE SALON built out: invitation, RSVP, key, door (Cowork FOUNDER team)
+
+Shelby asked to build out The Salon: an invitation, a nav tab, and email signup for updates on exclusive events, dinners, parties and escapes. It should feel lux and exclusive, and "you need the invitation and the key to enter". Her choice in chat: the email earns the key.
+- **Nav.** PRIMARY_NAV gains "The Salon" (/salon), stacked "The / Salon", on desktop and in the mobile menu. No overflow at 1024 or 1280.
+- **New `components/house/salon/SalonEntrance.tsx` + salon.module.css.** Stages: sealed → invited → keyed → inside.
+  - **Sealed.** The art-deco emerald doors (edoor-scene with its two leaf cutouts) are shut, with a thread of light at the seam. Beside them is a cream envelope with a Desert Rose wax seal pressed with the F-key monogram (masked from /brand/founder-f-monogram.svg, never redrawn).
+  - **Invited.** Break the seal and the invitation card rises: "FOUNDER requests the pleasure of your company in The Salon". Four lines: dinners, parties, escapes, first looks. "Guest list only · Kindly RSVP", then an email field and an RSVP button.
+  - **Keyed.** The RSVP posts to /api/subscribe with source "salon", so the Shopify tags are newsletter + source:salon and the guest list can be segmented. The key is given ONLY on ok:true: the F-key monogram filled with brass, with one glint. 503 shows an honest "not taking names this minute" message plus the contact email, and the door stays shut.
+  - **Inside.** "Turn the key": the key rotates, the door scrolls into view, the leaves swing open onto inside-founder-lounge, then the page scrolls to the inside.
+  - **Inside content** (page.tsx children): "Welcome to The Salon." Four image tiles (The Dinners, The Parties, The Escapes, The First Look), then a "House rules" close and CTAs.
+  - **Before the key**, a public "Behind the door" teaser shows; it is not a paywall ("Not a tier you buy").
+- **The key is remembered.** `grantInvitation("salon")` (new in HouseKeyProvider) writes to the Founder Key (localStorage). On a return visit she arrives holding the key ("Welcome back. Your key still fits."), and the House Map shows the Salon unlocked (HouseMap reads key.invitations).
+- api/subscribe ALLOWED_SOURCES += "salon". analytics: salon_seal, salon_rsvp, salon_enter (counts only).
+- **No dates, places or specific events are stated anywhere**; none has been announced. The welcome email that goes out is the existing generic one.
+- components/house/SalonDoor.tsx is now unused (left in place).
+- **Verified.** tsc, eslint and build pass. The full flow was run in Playwright at 1440 and 390: the real 503 path, a mocked success, key, door, inside, localStorage written, and the return visit. 0 console errors apart from the expected 503.

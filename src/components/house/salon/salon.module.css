@@ -1,0 +1,187 @@
+/* THE SALON — the invitation, the key and the door (2 Oct 2026).
+   Every motion here respects prefers-reduced-motion at the bottom. */
+
+/* ── The door ─────────────────────────────────────────────────────────── */
+.door {
+  position: relative;
+  display: block;
+  aspect-ratio: 900 / 1297;
+  width: 100%;
+  perspective: 1400px;
+}
+.surround { object-fit: cover; }
+.opening {
+  position: absolute;
+  left: 22.556%;
+  top: 9.406%;
+  width: 54.78%;
+  height: 87.433%;
+  overflow: hidden;
+  perspective: 1100px;
+  transform-style: preserve-3d;
+  background: #120c08;
+}
+.room { object-fit: cover; object-position: 50% 40%; }
+.glow {
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(85% 65% at 50% 42%, rgba(255, 226, 180, 0.34) 0%, transparent 72%);
+  opacity: 0;
+  transition: opacity 1400ms var(--ease-house) 200ms;
+}
+.leaf {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  width: 50.1%;
+  transform-style: preserve-3d;
+  backface-visibility: hidden;
+  transition: transform 1500ms cubic-bezier(0.65, 0, 0.2, 1) 150ms, filter 1500ms var(--ease-house) 150ms;
+}
+.leaf img { object-fit: fill; }
+.leafL { left: 0; transform-origin: 0% 50%; }
+.leafR { right: 0; transform-origin: 100% 50%; }
+/* a thread of light along the seam while the door is shut */
+.seam {
+  position: absolute;
+  left: 50%;
+  top: 4%;
+  bottom: 4%;
+  width: 2px;
+  transform: translateX(-50%);
+  background: linear-gradient(180deg, transparent, rgba(255, 220, 170, 0.55) 30%, rgba(255, 220, 170, 0.55) 70%, transparent);
+  filter: blur(1.5px);
+  transition: opacity 600ms var(--ease-house);
+}
+.doorOpen .leafL { transform: rotateY(-104deg); filter: brightness(0.5); }
+.doorOpen .leafR { transform: rotateY(104deg); filter: brightness(0.5); }
+.doorOpen .glow { opacity: 1; }
+.doorOpen .seam { opacity: 0; }
+
+/* ── The envelope ─────────────────────────────────────────────────────── */
+.envelope {
+  position: relative;
+  width: 100%;
+  max-width: 30rem;
+  aspect-ratio: 7 / 5;
+  margin-inline: auto;
+  background: linear-gradient(160deg, #f8f1e6 0%, #eee2d0 100%);
+  box-shadow: 0 30px 70px rgba(0, 0, 0, 0.5), inset 0 0 0 1px rgba(138, 99, 53, 0.25);
+  transform: rotate(-2deg);
+}
+/* the back flap, folded down to the seal */
+.flap {
+  position: absolute;
+  inset: 0 0 auto 0;
+  height: 58%;
+  background: linear-gradient(180deg, #efe4d2 0%, #e6d7c0 100%);
+  clip-path: polygon(0 0, 100% 0, 50% 100%);
+  filter: drop-shadow(0 2px 2px rgba(0, 0, 0, 0.12));
+}
+.envelopeLine {
+  position: absolute;
+  inset: auto 0 14% 0;
+  text-align: center;
+}
+.seal {
+  position: absolute;
+  left: 50%;
+  top: 58%;
+  width: 4.6rem;
+  height: 4.6rem;
+  transform: translate(-50%, -50%);
+  border-radius: 50%;
+  background: radial-gradient(circle at 38% 32%, #c98986 0%, #a8605e 45%, #7e3f3e 100%);
+  box-shadow: 0 4px 10px rgba(60, 20, 20, 0.45), inset 0 -3px 6px rgba(60, 20, 20, 0.45), inset 0 3px 5px rgba(255, 210, 200, 0.25);
+  display: grid;
+  place-items: center;
+  cursor: pointer;
+  transition: transform 400ms var(--ease-house), box-shadow 400ms var(--ease-house);
+}
+.seal::before {
+  /* the wax edge, pressed unevenly */
+  content: "";
+  position: absolute;
+  inset: -5px;
+  border-radius: 46% 54% 50% 50% / 52% 48% 52% 48%;
+  background: inherit;
+  z-index: -1;
+  filter: brightness(0.92);
+}
+.seal:hover, .seal:focus-visible { transform: translate(-50%, -50%) scale(1.06); outline: none; box-shadow: 0 0 0 3px rgba(214, 190, 154, 0.6), 0 6px 16px rgba(60, 20, 20, 0.5); }
+.sealMark {
+  width: 1.15rem;
+  height: 2.3rem;
+  background: rgba(70, 25, 25, 0.75);
+  -webkit-mask: url("/brand/founder-f-monogram.svg") center / contain no-repeat;
+  mask: url("/brand/founder-f-monogram.svg") center / contain no-repeat;
+}
+.envelopeLeaving { animation: envelopeOut 700ms var(--ease-house) forwards; }
+@keyframes envelopeOut {
+  to { opacity: 0; transform: rotate(-2deg) translateY(28px) scale(0.96); }
+}
+
+/* ── The invitation card ──────────────────────────────────────────────── */
+.card {
+  position: relative;
+  width: 100%;
+  max-width: 30rem;
+  margin-inline: auto;
+  background: linear-gradient(170deg, #faf5ec 0%, #f2e8d8 100%);
+  color: var(--color-charcoal);
+  box-shadow: 0 34px 80px rgba(0, 0, 0, 0.55);
+  padding: 2.75rem 2rem 2.25rem;
+  text-align: center;
+  animation: cardIn 900ms var(--ease-house) both;
+}
+.card::before, .card::after {
+  content: "";
+  position: absolute;
+  pointer-events: none;
+  border: 1px solid rgba(176, 138, 100, 0.75);
+}
+.card::before { inset: 0.6rem; }
+.card::after { inset: 0.85rem; border-color: rgba(176, 138, 100, 0.35); }
+@keyframes cardIn {
+  from { opacity: 0; transform: translateY(46px) rotate(1deg); }
+  to { opacity: 1; transform: none; }
+}
+
+/* ── The key ──────────────────────────────────────────────────────────── */
+.keyWrap {
+  display: grid;
+  place-items: center;
+  animation: keyIn 900ms var(--ease-house) both;
+}
+@keyframes keyIn {
+  from { opacity: 0; transform: translateY(-18px) scale(0.9); }
+  to { opacity: 1; transform: none; }
+}
+/* The F-key monogram itself is the key: the board's own geometry, masked
+   and filled with brass, never redrawn. */
+.key {
+  position: relative;
+  width: 3.4rem;
+  height: 6.8rem;
+  background: linear-gradient(135deg, #f3dcae 0%, #c79b5b 35%, #8a6335 62%, #e6c992 82%, #a37c53 100%);
+  -webkit-mask: url("/brand/founder-f-monogram.svg") center / contain no-repeat;
+  mask: url("/brand/founder-f-monogram.svg") center / contain no-repeat;
+  filter: drop-shadow(0 6px 10px rgba(0, 0, 0, 0.35));
+  transition: transform 900ms cubic-bezier(0.65, 0, 0.2, 1);
+}
+.key::after {
+  /* a glint that crosses the brass once */
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(115deg, transparent 30%, rgba(255, 255, 255, 0.85) 48%, transparent 62%);
+  transform: translateX(-120%);
+  animation: glint 1600ms 500ms var(--ease-house) both;
+}
+@keyframes glint { to { transform: translateX(120%); } }
+.keyTurned { transform: rotate(-90deg) scale(0.92); }
+
+@media (prefers-reduced-motion: reduce) {
+  .leaf, .glow, .seam, .seal, .key { transition: none; }
+  .envelopeLeaving, .card, .keyWrap, .key::after { animation: none; }
+}

@@ -5,6 +5,7 @@ import Link from "next/link";
 import { useEffect, useRef } from "react";
 import { WINGS, OPEN_WINGS } from "@/lib/house";
 import { track } from "@/lib/analytics";
+import { useHouseKey } from "./HouseKeyProvider";
 import s from "./founder-key.module.css";
 
 /**
@@ -43,6 +44,10 @@ export function HouseMap({
   here: string | null;
   found: string[];
 }) {
+  /* The Salon unlocks on the map once her key holds its invitation. */
+  const { key } = useHouseKey();
+  const isLocked = (w: (typeof WINGS)[number]) => Boolean(w.locked) && !key.invitations.includes(w.slug);
+
   const panel = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
@@ -93,14 +98,14 @@ export function HouseMap({
           {WINGS.map((w) => {
             const isHere = w.slug === here;
             const isFound = found.includes(w.slug);
-            const cls = [s.door, isHere ? s.doorHere : "", isFound ? s.doorFound : "", w.locked ? s.doorLocked : ""].join(" ");
+            const cls = [s.door, isHere ? s.doorHere : "", isFound ? s.doorFound : "", isLocked(w) ? s.doorLocked : ""].join(" ");
             return (
               <li key={w.slug} className={cls}>
                 <Link
                   href={w.href}
                   className={s.doorLink}
                   aria-current={isHere ? "location" : undefined}
-                  aria-label={`${w.plaque}${w.locked ? ", by invitation" : ""}${isHere ? " — you are here" : ""}`}
+                  aria-label={`${w.plaque}${isLocked(w) ? ", by invitation" : ""}${isHere ? " — you are here" : ""}`}
                   onClick={() => {
                     track("house_map_go", { to: w.slug, from: here ?? "unknown" });
                     onClose();
@@ -123,7 +128,7 @@ export function HouseMap({
                   </span>
                   <span className={s.plaque}>
                     <span className={s.plaqueName}>{w.plaque}</span>
-                    <span className={s.plaqueLine}>{w.locked ? "By invitation" : w.line}</span>
+                    <span className={s.plaqueLine}>{isLocked(w) ? "By invitation" : w.line}</span>
                     {isHere && <span className={s.here}>You are here</span>}
                   </span>
                 </Link>

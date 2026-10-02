@@ -52,6 +52,15 @@ export function visitWing(slug: string) {
   }
 }
 
+/** Adds an invitation to her key (the Salon, after she RSVPs at its door). */
+export function grantInvitation(slug: string) {
+  const current = snapshot.ready ? snapshot.key : readKey();
+  if (current.invitations.includes(slug)) return;
+  const next: HouseKey = { ...current, invitations: [...current.invitations, slug] };
+  writeKey(next);
+  emit({ ...snapshot, key: next, ready: true });
+}
+
 export function dismissNote() {
   if (!snapshot.note) return;
   emit({ ...snapshot, note: null });

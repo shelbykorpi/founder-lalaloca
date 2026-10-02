@@ -67,6 +67,11 @@ export type TrackEvent =
   | "house_map_go"
   | "house_key_note"
   | "salon_door"
+  /* The Salon entrance (2 Oct 2026): seal broken, RSVP left, key turned.
+     Counts only. */
+  | "salon_seal"
+  | "salon_rsvp"
+  | "salon_enter"
   /* The threshold and the hall. `threshold_open` carries only whether the
      key already had rooms in it, so we can see whether returning visitors
      open the door faster — never who she is. `hall_plaque` counts which

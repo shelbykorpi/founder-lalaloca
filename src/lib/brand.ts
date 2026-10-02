@@ -99,6 +99,9 @@ export const PRIMARY_NAV: { href: string; label: string; stack?: string[] }[] = 
   { href: "/our-story", label: "Our Story", stack: ["Our", "Story"] },
   { href: "/young-founders-room", label: "Young Founders’ Room", stack: ["Young Founders’", "Room"] },
   { href: "/library", label: "The Library", stack: ["The", "Library"] },
+  /* The Salon (Shelby, 2 Oct 2026): by invitation; the page holds the
+     invitation, the RSVP that earns the key, and the door. */
+  { href: "/salon", label: "The Salon", stack: ["The", "Salon"] },
 ];
 
 /** The house's Instagram (Shelby, 1 Oct 2026). Footer link + Organization sameAs. */

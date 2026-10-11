@@ -2407,3 +2407,12 @@ Shelby supplied four images: "update and replace the current images with these i
 - **Gala image cropped to its left 80%.** The original carries another brand's "V" monogram banner ("Exclusive by invitation only") on the right and a "V" table card. The crop removes both. A faint "V" in the carpet remains, mostly under the tile shading. Flagged to Shelby.
 - Added under the tiles: "Imagery shows the mood of a Salon evening, not a past event." These are composed images and no event has happened yet; same principle as the FOUND HER wall caption.
 - Checked at 1440 and 390 through the full key flow; 0 console errors.
+
+## 2026-10-10: Homepage clarity restructure (Grok Bot, branch homepage-clarity, PR only)
+
+- Hero rewritten ("BEAUTY FOR WHAT YOU'RE BUILDING."), primary CTA "Shop the skincare" → #shop, secondary → /found-her.
+- New #shop grid directly under hero: all 8 products from nextMove.ts / founderCollection.ts / products.ts (no retyped prices), add-to-bag per card; Smooth Talker links to its page to choose a shade.
+- New FOUND HER section with approved profiles; collections explainer; house rail, Grand Hall, Serum Salon, Vanity, pledge, invitation follow.
+- Removed from homepage: rose FOUND HER band, duplicate serum grid, Room 06 block (superseded).
+- Nav: SHOP (FOUNDER Collection, LALALOCA Serums, Shop All → /#shop) | Found Her | Our Story | The House (/#room-house). Young Founders' Room + The Salon added to footer.
+- SITE.description + homepage description updated. NOT merged, NOT deployed. Vanity.tsx lint warning pre-existing.

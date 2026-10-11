@@ -90,18 +90,20 @@ export const BRAND = {
    each name where it would break if you said it aloud: the verb or article
    on top, the noun underneath. */
 export const SHOP_NAV = [
-  { href: "/founder-collection", label: "The FOUNDER Collection", note: "Five pieces · cleanse to finish" },
-  { href: "/shop", label: "The LALALOCA Collection", note: "Three serums · three kinds of day" },
+  { href: "/founder-collection", label: "FOUNDER Collection", note: "Five pieces · the complete routine" },
+  { href: "/shop", label: "LALALOCA Serums", note: "Three signature serums" },
+  /* No /shop-all route exists; the homepage's shoppable grid holds all eight. */
+  { href: "/#shop", label: "Shop All", note: "Every piece · both collections" },
 ] as const;
 
 export const PRIMARY_NAV: { href: string; label: string; stack?: string[] }[] = [
+  /* 10 Oct 2026, homepage clarity: four destinations only — SHOP (above) |
+     FOUND HER | OUR STORY | THE HOUSE. Young Founders' Room, The Library and
+     The Salon are reached through The House (the Grand Hall on the homepage)
+     and the footer. */
   { href: "/found-her", label: "Found Her", stack: ["Found", "Her"] },
   { href: "/our-story", label: "Our Story", stack: ["Our", "Story"] },
-  { href: "/young-founders-room", label: "Young Founders’ Room", stack: ["Young Founders’", "Room"] },
-  { href: "/library", label: "The Library", stack: ["The", "Library"] },
-  /* The Salon (Shelby, 2 Oct 2026): by invitation; the page holds the
-     invitation, the RSVP that earns the key, and the door. */
-  { href: "/salon", label: "The Salon", stack: ["The", "Salon"] },
+  { href: "/#room-house", label: "The House", stack: ["The", "House"] },
 ];
 
 /** The house's Instagram (Shelby, 1 Oct 2026). Footer link + Organization sameAs. */
@@ -136,6 +138,8 @@ export const FOOTER_NAV = [
       { href: "/our-story", label: "Our Story" },
       { href: "/found-her#share", label: "Share Your Story" },
       { href: "/library", label: "The Library" },
+      { href: "/young-founders-room", label: "Young Founders’ Room" },
+      { href: "/salon", label: "The Salon" },
     ],
   },
   {
@@ -233,5 +237,5 @@ export const SITE = {
     process.env.VERCEL_ENV === "production" && process.env.ALLOW_INDEXING === "true",
   title: "FOUNDER | Beauty for what you’re building.",
   description:
-    "A private world for women who already know what they bring. Three serums, a five-piece routine, free US shipping, and stories from women about what they built.",
+    "Luxury skincare for women building businesses, careers, families, new beginnings and themselves. The FOUNDER Collection routine, three LALALOCA serums, and FOUND HER stories.",
 };

@@ -17,6 +17,9 @@ import { BRAND, CONTACT_MAILTO } from "@/lib/brand";
 import { FOUNDER_COLLECTION } from "@/lib/founderCollection";
 import { NEXT_MOVE, availabilityLine, type Availability } from "@/lib/nextMove";
 import { products, formatPrice, SET } from "@/lib/products";
+import { VARIANT_ID } from "@/lib/shopifyLinks";
+import { approvedProfiles } from "@/lib/profiles";
+import { AddToBagButton } from "@/components/bag/AddToBagButton";
 
 /**
  * THE HOUSE — the homepage. Seven rooms, one threshold.
@@ -65,7 +68,7 @@ import { products, formatPrice, SET } from "@/lib/products";
    place the site's name is written. */
 export const metadata: Metadata = {
   description:
-    "FOUNDER after dark. A private world for women who already know what they bring. Beauty for what you're building.",
+    "Luxury skincare for women building businesses, careers, families, new beginnings and themselves. Shop the FOUNDER Collection and the LALALOCA serums, and read FOUND HER.",
   alternates: { canonical: "/" },
 };
 
@@ -202,43 +205,150 @@ export default function HomePage() {
           aria-hidden
           className="absolute inset-0 bg-[linear-gradient(0deg,#0a2523_0,rgba(10,37,35,0.93)_240px,rgba(10,37,35,0.8)_460px,rgba(10,37,35,0)_620px)] md:bg-[linear-gradient(90deg,rgba(10,37,35,0.92)_0%,rgba(10,37,35,0.82)_40%,rgba(10,37,35,0.4)_56%,rgba(10,37,35,0)_68%)] xl:bg-[linear-gradient(90deg,rgba(10,37,35,0.9)_0%,rgba(10,37,35,0.78)_28%,rgba(10,37,35,0.35)_42%,rgba(10,37,35,0)_52%)]"
         />
-        <div className="shell relative flex min-h-[calc(100svh-4rem)] flex-col justify-end pb-16 pt-24 md:justify-center md:py-24">
+        <div className="shell relative flex min-h-[calc(100svh-4rem)] flex-col justify-end pb-10 pt-16 md:justify-center md:py-24">
           <div className="max-w-[44rem]">
             <p className="room-label">{BRAND.display} · Welcome inside</p>
-            <h1 className="mt-6 max-w-[12ch] font-serif text-[clamp(2.6rem,7vw,5rem)] font-light leading-[0.92] tracking-[-0.03em] text-cream">
-              Come for the beauty.
-              <span className="block italic text-blush">Stay for everything behind it.</span>
+            <h1 className="mt-4 max-w-[14ch] font-serif text-[clamp(2.3rem,7vw,5rem)] font-light leading-[0.95] tracking-[-0.03em] text-cream md:mt-6">
+              BEAUTY FOR WHAT YOU’RE BUILDING.
             </h1>
-            <p className="mt-7 max-w-[35rem] text-[1.02rem] leading-[1.75] text-cream/82">
-              Skincare is the first door. Inside: the FOUNDER Collection, the LALALOCA serums,
-              FOUND HER stories, and a house built to hold more than one version of a woman.
+            <p className="mt-5 max-w-[35rem] text-[1rem] leading-[1.65] text-cream/85 md:mt-7 md:text-[1.05rem]">
+              Luxury skincare for women building businesses, careers, families, new
+              beginnings—and themselves.
             </p>
-            <p className="mt-4 font-serif text-[1.45rem] text-blush">{BRAND.tagline}</p>
-            <div className="mt-9 flex flex-wrap items-center gap-x-5 gap-y-4">
-              <Link href="/founder-collection" className="btn btn-primary w-full sm:w-auto">
-                Enter the FOUNDER Collection
+            <div className="mt-6 flex flex-wrap items-center gap-x-5 gap-y-3 md:mt-8">
+              <Link href="#shop" className="btn btn-primary w-full sm:w-auto">
+                Shop the skincare
               </Link>
               <Link href="/found-her" className="btn btn-ghost-light w-full sm:w-auto">
-                Meet FOUND HER
+                Discover FOUND HER
               </Link>
             </div>
-            <div className="mt-6 flex flex-wrap items-center gap-x-5 gap-y-3 text-[0.7rem] uppercase tracking-[0.18em] text-cream/60">
-              <span>Not sure where to start?</span>
-              {/* Concierge off until it's fixed (lib/concierge/enabled.ts):
-                  the serum finder answers "where to start" meanwhile. */}
-              {CONCIERGE_ENABLED ? (
-                <ConciergeLauncher
-                  source="home-hero"
-                  className="hairline text-champagne"
-                >
-                  Ring the concierge
-                </ConciergeLauncher>
-              ) : (
-                <Link href="/find-your-serum" className="hairline text-champagne">
-                  Find your serum
+            <p className="mt-6 max-w-[35rem] text-[0.95rem] leading-[1.7] text-cream/75">
+              FOUNDER is more than the products on your vanity. It’s a place for women whose
+              stories deserve to be seen.
+            </p>
+            <p className="mt-4 font-serif text-[1.2rem] italic text-blush">
+              Welcome to FOUNDER. The room is yours.
+            </p>
+          </div>
+        </div>
+      </section>
+
+      {/* ══ SHOP · YOUR NEXT CHAPTER ═════════════════════════════════════════
+          10 Oct 2026, homepage clarity: every product, directly under the hero,
+          with price and a buy action. Every figure is read from the catalogue
+          (nextMove.ts, founderCollection.ts, products.ts) — never retyped. */}
+      <section id="shop" aria-labelledby="shop-heading" className="section scroll-mt-28 bg-night py-16 md:py-20">
+        <div className="shell">
+          <p className="room-label">Shop the skincare</p>
+          <h2 id="shop-heading" className="headline-house mt-4 max-w-[18ch] text-balance text-cream">
+            YOUR NEXT CHAPTER STARTS HERE.
+          </h2>
+          <p className="mt-5 max-w-[42rem] leading-relaxed text-cream/80">
+            Skincare for the moments before everything else. The meeting. The date. The first
+            day. The next beginning. Or simply a moment that belongs to you.
+          </p>
+          <p className="mt-4 text-[0.72rem] uppercase tracking-[0.18em] text-champagne">
+            FOUNDER is the name on your order. LALALOCA is the name of the collection.
+          </p>
+
+          <div className="mt-12 flex flex-wrap items-baseline justify-between gap-3 border-b border-bronze/20 pb-3">
+            <h3 className="font-serif text-2xl text-cream">The FOUNDER Collection</h3>
+            <Link href="/founder-collection" className="hairline text-cream">
+              The complete routine
+            </Link>
+          </div>
+          <ul className="mt-8 grid gap-x-6 gap-y-12 sm:grid-cols-2 lg:grid-cols-5">
+            {SHOP_FOUNDER.map((item) => (
+              <ProductCard key={item.slug} item={item} />
+            ))}
+          </ul>
+
+          <div className="mt-16 flex flex-wrap items-baseline justify-between gap-3 border-b border-bronze/20 pb-3">
+            <h3 className="font-serif text-2xl text-cream">LALALOCA · Three signature serums</h3>
+            <Link href="/shop#set-heading" className="hairline text-cream">
+              All three for {formatPrice(SET.price)} — save{" "}
+              {formatPrice(products.reduce((sum, p) => sum + p.price, 0) - SET.price)}
+            </Link>
+          </div>
+          <ul className="mt-8 grid gap-x-6 gap-y-12 sm:grid-cols-3">
+            {SHOP_LALALOCA.map((item) => (
+              <ProductCard key={item.slug} item={item} />
+            ))}
+          </ul>
+        </div>
+      </section>
+
+      {/* ══ FOUND HER ═══════════════════════════════════════════════════════
+          The brief's copy for this section ended after "The things she
+          built." — nothing beyond it is invented here. */}
+      <section id="found-her" aria-labelledby="found-her-heading" className="section bg-rose py-16 text-charcoal md:py-20">
+        <div className="shell">
+          <p className="room-label" style={{ color: "#5a2f2c" }}>FOUND HER</p>
+          <h2 id="found-her-heading" className="mt-4 max-w-[20ch] font-serif text-[clamp(2rem,4.5vw,3.5rem)] font-light leading-[1] text-balance">
+            THE WOMEN BEHIND THE BEAUTY.
+          </h2>
+          <p className="mt-5 max-w-[40rem] leading-relaxed text-charcoal/85">
+            Behind every woman is a story you haven’t heard. The risks she took. The doors that
+            closed. The things she built.
+          </p>
+          <p className="mt-3 max-w-[40rem] text-charcoal/75">Told in her own words.</p>
+          <ul className="mt-10 grid gap-8 sm:grid-cols-3">
+            {approvedProfiles.slice(0, 3).map((profile) => (
+              <li key={profile.slug}>
+                <Link href={`/found-her/${profile.slug}`} className="group block no-underline">
+                  {profile.portrait && (
+                    <span className="relative block aspect-[4/5] overflow-hidden bg-night">
+                      <Image
+                        src={profile.portrait.src}
+                        alt={profile.portrait.alt}
+                        fill
+                        loading="lazy"
+                        sizes="(min-width: 640px) 30vw, 100vw"
+                        className={profile.portrait.fit === "contain" ? "object-contain" : "object-cover"}
+                        style={{ objectPosition: profile.portrait.position }}
+                      />
+                    </span>
+                  )}
+                  <span className="mt-4 block font-serif text-2xl text-charcoal">{profile.name}</span>
+                  <span className="mt-1 block text-sm text-charcoal/75">{profile.role}</span>
+                  <span className="mt-3 inline-flex min-h-11 items-center text-[0.6875rem] uppercase tracking-[0.18em] text-charcoal underline-offset-4 group-hover:underline">
+                    Read her story<span className="sr-only">: {profile.name}</span>
+                  </span>
                 </Link>
-              )}
-            </div>
+              </li>
+            ))}
+          </ul>
+          <div className="mt-10 flex flex-wrap items-center gap-x-8 gap-y-4">
+            <Link href="/found-her" className="btn btn-dark">
+              Discover FOUND HER
+            </Link>
+            <Link href="/found-her#share" className="hairline text-charcoal">
+              Share your story
+            </Link>
+          </div>
+        </div>
+      </section>
+
+      {/* ══ TWO COLLECTIONS, ONE HOUSE ══════════════════════════════════════ */}
+      <section aria-labelledby="collections-heading" className="section-tight bg-night-deep py-14 text-cream md:py-16">
+        <div className="shell">
+          <h2 id="collections-heading" className="room-label">Two collections</h2>
+          <div className="mt-6 grid gap-px overflow-hidden border border-bronze/15 bg-bronze/15 md:grid-cols-2">
+            <Link href="/founder-collection" className="group bg-night-deep px-6 py-7 no-underline transition-colors hover:bg-founder-green/35">
+              <span className="block font-serif text-[1.6rem] text-cream">The FOUNDER Collection</span>
+              <span className="mt-2 block text-cream/75">
+                The complete routine. Five pieces: cleanse, wash, moisturise, eyes, finish.
+              </span>
+              <span className="mt-3 block text-sm text-champagne">Shop the routine →</span>
+            </Link>
+            <Link href="/shop" className="group bg-night-deep px-6 py-7 no-underline transition-colors hover:bg-founder-green/35">
+              <span className="block font-serif text-[1.6rem] text-cream">LALALOCA</span>
+              <span className="mt-2 block text-cream/75">
+                Three signature serums. Three kinds of day.
+              </span>
+              <span className="mt-3 block text-sm text-champagne">Shop the serums →</span>
+            </Link>
           </div>
         </div>
       </section>
@@ -341,42 +451,6 @@ export default function HomePage() {
           read from lib/house.ts so the map and the hall can never disagree
           about what the house contains. */}
       <GrandHall />
-      {/* ══ FOUND HER — the note on the vanity ══════════════════════════════
-          10 Sept 2026. The three-tile gallery that used to follow this hero
-          (The mirror · The note · The company) came out at Shelby's
-          direction, and this band took its place: Desert Rose at full voice,
-          the one ground the board reserves for FOUND HER, between the lounge
-          and the collection. Same construction as the pledge band further
-          down — label, one serif line, one hairline — so the two rose moments
-          on the page read as the same gesture. The campaign line is
-          BRAND.campaign, never retyped. The hero above keeps the #room-house
-          anchor that "Enter the house" and Room 07's doors resolve to. */}
-      <section
-        aria-labelledby="found-her-band"
-        className="section-tight bg-rose py-14 text-charcoal md:py-16"
-      >
-        <div className="shell flex flex-col items-center gap-4 text-center">
-          <p className="room-label" style={{ color: "#5a2f2c" }}>
-            Found Her
-          </p>
-          {/* Not BRAND.campaign: that line is Room 06's own headline further
-              down this page, and one page says a thing once (17 Sept 2026,
-              audit F-10). This is the Found Her note from the NOTES bank. */}
-          <p
-            id="found-her-band"
-            className="max-w-[22ch] font-serif text-[clamp(1.6rem,3.4vw,2.75rem)] leading-tight text-balance"
-          >
-            There’s always more to the woman than the photograph.
-          </p>
-          <p className="max-w-[34ch] text-charcoal/75">
-            FOUND HER is where she tells the rest herself.
-          </p>
-          <Link href="/found-her" className="hairline mt-2 text-charcoal">
-            Read their stories
-          </Link>
-        </div>
-      </section>
-
       {/* ══ 03 · THE SERUM SALON ════════════════════════════════════════════
           The products taking money get a room of their own, and it comes
           before the collection because that is its number in the house —
@@ -394,57 +468,12 @@ export default function HomePage() {
         lede="Some days you give nothing away. Some days you glow. Some days you start again."
       >
         <Link href="/shop" className="btn btn-primary">
-          Shop the serums
+          Visit the Serum Salon
         </Link>
         <Link href="/find-your-serum" className="hairline text-cream">
           Which one is yours?
         </Link>
       </RoomHero>
-      <section className="section bg-night pt-10">
-        <div className="shell">
-          <Reveal>
-            <div className="flex flex-wrap items-baseline justify-between gap-4">
-              <p className="room-label">Ships now · The LALALOCA Collection</p>
-              <Link href="/shop#set-heading" className="hairline text-cream">
-                All three for {formatPrice(SET.price)} — save{" "}
-                {formatPrice(products.reduce((sum, p) => sum + p.price, 0) - SET.price)}
-              </Link>
-            </div>
-            <ul className="mt-8 grid gap-10 sm:grid-cols-3">
-              {products.map((product) => (
-                <li key={product.slug}>
-                  <Link href={`/products/${product.slug}`} className="group block text-center">
-                    <span className="relative mx-auto block h-40 w-24 md:h-48 md:w-28">
-                      <Image
-                        src={product.bottle}
-                        alt={`The ${product.name} bottle.`}
-                        fill
-                        loading="lazy"
-                        sizes="112px"
-                        className="object-contain transition-transform duration-500 group-hover:scale-[1.04]"
-                      />
-                    </span>
-                    <span className="room-label mt-5 block">{product.archetype}</span>
-                    <span className="mt-2 block font-serif text-2xl leading-none text-cream">
-                      {product.name}
-                    </span>
-                    <span className="mt-2 block font-serif text-lg leading-snug text-cream/80">
-                      {product.hero}
-                    </span>
-                    <span className="mt-3 block text-sm text-cream">
-                      {formatPrice(product.price)} · {product.size.split(" /")[0]}
-                    </span>
-                    <span className="mt-4 inline-flex min-h-11 items-center text-[0.6875rem] uppercase tracking-[0.18em] text-champagne transition-colors group-hover:text-cream">
-                      Shop {product.name}
-                    </span>
-                  </Link>
-                </li>
-              ))}
-            </ul>
-          </Reveal>
-        </div>
-      </section>
-
       {/* ══ 04 · THE COLLECTION ═════════════════════════════════════════════
           Five on the vanity, all in stock from launch (30 Sept 2026); the
           state line under each name follows the record. */}
@@ -479,45 +508,6 @@ export default function HomePage() {
         title="The twenty minutes before you walk in."
         lede="Five pieces. One sequence. Choose the piece that gets you ready for what comes next."
       />
-
-      {/* ══ 06 · FOUND HER ══════════════════════════════════════════════════ */}
-      <section id="room-found-her" className="relative isolate overflow-hidden">
-        <Image
-          src="/editorial/rooms/found-her-hall-sky.webp"
-          alt="The FOUND HER gallery: gilt-framed portraits of women along a dark marble hall, a door at the end open onto a pink desert sky."
-          fill
-          loading="lazy"
-          sizes="100vw"
-          className="object-cover"
-        />
-        <div
-          aria-hidden
-          className="absolute inset-0 bg-[linear-gradient(180deg,rgba(10,37,35,0.86)_0%,rgba(10,37,35,0.7)_60%,rgba(10,37,35,0.94)_100%)] md:bg-[linear-gradient(90deg,rgba(10,37,35,0.97)_0%,rgba(10,37,35,0.9)_32%,rgba(10,37,35,0.5)_58%,rgba(10,37,35,0.1)_100%)]"
-        />
-        <div className="shell relative py-20 md:py-28">
-          <Reveal className="max-w-[34rem]">
-            <p className="room-label">Room 06 · Found Her</p>
-            <p className="mt-5 font-serif text-[1.35rem] leading-snug text-blush">
-              The titles are the least interesting part.
-            </p>
-            <h2 className="mt-4 max-w-[12ch] font-serif text-[clamp(2.25rem,5vw,4rem)] font-light leading-[0.98] text-cream">
-              She was there all along.
-            </h2>
-            <p className="mt-6 max-w-[40ch] text-[0.95rem] leading-relaxed text-cream/80">
-              Shelby. Julie. Aly. Three very different stories about what it took, what changed,
-              and the woman each one found on the other side.
-            </p>
-            <div className="mt-9 flex flex-wrap items-center gap-x-8 gap-y-4">
-              <Link href="/found-her" className="btn btn-primary">
-                Read the stories
-              </Link>
-              <Link href="/found-her#share" className="hairline text-cream">
-                Tell yours
-              </Link>
-            </div>
-          </Reveal>
-        </div>
-      </section>
 
       {/* ══ THE PLEDGE ══════════════════════════════════════════════════════
           Absent from the review build and from the creative deck. It is the
@@ -555,5 +545,108 @@ export default function HomePage() {
       </section>
       </HouseShell>
     </div>
+  );
+}
+
+/* ── The shop grid ─────────────────────────────────────────────────────── */
+
+type ShopItem = {
+  slug: string;
+  name: string;
+  type: string;
+  does: string;
+  price: number;
+  size: string;
+  image: string;
+  alt: string;
+  href: string;
+  note?: string;
+  /** Shopify variant to add; absent = choose on the product page (shades). */
+  bag?: { slug: string; bottle: string };
+  label: string;
+};
+
+const SHOP_FOUNDER: ShopItem[] = LINE.map((l) => {
+  const nm = bySlug[l.href.replace("/products/", "")];
+  const isHold = l.href === "/products/hold-the-room";
+  const variant = isHold ? VARIANT_ID["hold-the-room"] : nm?.variantId;
+  const price = isHold ? holdTheRoom.price : nm.price;
+  const size = isHold ? holdTheRoom.size : nm.size;
+  return {
+    slug: l.href,
+    name: l.name,
+    type: isHold ? holdTheRoom.category : nm.category,
+    does: isHold ? holdTheRoom.what : nm.what,
+    price,
+    size,
+    image: l.image,
+    alt: l.alt,
+    href: l.href,
+    note: l.state,
+    bag: variant ? { slug: variant, bottle: l.image } : undefined,
+    label: !isHold && nm.availability === "preorder" ? "Preorder" : "Add to bag",
+  };
+});
+
+const SHOP_LALALOCA: ShopItem[] = products.map((p) => ({
+  slug: p.slug,
+  name: p.name,
+  type: p.category,
+  does: p.hero,
+  price: p.price,
+  size: p.size,
+  image: p.bottle,
+  alt: `The ${p.name} bottle.`,
+  href: `/products/${p.slug}`,
+  bag: { slug: p.slug, bottle: p.bottle },
+  label: "Add to bag",
+}));
+
+function ProductCard({ item }: { item: ShopItem }) {
+  return (
+    <li className="flex flex-col">
+      <Link href={item.href} className="group block">
+        <span className="relative mx-auto block aspect-[4/5] w-full max-w-[14rem]">
+          <Image
+            src={item.image}
+            alt={item.alt}
+            fill
+            loading="lazy"
+            sizes="(min-width: 1024px) 18vw, (min-width: 640px) 40vw, 80vw"
+            className="object-contain transition-transform duration-500 group-hover:scale-[1.03]"
+          />
+        </span>
+        <span className="mt-5 block font-serif text-2xl leading-none text-cream">{item.name}</span>
+        <span className="mt-2 block text-[0.66rem] uppercase tracking-[0.16em] text-champagne">
+          {item.type}
+        </span>
+      </Link>
+      <p className="mt-3 text-sm leading-relaxed text-cream/75">{item.does}</p>
+      <p className="mt-3 text-sm text-cream">
+        {formatPrice(item.price)} · {item.size.split(" /")[0]}
+      </p>
+      {item.note && <p className="mt-1 text-xs text-cream/60">{item.note}</p>}
+      <div className="mt-auto pt-4">
+        {item.bag ? (
+          <AddToBagButton
+            product={{
+              slug: item.bag.slug,
+              name: item.name,
+              category: item.type,
+              price: item.price,
+              size: item.size,
+              bottle: item.bag.bottle,
+            }}
+            href={item.href}
+            label={item.label}
+            className="btn btn-primary w-full"
+          />
+        ) : (
+          <Link href={item.href} className="btn btn-primary w-full">
+            Choose your shade<span className="sr-only"> — {item.name}</span>
+          </Link>
+        )}
+      </div>
+    </li>
   );
 }

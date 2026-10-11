@@ -34,11 +34,22 @@ export const BRAND = {
    */
   legal: {
     name: "FOUNDER",
-    note: "FOUNDER is the name on your order. LALALOCA is the name of the collection.",
+    note: "FOUNDER is the name on your order. The FOUNDER Collection and the LALALOCA serums are both FOUNDER.",
   },
 
-  /** Structural line — what the customer needs to understand in one read. */
-  structure: "FOUNDER presents the LALALOCA Collection.",
+  /** Structural line — what the customer needs to understand in one read.
+      11 Oct 2026 (clarity brief): it used to say "FOUNDER presents the
+      LALALOCA Collection", which left out the FOUNDER Collection. */
+  structure: "FOUNDER is luxury skincare in two collections: the FOUNDER Collection and the LALALOCA serums.",
+
+  /**
+   * THE ONE EXPLANATION (Shelby's clarity brief, 11 Oct 2026: "Avoid using
+   * five different explanations of what FOUNDER is"). Every page that says
+   * what FOUNDER is reads it from here.
+   */
+  oneLine: "FOUNDER is luxury skincare for women building something of their own.",
+  aboutLine:
+    "We create products for the moments before you step into the world, and a space to celebrate the women making their own way through it. FOUND HER tells their stories.",
 
   /**
    * The announcement bar. 3 Sept 2026: the bar used to carry `structure`,
@@ -47,7 +58,10 @@ export const BRAND = {
    * one line every visitor reads on every page. Facts only: free US shipping
    * is the published policy, $38 and $98 are the Shopify prices.
    */
-  bar: "Free US shipping on every order · Three serums, $38 each · All three for $98",
+  /* 11 Oct 2026: the default bar named only the serums ("Three serums, $38
+     each"), which made the homepage read as a serum shop. Now two facts
+     that are true of every order: the shipping and the returns policies. */
+  bar: "Free US shipping on every order · Returns within 14 days on unopened pieces",
   /**
    * The same bar in the FOUNDER Collection's rooms (17 Sept 2026, audit
    * F-14): a $34–$46 plate with another line's price list over it read as
@@ -90,8 +104,30 @@ export const BRAND = {
    each name where it would break if you said it aloud: the verb or article
    on top, the noun underneath. */
 export const SHOP_NAV = [
+  { href: "/skincare", label: "Shop All", note: "All eight products, both collections" },
   { href: "/founder-collection", label: "The FOUNDER Collection", note: "Five pieces · cleanse to finish" },
-  { href: "/shop", label: "The LALALOCA Collection", note: "Three serums · three kinds of day" },
+  { href: "/shop", label: "The LALALOCA Serums", note: "Three serums · three kinds of day" },
+] as const;
+
+/**
+ * THE HEADER (clarity brief, 11 Oct 2026): SHOP | FOUND HER | OUR STORY |
+ * THE HOUSE. The house's rooms live inside The House, each with what it is
+ * for, so the architecture is the experience rather than the only way to
+ * find the shop. PRIMARY_NAV below stays as the flat list the search index
+ * reads.
+ */
+export const TOP_NAV = [
+  { href: "/found-her", label: "Found Her" },
+  { href: "/our-story", label: "Our Story" },
+] as const;
+
+export const HOUSE_NAV = [
+  { href: "/house", label: "Enter the House", note: "The doors, the hall, every room" },
+  { href: "/founder-collection", label: "The Boardroom", note: "Shop the FOUNDER Collection" },
+  { href: "/shop", label: "The Serum Salon", note: "Explore the LALALOCA serums" },
+  { href: "/library", label: "The Library", note: "Ingredients and skincare education" },
+  { href: "/young-founders-room", label: "Young Founders’ Room", note: "The next generation, and our giving" },
+  { href: "/salon", label: "The Salon", note: "By invitation: dinners, parties, escapes" },
 ] as const;
 
 export const PRIMARY_NAV: { href: string; label: string; stack?: string[] }[] = [
@@ -115,6 +151,7 @@ export const FOOTER_NAV = [
     heading: "Shop",
     links: [
       /* All eight products, both lines (audit 1 Oct: the footer named 3 of 8). */
+      { href: "/skincare", label: "Shop All" },
       { href: "/founder-collection", label: "The FOUNDER Collection" },
       { href: "/products/opening-line", label: "Opening Line" },
       { href: "/products/clean-break", label: "Clean Break" },
@@ -231,7 +268,7 @@ export const SITE = {
    */
   indexable:
     process.env.VERCEL_ENV === "production" && process.env.ALLOW_INDEXING === "true",
-  title: "FOUNDER | Beauty for what you’re building.",
+  title: "FOUNDER Skincare | Beauty for what you’re building.",
   description:
-    "A private world for women who already know what they bring. Three serums, a five-piece routine, free US shipping, and stories from women about what they built.",
+    "FOUNDER is luxury skincare for women building something of their own: the five-piece FOUNDER Collection and the LALALOCA serums, with free US shipping. FOUND HER tells their stories.",
 };

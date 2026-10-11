@@ -1,306 +1,452 @@
 import type { Metadata } from "next";
+import { withShare } from "@/lib/shareMeta";
 import Image from "next/image";
 import Link from "next/link";
 import { EmailSignup } from "@/components/site/EmailSignup";
 import { Reveal } from "@/components/house/Reveal";
-import { HouseShell } from "@/components/house/HouseShell";
-import { AmbientLighting } from "@/components/house/AmbientLighting";
-import { getRoom } from "@/lib/rooms";
-import { DoorFrame } from "@/components/house/DoorFrame";
-import { RoomHero } from "@/components/house/RoomHero";
-import { Vanity } from "@/components/house/Vanity";
-import { ThresholdDoors } from "@/components/house/ThresholdDoors";
-import { GrandHall } from "@/components/house/GrandHall";
-import { ConciergeLauncher } from "@/components/concierge/ConciergeLauncher";
-import { CONCIERGE_ENABLED } from "@/lib/concierge/enabled";
+import { HomeCta } from "@/components/home/HomeCta";
+import { NowPlaying } from "@/components/home/NowPlaying";
+import { SkincareGrid } from "@/components/shop/SkincareGrid";
+import { AddSetButton } from "@/components/bag/AddToBagButton";
 import { BRAND, CONTACT_MAILTO } from "@/lib/brand";
-import { FOUNDER_COLLECTION } from "@/lib/founderCollection";
-import { NEXT_MOVE, availabilityLine, type Availability } from "@/lib/nextMove";
-import { products, formatPrice, SET } from "@/lib/products";
+import { CONCIERGE_ENABLED } from "@/lib/concierge/enabled";
+import { ConciergeLauncher } from "@/components/concierge/ConciergeLauncher";
+import { FOUNDER_LINE, LALALOCA_LINE, allVariantIds } from "@/lib/skincare";
+import { fetchVariantAvailability } from "@/lib/catalog";
+import { VARIANT_ID } from "@/lib/shopifyLinks";
+import { formatPrice, SET } from "@/lib/products";
+import { approvedProfiles } from "@/lib/profiles";
 
 /**
- * THE HOUSE — the homepage. Seven rooms, one threshold.
+ * THE HOMEPAGE — 11 October 2026, the clarity brief.
  *
- * IT BUILT ON /after-hours FIRST, and that was worth the three days. The
- * direction went through three iterations in a week and every one arrived
- * with factual errors in the product data — a product dropped, a fill
- * invented, a sunscreen claim on something with no SPF test — so it went up
- * beside the real homepage, on the real domain, against the real catalogue,
- * and was walked before it took the front door. It took the front door on
- * 30 August. The old campaign homepage is in the history at 19951ab if any
- * of it is wanted back.
+ * Shelby: "people are confused what my site is." The audit found the same:
+ * a full-screen door, "Open the door. The room is yours.", and no product,
+ * price, menu or the word "skincare" until the second screen; the first
+ * price five phone screens down; about fifteen names before one product.
  *
- * WHAT IS TAKEN FROM THE REVIEW BUILD — the structure, and it is good:
- * seven numbered rooms, a full-bleed threshold, captions living inside the
- * photographs, hairline links in place of buttons, alternating full-bleed
- * fields, scroll reveals, and a rail that names the room you are standing in.
+ * So the page now says what FOUNDER is first and lets the house follow, in
+ * the order the brief sets:
+ *   1 The hero: "Beauty for what you're building." with real products,
+ *     Shop the skincare first, Discover FOUND HER second.
+ *   2 The skincare: all eight products with a real buy button on each.
+ *   3 FOUND HER: the women behind the beauty, with their approved portraits.
+ *   4 Our models have stories: how the community becomes the brand's faces,
+ *     with the terms said plainly.
+ *   5 Two collections, one house.
+ *   6 The house, explained room by room (the full walk-through, doors and
+ *     elevator included, lives on at /house).
+ *   7 The invitation: tell your story, join the Founding List, and the
+ *     protected close, "The room is yours."
  *
- * WHAT IS REFUSED, AND WHY:
- *
- *   · #08130f as the ground. Founder Green #164d49 is the master brand field
- *     with an exact hex and every door photograph is graded to it. The
- *     after-hours depth comes from --color-emerald-deep #0a2523, which is
- *     already the token for the room behind the door.
- *   · #b8955e as the brass. Antique Gold is #b08a64. The third variant in
- *     three weeks; see the gold rule in globals.css for what carries small
- *     text on which ground.
- *   · The lockup in two colours across four lines, the second in italic.
- *     Brand board: always two lines. One face, one colour.
- *   · The review build's catalogue. It drops Clean Break — a real product with
- *     finished artwork and a verified label — and replaces it with product
- *     pages for Opening Line and Sign Here, which have no formula. It also
- *     invented "150 mL" for Opening Line before that product existed — a
- *     regulated declaration for a product that did not exist. Every figure on
- *     this page is read from the repo. (16 Sept 2026: Hold the Room IS now the
- *     50 ml peptide cream — the Selfnamed cart settled it; founderCollection.ts
- *     was retranscribed from that listing.)
- *   · Calling the three LALALOCA serums "the archive". They are the products
- *     on sale.
+ * Everything shoppable reads the live catalogue records (lib/skincare.ts)
+ * and asks Shopify which variants can be sold, so a sold-out card says so.
  */
 
-/* The seven rooms are in src/lib/rooms.ts now; the rail reads them there. */
-
-/* No `title` — the root layout's template would render "FOUNDER | FOUNDER".
-   The homepage takes SITE.title from the layout default, which is the one
-   place the site's name is written. */
-export const metadata: Metadata = {
-  description:
-    "FOUNDER after dark. A private world for women who already know what they bring. Beauty for what you're building.",
+export const metadata: Metadata = withShare({
+  description: `${BRAND.oneLine} Shop the five-piece FOUNDER Collection and the LALALOCA serums, with free US shipping, and meet the women of FOUND HER.`,
   alternates: { canonical: "/" },
-};
+}, "/");
 
-/* The line and the fill, read from the repo rather than retyped. */
-const holdTheRoom = FOUNDER_COLLECTION[0];
-const threshold = getRoom(1);
-const bySlug = Object.fromEntries(NEXT_MOVE.map((p) => [p.slug, p]));
-/* The card's verb follows the record's sale state (17 Sept 2026, F-02):
-   a preorder says Preorder, the way Hold the Room's card always has. */
-const actionWord = (a: Availability) => (a === "preorder" ? "Preorder" : "Shop");
+const HOUSE_ROOMS = [
+  {
+    name: "The Boardroom",
+    purpose: "Shop the FOUNDER Collection",
+    href: "/founder-collection",
+    image: "/editorial/rooms/collection-boardroom-open-m.webp",
+  },
+  {
+    name: "The Serum Salon",
+    purpose: "Explore the LALALOCA serums",
+    href: "/shop",
+    image: "/editorial/rooms/serum-salon-alcoves-m.webp",
+  },
+  {
+    name: "FOUND HER",
+    purpose: "Meet the women and read their stories",
+    href: "/found-her",
+    image: "/editorial/rooms/found-her-hall-pink-m.webp",
+  },
+  {
+    name: "The Library",
+    purpose: "Ingredients and skincare education",
+    href: "/library",
+    image: "/editorial/rooms/library-shelves-m.webp",
+  },
+  {
+    name: "Young Founders’ Room",
+    purpose: "The next generation, and our giving",
+    href: "/young-founders-room",
+    image: "/editorial/rooms/young-founders-fireplace-m.webp",
+  },
+  {
+    name: "The Salon",
+    purpose: "The invitation-only experience",
+    href: "/salon",
+    image: "/editorial/salon/salon-lounge.webp",
+  },
+] as const;
 
-const LINE = [
-  {
-    n: "01",
-    archetype: "The Opener",
-    name: bySlug["opening-line"].name,
-    descriptor: `${bySlug["opening-line"].category} · ${bySlug["opening-line"].size}`,
-    image: "/products/opening-line-cut.webp",
-    alt: "Opening Line: the oil-to-milk cleanser bottle, Founder Green label with cream and green stripes and a white pump.",
-    href: "/products/opening-line",
-    hook: bySlug["opening-line"].hook,
-    state: availabilityLine(bySlug["opening-line"].availability),
-    action: `${actionWord(bySlug["opening-line"].availability)} · ${formatPrice(bySlug["opening-line"].price)}`,
-    ready: true,
-  },
-  {
-    n: "02",
-    archetype: "The Reset",
-    name: bySlug["clean-break"].name,
-    descriptor: `${bySlug["clean-break"].category} · ${bySlug["clean-break"].size}`,
-    image: "/products/clean-break-cut.webp",
-    alt: "Clean Break: the purifying face wash bottle, Founder Green label with cream and green stripes and a white pump.",
-    href: "/products/clean-break",
-    hook: bySlug["clean-break"].hook,
-    state: availabilityLine(bySlug["clean-break"].availability),
-    action: `${actionWord(bySlug["clean-break"].availability)} · ${formatPrice(bySlug["clean-break"].price)}`,
-    ready: true,
-  },
-  {
-    n: "03",
-    archetype: "The Anchor",
-    name: holdTheRoom.name,
-    descriptor: `${holdTheRoom.category} · ${holdTheRoom.size}`,
-    image: "/products/hold-the-room-cut.webp",
-    alt: "Hold the Room: the airless bottle and its carton, Desert Pink with a cream cartouche and gold crest.",
-    href: "/products/hold-the-room",
-    hook: holdTheRoom.hero,
-    state: availabilityLine("in-stock"),
-    action: `Shop · ${formatPrice(holdTheRoom.price)}`,
-    ready: true,
-  },
-  {
-    n: "04",
-    archetype: "The Second Look",
-    name: bySlug["double-take"].name,
-    descriptor: `${bySlug["double-take"].category} · ${bySlug["double-take"].size}`,
-    image: "/products/double-take-cut.webp",
-    alt: "Double Take: the small eye-cream bottle and its carton, Desert Pink with a cream cartouche and gold crest.",
-    href: "/products/double-take",
-    hook: bySlug["double-take"].hook,
-    state: availabilityLine(bySlug["double-take"].availability),
-    action: `${actionWord(bySlug["double-take"].availability)} · ${formatPrice(bySlug["double-take"].price)}`,
-    ready: true,
-  },
-  {
-    n: "05",
-    archetype: "The Closer",
-    name: bySlug["smooth-talker"].name,
-    descriptor: `${bySlug["smooth-talker"].category} · ${bySlug["smooth-talker"].size} · 3 shades`,
-    image: "/products/smooth-talker-cut.webp",
-    alt: "Smooth Talker: the tinted stick in 25 Medium and its brass carton, with a cream cartouche and gold crest.",
-    href: "/products/smooth-talker",
-    hook: bySlug["smooth-talker"].hook,
-    state: `${availabilityLine(bySlug["smooth-talker"].availability)} · 3 shades`,
-    action: `${actionWord(bySlug["smooth-talker"].availability)} · ${formatPrice(bySlug["smooth-talker"].price)}`,
-    ready: true,
-  },
-];
+export default async function HomePage() {
+  const availability = await fetchVariantAvailability([
+    ...allVariantIds([...FOUNDER_LINE, ...LALALOCA_LINE]),
+    VARIANT_ID["all-three"],
+  ]);
+  const setSoldOut = availability?.[VARIANT_ID["all-three"]] === false;
+  const women = approvedProfiles.filter((p) => p.portrait).slice(0, 3);
 
-/* Named on the board, not made. No photograph, no price, no product page and
-   no Reserve — a reservation implies something to reserve. The review build
-   gives both of these their own product page with a Reserve button; board
-   v2.14 bars them from the site as products in any form. */
-/* Empty since 4 Sep 2026. Opening Line left on 30 Aug (it became a reservation,
-   now a live SKU); Sign Here was removed from the site entirely at Shelby's
-   direction. Every piece in the collection is now priced, stocked and Active,
-   so there is nothing "in the making" to tile. Kept typed so the grid below
-   simply renders nothing rather than needing its markup pulled. */
-
-export default function HomePage() {
   return (
     <div className="bg-emerald-deep text-cream">
-      {/* THE FRONT DOOR — 12 Sept 2026, brief §3. An overlay, never a gate:
-          client-mounted only, once a session, skipped entirely under reduced
-          motion, and carrying SHOP DIRECTLY from the first frame. Everything
-          below is in the server HTML whether it mounts or not. */}
-      <ThresholdDoors />
-      <HouseShell room={2}>
-
-      {/* ══ 01 · THE THRESHOLD ══════════════════════════════════════════════
-          Full bleed, the doors centred, the copy on the hall's left wall.
-
-          30 Sept 2026, new frame (Shelby's): the front hall — the Founder
-          Green double doors standing open on the rose-lit salon, black
-          marble and candlelight either side. The doors are the subject, so
-          the picture is centred and the left wall is the ground for the
-          copy. That wall is busy with candle flames, so it carries a shade
-          (90% → 0 by the left door's edge from xl; wider between md and xl,
-          where the copy's fixed measure reaches further across the frame); there is no face in this frame
-          for a scrim to cover. Below md the phone crop (705×941, centred on
-          the doorway) keeps the F and the chandelier above the copy; its
-          fade is measured in px from the bottom, because the copy block is a
-          fixed height pinned to the bottom, so the shade follows the copy
-          (the label included) on short phones instead of a % of the frame. */}
-      <section id="room-threshold" className="relative isolate min-h-[calc(100svh-4rem)] overflow-hidden">
-        <Image
-          src={threshold.hero.src}
-          alt={threshold.hero.alt}
-          fill
-          priority
-          sizes="100vw"
-          className="hidden object-cover object-center md:block"
-        />
-        <Image
-          src={threshold.heroMobile.src}
-          alt={threshold.hero.alt}
-          fill
-          loading="eager"
-          sizes="100vw"
-          className="object-cover object-center md:hidden"
-        />
-        <AmbientLighting />
-        <div
-          aria-hidden
-          className="absolute inset-0 bg-[linear-gradient(0deg,#0a2523_0,rgba(10,37,35,0.93)_240px,rgba(10,37,35,0.8)_460px,rgba(10,37,35,0)_620px)] md:bg-[linear-gradient(90deg,rgba(10,37,35,0.92)_0%,rgba(10,37,35,0.82)_40%,rgba(10,37,35,0.4)_56%,rgba(10,37,35,0)_68%)] xl:bg-[linear-gradient(90deg,rgba(10,37,35,0.9)_0%,rgba(10,37,35,0.78)_28%,rgba(10,37,35,0.35)_42%,rgba(10,37,35,0)_52%)]"
-        />
-        <div className="shell relative flex min-h-[calc(100svh-4rem)] flex-col justify-end pb-16 pt-24 md:justify-center md:py-24">
-          <div className="max-w-[44rem]">
-            <p className="room-label">{BRAND.display} · Welcome inside</p>
-            <h1 className="mt-6 max-w-[12ch] font-serif text-[clamp(2.6rem,7vw,5rem)] font-light leading-[0.92] tracking-[-0.03em] text-cream">
-              Come for the beauty.
-              <span className="block italic text-blush">Stay for everything behind it.</span>
+      {/* ══ 1 · THE HERO ═══════════════════════════════════════════════════
+          Real FOUNDER products (Double Take, Smooth Talker, Clean Break) on
+          marble in the house's green room, so the first frame shows what is
+          sold as well as the world around it. One image for every width (a
+          phone sees it as a band above the words, a desktop full-bleed), so
+          only one hero downloads. On a phone the headline, the explanation
+          and Shop the skincare all sit in the first screen. */}
+      <section className="relative isolate overflow-hidden lg:min-h-[calc(100svh-5rem)]">
+        <div className="relative h-[30svh] min-h-[13rem] md:h-[42svh] lg:absolute lg:inset-0 lg:h-auto">
+          <Image
+            src="/editorial/next-move-hero.webp"
+            alt="FOUNDER skincare on a marble ledge in a dark green room: the Double Take eye cream carton and bottle, the Smooth Talker tone stick and the Clean Break face wash, a pink doorway behind."
+            fill
+            priority
+            sizes="100vw"
+            className="object-cover object-[80%_55%] md:object-[70%_55%] lg:object-[60%_50%]"
+          />
+          <div
+            aria-hidden
+            className="absolute inset-0 bg-[linear-gradient(180deg,rgba(10,37,35,0)_40%,rgba(10,37,35,1)_100%)] lg:bg-[linear-gradient(90deg,rgba(10,37,35,0.97)_0%,rgba(10,37,35,0.9)_34%,rgba(10,37,35,0.45)_52%,rgba(10,37,35,0)_66%)]"
+          />
+        </div>
+        <div className="shell relative flex flex-col pb-12 pt-5 md:pt-8 lg:min-h-[calc(100svh-5rem)] lg:justify-center lg:py-20">
+          <div className="max-w-[38rem]">
+            <p className="room-label">FOUNDER · Luxury skincare</p>
+            <h1 className="mt-4 max-w-[13ch] font-serif text-[clamp(2.35rem,6.4vw,4.9rem)] font-light leading-[0.95] tracking-[-0.025em] text-cream md:mt-6">
+              Beauty for what you’re building.
             </h1>
-            <p className="mt-7 max-w-[35rem] text-[1.02rem] leading-[1.75] text-cream/82">
-              Skincare is the first door. Inside: the FOUNDER Collection, the LALALOCA serums,
-              FOUND HER stories, and a house built to hold more than one version of a woman.
+            <p className="mt-4 max-w-[32rem] text-[1rem] leading-[1.6] text-cream/85 md:mt-6 md:text-[1.08rem] md:leading-[1.7]">
+              Luxury skincare for women building businesses, careers, families, new
+              beginnings—and themselves.
             </p>
-            <p className="mt-4 font-serif text-[1.45rem] text-blush">{BRAND.tagline}</p>
-            <div className="mt-9 flex flex-wrap items-center gap-x-5 gap-y-4">
-              <Link href="/founder-collection" className="btn btn-primary w-full sm:w-auto">
-                Enter the FOUNDER Collection
-              </Link>
-              <Link href="/found-her" className="btn btn-ghost-light w-full sm:w-auto">
-                Meet FOUND HER
-              </Link>
+            <div className="mt-5 flex flex-col gap-3 sm:flex-row sm:flex-wrap sm:items-center md:mt-8">
+              <HomeCta href="#skincare" cta="shop_skincare" className="btn btn-primary w-full sm:w-auto">
+                Shop the skincare
+              </HomeCta>
+              <HomeCta href="/found-her" cta="discover_found_her" className="btn btn-ghost-light w-full sm:w-auto">
+                Discover FOUND HER
+              </HomeCta>
             </div>
-            <div className="mt-6 flex flex-wrap items-center gap-x-5 gap-y-3 text-[0.7rem] uppercase tracking-[0.18em] text-cream/60">
-              <span>Not sure where to start?</span>
-              {/* Concierge off until it's fixed (lib/concierge/enabled.ts):
-                  the serum finder answers "where to start" meanwhile. */}
-              {CONCIERGE_ENABLED ? (
-                <ConciergeLauncher
-                  source="home-hero"
-                  className="hairline text-champagne"
-                >
-                  Ring the concierge
-                </ConciergeLauncher>
-              ) : (
-                <Link href="/find-your-serum" className="hairline text-champagne">
-                  Find your serum
-                </Link>
-              )}
-            </div>
+            <p className="mt-6 max-w-[32rem] text-[0.95rem] leading-[1.65] text-cream/70 md:mt-8">
+              FOUNDER is more than the products on your vanity. It’s a place for women whose
+              stories deserve to be seen.
+            </p>
+            <p className="mt-3 font-serif text-[1.15rem] italic text-blush">
+              Welcome to FOUNDER. The room is yours.
+            </p>
           </div>
         </div>
       </section>
 
-      <section className="border-y border-bronze/15 bg-night-deep py-7 text-cream md:py-8" aria-label="Inside FOUNDER">
+      {/* ══ 2 · THE SKINCARE ═══════════════════════════════════════════════ */}
+      <section id="skincare" className="scroll-mt-24 border-t border-bronze/15 bg-night py-16 md:py-24" aria-labelledby="skincare-heading">
         <div className="shell">
-          <p className="mb-5 text-[0.58rem] uppercase tracking-[0.24em] text-champagne/75">
-            Tonight in the house
-          </p>
-          <div className="grid gap-px overflow-hidden border border-bronze/15 bg-bronze/15 md:grid-cols-3">
-            <Link href="/founder-collection" className="group bg-night-deep px-5 py-5 no-underline transition-colors hover:bg-founder-green/35 md:px-6">
-              <span className="block text-[0.56rem] uppercase tracking-[0.22em] text-champagne/70">01 · The collection</span>
-              <span className="mt-2 block font-serif text-[1.35rem] text-cream">Five pieces. One routine.</span>
-              <span className="mt-2 block text-sm text-cream/55 group-hover:text-cream/75">Walk in →</span>
-            </Link>
-            <Link href="/found-her" className="group bg-night-deep px-5 py-5 no-underline transition-colors hover:bg-founder-green/35 md:px-6">
-              <span className="block text-[0.56rem] uppercase tracking-[0.22em] text-champagne/70">02 · FOUND HER</span>
-              <span className="mt-2 block font-serif text-[1.35rem] text-cream">Real women. Their own words.</span>
-              <span className="mt-2 block text-sm text-cream/55 group-hover:text-cream/75">Read the stories →</span>
-            </Link>
-            <Link href="/shop" className="group bg-night-deep px-5 py-5 no-underline transition-colors hover:bg-founder-green/35 md:px-6">
-              <span className="block text-[0.56rem] uppercase tracking-[0.22em] text-champagne/70">03 · LALALOCA</span>
-              <span className="mt-2 block font-serif text-[1.35rem] text-cream">Three serums. Three kinds of day.</span>
-              <span className="mt-2 block text-sm text-cream/55 group-hover:text-cream/75">Choose yours →</span>
-            </Link>
-          </div>
-          {/* NOW PLAYING (Shelby, 2 Oct 2026): "Spin In The Dark" by The Bela
-              Vibe, through Spotify's own embed, which is licensed for sites,
-              so no audio file and no music licence of ours is involved.
-              Signed-in Spotify listeners hear the full track; everyone else
-              gets Spotify's 30-second preview. Nothing auto-plays. Lazy, so
-              it costs nothing until the visitor scrolls near it. The privacy
-              policy names it, because Spotify may set its own cookies. */}
-          <div className="mt-5 grid gap-4 border-t border-bronze/10 pt-5 md:grid-cols-[minmax(0,1fr)_26rem] md:items-center md:gap-8">
-            <div>
-              <span className="block text-[0.56rem] uppercase tracking-[0.22em] text-champagne/70">
-                Now playing in the house
-              </span>
-              <span className="mt-2 block font-serif text-[1.35rem] text-cream">Spin In The Dark</span>
-              <span className="mt-1 block text-sm text-cream/55">The Bela Vibe</span>
-            </div>
-            <iframe
-              title="Spin In The Dark by The Bela Vibe, on Spotify"
-              src="https://open.spotify.com/embed/track/7dY2Gy12KLH8LkxcneRKce?utm_source=generator&theme=0"
-              width="100%"
-              height="80"
-              loading="lazy"
-              allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"
-              className="block w-full rounded-[12px] border-0"
-            />
+          <div className="max-w-[44rem]">
+            <p className="room-label">Shop FOUNDER</p>
+            <h2 id="skincare-heading" className="mt-4 font-serif text-[clamp(2.1rem,4.6vw,3.6rem)] font-light leading-[1] text-cream">
+              Your next chapter starts here.
+            </h2>
+            <p className="mt-5 text-[1rem] leading-[1.75] text-cream/78">
+              Skincare for the moments before everything else. The meeting. The date. The first
+              day. The next beginning. Or simply a moment that belongs to you.
+            </p>
           </div>
 
-          <div className="mt-5 flex flex-wrap items-center justify-between gap-3 border-t border-bronze/10 pt-5">
-            <p className="text-sm text-cream/55">
-              Need a recommendation, an order answer, or help finding your way through the house?
+          <div className="mt-12 flex flex-wrap items-end justify-between gap-3 border-b border-bronze/20 pb-4">
+            <h3 className="font-serif text-[1.6rem] text-cream">
+              The FOUNDER Collection
+              <span className="ml-3 align-middle text-[0.65rem] uppercase tracking-[0.2em] text-champagne/80">
+                Five pieces · one routine
+              </span>
+            </h3>
+            <Link href="/founder-collection" className="hairline text-cream">
+              Explore the collection
+            </Link>
+          </div>
+          <SkincareGrid
+            items={FOUNDER_LINE}
+            availability={availability}
+            listId="home_founder_collection"
+            listName="Homepage · FOUNDER Collection"
+            className="mt-6 lg:grid-cols-5"
+          />
+
+          <div className="mt-14 flex flex-wrap items-end justify-between gap-3 border-b border-bronze/20 pb-4">
+            <h3 className="font-serif text-[1.6rem] text-cream">
+              The LALALOCA Serums
+              <span className="ml-3 align-middle text-[0.65rem] uppercase tracking-[0.2em] text-champagne/80">
+                By FOUNDER · three serums
+              </span>
+            </h3>
+            <Link href="/shop" className="hairline text-cream">
+              Discover LALALOCA
+            </Link>
+          </div>
+          <div className="mt-6 grid gap-3 sm:gap-4 lg:grid-cols-[3fr_1fr]">
+            <SkincareGrid
+              items={LALALOCA_LINE}
+              availability={availability}
+              listId="home_lalaloca"
+              listName="Homepage · LALALOCA serums"
+              className="grid-cols-2 sm:grid-cols-3 lg:grid-cols-3"
+            />
+            <div className="flex flex-col justify-between border border-bronze/30 bg-[linear-gradient(160deg,rgba(214,190,154,0.12),rgba(9,23,18,0.6))] p-5">
+              <div>
+                <p className="text-[0.625rem] uppercase tracking-[0.2em] text-champagne/80">The set</p>
+                <p className="mt-2 font-serif text-[1.6rem] leading-none text-cream">The House Trio</p>
+                <p className="mt-3 text-[0.875rem] leading-relaxed text-cream/75">
+                  All three LALALOCA serums, full size, for every kind of day.
+                </p>
+              </div>
+              <div className="mt-6">
+                <p className="font-serif text-[1.25rem] text-cream">
+                  {formatPrice(SET.price)}
+                  <span className="ml-2 text-[0.75rem] text-cream/60">
+                    instead of {formatPrice(LALALOCA_LINE.reduce((n, i) => n + i.price, 0))}
+                  </span>
+                </p>
+                <AddSetButton className="btn btn-primary mt-4 w-full" soldOut={setSoldOut} />
+              </div>
+            </div>
+          </div>
+
+          <div className="mt-12 flex flex-col items-start justify-between gap-6 border-t border-bronze/15 pt-8 md:flex-row md:items-center">
+            <ul className="flex flex-wrap gap-x-8 gap-y-2 text-[0.8125rem] text-cream/70">
+              <li>Free US shipping on every order</li>
+              <li>Returns within 14 days on unopened pieces</li>
+              <li>Secure checkout by Shopify</li>
+            </ul>
+            <Link href="/skincare" className="btn btn-ghost-light">
+              Shop all skincare
+            </Link>
+          </div>
+        </div>
+      </section>
+
+      {/* ══ 3 · FOUND HER ══════════════════════════════════════════════════
+          The approved FOUND HER women, with their own portraits. Where a
+          portrait is a composition rather than her photograph, its note is
+          shown with it, as profiles.ts requires wherever it stands in. */}
+      <section className="bg-night-deep py-16 md:py-24" aria-labelledby="women-heading">
+        <div className="shell grid gap-12 lg:grid-cols-[0.9fr_1.1fr] lg:items-center lg:gap-16">
+          <Reveal>
+            <p className="room-label">FOUND HER</p>
+            <h2 id="women-heading" className="mt-4 max-w-[12ch] font-serif text-[clamp(2.1rem,4.6vw,3.6rem)] font-light leading-[1] text-cream">
+              The women behind the beauty.
+            </h2>
+            <div className="mt-6 max-w-[34rem] space-y-4 text-[1rem] leading-[1.75] text-cream/78">
+              <p className="font-serif text-[1.35rem] italic leading-snug text-blush">
+                Behind every woman is a story you haven’t heard.
+              </p>
+              <p>
+                The risks she took. The doors that closed. The things she built. The moments she
+                almost gave up—and the moments she kept going.
+              </p>
+              <p>FOUND HER is where those stories are told.</p>
+            </div>
+            <div className="mt-8 flex flex-col gap-3 sm:flex-row sm:flex-wrap">
+              <HomeCta href="/found-her" cta="meet_the_women" className="btn btn-primary w-full sm:w-auto">
+                Meet the women
+              </HomeCta>
+              <HomeCta href="/found-her#share" cta="share_your_story" className="btn btn-ghost-light w-full sm:w-auto">
+                Share your story
+              </HomeCta>
+            </div>
+          </Reveal>
+
+          <ul className="grid grid-cols-3 gap-3 sm:gap-4">
+            {women.map((w) => (
+              <li key={w.slug}>
+                <Link href={`/found-her/${w.slug}`} className="group block">
+                  <span className="relative block aspect-[3/4] overflow-hidden border border-bronze/25 bg-night">
+                    <Image
+                      src={w.portrait!.src}
+                      alt={w.portrait!.alt}
+                      fill
+                      loading="lazy"
+                      sizes="(max-width: 1024px) 30vw, 16vw"
+                      className="object-cover transition-transform duration-700 group-hover:scale-[1.04]"
+                      style={{ objectPosition: w.portrait!.position ?? "center 30%" }}
+                    />
+                  </span>
+                  <span className="mt-3 block font-serif text-[1.15rem] leading-tight text-cream group-hover:text-champagne md:text-[1.3rem]">
+                    {w.name}
+                  </span>
+                  <span className="mt-1 block text-[0.75rem] leading-snug text-cream/60">{w.role}</span>
+                </Link>
+                {w.portrait!.note ? (
+                  <p className="mt-2 text-[0.6875rem] leading-relaxed text-cream/65">{w.portrait!.note}</p>
+                ) : null}
+              </li>
+            ))}
+          </ul>
+        </div>
+      </section>
+
+      {/* ══ 4 · OUR MODELS HAVE STORIES ════════════════════════════════════
+          Shelby's copy (11 Oct 2026 brief). Inspiring, and transparent: the
+          terms under it repeat what the story form and her confirmation email
+          already promise, so the three never disagree. */}
+      <section className="bg-rose py-16 text-charcoal md:py-24" aria-labelledby="models-heading">
+        <div className="shell grid gap-10 lg:grid-cols-[0.9fr_1.1fr] lg:items-start lg:gap-16">
+          <Reveal>
+            <p className="room-label !text-night">The faces of FOUNDER</p>
+            <h2 id="models-heading" className="mt-4 max-w-[11ch] font-serif text-[clamp(2.1rem,4.6vw,3.6rem)] font-light leading-[1] text-night">
+              Our models have stories.
+            </h2>
+          </Reveal>
+          <Reveal delay={100}>
+            <div className="max-w-[38rem] space-y-4 text-[1.02rem] leading-[1.75] text-charcoal">
+              <p className="font-serif text-[1.35rem] leading-snug text-night">
+                The women of FOUND HER aren’t chosen because their lives look perfect.
+              </p>
+              <p>They’re women creating, building, rebuilding, and becoming.</p>
+              <p>
+                As FOUNDER grows, women from this community can be selected to represent the
+                brand—through editorial features, product photography, and future product
+                collections.
+              </p>
+              <p className="font-serif text-[1.35rem] italic leading-snug text-night">
+                The next face of FOUNDER could be yours.
+              </p>
+            </div>
+            <HomeCta
+              href="/found-her#share"
+              cta="become_part_of_found_her"
+              className="btn mt-8 w-full bg-founder-green text-cream hover:bg-rose-deep hover:text-night sm:w-auto"
+            >
+              Become part of FOUND HER
+            </HomeCta>
+            <p className="mt-5 max-w-[36rem] text-[0.8125rem] leading-relaxed text-charcoal">
+              Sharing your story is free and never requires a purchase. Being published, featured,
+              photographed or placed on a product is selective and never guaranteed, and each is
+              agreed with you separately, in writing, before anything is used.
+            </p>
+          </Reveal>
+        </div>
+      </section>
+
+      {/* ══ 5 · TWO COLLECTIONS. ONE HOUSE. ════════════════════════════════ */}
+      <section className="bg-night py-16 md:py-24" aria-labelledby="collections-heading">
+        <div className="shell">
+          <p className="room-label">The collections</p>
+          <h2 id="collections-heading" className="mt-4 font-serif text-[clamp(2.1rem,4.6vw,3.6rem)] font-light leading-[1] text-cream">
+            Two collections. One house.
+          </h2>
+          <p className="mt-4 max-w-[40rem] text-[1rem] leading-[1.7] text-cream/75">
+            Both are FOUNDER: the same house, the same standards, two ways into your routine.
+          </p>
+          <div className="mt-10 grid gap-5 md:grid-cols-2">
+            {[
+              {
+                label: "The FOUNDER Collection",
+                line: "Five pieces. One routine.",
+                body: "Skincare for the preparation before whatever comes next.",
+                cta: "Explore the collection",
+                href: "/founder-collection",
+                image: "/editorial/collection-vanity.webp",
+                alt: "A vanity in the FOUNDER house: a mirror lettered FOUNDER, ringed with bulbs, on a Desert Pink wall.",
+                position: "60% 50%",
+              },
+              {
+                label: "The LALALOCA Collection",
+                line: "Three serums. Three kinds of day.",
+                body: "The original serums that opened the door.",
+                cta: "Discover LALALOCA",
+                href: "/shop",
+                image: "/editorial/trio-parlor.webp",
+                alt: "The three LALALOCA serums, Thirst Trap, Bounce Back and C Me Glow, on a marble counter in the FOUNDER parlour.",
+                position: "25% 50%",
+              },
+            ].map((c) => (
+              <Link key={c.href} href={c.href} className="group relative isolate flex min-h-[26rem] flex-col justify-end overflow-hidden border border-bronze/20">
+                <Image
+                  src={c.image}
+                  alt={c.alt}
+                  fill
+                  loading="lazy"
+                  sizes="(max-width: 768px) 92vw, 46vw"
+                  className="-z-10 object-cover transition-transform duration-[1200ms] group-hover:scale-[1.03]"
+                  style={{ objectPosition: c.position }}
+                />
+                <span aria-hidden className="absolute inset-0 -z-10 bg-[linear-gradient(180deg,rgba(9,23,18,0.05)_20%,rgba(9,23,18,0.85)_70%,rgba(9,23,18,0.97)_100%)]" />
+                <div className="p-6 md:p-8">
+                  <p className="text-[0.625rem] uppercase tracking-[0.22em] text-champagne">A FOUNDER collection</p>
+                  <h3 className="mt-3 font-serif text-[clamp(1.8rem,3vw,2.4rem)] font-light leading-none text-cream">{c.label}</h3>
+                  <p className="mt-3 font-serif text-[1.2rem] italic text-blush">{c.line}</p>
+                  <p className="mt-2 text-[0.95rem] text-cream/78">{c.body}</p>
+                  <span className="btn btn-primary mt-6">{c.cta}</span>
+                </div>
+              </Link>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* ══ 6 · WELCOME INSIDE THE HOUSE ═══════════════════════════════════
+          The architecture, after the business. Each room says what it is
+          for. The full walk-through (doors, elevator, Grand Hall) is at
+          /house; nothing on this page needs it to shop. */}
+      <section className="border-t border-bronze/15 bg-night-deep py-16 md:py-24" aria-labelledby="house-heading">
+        <div className="shell">
+          <div className="grid gap-6 md:grid-cols-[1fr_auto] md:items-end">
+            <div>
+              <p className="room-label">The House</p>
+              <h2 id="house-heading" className="mt-4 font-serif text-[clamp(2.1rem,4.6vw,3.6rem)] font-light leading-[1] text-cream">
+                Welcome inside the house.
+              </h2>
+              <p className="mt-5 max-w-[40rem] text-[1rem] leading-[1.75] text-cream/78">
+                There’s more to FOUNDER than what you put on your skin. Explore the collections,
+                meet the women, discover the ingredients, and step into the rooms where our
+                stories continue.
+              </p>
+            </div>
+            <HomeCta href="/house" cta="enter_the_house" className="btn btn-ghost-light w-full sm:w-auto">
+              Enter the house
+            </HomeCta>
+          </div>
+
+          <ul className="mt-10 grid grid-cols-2 gap-3 sm:gap-4 lg:grid-cols-3">
+            {HOUSE_ROOMS.map((room) => (
+              <li key={room.href + room.name}>
+                <Link href={room.href} className="group relative isolate flex aspect-[4/5] flex-col justify-end overflow-hidden border border-bronze/20 sm:aspect-[16/11]">
+                  <Image
+                    src={room.image}
+                    alt=""
+                    fill
+                    loading="lazy"
+                    sizes="(max-width: 1024px) 46vw, 30vw"
+                    className="-z-10 object-cover transition-transform duration-[1200ms] group-hover:scale-[1.04]"
+                  />
+                  <span aria-hidden className="absolute inset-0 -z-10 bg-[linear-gradient(180deg,rgba(9,23,18,0)_30%,rgba(9,23,18,0.9)_100%)]" />
+                  <span className="p-4 md:p-5">
+                    <span className="block font-serif text-[1.3rem] leading-tight text-cream md:text-[1.6rem]">{room.name}</span>
+                    <span className="mt-1 block text-[0.75rem] leading-snug text-cream/75 md:text-[0.8125rem]">{room.purpose} →</span>
+                  </span>
+                </Link>
+              </li>
+            ))}
+          </ul>
+
+          <NowPlaying />
+
+          <div className="mt-6 flex flex-wrap items-center justify-between gap-3 border-t border-bronze/10 pt-6">
+            <p className="text-sm text-cream/60">
+              Need a recommendation or an answer about an order?
             </p>
             {CONCIERGE_ENABLED ? (
-              <ConciergeLauncher
-                source="home-house-rail"
-                className="btn btn-ghost-light"
-              >
-                Ring for service
+              <ConciergeLauncher source="home-house" className="btn btn-ghost-light">
+                Ask the concierge
               </ConciergeLauncher>
             ) : (
               <a href={CONTACT_MAILTO} className="btn btn-ghost-light">
@@ -311,225 +457,10 @@ export default function HomePage() {
         </div>
       </section>
 
-      <DoorFrame label="Room 02 · Inside FOUNDER" />
-
-      {/* ══ 02 · INSIDE FOUNDER ═════════════════════════════════════════════ */}
-      <RoomHero
-        id="room-house"
-        as="h2"
-        room={getRoom(2)}
-        height="min-h-[78svh]"
-        title="The elevator is waiting."
-        lede={
-          <>
-            Pick a floor. Beauty, stories, the library, or the room we keep by invitation.
-            <br />
-            There is no wrong first stop.
-          </>
-        }
-      >
-        <a href="#hall-doors" className="hairline text-cream">
-          Choose your floor ↓
-        </a>
-      </RoomHero>
-      {/* THE GRAND HALL — brief §4. Third pass, 12 Sept: the house’s own doors at
-          standing height, each with its room through the opening; press one and
-          you walk through. Was a wall of engraved plaques for an hour — Shelby:
-          "not the immersive feeling of being located in each room". The hall was
-          a dead end before that: one hairline
-          and a very long scroll before anything else was a door. Six doors,
-          read from lib/house.ts so the map and the hall can never disagree
-          about what the house contains. */}
-      <GrandHall />
-      {/* ══ FOUND HER — the note on the vanity ══════════════════════════════
-          10 Sept 2026. The three-tile gallery that used to follow this hero
-          (The mirror · The note · The company) came out at Shelby's
-          direction, and this band took its place: Desert Rose at full voice,
-          the one ground the board reserves for FOUND HER, between the lounge
-          and the collection. Same construction as the pledge band further
-          down — label, one serif line, one hairline — so the two rose moments
-          on the page read as the same gesture. The campaign line is
-          BRAND.campaign, never retyped. The hero above keeps the #room-house
-          anchor that "Enter the house" and Room 07's doors resolve to. */}
-      <section
-        aria-labelledby="found-her-band"
-        className="section-tight bg-rose py-14 text-charcoal md:py-16"
-      >
+      {/* THE PLEDGE. The house's largest truth claim; the wording never changes. */}
+      <section className="bg-night py-12 text-cream md:py-14">
         <div className="shell flex flex-col items-center gap-4 text-center">
-          <p className="room-label" style={{ color: "#5a2f2c" }}>
-            Found Her
-          </p>
-          {/* Not BRAND.campaign: that line is Room 06's own headline further
-              down this page, and one page says a thing once (17 Sept 2026,
-              audit F-10). This is the Found Her note from the NOTES bank. */}
-          <p
-            id="found-her-band"
-            className="max-w-[22ch] font-serif text-[clamp(1.6rem,3.4vw,2.75rem)] leading-tight text-balance"
-          >
-            There’s always more to the woman than the photograph.
-          </p>
-          <p className="max-w-[34ch] text-charcoal/75">
-            FOUND HER is where she tells the rest herself.
-          </p>
-          <Link href="/found-her" className="hairline mt-2 text-charcoal">
-            Read their stories
-          </Link>
-        </div>
-      </section>
-
-      {/* ══ 03 · THE SERUM SALON ════════════════════════════════════════════
-          The products taking money get a room of their own, and it comes
-          before the collection because that is its number in the house —
-          Room 03 in lib/rooms.ts — and because these are the three that ship
-          today (17 Sept 2026, audit F-09: one numbering, the house's). */}
-      <RoomHero
-        as="h2"
-        src="/editorial/rooms/serum-salon-arches.webp"
-        mobileSrc="/editorial/rooms/serum-salon-arches-m.webp"
-        alt="The serum salon: three lit marble niches in teal, gold and red, one bottle in each, over a black marble counter, pink desert sky through the arches either side."
-        position="center center"
-        height="min-h-[64svh]"
-        label="Room 03 · The Serum Salon"
-        title="Three serums. Three kinds of day."
-        lede="Some days you give nothing away. Some days you glow. Some days you start again."
-      >
-        <Link href="/shop" className="btn btn-primary">
-          Shop the serums
-        </Link>
-        <Link href="/find-your-serum" className="hairline text-cream">
-          Which one is yours?
-        </Link>
-      </RoomHero>
-      <section className="section bg-night pt-10">
-        <div className="shell">
-          <Reveal>
-            <div className="flex flex-wrap items-baseline justify-between gap-4">
-              <p className="room-label">Ships now · The LALALOCA Collection</p>
-              <Link href="/shop#set-heading" className="hairline text-cream">
-                All three for {formatPrice(SET.price)} — save{" "}
-                {formatPrice(products.reduce((sum, p) => sum + p.price, 0) - SET.price)}
-              </Link>
-            </div>
-            <ul className="mt-8 grid gap-10 sm:grid-cols-3">
-              {products.map((product) => (
-                <li key={product.slug}>
-                  <Link href={`/products/${product.slug}`} className="group block text-center">
-                    <span className="relative mx-auto block h-40 w-24 md:h-48 md:w-28">
-                      <Image
-                        src={product.bottle}
-                        alt={`The ${product.name} bottle.`}
-                        fill
-                        loading="lazy"
-                        sizes="112px"
-                        className="object-contain transition-transform duration-500 group-hover:scale-[1.04]"
-                      />
-                    </span>
-                    <span className="room-label mt-5 block">{product.archetype}</span>
-                    <span className="mt-2 block font-serif text-2xl leading-none text-cream">
-                      {product.name}
-                    </span>
-                    <span className="mt-2 block font-serif text-lg leading-snug text-cream/80">
-                      {product.hero}
-                    </span>
-                    <span className="mt-3 block text-sm text-cream">
-                      {formatPrice(product.price)} · {product.size.split(" /")[0]}
-                    </span>
-                    <span className="mt-4 inline-flex min-h-11 items-center text-[0.6875rem] uppercase tracking-[0.18em] text-champagne transition-colors group-hover:text-cream">
-                      Shop {product.name}
-                    </span>
-                  </Link>
-                </li>
-              ))}
-            </ul>
-          </Reveal>
-        </div>
-      </section>
-
-      {/* ══ 04 · THE COLLECTION ═════════════════════════════════════════════
-          Five on the vanity, all in stock from launch (30 Sept 2026); the
-          state line under each name follows the record. */}
-      {/* THE COLLECTION ROOM IS DARK, and it was cream until 30 August.
-          Two reasons it had to move. Every tile in it is already a dark
-          object — a photograph under a near-black gradient with cream type —
-          so a cream ground was a white mat around six dark pictures rather
-          than a lit room. And a grid of products is browsing, not reading;
-          `.paper` is for the things people read, which is why the ritual and
-          the ingredient lists further in are still lit. */}
-      <RoomHero
-        id="room-collection"
-        as="h2"
-        src="/editorial/rooms/collection-mirror.webp"
-        mobileSrc="/editorial/rooms/collection-mirror-m.webp"
-        alt="The FOUNDER Collection boardroom at night: a long polished marble table running to a panelled dark green wall between two brass sconces, green velvet chairs down both sides, white flowers on a lit shelf at the left and city lights through the window at the right."
-        position="center center"
-        height="min-h-[68svh]"
-        label="Room 04 · The FOUNDER Collection"
-        title="Five pieces before whatever comes next."
-        lede="Cleanse, wash, moisturise, eyes, finish. A complete routine designed to get you ready and get out of the way."
-      >
-        <Link href="/founder-collection" className="btn btn-primary">
-          Explore the collection
-        </Link>
-      </RoomHero>
-      {/* THE VANITY — launch edit. The five products now read as a luxury
-          campaign sequence rather than a literal shelf simulation: one large
-          editorial frame, one active piece, one controlled detail panel. */}
-      <Vanity
-        items={LINE}
-        title="The twenty minutes before you walk in."
-        lede="Five pieces. One sequence. Choose the piece that gets you ready for what comes next."
-      />
-
-      {/* ══ 06 · FOUND HER ══════════════════════════════════════════════════ */}
-      <section id="room-found-her" className="relative isolate overflow-hidden">
-        <Image
-          src="/editorial/rooms/found-her-hall-sky.webp"
-          alt="The FOUND HER gallery: gilt-framed portraits of women along a dark marble hall, a door at the end open onto a pink desert sky."
-          fill
-          loading="lazy"
-          sizes="100vw"
-          className="object-cover"
-        />
-        <div
-          aria-hidden
-          className="absolute inset-0 bg-[linear-gradient(180deg,rgba(10,37,35,0.86)_0%,rgba(10,37,35,0.7)_60%,rgba(10,37,35,0.94)_100%)] md:bg-[linear-gradient(90deg,rgba(10,37,35,0.97)_0%,rgba(10,37,35,0.9)_32%,rgba(10,37,35,0.5)_58%,rgba(10,37,35,0.1)_100%)]"
-        />
-        <div className="shell relative py-20 md:py-28">
-          <Reveal className="max-w-[34rem]">
-            <p className="room-label">Room 06 · Found Her</p>
-            <p className="mt-5 font-serif text-[1.35rem] leading-snug text-blush">
-              The titles are the least interesting part.
-            </p>
-            <h2 className="mt-4 max-w-[12ch] font-serif text-[clamp(2.25rem,5vw,4rem)] font-light leading-[0.98] text-cream">
-              She was there all along.
-            </h2>
-            <p className="mt-6 max-w-[40ch] text-[0.95rem] leading-relaxed text-cream/80">
-              Shelby. Julie. Aly. Three very different stories about what it took, what changed,
-              and the woman each one found on the other side.
-            </p>
-            <div className="mt-9 flex flex-wrap items-center gap-x-8 gap-y-4">
-              <Link href="/found-her" className="btn btn-primary">
-                Read the stories
-              </Link>
-              <Link href="/found-her#share" className="hairline text-cream">
-                Tell yours
-              </Link>
-            </div>
-          </Reveal>
-        </div>
-      </section>
-
-      {/* ══ THE PLEDGE ══════════════════════════════════════════════════════
-          Absent from the review build and from the creative deck. It is the
-          house's largest truth claim and the wording never changes. */}
-      {/* 1 Oct 2026 (team audit): Desert Rose type on the night ground, so the
-          page has one rose room (Found Her), not two, and the pledge keeps its
-          own room before the green invitation. */}
-      <section className="section-tight bg-night-deep py-14 text-cream md:py-16">
-        <div className="shell flex flex-col items-center gap-4 text-center">
-          <p className="room-label">
-            LALALOCA × StandUp for Kids
-          </p>
+          <p className="room-label">LALALOCA × StandUp for Kids</p>
           <p className="max-w-[26ch] font-serif text-[clamp(1.35rem,2.6vw,2rem)] leading-snug text-rose">
             20% of LALALOCA net profits. Every month. Directly to StandUp for Kids Tucson.
           </p>
@@ -539,21 +470,35 @@ export default function HomePage() {
         </div>
       </section>
 
-      {/* ══ THE INVITATION ══════════════════════════════════════════════════ */}
-      <section id="room-invitation" className="section-tight bg-founder-green py-16 md:py-20">
-        <div className="shell">
-          <Reveal className="max-w-xl">
+      {/* ══ 7 · THE INVITATION ═════════════════════════════════════════════ */}
+      <section id="invitation" className="bg-founder-green py-16 md:py-24" aria-labelledby="invitation-heading">
+        <div className="shell grid gap-12 lg:grid-cols-[1.1fr_0.9fr] lg:gap-16">
+          <Reveal>
             <p className="room-label">The invitation</p>
-            <h2 className="headline-house mt-5 text-balance text-cream">
-              Leave your name at the door.
+            <h2 id="invitation-heading" className="mt-4 max-w-[12ch] font-serif text-[clamp(2.1rem,4.6vw,3.6rem)] font-light leading-[1] text-cream">
+              There’s room for you here.
             </h2>
-            {/* No standfirst here: EmailSignup already carries its own heading
-                and explanation, and two of them read as a stutter. */}
-            <EmailSignup tone="green" source="home" />
+            <p className="mt-6 space-y-1 font-serif text-[clamp(1.2rem,2vw,1.45rem)] leading-[1.5] text-cream/90">
+              <span className="block">For the woman just beginning.</span>
+              <span className="block">For the woman starting over.</span>
+              <span className="block">For the woman who built something no one believed in.</span>
+              <span className="block">For the woman still figuring out what comes next.</span>
+            </p>
+            <p className="mt-5 font-serif text-[1.5rem] italic text-blush">You belong here.</p>
+            <HomeCta href="/found-her#share" cta="tell_your_story" className="btn btn-primary mt-8 w-full sm:w-auto">
+              Tell your story
+            </HomeCta>
+          </Reveal>
+          <Reveal delay={100} className="lg:pt-2">
+            <EmailSignup tone="green" source="home" heading="Join the Founding List." />
           </Reveal>
         </div>
+        <div className="shell mt-16 border-t border-cream/15 pt-12 text-center md:mt-20">
+          <p className="font-serif text-[clamp(2rem,5vw,3.6rem)] font-light leading-[1] tracking-[0.02em] text-cream">
+            FOUNDER. <span className="text-champagne">The room is yours.</span>
+          </p>
+        </div>
       </section>
-      </HouseShell>
     </div>
   );
 }

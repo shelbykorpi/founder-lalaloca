@@ -58,7 +58,7 @@ const DESK_BRIEF: Record<string, string> = {
   beauty:
     "She is at the Beauty desk: product choice, routines, ingredients, what to expect and when. This is the desk where a recommendation is the whole point of the conversation.",
   house:
-    "She is at The House desk: what FOUNDER is, why there are three, how the brand talks about results, where things are made. Sell the house before you sell the bottle — but if she is circling a choice, make one for her.",
+    "She is at The House desk: what FOUNDER is, why there are three, how the brand talks about results, where things are made. Say plainly what FOUNDER is first (luxury skincare, two collections, and FOUND HER for the women's stories), then the house — and if she is circling a choice, make one for her.",
   found:
     "She is at the Found Her desk: the stories platform, who it is for, and how to submit one. THIS DESK DOES NOT SELL. No recommendation, no closing invitation, no future-pacing a product. Warm, unhurried, genuinely interested in her. If she asks outright what she should buy, answer plainly and briefly — but never steer her there.",
   service:

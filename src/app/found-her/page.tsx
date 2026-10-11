@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { withShare } from "@/lib/shareMeta";
 import Image from "next/image";
 import Link from "next/link";
 import { HouseShell } from "@/components/house/HouseShell";
@@ -10,15 +11,15 @@ import { STORY_STANDARD } from "@/lib/content";
 import { approvedProfiles } from "@/lib/profiles";
 import { JsonLd, breadcrumbSchema, editorialListSchema } from "@/lib/seo";
 
-export const metadata: Metadata = {
+export const metadata: Metadata = withShare({
   title: "Found Her",
   description:
-    "FOUND HER — intimate stories from women about what they built, what it took, and the moment they finally recognized the woman they had become.",
+    "FOUND HER is FOUNDER's community of real women telling their own stories: what they built, what it took, and who they became. Share yours, and be considered as a face of FOUNDER.",
   alternates: {
     canonical: "/found-her",
     types: { "application/rss+xml": "/feed/found-her.xml" },
   },
-};
+}, "/found-her");
 
 /** "The women of FOUNDER", Shelby's words, verbatim (1 Oct 2026). */
 const WOMEN_OF_FOUNDER = {
@@ -34,6 +35,35 @@ const WOMEN_OF_FOUNDER = {
   stories: ["The wins.", "The failures.", "The risks.", "The rebuilds.", "The moments that changed everything."],
   you: ["Your story.", "What you built.", "What you survived.", "What you are still becoming."],
 };
+
+/** How FOUND HER works (clarity brief, Phase 5). Each line matches what the
+    story form, the privacy policy and the confirmation email already say. */
+const HOW_IT_WORKS = [
+  {
+    title: "What FOUND HER is",
+    body: "FOUNDER’s storytelling community: real women, in their own words, on what they built, survived, changed and became.",
+  },
+  {
+    title: "Who can take part",
+    body: "Any woman with a story. You don’t need a company, a title or a big win, and you never need to buy anything.",
+  },
+  {
+    title: "Why women are featured",
+    body: "Because the woman behind the beauty is the point. We look for stories that are honest, specific and yours, not polished.",
+  },
+  {
+    title: "How to share",
+    body: "Answer the questions in the form below. Only the first two are required; the rest are there if you want them.",
+  },
+  {
+    title: "Features and the faces of FOUNDER",
+    body: "Some women are invited into editorial features, product photography or future collections. It is selective, never guaranteed, and only with your separate written permission. Tick the third box on the form to be considered.",
+  },
+  {
+    title: "What happens next",
+    body: "A person reads every story and you get an email saying it arrived. If we’d like to publish, you see the final text first, and nothing goes live until you approve it.",
+  },
+];
 
 export default function FoundHerPage() {
   const [featured, ...rest] = approvedProfiles;
@@ -69,21 +99,30 @@ export default function FoundHerPage() {
           />
           <div className="shell relative flex min-h-[82svh] items-end pb-16 pt-28 md:items-center md:py-24">
             <div className="max-w-[46rem]">
-              <p className="room-label">FOUND HER · In her own words</p>
-              <h1 className="mt-6 font-serif text-[clamp(4rem,10vw,8.5rem)] font-light leading-[0.82] tracking-[-0.045em] text-cream">
-                She was there
-                <span className="block italic text-rose">all along.</span>
+              {/* The opening from the clarity brief (11 Oct 2026): it says what
+                  FOUND HER is and that its women are the faces of FOUNDER,
+                  where "She was there all along." left that to be guessed. */}
+              <p className="room-label">FOUND HER · The FOUNDER community</p>
+              <h1 className="mt-6 max-w-[16ch] font-serif text-[clamp(2.7rem,6.4vw,5.4rem)] font-light leading-[0.94] tracking-[-0.03em] text-cream">
+                Real women. Real stories.
+                <span className="block italic text-rose">The faces of FOUNDER.</span>
               </h1>
-              <p className="mt-8 max-w-[36rem] text-[clamp(1rem,1.5vw,1.25rem)] leading-[1.7] text-cream/78">
-                The woman behind the title. The story behind the work. The moments no one
-                saw — told by the women who lived them.
+              <p className="mt-7 max-w-[36rem] text-[clamp(1rem,1.5vw,1.2rem)] leading-[1.7] text-cream/82">
+                FOUND HER celebrates the women behind the work, the wins, the reinventions, and the
+                moments that changed everything.
               </p>
-              <div className="mt-9 flex flex-wrap gap-5">
-                <Link href="#stories" className="btn btn-primary">
+              <p className="mt-3 max-w-[36rem] font-serif text-[1.3rem] italic leading-snug text-blush">
+                Their stories deserve more than a caption. They deserve to be seen.
+              </p>
+              <div className="mt-9 flex flex-col gap-3 sm:flex-row sm:flex-wrap sm:items-center sm:gap-5">
+                <Link href="#stories" className="btn btn-primary w-full sm:w-auto">
                   Read the stories
                 </Link>
-                <Link href="#share" className="hairline text-cream">
-                  Tell yours
+                <Link href="#share" className="btn btn-ghost-light w-full sm:w-auto">
+                  Share your story
+                </Link>
+                <Link href="#how-it-works" className="hairline self-start text-cream sm:self-auto">
+                  How it works
                 </Link>
               </div>
             </div>
@@ -179,6 +218,35 @@ export default function FoundHerPage() {
           </div>
         </section>
 
+        {/* HOW FOUND HER WORKS (clarity brief, 11 Oct 2026, Phase 5): the six
+            things a woman needs to know before she writes. Every promise here
+            is one the form and its confirmation email already make. */}
+        <section id="how-it-works" className="scroll-mt-24 border-y border-bronze/15 bg-night py-16 md:py-24" aria-labelledby="how-heading">
+          <div className="shell">
+            <p className="room-label">How FOUND HER works</p>
+            <h2 id="how-heading" className="mt-4 max-w-[18ch] font-serif text-[clamp(2rem,4.4vw,3.4rem)] font-light leading-[1] text-cream">
+              Your story, your words, your say.
+            </h2>
+            <ol className="mt-10 grid gap-px overflow-hidden border border-bronze/15 bg-bronze/15 sm:grid-cols-2 lg:grid-cols-3">
+              {HOW_IT_WORKS.map((step, i) => (
+                <li key={step.title} className="bg-night px-6 py-7">
+                  <span className="text-[0.625rem] uppercase tracking-[0.22em] text-champagne/80">
+                    {String(i + 1).padStart(2, "0")}
+                  </span>
+                  <h3 className="mt-3 font-serif text-[1.45rem] leading-tight text-cream">{step.title}</h3>
+                  <p className="mt-3 text-[0.9375rem] leading-relaxed text-cream/75">{step.body}</p>
+                </li>
+              ))}
+            </ol>
+            <div className="mt-10 flex flex-col gap-3 sm:flex-row sm:items-center sm:gap-6">
+              <Link href="#share" className="btn btn-primary w-full sm:w-auto">
+                Share your story
+              </Link>
+              <p className="text-[0.8125rem] text-cream/60">No purchase, ever. Only two questions are required.</p>
+            </div>
+          </div>
+        </section>
+
         {featured ? (
           <section id="stories" className="bg-night-deep py-0" aria-labelledby="featured-story-heading">
             <Link
@@ -268,12 +336,12 @@ export default function FoundHerPage() {
                       existed and rendered nowhere, so the artwork was reading
                       as her own photograph. */}
                   {featured.portrait?.note && (
-                    <p className="mt-8 max-w-[44ch] text-[0.6875rem] leading-relaxed text-cream/45">
+                    <p className="mt-8 max-w-[44ch] text-[0.6875rem] leading-relaxed text-cream/65">
                       {featured.portrait.note}
                     </p>
                   )}
                   <div className="mt-10 flex items-center justify-between border-t border-bronze/20 pt-6">
-                    <span className="text-[0.625rem] uppercase tracking-[0.2em] text-cream/45">
+                    <span className="text-[0.625rem] uppercase tracking-[0.2em] text-cream/65">
                       {featured.role}
                     </span>
                     <span className="hairline text-cream">Read her story →</span>
@@ -362,7 +430,7 @@ export default function FoundHerPage() {
                         {profile.tagline ?? profile.building}
                       </p>
                       {profile.portrait?.note && (
-                        <p className="mt-5 max-w-[46ch] text-[0.6875rem] leading-relaxed text-cream/45">
+                        <p className="mt-5 max-w-[46ch] text-[0.6875rem] leading-relaxed text-cream/65">
                           {profile.portrait.note}
                         </p>
                       )}
@@ -421,6 +489,10 @@ export default function FoundHerPage() {
 
             <div className="bg-cream p-6 text-charcoal shadow-[0_35px_90px_rgba(0,0,0,0.35)] md:p-10 lg:p-12">
               <p className="eyebrow text-bronze-ink">Start where it changed</p>
+              <p className="mt-3 text-[0.8125rem] leading-relaxed text-charcoal/80">
+                Only the first two questions are required · No purchase needed · You approve every
+                word before anything is published
+              </p>
               <p className="mt-4 max-w-2xl font-serif text-[clamp(1.8rem,3vw,2.6rem)] leading-snug text-charcoal">
                 You do not need the polished version. Start with the moment that still feels true.
               </p>

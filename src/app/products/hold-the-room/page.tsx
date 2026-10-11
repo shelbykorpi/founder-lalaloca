@@ -1,4 +1,6 @@
+import { TrackProductView } from "@/components/site/TrackProductView";
 import type { Metadata } from "next";
+import { withShare } from "@/lib/shareMeta";
 import Image from "next/image";
 import Link from "next/link";
 import { AddToBagButton } from "@/components/bag/AddToBagButton";
@@ -51,18 +53,19 @@ export const revalidate = 60;
 
 const product = FOUNDER_COLLECTION[0];
 
-export const metadata: Metadata = {
+export const metadata: Metadata = withShare({
   title: `${product.name} — ${product.category}`,
   description:
     "Hold the Room, the anchor of the FOUNDER Collection. A peptide cream with hyaluronic acid and vitamin E, 50 ml, $36. Free US shipping.",
   alternates: { canonical: "/products/hold-the-room" },
-};
+}, "/products/hold-the-room");
 
 export default async function HoldTheRoomPage() {
   const available = await fetchVariantAvailability([VARIANT_ID["hold-the-room"]]);
   const soldOut = available?.[VARIANT_ID["hold-the-room"]] === false;
   return (
     <div className="bg-night text-cream">
+      <TrackProductView id="hold-the-room" name={product.name} category={product.category} price={product.price} />
       <JsonLd
         schema={[
           breadcrumbSchema([
@@ -77,7 +80,12 @@ export default async function HoldTheRoomPage() {
       {/* ══ THE PLATE ═══════════════════════════════════════════════════════
           One room, full width. The copy lives in the shadow on the left, so
           the wall behind it is the same wall the product is standing against. */}
-      <section className="relative isolate flex min-h-[calc(100svh-7rem)] flex-col justify-end overflow-hidden">
+      {/* 11 Oct 2026 (clarity audit): on a phone the copy used to sit over a
+          darkened photograph of the product. Below md the photograph is now
+          its own band above the words, so the bottle is seen clearly and the
+          words sit on the plain wall; from md up it is unchanged. */}
+      <section className="relative isolate flex flex-col overflow-hidden md:min-h-[calc(100svh-7rem)] md:justify-end">
+        <div className="relative h-[46svh] min-h-[18rem] md:absolute md:inset-0 md:h-auto">
         <Image
           src="/products/hold-the-room-hero.webp"
           alt="Hold the Room — the white airless pump bottle with its cream label and green-and-rose striped bands, beside its Desert Pink carton — standing on a black marble console against a dark green wall, reflected in the stone."
@@ -86,7 +94,7 @@ export default async function HoldTheRoomPage() {
           /* Below md the landscape frame is cropped to a tall phone box, so
              it renders about 3.4× the viewport's width; asking for 100vw
              served an 828px file stretched to ~2600 device pixels. */
-          sizes="(max-width: 767px) 340vw, 100vw"
+          sizes="(max-width: 767px) 180vw, 100vw"
           className="object-cover object-[68%_center]"
         />
         {/* Deep on the left where the words go, clear on the right where the
@@ -97,10 +105,11 @@ export default async function HoldTheRoomPage() {
             sat unreadable on the blurred pink carton). */}
         <div
           aria-hidden
-          className="absolute inset-0 bg-[linear-gradient(180deg,rgba(14,33,27,0.35)_0%,rgba(14,33,27,0.55)_20%,rgba(14,33,27,0.82)_38%,rgba(14,33,27,0.9)_70%,#0e211b_100%)] md:bg-[linear-gradient(90deg,#0e211b_0%,rgba(14,33,27,0.78)_28%,rgba(14,33,27,0.49)_44%,rgba(14,33,27,0.04)_66%)]"
+          className="absolute inset-0 bg-[linear-gradient(180deg,rgba(14,33,27,0)_55%,#0e211b_100%)] md:bg-[linear-gradient(90deg,#0e211b_0%,rgba(14,33,27,0.78)_28%,rgba(14,33,27,0.49)_44%,rgba(14,33,27,0.04)_66%)]"
         />
+        </div>
 
-        <div className="shell relative flex w-full flex-1 items-end pb-16 pt-28 md:items-center md:py-24">
+        <div className="shell relative flex w-full flex-1 items-end pb-16 pt-6 md:items-center md:py-24">
           <div className="max-w-[26rem]">
             <p className="room-label">The line</p>
             <p className="mt-3 text-[0.75rem] uppercase tracking-[0.22em] text-cream/80">
@@ -112,9 +121,12 @@ export default async function HoldTheRoomPage() {
             <p className="mt-4 text-[0.75rem] uppercase tracking-[0.22em] text-cream/70">
               {product.category}
             </p>
-            <span aria-hidden className="plate-rule mt-7" />
+            {/* What it does first, then the line to remember it by (clarity
+                brief, Phase 6). */}
+            <p className="mt-4 text-[1rem] leading-relaxed text-cream/85">{product.what}</p>
+            <span aria-hidden className="plate-rule mt-6" />
 
-            <p className="mt-7 font-serif text-[clamp(1.35rem,2.2vw,1.6rem)] leading-snug text-blush">
+            <p className="mt-6 font-serif text-[clamp(1.3rem,2.1vw,1.55rem)] italic leading-snug text-blush">
               {product.hero}
             </p>
 

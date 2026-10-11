@@ -91,8 +91,7 @@ export function Footer() {
           </div>
         </div>
         <p className="max-w-2xl text-[0.6875rem] leading-relaxed text-cream/65">
-          {BRAND.display} is the name on your order. {BRAND.collection} is the
-          name of the collection.
+          {BRAND.oneLine} {BRAND.legal.note}
         </p>
       </div>
     </footer>

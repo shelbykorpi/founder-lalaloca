@@ -10,7 +10,7 @@ import type { Review } from "@/lib/reviews";
  */
 function Stars({ rating }: { rating: number }) {
   return (
-    <span className="flex gap-0.5 text-bronze-ink" aria-label={`${rating} out of 5 stars`}>
+    <span role="img" className="flex gap-0.5 text-bronze-ink" aria-label={`${rating} out of 5 stars`}>
       {Array.from({ length: 5 }, (_, i) => (
         <svg key={i} viewBox="0 0 20 20" className="h-4 w-4" aria-hidden fill={i < rating ? "currentColor" : "none"} stroke="currentColor" strokeWidth="1.2">
           <path d="M10 1.8l2.5 5.2 5.7.8-4.1 4 1 5.6L10 14.7l-5.1 2.7 1-5.6-4.1-4 5.7-.8z" />

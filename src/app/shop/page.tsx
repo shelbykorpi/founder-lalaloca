@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { withShare } from "@/lib/shareMeta";
 import Image from "next/image";
 import Link from "next/link";
 import { AddSetButton } from "@/components/bag/AddToBagButton";
@@ -17,7 +18,7 @@ import { allSerumReviews } from "@/lib/reviews";
 import { EtsyReviews } from "@/components/shop/EtsyReviews";
 import { EXPRESS_OFFERED } from "@/lib/nextMove";
 
-export const metadata: Metadata = {
+export const metadata: Metadata = withShare({
   title: "Shop the LALALOCA Collection",
   description:
     "Three serums — Thirst Trap, C Me Glow and Bounce Back. 50 ml, $38 each, free US shipping. What each one does, and how to pick.",
@@ -25,7 +26,7 @@ export const metadata: Metadata = {
      Google the homepage is the real version of it — the fastest way to get a
      commercial page dropped from the index. */
   alternates: { canonical: "/shop" },
-};
+}, "/shop");
 
 export default async function ShopPage() {
   const variantIds = [
@@ -211,7 +212,7 @@ export default async function ShopPage() {
       {/* ---------------- Comparison ---------------- */}
       <EditorialRoomSection surface="paper" tight aria-labelledby="compare-heading">
         <div>
-          <p className="eyebrow text-rose-deep">Read the label. Then decide.</p>
+          <p className="eyebrow text-bronze-ink">Read the label. Then decide.</p>
           <h2 id="compare-heading" className="subhead mt-3 text-charcoal">
             Side by side
           </h2>

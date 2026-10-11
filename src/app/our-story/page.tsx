@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { withShare } from "@/lib/shareMeta";
 import type { ReactNode } from "react";
 import Image from "next/image";
 import Link from "next/link";
@@ -27,11 +28,11 @@ const TITLE = "Our Story";
 const DESCRIPTION =
   "Why Shelby Korpi started FOUNDER: for every woman who has been underestimated and kept going, and why FOUND HER exists to tell her story.";
 
-export const metadata: Metadata = {
+export const metadata: Metadata = withShare({
   title: TITLE,
   description: DESCRIPTION,
   alternates: { canonical: "/our-story" },
-};
+}, "/our-story");
 
 type Block =
   /** An ordinary sentence or paragraph. */

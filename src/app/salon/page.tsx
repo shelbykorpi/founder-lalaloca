@@ -1,14 +1,15 @@
 import type { Metadata } from "next";
+import { withShare } from "@/lib/shareMeta";
 import Image from "next/image";
 import Link from "next/link";
 import { SalonEntrance } from "@/components/house/salon/SalonEntrance";
 
-export const metadata: Metadata = {
+export const metadata: Metadata = withShare({
   title: "The Salon · By invitation",
   description:
     "The Salon is the private room of the FOUNDER house: intimate dinners, late-night parties, escapes and first looks. By invitation. RSVP with your email to receive your key.",
   alternates: { canonical: "/salon" },
-};
+}, "/salon");
 
 /**
  * THE SALON — 2 October 2026 (Shelby: "build out The Salon … an invitation

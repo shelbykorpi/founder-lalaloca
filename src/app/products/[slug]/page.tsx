@@ -47,6 +47,8 @@ export async function generateMetadata({
       description: product.what,
       images: [{ url: product.bottle }],
       type: "website",
+      url: `/products/${product.slug}`,
+      siteName: "FOUNDER",
     },
   };
 }
@@ -229,7 +231,7 @@ export default async function ProductPage({ params }: PageProps<"/products/[slug
               </details>
             ))}
             {/* Said once, here, instead of inside every panel. */}
-            <p className="pt-5 text-xs leading-relaxed text-charcoal/60">
+            <p className="pt-5 text-xs leading-relaxed text-charcoal/80">
               Cosmetic product. Results vary from person to person; no clinical
               claims are made.
             </p>

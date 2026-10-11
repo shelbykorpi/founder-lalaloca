@@ -1,4 +1,7 @@
+import { TrackListView } from "@/components/site/TrackListView";
+import { FOUNDER_LINE } from "@/lib/skincare";
 import type { Metadata } from "next";
+import { withShare } from "@/lib/shareMeta";
 import Image from "next/image";
 import Link from "next/link";
 import { AddToBagButton } from "@/components/bag/AddToBagButton";
@@ -63,12 +66,12 @@ import {
  * column on a centred frame fights the picture.
  */
 
-export const metadata: Metadata = {
+export const metadata: Metadata = withShare({
   title: "The FOUNDER Collection",
   description:
     "The FOUNDER Collection: Opening Line, Clean Break, Hold the Room, Double Take and Smooth Talker. Cleanser to colour, $34–$46, free US shipping.",
   alternates: { canonical: "/founder-collection" },
-};
+}, "/founder-collection");
 
 /**
  * KEY INGREDIENTS ON THE CARDS (Shelby, 2 Oct 2026: "highlight 1-3 main
@@ -313,6 +316,11 @@ export default async function FounderCollectionPage() {
 
   return (
     <>
+      <TrackListView
+        items={FOUNDER_LINE.map((i) => ({ slug: i.bag?.slug ?? i.slug, name: i.name, category: i.category, price: i.price }))}
+        listId="founder_collection"
+        listName="The FOUNDER Collection"
+      />
       <JsonLd
         schema={[
           breadcrumbSchema([

@@ -178,7 +178,10 @@ export function ThresholdDoors() {
       if (committed.current) return;
       if (["Enter", " ", "Spacebar", "ArrowDown", "PageDown", "Escape"].includes(e.key)) {
         /* Enter and Space on the button are the button's own job. */
-        if ((e.key === "Enter" || e.key === " ") && document.activeElement?.tagName === "BUTTON") return;
+        /* Links too (audit 11 Oct 2026): Enter on "Shop directly" or the
+           skip link used to open the doors instead of following the link. */
+        const tag = document.activeElement?.tagName;
+        if ((e.key === "Enter" || e.key === " ") && (tag === "BUTTON" || tag === "A")) return;
         e.preventDefault();
         swing();
       }

@@ -124,6 +124,11 @@ const nextConfig: NextConfig = {
       { source: "/found-her/what-she-said-once", destination: "/found-her", permanent: true },
       { source: "/journal/:slug", destination: "/found-her", permanent: true },
       { source: "/prelaunch", destination: "/", permanent: true },
+      /* The LALALOCA collection's natural name (clarity audit, 11 Oct 2026):
+         it lives at /shop, and /lalaloca-collection was a 404. */
+      { source: "/lalaloca-collection", destination: "/shop", permanent: true },
+      { source: "/lalaloca", destination: "/shop", permanent: true },
+      { source: "/shop-all", destination: "/skincare", permanent: true },
       ...legacyRedirects,
     ];
   },

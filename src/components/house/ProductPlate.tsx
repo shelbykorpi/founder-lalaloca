@@ -1,3 +1,4 @@
+import { TrackProductView } from "@/components/site/TrackProductView";
 import Image from "next/image";
 import Link from "next/link";
 import { Reveal } from "@/components/house/Reveal";
@@ -118,9 +119,12 @@ export async function ProductPlate({ product }: { product: NextMoveProduct }) {
           <p className="mt-4 text-[0.75rem] uppercase tracking-[0.22em] text-cream/70">
             {product.category}
           </p>
-          <span aria-hidden className="plate-rule mt-7" />
+          {/* What it does first, then the line to remember it by (clarity
+              brief, Phase 6). */}
+          <p className="mt-4 text-[1rem] leading-relaxed text-cream/85">{product.what}</p>
+          <span aria-hidden className="plate-rule mt-6" />
 
-          <p className="mt-7 font-serif text-[clamp(1.35rem,2.2vw,1.6rem)] leading-snug text-blush">
+          <p className="mt-6 font-serif text-[clamp(1.3rem,2.1vw,1.55rem)] italic leading-snug text-blush">
             {product.hook}
           </p>
 
@@ -181,6 +185,12 @@ export async function ProductPlate({ product }: { product: NextMoveProduct }) {
 
   return (
     <div className="bg-night text-cream">
+      <TrackProductView
+        id={product.shades ? product.shades[0].variantId : product.variantId!}
+        name={product.name}
+        category={product.category}
+        price={product.price}
+      />
       <JsonLd
         schema={[
           breadcrumbSchema([
@@ -433,6 +443,16 @@ export function plateMetadata(product: NextMoveProduct) {
       description: product.description,
       images: [{ url: `${SITE.url}${product.detailHero.src}` }],
       type: "website" as const,
+      /* Its own address (audit 11 Oct 2026): without it the preview
+         inherited the homepage's url from the root layout. */
+      url: `/products/${product.slug}`,
+      siteName: "FOUNDER",
+    },
+    twitter: {
+      card: "summary_large_image" as const,
+      title: `${product.name} — ${product.category}`,
+      description: product.description,
+      images: [`${SITE.url}${product.detailHero.src}`],
     },
   };
 }

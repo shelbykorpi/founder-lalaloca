@@ -2407,3 +2407,91 @@ Shelby supplied four images: "update and replace the current images with these i
 - **Gala image cropped to its left 80%.** The original carries another brand's "V" monogram banner ("Exclusive by invitation only") on the right and a "V" table card. The crop removes both. A faint "V" in the carpet remains, mostly under the tile shading. Flagged to Shelby.
 - Added under the tiles: "Imagery shows the mood of a Salon evening, not a past event." These are composed images and no event has happened yet; same principle as the FOUND HER wall caption.
 - Checked at 1440 and 390 through the full key flow; 0 console errors.
+
+## 2026-10-11: CLARITY RESTRUCTURE: homepage, navigation, FOUND HER, product clarity (Cowork FOUNDER team)
+
+Shelby: "people are confused what my site is", followed by her full clarity brief (14 phases). Restore point: tag `restore/pre-clarity-2026-10-11` (at 2e1891b). Audit report: Claude project `claude/clarity-audit-2026-10-11.md`.
+
+**Audit findings that drove this:**
+- The first-visit door hid the logo, the menu, products, prices and the word "skincare".
+- The first price was about 11,500px down on a phone.
+- About 15 names appeared before the first product, and there were 12 different explanations of FOUNDER.
+- The homepage title never said "skincare".
+- No add-to-bag existed on the homepage.
+
+**Homepage (src/app/page.tsx), rewritten in the brief's 7-part order:**
+1. **Hero.** "Beauty for what you're building."
+   - Real FOUNDER products in the image: next-move-hero.webp (Double Take, Smooth Talker, Clean Break).
+   - Buttons: "Shop the skincare" (#skincare) first, "Discover FOUND HER" second.
+   - Closes on "Welcome to FOUNDER. The room is yours."
+   - Below lg the image is a band above the words, so the phone's first screen holds the headline, the explanation and both buttons. One hero image only.
+2. **"Your next chapter starts here."**
+   - All 8 products as SkincareCards: category, one-line `what`, price, size or shades, ship line.
+   - Each card has a REAL AddToBagButton on the live variant; Smooth Talker links to its shade picker.
+   - The live sold-out check uses fetchVariantAvailability. The House Trio card has AddSetButton.
+   - Trust row, and "Shop all skincare" to /skincare.
+3. **"The women behind the beauty."** The 3 approved FOUND HER portraits, each with its portrait `note` where it is a composition.
+4. **"Our models have stories."** Shelby's brief copy, verbatim (this is HER copy, unlike the removed "FOUNDER Models" section).
+   - Terms line: free, no purchase, selective, never guaranteed, separate written consent.
+5. **"Two collections. One house."** Two equal panels, both labelled "A FOUNDER collection".
+6. **"Welcome inside the house."**
+   - Six room tiles, each saying what it is for. Then NowPlaying, the concierge, and the StandUp pledge.
+7. **"There's room for you here."** Tell your story, and "Join the Founding List." (EmailSignup). Closes "FOUNDER. The room is yours."
+
+**The immersive homepage moved, it was not deleted.**
+- The old homepage is now /house, verbatim: ThresholdDoors, elevator, Grand Hall and every room.
+- The door overlay now only appears on /house, so it never blocks shopping.
+
+**Navigation (Header.tsx, brand.ts).**
+- SHOP ▾ | FOUND HER | OUR STORY | THE HOUSE ▾ on desktop from lg (1024) up; the phone menu is grouped the same way.
+- Shop: Shop All (/skincare), The FOUNDER Collection, The LALALOCA Serums.
+- The House: Enter the House (/house), The Boardroom, The Serum Salon, The Library, Young Founders' Room, The Salon, each with its purpose.
+- PRIMARY_NAV is kept for the search index.
+
+**New pages.**
+- /skincare: Shop All, both collections, real buy buttons.
+- /house: as described above.
+- Both are in the sitemap.
+
+**FOUND HER (found-her/page.tsx).**
+- New hero: "Real women. Real stories. / The faces of FOUNDER." plus the brief's lines.
+- New #how-it-works section, six points: what FOUND HER is, who can take part, why women are featured, how to share, features and consent (points to the third box), and what happens next.
+- A reassurance line above the form. Form, permissions and Airtable unchanged.
+
+**One explanation everywhere (brand.ts).**
+- New BRAND.oneLine and BRAND.aboutLine. BRAND.structure and legal.note now name both collections.
+- SITE.title is "FOUNDER Skincare | Beauty for what you're building." SITE.description and the homepage meta now say skincare.
+- The announcement bar is now shipping plus returns, instead of the serums-only price line.
+- Footer note, llms.txt and the concierge knowledge are aligned. The concierge House-desk brief changed from "Sell the house before you sell the bottle" to "Say plainly what FOUNDER is first".
+
+**Product pages.**
+- Hold the Room (own page) and the 4 ProductPlate pages now show `what` before the poetic line.
+- On phones, Hold the Room's photo is its own band, no longer darkened under the text.
+
+**Technical.**
+- 308 redirects: /lalaloca-collection → /shop, /lalaloca → /shop, /shop-all → /skincare.
+- Per-page og/twitter url and title via the new `withShare()` (src/lib/shareMeta.ts) on /, /shop, /founder-collection, /our-story, /found-her, /salon, /house, /products/hold-the-room. ProductPlate metadata and products/[slug] get og.url.
+- GA4:
+  - view_item on all 5 FOUNDER Collection pages (TrackProductView).
+  - view_item_list on /founder-collection and the homepage and Shop All grids.
+  - select_item from the cards.
+  - New events nav_click, home_cta and story_cta. salon_rsvp is mapped to generate_lead.
+- Spotify is click-to-load (components/home/NowPlaying.tsx), on / and /house.
+- ThresholdDoors: Enter on a focused link (Shop directly, skip link) now follows the link.
+- FounderKey is hidden on / and /skincare.
+- Contrast fixes. role="img" on the Etsy stars.
+
+**Verified, all actually run:**
+- tsc, eslint and `next build` pass.
+- Playwright at 1440, 834 and 390: 0 page errors, 0 horizontal overflow.
+- Visitor A: h1 says skincare, and the Shop button is on the first phone screen. Add to bag from a homepage card works (Bag (1)).
+- Visitor B: 2 taps to the form.
+- Visitor C: 2 taps to Hold the Room.
+- 28 internal links, all 200. Redirects return 308.
+- axe on 11 routes × 2 sizes: the remaining serious items are 4.32:1 and 4.49:1 small labels (room-label on rose and on the cream plate). Everything else is clean.
+- Lighthouse mobile, local: home 84 performance (live was 53), LCP 4.6s (live 10.7s), TBT 50ms, accessibility 100. Hold the Room 87 / LCP 3.8s / accessibility 100.
+- The local SEO score of 69 is only noindex on non-production.
+
+**NOT changed:** Shopify, variants, prices, checkout, the bag, forms, Airtable, the Salon flow, protected lines, the monogram, product claims, any imagery files. package-lock.json was not committed.
+
+**Unpushed.** Shelby pushes.

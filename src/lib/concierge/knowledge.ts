@@ -175,10 +175,10 @@ const BRAND_FACTS: Fact[] = [
     id: "brand:who",
     cues: ["founder", "brand", "who are you", "about", "philosophy", "lalaloca", "stand for", "why"],
     text: [
-      `${BRAND.structure} FOUNDER is the master brand and the seller of record — the name on the order, the receipt and the packaging. LALALOCA is the name of the serum collection.`,
+      `${BRAND.oneLine} ${BRAND.structure} FOUNDER is the master brand and the seller of record — the name on the order, the receipt and the packaging. LALALOCA is the name of the serum collection; the FOUNDER Collection is the five-piece routine. FOUND HER is the community where real women tell their stories. The House is the site's immersive experience, not a separate brand.`,
       `Belief: ${BRAND.belief} Campaign line: ${BRAND.campaign} Tagline: ${BRAND.tagline}`,
       `The brand line is set on two lines and never one: "${BRAND.campaignLines[0]}" / "${BRAND.campaignLines[1]}"`,
-      `Not every woman has a company. Every woman is building something. Three serums, and the rest of what the brand does is about the women who buy it.`,
+      `Not every woman has a company. Every woman is building something. Eight products in two collections, and the rest of what the brand does is about the women who buy them.`,
       `Founder. Found her. Both meanings, deliberately.`,
     ].join("\n"),
   },

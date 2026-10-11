@@ -21,6 +21,8 @@ export default function sitemap(): MetadataRoute.Sitemap {
        /founder-collection. */
     "/young-founders-room",
     "/salon",
+    "/skincare",
+    "/house",
     /* Three deliberate absences:
        /account — robots.ts disallows it and the page carries noindex. A URL
          that is both submitted and blocked is a Search Console error.

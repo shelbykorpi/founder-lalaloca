@@ -81,7 +81,12 @@ export type TrackEvent =
   | "threshold_shop_direct"
   | "hall_plaque"
   | "concierge_open"
-  | "concierge_occasion";
+  | "concierge_occasion"
+  /* Clarity pass (11 Oct 2026): which menu item was used (desktop or the
+     phone menu), and which homepage call to action was pressed. */
+  | "nav_click"
+  | "home_cta"
+  | "story_cta";
 
 /** GA4 reserved names. Anything unmapped passes through as a custom event. */
 const GA4_NAME: Partial<Record<TrackEvent, string>> = {
@@ -91,6 +96,8 @@ const GA4_NAME: Partial<Record<TrackEvent, string>> = {
   cart_view: "view_cart",
   site_search: "search",
   email_signup: "sign_up",
+  /* A Salon RSVP is a lead in GA4's own vocabulary. */
+  salon_rsvp: "generate_lead",
 };
 
 /** One line item, in the shape GA4's ecommerce reports require. */

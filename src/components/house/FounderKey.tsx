@@ -46,6 +46,11 @@ export function FounderKey() {
     setOpen(!open);
   };
 
+  /* The homepage and Shop All lead with the skincare (clarity pass, 11 Oct
+     2026): the key is part of the house, not of the shop, and on a phone it
+     sat over body text. It stays on every room. */
+  if (pathname === "/" || pathname === "/skincare") return null;
+
   return (
     <>
       <div className={`${s.dock} ${open || ((past || note) && !onBuyBand) ? "" : s.dockTucked}`}>

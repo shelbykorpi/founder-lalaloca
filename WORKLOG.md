@@ -2512,3 +2512,7 @@ Fired by the "FOUNDER Collection ship-date switch" reminder. Asked Shelby; her a
 - **Still open (needs Shelby):**
   - The Shopify checkout Shipping policy's second paragraph. The token lacks write_legal_policies, so this is an admin edit in Chrome and needs her OK.
   - Confirming Express shows at a real checkout.
+
+### 14 Oct 2026 — Shipping policy updated (Claude, Founder Chief)
+- With Shelby's OK, the Shopify checkout Shipping policy's second paragraph was edited in the admin. It now reads: "Standard shipping is free and takes 3 to 5 business days. Express shipping is $15 and takes 1 to 2 business days. Orders are dispatched within one business day, and every parcel is sent with tracking." Read back through the Admin API: saved.
+- Still open: confirm Express shows at a real checkout after ef2cee6 is pushed; mark #1002–#1005 fulfilled with tracking.

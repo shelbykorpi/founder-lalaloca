@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "updated": "2026-10-01T23:59:00Z",
+  "updated": "2026-10-14T00:00:00Z",
   "updatedBy": "Founder Chief (Claude · Cowork)",
   "headline": "Google Analytics is set up (FOUNDER Beauty · G-YP5SS23BXF) and goes live on the site with your next push. To count sales too, Shopify needs the same property connected; that's your one click below.",
   "auditPath": "docs/desk/executive-audit-2026-10-01.md",
@@ -381,16 +381,12 @@
   ],
   "reminders": [
     {
-      "date": "2026-10-12",
-      "text": "Ship date. Confirm with Shelby the Collection orders have shipped (or the new date), then set COLLECTION_SHIPS = null in src/lib/nextMove.ts and clear the founder.badge metafield in Shopify. Until then the site keeps saying 'Ships October 12'."
+      "date": "2026-10-14",
+      "text": "Ship date done (Shelby, 12 Oct: shipping today). Site now says 'In stock · Ships within one business day' for the FOUNDER Collection and shows $15 Express again; Express re-enabled in Shopify; founder.badge cleared. Mark orders #1002–#1005 fulfilled in Shopify with tracking as they go out, so customers get their shipping emails."
     },
     {
       "date": "2026-10-02",
       "text": "Shelby: cancel or archive test order #1001 in Shopify admin. It shows as paid ($39.99), so if a real card was charged, refund it when cancelling; otherwise Archive is enough."
-    },
-    {
-      "date": "2026-10-12",
-      "text": "Turn Express Shipping back on in Shopify (it's paused while the Collection ship date is set). The Oct 12 ship-date reminder now includes this step; the site's Express lines return automatically when COLLECTION_SHIPS goes to null."
     },
     {
       "date": "2026-10-05",

@@ -2495,3 +2495,20 @@ Shelby: "people are confused what my site is", followed by her full clarity brie
 **NOT changed:** Shopify, variants, prices, checkout, the bag, forms, Airtable, the Salon flow, protected lines, the monogram, product claims, any imagery files. package-lock.json was not committed.
 
 **Unpushed.** Shelby pushes.
+
+## 2026-10-14: FOUNDER Collection ship date cleared; Express back on (Cowork FOUNDER team)
+
+Fired by the "FOUNDER Collection ship-date switch" reminder. Asked Shelby; her answer: "Shipping today" (the Collection orders go out). At the time Shopify showed #1002–#1005 still unfulfilled.
+- **Site.** `COLLECTION_SHIPS = null` in src/lib/nextMove.ts. It is declared as `null as {…} | null` so TypeScript keeps the type wide.
+  - Every Collection line now reads "In stock · Ships within one business day". The bag note and the ship date are gone.
+  - Schema PreOrder becomes InStock, and the feed loses its preorder date.
+  - `EXPRESS_OFFERED` is true again, so "$15 Express" returns on /shop, /policies/shipping and llms.txt.
+  - Verified locally: no route says "October 12" and no route has PreOrder. Checked at 390 and 1440.
+- **Shopify, via the API:**
+  - Express Shipping (method 807373209769, $15) set to active: true. Read-back shows Free Standard $0 and Express $15 both active.
+  - founder.badge metafield deleted on all five Collection products.
+  - The SHIPPING line in the Hold the Room and Smooth Talker descriptions is now "In stock. Ships within one business day, free anywhere in the US."
+- **docs/desk/brief.json.** The two Oct 12 reminders are replaced with a done note, plus a reminder to mark #1002–#1005 fulfilled with tracking.
+- **Still open (needs Shelby):**
+  - The Shopify checkout Shipping policy's second paragraph. The token lacks write_legal_policies, so this is an admin edit in Chrome and needs her OK.
+  - Confirming Express shows at a real checkout.

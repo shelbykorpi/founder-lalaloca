@@ -97,10 +97,9 @@ export const PREORDER_NOTE =
  * policy note, the schema (PreOrder → InStock) and the Merchant feed follow
  * this one value. Do not reintroduce a hand-written date anywhere else.
  */
-export const COLLECTION_SHIPS: { iso: string; label: string } | null = {
-  iso: "2026-10-12",
-  label: "October 12",
-};
+/* Cleared 12 Oct 2026 (Shelby: the Collection orders are shipping today).
+   Was { iso: "2026-10-12", label: "October 12" }. */
+export const COLLECTION_SHIPS = null as { iso: string; label: string } | null;
 
 /** "Ships October 12" while the date stands; the in-stock promise after. */
 export const COLLECTION_SHIP_LINE = COLLECTION_SHIPS

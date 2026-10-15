@@ -21,7 +21,7 @@ export function ProductCloseUps({ slug }: { slug: string }) {
         <Reveal>
           <p className="room-label">Close up</p>
           <h2 id={`close-up-${slug}`} className="mt-4 font-serif text-3xl font-light text-cream">
-            Real women. Real light.
+            Real skin. Real light.
           </h2>
           <p className="mt-3 max-w-[34rem] text-[0.9375rem] leading-relaxed text-cream/70">
             Photographed on the beach, not in a studio. A mood, not a before-and-after.

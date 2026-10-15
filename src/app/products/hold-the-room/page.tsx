@@ -6,6 +6,7 @@ import Link from "next/link";
 import { AddToBagButton } from "@/components/bag/AddToBagButton";
 import { Reveal } from "@/components/house/Reveal";
 import { LineRail } from "@/components/house/LineRail";
+import { ProductCloseUps } from "@/components/shop/ProductCloseUps";
 import { BRAND } from "@/lib/brand";
 import { FOUNDER_COLLECTION } from "@/lib/founderCollection";
 import { availabilityLine } from "@/lib/nextMove";
@@ -284,6 +285,9 @@ export default async function HoldTheRoomPage() {
           </Reveal>
         </div>
       </section>
+
+      {/* ══ CLOSE UP ═══ real-life close-ups (15 Oct 2026), see lib/closeUps. */}
+      <ProductCloseUps slug="hold-the-room" />
 
       {/* ══ THE HOUSE CONTINUES ═════════════════════════════════════════════ */}
       <section className="relative isolate overflow-hidden">

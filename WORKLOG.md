@@ -2516,3 +2516,11 @@ Fired by the "FOUNDER Collection ship-date switch" reminder. Asked Shelby; her a
 ### 14 Oct 2026 — Shipping policy updated (Claude, Founder Chief)
 - With Shelby's OK, the Shopify checkout Shipping policy's second paragraph was edited in the admin. It now reads: "Standard shipping is free and takes 3 to 5 business days. Express shipping is $15 and takes 1 to 2 business days. Orders are dispatched within one business day, and every parcel is sent with tracking." Read back through the Admin API: saved.
 - Still open: confirm Express shows at a real checkout after ef2cee6 is pushed; mark #1002–#1005 fulfilled with tracking.
+
+### 15 Oct 2026 — Real-life close-ups on every product (Claude, Founder Chief)
+- **Source.** Shelby's Lightroom album "shelby/natalie": 601 photos from two 2025 beach shoots, Shelby and Natalie (a model). No product appears in any frame. Shelby confirmed both women are cleared for commercial use.
+- **Picks.** Two face close-ups per product, 16 in total, each used once, cropped to 3:4 only with no retouching. The Lightroom file numbers are listed in `src/lib/closeUps.ts`.
+- **Site.** A new `ProductCloseUps` band titled "Close up / Real women. Real light.", with the line "A mood, not a before-and-after." It appears on all 8 product pages: the ProductPlate for the four FOUNDER plates, Hold the Room's own page, and products/[slug] for the three serums. On the serum pages it sits above the Etsy reviews so the models aren't read as reviewers. Images are in `public/editorial/close-ups/`.
+- **Shopify.** The same 16 images were appended to each product's media, after the existing product shots, so checkout thumbnails are unchanged. All 16 show as READY. Alt text ends "A mood photograph, not a result."
+- **Checks.** tsc, eslint and build pass. 8 pages × 1440/390 with no overflow and no console errors. An independent review was applied: the Double Take alt text was softened, the caption now reads "Natalie, model", and the frame is 3:4.
+- **Open (Shelby's call).** C Me Glow uses Natalie's orange shots. The orange signals vitamin C as a mood; the serum's INCI isn't published, so a swap to non-citrus frames is ready if she prefers.

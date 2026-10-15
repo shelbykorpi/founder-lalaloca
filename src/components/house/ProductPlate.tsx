@@ -9,6 +9,7 @@ import {
   PlateShadeChips,
 } from "@/components/house/PlateShades";
 import { PlateBuyButton } from "@/components/house/PlateBuyButton";
+import { ProductCloseUps } from "@/components/shop/ProductCloseUps";
 import { PREORDER_NOTE, ROUTINE_STEP, availabilityLine, type NextMoveProduct } from "@/lib/nextMove";
 import { formatPrice } from "@/lib/products";
 import { BRAND, SITE } from "@/lib/brand";
@@ -345,6 +346,9 @@ export async function ProductPlate({ product }: { product: NextMoveProduct }) {
           </Reveal>
         </div>
       </section>
+
+      {/* ══ CLOSE UP ═══ real-life close-ups (15 Oct 2026), see lib/closeUps. */}
+      <ProductCloseUps slug={product.slug} />
 
       {/* ══ THE RANGE ═══════════════════════════════════════════════════════
           Smooth Talker only. The family shot has a home here rather than as

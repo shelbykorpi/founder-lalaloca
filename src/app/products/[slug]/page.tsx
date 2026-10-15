@@ -9,6 +9,7 @@ import { JsonLd, breadcrumbSchema, productSchema } from "@/lib/seo";
 import { formatPrice, getProduct, otherProducts, products, SET } from "@/lib/products";
 import { getSchemaReviews, reviewsForSerumPage } from "@/lib/reviews";
 import { EtsyReviews } from "@/components/shop/EtsyReviews";
+import { ProductCloseUps } from "@/components/shop/ProductCloseUps";
 import { fetchCatalogProduct } from "@/lib/catalog";
 import { CatalogProductPage } from "@/components/shop/CatalogProductPage";
 import { fetchVariantAvailability } from "@/lib/catalog";
@@ -253,6 +254,9 @@ export default async function ProductPage({ params }: PageProps<"/products/[slug
           </div>
         </div>
       </section>
+
+      {/* Close-ups sit above the reviews so the models are never read as reviewers. */}
+      <ProductCloseUps slug={product.slug} />
 
       <EtsyReviews reviews={shownReviews} scope="product" />
 
